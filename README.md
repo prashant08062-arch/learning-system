@@ -11,6 +11,7 @@ This repository contains a self-contained HTML/JS/CSS learning system with inter
 | 🧮 Mathematics | The Baudhāyana–Pythagoras Theorem | Doubling squares, √2, the main theorem a² + b² = c² |
 | 🌍 Geography | World Geography: Some Glimpses | Earth's landforms and water bodies, with 3D globe + satellite images |
 | ⚛️ **Physics** | **Light: Mirrors and Lenses** *(new!)* | **Spherical mirrors, image formation, laws of reflection, convex/concave lenses — with animated SVG ray diagrams** |
+| 🌊 **Water Body Atlas** | **3D Animated Reference** *(new!)* | **15 water-body terms (Sea, Gulf, Bay, Strait, Canal, Trench, Ridge, Reef, Atoll, Isthmus, Peninsula, Cape, Delta, Estuary, Lagoon) — animated 3D scenes with Three.js** |
 
 ## ⚛️ Physics Chapter — Light: Mirrors and Lenses
 
@@ -31,6 +32,32 @@ Each lecture has 9–15 narrated "beats". As each beat plays:
 - Mirror surfaces shimmer
 - The narration is spoken aloud via Web Speech API (TTS)
 
+## 🌊 Water Body Atlas — 3D Animated Reference
+
+A standalone interactive page (`water_body_atlas.html`) that visualises 15 water-body terms as animated 3D scenes using Three.js (loaded from CDN). Designed for classroom projection.
+
+**Terms covered** — grouped by category:
+
+| Coastal inlets | Ocean floor | Land–water |
+|---|---|---|
+| Sea, Gulf, Bay, Strait, Canal | Trench, Ridge, Reef, Atoll | Isthmus, Peninsula, Cape, Delta, Estuary, Lagoon |
+
+**What's animated (not just shown)**:
+- **Strait** — two cargo ships threading between two landmasses in opposite directions, smoke rising
+- **Canal** — lock gates opening & closing, ship rising/lowering through the chambers
+- **Trench** — submersible descending the V-shape, depth markers for sea level / Mt. Everest / 11,000 m
+- **Ridge** — magma particles rising from the rift, plates-spreading arrows pulsing
+- **Reef** — coral branches swaying, fish circling, sunlight rays through water
+- **Atoll** — waves crashing on the outer ring while the inner lagoon stays calm
+- **Delta** — flow particles descending the main river then splitting into distributaries
+- **Estuary** — freshwater (light blue) and seawater (green) mixing with a tidal cycle
+- **Lagoon** — choppy waves outside, gentle ripples inside, barrier island absorbing the sea's energy
+- **Cape** — rotating lighthouse beam
+- **Peninsula** — wave whitecaps on three sides
+- **Isthmus** — two ships sailing the long way around while a canal cut saves the detour
+
+Each term has: 3D scene + on-screen labels + colour legend + info panel (definition, real-world example, "what to watch" activity prompt, and a comparison table).
+
 ## 🚀 Quick Start
 
 ```bash
@@ -45,7 +72,8 @@ For offline classroom use: download this repo as a ZIP, extract, and open `index
 ## 📁 Structure
 
 ```
-├── index.html              # App shell (home + chapter screens)
+├── index.html              # App shell (home + chapter screens + atlas launcher)
+├── water_body_atlas.html   # ← NEW: standalone 3D Water Body Atlas (Three.js)
 ├── css/style.css           # Shared styles + physics animations
 ├── js/
 │   ├── app.js              # Main app — renders 6 tabs per chapter
@@ -56,7 +84,7 @@ For offline classroom use: download this repo as a ZIP, extract, and open `index
 │   ├── catalog.js          # Master list of subjects & chapters
 │   ├── maths/baudhayana_pythagoras/chapter.js
 │   ├── geography/world_geography/chapter.js
-│   └── physics/light_mirrors_lenses/chapter.js   # ← NEW
+│   └── physics/light_mirrors_lenses/chapter.js   # ← NEW (Physics)
 └── assets/                 # Earth textures for geography chapter
 ```
 

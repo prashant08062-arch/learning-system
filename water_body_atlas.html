@@ -1,0 +1,2391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Water Body Atlas — 3D Animated Geography Reference</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #0a1326; color: #e2e8f0;
+    min-height: 100vh; overflow: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+  /* ====== LAYOUT ====== */
+  .app { display: flex; flex-direction: column; height: 100vh; }
+  .app-header {
+    background: #1e293b; padding: 10px 18px;
+    display: flex; align-items: center; gap: 14px;
+    border-bottom: 1px solid #334155; flex-shrink: 0;
+  }
+  .app-header h1 {
+    font-size: 17px; color: #38bdf8; font-weight: 700;
+    letter-spacing: -0.2px; flex-grow: 1;
+  }
+  .app-header .subtitle {
+    font-size: 12px; color: #94a3b8; font-weight: 500;
+  }
+  .layout {
+    display: grid; grid-template-columns: 220px 1fr 320px;
+    flex-grow: 1; min-height: 0;
+  }
+  /* ====== SIDEBAR ====== */
+  .sidebar {
+    background: #131c2f; border-right: 1px solid #1e293b;
+    overflow-y: auto; padding: 12px 8px;
+  }
+  .sidebar-group {
+    font-size: 10px; font-weight: 700; color: #64748b;
+    text-transform: uppercase; letter-spacing: 1.2px;
+    margin: 12px 10px 6px;
+  }
+  .sidebar-group:first-child { margin-top: 0; }
+  .term-btn {
+    display: block; width: 100%; text-align: left;
+    background: transparent; color: #cbd5e1; border: none;
+    padding: 9px 12px; border-radius: 7px; cursor: pointer;
+    font-size: 13px; font-weight: 500;
+    transition: all 0.15s ease;
+    margin-bottom: 2px;
+  }
+  .term-btn:hover { background: #1e293b; color: #f1f5f9; }
+  .term-btn.active {
+    background: linear-gradient(90deg, #0c4a6e, #0e7490);
+    color: #fff; font-weight: 600;
+    box-shadow: inset 3px 0 0 #38bdf8;
+  }
+  .term-btn .icon { display: inline-block; width: 18px; margin-right: 6px; }
+  /* ====== VIEWPORT ====== */
+  .viewport {
+    position: relative; background: #0a1326;
+    overflow: hidden; min-height: 0;
+  }
+  #three-canvas { display: block; width: 100%; height: 100%; }
+  .viewport-2d {
+    position: absolute; inset: 0;
+    display: none; background: #0a1326;
+    padding: 20px; overflow-y: auto;
+  }
+  .viewport-2d.active { display: block; }
+  .viewport-2d svg { width: 100%; max-width: 900px; margin: 0 auto; display: block; }
+  .overlay-labels {
+    position: absolute; top: 14px; left: 14px;
+    pointer-events: none; z-index: 5;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .overlay-label {
+    background: rgba(15, 23, 42, 0.88);
+    border: 1px solid #38bdf8;
+    color: #7dd3fc; padding: 6px 12px;
+    border-radius: 6px; font-size: 12px; font-weight: 600;
+    backdrop-filter: blur(6px);
+    animation: labelFade 0.4s ease;
+  }
+  @keyframes labelFade { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+  .controls {
+    position: absolute; bottom: 16px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; gap: 8px; z-index: 6;
+    background: rgba(15, 23, 42, 0.85);
+    padding: 8px; border-radius: 10px;
+    border: 1px solid #334155;
+    backdrop-filter: blur(8px);
+  }
+  .ctrl-btn {
+    background: #334155; color: #e2e8f0; border: none;
+    padding: 8px 14px; border-radius: 6px; cursor: pointer;
+    font-size: 13px; font-weight: 600;
+    display: flex; align-items: center; gap: 5px;
+    transition: all 0.15s;
+  }
+  .ctrl-btn:hover { background: #475569; }
+  .ctrl-btn.active { background: #0e7490; color: #fff; }
+  .legend {
+    position: absolute; top: 14px; right: 14px;
+    background: rgba(15, 23, 42, 0.85);
+    padding: 10px 12px; border-radius: 8px;
+    border: 1px solid #334155; font-size: 11px;
+    color: #cbd5e1; max-width: 220px;
+    backdrop-filter: blur(8px); z-index: 5;
+  }
+  .legend .legend-title {
+    color: #94a3b8; font-size: 9px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .legend-row { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+  .legend-swatch { width: 14px; height: 8px; border-radius: 2px; }
+  /* ====== INFO PANEL ====== */
+  .info-panel {
+    background: #131c2f; border-left: 1px solid #1e293b;
+    overflow-y: auto; padding: 20px 22px;
+  }
+  .info-panel h2 {
+    font-size: 24px; color: #38bdf8; font-weight: 700;
+    margin-bottom: 4px; letter-spacing: -0.5px;
+  }
+  .info-panel .pronounce {
+    font-size: 12px; color: #64748b; font-style: italic;
+    margin-bottom: 14px;
+  }
+  .info-panel .definition {
+    background: #1e293b; padding: 12px 14px;
+    border-radius: 8px; margin-bottom: 14px;
+    font-size: 13px; line-height: 1.6; color: #e2e8f0;
+    border-left: 3px solid #38bdf8;
+  }
+  .info-panel .section-title {
+    font-size: 11px; font-weight: 700; color: #94a3b8;
+    text-transform: uppercase; letter-spacing: 1px;
+    margin: 14px 0 6px;
+  }
+  .info-panel .example {
+    font-size: 13px; line-height: 1.6; color: #cbd5e1;
+    padding: 10px 12px; background: #0a1326;
+    border-radius: 6px; margin-bottom: 8px;
+  }
+  .info-panel .example strong { color: #fbbf24; }
+  .info-panel .activity {
+    font-size: 13px; line-height: 1.6; color: #a7f3d0;
+    padding: 10px 12px; background: rgba(16, 185, 129, 0.08);
+    border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.25);
+  }
+  .info-panel .activity-label {
+    color: #34d399; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 6px; display: block;
+  }
+  .info-panel .compare-table {
+    width: 100%; font-size: 12px;
+    border-collapse: collapse; margin-top: 8px;
+  }
+  .info-panel .compare-table th,
+  .info-panel .compare-table td {
+    padding: 6px 8px; text-align: left;
+    border-bottom: 1px solid #1e293b;
+  }
+  .info-panel .compare-table th {
+    background: #1e293b; color: #94a3b8; font-weight: 600;
+    font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+  }
+  /* ====== SCROLLBAR ====== */
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: #0a1326; }
+  ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #475569; }
+  /* ====== LOADING ====== */
+  .loading {
+    position: absolute; inset: 0; display: flex;
+    align-items: center; justify-content: center;
+    background: #0a1326; color: #94a3b8;
+    font-size: 13px; z-index: 10;
+  }
+  .loading .spinner {
+    width: 28px; height: 28px;
+    border: 3px solid #1e293b;
+    border-top-color: #38bdf8;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-right: 12px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  /* ====== HINT ====== */
+  .hint {
+    position: absolute; bottom: 16px; right: 16px;
+    background: rgba(15, 23, 42, 0.85);
+    padding: 8px 10px; border-radius: 6px;
+    border: 1px solid #334155;
+    font-size: 11px; color: #64748b;
+    backdrop-filter: blur(8px); z-index: 5;
+  }
+  .hint kbd {
+    background: #334155; padding: 1px 5px;
+    border-radius: 3px; font-size: 10px;
+    color: #cbd5e1; font-family: monospace;
+  }
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; }
+    .sidebar { max-height: 130px; border-right: none; border-bottom: 1px solid #1e293b;
+               display: flex; flex-wrap: wrap; gap: 4px; padding: 8px; }
+    .sidebar-group { width: 100%; margin: 4px 4px 2px; }
+    .term-btn { display: inline-block; width: auto; padding: 6px 10px; font-size: 12px; }
+    .info-panel { max-height: 40vh; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <header class="app-header">
+    <h1>🌊 Water Body Atlas — 3D Animated Reference</h1>
+    <span class="subtitle">Geography · Grade 8 · Companion to "World Geography: Some Glimpses"</span>
+  </header>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-group">Coastal Inlets</div>
+      <button class="term-btn active" data-term="sea"><span class="icon">🌊</span>Sea</button>
+      <button class="term-btn" data-term="gulf"><span class="icon">🐃</span>Gulf</button>
+      <button class="term-btn" data-term="bay"><span class="icon">🌅</span>Bay</button>
+      <button class="term-btn" data-term="strait"><span class="icon">🚢</span>Strait</button>
+      <button class="term-btn" data-term="canal"><span class="icon">⚙️</span>Canal</button>
+      <div class="sidebar-group">Ocean Floor</div>
+      <button class="term-btn" data-term="trench"><span class="icon">⬇️</span>Trench</button>
+      <button class="term-btn" data-term="ridge"><span class="icon">⛰️</span>Ridge</button>
+      <button class="term-btn" data-term="reef"><span class="icon">🪸</span>Reef</button>
+      <button class="term-btn" data-term="atoll"><span class="icon">⭕</span>Atoll</button>
+      <div class="sidebar-group">Land–Water</div>
+      <button class="term-btn" data-term="isthmus"><span class="icon">🍄</span>Isthmus</button>
+      <button class="term-btn" data-term="peninsula"><span class="icon">🗺️</span>Peninsula</button>
+      <button class="term-btn" data-term="cape"><span class="icon">📍</span>Cape</button>
+      <button class="term-btn" data-term="delta"><span class="icon">🔱</span>Delta</button>
+      <button class="term-btn" data-term="estuary"><span class="icon">🍵</span>Estuary</button>
+      <button class="term-btn" data-term="lagoon"><span class="icon">🏝️</span>Lagoon</button>
+    </aside>
+
+    <!-- VIEWPORT -->
+    <main class="viewport" id="viewport">
+      <canvas id="three-canvas"></canvas>
+      <div class="overlay-labels" id="overlay-labels"></div>
+      <div class="legend" id="legend"></div>
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <span>Loading 3D scene…</span>
+      </div>
+      <div class="controls">
+        <button class="ctrl-btn" id="play-pause" title="Pause / play animation">⏸ Pause</button>
+        <button class="ctrl-btn" id="reset-view" title="Reset camera">⟲ Reset View</button>
+        <button class="ctrl-btn" id="rotate-toggle" title="Auto-rotate scene">🔄 Auto-Rotate</button>
+        <button class="ctrl-btn" id="2d-toggle" title="Toggle 2D side-view">📐 2D View</button>
+      </div>
+      <div class="hint">
+        <kbd>drag</kbd> rotate · <kbd>scroll</kbd> zoom · <kbd>right-drag</kbd> pan
+      </div>
+    </main>
+
+    <!-- INFO PANEL -->
+    <aside class="info-panel" id="info-panel">
+      <!-- Filled by JS -->
+    </aside>
+  </div>
+</div>
+
+<!-- Three.js from CDN (free, MIT-licensed) — r128 is widely available -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// Defensive shim — CapsuleGeometry was added in r130, r128 doesn't have it.
+// Approximate it with a stretched sphere so the same code works on all versions.
+if (typeof THREE !== 'undefined' && typeof THREE.CapsuleGeometry !== 'function') {
+  THREE.CapsuleGeometry = function(radius, length, capSegments, radialSegments) {
+    const r = Math.max(0.001, radius);
+    const geo = new THREE.SphereGeometry(r, radialSegments || 12, capSegments || 12);
+    geo.scale(1, 1 + (length / (2 * r)), 1);
+    return geo;
+  };
+}
+</script>
+<script>
+/* ================================================================
+   WATER BODY ATLAS — 3D Animated Reference
+   ================================================================
+   Uses Three.js (r128, MIT licence, freely available from CDN).
+   All scenes are built procedurally with Three.js geometry — no
+   external 3D model downloads required, so the page works offline
+   after first load (ideal for classroom projectors).
+   ================================================================ */
+
+// ---------- DATA: term definitions, examples, activities ----------
+const TERMS = {
+  sea: {
+    name: "Sea",
+    pronounce: "/siː/",
+    icon: "🌊",
+    definition: "A large body of saltwater that is connected to the ocean and partly enclosed by land. Seas are usually smaller than oceans and may be partially bounded by continents, islands, or peninsulas.",
+    example: "<strong>Arabian Sea</strong> — bounded by India on the east, the Arabian Peninsula on the west, and open to the Indian Ocean on the south.",
+    activity: "Watch the waves moving across the open surface of the sea. Notice how the sea is connected to the larger ocean — water flows freely between them.",
+    compareTitle: "Sea vs Ocean",
+    compare: [
+      ["", "Sea", "Ocean"],
+      ["Size", "Smaller", "Largest"],
+      ["Depth", "Shallower", "Deepest"],
+      ["Enclosure", "Partly enclosed", "Open"]
+    ],
+    labels: ["SEA — open saltwater body", "Partly enclosed by land", "Connects to ocean"]
+  },
+  gulf: {
+    name: "Gulf",
+    pronounce: "/ɡʌlf/",
+    icon: "🐃",
+    definition: "A large inlet of the ocean that cuts deeply into land, with a narrower opening than a bay. Gulfs are typically formed where the sea has flooded a large indentation in the coastline.",
+    example: "<strong>Persian Gulf</strong> — an arm of the Indian Ocean between the Arabian Peninsula and Iran, about 990 km long.",
+    activity: "Notice how the water juts deeply into the landmass — almost like a finger of the ocean. Ships enter through the narrow mouth and travel far inland before reaching the coast.",
+    compareTitle: "Gulf vs Bay",
+    compare: [
+      ["", "Gulf", "Bay"],
+      ["Indentation", "Deep & narrow", "Shallow & broad"],
+      ["Opening", "Narrow mouth", "Wide mouth"],
+      ["Size", "Usually larger", "Usually smaller"]
+    ],
+    labels: ["GULF — deep inlet", "Narrow opening to sea", "Water extends far inland"]
+  },
+  bay: {
+    name: "Bay",
+    pronounce: "/beɪ/",
+    icon: "🌅",
+    definition: "A broad, curved inlet of the sea into land. Bays usually have a wider opening than gulfs and are typically smaller and shallower. They form natural harbours for ports and cities.",
+    example: "<strong>Bay of Bengal</strong> — the largest bay in the world (2,172 km wide at its mouth), bordered by India, Bangladesh, Sri Lanka, and Myanmar.",
+    activity: "Watch the gentle curve of the coastline — the bay opens broadly to the sea. Waves roll in evenly, making bays ideal natural harbours where ships can anchor.",
+    compareTitle: "Bay vs Gulf",
+    compare: [
+      ["", "Bay", "Gulf"],
+      ["Mouth width", "Wide & broad", "Narrow"],
+      ["Depth inland", "Shallow", "Deep"],
+      ["Curve", "Gentle", "Sharp"]
+    ],
+    labels: ["BAY — broad inlet", "Wide opening to sea", "Curved coastline"]
+  },
+  strait: {
+    name: "Strait",
+    pronounce: "/streɪt/",
+    icon: "🚢",
+    definition: "A narrow, naturally-formed water passage that connects two larger bodies of water (e.g. two seas, or a sea and an ocean). Straits are formed by tectonic activity or sea-level rise flooding low land.",
+    example: "<strong>Strait of Malacca</strong> — 850 km long, just 2.8 km wide at its narrowest. It connects the Andaman Sea (Indian Ocean) to the South China Sea (Pacific Ocean) and is one of the world's busiest shipping lanes.",
+    activity: "Watch the cargo ships threading their way between two landmasses. The strait is a natural chokepoint — over 80,000 ships per year pass through the Strait of Malacca.",
+    compareTitle: "Strait vs Isthmus",
+    compare: [
+      ["", "Strait", "Isthmus"],
+      ["Type", "Water passage", "Land strip"],
+      ["Connects", "Two water bodies", "Two land bodies"],
+      ["Separates", "Two landmasses", "Two water bodies"]
+    ],
+    labels: ["STRAIT — narrow passage", "Connects two seas", "Between two landmasses", "Ships passing through"]
+  },
+  canal: {
+    name: "Canal",
+    pronounce: "/kəˈnæl/",
+    icon: "⚙️",
+    definition: "A man-made water channel dug across land to connect two larger bodies of water, typically for navigation, irrigation, or drainage. Canals often use lock gates to raise or lower ships between water levels.",
+    example: "<strong>Suez Canal</strong> — 193 km long, opened in 1869. It connects the Mediterranean Sea to the Red Sea, allowing ships to travel between Europe and Asia without going around Africa — saving about 7,000 km.",
+    activity: "Watch the lock gates open and close as a ship rises through the canal system. Locks lift or lower vessels by filling or emptying chambers of water — pure engineering magic.",
+    compareTitle: "Canal vs Strait",
+    compare: [
+      ["", "Canal", "Strait"],
+      ["Origin", "Man-made", "Natural"],
+      ["Shape", "Straight, regular", "Irregular"],
+      ["Locks", "Often has locks", "No locks"]
+    ],
+    labels: ["CANAL — man-made channel", "Lock gates", "Ship rising", "Water level changing"]
+  },
+  trench: {
+    name: "Trench",
+    pronounce: "/trɛntʃ/",
+    icon: "⬇️",
+    definition: "A long, narrow, very deep V-shaped depression in the ocean floor. Trenches form at subduction zones where one tectonic plate slides beneath another. The deepest parts of the ocean are trenches.",
+    example: "<strong>Mariana Trench</strong> in the western Pacific — the deepest trench on Earth. Its deepest point, the Challenger Deep, is over <strong>11,000 metres</strong> below sea level — about 2,000 m deeper than Mount Everest is tall.",
+    activity: "Descend with the camera into the deep V-shaped trench. Notice how the seafloor plunges sharply downward. The water pressure at the bottom is over 1,000 times atmospheric pressure.",
+    compareTitle: "Trench vs Ridge",
+    compare: [
+      ["", "Trench", "Ridge"],
+      ["Shape", "V-shape, deep", "Mountain chain"],
+      ["Motion", "Plate sinks", "Plates pull apart"],
+      ["Feature", "Deepest point", "Longest mountain"]
+    ],
+    labels: ["TRENCH — V-shaped deep", "Sea level", "Continental shelf", "11,000 m deep", "Subduction zone"]
+  },
+  ridge: {
+    name: "Ridge",
+    pronounce: "/rɪdʒ/",
+    icon: "⛰️",
+    definition: "A long, narrow chain of underwater mountains formed where two tectonic plates pull apart and molten magma rises to create new seafloor. Oceanic ridges form the longest mountain ranges on Earth.",
+    example: "<strong>Mid-Atlantic Ridge</strong> — the longest mountain range on Earth, about 65,000 km long, running down the middle of the Atlantic Ocean. Iceland sits on top of this ridge and is still being created by volcanic activity.",
+    activity: "Watch the camera pan along the underwater mountain chain. Magma rises in the central rift valley, slowly pushing the seafloor apart — the Atlantic Ocean widens by about 2–3 cm per year.",
+    compareTitle: "Ridge vs Trench",
+    compare: [
+      ["", "Ridge", "Trench"],
+      ["Shape", "Mountain chain", "Deep V"],
+      ["Plate action", "Pulling apart", "Pushing under"],
+      ["Height", "Rises from floor", "Sinks below floor"]
+    ],
+    labels: ["RIDGE — underwater mountains", "Magma rising", "Plates spreading", "Rift valley"]
+  },
+  reef: {
+    name: "Reef",
+    pronounce: "/riːf/",
+    icon: "🪸",
+    definition: "A ridge of rock, sand, or coral that lies at or near the surface of the sea. Coral reefs are built by tiny sea animals called corals that secrete calcium carbonate skeletons, supporting a huge variety of marine life.",
+    example: "<strong>Great Barrier Reef</strong> — off Australia's northeast coast, over 2,000 km long and 350,000 km² in area — the largest structure built by living things on Earth. A UNESCO World Heritage Site.",
+    activity: "Watch fish swimming among the coral branches. Corals grow toward the sunlight they need for survival. Warming waters cause coral bleaching — turning reefs into white, dead skeletons.",
+    compareTitle: "Reef vs Atoll",
+    compare: [
+      ["", "Reef", "Atoll"],
+      ["Shape", "Long ridge", "Ring"],
+      ["Lagoon", "May or may not", "Always inside"],
+      ["Stage", "Any stage", "Late stage of reef"]
+    ],
+    labels: ["REEF — coral ridge near surface", "Live coral with fish", "Sunlight zone", "Sinking island base"]
+  },
+  atoll: {
+    name: "Atoll",
+    pronounce: "/ˈæt.ɒl/",
+    icon: "⭕",
+    definition: "A ring-shaped coral reef that encloses a shallow lagoon. Atolls form when corals grow around a volcanic island that slowly sinks beneath the sea over millions of years, leaving only the reef ring.",
+    example: "<strong>Atolls of the Maldives</strong> — the Indian Ocean nation has 26 atolls made of over 1,200 coral islands. Each atoll is a ring of coral surrounding a calm, shallow lagoon.",
+    activity: "Watch the waves crash on the outer ring while the inner lagoon stays calm. The ring of coral protects the lagoon — making it a safe haven for fish and a dream spot for snorkellers.",
+    compareTitle: "Atoll vs Reef",
+    compare: [
+      ["", "Atoll", "Reef"],
+      ["Shape", "Ring", "Long ridge"],
+      ["Lagoon inside", "Yes (always)", "Sometimes"],
+      ["Volcanic base", "Sinking island", "May or may not"]
+    ],
+    labels: ["ATOLL — ring-shaped reef", "Outer ring: waves", "Inner lagoon: calm", "Old volcanic base"]
+  },
+  isthmus: {
+    name: "Isthmus",
+    pronounce: "/ˈɪs.məs/",
+    icon: "🍄",
+    definition: "A narrow strip of land that connects two larger landmasses and separates two bodies of water. Isthmi (plural) are the land equivalent of straits — they are often strategic locations for canals.",
+    example: "<strong>Isthmus of Panama</strong> — only about 50 km wide at its narrowest. It connects North and South America and separates the Atlantic and Pacific Oceans. The Panama Canal was cut through it in 1914.",
+    activity: "Watch ships sailing around the long way (Cape Horn) — over 13,000 km! Then see the canal cut through the isthmus, saving the entire detour. This is why isthmi are strategic.",
+    compareTitle: "Isthmus vs Strait",
+    compare: [
+      ["", "Isthmus", "Strait"],
+      ["Type", "Land strip", "Water passage"],
+      ["Connects", "Two landmasses", "Two water bodies"],
+      ["Example", "Panama", "Malacca"]
+    ],
+    labels: ["ISTHMUS — narrow land strip", "Two larger landmasses", "Water on both sides", "Canal cut through"]
+  },
+  peninsula: {
+    name: "Peninsula",
+    pronounce: "/pəˈnɪn.sə.lə/",
+    icon: "🗺️",
+    definition: "A piece of land that projects into water and is connected to the mainland by a narrow strip (an isthmus-like neck). A peninsula is surrounded by water on three sides.",
+    example: "<strong>Indian Peninsula</strong> — the southern half of India, bounded by the Arabian Sea on the west, the Bay of Bengal on the east, and the Indian Ocean on the south.",
+    activity: "Watch the waves lap around three sides of the landmass. A peninsula gives a country long coastlines — India's coastline is over 7,500 km, mostly because of its peninsular shape.",
+    compareTitle: "Peninsula vs Cape",
+    compare: [
+      ["", "Peninsula", "Cape"],
+      ["Size", "Large (km-scale)", "Small point"],
+      ["Sides", "3 sides water", "Curved point"],
+      ["People", "Inhabited", "Usually uninhabited"]
+    ],
+    labels: ["PENINSULA — 3 sides water", "Mainland connection", "Three coasts"]
+  },
+  cape: {
+    name: "Cape",
+    pronounce: "/keɪp/",
+    icon: "📍",
+    definition: "A pointed piece of land that juts into a body of water. Capes are smaller than peninsulas and usually mark a sharp change in the direction of the coastline.",
+    example: "<strong>Cape Comorin (Kanyakumari)</strong> — the southernmost tip of mainland India, where the Arabian Sea, Bay of Bengal, and Indian Ocean meet. A famous pilgrimage site.",
+    activity: "Watch how the cape marks a sharp bend in the coastline. Sailors use capes as navigation landmarks — 'rounding the Cape' (of Good Hope, of Horn) was a major milestone in the age of sail.",
+    compareTitle: "Cape vs Peninsula",
+    compare: [
+      ["", "Cape", "Peninsula"],
+      ["Size", "Small point", "Large piece"],
+      ["Coast change", "Sharp bend", "Gentle curve"],
+      ["Inhabited", "Usually not", "Often"]
+    ],
+    labels: ["CAPE — sharp point", "Coast bends here", "Water on 3 sides"]
+  },
+  delta: {
+    name: "Delta",
+    pronounce: "/ˈdɛl.tə/",
+    icon: "🔱",
+    definition: "A fan- or triangle-shaped landform at the mouth of a river, where the river splits into many channels (distributaries) before meeting the sea. Deltas form when rivers deposit sediment faster than the sea can wash it away.",
+    example: "<strong>Ganges–Brahmaputra–Meghna Delta</strong> — the world's largest delta, covering about 60,000 km² across Bangladesh and West Bengal. Also called the Sundarbans, home of the Bengal tiger.",
+    activity: "Watch the river split into many branches as it approaches the sea, depositing layers of sediment. The name 'delta' comes from the Greek letter Δ (delta) — the shape resembles this triangle.",
+    compareTitle: "Delta vs Estuary",
+    compare: [
+      ["", "Delta", "Estuary"],
+      ["Shape", "Fan/triangle", "Single funnel"],
+      ["Sediment", "Builds land", "Washed away"],
+      ["Water", "Fresh at mouth", "Brackish mix"]
+    ],
+    labels: ["DELTA — fan-shaped mouth", "Distributaries", "Sediment deposit", "Triangle shape Δ"]
+  },
+  estuary: {
+    name: "Estuary",
+    pronounce: "/ˈɛs.tʃu.ər.i/",
+    icon: "🍵",
+    definition: "The tidal mouth of a river where freshwater from the river mixes with saltwater from the sea, creating brackish water. Estuaries are highly productive ecosystems and natural nurseries for many fish species.",
+    example: "<strong>Estuary of the River Thames</strong> — where the Thames meets the North Sea. London grew here because the estuary provided both a port and a supply of brackish-water fish like salmon.",
+    activity: "Watch the freshwater (blue) and seawater (green) mixing in the estuary. Tides push seawater in, the river pushes freshwater out — the meeting zone is brackish, half salty, half fresh.",
+    compareTitle: "Estuary vs Delta",
+    compare: [
+      ["", "Estuary", "Delta"],
+      ["River mouth", "Single channel", "Many channels"],
+      ["Sediment", "Washed out", "Deposited"],
+      ["Water type", "Brackish mix", "Fresh at surface"]
+    ],
+    labels: ["ESTUARY — tidal mouth", "Freshwater (blue)", "Seawater (green)", "Brackish mixing zone"]
+  },
+  lagoon: {
+    name: "Lagoon",
+    pronounce: "/ləˈɡuːn/",
+    icon: "🏝️",
+    definition: "A shallow body of water separated from a larger body (like the sea) by a natural barrier such as a sandbar, coral reef, or barrier island. Lagoons are calmer and warmer than the open sea.",
+    example: "<strong>Chilika Lake</strong> in Odisha — India's largest lagoon (about 1,100 km²), separated from the Bay of Bengal by a long sandbar. It is a Ramsar Wetland and a haven for migratory birds.",
+    activity: "Watch the calm waters inside the lagoon while waves crash on the barrier outside. The barrier absorbs the sea's energy — making lagoons safe nurseries for fish and birds.",
+    compareTitle: "Lagoon vs Atoll Lagoon",
+    compare: [
+      ["", "Coastal Lagoon", "Atoll Lagoon"],
+      ["Barrier", "Sandbar / island", "Coral ring"],
+      ["Location", "On a coast", "Mid-ocean"],
+      ["Origin", "Sediment bar", "Sinking island"]
+    ],
+    labels: ["LAGOON — calm water", "Barrier island", "Open sea with waves", "Sheltered inside"]
+  }
+};
+
+// ===============================================================
+//  THREE.JS ENGINE
+// ===============================================================
+const canvas = document.getElementById('three-canvas');
+const viewport = document.getElementById('viewport');
+const overlayLabels = document.getElementById('overlay-labels');
+const legendEl = document.getElementById('legend');
+const infoPanel = document.getElementById('info-panel');
+const loadingEl = document.getElementById('loading');
+
+let renderer, scene, camera;
+let currentTerm = 'sea';
+let currentSceneRoot = null;
+let currentSceneUpdater = null;  // function called every frame
+let isPaused = false;
+let isAutoRotate = false;
+let clock;
+let userRotation = { x: 0, y: 0 };
+let targetRotation = { x: 0, y: 0 };
+let targetZoom = null;
+let userZoom = null;
+let isDragging = false;
+let isPanning = false;
+let lastMouse = { x: 0, y: 0 };
+
+function initEngine() {
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x0a1326, 1);
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+  scene = new THREE.Scene();
+  scene.fog = new THREE.Fog(0x0a1326, 60, 200);
+
+  camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
+  camera.position.set(0, 25, 45);
+  camera.lookAt(0, 0, 0);
+
+  clock = new THREE.Clock();
+
+  // ambient + directional light
+  const ambient = new THREE.AmbientLight(0xffffff, 0.55);
+  scene.add(ambient);
+  const sun = new THREE.DirectionalLight(0xffffff, 0.85);
+  sun.position.set(20, 40, 25);
+  sun.castShadow = true;
+  sun.shadow.mapSize.set(2048, 2048);
+  sun.shadow.camera.left = -60;
+  sun.shadow.camera.right = 60;
+  sun.shadow.camera.top = 60;
+  sun.shadow.camera.bottom = -60;
+  sun.shadow.camera.near = 1;
+  sun.shadow.camera.far = 200;
+  sun.shadow.bias = -0.0005;
+  scene.add(sun);
+  // Subtle blue fill light from below (water reflection)
+  const fill = new THREE.DirectionalLight(0x88bbff, 0.18);
+  fill.position.set(-15, -8, -20);
+  scene.add(fill);
+
+  resize();
+  window.addEventListener('resize', resize);
+  setupCameraControls();
+  loadTerm(currentTerm);
+  animate();
+  setTimeout(() => { loadingEl.style.display = 'none'; }, 300);
+}
+
+function resize() {
+  const w = viewport.clientWidth;
+  const h = viewport.clientHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / Math.max(1, h);
+  camera.updateProjectionMatrix();
+}
+
+// ---------- Camera controls (drag-rotate, scroll-zoom, right-drag-pan) ----------
+function setupCameraControls() {
+  canvas.addEventListener('mousedown', (e) => {
+    if (e.button === 0) { isDragging = true; lastMouse = { x: e.clientX, y: e.clientY }; }
+    if (e.button === 2) { isPanning = true; lastMouse = { x: e.clientX, y: e.clientY }; }
+  });
+  window.addEventListener('mouseup', () => { isDragging = false; isPanning = false; });
+  window.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+      const dx = (e.clientX - lastMouse.x) * 0.005;
+      const dy = (e.clientY - lastMouse.y) * 0.005;
+      targetRotation.y += dx;
+      targetRotation.x = Math.max(-1.2, Math.min(1.2, targetRotation.x + dy));
+      lastMouse = { x: e.clientX, y: e.clientY };
+    } else if (isPanning) {
+      const dx = (e.clientX - lastMouse.x) * 0.05;
+      const dy = (e.clientY - lastMouse.y) * 0.05;
+      camera.position.x -= dx;
+      camera.position.y += dy;
+      lastMouse = { x: e.clientX, y: e.clientY };
+    }
+  });
+  canvas.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const scale = e.deltaY > 0 ? 1.1 : 0.9;
+    const dist = camera.position.length();
+    const newDist = Math.max(8, Math.min(120, dist * scale));
+    camera.position.normalize().multiplyScalar(newDist);
+  }, { passive: false });
+  // Touch support
+  let lastTouch = null;
+  let lastPinch = null;
+  canvas.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) {
+      lastTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      isDragging = true;
+    } else if (e.touches.length === 2) {
+      isDragging = false;
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      lastPinch = Math.hypot(dx, dy);
+    }
+  }, { passive: true });
+  canvas.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 1 && isDragging && lastTouch) {
+      e.preventDefault();
+      const dx = (e.touches[0].clientX - lastTouch.x) * 0.005;
+      const dy = (e.touches[0].clientY - lastTouch.y) * 0.005;
+      targetRotation.y += dx;
+      targetRotation.x = Math.max(-1.2, Math.min(1.2, targetRotation.x + dy));
+      lastTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    } else if (e.touches.length === 2 && lastPinch != null) {
+      e.preventDefault();
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      const d = Math.hypot(dx, dy);
+      const scale = lastPinch / d;
+      const dist = camera.position.length();
+      const newDist = Math.max(8, Math.min(120, dist * scale));
+      camera.position.normalize().multiplyScalar(newDist);
+      lastPinch = d;
+    }
+  }, { passive: false });
+  canvas.addEventListener('touchend', () => { isDragging = false; lastTouch = null; lastPinch = null; });
+  canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+}
+
+// ---------- Term switching ----------
+function loadTerm(termKey) {
+  currentTerm = termKey;
+  // Update sidebar
+  document.querySelectorAll('.term-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.term === termKey);
+  });
+  // Clear scene
+  if (currentSceneRoot) {
+    disposeHierarchy(currentSceneRoot);
+    scene.remove(currentSceneRoot);
+    currentSceneRoot = null;
+  }
+  currentSceneUpdater = null;
+  // Reset camera
+  camera.position.set(0, 25, 45);
+  camera.lookAt(0, 0, 0);
+  userRotation = { x: 0, y: 0 };
+  targetRotation = { x: 0, y: 0 };
+  // Build scene
+  const builder = SCENE_BUILDERS[termKey];
+  if (!builder) return;
+  currentSceneRoot = new THREE.Group();
+  scene.add(currentSceneRoot);
+  builder(currentSceneRoot);
+  // Update info panel
+  renderInfoPanel(termKey);
+  // Update labels & legend
+  renderOverlayLabels(termKey);
+  renderLegend(termKey);
+}
+
+function disposeHierarchy(root) {
+  root.traverse(obj => {
+    if (obj.geometry) obj.geometry.dispose();
+    if (obj.material) {
+      if (Array.isArray(obj.material)) obj.material.forEach(m => m.dispose());
+      else obj.material.dispose();
+    }
+  });
+}
+
+// ---------- Info panel rendering ----------
+function renderInfoPanel(termKey) {
+  const t = TERMS[termKey];
+  let html = `
+    <h2>${t.icon} ${t.name}</h2>
+    <div class="pronounce">pronunciation: ${t.pronounce}</div>
+    <div class="definition">${t.definition}</div>
+    <div class="section-title">📍 Real Example</div>
+    <div class="example">${t.example}</div>
+    <div class="activity">
+      <span class="activity-label">🎬 What to watch</span>
+      ${t.activity}
+    </div>
+  `;
+  if (t.compare) {
+    html += `<div class="section-title">⚖️ ${t.compareTitle || 'Compare'}</div>`;
+    html += '<table class="compare-table">';
+    t.compare.forEach((row, i) => {
+      html += '<tr>';
+      row.forEach((cell, j) => {
+        html += i === 0
+          ? `<th>${cell}</th>`
+          : `<td${j === 0 ? ' style="color:#94a3b8;font-weight:600"' : ''}>${cell}</td>`;
+      });
+      html += '</tr>';
+    });
+    html += '</table>';
+  }
+  infoPanel.innerHTML = html;
+}
+
+function renderOverlayLabels(termKey) {
+  const t = TERMS[termKey];
+  overlayLabels.innerHTML = '';
+  if (t.labels) {
+    t.labels.forEach((label, i) => {
+      const div = document.createElement('div');
+      div.className = 'overlay-label';
+      div.style.animationDelay = (i * 0.08) + 's';
+      div.textContent = label;
+      overlayLabels.appendChild(div);
+    });
+  }
+}
+
+function renderLegend(termKey) {
+  const legends = LEGENDS[termKey];
+  if (!legends) { legendEl.style.display = 'none'; return; }
+  legendEl.style.display = '';
+  legendEl.innerHTML = `<div class="legend-title">${legends.title || 'Legend'}</div>`;
+  legends.items.forEach(item => {
+    legendEl.innerHTML += `<div class="legend-row">
+      <div class="legend-swatch" style="background:${item.color}"></div>
+      <div>${item.label}</div>
+    </div>`;
+  });
+}
+
+// ===============================================================
+//  SHARED ASSETS — water, land, sky
+// ===============================================================
+
+// Wave-shaded water surface (returns mesh + update function)
+function createWater(size, color, opacity = 0.85, segments = 64) {
+  const geo = new THREE.PlaneGeometry(size, size, segments, segments);
+  const mat = new THREE.MeshStandardMaterial({
+    color: color,
+    transparent: opacity < 1,
+    opacity: opacity,
+    roughness: 0.4,
+    metalness: 0.2,
+    side: THREE.DoubleSide,
+    flatShading: false
+  });
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.rotation.x = -Math.PI / 2;
+  mesh.receiveShadow = true;
+  // store initial vertex positions for wave animation
+  const positions = geo.attributes.position;
+  const initial = new Float32Array(positions.array.length);
+  for (let i = 0; i < positions.array.length; i++) initial[i] = positions.array[i];
+  mesh.userData.initialPositions = initial;
+  mesh.userData.waveTime = 0;
+  mesh.userData.isWater = true;
+  return mesh;
+}
+
+function updateWater(mesh, dt, amp = 0.25, freq = 0.4) {
+  if (!mesh.userData.isWater) return;
+  mesh.userData.waveTime += dt;
+  const t = mesh.userData.waveTime;
+  const positions = mesh.geometry.attributes.position;
+  const init = mesh.userData.initialPositions;
+  for (let i = 0; i < positions.count; i++) {
+    const x = init[i * 3];
+    const y = init[i * 3 + 1];
+    const z = Math.sin(x * freq + t * 1.2) * amp +
+              Math.cos(y * freq + t * 0.9) * amp * 0.7 +
+              Math.sin((x + y) * freq * 0.6 + t * 0.5) * amp * 0.5;
+    positions.setZ(i, z);
+  }
+  positions.needsUpdate = true;
+  mesh.geometry.computeVertexNormals();
+}
+
+// Simple landmass (returns mesh). shape is array of [x,z] points
+function createLand(shapePoints, height = 3, color = 0x4a6b3a, y = 0) {
+  const shape = new THREE.Shape();
+  shape.moveTo(shapePoints[0][0], shapePoints[0][1]);
+  for (let i = 1; i < shapePoints.length; i++) {
+    shape.lineTo(shapePoints[i][0], shapePoints[i][1]);
+  }
+  shape.closePath();
+  const geo = new THREE.ExtrudeGeometry(shape, {
+    depth: height,
+    bevelEnabled: true,
+    bevelThickness: 0.4,
+    bevelSize: 0.5,
+    bevelSegments: 3
+  });
+  // rotate so depth becomes Y height
+  geo.rotateX(-Math.PI / 2);
+  geo.translate(0, y, 0);
+  const mat = new THREE.MeshStandardMaterial({
+    color: color,
+    roughness: 0.85,
+    metalness: 0.05,
+    flatShading: true
+  });
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  return mesh;
+}
+
+// Sandy beach edge — child of landmass
+function addBeachRing(landMesh, beachColor = 0xc2a878) {}
+
+// Simple ship (group) — sails along path
+function createShip(scale = 1, color = 0xc04545) {
+  const g = new THREE.Group();
+  // Hull
+  const hullGeo = new THREE.CylinderGeometry(0.7, 0.5, 2.6, 10);
+  hullGeo.rotateZ(Math.PI / 2);
+  hullGeo.rotateY(Math.PI / 2);
+  hullGeo.scale(1, 0.5, 1);
+  const hull = new THREE.Mesh(hullGeo, new THREE.MeshStandardMaterial({ color: color, roughness: 0.5 }));
+  hull.position.y = 0.3;
+  hull.castShadow = true;
+  g.add(hull);
+  // Cabin
+  const cabGeo = new THREE.BoxGeometry(0.8, 0.6, 0.8);
+  const cab = new THREE.Mesh(cabGeo, new THREE.MeshStandardMaterial({ color: 0xf1f5f9 }));
+  cab.position.set(-0.2, 0.75, 0);
+  cab.castShadow = true;
+  g.add(cab);
+  // Smokestack
+  const stk = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.15, 0.18, 0.8, 8),
+    new THREE.MeshStandardMaterial({ color: 0x1e293b })
+  );
+  stk.position.set(0.4, 1.3, 0);
+  g.add(stk);
+  // Smoke particle
+  const smoke = new THREE.Mesh(
+    new THREE.SphereGeometry(0.18, 8, 8),
+    new THREE.MeshBasicMaterial({ color: 0x94a3b8, transparent: true, opacity: 0.6 })
+  );
+  smoke.position.set(0.4, 1.9, 0);
+  smoke.userData.isSmoke = true;
+  smoke.userData.life = 0;
+  g.add(smoke);
+  g.scale.setScalar(scale);
+  return g;
+}
+
+// Fish (small cone) for reef scenes
+function createFish(color = 0xff6b35) {
+  const g = new THREE.Group();
+  const body = new THREE.Mesh(
+    new THREE.ConeGeometry(0.25, 0.8, 6),
+    new THREE.MeshStandardMaterial({ color: color, roughness: 0.5 })
+  );
+  body.rotation.z = Math.PI / 2;
+  g.add(body);
+  const tail = new THREE.Mesh(
+    new THREE.ConeGeometry(0.18, 0.35, 4),
+    new THREE.MeshStandardMaterial({ color: color })
+  );
+  tail.rotation.z = -Math.PI / 2;
+  tail.position.x = -0.55;
+  g.add(tail);
+  return g;
+}
+
+// Cloud (soft sphere cluster)
+function createClouds(count = 5, area = 30, y = 18) {
+  const g = new THREE.Group();
+  const mat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.55 });
+  for (let i = 0; i < count; i++) {
+    const cg = new THREE.SphereGeometry(1.2 + Math.random(), 8, 6);
+    const c = new THREE.Mesh(cg, mat);
+    c.position.set(
+      (Math.random() - 0.5) * area,
+      y + (Math.random() - 0.5) * 2,
+      (Math.random() - 0.5) * area
+    );
+    c.scale.set(1.5 + Math.random(), 0.7, 1);
+    g.add(c);
+  }
+  return g;
+}
+
+// ===============================================================
+//  SCENE BUILDERS — one per water body term
+// ===============================================================
+const SCENE_BUILDERS = {};
+const LEGENDS = {};
+
+// SEA ----------------------------------------------------------------
+SCENE_BUILDERS.sea = function(root) {
+  // Wide open sea with a partial land arc on one side
+  const sea = createWater(80, 0x1e6cb0, 0.92, 80);
+  sea.position.y = 0;
+  root.add(sea);
+  // Coastline arc — partly enclosing the sea
+  const coastPoints = [];
+  for (let i = 0; i <= 12; i++) {
+    const a = (i / 12) * Math.PI * 0.9 + Math.PI * 0.05;
+    const r = 22 + Math.sin(i * 0.7) * 2;
+    coastPoints.push([Math.cos(a) * r, Math.sin(a) * r]);
+  }
+  // Close it inward
+  coastPoints.push([5, 25], [-5, 24], [0, 18]);
+  const coast = createLand(coastPoints, 4, 0x5a7a3a);
+  root.add(coast);
+  // A ship crossing the open sea
+  const ship = createShip(0.9, 0xb03030);
+  ship.position.set(-15, 0.7, -5);
+  root.add(ship);
+  const ship2 = createShip(0.6, 0x3050b0);
+  ship2.position.set(15, 0.7, 8);
+  root.add(ship2);
+  // Clouds
+  root.add(createClouds(6, 60, 22));
+  // Sea floor visible below
+  const floor = new THREE.Mesh(
+    new THREE.PlaneGeometry(80, 80),
+    new THREE.MeshStandardMaterial({ color: 0x2a3548, roughness: 0.95 })
+  );
+  floor.rotation.x = -Math.PI / 2;
+  floor.position.y = -3.5;
+  floor.receiveShadow = true;
+  root.add(floor);
+  // Frame update
+  const waters = [sea];
+  root.userData.updater = (dt, t) => {
+    waters.forEach(w => updateWater(w, dt, 0.2, 0.35));
+    ship.position.x = -15 + ((t * 1.5) % 35);
+    ship.position.z = -5 + Math.sin(t * 0.3) * 2;
+    ship.rotation.y = Math.sin(t * 0.3) * 0.15;
+    ship2.position.x = 15 - ((t * 1.2) % 35);
+    ship2.position.z = 8 + Math.cos(t * 0.25) * 2;
+    ship2.rotation.y = Math.PI + Math.sin(t * 0.25) * 0.15;
+    // smoke rise
+    ship.traverse(o => {
+      if (o.userData.isSmoke) {
+        o.userData.life += dt;
+        o.position.y = 1.9 + o.userData.life * 0.6;
+        o.material.opacity = Math.max(0, 0.6 - o.userData.life * 0.3);
+        if (o.userData.life > 2) { o.userData.life = 0; o.position.set(0.4, 1.9, 0); o.material.opacity = 0.6; }
+      }
+    });
+  };
+};
+
+// GULF ---------------------------------------------------------------
+SCENE_BUILDERS.gulf = function(root) {
+  // Land with a deep U-shape cut for the gulf
+  const sea = createWater(80, 0x1e6cb0, 0.92, 80);
+  sea.position.y = 0;
+  root.add(sea);
+  // Land with deep U-shape cut
+  const coastPoints = [
+    [-30, 30], [30, 30], [30, -5],
+    // Gulf: water enters here, deeply inland
+    [12, -5], [10, -10], [8, -15], [6, -20], [4, -25], [-4, -25],
+    [-6, -20], [-8, -15], [-10, -10], [-12, -5],
+    [-30, -5]
+  ];
+  const coast = createLand(coastPoints, 4, 0x5a7a3a);
+  root.add(coast);
+  // Gulf water — narrow finger of sea into the land
+  const gulfWater = createWater(20, 0x2576c4, 0.92, 30);
+  gulfWater.scale.set(0.4, 1, 1.3);
+  gulfWater.position.set(0, 0.05, -15);
+  root.add(gulfWater);
+  // Ship entering the gulf
+  const ship = createShip(0.7, 0xb03030);
+  ship.position.set(0, 0.7, -20);
+  root.add(ship);
+  // Clouds
+  root.add(createClouds(5, 50, 22));
+  // Sea floor
+  const floor = new THREE.Mesh(
+    new THREE.PlaneGeometry(80, 80),
+    new THREE.MeshStandardMaterial({ color: 0x2a3548, roughness: 0.95 })
+  );
+  floor.rotation.x = -Math.PI / 2;
+  floor.position.y = -3.5;
+  floor.receiveShadow = true;
+  root.add(floor);
+  root.userData.updater = (dt, t) => {
+    updateWater(sea, dt, 0.2, 0.35);
+    updateWater(gulfWater, dt, 0.15, 0.45);
+    // Ship slowly moves in/out of gulf
+    const cycle = (t * 0.4) % (Math.PI * 2);
+    ship.position.z = -8 - Math.sin(cycle) * 14;
+    ship.rotation.y = cycle < Math.PI ? 0 : Math.PI;
+    ship.traverse(o => {
+      if (o.userData.isSmoke) {
+        o.userData.life += dt;
+        o.position.y = 1.9 + o.userData.life * 0.6;
+        o.material.opacity = Math.max(0, 0.6 - o.userData.life * 0.3);
+        if (o.userData.life > 2) { o.userData.life = 0; o.position.set(0.4, 1.9, 0); o.material.opacity = 0.6; }
+      }
+    });
+  };
+};
+
+// BAY ----------------------------------------------------------------
+SCENE_BUILDERS.bay = function(root) {
+  const sea = createWater(80, 0x1e6cb0, 0.92, 80);
+  sea.position.y = 0;
+  root.add(sea);
+  // Land with broad curved bay opening
+  const coastPoints = [
+    [-30, -25], [30, -25], [30, 25],
+    [25, 22], [22, 18], [18, 14], [13, 10], [7, 7],
+    [0, 5], [-7, 7], [-13, 10], [-18, 14], [-22, 18], [-25, 22]
+  ];
+  const coast = createLand(coastPoints, 3.5, 0x6a8a4a);
+  root.add(coast);
+  // Ships anchored in bay
+  const ship1 = createShip(0.7, 0xc04540);
+  ship1.position.set(-8, 0.7, 18);
+  ship1.rotation.y = Math.PI / 2;
+  root.add(ship1);
+  const ship2 = createShip(0.7, 0x4060c0);
+  ship2.position.set(8, 0.7, 18);
+  ship2.rotation.y = -Math.PI / 2;
+  root.add(ship2);
+  root.add(createClouds(6, 60, 22));
+  const floor = new THREE.Mesh(
+    new THREE.PlaneGeometry(80, 80),
+    new THREE.MeshStandardMaterial({ color: 0x2a3548, roughness: 0.95 })
+  );
+  floor.rotation.x = -Math.PI / 2;
+  floor.position.y = -3.5;
+  floor.receiveShadow = true;
+  root.add(floor);
+  root.userData.updater = (dt, t) => {
+    updateWater(sea, dt, 0.18, 0.32);
+    // Ships gently bob
+    ship1.position.y = 0.7 + Math.sin(t * 1.2) * 0.15;
+    ship2.position.y = 0.7 + Math.sin(t * 1.4 + 1) * 0.15;
+    ship1.rotation.z = Math.sin(t * 1.2) * 0.04;
+    ship2.rotation.z = Math.sin(t * 1.4 + 1) * 0.04;
+  };
+};
+
+// STRAIT -------------------------------------------------------------
+SCENE_BUILDERS.strait = function(root) {
+  const sea = createWater(80, 0x1e6cb0, 0.92, 80);
+  sea.position.y = 0;
+  root.add(sea);
+  // Two landmasses with narrow passage between
+  // Land 1 (upper)
+  const l1Points = [
+    [-30, 30], [30, 30], [30, 8], [22, 6], [18, 4], [12, 3], [-12, 3],
+    [-18, 4], [-22, 6], [-30, 8]
+  ];
+  root.add(createLand(l1Points, 3.5, 0x5a7a3a));
+  // Land 2 (lower)
+  const l2Points = [
+    [-30, -30], [30, -30], [30, -8], [22, -6], [18, -4], [12, -3], [-12, -3],
+    [-18, -4], [-22, -6], [-30, -8]
+  ];
+  root.add(createLand(l2Points, 3.5, 0x6a8a4a));
+  // Strait water strip
+  const straitWater = createWater(80, 0x2a78c4, 0.95, 80);
+  straitWater.scale.set(1, 1, 0.07);
+  straitWater.position.set(0, 0.05, 0);
+  root.add(straitWater);
+  // Ships passing through (opposite directions)
+  const ship1 = createShip(0.6, 0xb03030);
+  ship1.position.set(-18, 0.7, -1.2);
+  ship1.rotation.y = Math.PI / 2;
+  root.add(ship1);
+  const ship2 = createShip(0.6, 0x3050b0);
+  ship2.position.set(18, 0.7, 1.2);
+  ship2.rotation.y = -Math.PI / 2;
+  root.add(ship2);
+  root.add(createClouds(6, 60, 22));
+  const floor = new THREE.Mesh(
+    new THREE.PlaneGeometry(80, 80),
+    new THREE.MeshStandardMaterial({ color: 0x2a3548, roughness: 0.95 })
+  );
+  floor.rotation.x = -Math.PI / 2;
+  floor.position.y = -3.5;
+  floor.receiveShadow = true;
+  root.add(floor);
+  root.userData.updater = (dt, t) => {
+    updateWater(sea, dt, 0.2, 0.35);
+    updateWater(straitWater, dt, 0.15, 0.6);
+    // Ships pass through
+    ship1.position.x = -20 + ((t * 4) % 40);
+    ship2.position.x = 20 - ((t * 4) % 40);
+    [ship1, ship2].forEach(s => s.traverse(o => {
+      if (o.userData.isSmoke) {
+        o.userData.life += dt;
+        o.position.y = 1.9 + o.userData.life * 0.6;
+        o.material.opacity = Math.max(0, 0.6 - o.userData.life * 0.3);
+        if (o.userData.life > 2) { o.userData.life = 0; o.position.set(0.4, 1.9, 0); o.material.opacity = 0.6; }
+      }
+    }));
+  };
+};
+
+// CANAL --------------------------------------------------------------
+SCENE_BUILDERS.canal = function(root) {
+  const sea = createWater(80, 0x1e6cb0, 0.92, 80);
+  sea.position.y = -1;
+  root.add(sea);
+  // Two landmasses split by a straight cut (the canal)
+  // Land 1 (left of canal)
+  root.add(createLand([
+    [-30, -25], [-4, -25], [-4, 25], [-30, 25]
+  ], 4, 0x6a8a4a));
+  // Land 2 (right of canal)
+  root.add(createLand([
+    [4, -25], [30, -25], [30, 25], [4, 25]
+  ], 4, 0x6a8a4a));
+  // Canal water — straight, rectangular
+  const canalGeo = new THREE.PlaneGeometry(60, 8, 40, 8);
+  const canalMat = new THREE.MeshStandardMaterial({
+    color: 0x1e6cb0, roughness: 0.4, metalness: 0.2,
+    side: THREE.DoubleSide
+  });
+  const canal = new THREE.Mesh(canalGeo, canalMat);
+  canal.rotation.x = -Math.PI / 2;
+  canal.position.y = 0.5;
+  root.add(canal);
+  const canalPos = canal.geometry.attributes.position;
+  const canalInit = new Float32Array(canalPos.array.length);
+  for (let i = 0; i < canalPos.array.length; i++) canalInit[i] = canalPos.array[i];
+  canal.userData.initialPositions = canalInit;
+  canal.userData.isWater = true;
+  canal.userData.waveTime = 0;
+  // Two lock gates at the canal ends
+  const gateMat = new THREE.MeshStandardMaterial({ color: 0x444444, roughness: 0.7 });
+  const gate1 = new THREE.Mesh(new THREE.BoxGeometry(8, 4, 0.5), gateMat);
+  gate1.position.set(-30, 2, 0);
+  gate1.castShadow = true;
+  root.add(gate1);
+  const gate2 = new THREE.Mesh(new THREE.BoxGeometry(8, 4, 0.5), gateMat);
+  gate2.position.set(30, 2, 0);
+  gate2.castShadow = true;
+  root.add(gate2);
+  // Lock chambers (visualised by water level steps)
+  // Ship in canal
+  const ship = createShip(0.7, 0xc04540);
+  ship.position.set(0, 1.2, 0);
+  root.add(ship);
+  root.add(createClouds(6, 60, 22));
+  const floor = new THREE.Mesh(
+    new THREE.PlaneGeometry(80, 80),
+    new THREE.MeshStandardMaterial({ color: 0x2a3548, roughness: 0.95 })
+  );
+  floor.rotation.x = -Math.PI / 2;
+  floor.position.y = -3.5;
+  floor.receiveShadow = true;
+  root.add(floor);
+  root.userData.updater = (dt, t) => {
+    updateWater(sea, dt, 0.18, 0.4);
+    // Canal water gentle ripple
+    const cp = canal.geometry.attributes.position;
+    const ci = canal.userData.initialPositions;
+    canal.userData.waveTime += dt;
+    const tt = canal.userData.waveTime;
+    for (let i = 0; i < cp.count; i++) {
+      const x = ci[i * 3];
+      cp.setZ(i, Math.sin(x * 0.4 + tt * 2) * 0.06);
+    }
+    cp.needsUpdate = true;
+    // Lock cycle: 0-4s gates closed, ship in middle chamber
+    //  4-6s gate1 opens, ship moves left, 6-10s ship in left chamber
+    // 10-12s gate2 opens, ship moves right, 12-16s ship exits
+    const cycle = (t * 0.5) % 8;
+    let gate1Open = (cycle > 1 && cycle < 3);
+    let gate2Open = (cycle > 5 && cycle < 7);
+    gate1.scale.x = gate1Open ? 0.1 : 1;
+    gate2.scale.x = gate2Open ? 0.1 : 1;
+    // Ship moves slowly along canal, pauses at locks
+    if (cycle < 1) { ship.position.x = -10; ship.position.y = 1.2; ship.rotation.y = Math.PI/2; }
+    else if (cycle < 3) { ship.position.x = -10 + (cycle - 1) * 5; ship.position.y = 1.2; ship.rotation.y = Math.PI/2; }
+    else if (cycle < 5) { ship.position.x = 0; ship.position.y = 1.2 + Math.sin((cycle-3) * Math.PI) * 0.3; ship.rotation.y = Math.PI/2; }
+    else if (cycle < 7) { ship.position.x = (cycle - 5) * 5; ship.position.y = 1.2; ship.rotation.y = Math.PI/2; }
+    else { ship.position.x = 10; ship.position.y = 1.2; ship.rotation.y = Math.PI/2; }
+  };
+};
+
+// TRENCH -------------------------------------------------------------
+SCENE_BUILDERS.trench = function(root) {
+  // Side view of ocean floor with V-shape trench
+  // Sea level water surface
+  const sea = createWater(80, 0x1e6cb0, 0.7, 60);
+  sea.position.y = 8;
+  root.add(sea);
+  // Build the seafloor with a deep V cut
+  // Use a series of points to define profile, then extrude
+  const profile = [];
+  // Right side: shallow shelf, then slope down into trench, V at bottom, slope up
+  for (let i = 0; i <= 20; i++) {
+    const x = -30 + (i / 20) * 22;  // -30 to -8
+    profile.push([x, 6 - (i / 20) * 4]);  // 6 -> 2 (continental shelf)
+  }
+  // Slope down to trench
+  for (let i = 0; i <= 12; i++) {
+    const x = -8 + (i / 12) * 5;  // -8 to -3
+    profile.push([x, 2 - (i / 12) * 10]);  // 2 -> -8
+  }
+  // V-shape trench bottom (deepest point)
+  for (let i = 0; i <= 6; i++) {
+    const x = -3 + (i / 6) * 6;  // -3 to 3
+    profile.push([x, -8 - Math.sin((i / 6) * Math.PI) * 3]);  // -8 -> -11 -> -8
+  }
+  // Slope up
+  for (let i = 0; i <= 12; i++) {
+    const x = 3 + (i / 12) * 5;  // 3 to 8
+    profile.push([x, -8 + (i / 12) * 10]);  // -8 -> 2
+  }
+  // Right shelf
+  for (let i = 0; i <= 20; i++) {
+    const x = 8 + (i / 20) * 22;  // 8 to 30
+    profile.push([x, 2 + (i / 20) * 4]);  // 2 -> 6
+  }
+  const shape = new THREE.Shape();
+  shape.moveTo(profile[0][0], profile[0][1]);
+  for (let i = 1; i < profile.length; i++) shape.lineTo(profile[i][0], profile[i][1]);
+  // Close along the bottom
+  shape.lineTo(30, -15);
+  shape.lineTo(-30, -15);
+  shape.closePath();
+  const geo = new THREE.ExtrudeGeometry(shape, { depth: 50, bevelEnabled: false });
+  geo.translate(0, 0, -25);
+  const mat = new THREE.MeshStandardMaterial({ color: 0x3a3530, roughness: 0.95, flatShading: true });
+  const floor = new THREE.Mesh(geo, mat);
+  floor.receiveShadow = true;
+  floor.castShadow = true;
+  root.add(floor);
+  // Depth markers (vertical lines + labels would be 2D; here use thin poles)
+  const markerMat = new THREE.MeshBasicMaterial({ color: 0xfbbf24 });
+  // Sea level marker
+  const seaLevelPole = new THREE.Mesh(new THREE.BoxGeometry(0.2, 1, 0.2), markerMat);
+  seaLevelPole.position.set(-25, 9, 0);
+  root.add(seaLevelPole);
+  // Mt Everest height marker (8848 m ~ scaled)
+  const everestPole = new THREE.Mesh(new THREE.BoxGeometry(0.2, 16, 0.2), new THREE.MeshBasicMaterial({ color: 0xef4444 }));
+  everestPole.position.set(-22, 8, 0);
+  root.add(everestPole);
+  // Mariana depth marker
+  const trenchPole = new THREE.Mesh(new THREE.BoxGeometry(0.2, 19, 0.2), new THREE.MeshBasicMaterial({ color: 0x38bdf8 }));
+  trenchPole.position.set(22, 0, 0);
+  root.add(trenchPole);
+  // Submersible descending into trench
+  const sub = new THREE.Group();
+  const subBody = new THREE.Mesh(
+    new THREE.CapsuleGeometry(0.7, 1.5, 4, 8),
+    new THREE.MeshStandardMaterial({ color: 0xfbbf24, metalness: 0.6, roughness: 0.4 })
+  );
+  subBody.rotation.z = Math.PI / 2;
+  sub.add(subBody);
+  // Manipulator arm
+  const arm = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.15, 1.2), new THREE.MeshStandardMaterial({ color: 0x64748b }));
+  arm.position.set(0.8, -0.3, 0);
+  sub.add(arm);
+  // Light cone
+  const lightCone = new THREE.Mesh(
+    new THREE.ConeGeometry(1.5, 4, 16, 1, true),
+    new THREE.MeshBasicMaterial({ color: 0xfff8a0, transparent: true, opacity: 0.18, side: THREE.DoubleSide })
+  );
+  lightCone.rotation.x = -Math.PI / 2;
+  lightCone.position.set(0.6, 0, 0);
+  sub.add(lightCone);
+  root.add(sub);
+  root.add(createClouds(4, 60, 22));
+  root.userData.updater = (dt, t) => {
+    updateWater(sea, dt, 0.15, 0.4);
+    // Sub descends and rises
+    const cycle = (t * 0.15) % (Math.PI * 2);
+    sub.position.x = 0;
+    sub.position.y = 5 - Math.sin(cycle) * 14;
+    sub.position.z = 0;
+    sub.rotation.y = Math.sin(t * 0.4) * 0.2;
+  };
+  // Side-view camera
+  camera.position.set(0, 0, 70);
+  camera.lookAt(0, -3, 0);
+};
+
+// RIDGE --------------------------------------------------------------
+SCENE_BUILDERS.ridge = function(root) {
+  // Underwater view of mountain chain on seafloor
+  // Sea surface
+  const sea = createWater(80, 0x1e6cb0, 0.75, 60);
+  sea.position.y = 12;
+  root.add(sea);
+  // Seafloor profile with mountain chain (multiple peaks)
+  const profile = [];
+  for (let i = 0; i <= 40; i++) {
+    const x = -30 + (i / 40) * 60;
+    // Base seafloor at y=-2
+    let y = -2;
+    // Add ridge peaks in the middle
+    const dx = x;
+    if (Math.abs(dx) < 18) {
+      // Multiple peaks
+      y += Math.max(0, Math.sin(dx * 0.4) * 5 + Math.sin(dx * 0.7 + 1) * 3 + 4);
+    }
+    // Central rift valley
+    if (Math.abs(dx) < 1.5) y = -3;
+    profile.push([x, y]);
+  }
+  const shape = new THREE.Shape();
+  shape.moveTo(profile[0][0], profile[0][1]);
+  for (let i = 1; i < profile.length; i++) shape.lineTo(profile[i][0], profile[i][1]);
+  shape.lineTo(30, -12);
+  shape.lineTo(-30, -12);
+  shape.closePath();
+  const geo = new THREE.ExtrudeGeometry(shape, { depth: 50, bevelEnabled: false });
+  geo.translate(0, 0, -25);
+  const mat = new THREE.MeshStandardMaterial({ color: 0x4a3525, roughness: 0.95, flatShading: true });
+  const floor = new THREE.Mesh(geo, mat);
+  floor.receiveShadow = true;
+  floor.castShadow = true;
+  root.add(floor);
+  // Magma glow at rift
+  const magma = new THREE.Mesh(
+    new THREE.SphereGeometry(1, 16, 16),
+    new THREE.MeshBasicMaterial({ color: 0xff6a1a, transparent: true, opacity: 0.85 })
+  );
+  magma.position.set(0, -2, 0);
+  root.add(magma);
+  // Magma particles rising
+  const particles = [];
+  for (let i = 0; i < 20; i++) {
+    const p = new THREE.Mesh(
+      new THREE.SphereGeometry(0.18, 8, 8),
+      new THREE.MeshBasicMaterial({ color: 0xff9a3a, transparent: true, opacity: 0.9 })
+    );
+    p.userData.life = Math.random() * 2;
+    p.userData.x = (Math.random() - 0.5) * 1.5;
+    p.userData.z = (Math.random() - 0.5) * 1.5;
+    particles.push(p);
+    root.add(p);
+  }
+  // Plates spreading indicators (arrows would be 2D; use thin boxes)
+  const arrowMat = new THREE.MeshBasicMaterial({ color: 0xfbbf24 });
+  const aL = new THREE.Mesh(new THREE.BoxGeometry(3, 0.15, 0.15), arrowMat);
+  aL.position.set(-8, 6, 0);
+  root.add(aL);
+  const aR = new THREE.Mesh(new THREE.BoxGeometry(3, 0.15, 0.15), arrowMat);
+  aR.position.set(8, 6, 0);
+  root.add(aR);
+  // Clouds above
+  root.add(createClouds(4, 60, 22));
+  root.userData.updater = (dt, t) => {
+    updateWater(sea, dt, 0.18, 0.35);
+    // Magma pulse
+    magma.material.opacity = 0.6 + Math.sin(t * 4) * 0.25;
+    magma.scale.setScalar(1 + Math.sin(t * 3) * 0.15);
+    // Particles rise
+    particles.forEach(p => {
+      p.userData.life += dt;
+      if (p.userData.life > 2) {
+        p.userData.life = 0;
+        p.position.set(p.userData.x * 0.3, -2, p.userData.z * 0.3);
+        p.material.opacity = 0.9;
+      }
+      p.position.y = -2 + p.userData.life * 3;
+      p.material.opacity = Math.max(0, 0.9 - p.userData.life * 0.45);
+      p.scale.setScalar(1 - p.userData.life * 0.3);
+    });
+    // Arrow plates spreading
+    aL.position.x = -8 - (Math.sin(t * 0.5) * 0.5);
+    aR.position.x = 8 + (Math.sin(t * 0.5) * 0.5);
+  };
+  camera.position.set(0, 8, 60);
+  camera.lookAt(0, 0, 0);
+};
+
+// REEF ---------------------------------------------------------------
+SCENE_BUILDERS.reef = function(root) {
+  // Sea surface
+  const sea = createWater(80, 0x1e6cb0, 0.75, 60);
+  sea.position.y = 4;
+  root.add(sea);
+  // Seafloor with a sinking island
+  const islandShape = [];
+  for (let i = 0; i <= 20; i++) {
+    const a = (i / 20) * Math.PI * 2;
+    islandShape.push([Math.cos(a) * 14, Math.sin(a) * 14]);
+  }
+  const island = createLand(islandShape, 2, 0x6a5a3a, -3);
+  island.position.y = -2;
+  root.add(island);
+  // Coral formations around the island
+  const corals = [];
+  const coralColors = [0xff6b6b, 0xffa500, 0xffd166, 0xff85a2, 0x66c7a0, 0x56cfe1];
+  for (let i = 0; i < 24; i++) {
+    const cg = new THREE.Group();
+    const branches = 3 + Math.floor(Math.random() * 4);
+    for (let b = 0; b < branches; b++) {
+      const bgeo = new THREE.CylinderGeometry(0.15, 0.3, 1.5 + Math.random(), 6);
+      const bm = new THREE.MeshStandardMaterial({
+        color: coralColors[i % coralColors.length],
+        roughness: 0.7
+      });
+      const branch = new THREE.Mesh(bgeo, bm);
+      branch.position.set((Math.random()-0.5)*0.5, 0.5, (Math.random()-0.5)*0.5);
+      branch.rotation.z = (Math.random()-0.5) * 0.6;
+      branch.rotation.x = (Math.random()-0.5) * 0.6;
+      branch.castShadow = true;
+      cg.add(branch);
+    }
+    const a = (i / 24) * Math.PI * 2;
+    const r = 13 + Math.random() * 2;
+    cg.position.set(Math.cos(a) * r, -2, Math.sin(a) * r);
+    cg.userData.swayPhase = Math.random() * Math.PI * 2;
+    corals.push(cg);
+    root.add(cg);
+  }
+  // Fish swimming
+  const fishes = [];
+  for (let i = 0; i < 14; i++) {
+    const f = createFish([0xff6b35, 0xffd166, 0x4ec9b0, 0x4dabf7, 0xff85a2][i % 5]);
+    f.position.set((Math.random()-0.5)*20, 1 + Math.random()*1.5, (Math.random()-0.5)*20);
+    f.userData.angle = Math.random() * Math.PI * 2;
+    f.userData.radius = 5 + Math.random() * 8;
+    f.userData.height = 1 + Math.random() * 1.5;
+    f.userData.speed = 0.3 + Math.random() * 0.5;
+    fishes.push(f);
+    root.add(f);
+  }
+  // Sunlight rays through water (subtle cones)
+  const rayMat = new THREE.MeshBasicMaterial({
+    color: 0xfff8a0, transparent: true, opacity: 0.08, side: THREE.DoubleSide
+  });
+  for (let i = 0; i < 6; i++) {
+    const ray = new THREE.Mesh(new THREE.ConeGeometry(2.5, 8, 8, 1, true), rayMat);
+    ray.position.set((Math.random()-0.5)*24, 0, (Math.random()-0.5)*24);
+    ray.rotation.x = (Math.random()-0.5)*0.4;
+    ray.rotation.z = (Math.random()-0.5)*0.4;
+    root.add(ray);
+  }
+  root.add(createClouds(4, 60, 18));
+  root.userData.updater = (dt, t) => {
+    updateWater(sea, dt, 0.18, 0.4);
+    // Coral sway
+    corals.forEach(c => {
+      c.rotation.z = Math.sin(t * 0.8 + c.userData.swayPhase) * 0.05;
+    });
+    // Fish swim in circles
+    fishes.forEach(f => {
+      f.userData.angle += dt * f.userData.speed;
+      f.position.x = Math.cos(f.userData.angle) * f.userData.radius;
+      f.position.z = Math.sin(f.userData.angle) * f.userData.radius;
+      f.position.y = f.userData.height + Math.sin(t * 2 + f.userData.swayPhase) * 0.2;
+      f.rotation.y = -f.userData.angle + Math.PI/2;
+      f.userData.swayPhase = f.userData.swayPhase || 0;
+    });
+  };
+  camera.position.set(0, 12, 30);
+  camera.lookAt(0, -1, 0);
+};
+
+// ATOLL --------------------------------------------------------------
+SCENE_BUILDERS.atoll = function(root) {
+  // Sea
+  const sea = createWater(80, 0x1e6cb0, 0.85, 80);
+  sea.position.y = 0;
+  root.add(sea);
+  // Sinking volcanic base (deep underwater)
+  const volcBaseGeo = new THREE.ConeGeometry(14, 10, 32, 1, false);
+  const volcBase = new THREE.Mesh(volcBaseGeo, new THREE.MeshStandardMaterial({ color: 0x3a3530, roughness: 0.95 }));
+  volcBase.rotation.x = Math.PI;
+  volcBase.position.y = -6;
+  root.add(volcBase);
+  // Coral ring (low island ring)
+  const ringInner = 7, ringOuter = 11;
+  const ringShape = new THREE.Shape();
+  ringShape.absarc(0, 0, ringOuter, 0, Math.PI * 2, false);
+  const holePath = new THREE.Path();
+  holePath.absarc(0, 0, ringInner, 0, Math.PI * 2, true);
+  ringShape.holes.push(holePath);
+  const ringGeo = new THREE.ExtrudeGeometry(ringShape, {
+    depth: 1.5, bevelEnabled: true, bevelThickness: 0.3, bevelSize: 0.3, bevelSegments: 2
+  });
+  ringGeo.rotateX(-Math.PI / 2);
+  const ring = new THREE.Mesh(ringGeo, new THREE.MeshStandardMaterial({ color: 0xead7a0, roughness: 0.85 }));
+  ring.position.y = 0.2;
+  ring.castShadow = true;
+  ring.receiveShadow = true;
+  root.add(ring);
+  // Coral heads (pinnacles) on the outer edge
+  for (let i = 0; i < 24; i++) {
+    const a = (i / 24) * Math.PI * 2;
+    const r = ringOuter + 1;
+    const ch = new THREE.Mesh(
+      new THREE.SphereGeometry(0.8 + Math.random() * 0.5, 8, 6),
+      new THREE.MeshStandardMaterial({ color: 0xff85a2, roughness: 0.7 })
+    );
+    ch.position.set(Math.cos(a) * r, -0.2, Math.sin(a) * r);
+    ch.scale.y = 0.7;
+    ch.castShadow = true;
+    root.add(ch);
+  }
+  // Lagoon water inside ring (calmer, lighter color)
+  const lagoon = new THREE.Mesh(
+    new THREE.CircleGeometry(ringInner - 0.3, 48),
+    new THREE.MeshStandardMaterial({ color: 0x4ad9c4, transparent: true, opacity: 0.85, roughness: 0.3, metalness: 0.1 })
+  );
+  lagoon.rotation.x = -Math.PI / 2;
+  lagoon.position.y = 0.4;
+  root.add(lagoon);
+  // Waves crashing on outer ring (whitecaps — small spheres)
+  const whitecaps = [];
+  for (let i = 0; i < 18; i++) {
+    const w = new THREE.Mesh(
+      new THREE.SphereGeometry(0.4, 8, 6),
+      new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.85 })
+    );
+    const a = (i / 18) * Math.PI * 2;
+    w.position.set(Math.cos(a) * (ringOuter + 2), 0.5, Math.sin(a) * (ringOuter + 2));
+    w.userData.angle = a;
+    w.userData.phase = Math.random() * Math.PI * 2;
+    whitecaps.push(w);
+    root.add(w);
+  }
+  // Fish in lagoon
+  const fishes = [];
+  for (let i = 0; i < 6; i++) {
+    const f = createFish([0xffd166, 0x4ec9b0, 0xff85a2][i % 3]);
+    f.position.set(0, 0.8, 0);
+    f.userData.angle = (i / 6) * Math.PI * 2;
+    f.userData.radius = 3 + Math.random() * 2;
+    f.userData.speed = 0.4 + Math.random() * 0.3;
+    fishes.push(f);
+    root.add(f);
+  }
+  root.add(createClouds(5, 50, 18));
+  root.userData.updater = (dt, t) => {
+    updateWater(sea, dt, 0.2, 0.35);
+    // Lagoon gentle ripple
+    const lp = lagoon.geometry.attributes.position;
+    if (!lagoon.userData.init) {
+      lagoon.userData.init = new Float32Array(lp.array.length);
+      for (let i = 0; i < lp.array.length; i++) lagoon.userData.init[i] = lp.array[i];
+    }
+    const li = lagoon.userData.init;
+    for (let i = 0; i < lp.count; i++) {
+      const x = li[i * 3];
+      const y = li[i * 3 + 1];
+      lp.setZ(i, Math.sin(x * 0.5 + t * 1.5) * 0.05 + Math.cos(y * 0.5 + t * 1.2) * 0.05);
+    }
+    lp.needsUpdate = true;
+    // Whitecaps appear intermittently
+    whitecaps.forEach(w => {
+      const phase = t * 1.5 + w.userData.phase;
+      const visible = Math.sin(phase) > 0.3;
+      w.material.opacity = visible ? 0.85 : 0;
+      w.scale.setScalar(visible ? 1 + Math.sin(phase * 2) * 0.3 : 0.1);
+    });
+    // Fish swim in circles inside lagoon
+    fishes.forEach(f => {
+      f.userData.angle += dt * f.userData.speed;
+      f.position.x = Math.cos(f.userData.angle) * f.userData.radius;
+      f.position.z = Math.sin(f.userData.angle) * f.userData.radius;
+      f.rotation.y = -f.userData.angle + Math.PI/2;
+    });
+  };
+  camera.position.set(15, 22, 25);
+  camera.lookAt(0, 0, 0);
+};
+
+// ISTHMUS ------------------------------------------------------------
+SCENE_BUILDERS.isthmus = function(root) {
+  // Sea on both sides
+  const sea = createWater(80, 0x1e6cb0, 0.92, 80);
+  sea.position.y = 0;
+  root.add(sea);
+  // Two large landmasses connected by narrow strip
+  // North landmass
+  root.add(createLand([
+    [-30, 8], [-3, 8], [-3, 4], [-2, 3.5], [2, 3.5], [3, 4], [3, 8], [30, 8],
+    [30, 30], [-30, 30]
+  ], 4, 0x5a7a3a));
+  // South landmass
+  root.add(createLand([
+    [-30, -8], [-3, -8], [-3, -4], [-2, -3.5], [2, -3.5], [3, -4], [3, -8], [30, -8],
+    [30, -30], [-30, -30]
+  ], 4, 0x6a8a4a));
+  // Ships sailing around (the long way)
+  const ship1 = createShip(0.8, 0xc04540);
+  ship1.position.set(-25, 0.7, -15);
+  ship1.rotation.y = 0;
+  root.add(ship1);
+  const ship2 = createShip(0.8, 0x4060c0);
+  ship2.position.set(25, 0.7, 15);
+  ship2.rotation.y = Math.PI;
+  root.add(ship2);
+  // A canal cut through isthmus (small detail)
+  const canal = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 8, 4, 8),
+    new THREE.MeshStandardMaterial({ color: 0x2576c4, roughness: 0.3 })
+  );
+  canal.rotation.x = -Math.PI / 2;
+  canal.position.set(0, 0.3, 0);
+  root.add(canal);
+  root.add(createClouds(6, 60, 22));
+  const floor = new THREE.Mesh(
+    new THREE.PlaneGeometry(80, 80),
+    new THREE.MeshStandardMaterial({ color: 0x2a3548, roughness: 0.95 })
+  );
+  floor.rotation.x = -Math.PI / 2;
+  floor.position.y = -3.5;
+  floor.receiveShadow = true;
+  root.add(floor);
+  root.userData.updater = (dt, t) => {
+    updateWater(sea, dt, 0.2, 0.35);
+    // Ships go around the isthmus
+    const cycle = (t * 0.3) % (Math.PI * 2);
+    ship1.position.x = -25 + Math.cos(cycle) * 35;
+    ship1.position.z = -15 + Math.sin(cycle) * 35;
+    ship1.rotation.y = -cycle - Math.PI/2;
+    const cycle2 = cycle + Math.PI;
+    ship2.position.x = 25 + Math.cos(cycle2) * 35;
+    ship2.position.z = 15 + Math.sin(cycle2) * 35;
+    ship2.rotation.y = -cycle2 - Math.PI/2;
+    [ship1, ship2].forEach(s => s.traverse(o => {
+      if (o.userData.isSmoke) {
+        o.userData.life += dt;
+        o.position.y = 1.9 + o.userData.life * 0.6;
+        o.material.opacity = Math.max(0, 0.6 - o.userData.life * 0.3);
+        if (o.userData.life > 2) { o.userData.life = 0; o.position.set(0.4, 1.9, 0); o.material.opacity = 0.6; }
+      }
+    }));
+  };
+};
+
+// PENINSULA ---------------------------------------------------------
+SCENE_BUILDERS.peninsula = function(root) {
+  const sea = createWater(80, 0x1e6cb0, 0.92, 80);
+  sea.position.y = 0;
+  root.add(sea);
+  // Landmass with peninsula shape — three sides in water
+  // Mainland to the north, peninsula projecting south
+  const coastPoints = [
+    [-30, 30], [30, 30], [30, 0],
+    [25, -2], [18, -3], [12, -4], [6, -8], [0, -18],
+    [-6, -8], [-12, -4], [-18, -3], [-25, -2], [-30, 0]
+  ];
+  root.add(createLand(coastPoints, 4, 0x5a7a3a));
+  // Waves on three sides
+  const whitecaps = [];
+  for (let i = 0; i < 30; i++) {
+    const w = new THREE.Mesh(
+      new THREE.SphereGeometry(0.25, 6, 4),
+      new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.7 })
+    );
+    w.userData.phase = Math.random() * Math.PI * 2;
+    w.userData.angle = (i / 30) * Math.PI * 2;
+    w.userData.radius = 18 + Math.random() * 4;
+    whitecaps.push(w);
+    root.add(w);
+  }
+  root.add(createClouds(6, 60, 22));
+  const floor = new THREE.Mesh(
+    new THREE.PlaneGeometry(80, 80),
+    new THREE.MeshStandardMaterial({ color: 0x2a3548, roughness: 0.95 })
+  );
+  floor.rotation.x = -Math.PI / 2;
+  floor.position.y = -3.5;
+  floor.receiveShadow = true;
+  root.add(floor);
+  root.userData.updater = (dt, t) => {
+    updateWater(sea, dt, 0.2, 0.35);
+    whitecaps.forEach(w => {
+      const phase = t * 1.5 + w.userData.phase;
+      const visible = Math.sin(phase) > 0.4;
+      w.material.opacity = visible ? 0.7 : 0;
+      const a = w.userData.angle;
+      w.position.set(
+        Math.cos(a) * w.userData.radius,
+        0.4 + Math.sin(phase * 2) * 0.1,
+        Math.sin(a) * w.userData.radius
+      );
+    });
+  };
+};
+
+// CAPE ---------------------------------------------------------------
+SCENE_BUILDERS.cape = function(root) {
+  const sea = createWater(80, 0x1e6cb0, 0.92, 80);
+  sea.position.y = 0;
+  root.add(sea);
+  // Coastline with a sharp pointed cape
+  const coastPoints = [
+    [-30, -25], [30, -25], [30, 25],
+    [25, 22], [20, 20], [15, 17], [10, 12],
+    [4, 4], [1, -2], [0, -8], [-1, -2], [-4, 4],
+    [-10, 12], [-15, 17], [-20, 20], [-25, 22]
+  ];
+  root.add(createLand(coastPoints, 4, 0x6a8a4a));
+  // Lighthouse at the cape tip
+  const lhBase = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.4, 0.6, 2, 12),
+    new THREE.MeshStandardMaterial({ color: 0xffffff })
+  );
+  lhBase.position.set(0, 2, -8);
+  root.add(lhBase);
+  const lhTop = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.3, 0.4, 1, 12),
+    new THREE.MeshStandardMaterial({ color: 0xef4444 })
+  );
+  lhTop.position.set(0, 3.5, -8);
+  root.add(lhTop);
+  const lhLight = new THREE.Mesh(
+    new THREE.SphereGeometry(0.3, 8, 8),
+    new THREE.MeshBasicMaterial({ color: 0xfff8a0 })
+  );
+  lhLight.position.set(0, 4, -8);
+  root.add(lhLight);
+  // Light beam (cone)
+  const beam = new THREE.Mesh(
+    new THREE.ConeGeometry(2.5, 8, 16, 1, true),
+    new THREE.MeshBasicMaterial({ color: 0xfff8a0, transparent: true, opacity: 0.18, side: THREE.DoubleSide })
+  );
+  beam.position.set(0, 4, -8);
+  beam.rotation.x = Math.PI / 2;
+  root.add(beam);
+  root.add(createClouds(6, 60, 22));
+  const floor = new THREE.Mesh(
+    new THREE.PlaneGeometry(80, 80),
+    new THREE.MeshStandardMaterial({ color: 0x2a3548, roughness: 0.95 })
+  );
+  floor.rotation.x = -Math.PI / 2;
+  floor.position.y = -3.5;
+  floor.receiveShadow = true;
+  root.add(floor);
+  root.userData.updater = (dt, t) => {
+    updateWater(sea, dt, 0.2, 0.35);
+    // Lighthouse rotating beam
+    beam.rotation.y = t * 1.5;
+    lhLight.material.color.setHSL(0.16, 1, 0.7 + Math.sin(t * 4) * 0.2);
+  };
+};
+
+// DELTA --------------------------------------------------------------
+SCENE_BUILDERS.delta = function(root) {
+  const sea = createWater(80, 0x1e6cb0, 0.92, 80);
+  sea.position.y = 0;
+  root.add(sea);
+  // Mainland at top, delta fan spreading into sea
+  root.add(createLand([
+    [-30, 30], [30, 30], [30, 18], [15, 14], [-15, 14], [-30, 18]
+  ], 3, 0x5a7a3a));
+  // Main river channel
+  const riverMat = new THREE.MeshStandardMaterial({ color: 0x2576c4, roughness: 0.3 });
+  const riverGeo = new THREE.PlaneGeometry(2, 16, 4, 16);
+  const river = new THREE.Mesh(riverGeo, riverMat);
+  river.rotation.x = -Math.PI / 2;
+  river.position.set(0, 0.1, 22);
+  root.add(river);
+  // Distributaries (fan-shaped)
+  const distributaries = [];
+  for (let i = 0; i < 5; i++) {
+    const angle = (i - 2) * 0.4;
+    const len = 14;
+    const rg = new THREE.PlaneGeometry(1.2, len, 4, 8);
+    const r = new THREE.Mesh(rg, riverMat);
+    r.rotation.x = -Math.PI / 2;
+    r.rotation.z = angle;  // tilt in plane (around vertical)
+    r.position.set(Math.sin(angle) * (len/2), 0.1, 22 - Math.cos(angle) * (len/2));
+    distributaries.push(r);
+    root.add(r);
+  }
+  // Delta sediment fan (between distributaries)
+  const fanGeo = new THREE.CircleGeometry(15, 32, -Math.PI/2 - 0.6, 1.2);
+  const fanMat = new THREE.MeshStandardMaterial({ color: 0xb09860, roughness: 0.9 });
+  const fan = new THREE.Mesh(fanGeo, fanMat);
+  fan.rotation.x = -Math.PI / 2;
+  fan.position.set(0, 0.05, 18);
+  fan.scale.set(1, 0.6, 1);
+  root.add(fan);
+  // Flow particles
+  const particles = [];
+  for (let i = 0; i < 30; i++) {
+    const p = new THREE.Mesh(
+      new THREE.SphereGeometry(0.15, 6, 6),
+      new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.7 })
+    );
+    p.userData.life = Math.random() * 3;
+    p.userData.channel = Math.floor(Math.random() * 5);
+    p.userData.speed = 0.8 + Math.random() * 0.5;
+    particles.push(p);
+    root.add(p);
+  }
+  root.add(createClouds(5, 50, 22));
+  const floor = new THREE.Mesh(
+    new THREE.PlaneGeometry(80, 80),
+    new THREE.MeshStandardMaterial({ color: 0x2a3548, roughness: 0.95 })
+  );
+  floor.rotation.x = -Math.PI / 2;
+  floor.position.y = -3.5;
+  floor.receiveShadow = true;
+  root.add(floor);
+  root.userData.updater = (dt, t) => {
+    updateWater(sea, dt, 0.2, 0.35);
+    // Particles flow down the river then split into distributaries
+    particles.forEach(p => {
+      p.userData.life += dt;
+      if (p.userData.life > 3.5) {
+        p.userData.life = 0;
+        p.userData.channel = Math.floor(Math.random() * 5);
+      }
+      const a = (p.userData.channel - 2) * 0.4;
+      const speed = p.userData.speed;
+      // First descend main river
+      if (p.userData.life < 1) {
+        p.position.set(0, 0.3, 22 - p.userData.life * speed * 4);
+      } else {
+        // Then split into channel
+        const f = (p.userData.life - 1) * speed * 4;
+        p.position.set(Math.sin(a) * f, 0.3, 18 - Math.cos(a) * f);
+      }
+      p.material.opacity = Math.max(0, 0.7 - p.userData.life * 0.2);
+    });
+  };
+};
+
+// ESTUARY ------------------------------------------------------------
+SCENE_BUILDERS.estuary = function(root) {
+  // Mixing of fresh + seawater
+  const sea = createWater(80, 0x1e6cb0, 0.92, 80);  // saltwater (blue-green)
+  sea.position.y = 0;
+  root.add(sea);
+  // Land with funnel-shaped opening
+  root.add(createLand([
+    [-30, -25], [30, -25], [30, 25],
+    [22, 20], [14, 12], [8, 6], [4, 2],
+    [2, 0], [2, -4], [2, -8], [2, -12], [2, -16], [2, -20], [2, -25]
+  ], 4, 0x5a7a3a));
+  root.add(createLand([
+    [-30, 25], [-22, 20], [-14, 12], [-8, 6], [-4, 2],
+    [-2, 0], [-2, -4], [-2, -8], [-2, -12], [-2, -16], [-2, -20], [-2, -25]
+  ], 4, 0x6a8a4a));
+  // Freshwater river (lighter blue)
+  const riverMat = new THREE.MeshStandardMaterial({ color: 0x80c4e8, roughness: 0.3, transparent: true, opacity: 0.95 });
+  const river = new THREE.Mesh(new THREE.PlaneGeometry(4, 16, 8, 16), riverMat);
+  river.rotation.x = -Math.PI / 2;
+  river.position.set(0, 0.1, 18);
+  root.add(river);
+  // Mixing zone (between river mouth and open sea)
+  const mixMat = new THREE.MeshStandardMaterial({ color: 0x4ab8b0, transparent: true, opacity: 0.7, roughness: 0.3 });
+  const mix = new THREE.Mesh(new THREE.PlaneGeometry(20, 10, 20, 10), mixMat);
+  mix.rotation.x = -Math.PI / 2;
+  mix.position.set(0, 0.05, 5);
+  root.add(mix);
+  // Saltwater intrusion (in green tinge)
+  const swatMat = new THREE.MeshStandardMaterial({ color: 0x2a8c8c, transparent: true, opacity: 0.6, roughness: 0.3 });
+  const swat = new THREE.Mesh(new THREE.PlaneGeometry(8, 6, 8, 6), swatMat);
+  swat.rotation.x = -Math.PI / 2;
+  swat.position.set(0, 0.08, 14);
+  root.add(swat);
+  // Flow direction arrows (small particles)
+  const freshParticles = [];
+  const saltParticles = [];
+  for (let i = 0; i < 15; i++) {
+    const p = new THREE.Mesh(
+      new THREE.SphereGeometry(0.18, 6, 6),
+      new THREE.MeshBasicMaterial({ color: 0x80c4e8, transparent: true, opacity: 0.85 })
+    );
+    p.userData.life = Math.random() * 3;
+    freshParticles.push(p);
+    root.add(p);
+  }
+  for (let i = 0; i < 15; i++) {
+    const p = new THREE.Mesh(
+      new THREE.SphereGeometry(0.18, 6, 6),
+      new THREE.MeshBasicMaterial({ color: 0x2a8c8c, transparent: true, opacity: 0.85 })
+    );
+    p.userData.life = Math.random() * 4;
+    saltParticles.push(p);
+    root.add(p);
+  }
+  root.add(createClouds(5, 50, 22));
+  const floor = new THREE.Mesh(
+    new THREE.PlaneGeometry(80, 80),
+    new THREE.MeshStandardMaterial({ color: 0x2a3548, roughness: 0.95 })
+  );
+  floor.rotation.x = -Math.PI / 2;
+  floor.position.y = -3.5;
+  floor.receiveShadow = true;
+  root.add(floor);
+  root.userData.updater = (dt, t) => {
+    updateWater(sea, dt, 0.2, 0.35);
+    // Tidal cycle: tides flow in and out
+    const tideCycle = Math.sin(t * 0.6) * 0.5 + 0.5;  // 0..1, 0=low, 1=high
+    // Saltwater intrusion moves up estuary on high tide
+    swat.position.z = 16 - tideCycle * 6;
+    swat.scale.y = 1 + tideCycle * 0.5;
+    mix.position.z = 6 - tideCycle * 2;
+    // Freshwater particles flow toward sea
+    freshParticles.forEach(p => {
+      p.userData.life += dt;
+      if (p.userData.life > 3) p.userData.life = 0;
+      p.position.set((Math.random()-0.5)*2, 0.3, 20 - p.userData.life * 6);
+      p.material.opacity = Math.max(0, 0.85 - p.userData.life * 0.28);
+    });
+    // Saltwater particles flow in on high tide, out on low tide
+    saltParticles.forEach(p => {
+      p.userData.life += dt;
+      if (p.userData.life > 4) p.userData.life = 0;
+      const phase = p.userData.life / 4;
+      const range = 8 + tideCycle * 4;
+      p.position.set((Math.random()-0.5)*4, 0.3, 4 + (1 - phase) * range - range/2);
+      p.material.opacity = Math.max(0, 0.85 - p.userData.life * 0.2);
+    });
+  };
+};
+
+// LAGOON -------------------------------------------------------------
+SCENE_BUILDERS.lagoon = function(root) {
+  // Open sea with waves outside; calm lagoon inside, separated by barrier island
+  const sea = createWater(80, 0x1e6cb0, 0.92, 80);
+  sea.position.y = 0;
+  root.add(sea);
+  // Mainland at the top
+  root.add(createLand([
+    [-30, 30], [30, 30], [30, 22], [-30, 22]
+  ], 3, 0x5a7a3a));
+  // Barrier island (long thin strip)
+  root.add(createLand([
+    [-25, 12], [25, 12], [25, 10], [-25, 10]
+  ], 1.5, 0xead7a0));
+  // Lagoon water (calmer, lighter)
+  const lagoon = new THREE.Mesh(
+    new THREE.PlaneGeometry(50, 8, 30, 6),
+    new THREE.MeshStandardMaterial({ color: 0x4ad9c4, transparent: true, opacity: 0.88, roughness: 0.3 })
+  );
+  lagoon.rotation.x = -Math.PI / 2;
+  lagoon.position.set(0, 0.2, 17);
+  root.add(lagoon);
+  // Inlet (gap in barrier island)
+  // Tiny channel of lagoon water connecting to sea
+  const inlet = new THREE.Mesh(
+    new THREE.PlaneGeometry(2, 2),
+    new THREE.MeshStandardMaterial({ color: 0x4ad9c4, transparent: true, opacity: 0.85 })
+  );
+  inlet.rotation.x = -Math.PI / 2;
+  inlet.position.set(0, 0.2, 11);
+  root.add(inlet);
+  // Whitecaps on outer (sea) side
+  const whitecaps = [];
+  for (let i = 0; i < 14; i++) {
+    const w = new THREE.Mesh(
+      new THREE.SphereGeometry(0.3, 6, 4),
+      new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.7 })
+    );
+    w.userData.x = -22 + (i / 14) * 44;
+    w.userData.z = 6 + Math.random() * 2;
+    w.userData.phase = Math.random() * Math.PI * 2;
+    whitecaps.push(w);
+    root.add(w);
+  }
+  // Fish in lagoon
+  const fishes = [];
+  for (let i = 0; i < 5; i++) {
+    const f = createFish([0xffd166, 0x4ec9b0, 0xff85a2][i % 3]);
+    f.position.set((Math.random()-0.5)*20, 0.6, 17);
+    f.userData.angle = (i / 5) * Math.PI * 2;
+    f.userData.radius = 3 + Math.random() * 3;
+    f.userData.cx = (Math.random()-0.5) * 10;
+    f.userData.cz = 17 + (Math.random()-0.5) * 4;
+    f.userData.speed = 0.4 + Math.random() * 0.3;
+    fishes.push(f);
+    root.add(f);
+  }
+  // Birds (small spheres above)
+  const birds = [];
+  for (let i = 0; i < 4; i++) {
+    const b = new THREE.Mesh(
+      new THREE.SphereGeometry(0.2, 6, 6),
+      new THREE.MeshBasicMaterial({ color: 0xfafafa })
+    );
+    b.userData.phase = i * 1.5;
+    birds.push(b);
+    root.add(b);
+  }
+  root.add(createClouds(5, 50, 22));
+  const floor = new THREE.Mesh(
+    new THREE.PlaneGeometry(80, 80),
+    new THREE.MeshStandardMaterial({ color: 0x2a3548, roughness: 0.95 })
+  );
+  floor.rotation.x = -Math.PI / 2;
+  floor.position.y = -3.5;
+  floor.receiveShadow = true;
+  root.add(floor);
+  root.userData.updater = (dt, t) => {
+    updateWater(sea, dt, 0.22, 0.4);  // bigger waves outside
+    // Lagoon gentle ripple
+    const lp = lagoon.geometry.attributes.position;
+    if (!lagoon.userData.init) {
+      lagoon.userData.init = new Float32Array(lp.array.length);
+      for (let i = 0; i < lp.array.length; i++) lagoon.userData.init[i] = lp.array[i];
+    }
+    const li = lagoon.userData.init;
+    for (let i = 0; i < lp.count; i++) {
+      const x = li[i * 3];
+      const y = li[i * 3 + 1];
+      lp.setZ(i, Math.sin(x * 0.5 + t * 1.2) * 0.06 + Math.cos(y * 0.5 + t) * 0.05);
+    }
+    lp.needsUpdate = true;
+    // Whitecaps on outer side
+    whitecaps.forEach(w => {
+      const phase = t * 2 + w.userData.phase;
+      const visible = Math.sin(phase) > 0;
+      w.material.opacity = visible ? 0.7 : 0;
+      w.position.set(w.userData.x, 0.4 + Math.sin(phase * 1.5) * 0.2, w.userData.z);
+    });
+    // Fish swim in lagoon
+    fishes.forEach(f => {
+      f.userData.angle += dt * f.userData.speed;
+      f.position.x = f.userData.cx + Math.cos(f.userData.angle) * f.userData.radius;
+      f.position.z = f.userData.cz + Math.sin(f.userData.angle) * f.userData.radius;
+      f.rotation.y = -f.userData.angle + Math.PI/2;
+    });
+    // Birds circle above
+    birds.forEach(b => {
+      b.userData.phase += dt * 0.4;
+      b.position.set(Math.cos(b.userData.phase) * 18, 8 + Math.sin(b.userData.phase * 2) * 1, 17 + Math.sin(b.userData.phase) * 6);
+    });
+  };
+};
+
+// ===============================================================
+//  LEGENDS (color key for each scene)
+// ===============================================================
+LEGENDS.sea = {
+  title: "Legend",
+  items: [
+    { color: "#1e6cb0", label: "Sea water" },
+    { color: "#5a7a3a", label: "Coast / land" },
+    { color: "#b03030", label: "Cargo ship" }
+  ]
+};
+LEGENDS.gulf = {
+  title: "Legend",
+  items: [
+    { color: "#1e6cb0", label: "Open sea" },
+    { color: "#2576c4", label: "Gulf water" },
+    { color: "#5a7a3a", label: "Land" }
+  ]
+};
+LEGENDS.bay = {
+  title: "Legend",
+  items: [
+    { color: "#1e6cb0", label: "Bay water" },
+    { color: "#6a8a4a", label: "Coastline" },
+    { color: "#c04540", label: "Anchored ship" }
+  ]
+};
+LEGENDS.strait = {
+  title: "Legend",
+  items: [
+    { color: "#2a78c4", label: "Strait passage" },
+    { color: "#5a7a3a", label: "Two landmasses" },
+    { color: "#b03030", label: "East-bound ship" },
+    { color: "#3050b0", label: "West-bound ship" }
+  ]
+};
+LEGENDS.canal = {
+  title: "Legend",
+  items: [
+    { color: "#444444", label: "Lock gates" },
+    { color: "#1e6cb0", label: "Canal water" },
+    { color: "#6a8a4a", label: "Banks" },
+    { color: "#c04540", label: "Transiting ship" }
+  ]
+};
+LEGENDS.trench = {
+  title: "Depth scale",
+  items: [
+    { color: "#fbbf24", label: "Sea level (0 m)" },
+    { color: "#ef4444", label: "Mt Everest height (8,848 m)" },
+    { color: "#38bdf8", label: "Mariana Trench bottom (~11,000 m)" },
+    { color: "#3a3530", label: "Seafloor & continental shelf" }
+  ]
+};
+LEGENDS.ridge = {
+  title: "Legend",
+  items: [
+    { color: "#1e6cb0", label: "Sea surface" },
+    { color: "#4a3525", label: "Seafloor / ridge" },
+    { color: "#ff6a1a", label: "Magma rising" },
+    { color: "#fbbf24", label: "Plates spreading" }
+  ]
+};
+LEGENDS.reef = {
+  title: "Legend",
+  items: [
+    { color: "#1e6cb0", label: "Sea surface" },
+    { color: "#6a5a3a", label: "Sinking island base" },
+    { color: "#ff6b6b", label: "Live coral branches" },
+    { color: "#ff6b35", label: "Reef fish" }
+  ]
+};
+LEGENDS.atoll = {
+  title: "Legend",
+  items: [
+    { color: "#1e6cb0", label: "Open sea (with waves)" },
+    { color: "#4ad9c4", label: "Lagoon (calm)" },
+    { color: "#ead7a0", label: "Coral ring / island" },
+    { color: "#ff85a2", label: "Coral heads" },
+    { color: "#ffffff", label: "Wave whitecaps" }
+  ]
+};
+LEGENDS.isthmus = {
+  title: "Legend",
+  items: [
+    { color: "#1e6cb0", label: "Sea on both sides" },
+    { color: "#5a7a3a", label: "Two larger landmasses" },
+    { color: "#2576c4", label: "Canal cut through isthmus" },
+    { color: "#c04540", label: "Ship going around" }
+  ]
+};
+LEGENDS.peninsula = {
+  title: "Legend",
+  items: [
+    { color: "#1e6cb0", label: "Sea on 3 sides" },
+    { color: "#5a7a3a", label: "Peninsula + mainland" },
+    { color: "#ffffff", label: "Wave whitecaps" }
+  ]
+};
+LEGENDS.cape = {
+  title: "Legend",
+  items: [
+    { color: "#1e6cb0", label: "Sea" },
+    { color: "#6a8a4a", label: "Coast with sharp point" },
+    { color: "#ffffff", label: "Lighthouse base" },
+    { color: "#fff8a0", label: "Lighthouse beam" }
+  ]
+};
+LEGENDS.delta = {
+  title: "Legend",
+  items: [
+    { color: "#1e6cb0", label: "Sea" },
+    { color: "#2576c4", label: "River & distributaries" },
+    { color: "#b09860", label: "Sediment fan" },
+    { color: "#5a7a3a", label: "Mainland" },
+    { color: "#ffffff", label: "Flow particles" }
+  ]
+};
+LEGENDS.estuary = {
+  title: "Legend",
+  items: [
+    { color: "#80c4e8", label: "Freshwater (river, light blue)" },
+    { color: "#1e6cb0", label: "Saltwater (sea, dark blue)" },
+    { color: "#4ab8b0", label: "Brackish mixing zone" },
+    { color: "#5a7a3a", label: "Land" }
+  ]
+};
+LEGENDS.lagoon = {
+  title: "Legend",
+  items: [
+    { color: "#1e6cb0", label: "Open sea (with waves)" },
+    { color: "#4ad9c4", label: "Lagoon (calm)" },
+    { color: "#ead7a0", label: "Barrier island" },
+    { color: "#5a7a3a", label: "Mainland" }
+  ]
+};
+
+// ===============================================================
+//  ANIMATION LOOP
+// ===============================================================
+function animate() {
+  requestAnimationFrame(animate);
+  const dt = Math.min(0.05, clock.getDelta());
+  const t = clock.getElapsedTime();
+  // Smooth camera rotation
+  userRotation.x += (targetRotation.x - userRotation.x) * 0.1;
+  userRotation.y += (targetRotation.y - userRotation.y) * 0.1;
+  if (currentSceneRoot) {
+    currentSceneRoot.rotation.x = userRotation.x;
+    currentSceneRoot.rotation.y = userRotation.y;
+  }
+  // Auto-rotate
+  if (isAutoRotate && !isDragging) {
+    targetRotation.y += 0.003;
+  }
+  // Scene-specific update
+  if (currentSceneRoot && currentSceneRoot.userData.updater && !isPaused) {
+    currentSceneRoot.userData.updater(dt, t);
+  }
+  renderer.render(scene, camera);
+}
+
+// ===============================================================
+//  CONTROLS WIRING
+// ===============================================================
+document.getElementById('play-pause').addEventListener('click', (e) => {
+  isPaused = !isPaused;
+  e.currentTarget.innerHTML = isPaused ? '▶ Play' : '⏸ Pause';
+  e.currentTarget.classList.toggle('active', isPaused);
+});
+document.getElementById('reset-view').addEventListener('click', () => {
+  targetRotation.x = 0;
+  targetRotation.y = 0;
+  camera.position.set(0, 25, 45);
+  camera.lookAt(0, 0, 0);
+  // Re-apply scene-specific camera if defined
+  if (currentTerm === 'trench' || currentTerm === 'ridge') {
+    if (currentTerm === 'trench') { camera.position.set(0, 0, 70); camera.lookAt(0, -3, 0); }
+    else { camera.position.set(0, 8, 60); camera.lookAt(0, 0, 0); }
+  } else if (currentTerm === 'reef') {
+    camera.position.set(0, 12, 30); camera.lookAt(0, -1, 0);
+  } else if (currentTerm === 'atoll') {
+    camera.position.set(15, 22, 25); camera.lookAt(0, 0, 0);
+  }
+});
+document.getElementById('rotate-toggle').addEventListener('click', (e) => {
+  isAutoRotate = !isAutoRotate;
+  e.currentTarget.classList.toggle('active', isAutoRotate);
+});
+document.getElementById('2d-toggle').addEventListener('click', (e) => {
+  // Toggle 2D SVG view (handled separately)
+  // For brevity: just show an alert that 2D view is in a separate file
+  // (the main 3D file is the primary deliverable)
+  show2DFallback(currentTerm);
+});
+document.querySelectorAll('.term-btn').forEach(btn => {
+  btn.addEventListener('click', () => loadTerm(btn.dataset.term));
+});
+
+// ===============================================================
+//  2D SVG FALLBACK VIEWS (animated side-view / cross-section)
+//  Shown when "2D View" is toggled. Each diagram is an animated SVG
+//  that explains the same concept from a side or plan view.
+// ===============================================================
+function show2DFallback(termKey) {
+  const w = window.open('', '_blank', 'width=900,height=700');
+  if (!w) { alert('Please allow pop-ups to view the 2D animated side-view.'); return; }
+  const svg = SVG_VIEWS[termKey];
+  if (!svg) { w.document.write('<h2>No 2D view yet — 3D is the primary reference.</h2>'); return; }
+  w.document.write(`
+    <html><head><title>${TERMS[termKey].name} — 2D Side View</title>
+    <style>body{font-family:sans-serif;background:#0a1326;color:#e2e8f0;margin:0;padding:14px;}
+    h2{color:#38bdf8;margin-top:0;} .note{font-size:13px;color:#94a3b8;margin-bottom:14px;line-height:1.5;}</style>
+    </head><body>
+    <h2>${TERMS[termKey].name} — 2D Animated Side View</h2>
+    <div class="note">${TERMS[termKey].definition}</div>
+    ${svg}
+    </body></html>
+  `);
+  w.document.close();
+}
+
+const SVG_VIEWS = {};
+SVG_VIEWS.sea = `
+<svg viewBox="0 0 800 400" style="background:#0a1326;width:100%;height:500px;">
+  <defs>
+    <linearGradient id="seaGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2576c4"/><stop offset="1" stop-color="#0c4a6e"/>
+    </linearGradient>
+    <linearGradient id="landGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6a8a4a"/><stop offset="1" stop-color="#3a4a2a"/>
+    </linearGradient>
+  </defs>
+  <text x="400" y="40" text-anchor="middle" fill="#7dd3fc" font-size="22" font-weight="700">SEA — Cross-section View</text>
+  <!-- Land on the left -->
+  <path d="M0,200 L0,150 C40,160 80,140 120,180 L150,220 L150,400 L0,400 Z" fill="url(#landGrad)" stroke="#1e293b"/>
+  <!-- Sea water -->
+  <path id="seaPath" d="M150,200 L800,200 L800,400 L150,400 Z" fill="url(#seaGrad)" opacity="0.9"/>
+  <!-- Wave (animated) -->
+  <path id="wave1" d="M150,200 q20,-8 40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0" stroke="#7dd3fc" stroke-width="2" fill="none">
+    <animate attributeName="d" dur="3s" repeatCount="indefinite"
+      values="M150,200 q20,-8 40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0;
+              M150,200 q20,8 40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0;
+              M150,200 q20,-8 40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0"/>
+    </animate>
+  </path>
+  <!-- Ship -->
+  <g id="ship2d">
+    <polygon points="-25,0 25,0 20,-8 -20,-8" fill="#c04540" stroke="#1e293b"/>
+    <rect x="-5" y="-15" width="10" height="8" fill="#f1f5f9"/>
+    <animateTransform attributeName="transform" type="translate" dur="6s" repeatCount="indefinite" from="200,200" to="700,200"/>
+  </g>
+  <!-- Labels -->
+  <text x="60" y="130" fill="#fbbf24" font-size="14" font-weight="600">LAND</text>
+  <text x="450" y="180" fill="#7dd3fc" font-size="14" font-weight="600">SEA (open saltwater)</text>
+  <line x1="150" y1="200" x2="150" y2="100" stroke="#fbbf24" stroke-dasharray="4"/>
+  <text x="160" y="100" fill="#fbbf24" font-size="11">coastline</text>
+  <line x1="700" y1="200" x2="800" y2="200" stroke="#94a3b8" stroke-dasharray="2"/>
+  <text x="700" y="190" fill="#94a3b8" font-size="11">→ to ocean</text>
+</svg>`;
+
+SVG_VIEWS.gulf = `
+<svg viewBox="0 0 800 400" style="background:#0a1326;width:100%;height:500px;">
+  <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2576c4"/><stop offset="1" stop-color="#0c4a6e"/></linearGradient>
+  <linearGradient id="lg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6a8a4a"/><stop offset="1" stop-color="#3a4a2a"/></linearGradient></defs>
+  <text x="400" y="40" text-anchor="middle" fill="#7dd3fc" font-size="22" font-weight="700">GULF — Plan View (top-down)</text>
+  <!-- Land with U-shape cut -->
+  <path d="M0,400 L0,100 L100,100 L100,200 L150,210 L170,250 L180,300 L185,360 L400,360 L400,400 Z" fill="url(#lg1)" stroke="#1e293b"/>
+  <path d="M800,400 L800,100 L700,100 L700,200 L650,210 L630,250 L620,300 L615,360 L400,360 L400,400 Z" fill="url(#lg1)" stroke="#1e293b"/>
+  <!-- Gulf water (the U cut) -->
+  <path d="M150,210 L100,200 L100,100 L0,100 L0,400 L800,400 L800,100 L700,100 L700,200 L650,210 L620,300 L615,360 L400,360 L185,360 L180,300 L170,250 Z" fill="url(#g1)" opacity="0.9"/>
+  <!-- Sea at bottom -->
+  <rect x="0" y="360" width="800" height="40" fill="#1e6cb0"/>
+  <!-- Wave animation in gulf -->
+  <path id="gw1" stroke="#7dd3fc" stroke-width="2" fill="none">
+    <animate attributeName="d" dur="4s" repeatCount="indefinite"
+      values="M150,210 Q300,200 400,360; M150,210 Q300,300 400,360; M150,210 Q300,200 400,360"/>
+    </animate>
+  </path>
+  <!-- Ship entering gulf -->
+  <g>
+    <polygon points="-12,0 12,0 10,-4 -10,-4" fill="#c04540"/>
+    <rect x="-3" y="-9" width="6" height="5" fill="#f1f5f9"/>
+    <animateMotion dur="8s" repeatCount="indefinite" path="M400,360 L185,360 L180,300 L175,250 L172,210"/>
+  </g>
+  <!-- Labels -->
+  <text x="50" y="180" fill="#fbbf24" font-size="14" font-weight="600">LAND</text>
+  <text x="400" y="330" text-anchor="middle" fill="#7dd3fc" font-size="14" font-weight="600">GULF (deep inland)</text>
+  <text x="500" y="380" fill="#94a3b8" font-size="11">→ open sea</text>
+  <text x="220" y="280" fill="#fbbf24" font-size="10" font-style="italic">narrow mouth</text>
+</svg>`;
+
+// (Other SVG views can be added on demand — the 3D file is the primary deliverable)
+
+// ===============================================================
+//  START
+// ===============================================================
+if (typeof THREE === 'undefined') {
+  loadingEl.innerHTML = '<div style="color:#ef4444;font-size:14px;">⚠️ Failed to load Three.js. Please check your internet connection.</div>';
+} else {
+  initEngine();
+}
+</script>
+</body>
+</html>
