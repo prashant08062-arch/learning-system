@@ -1,0 +1,1179 @@
+/* ============================================================
+   LEARNING SYSTEM — Main Application
+   ============================================================
+   This file:
+     1. Renders the home screen (subjects + chapters)
+     2. Loads chapter data dynamically
+     3. Renders the chapter interface (6 tabs)
+     4. Handles lecture player (SVG or image based)
+     5. Handles real-life scenarios, guided practice, self-test
+
+   Architecture:
+     - catalog.js (loaded first) defines window.CATALOG
+     - When user selects a chapter, we dynamically load its
+       dataFile (e.g., data/maths/baudhayana_pythagoras/chapter.js)
+       which sets window.CHAPTER_DATA
+     - Then we render the chapter interface from CHAPTER_DATA
+   ============================================================ */
+
+(function() {
+'use strict';
+
+// State
+let currentChapterData = null;
+let currentSubject = null;
+let currentChapter = null;
+const lecStates = {};
+let gpState = null;
+
+// ====================================================================
+// HOME SCREEN — Render subjects & chapters
+// ====================================================================
+function renderHome() {
+  const grid = document.getElementById('subjectsGrid');
+  grid.innerHTML = '';
+
+  window.CATALOG.subjects.forEach(subject => {
+    const card = document.createElement('div');
+    card.className = 'subject-card';
+    card.style.setProperty('--subject-color', subject.color);
+    card.dataset.subjectId = subject.id;
+
+    const chapterCount = subject.chapters.length;
+    const countLabel = chapterCount === 0 ? 'No chapters yet' :
+                       chapterCount === 1 ? '1 chapter' :
+                       `${chapterCount} chapters`;
+
+    card.innerHTML = `
+      <div class="subject-icon">${subject.icon}</div>
+      <div class="subject-name">${subject.name}</div>
+      <div class="subject-count ${chapterCount > 0 ? 'has-chapters' : ''}">${countLabel}</div>
+      <div class="chapters-list">
+        ${chapterCount === 0 ?
+          '<div style="padding:14px; text-align:center; color:#64748b; font-size:12px; font-style:italic;">Chapters coming soon</div>' :
+          subject.chapters.map(ch => `
+            <div class="chapter-item" data-chapter-slug="${ch.slug}">
+              <div class="chapter-item-title">${ch.title}</div>
+              <div class="chapter-item-subtitle">${ch.subtitle}</div>
+              <div class="chapter-item-desc">${ch.description}</div>
+              <div class="chapter-item-meta">⏱ ${ch.estimatedTime} · ${ch.hasImages ? '🖼️ Image-based' : '✏️ SVG-based'}</div>
+            </div>
+          `).join('')
+        }
+      </div>
+    `;
+
+    // Click on card (not on a chapter) toggles expansion
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.chapter-item')) return;
+      // Collapse all other cards
+      document.querySelectorAll('.subject-card').forEach(c => {
+        if (c !== card) c.classList.remove('expanded');
+      });
+      card.classList.toggle('expanded');
+    });
+
+    // Click on a chapter item loads the chapter
+    card.querySelectorAll('.chapter-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const slug = item.dataset.chapterSlug;
+        const chapter = subject.chapters.find(c => c.slug === slug);
+        if (chapter) loadChapter(subject, chapter);
+      });
+    });
+
+    grid.appendChild(card);
+  });
+}
+
+// ====================================================================
+// LOAD CHAPTER — Dynamically load chapter.js and render
+// ====================================================================
+function loadChapter(subject, chapter) {
+  currentSubject = subject;
+  currentChapter = chapter;
+  // Dispose any existing globe viewers and clear lecture states
+  Object.values(lecStates).forEach(s => {
+    if (s.globe && typeof s.globe.dispose === 'function') s.globe.dispose();
+  });
+  Object.keys(lecStates).forEach(k => delete lecStates[k]);
+  currentChapterData = null;
+  gpState = null;
+
+  // Show chapter screen
+  document.getElementById('homeScreen').style.display = 'none';
+  document.getElementById('chapterScreen').style.display = 'block';
+
+  // Update top bar
+  document.getElementById('chapterTopSubject').textContent = subject.name;
+  document.getElementById('chapterTopTitle').textContent = chapter.title;
+
+  // Show loading state
+  document.getElementById('lectureContainer').innerHTML =
+    '<div style="padding:40px; text-align:center; color:#64748b;">Loading chapter…</div>';
+  document.getElementById('notesContent').innerHTML = '<p>Loading…</p>';
+  document.getElementById('practiceContent').innerHTML = '<p>Loading…</p>';
+  document.getElementById('reallifeContent').innerHTML = '<p>Loading…</p>';
+  document.getElementById('guidedApp').innerHTML = '<div class="content"><p>Loading…</p></div>';
+  document.getElementById('selftestContent').innerHTML = '<p>Loading…</p>';
+  document.getElementById('lectureSectionBar').innerHTML = '';
+
+  // Reset to lecture tab
+  switchTab('lecture');
+  window.scrollTo({ top: 0, behavior: 'instant' });
+
+  // Dynamically load the chapter data file
+  const script = document.createElement('script');
+  script.src = chapter.dataFile;
+  script.onload = () => {
+    currentChapterData = window.CHAPTER_DATA;
+    if (currentChapterData) {
+      renderChapter();
+    } else {
+      console.error('Chapter data not found in', chapter.dataFile);
+      alert('Chapter data not found in: ' + chapter.dataFile);
+      goHome();
+    }
+  };
+  script.onerror = () => {
+    alert('Failed to load chapter data: ' + chapter.dataFile);
+    goHome();
+  };
+  document.head.appendChild(script);
+}
+
+function goHome() {
+  document.getElementById('homeScreen').style.display = 'block';
+  document.getElementById('chapterScreen').style.display = 'none';
+  if (window.TTS) TTS.stopSpeaking();
+  // Dispose all globe viewers
+  Object.values(lecStates).forEach(s => {
+    if (s.globe && typeof s.globe.dispose === 'function') s.globe.dispose();
+  });
+  Object.keys(lecStates).forEach(k => delete lecStates[k]);
+  currentChapterData = null;
+  currentSubject = null;
+  currentChapter = null;
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+// ====================================================================
+// TAB SWITCHING
+// ====================================================================
+function switchTab(tabId) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  const tab = document.querySelector(`.tab[data-tab="${tabId}"]`);
+  const section = document.getElementById(tabId);
+  if (tab) tab.classList.add('active');
+  if (section) section.classList.add('active');
+  if (window.TTS) TTS.stopSpeaking();
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+// ====================================================================
+// RENDER CHAPTER — Build all 6 tabs from CHAPTER_DATA
+// ====================================================================
+function renderChapter() {
+  if (!currentChapterData) {
+    console.warn('renderChapter called with no currentChapterData');
+    return;
+  }
+
+  renderLectures();
+  renderNotes();
+  renderPractice();
+  renderRealLife();
+  renderGuidedPractice();
+  renderSelfTest();
+
+  // Populate voice-select dropdowns after rendering (they are created dynamically)
+  if (window.TTS && TTS.pickVoice) {
+    setTimeout(() => TTS.pickVoice(), 100);
+    setTimeout(() => TTS.pickVoice(), 600);
+  }
+}
+
+// ====================================================================
+// LECTURES — Multi-section lecture player
+// Supports both SVG-based and image-based chapters
+// ====================================================================
+function renderLectures() {
+  const data = currentChapterData;
+  const lectures = data.lectures || [];
+  const chapterType = data.meta.type;  // 'svg', 'image', or 'globe'
+  const isImageType = chapterType === 'image';
+  const isGlobeType = chapterType === 'globe';
+  const basePath = data.meta.imagesBasePath || '';
+
+  // Render section selector bar
+  const bar = document.getElementById('lectureSectionBar');
+  bar.innerHTML = lectures.map((lec, i) =>
+    `<button class="lec-sec-btn${i === 0 ? ' active' : ''}" data-lec="${lec.id}">${lec.label}</button>`
+  ).join('');
+
+  // Render each lecture section
+  const container = document.getElementById('lectureContainer');
+  container.innerHTML = '';
+
+  lectures.forEach((lec, i) => {
+    const active = i === 0 ? 'active' : '';
+    const sectionEl = document.createElement('div');
+    sectionEl.className = `lecture-app lec-section ${active}`;
+    sectionEl.id = `lec-${lec.id}`;
+    sectionEl.dataset.lecSection = lec.id;
+
+    let canvasContent;
+    if (isGlobeType) {
+      // Globe-based: a container div that will hold the Three.js canvas
+      canvasContent = `<div class="globe-container" id="globe-${lec.id}"><div class="globe-loading">Loading 3D globe…</div></div>`;
+    } else if (isImageType) {
+      // Image-based: stack of <img> elements
+      const imgs = (lec.images || []).map((img, bi) =>
+        `<img class="el" data-beat="${bi+1}" src="${basePath}${img.file}" alt="${img.caption || ''}" loading="lazy" />`
+      ).join('\n          ');
+      canvasContent = `<div class="canvas-stack">${imgs}</div>`;
+    } else {
+      // SVG-based: inline SVG with groups
+      canvasContent = `
+        <svg class="lec-board" viewBox="${lec.viewBox}" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+          ${lec.svg || ''}
+        </svg>`;
+    }
+
+    sectionEl.innerHTML = `
+      <div class="canvas-panel">${canvasContent}</div>
+      <div class="narration-panel">
+        <div class="chapter-title">Section ${lec.label}</div>
+        <div class="chapter-name">${data.meta.title}</div>
+        <div class="transcript lec-transcript" data-lec="${lec.id}"></div>
+      </div>
+      <div class="voice-bar">
+        <label>
+          <button class="voice-toggle on lec-voice-toggle" data-lec="${lec.id}" title="Toggle voice"></button>
+          <span>🔊 Voice</span>
+        </label>
+        <div class="voice-speed lec-voice-speed" data-lec="${lec.id}">
+          <button data-speed="0.6">0.6x</button>
+          <button data-speed="0.8">0.8x</button>
+          <button data-speed="1" class="active">1x</button>
+          <button data-speed="1.2">1.2x</button>
+          <button data-speed="1.5">1.5x</button>
+        </div>
+        <select class="voice-select lec-voice-select" data-lec="${lec.id}"></select>
+      </div>
+      <div class="controls lec-controls" data-lec="${lec.id}">
+        <button class="control-btn lec-prev">⏮</button>
+        <button class="control-btn primary lec-play">▶</button>
+        <button class="control-btn lec-next">⏭</button>
+        <div class="progress-bar lec-progress"><div class="progress-fill lec-progress-fill" style="width:0%"></div></div>
+        <div class="beat-counter lec-counter">1 / ${lec.beats.length}</div>
+      </div>
+    `;
+    container.appendChild(sectionEl);
+
+    // Initialize state for this lecture
+    initLectureState(sectionEl, lec, isImageType, isGlobeType);
+  });
+
+  // Wire section selector buttons
+  container.querySelectorAll('.lec-sec-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lecId = btn.dataset.lec;
+      Object.values(lecStates).forEach(s => { if (s.stop) s.stop(); });
+      document.querySelectorAll('.lec-sec-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.lec-section').forEach(s => s.classList.remove('active'));
+      const target = document.querySelector(`.lec-section[data-lec-section="${lecId}"]`);
+      if (target) {
+        target.classList.add('active');
+        const st = lecStates[lecId];
+        if (st && st.updateUI) st.updateUI();
+      }
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    });
+  });
+  // Note: section bar buttons are above container; re-wire them
+  document.querySelectorAll('#lectureSectionBar .lec-sec-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lecId = btn.dataset.lec;
+      Object.values(lecStates).forEach(s => { if (s.stop) s.stop(); });
+      document.querySelectorAll('#lectureSectionBar .lec-sec-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.lec-section').forEach(s => s.classList.remove('active'));
+      const target = document.querySelector(`.lec-section[data-lec-section="${lecId}"]`);
+      if (target) {
+        target.classList.add('active');
+        const st = lecStates[lecId];
+        if (st && st.updateUI) st.updateUI();
+      }
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    });
+  });
+}
+
+function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
+  const lecId = lec.id;
+  const beats = lec.beats;
+  const locations = currentChapterData.locations || {};
+  const basePath = currentChapterData.meta.imagesBasePath || '';
+
+  let imgPerBeat = [];
+  if (isImageType) {
+    const imgs = lec.images || [];
+    const nBeats = beats.length;
+
+    // Check if any image has atBeat specified
+    const hasAtBeat = imgs.some(img => img.atBeat !== undefined);
+
+    if (hasAtBeat) {
+      // Use explicit atBeat mapping: for each beat, show the image with
+      // the largest atBeat <= current beat (1-based). Image stays visible
+      // from its atBeat until the next image's atBeat.
+      for (let bi = 0; bi < nBeats; bi++) {
+        const beat1 = bi + 1;  // 1-based beat number
+        let imgIdx = 0;
+        for (let i = 0; i < imgs.length; i++) {
+          const atBeat = imgs[i].atBeat || 1;
+          if (atBeat <= beat1) {
+            imgIdx = i;
+          }
+        }
+        imgPerBeat.push(imgIdx);
+      }
+    } else {
+      // Fall back to even distribution
+      const nImgs = imgs.length;
+      for (let bi = 0; bi < nBeats; bi++) {
+        imgPerBeat.push(nImgs > 0 ? Math.min(Math.floor(bi * nImgs / Math.max(1, nBeats)), nImgs - 1) : 0);
+      }
+    }
+  }
+
+  const state = {
+    beats,
+    imgPerBeat,
+    isImageType,
+    isGlobeType,
+    locations,
+    basePath,
+    currentBeat: 0,
+    isPlaying: false,
+    playTimer: null,
+    voiceOn: true,
+    ttsRate: 1,
+    globe: null
+  };
+  lecStates[lecId] = state;
+
+  const transcriptEl = sectionEl.querySelector('.lec-transcript');
+  const playBtn = sectionEl.querySelector('.lec-play');
+  const prevBtn = sectionEl.querySelector('.lec-prev');
+  const nextBtn = sectionEl.querySelector('.lec-next');
+  const progressFill = sectionEl.querySelector('.lec-progress-fill');
+  const progressBar = sectionEl.querySelector('.lec-progress');
+  const counterEl = sectionEl.querySelector('.lec-counter');
+
+  let boardEls, imgEls;
+  if (isImageType) {
+    imgEls = Array.from(sectionEl.querySelectorAll('.canvas-stack img.el'));
+  } else if (!isGlobeType) {
+    boardEls = Array.from(sectionEl.querySelectorAll('svg.lec-board .el'));
+  }
+
+  // Initialize globe if this is a globe-type lecture
+  if (isGlobeType && window.GlobeViewer) {
+    const globeContainer = sectionEl.querySelector('.globe-container');
+    if (globeContainer) {
+      // Wait for the container to have proper dimensions
+      setTimeout(() => {
+        // Remove loading indicator
+        const loading = globeContainer.querySelector('.globe-loading');
+        if (loading) loading.remove();
+        state.globe = new GlobeViewer(globeContainer);
+        // Focus on the first beat's location
+        renderGlobe();
+      }, 100);
+    }
+  }
+
+  if (window.TTS) TTS.attachVoiceBar(sectionEl.querySelector('.voice-bar'), state);
+
+  function renderTranscript() {
+    transcriptEl.innerHTML = '';
+    state.beats.forEach((beat, i) => {
+      const div = document.createElement('div');
+      div.className = 'beat ' + (i === state.currentBeat ? 'current' : i < state.currentBeat ? 'past' : 'future');
+      div.innerHTML = `<div class="beat-number">Beat ${i + 1} of ${state.beats.length}</div><div class="beat-text">${beat}</div>`;
+      transcriptEl.appendChild(div);
+    });
+    const cur = transcriptEl.querySelector('.beat.current');
+    if (cur) cur.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // ----------------------------------------------------------------
+  // Globe rendering: rotate to the current beat's location
+  // ----------------------------------------------------------------
+  function renderGlobe() {
+    if (!state.globe) return;
+
+    // Get the location key for the current beat
+    const beatLocations = lec.beatLocations || [];
+    const locKey = beatLocations[state.currentBeat];
+    const loc = state.locations[locKey];
+
+    if (loc) {
+      state.globe.focusOn(loc.lat, loc.lng, loc.label, loc.zoom || 2.5);
+    }
+
+    // Check if there's an image overlay for this beat
+    const beatImages = lec.beatImages || {};
+    const imgInfo = beatImages[state.currentBeat + 1];  // 1-based
+    if (imgInfo) {
+      state.globe.showImageOverlay(state.basePath + imgInfo.file, imgInfo.caption);
+    } else {
+      state.globe.clearImageOverlay();
+    }
+  }
+
+  function renderBoard() {
+    if (isGlobeType) {
+      renderGlobe();
+    } else if (isImageType) {
+      const targetIdx = state.imgPerBeat[state.currentBeat] || 0;
+      imgEls.forEach((img, i) => {
+        const shouldShow = i === targetIdx;
+        const wasVisible = img.classList.contains('visible');
+        img.classList.toggle('visible', shouldShow);
+        img.classList.remove('pulse');
+        if (shouldShow && !wasVisible) {
+          void img.offsetWidth;
+          img.classList.add('pulse');
+        }
+      });
+    } else {
+      boardEls.forEach(el => {
+        const bn = parseInt(el.dataset.beat, 10);
+        el.classList.toggle('visible', bn <= state.currentBeat + 1);
+        el.classList.remove('pulse');
+        if (bn === state.currentBeat + 1) {
+          void el.offsetWidth;
+          el.classList.add('pulse');
+        }
+      });
+    }
+  }
+
+  function updateUI() {
+    renderTranscript();
+    renderBoard();
+    progressFill.style.width = ((state.currentBeat + 1) / state.beats.length * 100) + '%';
+    counterEl.textContent = `${state.currentBeat + 1} / ${state.beats.length}`;
+  }
+
+  function clearTimers() { clearTimeout(state.playTimer); }
+
+  function goToBeat(index) {
+    if (index < 0 || index >= state.beats.length) return;
+    state.currentBeat = index;
+    updateUI();
+    if (!state.isPlaying) return;
+    clearTimers();
+
+    const advance = () => {
+      if (!state.isPlaying) return;
+      if (state.currentBeat < state.beats.length - 1) goToBeat(state.currentBeat + 1);
+      else { state.isPlaying = false; playBtn.textContent = '▶'; }
+    };
+
+    if (state.voiceOn && window.TTS) {
+      TTS.speak(state.beats[state.currentBeat], {
+        rate: state.ttsRate,
+        onEnd: () => { state.playTimer = setTimeout(advance, 500); }
+      });
+    } else {
+      const estMs = Math.max(2500, (state.beats[state.currentBeat].length / 14) * 1000);
+      state.playTimer = setTimeout(advance, estMs);
+    }
+  }
+
+  function togglePlay() {
+    state.isPlaying = !state.isPlaying;
+    playBtn.textContent = state.isPlaying ? '⏸' : '▶';
+    if (state.isPlaying) {
+      if (state.currentBeat === state.beats.length - 1) state.currentBeat = 0;
+      goToBeat(state.currentBeat);
+    } else { clearTimers(); if (window.TTS) TTS.stopSpeaking(); }
+  }
+
+  playBtn.addEventListener('click', togglePlay);
+  nextBtn.addEventListener('click', () => {
+    state.isPlaying = false; playBtn.textContent = '▶';
+    clearTimers(); if (window.TTS) TTS.stopSpeaking();
+    goToBeat(state.currentBeat + 1);
+  });
+  prevBtn.addEventListener('click', () => {
+    state.isPlaying = false; playBtn.textContent = '▶';
+    clearTimers(); if (window.TTS) TTS.stopSpeaking();
+    goToBeat(state.currentBeat - 1);
+  });
+
+  progressBar.addEventListener('click', (e) => {
+    const rect = progressBar.getBoundingClientRect();
+    const idx = Math.floor(((e.clientX - rect.left) / rect.width) * state.beats.length);
+    state.isPlaying = false; playBtn.textContent = '▶';
+    clearTimers(); if (window.TTS) TTS.stopSpeaking();
+    goToBeat(Math.max(0, Math.min(state.beats.length - 1, idx)));
+  });
+
+  state.updateUI = updateUI;
+  state.goToBeat = goToBeat;
+  state.stop = () => {
+    state.isPlaying = false;
+    playBtn.textContent = '▶';
+    clearTimers();
+    if (window.TTS) TTS.stopSpeaking();
+  };
+
+  updateUI();
+}
+
+// ====================================================================
+// NOTES — Render HTML content
+// ====================================================================
+function renderNotes() {
+  document.getElementById('notesContent').innerHTML = currentChapterData.notes || '<p>No notes available.</p>';
+}
+
+// ====================================================================
+// PRACTICE — Render HTML content with reveal buttons
+// ====================================================================
+function renderPractice() {
+  document.getElementById('practiceContent').innerHTML = currentChapterData.practice || '<p>No practice problems available.</p>';
+}
+
+// ====================================================================
+// REAL LIFE — Render scenarios
+// ====================================================================
+function renderRealLife() {
+  const scenarios = currentChapterData.realLife || [];
+  // For globe chapters, treat real-life scenarios as image-based (they have image refs)
+  const isImageType = currentChapterData.meta.type === 'image' || currentChapterData.meta.type === 'globe';
+  const basePath = currentChapterData.meta.imagesBasePath || '';
+  const container = document.getElementById('reallifeContent');
+
+  if (scenarios.length === 0) {
+    container.innerHTML = '<p>No real-life scenarios available.</p>';
+    return;
+  }
+
+  let html = `
+    <h2>🌍 Real-Life Connections</h2>
+    <p>Tap any scenario below to walk through it step by step.</p>
+    <div class="scenario-selector">
+  `;
+
+  scenarios.forEach(sc => {
+    let canvasContent;
+    if (isImageType) {
+      const imgs = (sc.images || []).map((img, bi) =>
+        `<img class="el rl-img" data-beat="${bi+1}" src="${basePath}${img.file}" alt="${img.caption || ''}" />`
+      ).join('\n                ');
+      canvasContent = `<div class="canvas-stack rl-stack" data-scenario="${sc.id}">${imgs}</div>`;
+    } else {
+      canvasContent = `
+        <svg class="rl-board" viewBox="${sc.viewBox}" preserveAspectRatio="xMidYMid meet">
+          <defs><pattern id="rl-grid-${sc.id}" width="25" height="25" patternUnits="userSpaceOnUse"><path d="M 25 0 L 0 0 0 25" fill="none" stroke="#1e293b" stroke-width="0.5"/></pattern></defs>
+          <rect x="0" y="0" width="550" height="700" fill="url(#rl-grid-${sc.id})" />
+          ${sc.svg || ''}
+        </svg>`;
+    }
+
+    html += `
+      <div class="scenario-dropdown" data-scenario="${sc.id}">
+        <div class="scenario-header">
+          <span>${sc.title}</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="scenario-body">
+          <div class="real-life-lecture">
+            <div class="real-life-canvas">${canvasContent}</div>
+            <div class="real-life-narration">
+              <div class="real-life-title-small">${sc.title}</div>
+              <div class="real-life-transcript" data-scenario="${sc.id}"></div>
+            </div>
+            <div class="voice-bar">
+              <label><button class="voice-toggle on rl-voice-toggle"></button><span>🔊 Voice</span></label>
+              <div class="voice-speed rl-voice-speed">
+                <button data-speed="0.6">0.6x</button><button data-speed="0.8">0.8x</button><button data-speed="1" class="active">1x</button><button data-speed="1.2">1.2x</button><button data-speed="1.5">1.5x</button>
+              </div>
+            </div>
+            <div class="controls rl-controls">
+              <button class="control-btn rl-prev">⏮</button>
+              <button class="control-btn primary rl-play">▶</button>
+              <button class="control-btn rl-next">⏭</button>
+              <div class="progress-bar rl-progress"><div class="progress-fill rl-progress-fill" style="width:0%"></div></div>
+              <div class="beat-counter rl-counter">1 / ${sc.beats.length}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  html += '</div>';
+  container.innerHTML = html;
+
+  // Wire each scenario
+  container.querySelectorAll('.scenario-dropdown').forEach(dropdown => {
+    initRealLifeScenario(dropdown, isImageType);
+  });
+}
+
+function initRealLifeScenario(dropdown, isImageType) {
+  const scenarioKey = dropdown.dataset.scenario;
+  const scenarios = currentChapterData.realLife || [];
+  const sc = scenarios.find(s => s.id === scenarioKey);
+  if (!sc) return;
+  const beats = sc.beats;
+
+  const transcriptEl = dropdown.querySelector('.real-life-transcript');
+  const stackEl = dropdown.querySelector('.rl-stack');
+  const svgEl = dropdown.querySelector('.rl-board');
+  const imgEls = stackEl ? Array.from(stackEl.querySelectorAll('img.el')) : [];
+  const boardEls = svgEl ? Array.from(svgEl.querySelectorAll('.el')) : [];
+  const playBtn = dropdown.querySelector('.rl-play');
+  const prevBtn = dropdown.querySelector('.rl-prev');
+  const nextBtn = dropdown.querySelector('.rl-next');
+  const progressFill = dropdown.querySelector('.rl-progress-fill');
+  const progressBar = dropdown.querySelector('.rl-progress');
+  const counterEl = dropdown.querySelector('.rl-counter');
+
+  const state = { voiceOn: true, ttsRate: 1, currentBeat: 0, isPlaying: false, playTimer: null };
+  if (window.TTS) TTS.attachVoiceBar(dropdown.querySelector('.voice-bar'), state);
+
+  function render() {
+    transcriptEl.innerHTML = '';
+    beats.forEach((beat, i) => {
+      const div = document.createElement('div');
+      div.className = 'beat ' + (i === state.currentBeat ? 'current' : i < state.currentBeat ? 'past' : 'future');
+      div.innerHTML = `<div class="beat-text">${beat}</div>`;
+      transcriptEl.appendChild(div);
+    });
+    const cur = transcriptEl.querySelector('.beat.current');
+    if (cur) cur.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    if (isImageType) {
+      // Show image corresponding to current beat
+      const imgs = sc.images || [];
+      const nImgs = imgEls.length;
+      if (nImgs > 1) {
+        // Check if any image has atBeat specified
+        const hasAtBeat = imgs.some(img => img.atBeat !== undefined);
+        let targetIdx;
+        if (hasAtBeat) {
+          // Use explicit atBeat mapping
+          const beat1 = state.currentBeat + 1;
+          targetIdx = 0;
+          for (let i = 0; i < imgs.length; i++) {
+            const atBeat = imgs[i].atBeat || 1;
+            if (atBeat <= beat1) targetIdx = i;
+          }
+        } else {
+          // Even distribution
+          targetIdx = Math.min(Math.floor(state.currentBeat * nImgs / beats.length), nImgs - 1);
+        }
+        imgEls.forEach((img, i) => {
+          img.classList.toggle('visible', i === targetIdx);
+        });
+      } else if (nImgs === 1) {
+        imgEls[0].classList.add('visible');
+      }
+    } else {
+      boardEls.forEach(el => {
+        const bn = parseInt(el.dataset.beat, 10);
+        el.classList.toggle('visible', bn <= state.currentBeat + 1);
+        el.classList.remove('pulse');
+        if (bn === state.currentBeat + 1) {
+          void el.offsetWidth;
+          el.classList.add('pulse');
+        }
+      });
+    }
+
+    progressFill.style.width = ((state.currentBeat + 1) / beats.length * 100) + '%';
+    counterEl.textContent = `${state.currentBeat + 1} / ${beats.length}`;
+  }
+
+  function clearTimers() { clearTimeout(state.playTimer); }
+
+  function goTo(index) {
+    if (index < 0 || index >= beats.length) return;
+    state.currentBeat = index;
+    render();
+    if (!state.isPlaying) return;
+    clearTimers();
+
+    const advance = () => {
+      if (!state.isPlaying) return;
+      if (state.currentBeat < beats.length - 1) goTo(state.currentBeat + 1);
+      else { state.isPlaying = false; playBtn.textContent = '▶'; }
+    };
+
+    if (state.voiceOn && window.TTS) {
+      TTS.speak(beats[state.currentBeat], {
+        rate: state.ttsRate,
+        onEnd: () => { state.playTimer = setTimeout(advance, 500); }
+      });
+    } else {
+      const estMs = Math.max(2500, (beats[state.currentBeat].length / 14) * 1000);
+      state.playTimer = setTimeout(advance, estMs);
+    }
+  }
+
+  playBtn.addEventListener('click', () => {
+    state.isPlaying = !state.isPlaying;
+    playBtn.textContent = state.isPlaying ? '⏸' : '▶';
+    if (state.isPlaying) {
+      if (state.currentBeat === beats.length - 1) state.currentBeat = 0;
+      goTo(state.currentBeat);
+    } else { clearTimers(); if (window.TTS) TTS.stopSpeaking(); }
+  });
+
+  nextBtn.addEventListener('click', () => {
+    state.isPlaying = false; playBtn.textContent = '▶';
+    clearTimers(); if (window.TTS) TTS.stopSpeaking();
+    goTo(state.currentBeat + 1);
+  });
+
+  prevBtn.addEventListener('click', () => {
+    state.isPlaying = false; playBtn.textContent = '▶';
+    clearTimers(); if (window.TTS) TTS.stopSpeaking();
+    goTo(state.currentBeat - 1);
+  });
+
+  progressBar.addEventListener('click', (e) => {
+    const rect = progressBar.getBoundingClientRect();
+    const idx = Math.floor(((e.clientX - rect.left) / rect.width) * beats.length);
+    state.isPlaying = false; playBtn.textContent = '▶';
+    clearTimers(); if (window.TTS) TTS.stopSpeaking();
+    goTo(Math.max(0, Math.min(beats.length - 1, idx)));
+  });
+
+  const header = dropdown.querySelector('.scenario-header');
+  header.addEventListener('click', () => {
+    const wasOpen = dropdown.classList.contains('open');
+    document.querySelectorAll('.scenario-dropdown').forEach(d => {
+      d.classList.remove('open');
+      const p = d.querySelector('.rl-play');
+      if (p) p.textContent = '▶';
+      const s = d._rlState;
+      if (s) { s.isPlaying = false; clearTimeout(s.playTimer); }
+    });
+    if (window.TTS) TTS.stopSpeaking();
+    if (!wasOpen) {
+      dropdown.classList.add('open');
+      state.currentBeat = 0;
+      state.isPlaying = false;
+      playBtn.textContent = '▶';
+      render();
+    } else {
+      state.isPlaying = false;
+      clearTimers();
+    }
+  });
+
+  dropdown._rlState = state;
+  render();
+}
+
+// ====================================================================
+// GUIDED PRACTICE — Interactive step-by-step problems
+// ====================================================================
+function renderGuidedPractice() {
+  const problems = currentChapterData.guidedPractice || [];
+  // For globe chapters, treat guided practice as image-based
+  const isImageType = currentChapterData.meta.type === 'image' || currentChapterData.meta.type === 'globe';
+  const basePath = currentChapterData.meta.imagesBasePath || '';
+  const app = document.getElementById('guidedApp');
+
+  if (problems.length === 0) {
+    app.innerHTML = '<div class="content"><p>No guided practice problems available.</p></div>';
+    return;
+  }
+
+  app.innerHTML = `
+    <div class="gp-header">
+      <div class="gp-num" id="gpNum">Problem 1 of ${problems.length}</div>
+      <span class="gp-badge gp-easy" id="gpBadge">Easy</span>
+      <div class="gp-voice-bar">
+        <button class="voice-toggle on" id="gpVoiceToggle"></button>
+        <span>🔊</span>
+        <div class="gp-voice-speed" id="gpVoiceSpeed">
+          <button data-speed="0.6">0.6x</button>
+          <button data-speed="0.8">0.8x</button>
+          <button data-speed="1" class="active">1x</button>
+          <button data-speed="1.2">1.2x</button>
+        </div>
+        <select class="gp-voice-select" id="gpVoiceSelect"></select>
+      </div>
+    </div>
+    <div class="gp-statement" id="gpStatement"></div>
+    <div class="gp-split">
+      <div class="gp-canvas" id="gpCanvas">
+        ${isImageType ? '<img id="gpImage" alt="" />' : '<svg id="gpBoard" viewBox="60 130 460 540" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="gp-grid" width="25" height="25" patternUnits="userSpaceOnUse"><path d="M 25 0 L 0 0 0 25" fill="none" stroke="#1e293b" stroke-width="0.5"/></pattern></defs><rect x="0" y="0" width="550" height="700" fill="url(#gp-grid)" /><g id="gpScene"></g></svg>'}
+      </div>
+      <div class="gp-work" id="gpWork">
+        <div id="gpWorkContent">
+          <div class="gp-step-num" id="gpStepNum">Step 1</div>
+          <div class="gp-question" id="gpQuestion"></div>
+          <input type="text" id="gpInput" class="gp-input" placeholder="Type your answer…" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" />
+          <div class="gp-format-hint" id="gpFormatHint"></div>
+          <button class="gp-check-btn" id="gpCheck">Check</button>
+          <div class="gp-feedback" id="gpFeedback"></div>
+          <div class="gp-hint" id="gpHint"></div>
+        </div>
+        <div class="gp-complete" id="gpComplete" style="display:none">
+          <div class="gp-complete-icon">🎉</div>
+          <div class="gp-complete-title">Question Solved!</div>
+          <div class="gp-complete-msg" id="gpCompleteMsg"></div>
+          <button class="gp-check-btn" id="gpCompleteBtn">Next Question →</button>
+        </div>
+      </div>
+    </div>
+    <div class="gp-controls">
+      <button class="gp-nav-btn" id="gpPrev">⏮ Prev</button>
+      <div class="gp-dots" id="gpDots"></div>
+      <button class="gp-nav-btn" id="gpNext">Next ⏭</button>
+    </div>
+  `;
+
+  gpState = {
+    problemIdx: 0,
+    stepIdx: 0,
+    attempts: 0,
+    voiceOn: true,
+    rate: 1,
+    completed: new Set(),
+    isImageType,
+    basePath
+  };
+
+  // Wire voice controls
+  document.getElementById('gpVoiceToggle').addEventListener('click', function() {
+    this.classList.toggle('on');
+    gpState.voiceOn = this.classList.contains('on');
+    if (!gpState.voiceOn && window.TTS) TTS.stopSpeaking();
+  });
+  document.querySelectorAll('#gpVoiceSpeed button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#gpVoiceSpeed button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      gpState.rate = parseFloat(btn.dataset.speed);
+    });
+  });
+
+  document.getElementById('gpPrev').addEventListener('click', () => {
+    if (gpState.problemIdx > 0) gpLoad(gpState.problemIdx - 1);
+  });
+  document.getElementById('gpNext').addEventListener('click', () => {
+    if (gpState.problemIdx < problems.length - 1) gpLoad(gpState.problemIdx + 1);
+  });
+  document.getElementById('gpCheck').addEventListener('click', gpCheckAnswer);
+  document.getElementById('gpInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); gpCheckAnswer(); }
+  });
+
+  gpLoad(0);
+}
+
+function gpRenderDots() {
+  const problems = currentChapterData.guidedPractice || [];
+  const dots = document.getElementById('gpDots');
+  dots.innerHTML = '';
+  problems.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'gp-dot' +
+      (i === gpState.problemIdx ? ' active' : '') +
+      (gpState.completed.has(i) ? ' done' : '');
+    d.addEventListener('click', () => gpLoad(i));
+    dots.appendChild(d);
+  });
+}
+
+function gpRenderStep() {
+  if (!currentChapterData || !gpState) return;
+  const problems = currentChapterData.guidedPractice || [];
+  const p = problems[gpState.problemIdx];
+  if (!p) return;
+  const step = p.steps[gpState.stepIdx];
+  if (!step) return;
+
+  document.getElementById('gpWorkContent').style.display = '';
+  document.getElementById('gpComplete').style.display = 'none';
+
+  document.getElementById('gpStepNum').textContent = `Step ${gpState.stepIdx + 1} of ${p.steps.length}`;
+  document.getElementById('gpQuestion').textContent = step.prompt;
+  document.getElementById('gpFormatHint').textContent = step.formatHint || '';
+  const input = document.getElementById('gpInput');
+  input.value = '';
+  input.className = 'gp-input';
+  input.disabled = false;
+  document.getElementById('gpCheck').disabled = false;
+  document.getElementById('gpFeedback').className = 'gp-feedback';
+  document.getElementById('gpFeedback').textContent = '';
+  document.getElementById('gpHint').className = 'gp-hint';
+  document.getElementById('gpHint').textContent = '';
+
+  setTimeout(() => input.focus(), 80);
+}
+
+function gpLoad(idx) {
+  if (!currentChapterData || !gpState) return;
+  const problems = currentChapterData.guidedPractice || [];
+  if (idx < 0 || idx >= problems.length) return;
+  if (window.TTS) TTS.stopSpeaking();
+  gpState.problemIdx = idx;
+  gpState.stepIdx = 0;
+  gpState.attempts = 0;
+
+  const p = problems[idx];
+  document.getElementById('gpNum').textContent = `Problem ${idx + 1} of ${problems.length} · ${p.title}`;
+  document.getElementById('gpBadge').textContent = p.difficulty;
+  document.getElementById('gpBadge').className = 'gp-badge ' + p.diffClass;
+  document.getElementById('gpStatement').textContent = p.statement;
+
+  // Set the canvas
+  if (gpState.isImageType) {
+    const img = document.getElementById('gpImage');
+    if (img && p.image) {
+      img.src = gpState.basePath + p.image;
+      img.style.display = '';
+    } else if (img) {
+      img.style.display = 'none';
+    }
+  } else {
+    const board = document.getElementById('gpBoard');
+    const scene = document.getElementById('gpScene');
+    if (board && p.viewBox) board.setAttribute('viewBox', p.viewBox);
+    if (scene && p.svg) scene.innerHTML = p.svg;
+    // Reset gel visibility
+    if (scene) scene.querySelectorAll('.gel').forEach(el => el.classList.remove('visible'));
+  }
+
+  document.getElementById('gpPrev').disabled = idx === 0;
+  document.getElementById('gpNext').disabled = idx === problems.length - 1;
+
+  gpRenderDots();
+  gpRenderStep();
+  gpUpdateBeats();
+}
+
+function gpUpdateBeats() {
+  if (gpState.isImageType) return; // no beats for image type
+  const scene = document.getElementById('gpScene');
+  if (!scene) return;
+  scene.querySelectorAll('.gel').forEach(el => {
+    const beat = parseInt(el.dataset.beat, 10);
+    const wasVisible = el.classList.contains('visible');
+    const isVisible = beat <= gpState.stepIdx;
+    el.classList.toggle('visible', isVisible);
+    el.classList.remove('pulse');
+    if (!wasVisible && isVisible) {
+      void el.offsetWidth;
+      el.classList.add('pulse');
+    }
+  });
+}
+
+function gpValidate(value, validator) {
+  if (!validator) return false;
+  const v = value.toLowerCase().trim().replace(/\s+/g, ' ').replace(/[.,;:!?]/g, '');
+
+  switch (validator.type) {
+    case 'match':
+      return (validator.answers || []).some(a =>
+        a.toLowerCase().trim().replace(/\s+/g, ' ').replace(/[.,;:!?]/g, '') === v
+      );
+    case 'regex':
+      const re = new RegExp(validator.pattern, validator.flags || '');
+      return re.test(v);
+    case 'pureNum':
+      return new RegExp(`^${validator.value}\\.?$`).test(v.trim());
+    case 'numUnit':
+      return new RegExp(`^${validator.value}\\.?\\s*(${validator.unit})\\.?$`, 'i').test(v.trim());
+    case 'formula':
+      const normalized = v.replace(/\s+/g, '').replace(/²/g, '^2').replace(/[×·*]/g, '').replace(/,/g, '').replace(/–/g, '-');
+      return (validator.forms || []).includes(normalized);
+    default:
+      return false;
+  }
+}
+
+function gpCheckAnswer() {
+  if (!currentChapterData || !gpState) return;
+  const problems = currentChapterData.guidedPractice || [];
+  const p = problems[gpState.problemIdx];
+  if (!p) return;
+  const step = p.steps[gpState.stepIdx];
+  if (!step) return;
+  const input = document.getElementById('gpInput');
+  if (!input) return;
+  const value = input.value.trim();
+  if (!value) return;
+
+  if (gpValidate(value, step.validate)) {
+    input.classList.add('correct');
+    input.classList.remove('wrong');
+    input.disabled = true;
+    document.getElementById('gpCheck').disabled = true;
+
+    const feedback = document.getElementById('gpFeedback');
+    feedback.className = 'gp-feedback show success';
+    feedback.textContent = step.explanation;
+
+    if (gpState.voiceOn && window.TTS) {
+      TTS.speak(step.explanation, { rate: gpState.rate });
+    }
+
+    gpState.stepIdx++;
+    gpState.attempts = 0;
+    setTimeout(gpUpdateBeats, 200);
+
+    setTimeout(() => {
+      if (gpState.stepIdx >= p.steps.length) {
+        gpShowComplete();
+      } else {
+        gpRenderStep();
+        gpUpdateBeats();
+      }
+    }, 2400);
+  } else {
+    gpState.attempts++;
+    input.classList.add('wrong');
+    input.classList.remove('correct');
+    const feedback = document.getElementById('gpFeedback');
+    feedback.className = 'gp-feedback show error';
+    feedback.textContent = 'Try again.';
+
+    if (gpState.attempts >= 5) {
+      const hint = document.getElementById('gpHint');
+      hint.classList.add('show');
+      hint.textContent = step.hint || "You're close — keep trying. Re-read the question carefully.";
+    }
+
+    setTimeout(() => input.classList.remove('wrong'), 600);
+    setTimeout(() => input.focus(), 650);
+  }
+}
+
+function gpShowComplete() {
+  if (!currentChapterData || !gpState) return;
+  const problems = currentChapterData.guidedPractice || [];
+  const p = problems[gpState.problemIdx];
+  if (!p) return;
+  gpState.completed.add(gpState.problemIdx);
+  gpRenderDots();
+
+  document.getElementById('gpWorkContent').style.display = 'none';
+  const complete = document.getElementById('gpComplete');
+  complete.style.display = '';
+  document.getElementById('gpCompleteMsg').textContent = p.finalAnswer;
+
+  const btn = document.getElementById('gpCompleteBtn');
+  if (gpState.problemIdx < problems.length - 1) {
+    btn.textContent = 'Next Question →';
+    btn.onclick = () => gpLoad(gpState.problemIdx + 1);
+  } else {
+    btn.textContent = 'Restart from Q1';
+    btn.onclick = () => gpLoad(0);
+  }
+}
+
+// ====================================================================
+// SELF-TEST — Quick recall questions
+// ====================================================================
+function renderSelfTest() {
+  const questions = currentChapterData.selfTest || [];
+  const container = document.getElementById('selftestContent');
+
+  if (questions.length === 0) {
+    container.innerHTML = '<p>No self-test questions available.</p>';
+    return;
+  }
+
+  let html = `
+    <h2>🧪 Quick Self-Test</h2>
+    <p>Try these ${questions.length} questions on your own. Click "Reveal Answer" only after you've attempted each one.</p>
+  `;
+
+  questions.forEach((q, i) => {
+    html += `
+      <div class="problem">
+        <div class="problem-title">Q${i + 1}</div>
+        <div class="problem-q">${q.q}</div>
+        <button class="reveal-btn">Reveal Answer</button>
+        <div class="problem-steps">
+          <p>${q.steps}</p>
+          <span class="answer">${q.answer}</span>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+
+  // Wire reveal buttons
+  container.querySelectorAll('.reveal-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const steps = btn.nextElementSibling;
+      steps.classList.toggle('revealed');
+      btn.textContent = steps.classList.contains('revealed') ? 'Hide Answer' : 'Reveal Answer';
+    });
+  });
+}
+
+// ====================================================================
+// INITIALIZATION
+// ====================================================================
+document.addEventListener('DOMContentLoaded', () => {
+  renderHome();
+
+  // Tab switching
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+  });
+
+  // Back button
+  document.getElementById('backBtn').addEventListener('click', goHome);
+
+  // Fullscreen reading mode
+  const fullscreenBtn = document.getElementById('fullscreenBtn');
+  const exitFullscreenBtn = document.getElementById('exitFullscreenBtn');
+  const chapterScreen = document.getElementById('chapterScreen');
+
+  function toggleFullscreen() {
+    chapterScreen.classList.toggle('fullscreen-mode');
+    fullscreenBtn.classList.toggle('active');
+    fullscreenBtn.textContent = chapterScreen.classList.contains('fullscreen-mode')
+      ? '⛶ Exit Fullscreen'
+      : '⛶ Fullscreen';
+    // Scroll to top when entering fullscreen
+    if (chapterScreen.classList.contains('fullscreen-mode')) {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+  }
+
+  fullscreenBtn.addEventListener('click', toggleFullscreen);
+  exitFullscreenBtn.addEventListener('click', toggleFullscreen);
+
+  // ESC key to exit fullscreen
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && chapterScreen.classList.contains('fullscreen-mode')) {
+      toggleFullscreen();
+    }
+  });
+});
+
+})();

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Learning System — Multi-Subject Interactive Modules</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============================================================
+     HOME SCREEN — Subject & Chapter Selector
+     ============================================================ -->
+<div id="homeScreen" class="home-screen">
+  <header class="home-header">
+    <h1>🎓 Learning System</h1>
+    <p class="home-subtitle">Interactive modules for Mathematics, Geography, History, Civics, Economics, Physics, Chemistry &amp; Biology</p>
+  </header>
+
+  <div class="subjects-grid" id="subjectsGrid">
+    <!-- Subject cards are rendered here by app.js -->
+  </div>
+
+  <footer class="home-footer">
+    <p>📖 Select a subject above to see its chapters. New chapters can be added by dropping a <code>chapter.js</code> file into the appropriate <code>data/&lt;subject&gt;/&lt;chapter-slug&gt;/</code> folder and registering it in <code>data/catalog.js</code>.</p>
+  </footer>
+</div>
+
+<!-- ============================================================
+     CHAPTER SCREEN — Tabbed Learning Interface
+     ============================================================ -->
+<div id="chapterScreen" class="chapter-screen" style="display:none">
+  <!-- Top bar: back button + chapter title + fullscreen toggle -->
+  <div class="chapter-top-bar">
+    <button class="back-btn" id="backBtn">← All Subjects</button>
+    <div class="chapter-top-title">
+      <span id="chapterTopSubject"></span> · <span id="chapterTopTitle"></span>
+    </div>
+    <button class="fullscreen-btn" id="fullscreenBtn" title="Toggle full-screen reading mode">⛶ Fullscreen</button>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab active" data-tab="lecture">🎓 Lecture</button>
+    <button class="tab" data-tab="notes">📝 Key Notes</button>
+    <button class="tab" data-tab="practice">✏️ Practice</button>
+    <button class="tab" data-tab="reallife">🌍 Real Life</button>
+    <button class="tab" data-tab="guided">🎯 Guided Practice</button>
+    <button class="tab" data-tab="selftest">🧪 Self-Test</button>
+  </div>
+
+  <!-- LECTURE -->
+  <div class="section active" id="lecture">
+    <div class="lecture-section-bar" id="lectureSectionBar"></div>
+    <div id="lectureContainer"></div>
+  </div>
+
+  <!-- NOTES -->
+  <div class="section" id="notes">
+    <div class="content" id="notesContent"></div>
+  </div>
+
+  <!-- PRACTICE -->
+  <div class="section" id="practice">
+    <div class="content" id="practiceContent"></div>
+  </div>
+
+  <!-- REAL LIFE -->
+  <div class="section" id="reallife">
+    <div class="content" id="reallifeContent"></div>
+  </div>
+
+  <!-- GUIDED PRACTICE -->
+  <div class="section" id="guided">
+    <div class="gp-app" id="guidedApp"></div>
+  </div>
+
+  <!-- SELF-TEST -->
+  <div class="section" id="selftest">
+    <div class="content self-test" id="selftestContent"></div>
+  </div>
+
+  <!-- Exit-fullscreen floating button (only visible in fullscreen mode) -->
+  <button class="exit-fullscreen-btn" id="exitFullscreenBtn">✕ Exit Fullscreen</button>
+</div>
+
+<!-- ============================================================
+     SCRIPTS — loaded in order
+     ============================================================ -->
+<!-- Three.js for 3D globe (geography chapters) — bundled locally for offline use -->
+<script src="vendor/three.min.js"></script>
+<script src="data/catalog.js"></script>
+<script src="js/tts.js"></script>
+<script src="js/globe.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
