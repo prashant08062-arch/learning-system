@@ -1195,8 +1195,8 @@ body { overflow-x: hidden; }
 }
 
 /* ============================================================
-   PHYSICS CHAPTER — Light: Mirrors and Lenses
-   Additions: practice cards + animated ray/light effects
+   PHYSICS CHAPTER — Light, Shadows and Reflections
+   Additions: practice cards + animated light-ray effects
    ============================================================ */
 
 /* ---------- Practice cards ---------- */
@@ -1208,9 +1208,7 @@ body { overflow-x: hidden; }
   margin-bottom: 16px;
   transition: border-color 0.2s;
 }
-.practice-card:hover {
-  border-color: #38bdf8;
-}
+.practice-card:hover { border-color: #38bdf8; }
 .practice-card h3 {
   color: #38bdf8;
   font-size: 16px;
@@ -1223,31 +1221,6 @@ body { overflow-x: hidden; }
   line-height: 1.6;
   margin-bottom: 12px;
 }
-.reveal-btn {
-  background: #0e7490;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 12px;
-  font-weight: 600;
-  transition: background 0.15s;
-}
-.reveal-btn:hover { background: #38bdf8; color: #0f172a; }
-.reveal-answer {
-  margin-top: 12px;
-  padding: 12px 14px;
-  background: rgba(56,189,248,0.08);
-  border-left: 3px solid #38bdf8;
-  border-radius: 6px;
-}
-.reveal-answer p {
-  color: #e2e8f0;
-  font-size: 14px;
-  line-height: 1.65;
-  margin: 0;
-}
 
 /* ---------- Animated light rays in SVG lectures ---------- */
 svg.lec-board line[stroke*="fbbf24"],
@@ -1256,7 +1229,6 @@ svg.lec-board path[stroke*="fbbf24"]:not([stroke-dasharray]),
 svg.rl-board line[stroke*="fbbf24"],
 svg.rl-board line[stroke*="fb923c"] {
   filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.65));
-  animation: lightPulse 1.6s ease-in-out infinite;
 }
 svg.lec-board .el.visible line[stroke*="fbbf24"],
 svg.lec-board .el.visible line[stroke*="fb923c"],
@@ -1269,46 +1241,27 @@ svg.rl-board .el.visible line[stroke*="fb923c"] {
   50%      { opacity: 1.00; filter: drop-shadow(0 0 8px rgba(251,191,36,0.85)); }
 }
 
-/* Sun and bright spots pulse */
+/* Sun / lamp glow pulse */
 svg.lec-board circle[fill*="fde047"],
 svg.lec-board circle[fill*="fef3c7"],
 svg.rl-board circle[fill*="fde047"],
 svg.rl-board circle[fill*="fef3c7"] {
   filter: drop-shadow(0 0 8px rgba(251,191,36,0.7));
+  animation: sunGlow 2.5s ease-in-out infinite;
+}
+@keyframes sunGlow {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(251,191,36,0.6)); }
+  50%      { filter: drop-shadow(0 0 14px rgba(251,191,36,0.95)); }
 }
 
 /* Mirror surfaces shine */
-svg.lec-board path[stroke*="metal"],
-svg.lec-board rect[fill*="metal"],
-svg.rl-board path[stroke*="metal"],
-svg.rl-board rect[fill*="metal"] {
+svg.lec-board path[stroke*="94a3b8"],
+svg.lec-board rect[fill*="url(#mirror"],
+svg.rl-board path[stroke*="94a3b8"],
+svg.rl-board rect[fill*="url(#mirror"] {
   animation: metalShine 3s ease-in-out infinite;
 }
 @keyframes metalShine {
   0%, 100% { filter: brightness(1); }
-  50%      { filter: brightness(1.15); }
-}
-
-/* Glass lenses shimmer */
-svg.lec-board ellipse[fill*="7dd3fc"],
-svg.lec-board path[fill*="7dd3fc"],
-svg.rl-board ellipse[fill*="7dd3fc"],
-svg.rl-board path[fill*="7dd3fc"] {
-  animation: glassShimmer 2.5s ease-in-out infinite;
-}
-@keyframes glassShimmer {
-  0%, 100% { opacity: 0.75; }
-  50%      { opacity: 1.00; }
-}
-
-/* Smoke animation */
-svg.lec-board path[stroke*="94a3b8"][stroke-linecap],
-svg.rl-board path[stroke*="94a3b8"][stroke-linecap] {
-  animation: smokeWisp 2s ease-in-out infinite;
-  transform-origin: center;
-}
-@keyframes smokeWisp {
-  0%   { opacity: 0.4; transform: translateY(0); }
-  50%  { opacity: 0.7; transform: translateY(-2px); }
-  100% { opacity: 0.4; transform: translateY(0); }
+  50%      { filter: brightness(1.18); }
 }

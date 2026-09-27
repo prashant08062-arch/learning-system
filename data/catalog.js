@@ -77,13 +77,13 @@ window.CATALOG = {
       color: '#f472b6',
       chapters: [
         {
-          slug: 'light_mirrors_lenses',
-          title: 'Light: Mirrors and Lenses',
-          subtitle: 'Chapter 10 · Curiosity — Textbook of Science for Grade 8',
-          description: 'Meet spherical mirrors and lenses — image formation, the two laws of reflection, converging/diverging behaviour, and how a torch reflector, a dentist\'s mirror, a magnifying glass, and a solar cooker all work.',
-          dataFile: 'data/physics/light_mirrors_lenses/chapter.js',
+          slug: 'light_shadows_reflections',
+          title: 'Light, Shadows and Reflections',
+          subtitle: 'Chapter 11 · Curiosity — Textbook of Science for Grade 6',
+          description: 'Sources of light, transparent/translucent/opaque materials, how shadows form, pinhole camera, plane-mirror reflection, and lateral inversion — with simple animated ray diagrams and hands-on activities for first-time science learners.',
+          dataFile: 'data/physics/light_shadows_reflections/chapter.js',
           hasImages: false,
-          estimatedTime: '50 min'
+          estimatedTime: '40 min'
         }
       ]
     },
