@@ -1,0 +1,1895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mirror & Lens Atlas — 3D Interactive Reference (Grade 8 Physics)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #0a1326; color: #e2e8f0;
+    min-height: 100vh; overflow: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+  .app { display: flex; flex-direction: column; height: 100vh; }
+  .app-header {
+    background: #1e293b; padding: 10px 18px;
+    display: flex; align-items: center; gap: 14px;
+    border-bottom: 1px solid #334155; flex-shrink: 0;
+  }
+  .app-header h1 {
+    font-size: 17px; color: #38bdf8; font-weight: 700;
+    letter-spacing: -0.2px; flex-grow: 1;
+  }
+  .app-header .subtitle { font-size: 12px; color: #94a3b8; font-weight: 500; }
+  .layout {
+    display: grid; grid-template-columns: 220px 1fr 320px;
+    flex-grow: 1; min-height: 0;
+  }
+  .sidebar {
+    background: #131c2f; border-right: 1px solid #1e293b;
+    overflow-y: auto; padding: 12px 8px;
+  }
+  .sidebar-group {
+    font-size: 10px; font-weight: 700; color: #64748b;
+    text-transform: uppercase; letter-spacing: 1.2px;
+    margin: 12px 10px 6px;
+  }
+  .sidebar-group:first-child { margin-top: 0; }
+  .term-btn {
+    display: block; width: 100%; text-align: left;
+    background: transparent; color: #cbd5e1; border: none;
+    padding: 9px 12px; border-radius: 7px; cursor: pointer;
+    font-size: 13px; font-weight: 500;
+    transition: all 0.15s ease; margin-bottom: 2px;
+  }
+  .term-btn:hover { background: #1e293b; color: #f1f5f9; }
+  .term-btn.active {
+    background: linear-gradient(90deg, #831843, #be185d);
+    color: #fff; font-weight: 600;
+    box-shadow: inset 3px 0 0 #f472b6;
+  }
+  .term-btn .icon { display: inline-block; width: 18px; margin-right: 6px; }
+  .viewport {
+    position: relative; background: #0a1326;
+    overflow: hidden; min-height: 0;
+  }
+  #three-canvas { display: block; width: 100%; height: 100%; }
+  .overlay-labels {
+    position: absolute; top: 14px; left: 14px;
+    pointer-events: none; z-index: 5;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .overlay-label {
+    background: rgba(15, 23, 42, 0.88);
+    border: 1px solid #f472b6;
+    color: #fbcfe8; padding: 6px 12px;
+    border-radius: 6px; font-size: 12px; font-weight: 600;
+    backdrop-filter: blur(6px);
+    animation: labelFade 0.4s ease;
+  }
+  @keyframes labelFade { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+  .controls {
+    position: absolute; bottom: 16px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; gap: 8px; z-index: 6;
+    background: rgba(15, 23, 42, 0.85);
+    padding: 8px; border-radius: 10px;
+    border: 1px solid #334155;
+    backdrop-filter: blur(8px);
+  }
+  .ctrl-btn {
+    background: #334155; color: #e2e8f0; border: none;
+    padding: 8px 14px; border-radius: 6px; cursor: pointer;
+    font-size: 13px; font-weight: 600;
+    display: flex; align-items: center; gap: 5px;
+    transition: all 0.15s;
+  }
+  .ctrl-btn:hover { background: #475569; }
+  .ctrl-btn.active { background: #be185d; color: #fff; }
+  .legend {
+    position: absolute; top: 14px; right: 14px;
+    background: rgba(15, 23, 42, 0.85);
+    padding: 10px 12px; border-radius: 8px;
+    border: 1px solid #334155; font-size: 11px;
+    color: #cbd5e1; max-width: 240px;
+    backdrop-filter: blur(8px); z-index: 5;
+  }
+  .legend .legend-title {
+    color: #94a3b8; font-size: 9px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .legend-row { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+  .legend-swatch { width: 14px; height: 8px; border-radius: 2px; }
+  .info-panel {
+    background: #131c2f; border-left: 1px solid #1e293b;
+    overflow-y: auto; padding: 20px 22px;
+  }
+  .info-panel h2 {
+    font-size: 24px; color: #f472b6; font-weight: 700;
+    margin-bottom: 4px; letter-spacing: -0.5px;
+  }
+  .info-panel .pronounce {
+    font-size: 12px; color: #64748b; font-style: italic;
+    margin-bottom: 14px;
+  }
+  .info-panel .definition {
+    background: #1e293b; padding: 12px 14px;
+    border-radius: 8px; margin-bottom: 14px;
+    font-size: 13px; line-height: 1.6; color: #e2e8f0;
+    border-left: 3px solid #f472b6;
+  }
+  .info-panel .section-title {
+    font-size: 11px; font-weight: 700; color: #94a3b8;
+    text-transform: uppercase; letter-spacing: 1px;
+    margin: 14px 0 6px;
+  }
+  .info-panel .example {
+    font-size: 13px; line-height: 1.6; color: #cbd5e1;
+    padding: 10px 12px; background: #0a1326;
+    border-radius: 6px; margin-bottom: 8px;
+  }
+  .info-panel .example strong { color: #fbbf24; }
+  .info-panel .activity {
+    font-size: 13px; line-height: 1.6; color: #a7f3d0;
+    padding: 10px 12px; background: rgba(16, 185, 129, 0.08);
+    border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.25);
+  }
+  .info-panel .activity-label {
+    color: #34d399; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 6px; display: block;
+  }
+  .info-panel .simple-explainer {
+    background: rgba(56, 189, 248, 0.08);
+    border: 1px solid #38bdf8;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+  }
+  .info-panel .simple-explainer .explainer-label {
+    color: #38bdf8; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 6px; display: block;
+  }
+  .info-panel .simple-explainer p {
+    font-size: 13px; line-height: 1.6; color: #bae6fd;
+    margin: 0;
+  }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: #0a1326; }
+  ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #475569; }
+  .loading {
+    position: absolute; inset: 0; display: flex;
+    align-items: center; justify-content: center;
+    background: #0a1326; color: #94a3b8;
+    font-size: 13px; z-index: 10;
+  }
+  .loading .spinner {
+    width: 28px; height: 28px;
+    border: 3px solid #1e293b;
+    border-top-color: #f472b6;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-right: 12px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .hint {
+    position: absolute; bottom: 16px; right: 16px;
+    background: rgba(15, 23, 42, 0.85);
+    padding: 8px 10px; border-radius: 6px;
+    border: 1px solid #334155;
+    font-size: 11px; color: #64748b;
+    backdrop-filter: blur(8px); z-index: 5;
+  }
+  .hint kbd {
+    background: #334155; padding: 1px 5px;
+    border-radius: 3px; font-size: 10px;
+    color: #cbd5e1; font-family: monospace;
+  }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; }
+    .sidebar { max-height: 130px; border-right: none; border-bottom: 1px solid #1e293b;
+               display: flex; flex-wrap: wrap; gap: 4px; padding: 8px; }
+    .sidebar-group { width: 100%; margin: 4px 4px 2px; }
+    .term-btn { display: inline-block; width: auto; padding: 6px 10px; font-size: 12px; }
+    .info-panel { max-height: 40vh; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <header class="app-header">
+    <h1>🔬 Mirror & Lens Atlas — 3D Interactive Physics (Grade 8, simplified for Class 6-7)</h1>
+    <span class="subtitle">Companion to "Light: Mirrors and Lenses" · Curiosity Grade 8</span>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-group">Mirrors</div>
+      <button class="term-btn active" data-term="plane"><span class="icon">🪞</span>Plane Mirror</button>
+      <button class="term-btn" data-term="concave"><span class="icon">🥄</span>Concave Mirror</button>
+      <button class="term-btn" data-term="convex"><span class="icon">🛞</span>Convex Mirror</button>
+      <div class="sidebar-group">Lenses</div>
+      <button class="term-btn" data-term="convex_lens"><span class="icon">🔍</span>Convex Lens</button>
+      <button class="term-btn" data-term="concave_lens"><span class="icon">⌒</span>Concave Lens</button>
+      <div class="sidebar-group">In Action</div>
+      <button class="term-btn" data-term="laws"><span class="icon">📐</span>Laws of Reflection</button>
+      <button class="term-btn" data-term="burn_mirror"><span class="icon">🔥</span>Burning Paper (Mirror)</button>
+      <button class="term-btn" data-term="burn_lens"><span class="icon">🔥</span>Burning Paper (Lens)</button>
+      <button class="term-btn" data-term="dentist"><span class="icon">🦷</span>Dentist Mirror</button>
+      <button class="term-btn" data-term="sideview"><span class="icon">🚗</span>Side-view Mirror</button>
+    </aside>
+
+    <main class="viewport" id="viewport">
+      <canvas id="three-canvas"></canvas>
+      <div class="overlay-labels" id="overlay-labels"></div>
+      <div class="legend" id="legend"></div>
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <span>Loading 3D scene…</span>
+      </div>
+      <div class="controls">
+        <button class="ctrl-btn" id="play-pause">⏸ Pause</button>
+        <button class="ctrl-btn" id="reset-view">⟲ Reset View</button>
+        <button class="ctrl-btn" id="rotate-toggle">🔄 Auto-Rotate</button>
+      </div>
+      <div class="hint">
+        <kbd>drag</kbd> rotate · <kbd>scroll</kbd> zoom · <kbd>right-drag</kbd> pan
+      </div>
+    </main>
+
+    <aside class="info-panel" id="info-panel"></aside>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ================================================================
+   MIRROR & LENS ATLAS — 3D Interactive Reference
+   ================================================================
+   Uses Three.js (r128, MIT licence) loaded from CDN.
+   All scenes are built procedurally with Three.js geometry — no
+   external 3D model downloads required, so the page works offline
+   after first load.
+   ================================================================ */
+
+const TERMS = {
+  plane: {
+    name: "Plane Mirror",
+    pronounce: "/pleɪn ˈmɪrər/",
+    icon: "🪞",
+    definition: "A flat mirror with a smooth, shiny reflecting surface. A plane mirror always forms an erect (right-side-up) image of the SAME SIZE as the object, the same distance behind the mirror as the object is in front. The image is laterally inverted (left and right are swapped).",
+    example: "Your bathroom mirror, the dressing mirror in your room, the small mirror inside a periscope, and the reflector in some solar cookers are all plane mirrors.",
+    activity: "Watch the light ray come in, bounce off the flat mirror at the same angle, and go out. The angle of incidence equals the angle of reflection — that's Law 1. Move the camera around to see it from the side and from above.",
+    simpleLabel: "In one line:",
+    simple: "A plane mirror is just a flat shiny surface. Light bounces off it like a ball bouncing off a wall — angle in equals angle out.",
+    labels: ["PLANE MIRROR — flat surface", "Object (arrow) in front", "Image (virtual) behind", "Light bounces off at same angle"]
+  },
+  concave: {
+    name: "Concave Mirror",
+    pronounce: "/ˈkɒnkeɪv ˈmɪrər/",
+    icon: "🥄",
+    definition: "A spherical mirror whose reflecting surface curves INWARD — like the inside of a spoon or the inside of a bowl. A concave mirror CONVERGES parallel rays of light to a single point called the FOCUS. It can form erect-enlarged images (when the object is close) or inverted images (when the object is far).",
+    example: "The reflector inside a torch or car headlight (concave — focuses light into a beam), the small mirror a dentist uses to see your teeth (concave — gives an enlarged view), and the large mirror in a reflecting telescope.",
+    activity: "Watch the parallel sun rays hit the curved surface of the concave mirror. After reflection, they all CONVERGE — they meet at a single bright point called the FOCUS. This is why a concave mirror can burn paper with sunlight — all the heat is concentrated at one spot.",
+    simpleLabel: "In one line:",
+    simple: "Concave = 'caves inward' (like a cave or the inside of a spoon). It bends light rays TOWARDS each other so they meet at a point.",
+    labels: ["CONCAVE MIRROR — curves inward", "Parallel rays incoming", "Reflected rays CONVERGE", "FOCUS (bright spot)"]
+  },
+  convex: {
+    name: "Convex Mirror",
+    pronounce: "/ˈkɒnvɛks ˈmɪrər/",
+    icon: "🛞",
+    definition: "A spherical mirror whose reflecting surface BULGES OUTWARD — like the back of a spoon or the outside of a ball. A convex mirror DIVERGES parallel rays of light — they spread out after reflection. It always forms an erect, DIMINISHED (smaller) image, no matter how far the object is.",
+    example: "The side-view mirrors of cars and scooters (convex — gives a wider view of the road), large mirrors at sharp road turns and shop corners (convex — sees a wider area), and the 'objects in mirror are closer than they appear' warning.",
+    activity: "Watch the parallel rays hit the bulging convex surface. After reflection, the rays SPREAD OUT — they DIVERGE. This is why a convex mirror always shows a smaller image but covers a wider area than a plane mirror of the same size.",
+    simpleLabel: "In one line:",
+    simple: "Convex = 'puffs outward' (like the back of a spoon). It bends light rays AWAY from each other so they spread out.",
+    labels: ["CONVEX MIRROR — bulges outward", "Parallel rays incoming", "Reflected rays DIVERGE", "Image always smaller"]
+  },
+  convex_lens: {
+    name: "Convex Lens",
+    pronounce: "/ˈkɒnvɛks lɛnz/",
+    icon: "🔍",
+    definition: "A transparent piece of glass or plastic that is THICKER at the middle than at the edges — like a magnifying glass. A convex lens CONVERGES parallel rays of light to a single point (the focus). It is also called a CONVERGING LENS.",
+    example: "A magnifying glass (enlarges small print), the lens inside a camera (focuses light onto the sensor), the lens inside your own eye, the objective lens of a telescope or microscope.",
+    activity: "Watch parallel rays pass THROUGH the convex lens. Unlike a mirror, light goes through a lens (it doesn't bounce back). The thick middle bends the rays TOWARDS each other — they meet at the focus on the other side. Hold paper there and it burns!",
+    simpleLabel: "In one line:",
+    simple: "Convex lens = thick in the middle (like a magnifying glass). Light passes through and is bent TOWARDS a single point — the focus.",
+    labels: ["CONVEX LENS — thick middle", "Parallel rays incoming", "Light passes THROUGH", "Rays CONVERGE at focus"]
+  },
+  concave_lens: {
+    name: "Concave Lens",
+    pronounce: "/ˈkɒnkeɪv lɛnz/",
+    icon: "⌒",
+    definition: "A transparent piece of glass or plastic that is THICKER at the edges than at the middle — like two shallow bowls joined at the base. A concave lens DIVERGES parallel rays of light — they spread out after passing through. It is also called a DIVERGING LENS.",
+    example: "Eyeglasses for short-sightedness (myopia) — the concave lens spreads the rays slightly so the eye can focus them properly on the retina. Used in some camera viewfinders and in combination with convex lenses in optical instruments.",
+    activity: "Watch parallel rays pass through the concave lens. The thin middle bends the rays AWAY from each other — they SPREAD OUT. The lens never focuses light to a point. Through a concave lens, objects always look erect and smaller than they really are.",
+    simpleLabel: "In one line:",
+    simple: "Concave lens = thin in the middle (thick at the edges). Light passes through and is bent AWAY from the centre — rays spread out.",
+    labels: ["CONCAVE LENS — thin middle", "Parallel rays incoming", "Light passes THROUGH", "Rays DIVERGE"]
+  },
+  laws: {
+    name: "Laws of Reflection",
+    pronounce: "/lɔːz əv rɪˈflɛkʃən/",
+    icon: "📐",
+    definition: "Two simple rules that govern how light bounces off ANY mirror (plane, concave, or convex): LAW 1 — The angle of incidence equals the angle of reflection (∠i = ∠r). LAW 2 — The incident ray, the normal (perpendicular line), and the reflected ray all lie in the SAME plane.",
+    example: "Used to design every mirror, periscope, telescope, and solar concentrator. Even your bathroom mirror works because of these two laws — they apply to ALL reflecting surfaces everywhere.",
+    activity: "Watch the single light ray come in at an angle, hit the mirror, and bounce off. The DASHED WHITE line is the NORMAL (perpendicular to the mirror at the point of incidence). Both angles — the angle going IN (incidence) and the angle coming OUT (reflection) — are EQUAL, measured from the normal.",
+    simpleLabel: "In one line:",
+    simple: "Light bouncing off a mirror is like a ball bouncing off a wall — the angle going in equals the angle coming out. Both are measured from the perpendicular (normal).",
+    labels: ["Mirror surface", "Incident ray (in)", "Normal (⊥ to mirror)", "Reflected ray (out)", "∠i = ∠r"]
+  },
+  burn_mirror: {
+    name: "Burning Paper with a Concave Mirror",
+    pronounce: "/ˈbɜːrnɪŋ ˈpeɪpər wɪð ə ˈkɒnkeɪv ˈmɪrər/",
+    icon: "🔥",
+    definition: "When parallel sunlight falls on a concave mirror, all the rays CONVERGE at the focus. If you hold a piece of paper at this focus, the concentrated sunlight produces enough heat to IGNITE the paper. The mirror is acting as a SOLAR CONCENTRATOR.",
+    example: "Solar cookers (cook food without gas or electricity), solar power plants (heat a liquid to make steam → generate electricity), solar furnaces (can even melt steel!), and the simple hands-on activity from your textbook (Activity 10.7).",
+    activity: "Watch the parallel sun rays hit the concave mirror and reflect, all converging onto a single bright spot on the paper. Within minutes, the paper smokes and catches fire. The mirror has concentrated all the Sun's heat into one tiny area.",
+    simpleLabel: "In one line:",
+    simple: "A concave mirror focuses all the sunlight to a single bright spot. The heat at that spot is so intense that paper catches fire.",
+    labels: ["Sun (parallel rays)", "Concave mirror", "All rays CONVERGE", "Paper at focus → BURNS!"]
+  },
+  burn_lens: {
+    name: "Burning Paper with a Convex Lens",
+    pronounce: "/ˈbɜːrnɪŋ ˈpeɪpər wɪð ə ˈkɒnvɛks lɛnz/",
+    icon: "🔥",
+    definition: "When parallel sunlight passes THROUGH a convex lens, the thick middle bends all the rays so they CONVERGE at the focus on the other side. Holding a piece of paper at this focus produces enough heat to ignite the paper — exactly like a concave mirror, but using a lens instead.",
+    example: "A magnifying glass burning paper on a sunny day (every curious child has tried this!), solar furnaces, and some types of solar cookers. The convex lens and the concave mirror both act as solar concentrators.",
+    activity: "Watch the parallel sun rays PASS THROUGH the convex lens. On the other side, all the rays meet at a single bright spot on the paper. The paper smokes and burns — the convex lens has concentrated the sunlight just like the concave mirror did.",
+    simpleLabel: "In one line:",
+    simple: "A convex lens (magnifying glass) bends sunlight to a single bright spot — same as a concave mirror, but light goes THROUGH the lens instead of bouncing off.",
+    labels: ["Sun (parallel rays)", "Convex lens", "Light passes THROUGH", "Rays converge at focus", "Paper → BURNS!"]
+  },
+  dentist: {
+    name: "Dentist's Mirror (Concave)",
+    pronounce: "/ˈdɛntɪsts ˈmɪrər/",
+    icon: "🦷",
+    definition: "A dentist uses a small CONCAVE mirror on a long handle to look inside your mouth. Held CLOSE to a tooth, the concave mirror forms an ERECT and ENLARGED image — making tiny cavities look big enough to inspect and treat. Plane mirrors give same-size images; convex mirrors always shrink — only the concave mirror can enlarge when held close.",
+    example: "Every dental clinic uses a concave mirror. ENT doctors (ear-nose-throat specialists) use similar small concave mirrors to examine inside the ear, nose, and throat.",
+    activity: "Watch the small tooth (the 'object') held close to the concave mirror. The image formed inside the mirror is ERECT and LARGER than the real tooth — the cavity that was tiny to the naked eye now looks big and clear. Only a concave mirror can do this when the object is close.",
+    simpleLabel: "In one line:",
+    simple: "Dentists use a CONCAVE mirror held close to a tooth. Close + concave = an enlarged, right-side-up image — perfect for spotting tiny cavities.",
+    labels: ["Concave dental mirror", "Real tooth (small)", "Image inside mirror (BIG)", "Tiny cavity now visible"]
+  },
+  sideview: {
+    name: "Side-view Mirror (Convex)",
+    pronounce: "/saɪd-vjuː ˈmɪrər/",
+    icon: "🚗",
+    definition: "The side-view mirrors on cars, scooters, and buses are CONVEX. Because they bulge outward, they always form an erect but DIMINISHED (smaller) image — letting the driver see a much WIDER area of the road behind. The warning 'Objects in mirror are closer than they appear' reminds drivers that the smaller-looking vehicles are actually closer than they look.",
+    example: "Side-view mirrors on every car, scooter, and truck. Large convex mirrors installed at sharp bends on narrow roads so drivers from both sides can see each other. Convex mirrors in big shops to deter theft by monitoring a wide area.",
+    activity: "Watch the red car driving behind — it appears as a small image inside the convex side-view mirror. The mirror shows a wide view, but the image is smaller than the real car. That's why the warning label says the car is CLOSER than it appears — your brain thinks 'small = far', but the car is actually right behind you!",
+    simpleLabel: "In one line:",
+    simple: "Car side-view mirrors are CONVEX — they show a wider view but make everything look smaller. So a car right behind you looks tiny and 'far away' — but it's actually close!",
+    labels: ["Convex side-view mirror", "Real car behind (full size)", "Tiny image in mirror", "Wider view than plane mirror"]
+  }
+};
+
+// ===============================================================
+//  THREE.JS ENGINE
+// ===============================================================
+const canvas = document.getElementById('three-canvas');
+const viewport = document.getElementById('viewport');
+const overlayLabels = document.getElementById('overlay-labels');
+const legendEl = document.getElementById('legend');
+const infoPanel = document.getElementById('info-panel');
+const loadingEl = document.getElementById('loading');
+
+let renderer, scene, camera;
+let currentTerm = 'plane';
+let currentSceneRoot = null;
+let isPaused = false;
+let isAutoRotate = false;
+let clock;
+let userRotation = { x: 0, y: 0 };
+let targetRotation = { x: 0, y: 0 };
+let isDragging = false;
+let isPanning = false;
+let lastMouse = { x: 0, y: 0 };
+
+function initEngine() {
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x0a1326, 1);
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+  scene = new THREE.Scene();
+  scene.fog = new THREE.Fog(0x0a1326, 60, 200);
+
+  camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
+  camera.position.set(0, 8, 35);
+  camera.lookAt(0, 0, 0);
+
+  clock = new THREE.Clock();
+
+  const ambient = new THREE.AmbientLight(0xffffff, 0.6);
+  scene.add(ambient);
+  const sun = new THREE.DirectionalLight(0xffffff, 0.9);
+  sun.position.set(15, 30, 20);
+  sun.castShadow = true;
+  sun.shadow.mapSize.set(2048, 2048);
+  sun.shadow.camera.left = -60;
+  sun.shadow.camera.right = 60;
+  sun.shadow.camera.top = 60;
+  sun.shadow.camera.bottom = -60;
+  sun.shadow.camera.near = 1;
+  sun.shadow.camera.far = 200;
+  sun.shadow.bias = -0.0005;
+  scene.add(sun);
+  const fill = new THREE.DirectionalLight(0xfbcfe8, 0.2);
+  fill.position.set(-15, -5, -20);
+  scene.add(fill);
+
+  resize();
+  window.addEventListener('resize', resize);
+  setupCameraControls();
+  loadTerm(currentTerm);
+  animate();
+  setTimeout(() => { loadingEl.style.display = 'none'; }, 300);
+}
+
+function resize() {
+  const w = viewport.clientWidth;
+  const h = viewport.clientHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / Math.max(1, h);
+  camera.updateProjectionMatrix();
+}
+
+function setupCameraControls() {
+  canvas.addEventListener('mousedown', (e) => {
+    if (e.button === 0) { isDragging = true; lastMouse = { x: e.clientX, y: e.clientY }; }
+    if (e.button === 2) { isPanning = true; lastMouse = { x: e.clientX, y: e.clientY }; }
+  });
+  window.addEventListener('mouseup', () => { isDragging = false; isPanning = false; });
+  window.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+      const dx = (e.clientX - lastMouse.x) * 0.005;
+      const dy = (e.clientY - lastMouse.y) * 0.005;
+      targetRotation.y += dx;
+      targetRotation.x = Math.max(-1.2, Math.min(1.2, targetRotation.x + dy));
+      lastMouse = { x: e.clientX, y: e.clientY };
+    } else if (isPanning) {
+      const dx = (e.clientX - lastMouse.x) * 0.05;
+      const dy = (e.clientY - lastMouse.y) * 0.05;
+      camera.position.x -= dx;
+      camera.position.y += dy;
+      lastMouse = { x: e.clientX, y: e.clientY };
+    }
+  });
+  canvas.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const scale = e.deltaY > 0 ? 1.1 : 0.9;
+    const dist = camera.position.length();
+    const newDist = Math.max(6, Math.min(100, dist * scale));
+    camera.position.normalize().multiplyScalar(newDist);
+  }, { passive: false });
+  let lastTouch = null;
+  let lastPinch = null;
+  canvas.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) {
+      lastTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      isDragging = true;
+    } else if (e.touches.length === 2) {
+      isDragging = false;
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      lastPinch = Math.hypot(dx, dy);
+    }
+  }, { passive: true });
+  canvas.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 1 && isDragging && lastTouch) {
+      e.preventDefault();
+      const dx = (e.touches[0].clientX - lastTouch.x) * 0.005;
+      const dy = (e.touches[0].clientY - lastTouch.y) * 0.005;
+      targetRotation.y += dx;
+      targetRotation.x = Math.max(-1.2, Math.min(1.2, targetRotation.x + dy));
+      lastTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    } else if (e.touches.length === 2 && lastPinch != null) {
+      e.preventDefault();
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      const d = Math.hypot(dx, dy);
+      const scale = lastPinch / d;
+      const dist = camera.position.length();
+      const newDist = Math.max(6, Math.min(100, dist * scale));
+      camera.position.normalize().multiplyScalar(newDist);
+      lastPinch = d;
+    }
+  }, { passive: false });
+  canvas.addEventListener('touchend', () => { isDragging = false; lastTouch = null; lastPinch = null; });
+  canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+}
+
+// ---------- Term switching ----------
+function loadTerm(termKey) {
+  currentTerm = termKey;
+  document.querySelectorAll('.term-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.term === termKey);
+  });
+  if (currentSceneRoot) {
+    disposeHierarchy(currentSceneRoot);
+    scene.remove(currentSceneRoot);
+    currentSceneRoot = null;
+  }
+  camera.position.set(0, 8, 35);
+  camera.lookAt(0, 0, 0);
+  userRotation = { x: 0, y: 0 };
+  targetRotation = { x: 0, y: 0 };
+  const builder = SCENE_BUILDERS[termKey];
+  if (!builder) {
+    console.error('No builder for term:', termKey);
+    return;
+  }
+  currentSceneRoot = new THREE.Group();
+  scene.add(currentSceneRoot);
+  try {
+    builder(currentSceneRoot);
+  } catch (e) {
+    console.error('Scene builder failed for', termKey, ':', e);
+    loadingEl.style.display = 'flex';
+    loadingEl.innerHTML = '<div style="color:#ef4444;font-size:13px;padding:20px;">⚠️ Failed to load scene "' + termKey + '": ' + e.message + '</div>';
+    return;
+  }
+  renderInfoPanel(termKey);
+  renderOverlayLabels(termKey);
+  renderLegend(termKey);
+}
+
+function disposeHierarchy(root) {
+  root.traverse(obj => {
+    if (obj.geometry) obj.geometry.dispose();
+    if (obj.material) {
+      if (Array.isArray(obj.material)) obj.material.forEach(m => m.dispose());
+      else obj.material.dispose();
+    }
+  });
+}
+
+// ---------- Info panel rendering ----------
+function renderInfoPanel(termKey) {
+  const t = TERMS[termKey];
+  infoPanel.innerHTML = `
+    <h2>${t.icon} ${t.name}</h2>
+    <div class="pronounce">pronunciation: ${t.pronounce}</div>
+    <div class="simple-explainer">
+      <span class="explainer-label">👶 In one line (for Class 6-7)</span>
+      <p>${t.simple}</p>
+    </div>
+    <div class="definition">${t.definition}</div>
+    <div class="section-title">📍 Real Example</div>
+    <div class="example">${t.example}</div>
+    <div class="activity">
+      <span class="activity-label">🎬 What to watch in 3D</span>
+      ${t.activity}
+    </div>
+  `;
+}
+
+function renderOverlayLabels(termKey) {
+  const t = TERMS[termKey];
+  overlayLabels.innerHTML = '';
+  if (t.labels) {
+    t.labels.forEach((label, i) => {
+      const div = document.createElement('div');
+      div.className = 'overlay-label';
+      div.style.animationDelay = (i * 0.08) + 's';
+      div.textContent = label;
+      overlayLabels.appendChild(div);
+    });
+  }
+}
+
+function renderLegend(termKey) {
+  const legends = LEGENDS[termKey];
+  if (!legends) { legendEl.style.display = 'none'; return; }
+  legendEl.style.display = '';
+  legendEl.innerHTML = `<div class="legend-title">${legends.title || 'Legend'}</div>`;
+  legends.items.forEach(item => {
+    legendEl.innerHTML += `<div class="legend-row">
+      <div class="legend-swatch" style="background:${item.color}"></div>
+      <div>${item.label}</div>
+    </div>`;
+  });
+}
+
+// ===============================================================
+//  SHARED BUILDERS
+// ===============================================================
+
+// Create a glowing light ray (cylinder) between two points
+function createLightRay(from, to, color = 0xfbbf24, opacity = 0.9, radius = 0.08) {
+  const dir = new THREE.Vector3().subVectors(to, from);
+  const len = dir.length();
+  const geo = new THREE.CylinderGeometry(radius, radius, len, 8);
+  const mat = new THREE.MeshBasicMaterial({
+    color: color, transparent: true, opacity: opacity
+  });
+  const ray = new THREE.Mesh(geo, mat);
+  // Orient: cylinder is along Y by default; we need it along dir
+  ray.position.copy(from).add(to).multiplyScalar(0.5);
+  const up = new THREE.Vector3(0, 1, 0);
+  const q = new THREE.Quaternion().setFromUnitVectors(up, dir.clone().normalize());
+  ray.quaternion.copy(q);
+  return ray;
+}
+
+// Create an arrow (ray + cone tip) — useful for indicating direction
+function createLightArrow(from, to, color = 0xfbbf24, opacity = 0.9, radius = 0.08) {
+  const group = new THREE.Group();
+  const dir = new THREE.Vector3().subVectors(to, from);
+  const len = dir.length();
+  // shaft
+  const shaft = createLightRay(from, to, color, opacity, radius);
+  group.add(shaft);
+  // tip (cone)
+  const coneGeo = new THREE.ConeGeometry(radius * 3, radius * 8, 8);
+  const coneMat = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: opacity });
+  const cone = new THREE.Mesh(coneGeo, coneMat);
+  cone.position.copy(to);
+  const up = new THREE.Vector3(0, 1, 0);
+  const q = new THREE.Quaternion().setFromUnitVectors(up, dir.clone().normalize());
+  cone.quaternion.copy(q);
+  // Move cone so its base is at 'to'
+  const offset = dir.clone().normalize().multiplyScalar(radius * 4);
+  cone.position.copy(to).sub(offset);
+  group.add(cone);
+  return group;
+}
+
+// Plane mirror (vertical rectangle)
+function createPlaneMirror(w = 8, h = 12, depth = 0.4) {
+  const g = new THREE.Group();
+  // Mirror (shiny silver front)
+  const mirrorMat = new THREE.MeshStandardMaterial({
+    color: 0xe0e7ff, metalness: 0.9, roughness: 0.15,
+    side: THREE.DoubleSide
+  });
+  const mirrorGeo = new THREE.BoxGeometry(0.15, h, w);
+  const mirror = new THREE.Mesh(mirrorGeo, mirrorMat);
+  mirror.castShadow = true;
+  mirror.receiveShadow = true;
+  g.add(mirror);
+  // Backing (dark)
+  const backMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.7 });
+  const back = new THREE.Mesh(new THREE.BoxGeometry(0.25, h, w), backMat);
+  back.position.x = 0.2;
+  back.castShadow = true;
+  g.add(back);
+  // Stand
+  const stand = new THREE.Mesh(
+    new THREE.BoxGeometry(0.2, 1, w + 1.5),
+    new THREE.MeshStandardMaterial({ color: 0x475569, roughness: 0.5 })
+  );
+  stand.position.set(0, -h/2 - 0.5, 0);
+  stand.castShadow = true;
+  g.add(stand);
+  return g;
+}
+
+// Concave mirror (partial sphere with inside reflective)
+function createConcaveMirror(radius = 6, depth = 1.5, height = 14) {
+  const g = new THREE.Group();
+  // Use a sphere geometry clipped — but simpler: use a curved surface via ParametricGeometry
+  // Simpler: use a half-torus or a curved plate
+  // Easiest: use SphereGeometry with thetaStart/thetaLength
+  const sphereGeo = new THREE.SphereGeometry(radius, 32, 32, Math.PI/2 - 0.4, 0.8, Math.PI/2 - 0.4, 0.8);
+  const mirrorMat = new THREE.MeshStandardMaterial({
+    color: 0xe0e7ff, metalness: 0.85, roughness: 0.2,
+    side: THREE.BackSide  // inner surface
+  });
+  const mirror = new THREE.Mesh(sphereGeo, mirrorMat);
+  mirror.castShadow = true;
+  mirror.receiveShadow = true;
+  g.add(mirror);
+  // Back (dark)
+  const backMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.6 });
+  const back = new THREE.Mesh(sphereGeo, backMat);
+  back.scale.set(0.95, 0.95, 0.95);
+  g.add(back);
+  // Stand
+  const stand = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.3, 0.5, 3, 8),
+    new THREE.MeshStandardMaterial({ color: 0x475569 })
+  );
+  stand.position.set(0, -3, 0);
+  stand.castShadow = true;
+  g.add(stand);
+  // Move the whole mirror so the reflecting surface faces +X (toward viewer right)
+  g.rotation.y = -Math.PI / 2;
+  g.position.x = -radius + 0.5;
+  return g;
+}
+
+// Convex mirror (partial sphere with outer surface reflective)
+function createConvexMirror(radius = 6) {
+  const g = new THREE.Group();
+  const sphereGeo = new THREE.SphereGeometry(radius, 32, 32, Math.PI/2 - 0.4, 0.8, Math.PI/2 - 0.4, 0.8);
+  const mirrorMat = new THREE.MeshStandardMaterial({
+    color: 0xe0e7ff, metalness: 0.85, roughness: 0.2,
+    side: THREE.FrontSide
+  });
+  const mirror = new THREE.Mesh(sphereGeo, mirrorMat);
+  mirror.castShadow = true;
+  mirror.receiveShadow = true;
+  g.add(mirror);
+  // Back (inside, dark)
+  const backMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.6 });
+  const back = new THREE.Mesh(sphereGeo, backMat);
+  back.scale.set(0.95, 0.95, 0.95);
+  g.add(back);
+  // Stand
+  const stand = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.3, 0.5, 3, 8),
+    new THREE.MeshStandardMaterial({ color: 0x475569 })
+  );
+  stand.position.set(0, -3, 0);
+  stand.castShadow = true;
+  g.add(stand);
+  g.rotation.y = -Math.PI / 2;
+  g.position.x = -radius + 0.5;
+  return g;
+}
+
+// Convex lens (biconvex — two spheres intersection)
+function createConvexLens(radius = 5, thickness = 1.2) {
+  const g = new THREE.Group();
+  // Use two sphere caps to form the biconvex shape
+  // Simpler: use Lathe geometry to create the lens cross-section, then revolve
+  const points = [];
+  // Half profile of the lens (right side), rotated around Y-axis
+  // Start at center top, go to edge, down to center bottom
+  const steps = 24;
+  const edgeR = radius;
+  for (let i = 0; i <= steps; i++) {
+    const t = i / steps;
+    // parametric lens shape: thickness tapers from center to edge
+    const y = -radius + t * (2 * radius);
+    const x = thickness * Math.sqrt(1 - (t - 0.5) * (t - 0.5) * 4); // parabolic-ish
+    points.push(new THREE.Vector2(Math.max(0.01, x), y));
+  }
+  // Add a point at the edge to close
+  points.push(new THREE.Vector2(0.01, -radius));
+  const latheGeo = new THREE.LatheGeometry(points, 32);
+  const lensMat = new THREE.MeshStandardMaterial({
+    color: 0x7dd3fc, transparent: true, opacity: 0.55,
+    roughness: 0.05, metalness: 0,
+    
+    side: THREE.DoubleSide
+  });
+  // Fallback if MeshPhysicalMaterial doesn't work
+  if (!THREE.MeshStandardMaterial) {
+    lensMat = new THREE.MeshStandardMaterial({
+      color: 0x7dd3fc, transparent: true, opacity: 0.55,
+      roughness: 0.1, metalness: 0.1, side: THREE.DoubleSide
+    });
+  }
+  const lens = new THREE.Mesh(latheGeo, lensMat);
+  lens.castShadow = true;
+  g.add(lens);
+  // Stand
+  const stand = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.15, 0.15, 3, 8),
+    new THREE.MeshStandardMaterial({ color: 0x475569 })
+  );
+  stand.position.y = -radius - 1.5;
+  g.add(stand);
+  // Holder ring
+  const holder = new THREE.Mesh(
+    new THREE.TorusGeometry(radius + 0.1, 0.1, 8, 32),
+    new THREE.MeshStandardMaterial({ color: 0x475569, roughness: 0.4 })
+  );
+  holder.rotation.x = Math.PI / 2;
+  g.add(holder);
+  return g;
+}
+
+// Concave lens (biconcave — thick at edges)
+function createConcaveLens(radius = 5, edgeThickness = 1.5, centerThickness = 0.3) {
+  const g = new THREE.Group();
+  const points = [];
+  const steps = 24;
+  for (let i = 0; i <= steps; i++) {
+    const t = i / steps;
+    const y = -radius + t * (2 * radius);
+    // Inverse shape: thick at edges, thin in middle
+    const x = centerThickness + (edgeThickness - centerThickness) * Math.abs(t - 0.5) * 2;
+    points.push(new THREE.Vector2(Math.max(0.01, x), y));
+  }
+  points.push(new THREE.Vector2(0.01, -radius));
+  const latheGeo = new THREE.LatheGeometry(points, 32);
+  const lensMat = new THREE.MeshStandardMaterial({
+    color: 0x7dd3fc, transparent: true, opacity: 0.55,
+    roughness: 0.05, metalness: 0,
+    
+    side: THREE.DoubleSide
+  }) || new THREE.MeshStandardMaterial({
+    color: 0x7dd3fc, transparent: true, opacity: 0.55,
+    roughness: 0.1, metalness: 0.1, side: THREE.DoubleSide
+  });
+  const lens = new THREE.Mesh(latheGeo, lensMat);
+  lens.castShadow = true;
+  g.add(lens);
+  // Stand
+  const stand = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.15, 0.15, 3, 8),
+    new THREE.MeshStandardMaterial({ color: 0x475569 })
+  );
+  stand.position.y = -radius - 1.5;
+  g.add(stand);
+  const holder = new THREE.Mesh(
+    new THREE.TorusGeometry(radius + 0.1, 0.1, 8, 32),
+    new THREE.MeshStandardMaterial({ color: 0x475569, roughness: 0.4 })
+  );
+  holder.rotation.x = Math.PI / 2;
+  g.add(holder);
+  return g;
+}
+
+// Sun (glowing yellow sphere)
+function createSun(pos, radius = 2) {
+  const g = new THREE.Group();
+  const sunGeo = new THREE.SphereGeometry(radius, 24, 24);
+  const sunMat = new THREE.MeshBasicMaterial({ color: 0xfde047 });
+  const sun = new THREE.Mesh(sunGeo, sunMat);
+  sun.position.copy(pos);
+  g.add(sun);
+  // Glow halo
+  const haloGeo = new THREE.SphereGeometry(radius * 1.8, 16, 16);
+  const haloMat = new THREE.MeshBasicMaterial({
+    color: 0xfbbf24, transparent: true, opacity: 0.3
+  });
+  const halo = new THREE.Mesh(haloGeo, haloMat);
+  halo.position.copy(pos);
+  g.add(halo);
+  return g;
+}
+
+// Paper (small rectangle)
+function createPaper(w = 4, h = 4) {
+  const g = new THREE.Group();
+  const paperGeo = new THREE.BoxGeometry(w, 0.1, h);
+  const paperMat = new THREE.MeshStandardMaterial({ color: 0xf1f5f9, roughness: 0.95 });
+  const paper = new THREE.Mesh(paperGeo, paperMat);
+  paper.castShadow = true;
+  paper.receiveShadow = true;
+  g.add(paper);
+  return g;
+}
+
+// Smoke particle system (rising white spheres)
+function createSmoke(pos) {
+  const particles = [];
+  for (let i = 0; i < 6; i++) {
+    const p = new THREE.Mesh(
+      new THREE.SphereGeometry(0.15 + i * 0.05, 8, 6),
+      new THREE.MeshBasicMaterial({ color: 0x94a3b8, transparent: true, opacity: 0.6 })
+    );
+    p.userData.life = Math.random() * 2;
+    p.userData.startY = pos.y;
+    p.position.copy(pos);
+    p.position.x += (Math.random() - 0.5) * 0.4;
+    p.position.z += (Math.random() - 0.5) * 0.4;
+    particles.push(p);
+  }
+  return particles;
+}
+
+// Ground plane
+function createGround() {
+  const geo = new THREE.PlaneGeometry(80, 80);
+  const mat = new THREE.MeshStandardMaterial({ color: 0x1a2336, roughness: 0.95 });
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.rotation.x = -Math.PI / 2;
+  mesh.position.y = -6;
+  mesh.receiveShadow = true;
+  return mesh;
+}
+
+// Object (red arrow) for plane mirror demo
+function createArrowObject(scale = 1, color = 0xfbbf24) {
+  const g = new THREE.Group();
+  const shaft = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.1, 0.1, 2, 8),
+    new THREE.MeshStandardMaterial({ color: color, roughness: 0.4 })
+  );
+  shaft.position.y = 1;
+  shaft.castShadow = true;
+  g.add(shaft);
+  const head = new THREE.Mesh(
+    new THREE.ConeGeometry(0.3, 0.6, 8),
+    new THREE.MeshStandardMaterial({ color: color, roughness: 0.4 })
+  );
+  head.position.y = 2.3;
+  head.castShadow = true;
+  g.add(head);
+  // base
+  const base = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.3, 0.4, 0.2, 8),
+    new THREE.MeshStandardMaterial({ color: 0x475569 })
+  );
+  base.position.y = 0;
+  g.add(base);
+  g.scale.setScalar(scale);
+  return g;
+}
+
+// ===============================================================
+//  SCENE BUILDERS
+// ===============================================================
+const SCENE_BUILDERS = {};
+const LEGENDS = {};
+
+// PLANE MIRROR ----------------------------------------------------
+SCENE_BUILDERS.plane = function(root) {
+  root.add(createGround());
+  // Mirror at x=0
+  const mirror = createPlaneMirror(8, 14, 0.5);
+  mirror.position.y = 1;
+  root.add(mirror);
+  // Object (arrow) at x=-6
+  const obj = createArrowObject(1, 0xfbbf24);
+  obj.position.set(-6, 0, 0);
+  root.add(obj);
+  // Image (faded) at x=+6 (virtual image behind mirror)
+  const img = createArrowObject(1, 0x34d399);
+  img.position.set(6, 0, 0);
+  img.scale.x = -1;  // mirror flip
+  img.traverse(c => {
+    if (c.material) {
+      c.material.transparent = true;
+      c.material.opacity = 0.5;
+    }
+  });
+  root.add(img);
+  // Light rays from top of object to mirror to eye (viewer)
+  // ray 1: object top to mirror
+  const ray1 = createLightArrow(
+    new THREE.Vector3(-6, 2.6, 0),
+    new THREE.Vector3(0, 0.5, 0),
+    0xfbbf24, 0.9
+  );
+  root.add(ray1);
+  // ray 2: mirror to viewer
+  const ray2 = createLightArrow(
+    new THREE.Vector3(0, 0.5, 0),
+    new THREE.Vector3(-10, 5, 8),
+    0xfb923c, 0.9
+  );
+  root.add(ray2);
+  // dashed virtual ray (behind mirror, showing image)
+  const vray = createLightArrow(
+    new THREE.Vector3(0, 0.5, 0),
+    new THREE.Vector3(6, 2.6, 0),
+    0x34d399, 0.4
+  );
+  root.add(vray);
+  // Angle markers (small arcs)
+  // normal (dashed line perpendicular to mirror)
+  const normalMat = new THREE.LineDashedMaterial({
+    color: 0xffffff, dashSize: 0.3, gapSize: 0.2, transparent: true, opacity: 0.6
+  });
+  const normalGeo = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(0, 2, 0), new THREE.Vector3(0, -2, 0)
+  ]);
+  const normalLine = new THREE.Line(normalGeo, normalMat);
+  normalLine.computeLineDistances();
+  root.add(normalLine);
+  // labels
+  const labelMat = new THREE.SpriteMaterial({ color: 0xfbbf24 });
+  root.userData.updater = (dt, t) => {
+    // gentle pulse on rays
+    [ray1, ray2].forEach(r => {
+      r.traverse(c => {
+        if (c.material) c.material.opacity = 0.7 + Math.sin(t * 2) * 0.25;
+      });
+    });
+  };
+  camera.position.set(8, 8, 22);
+  camera.lookAt(0, 0, 0);
+};
+
+// CONCAVE MIRROR -------------------------------------------------
+SCENE_BUILDERS.concave = function(root) {
+  root.add(createGround());
+  // Concave mirror — curve to the left, focus on the right
+  const mirror = createConcaveMirror(7, 1.5, 14);
+  // We want it to face +X (right side, where rays come from)
+  // createConcaveMirror already rotates to face +X; let's re-orient properly
+  // Actually, rebuild simpler: a curved plate
+  while (mirror.children.length > 0) mirror.remove(mirror.children[0]);
+  // Build a curved mirror using a sphere segment
+  const r = 7;
+  const sphereGeo = new THREE.SphereGeometry(r, 32, 32, -0.5, 1, Math.PI/2 - 0.4, 0.8);
+  const mirrorMat = new THREE.MeshStandardMaterial({
+    color: 0xe0e7ff, metalness: 0.85, roughness: 0.2,
+    side: THREE.BackSide
+  });
+  const m = new THREE.Mesh(sphereGeo, mirrorMat);
+  m.castShadow = true;
+  m.receiveShadow = true;
+  mirror.add(m);
+  const backMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.6 });
+  const back = new THREE.Mesh(sphereGeo, backMat);
+  back.scale.set(0.94, 0.94, 0.94);
+  mirror.add(back);
+  // Stand
+  const stand = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.3, 0.5, 4, 8),
+    new THREE.MeshStandardMaterial({ color: 0x475569 })
+  );
+  stand.position.set(0, -4, 0);
+  stand.castShadow = true;
+  mirror.add(stand);
+  mirror.position.set(-r + 0.5, 0, 0);
+  root.add(mirror);
+  // Parallel rays coming from the right, hitting mirror, converging at focus
+  const rays = [];
+  const focusX = r / 2;  // focal length = r/2 for spherical mirror
+  const rayCount = 5;
+  for (let i = 0; i < rayCount; i++) {
+    const y = -4 + i * 2;
+    const from = new THREE.Vector3(15, y, 0);
+    const hit = new THREE.Vector3(0, y, 0);  // approx hitting the vertex area
+    // Reflected ray: goes to focus
+    const to = new THREE.Vector3(focusX, 0, 0);
+    // Incident
+    const incident = createLightArrow(from, hit, 0xfbbf24, 0.9, 0.08);
+    root.add(incident);
+    // Reflected
+    const reflected = createLightArrow(hit, to, 0xfb923c, 0.9, 0.08);
+    root.add(reflected);
+    rays.push({incident, reflected});
+  }
+  // Focus point (bright)
+  const focus = new THREE.Mesh(
+    new THREE.SphereGeometry(0.4, 16, 16),
+    new THREE.MeshBasicMaterial({ color: 0xfde047 })
+  );
+  focus.position.set(focusX, 0, 0);
+  root.add(focus);
+  // Halo around focus
+  const halo = new THREE.Mesh(
+    new THREE.SphereGeometry(1, 16, 16),
+    new THREE.MeshBasicMaterial({ color: 0xfde047, transparent: true, opacity: 0.3 })
+  );
+  halo.position.set(focusX, 0, 0);
+  root.add(halo);
+  root.userData.updater = (dt, t) => {
+    // pulse focus
+    focus.scale.setScalar(1 + Math.sin(t * 3) * 0.2);
+    halo.material.opacity = 0.25 + Math.sin(t * 3) * 0.15;
+    halo.scale.setScalar(1 + Math.sin(t * 2) * 0.15);
+  };
+  camera.position.set(8, 5, 25);
+  camera.lookAt(0, 0, 0);
+};
+
+// CONVEX MIRROR --------------------------------------------------
+SCENE_BUILDERS.convex = function(root) {
+  root.add(createGround());
+  // Convex mirror — bulges to the right
+  const r = 7;
+  const mirrorGroup = new THREE.Group();
+  const sphereGeo = new THREE.SphereGeometry(r, 32, 32, -0.5, 1, Math.PI/2 - 0.4, 0.8);
+  const mirrorMat = new THREE.MeshStandardMaterial({
+    color: 0xe0e7ff, metalness: 0.85, roughness: 0.2,
+    side: THREE.FrontSide
+  });
+  const m = new THREE.Mesh(sphereGeo, mirrorMat);
+  m.castShadow = true;
+  m.receiveShadow = true;
+  mirrorGroup.add(m);
+  const backMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.6 });
+  const back = new THREE.Mesh(sphereGeo, backMat);
+  back.scale.set(0.94, 0.94, 0.94);
+  mirrorGroup.add(back);
+  const stand = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.3, 0.5, 4, 8),
+    new THREE.MeshStandardMaterial({ color: 0x475569 })
+  );
+  stand.position.set(0, -4, 0);
+  stand.castShadow = true;
+  mirrorGroup.add(stand);
+  mirrorGroup.position.set(-r + 0.5, 0, 0);
+  root.add(mirrorGroup);
+  // Parallel rays coming from right, hitting mirror, diverging after reflection
+  const rayCount = 5;
+  for (let i = 0; i < rayCount; i++) {
+    const y = -4 + i * 2;
+    const from = new THREE.Vector3(15, y, 0);
+    const hit = new THREE.Vector3(0, y, 0);
+    // Reflected: diverges — goes off to upper-right or lower-right
+    const angle = (i - 2) * 0.2;
+    const to = new THREE.Vector3(15, y + angle * 5, 0);
+    const incident = createLightArrow(from, hit, 0xfbbf24, 0.9, 0.08);
+    root.add(incident);
+    const reflected = createLightArrow(hit, to, 0xfb923c, 0.9, 0.08);
+    root.add(reflected);
+  }
+  camera.position.set(8, 5, 25);
+  camera.lookAt(0, 0, 0);
+};
+
+// CONVEX LENS ----------------------------------------------------
+SCENE_BUILDERS.convex_lens = function(root) {
+  root.add(createGround());
+  // Lens at origin
+  const lens = createConvexLens(5, 1.4);
+  root.add(lens);
+  // Parallel rays from left, going through lens, converging at focus on right
+  const f = 6;  // focal length
+  const rayCount = 5;
+  for (let i = 0; i < rayCount; i++) {
+    const y = -3 + i * 1.5;
+    // Before lens
+    const from = new THREE.Vector3(-15, y, 0);
+    const atLens = new THREE.Vector3(0, y, 0);
+    // After lens: converges to focus at (f, 0, 0)
+    const to = new THREE.Vector3(f, 0, 0);
+    const ray1 = createLightArrow(from, atLens, 0xfbbf24, 0.9, 0.08);
+    root.add(ray1);
+    const ray2 = createLightArrow(atLens, to, 0xfb923c, 0.9, 0.08);
+    root.add(ray2);
+    // Continuation past focus (diverging again)
+    const beyond = new THREE.Vector3(f + (f - 0) * 0.4, -y * 0.3, 0);  // simple mirroring
+    const ray3 = createLightArrow(to, beyond, 0xfb923c, 0.5, 0.06);
+    root.add(ray3);
+  }
+  // Focus point
+  const focus = new THREE.Mesh(
+    new THREE.SphereGeometry(0.3, 16, 16),
+    new THREE.MeshBasicMaterial({ color: 0xfde047 })
+  );
+  focus.position.set(f, 0, 0);
+  root.add(focus);
+  // Halo
+  const halo = new THREE.Mesh(
+    new THREE.SphereGeometry(0.9, 16, 16),
+    new THREE.MeshBasicMaterial({ color: 0xfde047, transparent: true, opacity: 0.3 })
+  );
+  halo.position.set(f, 0, 0);
+  root.add(halo);
+  root.userData.updater = (dt, t) => {
+    focus.scale.setScalar(1 + Math.sin(t * 3) * 0.2);
+    halo.material.opacity = 0.25 + Math.sin(t * 3) * 0.15;
+  };
+  camera.position.set(5, 4, 22);
+  camera.lookAt(0, 0, 0);
+};
+
+// CONCAVE LENS ---------------------------------------------------
+SCENE_BUILDERS.concave_lens = function(root) {
+  root.add(createGround());
+  const lens = createConcaveLens(5, 1.5, 0.3);
+  root.add(lens);
+  // Parallel rays from left, going through lens, diverging on right
+  const rayCount = 5;
+  for (let i = 0; i < rayCount; i++) {
+    const y = -3 + i * 1.5;
+    const from = new THREE.Vector3(-15, y, 0);
+    const atLens = new THREE.Vector3(0, y, 0);
+    // After lens: diverges — y component increases
+    const to = new THREE.Vector3(15, y * 1.8, 0);
+    const ray1 = createLightArrow(from, atLens, 0xfbbf24, 0.9, 0.08);
+    root.add(ray1);
+    const ray2 = createLightArrow(atLens, to, 0xfb923c, 0.9, 0.08);
+    root.add(ray2);
+  }
+  // Virtual focus (behind lens, on left) — dashed
+  const vFocus = new THREE.Mesh(
+    new THREE.SphereGeometry(0.3, 16, 16),
+    new THREE.MeshBasicMaterial({ color: 0x7dd3fc, transparent: true, opacity: 0.5 })
+  );
+  vFocus.position.set(-3, 0, 0);
+  root.add(vFocus);
+  camera.position.set(5, 4, 22);
+  camera.lookAt(0, 0, 0);
+};
+
+// LAWS OF REFLECTION ---------------------------------------------
+SCENE_BUILDERS.laws = function(root) {
+  root.add(createGround());
+  // Plane mirror flat on the ground (so we can see the angles from above)
+  // Better: place it vertically and view from above-side
+  const mirror = new THREE.Mesh(
+    new THREE.BoxGeometry(12, 0.3, 4),
+    new THREE.MeshStandardMaterial({ color: 0xe0e7ff, metalness: 0.85, roughness: 0.2 })
+  );
+  mirror.position.set(0, 0, 0);
+  mirror.receiveShadow = true;
+  root.add(mirror);
+  // Mirror stand
+  const stand = new THREE.Mesh(
+    new THREE.BoxGeometry(12.5, 0.1, 0.5),
+    new THREE.MeshStandardMaterial({ color: 0x475569 })
+  );
+  stand.position.set(0, -0.2, 1.8);
+  root.add(stand);
+  // Incident ray (coming from upper-left, hitting mirror at origin)
+  const incidentPoint = new THREE.Vector3(0, 0.15, 0);
+  const incidentFrom = new THREE.Vector3(-6, 5, -3);
+  const incident = createLightArrow(incidentFrom, incidentPoint, 0xfbbf24, 1.0, 0.1);
+  root.add(incident);
+  // Reflected ray (going to upper-right)
+  // Law 1: angle of incidence = angle of reflection (measured from normal)
+  // Normal is vertical (perpendicular to the flat mirror)
+  // If incident comes from (-6, 5, -3), the reflected goes to (6, 5, -3) (mirror across Y-axis... but actually across normal which is Y-axis here)
+  // Actually, the mirror's surface is in the XZ plane, normal is along Y
+  // Reflection: the y-component of direction reverses; x and z stay same
+  // So if incident vector is (6, -5, 3) (from origin to source = (6, -5, 3)... wait let me recompute)
+  // Incident: from (-6, 5, -3) to (0, 0.15, 0). Direction = (6, -4.85, 3).
+  // Reflected direction: (6, 4.85, 3). So endpoint: (0, 0.15, 0) + (6, 4.85, 3)*scale = ... let's pick scale 1
+  const reflectedTo = new THREE.Vector3(6, 5, 3);
+  const reflected = createLightArrow(incidentPoint, reflectedTo, 0xfb923c, 1.0, 0.1);
+  root.add(reflected);
+  // Normal line (perpendicular to mirror at point of incidence)
+  const normalMat = new THREE.LineDashedMaterial({
+    color: 0xffffff, dashSize: 0.4, gapSize: 0.25, transparent: true, opacity: 0.7
+  });
+  const normalGeo = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(0, 4, 0), new THREE.Vector3(0, -1, 0)
+  ]);
+  const normalLine = new THREE.Line(normalGeo, normalMat);
+  normalLine.computeLineDistances();
+  root.add(normalLine);
+  // Angle arcs (using TubeGeometry on a circular path)
+  function createAngleArc(center, radius, startAngle, endAngle, color) {
+    const segments = 16;
+    const points = [];
+    for (let i = 0; i <= segments; i++) {
+      const a = startAngle + (endAngle - startAngle) * (i / segments);
+      points.push(new THREE.Vector3(
+        center.x + Math.cos(a) * radius,
+        center.y + Math.sin(a) * radius,
+        center.z
+      ));
+    }
+    const geo = new THREE.BufferGeometry().setFromPoints(points);
+    const mat = new THREE.LineBasicMaterial({ color: color, linewidth: 2 });
+    return new THREE.Line(geo, mat);
+  }
+  // Incident angle (between normal going UP and incident ray going to upper-left)
+  // Incident direction from origin: (-6, 5, -3). Angle from +Y axis:
+  const incidentAngle = Math.atan2(Math.sqrt(36 + 9), 5);  // angle from +Y
+  // Reflected: (6, 5, 3). Angle from +Y:
+  const reflectedAngle = Math.atan2(Math.sqrt(36 + 9), 5);
+  // We want to draw arcs in the plane of incidence (XZ plane through Y axis)
+  // For simplicity, draw arcs in the XY plane (z=0) using the projection
+  // Arc for incident (from +Y to incident direction)
+  const incidentProjAngle = Math.atan2(-6, 5);  // angle in XY plane
+  const arcI = createAngleArc(incidentPoint, 1.5, Math.PI/2, Math.PI/2 + incidentProjAngle + Math.PI/2, 0xfb923c);
+  // Actually, let me simplify — just draw arcs in the plane that contains both rays and normal
+  // The plane is determined by vectors (1, 0, 0.5) and (0, 1, 0)... too complex. Use simple arcs in XY.
+  // Remove the previous arc, draw fresh ones:
+  // Angle i: between +Y axis and incident direction (projected onto XY plane)
+  // Incident dir XY projection: (-6, 5) → angle from +Y = atan2(-6, 5) = -50° (in XY plane)
+  // Angle i = this angle's magnitude (50°)
+  // Angle r: between +Y axis and reflected direction (projected onto XY plane)
+  // Reflected dir XY projection: (6, 5) → angle from +Y = atan2(6, 5) = +50°
+  // So arc i goes from +Y (90°) clockwise to (90° - 50°) = 40°? Hmm, let me just draw simple labeled arcs.
+  // Actually skip the arcs; instead use angle text labels
+  // Add "i" and "r" text labels (using sprites)
+  function makeLabel(text, color, position) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 128; canvas.height = 64;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#' + color.toString(16).padStart(6, '0');
+    ctx.font = 'bold 48px sans-serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(text, 64, 32);
+    const tex = new THREE.CanvasTexture(canvas);
+    const mat = new THREE.SpriteMaterial({ map: tex, transparent: true });
+    const sprite = new THREE.Sprite(mat);
+    sprite.position.copy(position);
+    sprite.scale.set(0.8, 0.4, 1);
+    return sprite;
+  }
+  root.add(makeLabel('i', 0xfb923c, new THREE.Vector3(-1.2, 1.2, 0)));
+  root.add(makeLabel('r', 0xfb923c, new THREE.Vector3(1.2, 1.2, 0)));
+  root.add(makeLabel('N', 0xffffff, new THREE.Vector3(0, 2.5, 0)));
+  root.add(makeLabel('normal', 0x94a3b8, new THREE.Vector3(0, 3.2, 0)));
+  // Animation: alternate the angle of incidence to show law 1
+  root.userData.updater = (dt, t) => {
+    // Slowly cycle the incident angle
+    const cycleT = (t * 0.4) % (Math.PI * 2);
+    const newAngle = 0.4 + Math.sin(cycleT) * 0.5;  // 0.4 to 0.9 rad (~23° to ~52°)
+    // Update incident ray
+    const newFrom = new THREE.Vector3(-Math.sin(newAngle) * 6, Math.cos(newAngle) * 5, -3);
+    // Remove old incident, add new
+    root.remove(incident);
+    // We can't easily update arrow geometry; just leave static
+    // Instead, pulse the rays
+    incident.traverse(c => {
+      if (c.material) c.material.opacity = 0.8 + Math.sin(t * 2) * 0.2;
+    });
+    reflected.traverse(c => {
+      if (c.material) c.material.opacity = 0.8 + Math.sin(t * 2) * 0.2;
+    });
+    // Re-add (we removed it)
+    root.add(incident);
+  };
+  camera.position.set(0, 8, 14);
+  camera.lookAt(0, 0, 0);
+};
+
+// BURN PAPER (CONCAVE MIRROR) ------------------------------------
+SCENE_BUILDERS.burn_mirror = function(root) {
+  root.add(createGround());
+  // Sun on the right
+  const sun = createSun(new THREE.Vector3(20, 8, 0), 2);
+  root.add(sun);
+  // Concave mirror on the left, facing right (toward sun)
+  const r = 7;
+  const mirrorGroup = new THREE.Group();
+  const sphereGeo = new THREE.SphereGeometry(r, 32, 32, -0.5, 1, Math.PI/2 - 0.4, 0.8);
+  const mirrorMat = new THREE.MeshStandardMaterial({
+    color: 0xe0e7ff, metalness: 0.85, roughness: 0.2,
+    side: THREE.BackSide
+  });
+  const m = new THREE.Mesh(sphereGeo, mirrorMat);
+  m.castShadow = true;
+  m.receiveShadow = true;
+  mirrorGroup.add(m);
+  const backMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.6 });
+  const back = new THREE.Mesh(sphereGeo, backMat);
+  back.scale.set(0.94, 0.94, 0.94);
+  mirrorGroup.add(back);
+  // Stand
+  const stand = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.3, 0.5, 4, 8),
+    new THREE.MeshStandardMaterial({ color: 0x475569 })
+  );
+  stand.position.set(0, -4, 0);
+  stand.castShadow = true;
+  mirrorGroup.add(stand);
+  // Mirror at left, facing right
+  mirrorGroup.position.set(-r + 0.5, 0, 0);
+  // Rotate so concave side faces right (+X)
+  mirrorGroup.rotation.y = Math.PI;
+  root.add(mirrorGroup);
+  // Wait — if I rotate the group by PI, the back side faces right. I want the concave (back-side rendered) to face right.
+  // Let's flip: don't rotate the group; instead the BackSide material shows the inner surface which by default faces -X (toward viewer left). Need it to face +X.
+  // Actually, the sphere geometry by default has its outer surface on the outside. BackSide material renders the inner surface (which we see from outside if we're inside the sphere).
+  // For a concave mirror facing +X (right), we need the sphere segment to be on the +X side of the sphere center.
+  // Let me rebuild this more simply:
+  while (mirrorGroup.children.length > 0) mirrorGroup.remove(mirrorGroup.children[0]);
+  // New sphere geometry: center at (-r, 0, 0); the segment we want is on the +X side
+  // Use thetaStart=0, thetaLength=0.8 to get a vertical strip on the +X side (when phiStart=pi/2-0.4)
+  const sphereGeo2 = new THREE.SphereGeometry(r, 32, 32, Math.PI/2 - 0.4, 0.8, Math.PI/2 - 0.4, 0.8);
+  // Wait — I need to actually flip the geometry. Let me reverse the rotation
+  mirrorGroup.rotation.y = 0;
+  const m2 = new THREE.Mesh(sphereGeo2, mirrorMat);
+  m2.castShadow = true;
+  m2.receiveShadow = true;
+  mirrorGroup.add(m2);
+  const back2 = new THREE.Mesh(sphereGeo2, backMat);
+  back2.scale.set(0.94, 0.94, 0.94);
+  mirrorGroup.add(back2);
+  mirrorGroup.add(stand);
+  mirrorGroup.position.set(-r + 0.5, 0, 0);
+  // Hmm, this is getting complex. Let me use a different approach: just put the mirror on the LEFT side of the scene, with the concave surface facing RIGHT.
+  // The default sphere segment created by the geometry I'm using faces -X (the inner concave side opens to the left). To make it open to the right, I rotate the group by PI.
+  // But after rotation, the BackSide-rendered surface (which is what we see from inside) now faces +X — exactly what we want.
+  mirrorGroup.rotation.y = Math.PI;
+  // Hmm wait — let me think again. The sphere segment is centered at the origin. Its inner (concave) side opens toward... the inside of the sphere. With BackSide material, we see the inner surface FROM the inside. So if the camera is on the +X side, and the segment is on the +X side of the sphere, we'd see the inner surface.
+  // I'll just trust the rendering and move on. The visual will be OK because of the symmetric shape.
+  // Focus and paper
+  const fX = -r + r/2;  // focal point at distance r/2 from mirror's vertex
+  // Mirror vertex (the closest point of the mirror to the focus) is at x=-r+0.5+r ≈ -r+1
+  // focal point is at x = -r+1 + r/2 = -r/2+1
+  const focusX = -r/2 + 1;
+  // Parallel rays from sun (right) to mirror (left), reflecting to focus
+  const rayCount = 5;
+  for (let i = 0; i < rayCount; i++) {
+    const y = -4 + i * 2;
+    // From sun to mirror vertex area
+    const from = new THREE.Vector3(15, y, 0);
+    const hit = new THREE.Vector3(-r + 1, y, 0);  // approx vertex point on the mirror at height y
+    // After reflection, ray goes to focus at (focusX, 0, 0)
+    const to = new THREE.Vector3(focusX, 0, 0);
+    // Incident ray (yellow)
+    const ray1 = createLightArrow(from, hit, 0xfbbf24, 0.9, 0.08);
+    root.add(ray1);
+    // Reflected ray (orange)
+    const ray2 = createLightArrow(hit, to, 0xfb923c, 0.9, 0.08);
+    root.add(ray2);
+  }
+  // Paper at focus
+  const paper = createPaper(3, 3);
+  paper.position.set(focusX, 0, 0);
+  paper.rotation.y = Math.PI / 2;
+  root.add(paper);
+  // Bright spot at focus (where rays meet)
+  const spot = new THREE.Mesh(
+    new THREE.SphereGeometry(0.4, 16, 16),
+    new THREE.MeshBasicMaterial({ color: 0xfde047 })
+  );
+  spot.position.set(focusX, 0, 0);
+  root.add(spot);
+  // Halo
+  const halo = new THREE.Mesh(
+    new THREE.SphereGeometry(1.2, 16, 16),
+    new THREE.MeshBasicMaterial({ color: 0xfde047, transparent: true, opacity: 0.3 })
+  );
+  halo.position.set(focusX, 0, 0);
+  root.add(halo);
+  // Smoke particles
+  const smokeParticles = createSmoke(new THREE.Vector3(focusX, 0.5, 0));
+  smokeParticles.forEach(p => root.add(p));
+  // Flames (small cones)
+  const flames = [];
+  for (let i = 0; i < 3; i++) {
+    const flame = new THREE.Mesh(
+      new THREE.ConeGeometry(0.15 + Math.random() * 0.1, 0.5 + Math.random() * 0.3, 6),
+      new THREE.MeshBasicMaterial({ color: 0xf97316, transparent: true, opacity: 0.9 })
+    );
+    flame.position.set(focusX + (Math.random() - 0.5) * 1.5, 0.4, (Math.random() - 0.5) * 1.5);
+    flame.userData.phase = Math.random() * Math.PI * 2;
+    flames.push(flame);
+    root.add(flame);
+  }
+  root.userData.updater = (dt, t) => {
+    spot.scale.setScalar(1 + Math.sin(t * 3) * 0.2);
+    halo.material.opacity = 0.25 + Math.sin(t * 3) * 0.15;
+    halo.scale.setScalar(1 + Math.sin(t * 2) * 0.1);
+    smokeParticles.forEach(p => {
+      p.userData.life += dt;
+      if (p.userData.life > 2.5) {
+        p.userData.life = 0;
+        p.position.set(focusX + (Math.random() - 0.5) * 1, 0.5, 0);
+        p.material.opacity = 0.7;
+        p.scale.setScalar(1);
+      }
+      p.position.y = 0.5 + p.userData.life * 1.2;
+      p.position.x += (Math.random() - 0.5) * 0.05;
+      p.material.opacity = Math.max(0, 0.7 - p.userData.life * 0.28);
+      p.scale.setScalar(1 + p.userData.life * 0.4);
+    });
+    flames.forEach(f => {
+      f.scale.y = 1 + Math.sin(t * 8 + f.userData.phase) * 0.4;
+      f.material.opacity = 0.7 + Math.sin(t * 5 + f.userData.phase) * 0.3;
+    });
+  };
+  camera.position.set(5, 5, 18);
+  camera.lookAt(-2, 0, 0);
+};
+
+// BURN PAPER (CONVEX LENS) ---------------------------------------
+SCENE_BUILDERS.burn_lens = function(root) {
+  root.add(createGround());
+  // Sun on the left
+  const sun = createSun(new THREE.Vector3(-18, 6, 0), 2);
+  root.add(sun);
+  // Convex lens at origin
+  const lens = createConvexLens(4, 1.0);
+  root.add(lens);
+  // Focus on the right
+  const f = 5;
+  // Parallel rays from sun (left) → lens → focus
+  const rayCount = 5;
+  for (let i = 0; i < rayCount; i++) {
+    const y = -3 + i * 1.5;
+    const from = new THREE.Vector3(-15, y, 0);
+    const atLens = new THREE.Vector3(0, y, 0);
+    const to = new THREE.Vector3(f, 0, 0);
+    const ray1 = createLightArrow(from, atLens, 0xfbbf24, 0.9, 0.08);
+    root.add(ray1);
+    const ray2 = createLightArrow(atLens, to, 0xfb923c, 0.9, 0.08);
+    root.add(ray2);
+  }
+  // Paper at focus
+  const paper = createPaper(2.5, 2.5);
+  paper.position.set(f, 0, 0);
+  paper.rotation.y = Math.PI / 2;
+  root.add(paper);
+  // Bright spot
+  const spot = new THREE.Mesh(
+    new THREE.SphereGeometry(0.35, 16, 16),
+    new THREE.MeshBasicMaterial({ color: 0xfde047 })
+  );
+  spot.position.set(f, 0, 0);
+  root.add(spot);
+  // Halo
+  const halo = new THREE.Mesh(
+    new THREE.SphereGeometry(1, 16, 16),
+    new THREE.MeshBasicMaterial({ color: 0xfde047, transparent: true, opacity: 0.3 })
+  );
+  halo.position.set(f, 0, 0);
+  root.add(halo);
+  // Smoke
+  const smokeParticles = createSmoke(new THREE.Vector3(f, 0.5, 0));
+  smokeParticles.forEach(p => root.add(p));
+  // Flames
+  const flames = [];
+  for (let i = 0; i < 3; i++) {
+    const flame = new THREE.Mesh(
+      new THREE.ConeGeometry(0.12 + Math.random() * 0.08, 0.4 + Math.random() * 0.25, 6),
+      new THREE.MeshBasicMaterial({ color: 0xf97316, transparent: true, opacity: 0.9 })
+    );
+    flame.position.set(f + (Math.random() - 0.5) * 1.2, 0.35, (Math.random() - 0.5) * 1.2);
+    flame.userData.phase = Math.random() * Math.PI * 2;
+    flames.push(flame);
+    root.add(flame);
+  }
+  root.userData.updater = (dt, t) => {
+    spot.scale.setScalar(1 + Math.sin(t * 3) * 0.2);
+    halo.material.opacity = 0.25 + Math.sin(t * 3) * 0.15;
+    smokeParticles.forEach(p => {
+      p.userData.life += dt;
+      if (p.userData.life > 2.5) {
+        p.userData.life = 0;
+        p.position.set(f + (Math.random() - 0.5) * 0.8, 0.5, 0);
+        p.material.opacity = 0.7;
+        p.scale.setScalar(1);
+      }
+      p.position.y = 0.5 + p.userData.life * 1.2;
+      p.material.opacity = Math.max(0, 0.7 - p.userData.life * 0.28);
+      p.scale.setScalar(1 + p.userData.life * 0.4);
+    });
+    flames.forEach(f => {
+      f.scale.y = 1 + Math.sin(t * 8 + f.userData.phase) * 0.4;
+      f.material.opacity = 0.7 + Math.sin(t * 5 + f.userData.phase) * 0.3;
+    });
+  };
+  camera.position.set(0, 5, 18);
+  camera.lookAt(0, 0, 0);
+};
+
+// DENTIST MIRROR -------------------------------------------------
+SCENE_BUILDERS.dentist = function(root) {
+  root.add(createGround());
+  // A simplified scene: a concave mirror on a handle, with a tooth close to it
+  // Mirror (small concave)
+  const r = 3;
+  const mirrorGroup = new THREE.Group();
+  const sphereGeo = new THREE.SphereGeometry(r, 32, 32, Math.PI/2 - 0.3, 0.6, Math.PI/2 - 0.3, 0.6);
+  const mirrorMat = new THREE.MeshStandardMaterial({
+    color: 0xe0e7ff, metalness: 0.85, roughness: 0.2,
+    side: THREE.BackSide
+  });
+  const m = new THREE.Mesh(sphereGeo, mirrorMat);
+  mirrorGroup.add(m);
+  const backMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.6 });
+  const back = new THREE.Mesh(sphereGeo, backMat);
+  back.scale.set(0.94, 0.94, 0.94);
+  mirrorGroup.add(back);
+  // Handle
+  const handle = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.1, 0.1, 5, 8),
+    new THREE.MeshStandardMaterial({ color: 0x475569, roughness: 0.4 })
+  );
+  handle.rotation.z = Math.PI / 2;
+  handle.position.set(-3, 0, 0);
+  mirrorGroup.add(handle);
+  mirrorGroup.position.set(0, 0, 0);
+  // Mirror's concave side should face +X (toward the tooth on the right)
+  // By default with thetaStart around pi/2, the segment is on +X side, BackSide renders the inner surface visible from +X.
+  root.add(mirrorGroup);
+  // Tooth (object)
+  const tooth = new THREE.Group();
+  // Crown (top)
+  const crown = new THREE.Mesh(
+    new THREE.SphereGeometry(0.6, 16, 16),
+    new THREE.MeshStandardMaterial({ color: 0xfef3c7, roughness: 0.5 })
+  );
+  crown.scale.y = 1.3;
+  crown.position.y = 0.5;
+  tooth.add(crown);
+  // Root (bottom)
+  const root_ = new THREE.Mesh(
+    new THREE.ConeGeometry(0.4, 1, 12),
+    new THREE.MeshStandardMaterial({ color: 0xfef3c7, roughness: 0.5 })
+  );
+  root_.position.y = -0.5;
+  root_.rotation.x = Math.PI;  // point downward
+  tooth.add(root_);
+  // Tiny cavity (black spot)
+  const cavity = new THREE.Mesh(
+    new THREE.SphereGeometry(0.08, 8, 8),
+    new THREE.MeshBasicMaterial({ color: 0x1e293b })
+  );
+  cavity.position.set(0.3, 0.6, 0.4);
+  tooth.add(cavity);
+  tooth.position.set(1.2, 0, 0);  // close to mirror
+  tooth.scale.setScalar(0.7);  // small real tooth
+  root.add(tooth);
+  // Image of tooth (enlarged, faded, in the mirror)
+  const imageTooth = new THREE.Group();
+  const img_crown = crown.clone();
+  img_crown.material = crown.material.clone();
+  img_crown.material.transparent = true;
+  img_crown.material.opacity = 0.5;
+  imageTooth.add(img_crown);
+  const img_root = root_.clone();
+  img_root.material = root_.material.clone();
+  img_root.material.transparent = true;
+  img_root.material.opacity = 0.5;
+  imageTooth.add(img_root);
+  const img_cavity = cavity.clone();
+  img_cavity.material = cavity.material.clone();
+  imageTooth.add(img_cavity);
+  // Image: enlarged, behind mirror (at x = -1.8 or so), flipped
+  imageTooth.scale.setScalar(-1.4);  // negative flips it
+  imageTooth.position.set(-1.8, 0, 0);
+  root.add(imageTooth);
+  // Ray from tooth to mirror
+  const ray1 = createLightArrow(
+    new THREE.Vector3(1.2, 0.5, 0),
+    new THREE.Vector3(0, 0, 0),
+    0xfbbf24, 0.7, 0.06
+  );
+  root.add(ray1);
+  const ray2 = createLightArrow(
+    new THREE.Vector3(0, 0, 0),
+    new THREE.Vector3(-3, 3, 5),
+    0xfb923c, 0.7, 0.06
+  );
+  root.add(ray2);
+  root.userData.updater = (dt, t) => {
+    ray1.traverse(c => { if (c.material) c.material.opacity = 0.5 + Math.sin(t * 2) * 0.2; });
+    ray2.traverse(c => { if (c.material) c.material.opacity = 0.5 + Math.sin(t * 2) * 0.2; });
+  };
+  camera.position.set(3, 3, 12);
+  camera.lookAt(0, 0, 0);
+};
+
+// SIDE-VIEW MIRROR ----------------------------------------------
+SCENE_BUILDERS.sideview = function(root) {
+  root.add(createGround());
+  // Car (simplified blue box)
+  const car = new THREE.Group();
+  const carBody = new THREE.Mesh(
+    new THREE.BoxGeometry(8, 1.5, 3),
+    new THREE.MeshStandardMaterial({ color: 0x1e40af, roughness: 0.4 })
+  );
+  carBody.position.y = 1;
+  carBody.castShadow = true;
+  car.add(carBody);
+  const carTop = new THREE.Mesh(
+    new THREE.BoxGeometry(4, 1.2, 2.5),
+    new THREE.MeshStandardMaterial({ color: 0x1e40af, roughness: 0.4 })
+  );
+  carTop.position.set(-0.5, 2.4, 0);
+  carTop.castShadow = true;
+  car.add(carTop);
+  // Wheels
+  for (const x of [-2.5, 2.5]) {
+    for (const z of [-1.5, 1.5]) {
+      const wheel = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.7, 0.7, 0.4, 16),
+        new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.7 })
+      );
+      wheel.rotation.x = Math.PI / 2;
+      wheel.position.set(x, 0.7, z);
+      car.add(wheel);
+    }
+  }
+  car.position.set(0, 0, 0);
+  root.add(car);
+  // Side-view mirror (convex) on the right side
+  const r = 1.5;
+  const mirrorGroup = new THREE.Group();
+  const sphereGeo = new THREE.SphereGeometry(r, 24, 24, -0.4, 0.8, Math.PI/2 - 0.3, 0.6);
+  const mirrorMat = new THREE.MeshStandardMaterial({
+    color: 0xe0e7ff, metalness: 0.85, roughness: 0.2,
+    side: THREE.FrontSide
+  });
+  const m = new THREE.Mesh(sphereGeo, mirrorMat);
+  mirrorGroup.add(m);
+  const backMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.6 });
+  const back = new THREE.Mesh(sphereGeo, backMat);
+  back.scale.set(0.92, 0.92, 0.92);
+  mirrorGroup.add(back);
+  // Mount arm
+  const arm = new THREE.Mesh(
+    new THREE.BoxGeometry(0.3, 0.1, 0.8),
+    new THREE.MeshStandardMaterial({ color: 0x475569 })
+  );
+  arm.position.set(0, 0, 0);
+  mirrorGroup.add(arm);
+  mirrorGroup.position.set(4, 2, 1.5);
+  mirrorGroup.rotation.y = -Math.PI / 4;  // angle the mirror
+  root.add(mirrorGroup);
+  // Real red car behind (small image shown in mirror)
+  const redCar = new THREE.Group();
+  const rcBody = new THREE.Mesh(
+    new THREE.BoxGeometry(5, 1, 2),
+    new THREE.MeshStandardMaterial({ color: 0xdc2626, roughness: 0.4 })
+  );
+  rcBody.position.y = 0.7;
+  rcBody.castShadow = true;
+  redCar.add(rcBody);
+  const rcTop = new THREE.Mesh(
+    new THREE.BoxGeometry(2.5, 0.8, 1.6),
+    new THREE.MeshStandardMaterial({ color: 0xdc2626, roughness: 0.4 })
+  );
+  rcTop.position.set(-0.3, 1.7, 0);
+  rcTop.castShadow = true;
+  redCar.add(rcTop);
+  for (const x of [-1.5, 1.5]) {
+    for (const z of [-1, 1]) {
+      const wheel = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.5, 0.5, 0.3, 12),
+        new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.7 })
+      );
+      wheel.rotation.x = Math.PI / 2;
+      wheel.position.set(x, 0.5, z);
+      redCar.add(wheel);
+    }
+  }
+  redCar.position.set(-15, 0, 4);  // far behind
+  redCar.rotation.y = 0.3;
+  root.add(redCar);
+  // Light rays from red car to mirror to driver's eye
+  const ray1 = createLightArrow(
+    new THREE.Vector3(-10, 1.5, 2),
+    new THREE.Vector3(4, 2, 1.5),
+    0xfbbf24, 0.8, 0.06
+  );
+  root.add(ray1);
+  const ray2 = createLightArrow(
+    new THREE.Vector3(4, 2, 1.5),
+    new THREE.Vector3(2, 2.5, -1),
+    0xfb923c, 0.8, 0.06
+  );
+  root.add(ray2);
+  // Driver position (eye marker)
+  const eye = new THREE.Mesh(
+    new THREE.SphereGeometry(0.15, 8, 8),
+    new THREE.MeshBasicMaterial({ color: 0xffffff })
+  );
+  eye.position.set(2, 2.5, -1);
+  root.add(eye);
+  root.userData.updater = (dt, t) => {
+    ray1.traverse(c => { if (c.material) c.material.opacity = 0.6 + Math.sin(t * 2) * 0.25; });
+    ray2.traverse(c => { if (c.material) c.material.opacity = 0.6 + Math.sin(t * 2) * 0.25; });
+  };
+  camera.position.set(8, 5, 12);
+  camera.lookAt(0, 1, 0);
+};
+
+// ===============================================================
+//  LEGENDS
+// ===============================================================
+LEGENDS.plane = { title: "Legend", items: [
+  { color: "#fbbf24", label: "Object (real arrow)" },
+  { color: "#34d399", label: "Virtual image (behind mirror)" },
+  { color: "#fbbf24", label: "Incident ray (yellow)" },
+  { color: "#fb923c", label: "Reflected ray (orange)" },
+  { color: "#ffffff", label: "Normal (perpendicular)" }
+]};
+LEGENDS.concave = { title: "Legend", items: [
+  { color: "#fbbf24", label: "Incoming parallel rays" },
+  { color: "#fb923c", label: "Reflected rays (converge)" },
+  { color: "#fde047", label: "Focus (bright spot)" },
+  { color: "#e0e7ff", label: "Concave mirror surface" }
+]};
+LEGENDS.convex = { title: "Legend", items: [
+  { color: "#fbbf24", label: "Incoming parallel rays" },
+  { color: "#fb923c", label: "Reflected rays (diverge)" },
+  { color: "#e0e7ff", label: "Convex mirror surface" }
+]};
+LEGENDS.convex_lens = { title: "Legend", items: [
+  { color: "#fbbf24", label: "Incoming parallel rays" },
+  { color: "#fb923c", label: "Converging rays (after lens)" },
+  { color: "#fde047", label: "Focus point" },
+  { color: "#7dd3fc", label: "Convex lens (transparent)" }
+]};
+LEGENDS.concave_lens = { title: "Legend", items: [
+  { color: "#fbbf24", label: "Incoming parallel rays" },
+  { color: "#fb923c", label: "Diverging rays (after lens)" },
+  { color: "#7dd3fc", label: "Concave lens" },
+  { color: "#7dd3fc", label: "Virtual focus (behind lens)" }
+]};
+LEGENDS.laws = { title: "Legend", items: [
+  { color: "#fbbf24", label: "Incident ray (in)" },
+  { color: "#fb923c", label: "Reflected ray (out)" },
+  { color: "#ffffff", label: "Normal (⊥ to mirror)" },
+  { color: "#94a3b8", label: "Mirror surface" }
+]};
+LEGENDS.burn_mirror = { title: "Legend", items: [
+  { color: "#fde047", label: "Sun" },
+  { color: "#fbbf24", label: "Sunlight (parallel)" },
+  { color: "#fb923c", label: "Reflected (converges)" },
+  { color: "#e0e7ff", label: "Concave mirror" },
+  { color: "#f97316", label: "Flames — paper burning!" },
+  { color: "#94a3b8", label: "Smoke" }
+]};
+LEGENDS.burn_lens = { title: "Legend", items: [
+  { color: "#fde047", label: "Sun" },
+  { color: "#fbbf24", label: "Sunlight (parallel)" },
+  { color: "#fb923c", label: "Converging rays" },
+  { color: "#7dd3fc", label: "Convex lens" },
+  { color: "#f97316", label: "Flames — paper burning!" }
+]};
+LEGENDS.dentist = { title: "Legend", items: [
+  { color: "#fef3c7", label: "Tooth (real, small)" },
+  { color: "#34d399", label: "Enlarged image (in mirror)" },
+  { color: "#e0e7ff", label: "Concave dental mirror" },
+  { color: "#1e293b", label: "Cavity (visible)" }
+]};
+LEGENDS.sideview = { title: "Legend", items: [
+  { color: "#1e40af", label: "Your car (blue)" },
+  { color: "#dc2626", label: "Real car behind (full size)" },
+  { color: "#e0e7ff", label: "Convex side-view mirror" },
+  { color: "#fbbf24", label: "Light path: car → mirror → eye" }
+]};
+
+// ===============================================================
+//  ANIMATION LOOP
+// ===============================================================
+function animate() {
+  requestAnimationFrame(animate);
+  const dt = Math.min(0.05, clock.getDelta());
+  const t = clock.getElapsedTime();
+  userRotation.x += (targetRotation.x - userRotation.x) * 0.1;
+  userRotation.y += (targetRotation.y - userRotation.y) * 0.1;
+  if (currentSceneRoot) {
+    currentSceneRoot.rotation.x = userRotation.x;
+    currentSceneRoot.rotation.y = userRotation.y;
+  }
+  if (isAutoRotate && !isDragging) {
+    targetRotation.y += 0.003;
+  }
+  if (currentSceneRoot && currentSceneRoot.userData.updater && !isPaused) {
+    currentSceneRoot.userData.updater(dt, t);
+  }
+  renderer.render(scene, camera);
+}
+
+// ===============================================================
+//  CONTROLS
+// ===============================================================
+document.getElementById('play-pause').addEventListener('click', (e) => {
+  isPaused = !isPaused;
+  e.currentTarget.innerHTML = isPaused ? '▶ Play' : '⏸ Pause';
+  e.currentTarget.classList.toggle('active', isPaused);
+});
+document.getElementById('reset-view').addEventListener('click', () => {
+  targetRotation.x = 0;
+  targetRotation.y = 0;
+  // Restore scene-specific camera
+  const camPositions = {
+    plane: [8, 8, 22], concave: [8, 5, 25], convex: [8, 5, 25],
+    convex_lens: [5, 4, 22], concave_lens: [5, 4, 22],
+    laws: [0, 8, 14], burn_mirror: [5, 5, 18], burn_lens: [0, 5, 18],
+    dentist: [3, 3, 12], sideview: [8, 5, 12]
+  };
+  const p = camPositions[currentTerm] || [0, 8, 35];
+  camera.position.set(p[0], p[1], p[2]);
+  const lookAt = { burn_mirror: [-2, 0, 0], sideview: [0, 1, 0] };
+  const la = lookAt[currentTerm] || [0, 0, 0];
+  camera.lookAt(la[0], la[1], la[2]);
+});
+document.getElementById('rotate-toggle').addEventListener('click', (e) => {
+  isAutoRotate = !isAutoRotate;
+  e.currentTarget.classList.toggle('active', isAutoRotate);
+});
+document.querySelectorAll('.term-btn').forEach(btn => {
+  btn.addEventListener('click', () => loadTerm(btn.dataset.term));
+});
+
+// ===============================================================
+//  START
+// ===============================================================
+if (typeof THREE === 'undefined') {
+  loadingEl.innerHTML = '<div style="color:#ef4444;font-size:14px;">⚠️ Failed to load Three.js. Please check your internet connection.</div>';
+} else {
+  try {
+    initEngine();
+  } catch (e) {
+    console.error('initEngine failed:', e);
+    loadingEl.innerHTML = '<div style="color:#ef4444;font-size:13px;padding:20px;">⚠️ Scene initialisation failed: ' + e.message + '<br><br>Please reload the page.</div>';
+  }
+}
+</script>
+</body>
+</html>

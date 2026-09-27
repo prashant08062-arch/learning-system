@@ -2,14 +2,14 @@
 
 A scalable, single-page web application for interactive learning across **8 subjects**: Mathematics, Geography, History, Civics, Economics, Physics, Chemistry, and Biology.
 
-This repository also includes a standalone **3D Water Body Atlas** for geography lessons.
+This repository also includes **two standalone 3D atlases** — one for physics (mirrors & lenses) and one for geography (water bodies).
 
 ## Quick Start
 
 1. Open `index.html` in any modern web browser (Chrome, Firefox, Edge, Safari).
 2. Click a subject card to expand it and see available chapters.
 3. Click a chapter to launch the interactive learning module.
-4. Or click the yellow **"🚀 Launch 3D Atlas →"** button below the subject grid to open the Water Body Atlas in a new tab.
+4. Or click one of the two yellow **"🚀 Launch 3D Atlas →"** buttons below the subject grid to open a 3D atlas in a new tab.
 
 No server required — runs entirely from the file system.
 
@@ -19,37 +19,64 @@ No server required — runs entirely from the file system.
 |---------|---------|-------|------|
 | 🧮 Mathematics | The Baudhāyana–Pythagoras Theorem | 8 (sub-lectures 2.1–2.2 also work for Class 7) | SVG |
 | 🌍 Geography | World Geography: Some Glimpses | 6–8 | Image |
-| ⚛️ **Physics** | **Light, Shadows and Reflections** | **6** (also good revision for Class 7) | SVG |
-| 🌊 Water Body Atlas | 3D Animated Reference | 6–8 | Three.js (standalone) |
+| ⚛️ **Physics** | **Light: Mirrors and Lenses** | **8** (with Class 6–7 scaffolding) | SVG |
+| 🌊 3D Water Body Atlas | 15 animated geography terms | 6–8 | Three.js (standalone) |
+| 🔬 **3D Mirror & Lens Atlas** | **10 interactive physics scenes** | 6–8 | Three.js (standalone) |
 
 For a pedagogical review of Maths, Geography, and Physics chapters against the NCERT Class 6–7 syllabus, please see **`CLASS_6_7_SUITABILITY.md`**.
 
-## What's in the Physics Chapter — *Light, Shadows and Reflections*
+## What's in the Physics Chapter — *Light: Mirrors and Lenses* (Grade 8, enhanced for Class 6-7)
 
-Built for Class 6 students who are encountering physics technical terms for the first time. Based on NCERT Curiosity Grade 6 Science Chapter 11.
+Based on NCERT Curiosity Grade 8 Science Chapter 10. The Grade 8 content is **preserved verbatim** — every concept the textbook covers is still there. Around it, we added layered scaffolding so Class 6-7 students can access the same concepts.
 
-### 4 SVG-animated lectures (29 narrated beats)
-1. **11.1 Sources of Light** — Sun, stars, fireflies (natural) vs bulb, torch, candle (artificial); light travels in straight lines (3-cardboard experiment)
-2. **11.2 Materials Around Us** — transparent / translucent / opaque with everyday examples
-3. **11.3 Shadows** — how shadows form, why size changes with distance, why morning shadows are long and noon shadows are short
-4. **11.4 Mirrors and Reflection** — plane mirror, incident/reflected ray, image properties, lateral inversion (with the AMBULANCE example)
+### Layered scaffolding for Class 6-7 access
+
+1. **3D Mirror & Lens Atlas** (`mirrors_lenses_3d_atlas.html`) — 10 interactive Three.js scenes:
+   - Plane mirror, Concave mirror, Convex mirror
+   - Convex lens, Concave lens
+   - Laws of reflection (with animated rays)
+   - Burning paper with concave mirror (with flames + smoke)
+   - Burning paper with convex lens
+   - Dentist's mirror (concave, close-up)
+   - Side-view mirror (convex, in a car)
+
+   Each scene has:
+   - A "👶 In one line (for Class 6-7)" simple summary at the top
+   - The formal Grade 8 definition
+   - A real-world example
+   - A "What to watch in 3D" activity prompt
+   - Animated light rays (yellow = incident, orange = reflected)
+   - Labels, color legend, on-screen text
+
+2. **Class 6-7 Quick Reference** — A 18-row glossary table at the top of the Notes tab. Every technical term (concave, convex, converge, diverge, focus, incident, normal, lateral inversion, etc.) is explained in ONE LINE with a real-world example.
+
+3. **Additional SVG elements** in each lecture showing intermediate visual states:
+   - Lecture 1: Side-by-side spoon analogy (inside = concave, back = convex)
+   - Lecture 2: Erect vs Inverted arrow comparison clearly labeled
+   - Lecture 3: The special "angle = 0" case (light retraces its path)
+   - Lecture 4: Mirror vs Lens comparison (bounce back vs pass through)
+
+4. **Additional beats** with simple analogies:
+   - Lecture 1 beat 2: "What is a mirror?" — explains reflection before introducing curved mirrors
+   - Lecture 4 beat 2: "Mirror = bounce back vs Lens = pass through" — contrasts the two before going into types
+
+### 4 SVG-animated lectures (50 narrated beats)
+
+1. **10.1 Spherical Mirrors** (10 beats) — spoon activity, concave vs convex, schematic representations, hollow-sphere origin
+2. **10.2 Images in Mirrors** (10 beats) — close vs far, real-life uses (torch, dental, side-view, road-safety)
+3. **10.3 Laws of Reflection** (14 beats) — incident ray, reflected ray, normal, angle of incidence, angle of reflection, Law 1 (i = r), Law 2 (coplanar), parallel beams, burning paper
+4. **10.4 Lenses** (16 beats) — water-drop lens, convex vs concave, viewing through lenses, converging/diverging, eyeglasses/camera/eye
 
 ### 4 real-life SVG scenarios
-- 📷 The Pinhole Camera — how a tiny hole makes an upside-down picture
-- 🔭 The Periscope — how submariners see above the water (two 45° mirrors)
-- 🎭 Shadow Puppets — telling stories with light and hands
-- ☀️ Solar Cookers — cooking food with sunlight and a curved mirror
+- 🚗 Why Objects in the Mirror Are Closer Than They Appear
+- 🦷 How the Dentist Sees Inside Your Mouth
+- ☀️ Burning Paper with Sunlight — Solar Concentrators
+- 🔍 Why a Magnifying Glass Makes Letters Bigger
 
 ### Practice material
 - 5 guided-practice problems with step-by-step answer validation
 - 8 practice cards with reveal-answer buttons
-- 11 self-test questions with worked-out answers
-
-### Pedagogical style
-- All narration in **simple, conversational English** suitable for an 11–12 year old
-- Technical terms are **defined when first introduced** (e.g., "translucent = lets some light through, but blurry")
-- Hands-on activities use only household items (spoon, torch, cardboard, hand)
-- Concepts build incrementally — no algebra, no trigonometry, no formal "laws" yet
+- 10 self-test questions with worked-out answers
 
 ## What's in the 3D Water Body Atlas
 
@@ -65,9 +92,10 @@ Each scene animates the activity: ships threading through straits, lock gates op
 
 ```
 learning_system/
-├── index.html                  # Main entry point (home screen + chapter screen + atlas launcher)
+├── index.html                  # Main entry point (home screen + chapter screen + two atlas launchers)
 ├── water_body_atlas.html       # Standalone 3D Water Body Atlas (Three.js)
-├── CLASS_6_7_SUITABILITY.md    # Pedagogical review of all chapters
+├── mirrors_lenses_3d_atlas.html # Standalone 3D Mirror & Lens Atlas (Three.js) — NEW
+├── CLASS_6_7_SUITABILITY.md    # Pedagogical review + enhancement approach
 ├── css/
 │   └── style.css               # All styles (shared across all chapters + physics light-ray animations)
 ├── js/
@@ -80,7 +108,7 @@ learning_system/
     ├── catalog.js              # Master list of subjects & chapters (REGISTER HERE)
     ├── maths/baudhayana_pythagoras/chapter.js
     ├── geography/world_geography/chapter.js (+ images/ subfolder)
-    ├── physics/light_shadows_reflections/chapter.js    ← Class 6 chapter
+    ├── physics/light_mirrors_lenses/chapter.js    ← Grade 8 + Class 6-7 scaffolding
     ├── history/, civics/, economics/, chemistry/, biology/   (empty — add here)
 ```
 
@@ -92,51 +120,7 @@ data/<subject>/<chapter_slug>/
 ```
 
 ### Step 2: Create the `chapter.js` file
-Inside that folder, create `chapter.js` defining `window.CHAPTER_DATA`. See the physics chapter (`data/physics/light_shadows_reflections/chapter.js`) for a complete working example. The structure is:
-
-```javascript
-window.CHAPTER_DATA = {
-  meta: {
-    subject: 'physics',
-    slug: 'light_shadows_reflections',
-    title: 'Light, Shadows and Reflections',
-    subtitle: 'Chapter 11 · Curiosity — Textbook of Science for Grade 6',
-    chapterNumber: 11,
-    type: 'svg',        // 'svg', 'image', or 'globe'
-    intro: 'Brief description shown on the home screen'
-  },
-  lectures: [
-    {
-      id: 'sources',
-      label: '11.1 Sources of Light',
-      viewBox: '0 0 800 600',
-      svg: '<g class="el" data-beat="1">...</g>',
-      beats: ["Beat 1 narration...", "Beat 2 narration..."]
-    }
-  ],
-  notes: '<h2>📝 Key Notes</h2><p>...</p>',
-  practice: '<h2>✏️ Practice</h2><div class="practice-card">...</div>',
-  realLife: [
-    { id: 'pinhole', title: '📷 ...', viewBox: '0 0 700 600', svg: '...', beats: [...] }
-  ],
-  guidedPractice: [
-    {
-      title: 'Identify the Material',
-      difficulty: 'Easy',
-      diffClass: 'gp-easy',
-      statement: '...',
-      steps: [
-        { prompt: '...', validate: { type: 'match', answers: ['translucent'] },
-          formatHint: '...', explanation: '...', hint: '...' }
-      ],
-      finalAnswer: '...'
-    }
-  ],
-  selfTest: [
-    { q: 'Question?', steps: 'Step-by-step answer', answer: 'Short answer' }
-  ]
-};
-```
+Inside that folder, create `chapter.js` defining `window.CHAPTER_DATA`. See the physics chapter (`data/physics/light_mirrors_lenses/chapter.js`) for a complete working example with the layered scaffolding pattern.
 
 ### Step 3: Register the chapter in `data/catalog.js`
 Add the chapter to the appropriate subject's `chapters` array.
@@ -171,7 +155,8 @@ Refresh `index.html` — your new chapter will appear under its subject.
 - 📱 **Fully responsive** — works on desktop, tablet, and mobile
 - 🎯 **Multi-section lectures** — only one sub-lecture visible at a time
 - 🌈 **Color-coded subjects** — each subject has its own accent color
-- 🌊 **Standalone 3D Water Body Atlas** — 15 animated geography terms
+- 🌊 **3D Water Body Atlas** — 15 animated geography terms
+- 🔬 **3D Mirror & Lens Atlas** — 10 interactive physics scenes with simple analogies for Class 6-7
 
 ## Adding New Subjects
 

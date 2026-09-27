@@ -77,13 +77,13 @@ window.CATALOG = {
       color: '#f472b6',
       chapters: [
         {
-          slug: 'light_shadows_reflections',
-          title: 'Light, Shadows and Reflections',
-          subtitle: 'Chapter 11 · Curiosity — Textbook of Science for Grade 6',
-          description: 'Sources of light, transparent/translucent/opaque materials, how shadows form, pinhole camera, plane-mirror reflection, and lateral inversion — with simple animated ray diagrams and hands-on activities for first-time science learners.',
-          dataFile: 'data/physics/light_shadows_reflections/chapter.js',
+          slug: 'light_mirrors_lenses',
+          title: 'Light: Mirrors and Lenses',
+          subtitle: 'Chapter 10 · Curiosity — Textbook of Science for Grade 8',
+          description: 'Spherical mirrors and lenses — image formation, the two laws of reflection, converging/diverging behaviour. Animated SVG ray diagrams + a 3D mirror-and-lens viewer make every Grade 8 concept crystal-clear even for Class 6–7 students.',
+          dataFile: 'data/physics/light_mirrors_lenses/chapter.js',
           hasImages: false,
-          estimatedTime: '40 min'
+          estimatedTime: '50 min'
         }
       ]
     },
