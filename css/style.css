@@ -681,6 +681,84 @@ body { overflow-x: hidden; }
 .content { max-width: 880px; margin: 0 auto; padding: 24px 18px 80px; }
 .content h2 { font-size: 22px; color: #38bdf8; margin-bottom: 6px; margin-top: 28px; }
 .content h2:first-child { margin-top: 0; }
+
+/* ============ NOTES TOOLBAR (Print / Export to PDF) ============ */
+.notes-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.10) 0%, rgba(167, 139, 250, 0.08) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.30);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 22px;
+  position: sticky;
+  top: 56px;
+  z-index: 20;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.notes-toolbar-info { min-width: 0; flex: 1 1 200px; }
+.notes-toolbar-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #38bdf8;
+  letter-spacing: 0.02em;
+  margin-bottom: 2px;
+}
+.notes-toolbar-sub {
+  font-size: 12px;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.notes-print-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 100%);
+  color: #ffffff;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(56, 189, 248, 0.30);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.notes-print-btn:hover {
+  filter: brightness(1.10);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.45);
+}
+.notes-print-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(56, 189, 248, 0.30);
+}
+.notes-print-btn .notes-print-icon { font-size: 15px; }
+.notes-print-btn .notes-print-label { line-height: 1; }
+
+@media (max-width: 600px) {
+  .notes-toolbar {
+    /* On mobile, stack vertically so the print button is full-width and easy to tap */
+    flex-direction: column;
+    align-items: stretch;
+    top: 50px;
+  }
+  .notes-toolbar-info { flex-basis: auto; }
+  .notes-toolbar-sub { white-space: normal; }
+  .notes-print-btn {
+    justify-content: center;
+    padding: 11px 16px;
+  }
+}
 .content h3 {
   font-size: 17px; color: #f1f5f9;
   margin-top: 22px; margin-bottom: 10px;

@@ -116,6 +116,13 @@ window.CHAPTER_DATA = {
 
   // NOTES — HTML content. Use <h2>, <h3>, <p>, <table class="styled-table">,
   // <div class="practice-card"> etc.
+  // IMPORTANT: A "Print / Export to PDF" button is AUTOMATICALLY injected at the
+  // top of the Notes tab by renderNotes() in js/app.js. You do NOT need to add
+  // anything to your chapter.js notes HTML — the toolbar is added by the app.
+  // The button opens a clean print-friendly window with just the notes content
+  // and triggers the browser's Print dialog (where the user can pick "Save as
+  // PDF" as the destination). See the "🖨 Print / Export to PDF Button" section
+  // below for details on styling and the print-friendly stylesheet.
   "notes": "<h2>📝 Key Notes</h2><p>...</p>",
 
   // PRACTICE — HTML content with reveal-answer buttons
@@ -409,6 +416,58 @@ svg.rl-board line[stroke*="fb923c"] {
 
 ---
 
+## 🖨 Print / Export to PDF Button (in every chapter's Notes tab)
+
+Every chapter's **Notes (Key Things to Remember)** tab automatically shows a **"Print / Export to PDF"** button at the top of the content. Students (and teachers) can use this button to:
+
+- **Print** the notes to a physical printer, OR
+- **Export to PDF** by choosing "Save as PDF" as the destination in the browser's Print dialog.
+
+### How it works (no per-chapter work required)
+
+The button is **automatically injected** by `renderNotes()` in `js/app.js` whenever a chapter's Notes tab is rendered. You do **NOT** need to add anything to your chapter's `notes` HTML — the toolbar is added by the app, not by individual chapter.js files.
+
+When the user clicks the button:
+
+1. The `printNotes()` function in `js/app.js` reads the current chapter's notes HTML (from the `#notesBody` div that `renderNotes()` created).
+2. It builds a **self-contained print-friendly HTML document** in a new browser window/tab. The document includes:
+   - A **print header** at the top with the chapter title and subtitle, with a colored accent bar matching the subject's color.
+   - The full notes HTML content, restyled for print: light background, dark text, readable font sizes (12pt body, 16pt h2, 13pt h3), and proper page-break rules (`page-break-after: avoid` on headings, `page-break-inside: avoid` on tables/cards).
+   - A **print footer** at the bottom with the chapter name and generation date.
+   - An inline `<script>` that calls `window.print()` automatically when the page loads.
+3. The browser's Print dialog opens. The user picks "Save as PDF" (or a physical printer) and clicks Save.
+
+### Styling details (already handled by `printNotes()`)
+
+The print-friendly document has its own inline stylesheet (so it doesn't depend on the main app's `style.css`). Notable rules:
+
+- **Subject color is reused** for the header accent bar, h2/h3 colors, table header background, formula text, and triple pill backgrounds — so the printed PDF remains visually identifiable per subject (blue for Maths, pink for Physics, yellow for History, green for Geography).
+- **The "Before We Begin" gradient card** (used in History and Fractions chapters) keeps its dark purple gradient background with light text — `print-color-adjust: exact` is set so the gradient prints correctly.
+- **Reveal-answer buttons** (`.reveal-btn`) are hidden in the print output, and the reveal-answer content (`.reveal-answer`) is force-shown so the student gets the full notes including hidden answers.
+- **Tables** (`.styled-table`) use the subject color for the header row and zebra-striping for readability.
+
+### CSS in `css/style.css` (for the on-screen button)
+
+The toolbar button itself (visible in the live app) is styled by the `.notes-toolbar`, `.notes-toolbar-info`, `.notes-toolbar-title`, `.notes-toolbar-sub`, `.notes-print-btn`, `.notes-print-icon`, and `.notes-print-label` classes in `css/style.css`. The toolbar is `position: sticky` so it stays visible as the user scrolls through long notes. On mobile (≤600px width) it stacks vertically so the print button is full-width and easy to tap.
+
+### Quality-checklist additions for this feature
+
+When adding a new chapter, also verify:
+
+- [ ] Notes tab shows the "📝 Key Things to Remember" toolbar at the top
+- [ ] The "Print / Export to PDF" button is visible and tappable
+- [ ] Clicking the button opens a new window/tab with a print-friendly view of the notes
+- [ ] The print view has a header with the chapter title and colored accent bar
+- [ ] In the print view: `page-break-after: avoid` is set on h2/h3/h4 (so headings don't get orphaned at the bottom of a page)
+- [ ] In the print view: tables and `.practice-card` blocks have `page-break-inside: avoid`
+- [ ] In the print view: the subject's accent color is used for headings, table headers, and formula text
+
+### If you need to change the button label or styling
+
+Edit `js/app.js` (search for `renderNotes` and `printNotes`) and `css/style.css` (search for `.notes-toolbar` and `.notes-print-btn`). The print-friendly stylesheet itself is inline in the `printNotes()` function in `js/app.js` — it is intentionally NOT in `css/style.css` because the print document is a separate window with no access to the main app's stylesheet.
+
+---
+
 ## 🚀 Push to GitHub
 
 After all browser tests pass and VLM verification confirms the visuals are correct:
@@ -503,6 +562,8 @@ Add a launcher button on the home screen (`index.html`) below the existing subje
 - [ ] For image chapters: images transition correctly as beats advance
 - [ ] VLM (vision model) verifies the screenshots look correct
 - [ ] README.md updated to mention the new chapter in the chapters table
+- [ ] **Notes tab shows the "📝 Key Things to Remember" toolbar at the top, with a working "Print / Export to PDF" button** (added automatically by `renderNotes()` in `js/app.js` — no per-chapter work needed)
+- [ ] **Clicking the Print button opens a print-friendly window** with the chapter title in a colored header bar and the full notes content
 - [ ] Commit message follows the established format (`feat(<subject>): add <title>`)
 - [ ] Push to GitHub successful; latest commit visible via API
 

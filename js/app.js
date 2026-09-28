@@ -540,10 +540,326 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
 }
 
 // ====================================================================
-// NOTES — Render HTML content
+// NOTES — Render HTML content + Print/Export-to-PDF toolbar
 // ====================================================================
 function renderNotes() {
-  document.getElementById('notesContent').innerHTML = currentChapterData.notes || '<p>No notes available.</p>';
+  const notesHTML = currentChapterData.notes || '<p>No notes available.</p>';
+  const meta = currentChapterData.meta || {};
+  const chapterTitle = meta.title || 'Chapter Notes';
+  const chapterSubtitle = meta.subtitle || '';
+
+  // Inject the notes content together with a small action toolbar that
+  // lets the student print or export the Key Notes to PDF.
+  // NOTE: app.js is wrapped in an IIFE, so we cannot use inline onclick
+  // attributes (the handler would not be on `window`). Instead we attach
+  // the click listener via addEventListener below — consistent with the
+  // rest of the app.
+  document.getElementById('notesContent').innerHTML = `
+    <div class="notes-toolbar">
+      <div class="notes-toolbar-info">
+        <div class="notes-toolbar-title">📝 Key Things to Remember</div>
+        <div class="notes-toolbar-sub">${chapterSubtitle || chapterTitle}</div>
+      </div>
+      <button type="button" class="notes-print-btn" title="Print or save these notes as a PDF file">
+        <span class="notes-print-icon">🖨</span>
+        <span class="notes-print-label">Print / Export to PDF</span>
+      </button>
+    </div>
+    <div id="notesBody">${notesHTML}</div>
+  `;
+
+  // Attach the click listener (app.js is in an IIFE, so the handler
+  // must be wired up here rather than via an inline onclick attribute).
+  const printBtn = document.querySelector('#notesContent .notes-print-btn');
+  if (printBtn) {
+    printBtn.addEventListener('click', printNotes);
+  }
+}
+
+// ====================================================================
+// PRINT NOTES — Open a clean print-friendly window with just the notes
+// content, then trigger the browser's Print dialog. The student (or
+// teacher) can choose "Save as PDF" as the destination to export the
+// notes to a PDF file.
+// ====================================================================
+function printNotes() {
+  const notesBody = document.getElementById('notesBody');
+  if (!notesBody) {
+    alert('Notes content is not loaded yet. Please wait a moment and try again.');
+    return;
+  }
+
+  const meta = (currentChapterData && currentChapterData.meta) || {};
+  const chapterTitle = meta.title || 'Chapter Notes';
+  const chapterSubtitle = meta.subtitle || '';
+  const subject = (currentSubject && currentSubject.name) || '';
+
+  // Build a self-contained print-friendly HTML document.
+  // - Inline all styles so the printed output is portable.
+  // - Use a light background with dark text (print-optimized).
+  // - Preserve the existing chapter color scheme for headings so the
+  //   notes remain visually identifiable per subject.
+  const subjectColor = (currentSubject && currentSubject.color) || '#38bdf8';
+  const accentR = parseInt(subjectColor.slice(1, 3), 16);
+  const accentG = parseInt(subjectColor.slice(3, 5), 16);
+  const accentB = parseInt(subjectColor.slice(5, 7), 16);
+
+  const printDoc = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${escapeHTML(chapterTitle)} — Key Notes</title>
+  <style>
+    @page { margin: 16mm 14mm; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      color: #1e293b;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      font-size: 12pt;
+    }
+    .print-header {
+      border-bottom: 3px solid ${subjectColor};
+      padding-bottom: 14px;
+      margin-bottom: 24px;
+    }
+    .print-header-eyebrow {
+      font-size: 10pt;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #64748b;
+      margin-bottom: 4px;
+    }
+    .print-header-title {
+      font-size: 22pt;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 0 0 6px 0;
+      line-height: 1.2;
+    }
+    .print-header-sub {
+      font-size: 11pt;
+      color: #475569;
+      margin: 0;
+    }
+    h2 {
+      color: ${subjectColor};
+      font-size: 16pt;
+      margin: 28px 0 10px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #e2e8f0;
+      page-break-after: avoid;
+    }
+    h3 {
+      color: rgb(${accentR}, ${accentG}, ${accentB});
+      font-size: 13pt;
+      font-weight: 700;
+      margin: 22px 0 8px;
+      page-break-after: avoid;
+    }
+    h4 {
+      color: #1e293b;
+      font-size: 11.5pt;
+      font-weight: 700;
+      margin: 16px 0 6px;
+      page-break-after: avoid;
+    }
+    p {
+      margin: 0 0 10px;
+      color: #1e293b;
+    }
+    ul, ol { margin: 6px 0 12px 22px; }
+    li { margin-bottom: 4px; color: #1e293b; }
+    strong { color: #0f172a; font-weight: 700; }
+    em { color: rgb(${Math.min(accentR + 40, 255)}, ${Math.min(accentG + 40, 255)}, ${Math.min(accentB + 40, 255)}); font-style: italic; }
+    code {
+      font-family: "SF Mono", "Monaco", "Consolas", monospace;
+      background: #f1f5f9;
+      color: #0f172a;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-size: 10.5pt;
+    }
+    /* Preserve the inline "Before We Begin" gradient card on a light bg */
+    div[style*="linear-gradient"] {
+      color: #f8fafc !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    div[style*="linear-gradient"] h2,
+    div[style*="linear-gradient"] h3,
+    div[style*="linear-gradient"] p {
+      color: #f8fafc !important;
+    }
+    /* Practice cards and warning boxes — keep their accent backgrounds */
+    .practice-card,
+    .card,
+    .styled-table th,
+    .reveal-answer,
+    .formula-big,
+    .formula-sub,
+    .triples,
+    .triple {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .card {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+      border-left-width: 4px !important;
+      border-radius: 8px;
+      padding: 12px 16px !important;
+      margin: 14px 0 !important;
+    }
+    .card.warn { border-left-color: #f59e0b !important; }
+    .card.tip  { border-left-color: #10b981 !important; }
+    .card.formula { border-left-color: ${subjectColor} !important; }
+    .card.history { border-left-color: #8b5cf6 !important; }
+    .card.open { border-left-color: #f97316 !important; }
+    .card h4 { margin-top: 0; }
+    .card ul, .card ol { margin-top: 6px; }
+    .card p { color: #1e293b; }
+    .formula-big {
+      font-size: 16pt;
+      font-weight: 700;
+      color: ${subjectColor};
+      text-align: center;
+      margin: 6px 0;
+    }
+    .formula-sub {
+      font-size: 10.5pt;
+      color: #475569;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    table.styled-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 10.5pt;
+      page-break-inside: avoid;
+    }
+    .styled-table th {
+      background: ${subjectColor} !important;
+      color: #ffffff !important;
+      padding: 8px 10px;
+      text-align: left;
+      border: 1px solid #cbd5e1;
+      font-weight: 700;
+    }
+    .styled-table td {
+      padding: 7px 10px;
+      border: 1px solid #e2e8f0;
+      color: #1e293b;
+    }
+    .styled-table tr:nth-child(even) td {
+      background: #f8fafc !important;
+    }
+    .practice-card {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 8px;
+      padding: 12px 14px !important;
+      margin: 12px 0 !important;
+      page-break-inside: avoid;
+    }
+    .practice-card h3 { color: ${subjectColor}; margin-top: 0; }
+    .practice-card p { color: #1e293b; }
+    .reveal-btn { display: none; }
+    .reveal-answer {
+      display: block !important;
+      background: #ecfeff !important;
+      border-left: 3px solid ${subjectColor} !important;
+      padding: 8px 12px;
+      border-radius: 4px;
+      margin-top: 8px;
+      color: #1e293b;
+      font-size: 11pt;
+    }
+    .triples {
+      display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0;
+    }
+    .triple {
+      background: ${subjectColor} !important;
+      color: #ffffff !important;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 11pt;
+    }
+    /* Avoid awkward page breaks inside lecture/example blocks */
+    .problem, .scenario-dropdown, .lec-section { page-break-inside: avoid; }
+    img { max-width: 100%; height: auto; }
+    .print-footer {
+      margin-top: 36px;
+      padding-top: 12px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 9.5pt;
+      color: #64748b;
+      text-align: center;
+    }
+    .print-footer .print-chapter { font-weight: 600; color: #475569; }
+    @media print {
+      body { font-size: 11pt; }
+      .print-header { page-break-after: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="print-header">
+    <div class="print-header-eyebrow">${escapeHTML(subject ? subject + ' · Key Notes' : 'Key Notes')}</div>
+    <h1 class="print-header-title">${escapeHTML(chapterTitle)}</h1>
+    ${chapterSubtitle ? `<p class="print-header-sub">${escapeHTML(chapterSubtitle)}</p>` : ''}
+  </div>
+
+  ${notesBody.innerHTML}
+
+  <div class="print-footer">
+    <span class="print-chapter">${escapeHTML(chapterTitle)}</span>
+    &nbsp;·&nbsp; Generated from the Learning System interactive module
+    &nbsp;·&nbsp; ${new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
+  </div>
+
+  <script>
+    // Automatically trigger the browser's Print dialog. The student
+    // (or teacher) can then choose "Save as PDF" as the destination
+    // to export the notes to a PDF file, or pick a physical printer.
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        window.focus();
+        window.print();
+      }, 300);
+    });
+  </script>
+</body>
+</html>`;
+
+  // Open the print-friendly document in a new window/tab and trigger
+  // the print dialog. Using a new window keeps the main app untouched
+  // and lets the user return to the chapter after printing.
+  const printWindow = window.open('', '_blank');
+  if (!printWindow) {
+    alert('Please allow pop-ups for this site to print or export the notes as PDF.');
+    return;
+  }
+  printWindow.document.open();
+  printWindow.document.write(printDoc);
+  printWindow.document.close();
+}
+
+// Small helper to safely escape HTML for the print header text.
+function escapeHTML(s) {
+  if (s == null) return '';
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 // ====================================================================

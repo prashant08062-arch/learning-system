@@ -217,6 +217,7 @@ Refresh `index.html` — your new chapter will appear under its subject.
 - ✏️ **Interactive guided practice** with answer validation and hints
 - 🌍 **Real-life scenarios** with step-by-step narration
 - 🧪 **Self-test** with reveal-answer buttons
+- 🖨 **Print / Export to PDF** — every chapter's Key Notes tab has a button to print or save the notes as a PDF (with print-friendly styling, subject-colored headers, and proper page breaks)
 - 📱 **Fully responsive** — works on desktop, tablet, and mobile
 - 🎯 **Multi-section lectures** — only one sub-lecture visible at a time
 - 🌈 **Color-coded subjects** — each subject has its own accent color
