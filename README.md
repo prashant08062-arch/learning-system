@@ -18,6 +18,7 @@ No server required — runs entirely from the file system.
 | Subject | Chapter | Grade | Type |
 |---------|---------|-------|------|
 | 🧮 Mathematics | The Baudhāyana–Pythagoras Theorem | 8 (sub-lectures 2.1–2.2 also work for Class 7) | SVG |
+| 🧮 **Mathematics** | **Fractions in Disguise** *(new!)* | **8** | SVG |
 | 🌍 Geography | World Geography: Some Glimpses | 6–8 | Image |
 | 📜 **History** | **India's Long Road to Independence** *(new!)* | **8** (story-form for 5-7 year olds) | Image |
 | ⚛️ Physics | Light: Mirrors and Lenses | 8 (with Class 6-7 scaffolding) | SVG |
@@ -25,6 +26,53 @@ No server required — runs entirely from the file system.
 | 🔬 3D Mirror & Lens Atlas | 10 interactive physics scenes | 6–8 | Three.js (standalone) |
 
 For a pedagogical review of Maths, Geography, and Physics chapters against the NCERT Class 6–7 syllabus, please see **`CLASS_6_7_SUITABILITY.md`**.
+
+## 🧮 What's in the Maths Chapter — *Fractions in Disguise* (NEW)
+
+Based on NCERT Ganita Prakash Grade 8 Part-II Chapter 1. A complete, story-form treatment of percentages — fractions wearing a clever disguise — compressed into **10 story-form lectures** with **65 narrated beats**, written as if explaining to a young friend.
+
+### "Before We Begin" Story-Time Vocabulary Section
+
+A dedicated assets section at the top of the Notes tab that explains every technical term BEFORE the student starts the lectures. Written in story-form ("Imagine we are sitting on a soft rug, with a cup of warm milk..."). 15 terms covered:
+
+1. 🍕 Fraction · 2. 💯 Per cent / % · 3. ⚖️ Equivalent Fraction · 4. 🔢 Decimal · 5. 📊 Bar Model · 6. 🔗 Proportion · 7. 🛒 Cost Price (CP) · 8. 🏷️ Marked Price (MP) · 9. 💰 Selling Price (SP) · 10. 📈 Profit and Loss · 11. 🏷️ Discount · 12. 🏛️ GST / Tax · 13. 🏦 Interest and Principal · 14. 🔄 Compounding · 15. 📉 Depreciation
+
+### 10 Story-Form Lectures (65 beats)
+
+| # | Lecture | Topics |
+|---|---------|--------|
+| 1 | What Does % Mean? | The Latin "per centum", 25/100 = 25% |
+| 2 | Fractions ↔ Percentages | Two methods: scale to /100 or multiply by 100 |
+| 3 | The FDP Trio | Fractions, decimals, percentages interconvert |
+| 4 | Percentage of Some Quantity | Proportional reasoning, Madhu's biscuits |
+| 5 | Free-hand Computation | Mental math: 25%=1/4, 10%=1/10, scaling tricks |
+| 6 | Comparing Proportions | Eesha's test scores, KYC food labels |
+| 7 | Percentage Increase and Decrease | Tomato prices, theatre footfall |
+| 8 | Profit and Loss | CP, MP, SP; Kishanlal's sweater |
+| 9 | Growth and Compounding | Simple vs compound interest on ₹6000 FD |
+| 10 | Tricky Percentages | Cakely's 30%+20% vs Cakify's 50% |
+
+### Real-Life Story Scenarios (4)
+
+- 🍪 Madhu & Madhav's Biscuit Sugar Mystery
+- 🥛 Know Your Contents — Reading Food Labels (DEF vs Zacni)
+- 🧶 Kishanlal Sells a Sweater (CP, MP, SP, profit %)
+- 🏦 A Bank Fixed Deposit — 10% Interest for 3 Years (simple vs compound)
+
+### Practice Material
+
+- **8 guided-practice problems** with step-by-step answer validation (converting fractions, % of quantity, comparisons, increase/decrease, profit %, compound interest, compound discounts, depreciation)
+- **12 practice cards** with reveal-answer buttons (FDP conversions, mental math, profit/loss, discount, simple & compound interest)
+- **14 self-test questions** with worked-out answers covering every section of the chapter
+
+### Comprehensive Key Notes
+
+The Notes tab includes the "Before We Begin" vocabulary section, plus:
+- Section-by-section formula cards (x% = x/100, FDP trio, y% of value, profit/loss, discount, simple vs compound interest, depreciation, compound discount)
+- Worked examples for every concept
+- Common Mistakes section (10 pitfalls to avoid)
+- Memory Tricks for tricky formulas
+- Quick Reference Card — a single table with every formula in the chapter
 
 ## 📜 What's in the History Chapter — *India's Long Road to Independence* (NEW)
 

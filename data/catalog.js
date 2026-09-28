@@ -29,6 +29,15 @@ window.CATALOG = {
           dataFile: 'data/maths/baudhayana_pythagoras/chapter.js',
           hasImages: false,
           estimatedTime: '45 min'
+        },
+        {
+          slug: 'fractions_in_disguise',
+          title: 'Fractions in Disguise',
+          subtitle: 'Chapter 1 · Ganita Prakash · Grade 8 Part II',
+          description: 'Discover percentages — fractions wearing a clever disguise! Covers FDP conversions, percentage of a quantity, mental-math tricks, percentage increase/decrease, profit & loss, discounts & taxes, simple vs compound interest, depreciation, and the surprising truth about compound discounts (30% + 20% ≠ 50%!). Story-form narration with 10 lectures, 4 real-life scenarios, 8 guided-practice problems, 14 self-test questions, and a 15-term Before-We-Begin vocabulary section.',
+          dataFile: 'data/maths/fractions_in_disguise/chapter.js',
+          hasImages: false,
+          estimatedTime: '75 min'
         }
       ]
     },
