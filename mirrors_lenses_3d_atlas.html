@@ -677,31 +677,52 @@ function createPlaneMirror(w = 8, h = 12, depth = 0.4) {
 // Concave mirror (partial sphere with inside reflective)
 function createConcaveMirror(radius = 6, depth = 1.5, height = 14) {
   const g = new THREE.Group();
-  // Use a sphere geometry clipped — but simpler: use a curved surface via ParametricGeometry
-  // Simpler: use a half-torus or a curved plate
-  // Easiest: use SphereGeometry with thetaStart/thetaLength
-  const sphereGeo = new THREE.SphereGeometry(radius, 32, 32, Math.PI/2 - 0.4, 0.8, Math.PI/2 - 0.4, 0.8);
-  const mirrorMat = new THREE.MeshStandardMaterial({
-    color: 0xe0e7ff, metalness: 0.85, roughness: 0.2,
-    side: THREE.BackSide  // inner surface
+  // FIX #1 & #2: Bright, shiny, METALLIC mirror surface (visible reflection) + curved properly
+  // Use a thicker sphere segment so it looks like a real curved dish (not a thin ghost)
+  const sphereGeo = new THREE.SphereGeometry(radius, 64, 64, Math.PI/2 - 0.45, 0.9, Math.PI/2 - 0.45, 0.9);
+  // FIX #1: Use MeshPhongMaterial with high shininess + specular for a visible silver look
+  // (MeshStandardMaterial with metalness looks dark without an environment map)
+  const mirrorMat = new THREE.MeshPhongMaterial({
+    color: 0xf8fafc,         // bright white-silver
+    specular: 0xffffff,      // bright white highlights
+    shininess: 120,         // very shiny
+    side: THREE.DoubleSide, // render both sides so the inside is visible
+    emissive: 0x4a5568,     // slight self-illumination so it's never pitch-black
+    emissiveIntensity: 0.15
   });
   const mirror = new THREE.Mesh(sphereGeo, mirrorMat);
   mirror.castShadow = true;
   mirror.receiveShadow = true;
   g.add(mirror);
-  // Back (dark)
-  const backMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.6 });
+  // Back: dark navy backing (visible behind the silver)
+  const backMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.7, metalness: 0.3 });
   const back = new THREE.Mesh(sphereGeo, backMat);
-  back.scale.set(0.95, 0.95, 0.95);
+  back.scale.set(0.96, 0.96, 0.96);
   g.add(back);
-  // Stand
+  // Edge frame (gold rim around the mirror — like a real telescope mirror)
+  const rim = new THREE.Mesh(
+    new THREE.TorusGeometry(radius * 0.62, 0.15, 12, 48),
+    new THREE.MeshStandardMaterial({ color: 0xfbbf24, metalness: 0.9, roughness: 0.3 })
+  );
+  rim.rotation.y = Math.PI / 2;
+  rim.position.x = -0.1;
+  g.add(rim);
+  // Stand (wooden-looking)
   const stand = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.3, 0.5, 3, 8),
-    new THREE.MeshStandardMaterial({ color: 0x475569 })
+    new THREE.CylinderGeometry(0.4, 0.6, 4, 12),
+    new THREE.MeshStandardMaterial({ color: 0x78350f, roughness: 0.6 })
   );
   stand.position.set(0, -3, 0);
   stand.castShadow = true;
   g.add(stand);
+  // Base
+  const base = new THREE.Mesh(
+    new THREE.CylinderGeometry(1.2, 1.4, 0.3, 16),
+    new THREE.MeshStandardMaterial({ color: 0x475569, roughness: 0.5 })
+  );
+  base.position.set(0, -5.1, 0);
+  base.castShadow = true;
+  g.add(base);
   // Move the whole mirror so the reflecting surface faces +X (toward viewer right)
   g.rotation.y = -Math.PI / 2;
   g.position.x = -radius + 0.5;
@@ -711,28 +732,48 @@ function createConcaveMirror(radius = 6, depth = 1.5, height = 14) {
 // Convex mirror (partial sphere with outer surface reflective)
 function createConvexMirror(radius = 6) {
   const g = new THREE.Group();
-  const sphereGeo = new THREE.SphereGeometry(radius, 32, 32, Math.PI/2 - 0.4, 0.8, Math.PI/2 - 0.4, 0.8);
-  const mirrorMat = new THREE.MeshStandardMaterial({
-    color: 0xe0e7ff, metalness: 0.85, roughness: 0.2,
-    side: THREE.FrontSide
+  const sphereGeo = new THREE.SphereGeometry(radius, 64, 64, Math.PI/2 - 0.45, 0.9, Math.PI/2 - 0.45, 0.9);
+  // FIX #1: Shiny silver convex surface — use MeshPhongMaterial for visible highlights
+  const mirrorMat = new THREE.MeshPhongMaterial({
+    color: 0xf8fafc,
+    specular: 0xffffff,
+    shininess: 120,
+    side: THREE.DoubleSide,
+    emissive: 0x4a5568,
+    emissiveIntensity: 0.15
   });
   const mirror = new THREE.Mesh(sphereGeo, mirrorMat);
   mirror.castShadow = true;
   mirror.receiveShadow = true;
   g.add(mirror);
   // Back (inside, dark)
-  const backMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.6 });
+  const backMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.7, metalness: 0.3 });
   const back = new THREE.Mesh(sphereGeo, backMat);
-  back.scale.set(0.95, 0.95, 0.95);
+  back.scale.set(0.96, 0.96, 0.96);
   g.add(back);
+  // Edge frame (gold rim)
+  const rim = new THREE.Mesh(
+    new THREE.TorusGeometry(radius * 0.62, 0.15, 12, 48),
+    new THREE.MeshStandardMaterial({ color: 0xfbbf24, metalness: 0.9, roughness: 0.3 })
+  );
+  rim.rotation.y = Math.PI / 2;
+  rim.position.x = 0.1;
+  g.add(rim);
   // Stand
   const stand = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.3, 0.5, 3, 8),
-    new THREE.MeshStandardMaterial({ color: 0x475569 })
+    new THREE.CylinderGeometry(0.4, 0.6, 4, 12),
+    new THREE.MeshStandardMaterial({ color: 0x78350f, roughness: 0.6 })
   );
   stand.position.set(0, -3, 0);
   stand.castShadow = true;
   g.add(stand);
+  const base = new THREE.Mesh(
+    new THREE.CylinderGeometry(1.2, 1.4, 0.3, 16),
+    new THREE.MeshStandardMaterial({ color: 0x475569, roughness: 0.5 })
+  );
+  base.position.set(0, -5.1, 0);
+  base.castShadow = true;
+  g.add(base);
   g.rotation.y = -Math.PI / 2;
   g.position.x = -radius + 0.5;
   return g;
@@ -999,123 +1040,156 @@ SCENE_BUILDERS.plane = function(root) {
 // CONCAVE MIRROR -------------------------------------------------
 SCENE_BUILDERS.concave = function(root) {
   root.add(createGround());
-  // Concave mirror — curve to the left, focus on the right
-  const mirror = createConcaveMirror(7, 1.5, 14);
-  // We want it to face +X (right side, where rays come from)
-  // createConcaveMirror already rotates to face +X; let's re-orient properly
-  // Actually, rebuild simpler: a curved plate
-  while (mirror.children.length > 0) mirror.remove(mirror.children[0]);
-  // Build a curved mirror using a sphere segment
+  // FIX #1 & #2: Use the improved createConcaveMirror (shiny silver + gold rim + base)
   const r = 7;
-  const sphereGeo = new THREE.SphereGeometry(r, 32, 32, -0.5, 1, Math.PI/2 - 0.4, 0.8);
-  const mirrorMat = new THREE.MeshStandardMaterial({
-    color: 0xe0e7ff, metalness: 0.85, roughness: 0.2,
-    side: THREE.BackSide
-  });
-  const m = new THREE.Mesh(sphereGeo, mirrorMat);
-  m.castShadow = true;
-  m.receiveShadow = true;
-  mirror.add(m);
-  const backMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.6 });
-  const back = new THREE.Mesh(sphereGeo, backMat);
-  back.scale.set(0.94, 0.94, 0.94);
-  mirror.add(back);
-  // Stand
-  const stand = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.3, 0.5, 4, 8),
-    new THREE.MeshStandardMaterial({ color: 0x475569 })
-  );
-  stand.position.set(0, -4, 0);
-  stand.castShadow = true;
-  mirror.add(stand);
-  mirror.position.set(-r + 0.5, 0, 0);
+  const mirror = createConcaveMirror(r, 1.5, 14);
   root.add(mirror);
-  // Parallel rays coming from the right, hitting mirror, converging at focus
-  const rays = [];
-  const focusX = r / 2;  // focal length = r/2 for spherical mirror
+  // FIX #2: Compute the actual surface intersection point for each parallel ray.
+  // Mirror is a sphere centered at (-r+0.5, 0, 0) (after the group's position offset).
+  // Actually createConcaveMirror returns a group rotated by -PI/2 around Y and positioned at (-r+0.5, 0, 0).
+  // The sphere is built at origin (before group transform), with radius r.
+  // After rotation (-PI/2 around Y) + translation (-r+0.5, 0, 0):
+  //   the vertex of the dish (originally at (r, 0, 0)) ends up at (-r+0.5 + 0, 0, r) -- NO
+  // Let me just compute the surface intersection in world space:
+  // The sphere's center in world coords = (-r+0.5, 0, 0) [because the geometry is at group origin,
+  //   then the group is rotated -PI/2 around Y (which sends +X -> +Z and +Z -> -X),
+  //   then translated]. Actually the sphere was built with default center at origin, then group is
+  //   rotated -PI/2 around Y axis: this rotates the local +X axis to +Z axis.
+  // The dish now opens toward +Z (the camera direction) — wait no, the camera looks at origin from
+  //   (8, 5, 25) which is +X+Y+Z direction. So +Z is toward viewer. The dish opens toward +Z.
+  // The focal point of a spherical mirror with radius r is at f = r/2 from the vertex, along the axis.
+  // The vertex (after transform) is at (-r+0.5, 0, r) in world coords... actually I think the vertex
+  // is at (-r+0.5, 0, 0) + rotated(r, 0, 0).
+  // Simpler: rebuild the mirror at origin to compute correctly.
+  // For the parallel rays, we'll use rays traveling in -Z direction (from +Z toward -Z),
+  // hitting the dish which opens toward +Z.
+  // Surface intersection for ray at height y: at world point (mirrorCenter.x + 0, y, mirrorCenter.z + sqrt(r²-y²))
+  // But since the group is rotated, the math is messy. Let me just use approximate hit points
+  // on the actual curved surface (much closer to reality than (0, y, 0)):
+  const mirrorCenterX = -r + 0.5;  // group's position.x
+  // After rotation -PI/2 around Y: a point that was at (rx, ry, rz) in local coords
+  //   becomes (rz, ry, -rx) — because rotating -PI/2 around Y sends +X to +Z (no, sends +X to -Z)
+  // Actually rotation -PI/2 around Y: x' = z, z' = -x (right-handed system, positive Y up).
+  //   Wait: standard rotation around Y by angle θ: x' = x cos θ + z sin θ, z' = -x sin θ + z cos θ
+  //   For θ = -PI/2: cos = 0, sin = -1. So x' = -z, z' = x.
+  // So a local point (lx, ly, lz) ends up at world (-lz + mirrorCenterX, ly, lx).
+  // The sphere in local coords is centered at (0,0,0) with radius r.
+  // A point on the +X side of the sphere (local): (sqrt(r²-y²-z²), y, z).
+  // After rotation+translation: (-z + mirrorCenterX, y, sqrt(r²-y²-z²)).
+  // For a parallel ray coming from +Z (at world (anyX, y, farZ)) traveling in -Z direction,
+  //   it hits the surface where local z=0, i.e., world z = lx = sqrt(r²-y²).
+  // So hit point world = (-0 + mirrorCenterX, y, sqrt(r²-y²))
+  //                 = (mirrorCenterX, y, sqrt(r²-y²)).
+  // For r=7, y=4: hit at (-6.5, 4, sqrt(49-16)) = (-6.5, 4, 5.74)
+  // For r=7, y=0: hit at (-6.5, 0, 7) — vertex!
+  // The focal point is at distance r/2 from vertex along the axis (+Z direction):
+  //   focus = (mirrorCenterX, 0, r - r/2) = (-6.5, 0, 3.5)
+  // Now the rays travel in -Z direction from far away to hit the mirror at +Z side.
+  // Reflected rays go from hit point to focus.
+  const focusX = mirrorCenterX;
+  const focusZ = r - r/2;  // = r/2 = 3.5
   const rayCount = 5;
   for (let i = 0; i < rayCount; i++) {
-    const y = -4 + i * 2;
-    const from = new THREE.Vector3(15, y, 0);
-    const hit = new THREE.Vector3(0, y, 0);  // approx hitting the vertex area
-    // Reflected ray: goes to focus
-    const to = new THREE.Vector3(focusX, 0, 0);
-    // Incident
-    const incident = createLightArrow(from, hit, 0xfbbf24, 0.9, 0.08);
+    const y = -4 + i * 2;  // -4, -2, 0, 2, 4
+    const surfaceZ = Math.sqrt(Math.max(0.01, r * r - y * y));
+    const hit = new THREE.Vector3(mirrorCenterX, y, surfaceZ);  // ACTUAL surface point
+    const from = new THREE.Vector3(mirrorCenterX, y, surfaceZ + 12);  // ray coming from +Z
+    const to = new THREE.Vector3(focusX, 0, focusZ);  // reflected to focus
+    const incident = createLightArrow(from, hit, 0xfbbf24, 0.95, 0.08);
     root.add(incident);
-    // Reflected
-    const reflected = createLightArrow(hit, to, 0xfb923c, 0.9, 0.08);
+    const reflected = createLightArrow(hit, to, 0xfb923c, 0.95, 0.08);
     root.add(reflected);
-    rays.push({incident, reflected});
   }
   // Focus point (bright)
   const focus = new THREE.Mesh(
     new THREE.SphereGeometry(0.4, 16, 16),
     new THREE.MeshBasicMaterial({ color: 0xfde047 })
   );
-  focus.position.set(focusX, 0, 0);
+  focus.position.set(focusX, 0, focusZ);
   root.add(focus);
   // Halo around focus
   const halo = new THREE.Mesh(
     new THREE.SphereGeometry(1, 16, 16),
     new THREE.MeshBasicMaterial({ color: 0xfde047, transparent: true, opacity: 0.3 })
   );
-  halo.position.set(focusX, 0, 0);
+  halo.position.set(focusX, 0, focusZ);
   root.add(halo);
+  // Label the focus
+  function makeLabel(text, color, position) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 256; canvas.height = 64;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#' + color.toString(16).padStart(6, '0');
+    ctx.font = 'bold 36px sans-serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(text, 128, 32);
+    const tex = new THREE.CanvasTexture(canvas);
+    const mat = new THREE.SpriteMaterial({ map: tex, transparent: true });
+    const sprite = new THREE.Sprite(mat);
+    sprite.position.copy(position);
+    sprite.scale.set(1.5, 0.5, 1);
+    return sprite;
+  }
+  root.add(makeLabel('FOCUS', 0xfde047, new THREE.Vector3(focusX, 1.5, focusZ)));
+  root.add(makeLabel('Concave Mirror', 0xfbcfe8, new THREE.Vector3(mirrorCenterX, -5.5, 0)));
   root.userData.updater = (dt, t) => {
-    // pulse focus
     focus.scale.setScalar(1 + Math.sin(t * 3) * 0.2);
     halo.material.opacity = 0.25 + Math.sin(t * 3) * 0.15;
     halo.scale.setScalar(1 + Math.sin(t * 2) * 0.15);
   };
-  camera.position.set(8, 5, 25);
-  camera.lookAt(0, 0, 0);
+  camera.position.set(-2, 6, 20);
+  camera.lookAt(mirrorCenterX + 1, 0, 2);
 };
 
 // CONVEX MIRROR --------------------------------------------------
 SCENE_BUILDERS.convex = function(root) {
   root.add(createGround());
-  // Convex mirror — bulges to the right
+  // FIX #1: Use the improved createConvexMirror (shiny silver + gold rim + base)
   const r = 7;
-  const mirrorGroup = new THREE.Group();
-  const sphereGeo = new THREE.SphereGeometry(r, 32, 32, -0.5, 1, Math.PI/2 - 0.4, 0.8);
-  const mirrorMat = new THREE.MeshStandardMaterial({
-    color: 0xe0e7ff, metalness: 0.85, roughness: 0.2,
-    side: THREE.FrontSide
-  });
-  const m = new THREE.Mesh(sphereGeo, mirrorMat);
-  m.castShadow = true;
-  m.receiveShadow = true;
-  mirrorGroup.add(m);
-  const backMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.6 });
-  const back = new THREE.Mesh(sphereGeo, backMat);
-  back.scale.set(0.94, 0.94, 0.94);
-  mirrorGroup.add(back);
-  const stand = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.3, 0.5, 4, 8),
-    new THREE.MeshStandardMaterial({ color: 0x475569 })
-  );
-  stand.position.set(0, -4, 0);
-  stand.castShadow = true;
-  mirrorGroup.add(stand);
-  mirrorGroup.position.set(-r + 0.5, 0, 0);
+  const mirrorGroup = createConvexMirror(r);
   root.add(mirrorGroup);
-  // Parallel rays coming from right, hitting mirror, diverging after reflection
+  // FIX #2: Compute actual surface intersection for parallel rays
+  // Same math as concave but rays diverge after reflection
+  const mirrorCenterX = -r + 0.5;
+  // For convex mirror, the reflecting surface is the OUTER surface of the sphere.
+  // Rays come from +Z, hit the surface at world (mirrorCenterX, y, sqrt(r²-y²)),
+  // then reflect outward (diverge).
+  // For a convex mirror, reflected rays diverge AS IF coming from the focal point BEHIND the mirror.
+  // Visual: just draw them spreading outward (away from the axis).
   const rayCount = 5;
   for (let i = 0; i < rayCount; i++) {
     const y = -4 + i * 2;
-    const from = new THREE.Vector3(15, y, 0);
-    const hit = new THREE.Vector3(0, y, 0);
-    // Reflected: diverges — goes off to upper-right or lower-right
-    const angle = (i - 2) * 0.2;
-    const to = new THREE.Vector3(15, y + angle * 5, 0);
-    const incident = createLightArrow(from, hit, 0xfbbf24, 0.9, 0.08);
+    const surfaceZ = Math.sqrt(Math.max(0.01, r * r - y * y));
+    const hit = new THREE.Vector3(mirrorCenterX, y, surfaceZ);  // actual surface point
+    const from = new THREE.Vector3(mirrorCenterX, y, surfaceZ + 12);  // ray from +Z
+    // Reflected ray diverges — slope away from axis
+    const slope = (y / Math.max(0.5, surfaceZ)) * 0.6;  // angle of reflection
+    const to = new THREE.Vector3(mirrorCenterX, y + slope * 8, surfaceZ + 8);
+    const incident = createLightArrow(from, hit, 0xfbbf24, 0.95, 0.08);
     root.add(incident);
-    const reflected = createLightArrow(hit, to, 0xfb923c, 0.9, 0.08);
+    const reflected = createLightArrow(hit, to, 0xfb923c, 0.95, 0.08);
     root.add(reflected);
   }
-  camera.position.set(8, 5, 25);
-  camera.lookAt(0, 0, 0);
+  // Label
+  function makeLabel(text, color, position) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 256; canvas.height = 64;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#' + color.toString(16).padStart(6, '0');
+    ctx.font = 'bold 36px sans-serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(text, 128, 32);
+    const tex = new THREE.CanvasTexture(canvas);
+    const mat = new THREE.SpriteMaterial({ map: tex, transparent: true });
+    const sprite = new THREE.Sprite(mat);
+    sprite.position.copy(position);
+    sprite.scale.set(1.8, 0.5, 1);
+    return sprite;
+  }
+  root.add(makeLabel('Convex Mirror (bulges out)', 0xfbcfe8, new THREE.Vector3(mirrorCenterX, -5.5, 0)));
+  root.add(makeLabel('rays DIVERGE', 0xfb923c, new THREE.Vector3(mirrorCenterX + 5, 5, 5)));
+  camera.position.set(-2, 6, 20);
+  camera.lookAt(mirrorCenterX + 1, 0, 2);
 };
 
 // CONVEX LENS ----------------------------------------------------
@@ -1214,332 +1288,478 @@ SCENE_BUILDERS.laws = function(root) {
   stand.position.set(0, -0.2, 1.8);
   root.add(stand);
   // Incident ray (coming from upper-left, hitting mirror at origin)
-  const incidentPoint = new THREE.Vector3(0, 0.15, 0);
-  const incidentFrom = new THREE.Vector3(-6, 5, -3);
-  const incident = createLightArrow(incidentFrom, incidentPoint, 0xfbbf24, 1.0, 0.1);
+  // FIX #3: Make the geometry 2D-friendly so angles are obvious from a side view
+  // Use a simple, symmetric incident/reflected pair in the XY plane (z=0)
+  // Both rays in the SAME plane (XY) so the angle arcs are clear
+  const angleI = Math.PI / 4;   // 45 degrees — easy to see and equal
+  const rayLen = 6;
+  const incidentFrom = new THREE.Vector3(-Math.sin(angleI) * rayLen, Math.cos(angleI) * rayLen, 0);
+  const incidentTo = new THREE.Vector3(0, 0.15, 0);   // hits mirror at origin
+  const incident = createLightArrow(incidentFrom, incidentTo, 0xfbbf24, 1.0, 0.12);
   root.add(incident);
-  // Reflected ray (going to upper-right)
-  // Law 1: angle of incidence = angle of reflection (measured from normal)
-  // Normal is vertical (perpendicular to the flat mirror)
-  // If incident comes from (-6, 5, -3), the reflected goes to (6, 5, -3) (mirror across Y-axis... but actually across normal which is Y-axis here)
-  // Actually, the mirror's surface is in the XZ plane, normal is along Y
-  // Reflection: the y-component of direction reverses; x and z stay same
-  // So if incident vector is (6, -5, 3) (from origin to source = (6, -5, 3)... wait let me recompute)
-  // Incident: from (-6, 5, -3) to (0, 0.15, 0). Direction = (6, -4.85, 3).
-  // Reflected direction: (6, 4.85, 3). So endpoint: (0, 0.15, 0) + (6, 4.85, 3)*scale = ... let's pick scale 1
-  const reflectedTo = new THREE.Vector3(6, 5, 3);
-  const reflected = createLightArrow(incidentPoint, reflectedTo, 0xfb923c, 1.0, 0.1);
+  // Reflected: mirror across the Y-axis (the normal) — same angle on the other side
+  const reflectedTo = new THREE.Vector3(Math.sin(angleI) * rayLen, Math.cos(angleI) * rayLen, 0);
+  const reflected = createLightArrow(incidentTo, reflectedTo, 0xfb923c, 1.0, 0.12);
   root.add(reflected);
-  // Normal line (perpendicular to mirror at point of incidence)
-  const normalMat = new THREE.LineDashedMaterial({
-    color: 0xffffff, dashSize: 0.4, gapSize: 0.25, transparent: true, opacity: 0.7
+
+  // FIX #3: NORMAL line — bright cyan, THICK (cylinder instead of line), with "N" label and arrow
+  const normalLength = 5;
+  const normalCyl = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.05, 0.05, normalLength, 12),
+    new THREE.MeshBasicMaterial({ color: 0x22d3ee, transparent: true, opacity: 0.9 })
+  );
+  normalCyl.position.set(0, normalLength / 2 - 0.5, 0);
+  root.add(normalCyl);
+  // Normal arrow head (top)
+  const normalTip = new THREE.Mesh(
+    new THREE.ConeGeometry(0.18, 0.5, 12),
+    new THREE.MeshBasicMaterial({ color: 0x22d3ee })
+  );
+  normalTip.position.set(0, normalLength - 0.5, 0);
+  root.add(normalTip);
+  // Normal extension below the mirror (dashed) for completeness
+  const normalBelowMat = new THREE.LineDashedMaterial({
+    color: 0x22d3ee, dashSize: 0.3, gapSize: 0.2, transparent: true, opacity: 0.5
   });
-  const normalGeo = new THREE.BufferGeometry().setFromPoints([
-    new THREE.Vector3(0, 4, 0), new THREE.Vector3(0, -1, 0)
+  const normalBelowGeo = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, -2, 0)
   ]);
-  const normalLine = new THREE.Line(normalGeo, normalMat);
-  normalLine.computeLineDistances();
-  root.add(normalLine);
-  // Angle arcs (using TubeGeometry on a circular path)
-  function createAngleArc(center, radius, startAngle, endAngle, color) {
-    const segments = 16;
-    const points = [];
-    for (let i = 0; i <= segments; i++) {
-      const a = startAngle + (endAngle - startAngle) * (i / segments);
-      points.push(new THREE.Vector3(
-        center.x + Math.cos(a) * radius,
-        center.y + Math.sin(a) * radius,
-        center.z
-      ));
-    }
-    const geo = new THREE.BufferGeometry().setFromPoints(points);
-    const mat = new THREE.LineBasicMaterial({ color: color, linewidth: 2 });
-    return new THREE.Line(geo, mat);
-  }
-  // Incident angle (between normal going UP and incident ray going to upper-left)
-  // Incident direction from origin: (-6, 5, -3). Angle from +Y axis:
-  const incidentAngle = Math.atan2(Math.sqrt(36 + 9), 5);  // angle from +Y
-  // Reflected: (6, 5, 3). Angle from +Y:
-  const reflectedAngle = Math.atan2(Math.sqrt(36 + 9), 5);
-  // We want to draw arcs in the plane of incidence (XZ plane through Y axis)
-  // For simplicity, draw arcs in the XY plane (z=0) using the projection
-  // Arc for incident (from +Y to incident direction)
-  const incidentProjAngle = Math.atan2(-6, 5);  // angle in XY plane
-  const arcI = createAngleArc(incidentPoint, 1.5, Math.PI/2, Math.PI/2 + incidentProjAngle + Math.PI/2, 0xfb923c);
-  // Actually, let me simplify — just draw arcs in the plane that contains both rays and normal
-  // The plane is determined by vectors (1, 0, 0.5) and (0, 1, 0)... too complex. Use simple arcs in XY.
-  // Remove the previous arc, draw fresh ones:
-  // Angle i: between +Y axis and incident direction (projected onto XY plane)
-  // Incident dir XY projection: (-6, 5) → angle from +Y = atan2(-6, 5) = -50° (in XY plane)
-  // Angle i = this angle's magnitude (50°)
-  // Angle r: between +Y axis and reflected direction (projected onto XY plane)
-  // Reflected dir XY projection: (6, 5) → angle from +Y = atan2(6, 5) = +50°
-  // So arc i goes from +Y (90°) clockwise to (90° - 50°) = 40°? Hmm, let me just draw simple labeled arcs.
-  // Actually skip the arcs; instead use angle text labels
-  // Add "i" and "r" text labels (using sprites)
-  function makeLabel(text, color, position) {
+  const normalBelow = new THREE.Line(normalBelowGeo, normalBelowMat);
+  normalBelow.computeLineDistances();
+  root.add(normalBelow);
+
+  // FIX #3: ANGLE ARCS — proper curved lines with "i" and "r" labels
+  // Both arcs are in the XY plane (z=0), centered at the point of incidence
+  const arcRadius = 1.6;
+  const arcSegments = 24;
+  // Arc for angle i: from the normal (pointing up, +Y) to the incident ray (going up-left)
+  // Incident goes from (0,0) toward (-sin(i), cos(i)) direction
+  // Normal goes from (0,0) toward (0, +1)
+  // So the arc starts at (0, arcRadius) [on the normal] and ends at (-sin(i)*arcRadius, cos(i)*arcRadius)
+  // Sweep from angle PI/2 (normal up) clockwise to (PI/2 + angleI)
+  const arcIGeo = new THREE.BufferGeometry().setFromPoints(
+    Array.from({length: arcSegments+1}, (_, k) => {
+      const a = Math.PI/2 + angleI * (k / arcSegments);
+      return new THREE.Vector3(Math.cos(a) * arcRadius, Math.sin(a) * arcRadius, 0);
+    })
+  );
+  const arcIMat = new THREE.LineBasicMaterial({ color: 0xfb923c, linewidth: 4 });
+  const arcI = new THREE.Line(arcIGeo, arcIMat);
+  root.add(arcI);
+  // Arc for angle r: from the normal (up) to the reflected ray (going up-right)
+  // Sweep from angle PI/2 (normal up) counter-clockwise to (PI/2 - angleI)
+  const arcRGeo = new THREE.BufferGeometry().setFromPoints(
+    Array.from({length: arcSegments+1}, (_, k) => {
+      const a = Math.PI/2 - angleI * (k / arcSegments);
+      return new THREE.Vector3(Math.cos(a) * arcRadius, Math.sin(a) * arcRadius, 0);
+    })
+  );
+  const arcRMat = new THREE.LineBasicMaterial({ color: 0xfb923c, linewidth: 4 });
+  const arcR = new THREE.Line(arcRGeo, arcRMat);
+  root.add(arcR);
+
+  // Tiny tick marks at angle i and r on the arcs (visual emphasis)
+  const iDot = new THREE.Mesh(
+    new THREE.SphereGeometry(0.1, 8, 8),
+    new THREE.MeshBasicMaterial({ color: 0xfb923c })
+  );
+  iDot.position.set(-Math.sin(angleI/2) * arcRadius, Math.cos(angleI/2) * arcRadius, 0);
+  root.add(iDot);
+  const rDot = new THREE.Mesh(
+    new THREE.SphereGeometry(0.1, 8, 8),
+    new THREE.MeshBasicMaterial({ color: 0xfb923c })
+  );
+  rDot.position.set(Math.sin(angleI/2) * arcRadius, Math.cos(angleI/2) * arcRadius, 0);
+  root.add(rDot);
+
+  // Text labels — bigger and brighter
+  function makeLabel(text, color, position, scale = 1.2) {
     const canvas = document.createElement('canvas');
-    canvas.width = 128; canvas.height = 64;
+    canvas.width = 256; canvas.height = 128;
     const ctx = canvas.getContext('2d');
+    // Background pill
+    ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+    const padX = 20, padY = 14;
+    const textWidth = ctx.measureText(text).width;
+    ctx.fillRect(0, 0, 256, 128);
+    // Text
     ctx.fillStyle = '#' + color.toString(16).padStart(6, '0');
-    ctx.font = 'bold 48px sans-serif';
+    ctx.font = 'bold 64px sans-serif';
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillText(text, 64, 32);
+    ctx.fillText(text, 128, 64);
     const tex = new THREE.CanvasTexture(canvas);
     const mat = new THREE.SpriteMaterial({ map: tex, transparent: true });
     const sprite = new THREE.Sprite(mat);
     sprite.position.copy(position);
-    sprite.scale.set(0.8, 0.4, 1);
+    sprite.scale.set(scale, scale * 0.5, 1);
     return sprite;
   }
-  root.add(makeLabel('i', 0xfb923c, new THREE.Vector3(-1.2, 1.2, 0)));
-  root.add(makeLabel('r', 0xfb923c, new THREE.Vector3(1.2, 1.2, 0)));
-  root.add(makeLabel('N', 0xffffff, new THREE.Vector3(0, 2.5, 0)));
-  root.add(makeLabel('normal', 0x94a3b8, new THREE.Vector3(0, 3.2, 0)));
-  // Animation: alternate the angle of incidence to show law 1
+  // Place "i" label inside the angle i arc, "r" label inside angle r arc, "N" near top of normal
+  root.add(makeLabel('i', 0xfb923c, new THREE.Vector3(-1.0, 1.8, 0), 1.0));
+  root.add(makeLabel('r', 0xfb923c, new THREE.Vector3(1.0, 1.8, 0), 1.0));
+  root.add(makeLabel('N', 0x22d3ee, new THREE.Vector3(0, 4.5, 0), 0.9));
+  root.add(makeLabel('Normal', 0x94a3b8, new THREE.Vector3(0, 5.3, 0), 0.7));
+  root.add(makeLabel('∠i = ∠r', 0xfde047, new THREE.Vector3(0, -1.5, 0), 1.5));
+  root.add(makeLabel('Incident ray', 0xfbbf24, new THREE.Vector3(-3.5, 4.5, 0), 0.9));
+  root.add(makeLabel('Reflected ray', 0xfb923c, new THREE.Vector3(3.5, 4.5, 0), 0.9));
+  root.add(makeLabel('Mirror', 0x94a3b8, new THREE.Vector3(0, -0.6, 2.5), 0.9));
+
+  // Animation: pulse the rays + arcs gently
   root.userData.updater = (dt, t) => {
-    // Slowly cycle the incident angle
-    const cycleT = (t * 0.4) % (Math.PI * 2);
-    const newAngle = 0.4 + Math.sin(cycleT) * 0.5;  // 0.4 to 0.9 rad (~23° to ~52°)
-    // Update incident ray
-    const newFrom = new THREE.Vector3(-Math.sin(newAngle) * 6, Math.cos(newAngle) * 5, -3);
-    // Remove old incident, add new
-    root.remove(incident);
-    // We can't easily update arrow geometry; just leave static
-    // Instead, pulse the rays
     incident.traverse(c => {
-      if (c.material) c.material.opacity = 0.8 + Math.sin(t * 2) * 0.2;
+      if (c.material && c.material.opacity !== undefined) {
+        c.material.opacity = 0.85 + Math.sin(t * 2) * 0.15;
+      }
     });
     reflected.traverse(c => {
-      if (c.material) c.material.opacity = 0.8 + Math.sin(t * 2) * 0.2;
+      if (c.material && c.material.opacity !== undefined) {
+        c.material.opacity = 0.85 + Math.sin(t * 2) * 0.15;
+      }
     });
-    // Re-add (we removed it)
-    root.add(incident);
+    // Pulse the angle arcs subtly
+    arcIMat.opacity = 0.8 + Math.sin(t * 3) * 0.2;
+    arcRMat.opacity = 0.8 + Math.sin(t * 3 + 0.3) * 0.2;
   };
-  camera.position.set(0, 8, 14);
-  camera.lookAt(0, 0, 0);
+  camera.position.set(0, 4, 14);
+  camera.lookAt(0, 1, 0);
 };
 
 // BURN PAPER (CONCAVE MIRROR) ------------------------------------
 SCENE_BUILDERS.burn_mirror = function(root) {
   root.add(createGround());
   // Sun on the right
-  const sun = createSun(new THREE.Vector3(20, 8, 0), 2);
+  const sun = createSun(new THREE.Vector3(15, 6, 5), 1.8);
   root.add(sun);
-  // Concave mirror on the left, facing right (toward sun)
+  // FIX #1 & #2: Use the improved createConcaveMirror (shiny silver + gold rim + base)
+  // Mirror on the LEFT, concave side facing RIGHT toward the sun.
+  // createConcaveMirror returns a group with the dish opening toward +Z (toward camera)
+  // by default. We want it to open toward +X (toward sun). So rotate by +PI/2 around Y.
   const r = 7;
-  const mirrorGroup = new THREE.Group();
-  const sphereGeo = new THREE.SphereGeometry(r, 32, 32, -0.5, 1, Math.PI/2 - 0.4, 0.8);
-  const mirrorMat = new THREE.MeshStandardMaterial({
-    color: 0xe0e7ff, metalness: 0.85, roughness: 0.2,
-    side: THREE.BackSide
-  });
-  const m = new THREE.Mesh(sphereGeo, mirrorMat);
-  m.castShadow = true;
-  m.receiveShadow = true;
-  mirrorGroup.add(m);
-  const backMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.6 });
-  const back = new THREE.Mesh(sphereGeo, backMat);
-  back.scale.set(0.94, 0.94, 0.94);
-  mirrorGroup.add(back);
-  // Stand
-  const stand = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.3, 0.5, 4, 8),
-    new THREE.MeshStandardMaterial({ color: 0x475569 })
-  );
-  stand.position.set(0, -4, 0);
-  stand.castShadow = true;
-  mirrorGroup.add(stand);
-  // Mirror at left, facing right
-  mirrorGroup.position.set(-r + 0.5, 0, 0);
-  // Rotate so concave side faces right (+X)
-  mirrorGroup.rotation.y = Math.PI;
-  root.add(mirrorGroup);
-  // Wait — if I rotate the group by PI, the back side faces right. I want the concave (back-side rendered) to face right.
-  // Let's flip: don't rotate the group; instead the BackSide material shows the inner surface which by default faces -X (toward viewer left). Need it to face +X.
-  // Actually, the sphere geometry by default has its outer surface on the outside. BackSide material renders the inner surface (which we see from outside if we're inside the sphere).
-  // For a concave mirror facing +X (right), we need the sphere segment to be on the +X side of the sphere center.
-  // Let me rebuild this more simply:
-  while (mirrorGroup.children.length > 0) mirrorGroup.remove(mirrorGroup.children[0]);
-  // New sphere geometry: center at (-r, 0, 0); the segment we want is on the +X side
-  // Use thetaStart=0, thetaLength=0.8 to get a vertical strip on the +X side (when phiStart=pi/2-0.4)
-  const sphereGeo2 = new THREE.SphereGeometry(r, 32, 32, Math.PI/2 - 0.4, 0.8, Math.PI/2 - 0.4, 0.8);
-  // Wait — I need to actually flip the geometry. Let me reverse the rotation
-  mirrorGroup.rotation.y = 0;
-  const m2 = new THREE.Mesh(sphereGeo2, mirrorMat);
-  m2.castShadow = true;
-  m2.receiveShadow = true;
-  mirrorGroup.add(m2);
-  const back2 = new THREE.Mesh(sphereGeo2, backMat);
-  back2.scale.set(0.94, 0.94, 0.94);
-  mirrorGroup.add(back2);
-  mirrorGroup.add(stand);
-  mirrorGroup.position.set(-r + 0.5, 0, 0);
-  // Hmm, this is getting complex. Let me use a different approach: just put the mirror on the LEFT side of the scene, with the concave surface facing RIGHT.
-  // The default sphere segment created by the geometry I'm using faces -X (the inner concave side opens to the left). To make it open to the right, I rotate the group by PI.
-  // But after rotation, the BackSide-rendered surface (which is what we see from inside) now faces +X — exactly what we want.
-  mirrorGroup.rotation.y = Math.PI;
-  // Hmm wait — let me think again. The sphere segment is centered at the origin. Its inner (concave) side opens toward... the inside of the sphere. With BackSide material, we see the inner surface FROM the inside. So if the camera is on the +X side, and the segment is on the +X side of the sphere, we'd see the inner surface.
-  // I'll just trust the rendering and move on. The visual will be OK because of the symmetric shape.
-  // Focus and paper
-  const fX = -r + r/2;  // focal point at distance r/2 from mirror's vertex
-  // Mirror vertex (the closest point of the mirror to the focus) is at x=-r+0.5+r ≈ -r+1
-  // focal point is at x = -r+1 + r/2 = -r/2+1
-  const focusX = -r/2 + 1;
-  // Parallel rays from sun (right) to mirror (left), reflecting to focus
+  const mirror = createConcaveMirror(r, 1.5, 14);
+  mirror.rotation.y = Math.PI / 2;  // open toward +X (right)
+  mirror.position.set(-r + 1, 0, 0);
+  root.add(mirror);
+  // Compute the focal point: vertex is at the front of the dish (after rotation, +X direction)
+  // After createConcaveMirror rotates -PI/2 around Y and translates by -r+0.5, the local +X axis
+  // points toward world +Z. Adding another +PI/2 around Y rotation: local +X now points to world -X.
+  // Wait — easier: after all rotations, the dish opens toward +X (we just rotated it +PI/2).
+  // The vertex is at world (-r+1, 0, 0) + r*1 (in +X dir) = (-r+1+r, 0, 0) = (1, 0, 0)
+  // The focus is at r/2 from the vertex, in the +X direction (away from the mirror): (1 + r/2, 0, 0) = (4.5, 0, 0)
+  const focusX = -r + 1 + r;       // vertex position = (1, 0, 0)
+  const focusPoint = new THREE.Vector3(focusX + r/2, 0, 0);  // = (4.5, 0, 0)
+  // FIX #2: Compute actual surface intersection points for parallel rays from +X direction
   const rayCount = 5;
   for (let i = 0; i < rayCount; i++) {
-    const y = -4 + i * 2;
-    // From sun to mirror vertex area
-    const from = new THREE.Vector3(15, y, 0);
-    const hit = new THREE.Vector3(-r + 1, y, 0);  // approx vertex point on the mirror at height y
-    // After reflection, ray goes to focus at (focusX, 0, 0)
-    const to = new THREE.Vector3(focusX, 0, 0);
-    // Incident ray (yellow)
-    const ray1 = createLightArrow(from, hit, 0xfbbf24, 0.9, 0.08);
-    root.add(ray1);
-    // Reflected ray (orange)
-    const ray2 = createLightArrow(hit, to, 0xfb923c, 0.9, 0.08);
-    root.add(ray2);
+    const y = -4 + i * 2;  // -4, -2, 0, 2, 4
+    // Surface intersection: sphere centered at (-r+1, 0, 0) with radius r.
+    // A parallel ray at height y traveling in -X direction hits the surface at:
+    //   x = (-r+1) + sqrt(r² - y²)
+    // For r=7, y=4: x = -6 + 5.74 = -0.26
+    // For r=7, y=0: x = -6 + 7 = 1  (vertex)
+    const surfaceX = (-r + 1) + Math.sqrt(Math.max(0.01, r * r - y * y));
+    const hit = new THREE.Vector3(surfaceX, y, 0);  // ACTUAL surface point
+    const from = new THREE.Vector3(surfaceX + 10, y, 0);  // ray from +X direction
+    const to = focusPoint.clone();  // reflected ray converges to focus
+    const incident = createLightArrow(from, hit, 0xfbbf24, 0.95, 0.08);
+    root.add(incident);
+    const reflected = createLightArrow(hit, to, 0xfb923c, 0.95, 0.08);
+    root.add(reflected);
   }
-  // Paper at focus
-  const paper = createPaper(3, 3);
-  paper.position.set(focusX, 0, 0);
-  paper.rotation.y = Math.PI / 2;
+  // Paper at focus (held vertically so we see the burning face)
+  const paper = createPaper(3, 4);
+  paper.position.copy(focusPoint);
+  paper.rotation.y = Math.PI / 2;  // face the mirror (so the focused rays hit the paper's face)
   root.add(paper);
-  // Bright spot at focus (where rays meet)
-  const spot = new THREE.Mesh(
-    new THREE.SphereGeometry(0.4, 16, 16),
-    new THREE.MeshBasicMaterial({ color: 0xfde047 })
+  // FIX #4: Charred spot on the paper (darkening at the focus point — the burn mark)
+  const charSpot = new THREE.Mesh(
+    new THREE.CircleGeometry(0.4, 16),
+    new THREE.MeshBasicMaterial({ color: 0x1c0a00, transparent: true, opacity: 0.85 })
   );
-  spot.position.set(focusX, 0, 0);
-  root.add(spot);
-  // Halo
+  charSpot.position.copy(focusPoint);
+  charSpot.position.x -= 0.05;  // slightly in front of the paper
+  charSpot.rotation.y = Math.PI / 2;
+  root.add(charSpot);
+  // Glow around the burn spot (hot zone)
+  const glowSpot = new THREE.Mesh(
+    new THREE.SphereGeometry(0.5, 16, 16),
+    new THREE.MeshBasicMaterial({ color: 0xff6b00, transparent: true, opacity: 0.7 })
+  );
+  glowSpot.position.copy(focusPoint);
+  root.add(glowSpot);
+  // Bright outer halo
   const halo = new THREE.Mesh(
-    new THREE.SphereGeometry(1.2, 16, 16),
+    new THREE.SphereGeometry(1.3, 16, 16),
     new THREE.MeshBasicMaterial({ color: 0xfde047, transparent: true, opacity: 0.3 })
   );
-  halo.position.set(focusX, 0, 0);
+  halo.position.copy(focusPoint);
   root.add(halo);
-  // Smoke particles
-  const smokeParticles = createSmoke(new THREE.Vector3(focusX, 0.5, 0));
-  smokeParticles.forEach(p => root.add(p));
-  // Flames (small cones)
+  // FIX #4: ANIMATED FLICKERING FLAMES — proper multi-layer particle system
+  // Outer flame layer (orange-red, large, slow flicker)
   const flames = [];
-  for (let i = 0; i < 3; i++) {
-    const flame = new THREE.Mesh(
-      new THREE.ConeGeometry(0.15 + Math.random() * 0.1, 0.5 + Math.random() * 0.3, 6),
-      new THREE.MeshBasicMaterial({ color: 0xf97316, transparent: true, opacity: 0.9 })
+  for (let i = 0; i < 8; i++) {
+    const flameGroup = new THREE.Group();
+    // Outer (red-orange) flame
+    const outer = new THREE.Mesh(
+      new THREE.ConeGeometry(0.25 + Math.random() * 0.15, 0.9 + Math.random() * 0.4, 8),
+      new THREE.MeshBasicMaterial({ color: 0xff4500, transparent: true, opacity: 0.7 })
     );
-    flame.position.set(focusX + (Math.random() - 0.5) * 1.5, 0.4, (Math.random() - 0.5) * 1.5);
-    flame.userData.phase = Math.random() * Math.PI * 2;
-    flames.push(flame);
-    root.add(flame);
+    outer.position.y = 0.45;
+    flameGroup.add(outer);
+    // Inner (yellow) flame
+    const inner = new THREE.Mesh(
+      new THREE.ConeGeometry(0.15 + Math.random() * 0.08, 0.7 + Math.random() * 0.3, 8),
+      new THREE.MeshBasicMaterial({ color: 0xfde047, transparent: true, opacity: 0.9 })
+    );
+    inner.position.y = 0.35;
+    flameGroup.add(inner);
+    // Hottest core (white-yellow)
+    const core = new THREE.Mesh(
+      new THREE.ConeGeometry(0.07, 0.4, 8),
+      new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.95 })
+    );
+    core.position.y = 0.25;
+    flameGroup.add(core);
+    // Position around the burn spot
+    flameGroup.position.set(
+      focusPoint.x + (Math.random() - 0.5) * 1.2,
+      0,
+      (Math.random() - 0.5) * 1.2
+    );
+    flameGroup.userData.phase = Math.random() * Math.PI * 2;
+    flameGroup.userData.speed = 8 + Math.random() * 4;
+    flameGroup.userData.baseHeight = 0.45 + Math.random() * 0.3;
+    flames.push(flameGroup);
+    root.add(flameGroup);
   }
+  // Smoke particles
+  const smokeParticles = createSmoke(new THREE.Vector3(focusPoint.x, 1, 0));
+  smokeParticles.forEach(p => root.add(p));
+  // Label
+  function makeLabel(text, color, position, scale = 1.5) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 256; canvas.height = 128;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+    ctx.fillRect(0, 0, 256, 128);
+    ctx.fillStyle = '#' + color.toString(16).padStart(6, '0');
+    ctx.font = 'bold 56px sans-serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(text, 128, 64);
+    const tex = new THREE.CanvasTexture(canvas);
+    const mat = new THREE.SpriteMaterial({ map: tex, transparent: true });
+    const sprite = new THREE.Sprite(mat);
+    sprite.position.copy(position);
+    sprite.scale.set(scale, scale * 0.5, 1);
+    return sprite;
+  }
+  root.add(makeLabel('FOCUS', 0xfde047, new THREE.Vector3(focusPoint.x, 2.2, 0), 1.4));
+  root.add(makeLabel('PAPER BURNS!', 0xff4500, new THREE.Vector3(focusPoint.x, -2.5, 0), 1.6));
+  root.add(makeLabel('Concave Mirror', 0xfbcfe8, new THREE.Vector3(-r + 1, -5.5, 0), 1.6));
+  // FIX #4: Animation loop with realistic flickering
   root.userData.updater = (dt, t) => {
-    spot.scale.setScalar(1 + Math.sin(t * 3) * 0.2);
+    // Pulse the bright spot and glow
+    glowSpot.scale.setScalar(1 + Math.sin(t * 5) * 0.2);
+    glowSpot.material.opacity = 0.6 + Math.sin(t * 4) * 0.2;
     halo.material.opacity = 0.25 + Math.sin(t * 3) * 0.15;
     halo.scale.setScalar(1 + Math.sin(t * 2) * 0.1);
+    // Pulsing char spot (gets darker over time, then resets — like the paper is being consumed)
+    const charCycle = (t * 0.3) % 4;
+    if (charCycle < 3) {
+      charSpot.material.opacity = Math.min(0.95, 0.5 + charCycle * 0.15);
+      charSpot.scale.setScalar(1 + charCycle * 0.1);
+    } else {
+      charSpot.material.opacity = 0.95 - (charCycle - 3) * 0.45;
+      charSpot.scale.setScalar(1.3 - (charCycle - 3) * 0.3);
+    }
+    // Flickering flames — independent oscillation per flame + vertical dance
+    flames.forEach((f, idx) => {
+      const phase = f.userData.phase;
+      const speed = f.userData.speed;
+      // Height flickers
+      const heightScale = 0.7 + Math.abs(Math.sin(t * speed + phase)) * 0.6 + Math.sin(t * speed * 2.3 + phase) * 0.15;
+      f.scale.set(0.9 + Math.sin(t * speed * 0.7 + phase) * 0.15, heightScale, 0.9 + Math.cos(t * speed * 0.7 + phase) * 0.15);
+      // Sway side-to-side
+      f.rotation.z = Math.sin(t * speed * 0.5 + phase) * 0.2;
+      f.rotation.x = Math.cos(t * speed * 0.6 + phase) * 0.15;
+      // Opacity flicker
+      f.children.forEach((child, ci) => {
+        if (child.material) {
+          const baseOp = [0.7, 0.9, 0.95][ci] || 0.7;
+          child.material.opacity = baseOp + Math.sin(t * speed * 1.5 + phase + ci) * 0.15;
+        }
+      });
+    });
+    // Smoke rises
     smokeParticles.forEach(p => {
       p.userData.life += dt;
-      if (p.userData.life > 2.5) {
+      if (p.userData.life > 3) {
         p.userData.life = 0;
-        p.position.set(focusX + (Math.random() - 0.5) * 1, 0.5, 0);
+        p.position.set(focusPoint.x + (Math.random() - 0.5) * 1.5, 1, 0);
         p.material.opacity = 0.7;
         p.scale.setScalar(1);
       }
-      p.position.y = 0.5 + p.userData.life * 1.2;
-      p.position.x += (Math.random() - 0.5) * 0.05;
-      p.material.opacity = Math.max(0, 0.7 - p.userData.life * 0.28);
-      p.scale.setScalar(1 + p.userData.life * 0.4);
-    });
-    flames.forEach(f => {
-      f.scale.y = 1 + Math.sin(t * 8 + f.userData.phase) * 0.4;
-      f.material.opacity = 0.7 + Math.sin(t * 5 + f.userData.phase) * 0.3;
+      p.position.y = 1 + p.userData.life * 1.5;
+      p.position.x += (Math.random() - 0.5) * 0.06;
+      p.position.z += (Math.random() - 0.5) * 0.04;
+      p.material.opacity = Math.max(0, 0.7 - p.userData.life * 0.23);
+      p.scale.setScalar(1 + p.userData.life * 0.6);
     });
   };
-  camera.position.set(5, 5, 18);
-  camera.lookAt(-2, 0, 0);
+  camera.position.set(2, 4, 16);
+  camera.lookAt(0, 0, 0);
 };
 
 // BURN PAPER (CONVEX LENS) ---------------------------------------
 SCENE_BUILDERS.burn_lens = function(root) {
   root.add(createGround());
   // Sun on the left
-  const sun = createSun(new THREE.Vector3(-18, 6, 0), 2);
+  const sun = createSun(new THREE.Vector3(-15, 5, 0), 1.8);
   root.add(sun);
   // Convex lens at origin
   const lens = createConvexLens(4, 1.0);
   root.add(lens);
   // Focus on the right
   const f = 5;
+  const focusPoint = new THREE.Vector3(f, 0, 0);
   // Parallel rays from sun (left) → lens → focus
   const rayCount = 5;
   for (let i = 0; i < rayCount; i++) {
     const y = -3 + i * 1.5;
-    const from = new THREE.Vector3(-15, y, 0);
+    const from = new THREE.Vector3(-12, y, 0);
     const atLens = new THREE.Vector3(0, y, 0);
-    const to = new THREE.Vector3(f, 0, 0);
-    const ray1 = createLightArrow(from, atLens, 0xfbbf24, 0.9, 0.08);
+    const to = focusPoint.clone();
+    const ray1 = createLightArrow(from, atLens, 0xfbbf24, 0.95, 0.08);
     root.add(ray1);
-    const ray2 = createLightArrow(atLens, to, 0xfb923c, 0.9, 0.08);
+    const ray2 = createLightArrow(atLens, to, 0xfb923c, 0.95, 0.08);
     root.add(ray2);
   }
   // Paper at focus
-  const paper = createPaper(2.5, 2.5);
-  paper.position.set(f, 0, 0);
+  const paper = createPaper(2.8, 3.2);
+  paper.position.copy(focusPoint);
   paper.rotation.y = Math.PI / 2;
   root.add(paper);
-  // Bright spot
-  const spot = new THREE.Mesh(
-    new THREE.SphereGeometry(0.35, 16, 16),
-    new THREE.MeshBasicMaterial({ color: 0xfde047 })
+  // FIX #4: Charred spot on the paper (darkening at the focus point — the burn mark)
+  const charSpot = new THREE.Mesh(
+    new THREE.CircleGeometry(0.35, 16),
+    new THREE.MeshBasicMaterial({ color: 0x1c0a00, transparent: true, opacity: 0.85 })
   );
-  spot.position.set(f, 0, 0);
-  root.add(spot);
-  // Halo
+  charSpot.position.copy(focusPoint);
+  charSpot.position.x -= 0.05;
+  charSpot.rotation.y = Math.PI / 2;
+  root.add(charSpot);
+  // Glow around the burn spot
+  const glowSpot = new THREE.Mesh(
+    new THREE.SphereGeometry(0.45, 16, 16),
+    new THREE.MeshBasicMaterial({ color: 0xff6b00, transparent: true, opacity: 0.7 })
+  );
+  glowSpot.position.copy(focusPoint);
+  root.add(glowSpot);
+  // Bright outer halo
   const halo = new THREE.Mesh(
-    new THREE.SphereGeometry(1, 16, 16),
+    new THREE.SphereGeometry(1.1, 16, 16),
     new THREE.MeshBasicMaterial({ color: 0xfde047, transparent: true, opacity: 0.3 })
   );
-  halo.position.set(f, 0, 0);
+  halo.position.copy(focusPoint);
   root.add(halo);
-  // Smoke
-  const smokeParticles = createSmoke(new THREE.Vector3(f, 0.5, 0));
-  smokeParticles.forEach(p => root.add(p));
-  // Flames
+  // FIX #4: ANIMATED FLICKERING FLAMES — multi-layer particle system
   const flames = [];
-  for (let i = 0; i < 3; i++) {
-    const flame = new THREE.Mesh(
-      new THREE.ConeGeometry(0.12 + Math.random() * 0.08, 0.4 + Math.random() * 0.25, 6),
-      new THREE.MeshBasicMaterial({ color: 0xf97316, transparent: true, opacity: 0.9 })
+  for (let i = 0; i < 7; i++) {
+    const flameGroup = new THREE.Group();
+    const outer = new THREE.Mesh(
+      new THREE.ConeGeometry(0.22 + Math.random() * 0.12, 0.85 + Math.random() * 0.35, 8),
+      new THREE.MeshBasicMaterial({ color: 0xff4500, transparent: true, opacity: 0.7 })
     );
-    flame.position.set(f + (Math.random() - 0.5) * 1.2, 0.35, (Math.random() - 0.5) * 1.2);
-    flame.userData.phase = Math.random() * Math.PI * 2;
-    flames.push(flame);
-    root.add(flame);
+    outer.position.y = 0.42;
+    flameGroup.add(outer);
+    const inner = new THREE.Mesh(
+      new THREE.ConeGeometry(0.13 + Math.random() * 0.07, 0.65 + Math.random() * 0.25, 8),
+      new THREE.MeshBasicMaterial({ color: 0xfde047, transparent: true, opacity: 0.9 })
+    );
+    inner.position.y = 0.32;
+    flameGroup.add(inner);
+    const core = new THREE.Mesh(
+      new THREE.ConeGeometry(0.06, 0.35, 8),
+      new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.95 })
+    );
+    core.position.y = 0.22;
+    flameGroup.add(core);
+    flameGroup.position.set(
+      focusPoint.x + (Math.random() - 0.5) * 1.0,
+      0,
+      (Math.random() - 0.5) * 1.0
+    );
+    flameGroup.userData.phase = Math.random() * Math.PI * 2;
+    flameGroup.userData.speed = 8 + Math.random() * 4;
+    flames.push(flameGroup);
+    root.add(flameGroup);
   }
+  // Smoke particles
+  const smokeParticles = createSmoke(new THREE.Vector3(f, 1, 0));
+  smokeParticles.forEach(p => root.add(p));
+  // Label
+  function makeLabel(text, color, position, scale = 1.5) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 256; canvas.height = 128;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+    ctx.fillRect(0, 0, 256, 128);
+    ctx.fillStyle = '#' + color.toString(16).padStart(6, '0');
+    ctx.font = 'bold 56px sans-serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(text, 128, 64);
+    const tex = new THREE.CanvasTexture(canvas);
+    const mat = new THREE.SpriteMaterial({ map: tex, transparent: true });
+    const sprite = new THREE.Sprite(mat);
+    sprite.position.copy(position);
+    sprite.scale.set(scale, scale * 0.5, 1);
+    return sprite;
+  }
+  root.add(makeLabel('FOCUS', 0xfde047, new THREE.Vector3(f, 2, 0), 1.4));
+  root.add(makeLabel('PAPER BURNS!', 0xff4500, new THREE.Vector3(f, -2.3, 0), 1.6));
+  root.add(makeLabel('Convex Lens', 0x7dd3fc, new THREE.Vector3(0, -3, 0), 1.5));
   root.userData.updater = (dt, t) => {
-    spot.scale.setScalar(1 + Math.sin(t * 3) * 0.2);
+    glowSpot.scale.setScalar(1 + Math.sin(t * 5) * 0.2);
+    glowSpot.material.opacity = 0.6 + Math.sin(t * 4) * 0.2;
     halo.material.opacity = 0.25 + Math.sin(t * 3) * 0.15;
+    halo.scale.setScalar(1 + Math.sin(t * 2) * 0.1);
+    // Char spot cycle (gets darker, then resets — like the paper is being consumed)
+    const charCycle = (t * 0.3) % 4;
+    if (charCycle < 3) {
+      charSpot.material.opacity = Math.min(0.95, 0.5 + charCycle * 0.15);
+      charSpot.scale.setScalar(1 + charCycle * 0.1);
+    } else {
+      charSpot.material.opacity = 0.95 - (charCycle - 3) * 0.45;
+      charSpot.scale.setScalar(1.3 - (charCycle - 3) * 0.3);
+    }
+    flames.forEach(f => {
+      const phase = f.userData.phase;
+      const speed = f.userData.speed;
+      const heightScale = 0.7 + Math.abs(Math.sin(t * speed + phase)) * 0.6 + Math.sin(t * speed * 2.3 + phase) * 0.15;
+      f.scale.set(0.9 + Math.sin(t * speed * 0.7 + phase) * 0.15, heightScale, 0.9 + Math.cos(t * speed * 0.7 + phase) * 0.15);
+      f.rotation.z = Math.sin(t * speed * 0.5 + phase) * 0.2;
+      f.rotation.x = Math.cos(t * speed * 0.6 + phase) * 0.15;
+      f.children.forEach((child, ci) => {
+        if (child.material) {
+          const baseOp = [0.7, 0.9, 0.95][ci] || 0.7;
+          child.material.opacity = baseOp + Math.sin(t * speed * 1.5 + phase + ci) * 0.15;
+        }
+      });
+    });
     smokeParticles.forEach(p => {
       p.userData.life += dt;
-      if (p.userData.life > 2.5) {
+      if (p.userData.life > 3) {
         p.userData.life = 0;
-        p.position.set(f + (Math.random() - 0.5) * 0.8, 0.5, 0);
+        p.position.set(f + (Math.random() - 0.5) * 1.2, 1, 0);
         p.material.opacity = 0.7;
         p.scale.setScalar(1);
       }
-      p.position.y = 0.5 + p.userData.life * 1.2;
-      p.material.opacity = Math.max(0, 0.7 - p.userData.life * 0.28);
-      p.scale.setScalar(1 + p.userData.life * 0.4);
-    });
-    flames.forEach(f => {
-      f.scale.y = 1 + Math.sin(t * 8 + f.userData.phase) * 0.4;
-      f.material.opacity = 0.7 + Math.sin(t * 5 + f.userData.phase) * 0.3;
+      p.position.y = 1 + p.userData.life * 1.5;
+      p.position.x += (Math.random() - 0.5) * 0.06;
+      p.material.opacity = Math.max(0, 0.7 - p.userData.life * 0.23);
+      p.scale.setScalar(1 + p.userData.life * 0.6);
     });
   };
-  camera.position.set(0, 5, 18);
+  camera.position.set(0, 4, 16);
   camera.lookAt(0, 0, 0);
 };
 
