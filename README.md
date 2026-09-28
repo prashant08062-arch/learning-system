@@ -19,97 +19,130 @@ No server required — runs entirely from the file system.
 |---------|---------|-------|------|
 | 🧮 Mathematics | The Baudhāyana–Pythagoras Theorem | 8 (sub-lectures 2.1–2.2 also work for Class 7) | SVG |
 | 🌍 Geography | World Geography: Some Glimpses | 6–8 | Image |
-| ⚛️ **Physics** | **Light: Mirrors and Lenses** | **8** (with Class 6–7 scaffolding) | SVG |
+| 📜 **History** | **India's Long Road to Independence** *(new!)* | **8** (story-form for 5-7 year olds) | Image |
+| ⚛️ Physics | Light: Mirrors and Lenses | 8 (with Class 6-7 scaffolding) | SVG |
 | 🌊 3D Water Body Atlas | 15 animated geography terms | 6–8 | Three.js (standalone) |
-| 🔬 **3D Mirror & Lens Atlas** | **10 interactive physics scenes** | 6–8 | Three.js (standalone) |
+| 🔬 3D Mirror & Lens Atlas | 10 interactive physics scenes | 6–8 | Three.js (standalone) |
 
 For a pedagogical review of Maths, Geography, and Physics chapters against the NCERT Class 6–7 syllabus, please see **`CLASS_6_7_SUITABILITY.md`**.
 
+## 📜 What's in the History Chapter — *India's Long Road to Independence* (NEW)
+
+Based on NCERT Exploring Society Grade 8 Part 2, Chapter 2. A 50-page chapter compressed into **12 story-form lectures** with **140+ narrated beats**, written as if telling a long story to a 5-7 year old.
+
+### Special: "Before We Begin" Story-Time Vocabulary Section
+
+A dedicated assets section at the top of the Notes tab that explains every technical term BEFORE the student starts the lectures. Written in story-form ("Imagine we are sitting on a soft rug, with a cup of warm milk, and I am telling you these words one by one"). 12 terms covered:
+
+1. 🌍 Our Country — India
+2. 👑 The British and the East India Company
+3. ⚔️ The Great Uprising of 1857
+4. 🗣️ Freedom, Independence, and Swaraj
+5. 🏛️ The Indian National Congress
+6. 🕊️ Mahatma Gandhi and Non-Violence
+7. 🛍️ Swadeshi and Boycott
+8. ⚔️ Revolutionaries
+9. 🎶 Vande Mataram — Our Song
+10. 🇵🇰 Pakistan and the Partition
+11. 🚂 Princely States
+12. 🕯️ Martyr
+
+### 12 Story-Form Lectures (140+ beats)
+
+| # | Lecture | Period | Images |
+|---|---|---|---|
+| 1 | The Queen Takes Over | 1858 | 1 |
+| 2 | The Good Teachers | Reform Movements + Other Influences | 1 |
+| 3 | A Big Meeting in Bombay | 1885 — Rise of Congress | 3 |
+| 4 | Our Own Things! | 1905 — Swadeshi, Boycott, Bharat Mata | 3 |
+| 5 | The Brave Bomb-Throwers | Revolutionaries + Cellular Jail | 3 |
+| 6 | Home Means Freedom | 1916 — Home Rule + Lucknow Pact | 2 |
+| 7 | A Sad Day in Amritsar | 1919 — Jallianwala Bagh + Non-Coop | 2 |
+| 8 | Brave Bhagat Singh | HSRA + revolutionaries | 1 |
+| 9 | Walking to the Sea | 1930 — Purna Swaraj + Salt March | 5 |
+| 10 | The Brave Soldier Subhas | WWII + INA + Azad Hind | 1 |
+| 11 | Do or Die! | 1942 — Quit India | 1 |
+| 12 | A New Country is Born | 1947 — Partition + Independence | 2 |
+
+### Real-Life Story Scenarios (4)
+
+- 🎶 The Story of Vande Mataram — Our National Song
+- 🚶 The Story of the Salt March — Walking 380 km for a Pinch of Salt
+- 🌹 The Story of Brave Bhagat Singh — A Young Hero
+- 🇮🇳 The Story of 15 August 1947 — The Day India Became Free
+
+### Practice Material
+
+- **7 guided-practice problems** with step-by-step answer validation (e.g., "When did India become free?", "What does 'Vande Mataram' mean?")
+- **12 practice cards** with reveal-answer buttons (kid-friendly questions)
+- **15 self-test questions** with worked-out answers covering the entire timeline 1858-1947
+
+### Comprehensive Key Notes
+
+The Notes tab includes:
+- "Before We Begin" story-time vocabulary section (12 terms)
+- Timeline at a Glance (35+ events from 1857 to 1950)
+- Reform Movements table
+- Key Leaders of the Freedom Struggle (19 leaders)
+- Major Movements and Their Methods (6 movements)
+- Important Acts and Laws (9 acts)
+- Our National Symbols (Vande Mataram, Jana Gana Mana, Tricolour)
+- Snapshots — Key Takeaways
+- Books and Ideas Mentioned in the Chapter
+
+### Images
+
+**25 figures** extracted from the original textbook PDF, including:
+- Procession of women in Bombay during the 1942 Quit India Movement
+- Bankim Chandra Chattopadhyay, Swami Vivekananda, A.O. Hume
+- Tilak, Birsa Munda, the Lal-Bal-Pal trio
+- 'Bharat Mata' painting by Abanindranath Tagore
+- Khudiram Bose, the HSRA revolutionaries, Cellular Jail
+- Mahatma Gandhi spinning khadi
+- Jallianwala Bagh Martyrs' Memorial
+- Bhagat Singh, Chandrashekhar Azad, Ashfaqulla Khan
+- Lahore Session of the Congress (1929)
+- The Salt (Dandi) March (1930)
+- Sarojini Naidu, Khan Abdul Ghaffar Khan
+- Round Table Conference (1931)
+- Subhas Chandra Bose
+- Quit India stamp
+- Sardar Patel
+- Partition refugee train (1947)
+
 ## What's in the Physics Chapter — *Light: Mirrors and Lenses* (Grade 8, enhanced for Class 6-7)
 
-Based on NCERT Curiosity Grade 8 Science Chapter 10. The Grade 8 content is **preserved verbatim** — every concept the textbook covers is still there. Around it, we added layered scaffolding so Class 6-7 students can access the same concepts.
-
-### Layered scaffolding for Class 6-7 access
-
-1. **3D Mirror & Lens Atlas** (`mirrors_lenses_3d_atlas.html`) — 10 interactive Three.js scenes:
-   - Plane mirror, Concave mirror, Convex mirror
-   - Convex lens, Concave lens
-   - Laws of reflection (with animated rays)
-   - Burning paper with concave mirror (with flames + smoke)
-   - Burning paper with convex lens
-   - Dentist's mirror (concave, close-up)
-   - Side-view mirror (convex, in a car)
-
-   Each scene has:
-   - A "👶 In one line (for Class 6-7)" simple summary at the top
-   - The formal Grade 8 definition
-   - A real-world example
-   - A "What to watch in 3D" activity prompt
-   - Animated light rays (yellow = incident, orange = reflected)
-   - Labels, color legend, on-screen text
-
-2. **Class 6-7 Quick Reference** — A 18-row glossary table at the top of the Notes tab. Every technical term (concave, convex, converge, diverge, focus, incident, normal, lateral inversion, etc.) is explained in ONE LINE with a real-world example.
-
-3. **Additional SVG elements** in each lecture showing intermediate visual states:
-   - Lecture 1: Side-by-side spoon analogy (inside = concave, back = convex)
-   - Lecture 2: Erect vs Inverted arrow comparison clearly labeled
-   - Lecture 3: The special "angle = 0" case (light retraces its path)
-   - Lecture 4: Mirror vs Lens comparison (bounce back vs pass through)
-
-4. **Additional beats** with simple analogies:
-   - Lecture 1 beat 2: "What is a mirror?" — explains reflection before introducing curved mirrors
-   - Lecture 4 beat 2: "Mirror = bounce back vs Lens = pass through" — contrasts the two before going into types
-
-### 4 SVG-animated lectures (50 narrated beats)
-
-1. **10.1 Spherical Mirrors** (10 beats) — spoon activity, concave vs convex, schematic representations, hollow-sphere origin
-2. **10.2 Images in Mirrors** (10 beats) — close vs far, real-life uses (torch, dental, side-view, road-safety)
-3. **10.3 Laws of Reflection** (14 beats) — incident ray, reflected ray, normal, angle of incidence, angle of reflection, Law 1 (i = r), Law 2 (coplanar), parallel beams, burning paper
-4. **10.4 Lenses** (16 beats) — water-drop lens, convex vs concave, viewing through lenses, converging/diverging, eyeglasses/camera/eye
-
-### 4 real-life SVG scenarios
-- 🚗 Why Objects in the Mirror Are Closer Than They Appear
-- 🦷 How the Dentist Sees Inside Your Mouth
-- ☀️ Burning Paper with Sunlight — Solar Concentrators
-- 🔍 Why a Magnifying Glass Makes Letters Bigger
-
-### Practice material
-- 5 guided-practice problems with step-by-step answer validation
-- 8 practice cards with reveal-answer buttons
-- 10 self-test questions with worked-out answers
+Based on NCERT Curiosity Grade 8 Science Chapter 10. The Grade 8 content is **preserved verbatim** — every concept the textbook covers is still there. Around it, layered scaffolding makes it accessible to Class 6-7 students via:
+1. **3D Mirror & Lens Atlas** (`mirrors_lenses_3d_atlas.html`) — 10 interactive Three.js scenes
+2. **Class 6-7 Quick Reference** glossary (18 terms) at the top of the Notes tab
+3. Additional SVG elements and beats with simple analogies
 
 ## What's in the 3D Water Body Atlas
 
-A standalone HTML page (`water_body_atlas.html`) that visualises **15 water-body terms** as animated 3D scenes using Three.js (loaded from CDN). Designed for classroom projection.
-
-**Coastal inlets:** Sea, Gulf, Bay, Strait, Canal
-**Ocean floor:** Trench, Ridge, Reef, Atoll
-**Land–water:** Isthmus, Peninsula, Cape, Delta, Estuary, Lagoon
-
-Each scene animates the activity: ships threading through straits, lock gates opening in canals, submersibles descending trenches, magma rising from ridges, coral swaying with fish, and more.
+A standalone HTML page (`water_body_atlas.html`) that visualises **15 water-body terms** as animated 3D scenes using Three.js. Designed for classroom projection.
 
 ## System Architecture
 
 ```
 learning_system/
-├── index.html                  # Main entry point (home screen + chapter screen + two atlas launchers)
-├── water_body_atlas.html       # Standalone 3D Water Body Atlas (Three.js)
-├── mirrors_lenses_3d_atlas.html # Standalone 3D Mirror & Lens Atlas (Three.js) — NEW
-├── CLASS_6_7_SUITABILITY.md    # Pedagogical review + enhancement approach
-├── css/
-│   └── style.css               # All styles (shared across all chapters + physics light-ray animations)
+├── index.html                   # Main entry point (home screen + chapter screen + two atlas launchers)
+├── water_body_atlas.html        # Standalone 3D Water Body Atlas (Three.js)
+├── mirrors_lenses_3d_atlas.html # Standalone 3D Mirror & Lens Atlas (Three.js)
+├── CLASS_6_7_SUITABILITY.md     # Pedagogical review + enhancement approach
+├── css/style.css                # All styles (shared across all chapters + physics light-ray animations)
 ├── js/
-│   ├── tts.js                  # Text-to-Speech engine (shared)
-│   ├── globe.js                # 3D Earth globe viewer (for geography chapter)
-│   └── app.js                  # Main application logic (shared)
-├── vendor/
-│   └── three.min.js            # Three.js (MIT) bundled for offline use
+│   ├── tts.js                   # Text-to-Speech engine (shared)
+│   ├── globe.js                 # 3D Earth globe viewer (for geography chapter)
+│   └── app.js                   # Main application logic (shared)
+├── vendor/three.min.js          # Three.js (MIT) bundled for offline use
 └── data/
-    ├── catalog.js              # Master list of subjects & chapters (REGISTER HERE)
+    ├── catalog.js               # Master list of subjects & chapters (REGISTER HERE)
     ├── maths/baudhayana_pythagoras/chapter.js
-    ├── geography/world_geography/chapter.js (+ images/ subfolder)
-    ├── physics/light_mirrors_lenses/chapter.js    ← Grade 8 + Class 6-7 scaffolding
-    ├── history/, civics/, economics/, chemistry/, biology/   (empty — add here)
+    ├── geography/world_geography/chapter.js (+ 54 images in images/ subfolder)
+    ├── history/india_independence/chapter.js    ← NEW (140 beats, 25 figures)
+    │   └── images/                                 ← 25 extracted PDF figures
+    ├── physics/light_mirrors_lenses/chapter.js   ← Grade 8 + Class 6-7 scaffolding
+    ├── civics/, economics/, chemistry/, biology/   (empty — add here)
 ```
 
 ## How to Add a New Chapter
@@ -120,29 +153,13 @@ data/<subject>/<chapter_slug>/
 ```
 
 ### Step 2: Create the `chapter.js` file
-Inside that folder, create `chapter.js` defining `window.CHAPTER_DATA`. See the physics chapter (`data/physics/light_mirrors_lenses/chapter.js`) for a complete working example with the layered scaffolding pattern.
+Inside that folder, create `chapter.js` defining `window.CHAPTER_DATA`. See the History chapter (`data/history/india_independence/chapter.js`) for a complete working example with the story-form pattern + "Before We Begin" vocabulary section.
 
 ### Step 3: Register the chapter in `data/catalog.js`
 Add the chapter to the appropriate subject's `chapters` array.
 
 ### Done!
 Refresh `index.html` — your new chapter will appear under its subject.
-
-## Validation types for Guided Practice
-
-| Type | Description | Example |
-|------|-------------|---------|
-| `match` | Match against a list of accepted answers | `{ type: 'match', answers: ['india', 'india is larger'] }` |
-| `regex` | Match a regular expression | `{ type: 'regex', pattern: '^1526', flags: 'i' }` |
-| `pureNum` | Match a pure number | `{ type: 'pureNum', value: 25 }` |
-| `numUnit` | Match number + unit | `{ type: 'numUnit', value: 5, unit: 'cm\\|centimeter' }` |
-| `formula` | Match a math formula (auto-normalized) | `{ type: 'formula', forms: ['a^2+b^2=c^2', 'c^2=a^2+b^2'] }` |
-
-## Chapter types
-
-- **`svg`** — Use for math, physics, chemistry (diagrammatic). The `svg` field contains SVG markup; elements with `class="el" data-beat="N"` appear at beat N.
-- **`image`** — Use for geography, history, biology (photos, maps). The `images` array lists image files; one image is shown per beat (distributed evenly).
-- **`globe`** — Use for geography chapters that need a 3D Earth. Each lecture has a `globe-container` div; the GlobeViewer (Three.js) renders it.
 
 ## Features
 
@@ -157,22 +174,7 @@ Refresh `index.html` — your new chapter will appear under its subject.
 - 🌈 **Color-coded subjects** — each subject has its own accent color
 - 🌊 **3D Water Body Atlas** — 15 animated geography terms
 - 🔬 **3D Mirror & Lens Atlas** — 10 interactive physics scenes with simple analogies for Class 6-7
-
-## Adding New Subjects
-
-To add a new subject (e.g., "Computer Science"), just add it to the `subjects` array in `data/catalog.js`:
-
-```javascript
-{
-  id: 'computer_science',
-  name: 'Computer Science',
-  icon: '💻',
-  color: '#22d3ee',
-  chapters: []
-}
-```
-
-Then create the folder `data/computer_science/` and start adding chapters.
+- 📜 **History chapter** with story-form narration and "Before We Begin" vocabulary section
 
 ## Browser Compatibility
 

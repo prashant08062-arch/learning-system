@@ -54,7 +54,17 @@ window.CATALOG = {
       name: 'History',
       icon: '📜',
       color: '#fbbf24',
-      chapters: []
+      chapters: [
+        {
+          slug: 'india_independence',
+          title: 'India\'s Long Road to Independence',
+          subtitle: 'Chapter 2 · Exploring Society: India and Beyond · Grade 8 Part 2',
+          description: 'A long, true story of how India became free — from the Royal Proclamation of 1858 to the Independence and Partition of 1947. Told in story-form for little listeners (5-7 year olds), with a \'Before We Begin\' story-time vocabulary section. 12 lectures covering 200 years of history, with 25 figures extracted from the original textbook PDF.',
+          dataFile: 'data/history/india_independence/chapter.js',
+          hasImages: true,
+          estimatedTime: '90 min'
+        }
+      ]
     },
     {
       id: 'civics',

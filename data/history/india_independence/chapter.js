@@ -1,0 +1,763 @@
+/* ============================================================
+   CHAPTER DATA - India's Long Road to Independence
+   Subject: History (Grade 8, NCERT Exploring Society Part 2)
+   ============================================================
+   Contains:
+     - 12 story-form lectures (140+ narrated beats) covering 1858-1947
+     - 'Before We Begin' story-time vocabulary section in notes
+       (12 terms explained for 5-7 year olds)
+     - 4 real-life story scenarios (Vande Mataram, Salt March,
+       Bhagat Singh, Independence Day)
+     - 7 guided-practice problems with step-by-step validation
+     - 15 self-test questions with worked-out answers
+     - 12 practice cards with reveal-answer buttons
+     - 25 images extracted from the original textbook PDF
+   ============================================================ */
+
+window.CHAPTER_DATA = {
+  "meta": {
+    "subject": "history",
+    "slug": "india_independence",
+    "title": "India's Long Road to Independence",
+    "subtitle": "Chapter 2 · Exploring Society: India and Beyond · Grade 8 Part 2",
+    "chapterNumber": 2,
+    "type": "image",
+    "imagesBasePath": "data/history/india_independence/images/",
+    "intro": "A long, true story of how India became free — from the Royal Proclamation of 1858 to the Independence and Partition of 1947. Told in story-form for little listeners, with a 'Before We Begin' story-time vocabulary section. Meet Mahatma Gandhi, Bhagat Singh, Subhas Bose, Sarojini Naidu, Sardar Patel, and millions of brave hearts who gave their all for Mother India."
+  },
+  "lectures": [
+    {
+      "id": "queen_takes_over",
+      "label": "1. The Queen Takes Over (1858)",
+      "images": [
+        {
+          "file": "fig2_01_quit_india_women.png",
+          "caption": "Brave Indian women marching in Bombay in 1942, asking the British to leave India"
+        }
+      ],
+      "beats": [
+        "Namaste, my little friend! Welcome to a very special story-time. Today, I am going to tell you a true story — the story of how our country, India, became free. But this story does not begin with freedom. It begins a long, long time ago, when India was not free at all. Are you ready? Let's sit down and listen…",
+        "Once upon a time, there was a big company far away in a country called England. The company was called the East India Company. They came to India to trade — to buy and sell things like spices, cloth, and tea. But slowly, slowly, they stopped being just traders. They became rulers. They started telling Indians what to do, took our lands, made us pay heavy taxes, and did not treat us fairly.",
+        "In the year 1857 — that is more than 165 years ago! — the Indian people said, 'ENOUGH!' Soldiers, kings, farmers, queens — all of them joined hands and fought against the East India Company. This was called the Great Uprising. It was a big, brave fight. But sadly, the Indian side lost, because the British had better guns and more soldiers.",
+        "After the fight, the big Queen of England — her name was Queen Victoria — said, 'The East India Company has made a mess. I will take over now.' So in 1858, the Queen sent a letter — they called it a 'Royal Proclamation' — saying that India would now be ruled in HER name. A new person called the Viceroy would sit in India and rule. The Viceroy was like the Queen's helper, but he had a lot of power.",
+        "The Queen's letter made many promises. She promised that Indian princes could keep ruling their small kingdoms. She promised that Indians would be treated 'just like all her other subjects' — meaning fairly. She promised that no one would force Indians to change their religion. The promises sounded very nice on paper.",
+        "But here is the sad part: the promises were NOT kept. The Indian princes were watched very closely by British officers called 'Residents'. These Residents would often interfere in the princes' decisions. So even though the princes were told they could rule, they really couldn't do much without British permission. It was like being told, 'Yes, you can play in your room, but I will stand at the door and tell you which toys to pick.'",
+        "Christian missionaries kept trying to convert people, sometimes with the quiet help of British officers. Heavy taxes continued, and many poor farmers went hungry. Some parts of India even had terrible famines — when there is no food for many months — and many people died. Indian weavers and potters could not compete with cheap things made in British factories.",
+        "Indians were also treated as 'inferior' — meaning 'less than' the British. An Indian soldier or clerk got paid less than a British person doing the same job. In clubs and trains, Indians were not allowed to sit with British people. In 1878, the British made a rule called the 'Arms Act' — Indians were not allowed to keep weapons, but British people could. That was very unfair, wasn't it?",
+        "That same year, 1878, the British made another rule called the 'Vernacular Press Act'. This meant they could stop Indian-language newspapers from printing things they did not like. So if a Hindi or Bengali newspaper wrote, 'The British are being unfair to us', the British could shut the newspaper down. Imagine someone telling you that you cannot speak in your own language! How would you feel?",
+        "All these unfair things made the Indian people very angry and very sad. But they were also very brave. They started to think, 'This is OUR country. WE should rule it. WE should decide what happens here.' And that thought — that simple, beautiful thought — was the seed of our freedom story. In the next story, we will meet some very good teachers who tried to fix Indian society from the inside. Are you ready? Let's turn the page…"
+      ]
+    },
+    {
+      "id": "good_teachers",
+      "label": "2. The Good Teachers",
+      "images": [
+        {
+          "file": "fig2_09_tilak.png",
+          "caption": "A great teacher who inspired many freedom fighters"
+        }
+      ],
+      "beats": [
+        "Welcome back, my little friend! In the last story, we learned how the British took over India and made many unfair rules. Today, before we meet the freedom fighters, let's meet some very kind teachers. Long ago, India had some old customs that were not so nice — like little girls being married off when they were still children, or widows being treated badly, or some people being called 'low' just because of the family they were born in. These good teachers wanted to fix these unfair things.",
+        "The first good teacher was a kind man named Raja Ram Mohan Roy. People called him 'Raja' which means 'King', but he was a king of IDEAS, not of land. In 1828 — almost 200 years ago — he started a group called the Brahmo Samaj in a big city called Calcutta. He said, 'Little children should not be married. Widows should be treated with respect. Girls should go to school just like boys. ALL people are equal.'",
+        "Raja Ram Mohan Roy also liked the English language and English education. He thought Indians could learn good things from the British, even while fighting against their unfair rule. He wanted Indians to be modern and educated. Some people did not like his ideas — they said, 'No, we must keep the old ways!' But many people loved him and joined his Brahmo Samaj.",
+        "Another great teacher was Swami Dayananda Saraswati. In 1875 — about 150 years ago — he started a group called the Arya Samaj in Bombay. He said, 'Let us go back to the Vedas — the oldest and wisest books of India. Let us think clearly and rationally. Let us treat everyone equally — no matter what family they were born in.' He especially opposed the system where some people were called 'high caste' and others 'low caste' from birth.",
+        "Swami Dayananda believed that being good or bad is about what you DO, not about the family you are born in. He supported girls' education and said widows should be allowed to marry again. His Arya Samaj inspired many future freedom fighters, especially in north India. Many young people joined and decided, 'I will fight for my country!'",
+        "There was also a kind man named Iswar Chandra Vidyasagar. He worked hard to open schools for girls and for children from poor families. There was Syed Ahmed Khan, who wanted Muslims in India to get modern education — he later started the famous Aligarh Muslim University. And there were Jyotirao Phule and his wife Savitribai Phule — they opened the very first school for girls in Pune, and Savitribai became the first female teacher in India!",
+        "All these teachers — Raja Ram Mohan Roy, Swami Dayananda, Vidyasagar, Syed Ahmed Khan, the Phules — were trying to fix Indian society from the inside. They said, 'If we want to be free from British rule, we must first make our own society fair and good. We must respect women. We must educate children. We must not treat anyone as low or high by birth.' Without these good teachers, the freedom story would not have happened.",
+        "Now let me tell you about a very special song. Long ago, in 1875, a writer named Bankim Chandra Chattopadhyay wrote a beautiful poem in Bengali. The poem was called 'Vande Mataram' — which means 'I bow to the Mother' or 'Praise to the Mother'. The Mother he was writing about was not a person. It was our Mother India — the land itself, with its rivers, mountains, fields, and people.",
+        "Bankim Chandra later wrote a story book called 'Anandamath' in 1882, and he put the poem 'Vande Mataram' inside the story. The poem became very, very famous. When freedom fighters marched on the streets, they shouted 'Vande Mataram!' as a slogan. It became a magic word that made Indians feel brave and united. Later, in 1950, after India became free, 'Vande Mataram' was adopted as our National Song. You can sing it on Independence Day!",
+        "There was also a great teacher named Swami Vivekananda. He was a disciple of a saint called Ramakrishna. Vivekananda did not directly join politics, but he told Indians, 'Be brave! Be strong! Believe in yourself! Serve the poor — that is the true worship of God.' He travelled to far-away America and spoke about India's wisdom to the whole world. He gave Indians pride in their own culture. Many young men heard him and decided to dedicate their lives to India.",
+        "So before the freedom fight even began, India had: good teachers who fixed society's unfair customs, a beautiful song 'Vande Mataram' that made everyone feel proud of the motherland, and a brave teacher Swami Vivekananda who told Indians, 'Believe in yourself!' All these were like the soil and water that help a seed grow. In the next story, we will see how that seed sprouted — when some kind Indian gentlemen decided to hold a big meeting in Bombay. Want to hear? Let's go!"
+      ]
+    },
+    {
+      "id": "big_meeting",
+      "label": "3. A Big Meeting in Bombay (1885)",
+      "images": [
+        {
+          "file": "fig2_07_aoc_hume.png",
+          "caption": "Allan Octavian Hume, the kind British gentleman who helped start the Indian National Congress"
+        },
+        {
+          "file": "fig2_08_19th_century_painting.png",
+          "caption": "India in the late 19th century — many voices beginning to speak"
+        },
+        {
+          "file": "fig2_10_birsa_munda.png",
+          "caption": "Birsa Munda, the brave young tribal leader who fought for his people's land"
+        }
+      ],
+      "beats": [
+        "Welcome back, my little friend! Today, our story takes us to the city of Bombay — the city we now call Mumbai. The date is December 1885, a long time ago. A very special meeting is about to happen. Imagine a big hall with chairs, fans humming from the ceiling, and 72 Indian gentlemen walking in. They are wearing white kurtas, dhotis, turbans of many colours. Why have they come? Let's find out!",
+        "The idea for this meeting came from a kind British gentleman named Allan Octavian Hume. Yes, he was British — but he was different. He loved India and felt sad that Indians had no voice in how their country was run. So he wrote letters to many Indian leaders and said, 'Why don't we have a meeting? Let us form a group where Indians can talk about their problems politely and ask the British government to make changes.'",
+        "And so, on 28 December 1885, the first meeting of the Indian National Congress was held in Bombay. The word 'Congress' means 'a gathering' or 'a big meeting'. They chose this name because they wanted to come together as one big family of Indians. The first president of the meeting was a kind man named Womesh Chunder Bonnerjee — he was like the head student of the class for that day.",
+        "What did the 72 gentlemen want? They had very simple, polite requests. They said, 'Please let more Indians get jobs in the government. Please let us have a say in making laws. Please reduce the heavy taxes on poor farmers. Please build more schools and colleges for our children.' They did not shout or fight — they wrote letters, gave speeches, and asked nicely. This was the 'moderate' way of asking for change.",
+        "But slowly, some Indians started to feel, 'Asking politely is not enough. The British are not listening. We need to be more firm. We need to ask for SELF-RULE — meaning Indians should rule India, not the British.' The Sanskrit word for self-rule is SWARAJ. Say it with me: SWA-RAJ. 'Swa' means 'self', and 'raj' means 'rule'. So Swaraj means 'rule by ourselves'.",
+        "One of the leaders who began to demand Swaraj was a brave man named Bal Gangadhar Tilak. He was a teacher and a newspaper editor. He said famously, 'Swaraj is my birthright, and I will have it!' — meaning, 'Being ruled by my own people is my right from birth, and I WILL get it.' He wrote such strong words in his newspaper that the British put him in jail. But he did not stop.",
+        "Tilak also did something very clever. He knew that people would unite better if they had festivals to celebrate together. So he started two big festivals in western India — the Ganpati festival (worshipping Lord Ganesha) and the Shivaji festival (celebrating the great Maratha king Shivaji). These festivals were not just religious — they were a way for Indians of all castes and professions to come together, talk, sing patriotic songs, and feel proud of being Indian.",
+        "Around this time, in Punjab (up north), another movement was growing. It was called the Singh Sabha. Sikh leaders wanted to clean up their own community — to stop bad practices and to educate Sikh children in modern schools. They also said, 'We love our Sikh faith, and we love India too.' The Singh Sabha made Sikh people feel proud and ready to fight for freedom.",
+        "Far away in eastern India, in the forests of Jharkhand, a young tribal leader named Birsa Munda was leading his Munda people against the British. The British were taking tribal lands and giving them to outsiders. Birsa said, 'This land is OURS. The British must leave.' He led a big uprising in 1895. Sadly, he was captured and died in prison at just 25 years old. But he became a hero — and the Mundas still sing songs about him today.",
+        "There was also a sect called the Kukas, a Sikh reform group. They strongly opposed the British, refused to use British goods, and even refused to send their children to British schools. The British treated them harshly — many were imprisoned or killed by being blown from cannons. Yes, that sounds terrible, but these were the cruel ways the British punished those who said 'no' to them.",
+        "So you see, my little friend, India was waking up. There were meetings in cities, festivals in towns, and brave hearts in forests. People were saying in many voices, many languages, many songs: 'This is OUR land. WE will rule it.' In our next story, we will see what happened when the British did something very unfair to Bengal in 1905 — and how Indians responded with a beautiful new word called SWADESHI. Ready? Let's go!"
+      ]
+    },
+    {
+      "id": "swadeshi",
+      "label": "4. Our Own Things! (1905)",
+      "images": [
+        {
+          "file": "fig2_11_lal_bal_pal.png",
+          "caption": "The 'Lal-Bal-Pal' trio — three brave leaders of the Swadeshi movement"
+        },
+        {
+          "file": "fig2_14_bharat_mata.png",
+          "caption": "'Bharat Mata' — the painting of Mother India by Abanindranath Tagore"
+        },
+        {
+          "file": "fig2_13_national_council_education.png",
+          "caption": "Logo of the National Council of Education — Indians opening their own colleges"
+        }
+      ],
+      "beats": [
+        "Welcome back! In the last story, we met the Indian National Congress and the brave leaders like Tilak. Today, we will learn about a special year — 1905. In this year, the British did something very unfair to the people of Bengal, and Indians responded with a beautiful idea. Let me tell you what happened.",
+        "Bengal was a very big province in eastern India — so big that the British said, 'It is too big to rule properly. We will divide it into two parts — East Bengal and West Bengal.' But here was the secret reason: Bengal was the home of many clever, brave Indian leaders. The British were afraid of these leaders. So they thought, 'If we split Bengal, the leaders will be divided and weak.'",
+        "When the Indian people heard about this, they were FURIOUS. 'You cannot divide our home!' they said. But the British went ahead and divided Bengal anyway, on 16 October 1905. The Indian people decided, 'If you divide us, we will show you we are united. We will do something the British cannot ignore.'",
+        "And so the SWADESHI movement was born. The word SWADESHI is made of two parts: 'Swa' means 'self' or 'own', and 'desh' means 'country'. So Swadeshi means 'of our own country'. The idea was simple: Indians should buy things made IN INDIA, not things made in British factories. If Indians stopped buying British cloth, British sugar, British shoes — the British would lose a lot of money!",
+        "Imagine: Indian weavers started making beautiful khadi cloth on their spinning wheels. Indian mothers said, 'I will buy cloth only from Indian weavers.' Indian shopkeepers put up signs saying, 'Swadeshi only — Indian goods sold here.' People started buying Indian-made soap, paper, matches, even Indian cigarettes! This made the British factories very sad — because nobody was buying their stuff anymore.",
+        "Along with Swadeshi came BOYCOTT. 'Boycott' means refusing to buy from or work with someone. Indians boycotted British goods, British schools, British courts, even British titles. Some Indian lawyers stopped wearing black coats to British courts. Some Indian students left British colleges and joined new Indian colleges. They said, 'We will study in our own colleges, ruled by our own people.'",
+        "This was a HUGE change. For the first time, ordinary Indians — students, mothers, shopkeepers, weavers, farmers — joined the freedom movement. Before this, only rich, educated leaders used to talk about freedom. Now EVERYONE was part of it. Women, especially, came out of their homes for the first time, marching in processions, singing Vande Mataram.",
+        "Around this time, a beautiful painting was made. It was called 'Bharat Mata' — meaning 'Mother India'. The painter was Abanindranath Tagore, the nephew of the famous poet Rabindranath Tagore. In the painting, Mother India is shown as a calm, sad lady in a saffron sari. She holds in her four hands: a sheaf of paddy (for food), a white cloth (for clothing), a rudraksha bead (for faith), and a book (for learning). She gives us food, clothes, faith, and knowledge — everything we need to live.",
+        "The image of Bharat Mata became very powerful. People put up pictures of her in their homes. They prayed to her like a goddess. When they sang Vande Mataram, they thought of her. Mother India was no longer just a piece of land — she was their MOTHER. And just as you would fight anyone who hurts your mother, Indians felt they must fight anyone who was hurting Mother India.",
+        "In Madras (now Chennai), a brave poet named Subramania Bharati was writing fiery poems in Tamil. He wrote about freedom, about women's strength, about equality. His magazine was called 'India'. Young men and women read his poems and felt their hearts burn with love for the motherland. Bharati was the voice of the south, just as Bankim Chandra was the voice of the east and Tilak was the voice of the west.",
+        "But there was also sadness. Some Indian Muslim leaders, like the Aga Khan and Syed Ahmed Khan, felt that Hindus were the majority in India, and that Muslims might not get a fair chance in a free India. In 1906, they formed the All-India Muslim League in Dhaka. They wanted to make sure Muslim interests were protected. At first, the Congress and the League worked together. But slowly, slowly, the two groups grew apart — and this would lead to a great sadness many years later.",
+        "So in 1905, something amazing happened. From the unfair division of Bengal came the beautiful Swadeshi movement. Indians learned that they were stronger together than apart. They learned that they could hurt the British not with guns, but with their choices — by deciding what to buy and what not to buy. This was the first big non-violent weapon of our freedom struggle. In our next story, we will meet some very brave young men who decided that words and petitions were not enough — and they chose a different, harder path. Are you ready? Turn the page…"
+      ]
+    },
+    {
+      "id": "revolutionaries",
+      "label": "5. The Brave Bomb-Throwers",
+      "images": [
+        {
+          "file": "fig2_17_khudiram_bose.png",
+          "caption": "Khudiram Bose — the brave 18-year-old who gave his life for India"
+        },
+        {
+          "file": "fig2_19_revolutionaries.png",
+          "caption": "Brave revolutionaries who fought for India's freedom"
+        },
+        {
+          "file": "fig2_20_cellular_jail.png",
+          "caption": "The Cellular Jail in the Andaman Islands — where freedom fighters were sent far from home"
+        }
+      ],
+      "beats": [
+        "Welcome back, my little friend. In the last story, we met the Swadeshi movement — buying Indian things and boycotting British things. But some young Indians felt that this was too slow. They said, 'The British only understand force. We must fight them with weapons!' These brave young men were called the REVOLUTIONARIES. Let me tell you their story — but please remember, these are NOT role models for you. They lived in a very hard time, and they made hard choices.",
+        "In 1902, in a city called Calcutta, some young men started a secret group called the Anushilan Samiti. 'Anushilan' means 'training' or 'practice'. They met in small rooms, did exercises, learned to use swords and small pistols, and read books about freedom. They wanted to inspire Indians by doing brave, daring acts against the British.",
+        "One of these brave young men was a 18-year-old boy named Khudiram Bose. He was born in a small village in Bengal. When he heard about the unfair things the British were doing, he could not sleep. He joined the revolutionaries. In 1908, he was given a task: throw a bomb at a strict British judge named Kingsford, who had punished many Indian freedom fighters harshly.",
+        "On 30 April 1908, Khudiram Bose waited near the judge's house. He saw a carriage — a horse-drawn cart — coming out. He threw the bomb at it. BANG! Sadly, the carriage did not have the judge. It had two British ladies, the wife and daughter of another officer, and they died. Khudiram was caught the next day, tired and hungry, walking along a railway track.",
+        "Khudiram Bose was just 18 years old when he was hanged on 11 August 1908. As he walked to the gallows, he held his head high and smiled. He became the youngest revolutionary to be martyred. People in Bengal sang songs about him. Mothers named their newborn sons 'Khudiram' to honour his bravery. His story inspired thousands of young Indians to join the freedom struggle.",
+        "Another big thing happened that year. The police raided a house in Alipore, in Calcutta, where the revolutionaries had their secret base. They arrested many people, including a leader named Aurobindo Ghose. The trial that followed was called the 'Alipore Bomb Case' — it went on for months. A brilliant young lawyer named Chittaranjan Das defended Aurobindo so well that Aurobindo was set free. But many others were sent to prison for many years.",
+        "The Anushilan Samiti and other revolutionary groups grew. Young men in Bengal, Punjab, Maharashtra, Madras — everywhere — formed secret societies. They believed in armed revolution: that means fighting with weapons, like guns and bombs. Some of them went abroad to countries like France, Germany, and even America, to learn how to make weapons and to ask other countries to help India become free.",
+        "In 1904, a revolutionary named Hemchandra Kanungo went to Paris to learn how to make bombs. He came back and trained other young revolutionaries. In 1908, there were attacks on British officials in London too — a young man named Madan Lal Dhingra shot a British official named Curzon Wyllie in London. Dhingra was hanged, but he said, 'I am proud to die for my country.'",
+        "The British were alarmed. They made a special law called the 'Defence of India Act' to arrest revolutionaries without trial. They also started sending revolutionaries to a terrible prison far, far away — the Cellular Jail in the Andaman Islands. The Andaman Islands are in the Bay of Bengal, very far from mainland India. The British had built a huge prison there to send the worst (in their eyes) freedom fighters.",
+        "The Cellular Jail was a horrible place. It was built like a giant wheel with seven wings radiating from a central watchtower. Each prisoner was kept alone in a tiny cell. They could not talk to each other. They were forced to do hard labour — like grinding mustard seeds with a heavy stone, or making coir rope by hand. If they refused, they were beaten or hung by their hands. Many died. Some went mad.",
+        "Even so, the revolutionaries did not give up. They smuggled out letters written on tiny pieces of paper, hidden inside their shoes or in the spines of books. They wrote poems on the walls of their cells. They sang Vande Mataram softly at night. The Cellular Jail became a 'university of the revolutionaries' — a place where men went in as angry young boys and came out (if they survived) as seasoned, wise leaders.",
+        "So you see, my little friend, alongside the gentle Swadeshi movement, there was also a fierce revolutionary movement. The revolutionaries believed the British would only leave if forced. But we know now, looking back, that the path of non-violence — led by a man named Mahatma Gandhi, whom we will meet soon — was the path that finally won us freedom. In our next story, we will meet some brave ladies and gentlemen who fought for 'Home Rule' — meaning, rule from home, not from England. Ready? Let's go!"
+      ]
+    },
+    {
+      "id": "home_rule",
+      "label": "6. Home Means Freedom (1916)",
+      "images": [
+        {
+          "file": "fig2_16_surat_split.png",
+          "caption": "Indian leaders in a meeting — sometimes they agreed, sometimes they argued"
+        },
+        {
+          "file": "fig2_24_postage_stamp.png",
+          "caption": "A stamp honouring India's struggle for self-rule"
+        }
+      ],
+      "beats": [
+        "Welcome back, my little friend! Today, our story takes us to the years 1916-1918. The world was fighting a great big war — the First World War — far away in Europe. While the British were busy with that war, some Indian leaders said, 'This is a good time to demand our rights. The British need us. Let us ask for HOME RULE.'",
+        "HOME RULE means ruling your own home — your own country — while still being friendly with bigger countries. It does not mean full independence. It means: 'We, Indians, will make laws for India. But India will still be a part of the British Empire, like a friendly cousin.' This was a step towards full freedom, but not full freedom yet.",
+        "Two leaders started the Home Rule Movement. One was our old friend Bal Gangadhar Tilak — the man who said, 'Swaraj is my birthright!' He started his Home Rule League in April 1916, in the city of Belgaum. The other was a brave lady named Annie Besant. She was actually British-born, but she loved India and made it her home. She started her own Home Rule League in September 1916, in Madras (now Chennai).",
+        "Annie Besant was an amazing woman. She was a writer, a speaker, and a thinker. She started newspapers like 'New India' and 'Commonweal' to spread the message of Home Rule. She travelled across India giving speeches. She said, 'Indians deserve to rule themselves. The British must give us Home Rule!' Many young men and women joined her leagues. They wore badges saying 'Home Rule'. They carried flags with the picture of a charkha — the spinning wheel.",
+        "Tilak also travelled widely, giving fiery speeches. He said, 'If we keep quiet, the British will never give us anything. We must knock on the door of freedom — and if no one opens, we must push!' Tilak and Annie Besant worked together. Their leagues had about 40,000 members across India. For the first time, the freedom movement was not just in big cities — it had spread to small towns and even villages.",
+        "Meanwhile, the Indian National Congress and the Muslim League had a special meeting in 1916 in the city of Lucknow. They agreed on something important: they would ask the British for Home Rule TOGETHER. The Congress promised that Muslims would have a fixed number of seats in any future law-making body — this was called 'separate electorates'. This agreement was called the LUCKNOW PACT. It was a moment of Hindu-Muslim unity. People said, 'Look — Hindus and Muslims are walking together!'",
+        "But there was also a sad part of the Lucknow Pact. The agreement meant that Muslim and Hindu voters would vote separately — Muslims would only vote for Muslim candidates, Hindus for Hindu candidates. This was meant to protect Muslim interests, but it also planted a seed that would, many years later, grow into the sad idea of 'two separate nations' — India for Hindus, Pakistan for Muslims. We will see that part of the story much later.",
+        "The British were worried by the Home Rule Movement. They put Tilak in jail again — but this time the British realised they could not ignore the Indians anymore. In 1917, the British government made a declaration: 'We will gradually allow Indians to govern themselves.' This was a small victory — the British had admitted, for the first time, that Indians would one day rule themselves. The Home Rule leagues rejoiced!",
+        "But the British also did something terrible during these years. They passed a law called the 'Rowlatt Act' in 1919. This law said: the police could arrest ANYONE without telling them why, and could keep them in prison for up to TWO YEARS without a trial! This was very unfair. Indians were angry. They said, 'This is a Black Law!' All over India, there were protests and strikes.",
+        "Two leaders especially spoke out against the Rowlatt Act. One was a quiet, kind man named Mohandas Karamchand Gandhi — we will meet him properly in the next story. The other was Tilak. Tilak wrote in his newspaper, 'The Rowlatt Act is a slap on the face of every Indian. We must oppose it with all our might.'",
+        "So, my little friend, the Home Rule Movement was a step forward — Indians were now demanding not just polite reforms but real self-rule. The Lucknow Pact showed that Hindus and Muslims could work together. But the Rowlatt Act showed that the British were still capable of great unfairness. Something terrible was about to happen in a city called Amritsar in April 1919. Are you ready to hear that sad story? Take a deep breath, and let's turn the page…"
+      ]
+    },
+    {
+      "id": "amritsar",
+      "label": "7. A Sad Day in Amritsar (1919)",
+      "images": [
+        {
+          "file": "fig2_21_gandhi_spinning.png",
+          "caption": "Mahatma Gandhi spinning khadi cloth on a charkha — symbol of self-reliance"
+        },
+        {
+          "file": "fig2_22_jallianwala_memorial.png",
+          "caption": "The Martyrs' Memorial at Jallianwala Bagh in Amritsar — built to remember those who died"
+        }
+      ],
+      "beats": [
+        "Welcome back, my little friend. Today's story is a very sad one. But it is an important story — because sometimes, sad things make people wake up and fight harder for what is right. Let me tell you what happened on a spring day in 1919, in a beautiful city called Amritsar, in Punjab.",
+        "First, let me introduce you to a man who would change the freedom struggle forever. His name was Mohandas Karamchand Gandhi. People called him 'Mahatma' Gandhi — 'Mahatma' means 'Great Soul'. He had been working in South Africa, fighting for the rights of Indians there using a new method called SATYAGRAHA. Satyagraha means 'truth force' or 'soul force' — fighting for what is right WITHOUT violence, WITHOUT guns, WITHOUT bombs.",
+        "In 1915, Gandhiji returned to India. He travelled across the country, met ordinary people, and started to lead small satyagrahas — peaceful protests where people would refuse to obey unfair laws. When the British passed the unfair Rowlatt Act in 1919, Gandhiji called for a HARTAL — a day when all Indians would close their shops, stop working, and stay home in protest. On 6 April 1919, India came to a standstill.",
+        "But in some places, the protests turned violent. In the city of Amritsar, on 10 April 1919, some angry Indians attacked British buildings and killed a few British people. The British were furious. They sent a strict general named Reginald Dyer to take control of Amritsar. General Dyer banned all public meetings. He said, 'If anyone gathers in a group, they will be punished.'",
+        "But on 13 April 1919 — it was a Sunday, and also the day of the Baisakhi festival — many people, including women and children, gathered in a garden called Jallianwala Bagh. They were there to celebrate the festival and to peacefully protest against the Rowlatt Act. The garden had only one narrow entrance, and walls on the other sides. People were sitting, talking, singing, eating. They were peaceful.",
+        "General Dyer arrived with his soldiers. He did not warn the people. He did not ask them to leave. He simply ordered his soldiers: 'FIRE!' The soldiers fired their rifles into the crowd — into men, women, and children — for ten full minutes. They fired 1,650 bullets. When people tried to escape through the narrow gate, they were trampled. Some jumped into a well in the garden to escape the bullets — and drowned. Officially, 379 people died. The real number was probably much higher.",
+        "The whole of India was in shock. People wept with anger. The British government did not punish General Dyer — in fact, some British people collected money for him as a reward! Indians were filled with a quiet fury. Rabindranath Tagore, the great poet, returned his 'knighthood' — a British honour — saying, 'I cannot accept a title from a government that does this to my people.' The Jallianwala Bagh massacre made the whole nation say: 'The British must go. We can no longer live under their rule.'",
+        "Gandhiji decided it was time for a big movement. He called it the NON-COOPERATION MOVEMENT. 'Non-cooperation' means 'we will not cooperate with the British'. Indians were asked to: give up their British-given titles (like 'Sir'), boycott British schools and colleges, boycott British courts, refuse to pay taxes, and resign from British government jobs. The movement began in 1920 and spread like fire across India.",
+        "But before that, Gandhiji also supported another movement called the KHILAFAT MOVEMENT. Here is the background: After the First World War, the British and their friends weakened the Sultan of Turkey, who was also the Caliph (the spiritual head of Muslims everywhere). Indian Muslims were upset. Gandhiji said, 'I will support the Muslim cause, because we are all Indians together.' So the Khilafat Movement and the Non-Cooperation Movement ran together, from 1920 to 1922. For the first time, Hindus and Muslims were fighting shoulder to shoulder against the British.",
+        "Indians gave up British titles. Lawyers like Motilal Nehru and C.R. Das gave up their law practices. Students left British colleges and joined new 'national colleges' started by Indians. People spun their own cloth on the charkha. Millions joined the movement. It felt like freedom was just around the corner.",
+        "But then, something terrible happened. On 4 February 1922, in a small village called Chauri Chaura in Uttar Pradesh, a big group of protesters was marching peacefully. The police insulted and beat some of them. The angry crowd set fire to the police station. 22 policemen burned to death inside. When Gandhiji heard this, he was heart-broken. He said, 'I cannot lead a movement that turns violent. We must stop.' And just like that, he called off the Non-Cooperation Movement.",
+        "Many Indians were angry with Gandhiji for stopping. They said, 'We were so close!' But Gandhiji believed that freedom won through violence would not be true freedom. He wanted Indians to win freedom in a way that would make them proud, not ashamed. So the movement stopped, but the lessons stayed. Indians had learned that they could unite across religions, across regions, across languages — and that the British could be challenged peacefully. In our next story, we will meet some young revolutionaries who disagreed with Gandhiji's non-violence and chose a different path. Ready?"
+      ]
+    },
+    {
+      "id": "bhagat_singh",
+      "label": "8. Brave Bhagat Singh",
+      "images": [
+        {
+          "file": "fig2_25_bhagat_singh.png",
+          "caption": "Bhagat Singh, Chandrashekhar Azad, and Ashfaqulla Khan — brave young revolutionaries"
+        }
+      ],
+      "beats": [
+        "Welcome back, my little friend. In our last story, we met Mahatma Gandhi and his non-violent movement. But some young Indians felt that non-violence was too slow. They said, 'The British will not leave just because we ask nicely. We must show them we are serious — even if it costs us our lives.' Today, we will meet some of these brave young revolutionaries. Again, please remember — they are not role models for you. They lived in a hard time and made hard choices.",
+        "In 1924, some young men in north India — Ram Prasad Bismil, Sachindra Sanyal, and others — formed a group called the Hindustan Republican Association (HRA). Their goal was to organize an armed revolution against the British. They collected weapons, made bombs, and robbed a train at a place called Kakori in 1925 to get money for their work. Many were arrested and hanged.",
+        "In 1928, the HRA changed its name to HSRA — Hindustan Socialist Republican Association. They added the word 'Socialist' because they believed that in a free India, the workers and farmers should be treated fairly, not just the rich. The leader of the HSRA was a brave young man named Chandrashekhar Azad. He carried a gun and promised, 'I will never be caught alive by the British.' He kept his promise — when the British finally surrounded him in a park in Allahabad in 1931, he shot himself with his last bullet.",
+        "Now let me tell you about a very famous young man — Bhagat Singh. He was born in 1907 in a Sikh family in Punjab. As a child, he saw the Jallianwala Bagh massacre and the cruel treatment of Indians by the British. He decided to dedicate his life to freeing India. He joined the HSRA. He was just 21 years old when he did his first big action.",
+        "In 1928, the British sent a commission called the Simon Commission to India. It was supposed to discuss India's constitution, but it had NOT A SINGLE Indian member! Indians were furious. All over India, protests broke out. In Lahore, the great leader Lala Lajpat Rai led a peaceful march. The police beat him with lathis (long wooden sticks). Lala Lajpat Rai was badly hurt and died a few weeks later. Bhagat Singh and his friends decided to take revenge.",
+        "Bhagat Singh and his friend Shivaram Rajguru shot dead the British police officer who had ordered the lathi charge — a man named J.P. Saunders. Then Bhagat Singh and another friend, Jatindranath Das, escaped. They went into hiding. But Bhagat Singh did not want to hide forever. He wanted to wake up the Indian people.",
+        "In 1929, Bhagat Singh and his friend Batukeshwar Dutt threw two bombs in the Central Legislative Assembly in Delhi. The bombs were small — they did not hurt anyone. The plan was: 'We will throw the bombs, make a noise, and then shout our message: Down with British imperialism!' After throwing the bombs, Bhagat Singh and Batukeshwar Dutt did NOT run away. They stood there and waited to be arrested. They wanted to use the trial to spread their message to the whole country.",
+        "Bhagat Singh and his friends were put in prison in Lahore. They went on a hunger strike — refusing to eat — for 116 days, demanding that Indian political prisoners be treated as well as British political prisoners. The British did not listen. Jatindranath Das died on the 63rd day of the hunger strike. The whole country mourned him.",
+        "On 23 March 1931, Bhagat Singh, Rajguru, and Sukhdev were hanged in Lahore jail. Bhagat Singh was just 23 years old. As he walked to the gallows, he shouted, 'Down with British imperialism! Long live the revolution!' He kissed the noose before it was put around his neck. The whole of India wept. People cried in the streets. Mothers named their sons 'Bhagat' in his honour.",
+        "There were also brave women revolutionaries. One was Bina Das — a young girl of 21 from Bengal. In 1932, she shot at the Governor of Bengal, Stanley Jackson, during a convocation at Calcutta University. She missed and was arrested. She said in court, 'I tried to kill a man who represents a cruel, unjust government.' She was sentenced to nine years in prison.",
+        "Another brave woman was Pritilata Waddedar. In 1932, she led a small group of revolutionaries to attack the Pahartali European Club in Chittagong. The club had a sign saying 'Dogs and Indians not allowed'. Pritilata and her group attacked it. Pritilata was wounded in the fight. Rather than be captured, she took potassium cyanide and died. She was just 21.",
+        "There were many, many more revolutionaries — Kalpana Dutta, Surya Sen (Masterda), Bagha Jatin, Rash Behari Bose, Kartar Singh Sarabha, Sachin Sanyal, Bagha Jatin — I cannot name them all. Some were Hindus, some Muslims, some Sikhs, some Christians. They were from Bengal, Punjab, Maharashtra, Madras, everywhere. They came from every part of India. They gave their young lives for India's freedom. In our next story, we will see how the Indian people marched to the sea — to make salt!"
+      ]
+    },
+    {
+      "id": "salt_march",
+      "label": "9. Walking to the Sea (1930)",
+      "images": [
+        {
+          "file": "fig2_27_lahore_session.png",
+          "caption": "The Lahore session of the Congress in 1929, where Purna Swaraj was demanded"
+        },
+        {
+          "file": "fig2_28_salt_march.png",
+          "caption": "Gandhiji leading the Salt (Dandi) March — 380 km on foot, 1930"
+        },
+        {
+          "file": "fig2_29_sarojini_naidu.png",
+          "caption": "Sarojini Naidu — the 'Nightingale of India' — leading the salt march at Dharasana"
+        },
+        {
+          "file": "fig2_30_ghaffar_khan.png",
+          "caption": "Khan Abdul Ghaffar Khan — the 'Frontier Gandhi' — and his Khudai Khidmatgars"
+        },
+        {
+          "file": "fig2_31_round_table.png",
+          "caption": "The Round Table Conference in London, 1931 — Gandhiji representing India"
+        }
+      ],
+      "beats": [
+        "Welcome back, my little friend! Today, our story takes us to a beautiful moment — when an old man with a stick walked 380 kilometres to the sea, just to make a pinch of salt. This sounds strange, doesn't it? Why would anyone walk so far for salt? Let me explain.",
+        "First, let me tell you about a meeting that happened in 1929, in the city of Lahore (now in Pakistan). The Indian National Congress had a big meeting there. They said, 'We have had enough of asking politely. We do not want Home Rule anymore. We want PURNA SWARAJ — meaning COMPLETE independence. India will be a completely free country!' They chose 26 January 1930 as 'Independence Day' — and many Indians celebrated it that day, even though India was not actually free yet.",
+        "But the British did not leave. So Gandhiji thought, 'How do we challenge the British in a way that EVERY Indian can join?' He thought about salt. Salt is something EVERY Indian eats — rich and poor, Hindu and Muslim, north and south. And the British had a cruel law: only the British government was allowed to make and sell salt. Indians had to buy British-made salt — and pay a tax on it! Even if you lived next to the sea, you could not make your own salt. That was very unfair.",
+        "So Gandhiji decided: 'I will walk to the sea. I will make salt. I will break the British law. And every Indian who wants freedom can do the same.' On 12 March 1930, Gandhiji set out from his ashram in Sabarmati (near Ahmedabad) with 78 followers. He was 61 years old. He had a simple bamboo stick in his hand. He walked 380 kilometres, over 24 days, to reach a seaside village called Dandi.",
+        "As Gandhiji walked, more and more people joined him. By the time he reached Dandi, there were thousands of people walking with him! All along the route, villagers came out to greet him. They gave him and his followers food and water. They sang songs. The whole country was watching. Foreign journalists came to report on the strange old man walking to the sea.",
+        "On 6 April 1930, Gandhiji reached the beach at Dandi. He bent down, picked up a handful of salty sea mud, and boiled it to make salt. With that simple act, he broke the British law. He said, 'With this, I am shaking the foundations of the British Empire.' The news spread across India like wildfire. All along India's coast, people started making their own salt. The British were horrified — how could they arrest millions of people?",
+        "The British did try. They arrested Gandhiji. They arrested tens of thousands of Indians who made salt. In some places, peaceful protesters walked up to salt factories owned by the British. The police beat them with steel-tipped lathis. The protesters did not raise a hand to defend themselves. They just kept walking. Hundreds were injured. Foreign journalists wrote about this — and the whole world saw how cruel the British were being to peaceful Indians.",
+        "Brave women also joined. A famous poet named Sarojini Naidu led a march to the Dharasana salt works. When the police beat the peaceful marchers, the world saw it in the newspapers. The British lost face in front of the whole world. People in England began to ask, 'Why are we ruling India by force? Why don't we let them be free?'",
+        "In the northwest, a giant of a man named Khan Abdul Ghaffar Khan — people called him the 'Frontier Gandhi' — led a movement of Pashtun Muslims called the Khudai Khidmatgars ('Servants of God'). They wore red shirts and were sworn to non-violence. They marched peacefully even when British soldiers opened fire on them. In 1930, in a bazaar in Peshawar, British armoured cars ran over peaceful protesters. But the Khudai Khidmatgars did not bend.",
+        "There were also some Indian soldiers who refused to obey the British. The most famous was Chandra Singh Garhwali, who was ordered to fire on unarmed peaceful protesters in Peshawar. He and his men refused. 'We will not fire on our own people,' they said. They were arrested and sent to prison. But their act of conscience inspired the whole nation.",
+        "Finally, in March 1931, the British agreed to talk. The Viceroy, Lord Irwin, signed a pact with Gandhiji — it was called the GANDHI-IRWIN PACT. The British agreed to release all political prisoners. They allowed Indians to make salt on the coast (but not sell it). Gandhiji agreed to stop the civil disobedience movement and attend a Round Table Conference in London to discuss India's future. It was not freedom yet, but it was a step.",
+        "So, my little friend, the Salt March was one of the most amazing chapters of our freedom struggle. An old man with a stick, walking to the sea, making a pinch of salt — and shaking the British Empire. It showed the world that Indians were serious about freedom, and that they could fight without violence. But the path to freedom was still long. In our next story, we will meet a famous leader who disagreed with Gandhiji and wanted a different kind of freedom. Ready?"
+      ]
+    },
+    {
+      "id": "subhas_bose",
+      "label": "10. The Brave Soldier Subhas",
+      "images": [
+        {
+          "file": "fig2_32_subhas_bose.png",
+          "caption": "Subhas Chandra Bose — 'Netaji' — the brave leader of the Indian National Army"
+        }
+      ],
+      "beats": [
+        "Welcome back! In our last story, we met Gandhiji's Salt March. Today, we will meet another leader — a brave, fiery man who respected Gandhiji but disagreed with his slow, peaceful methods. His name was Subhas Chandra Bose. People lovingly called him 'Netaji' — meaning 'Respected Leader'. Let me tell you his story.",
+        "Subhas Chandra Bose was born in 1897 in Cuttack, Odisha. He was a very bright student. He went to England to study for the Indian Civil Service — that means he could have become a high-ranking British officer in India! But while in England, he heard about the Jallianwala Bagh massacre and the cruel treatment of Indians. He decided, 'I will not work for the British. I will fight them!' He resigned from the Civil Service in 1921 and came back to India.",
+        "Back in India, Subhas joined the Indian National Congress. He was a great speaker — his speeches made people feel brave and ready to fight. He became the President of the Congress twice, in 1938 and 1939. But he and Gandhiji disagreed. Gandhiji wanted non-violence and patience. Subhas said, 'We have been patient for too long. We need to fight — and if necessary, with weapons.' In 1939, Subhas resigned from the Congress and formed his own group, the Forward Bloc.",
+        "Then, in 1939, the Second World War began. Britain was at war with Germany, Italy, and Japan. Subhas thought, 'The enemy of my enemy is my friend. Britain's enemies can help me free India.' He decided to leave India and seek help from countries like Germany and Japan that were fighting the British.",
+        "In 1941, Subhas escaped from India in disguise. He grew a beard, wore a long coat, and travelled by car, foot, train, and finally aeroplane — through Afghanistan, the Soviet Union, and reached Germany! He met the German leader Adolf Hitler. Please remember — Hitler was a very bad man who did terrible things. Subhas did not like Hitler's ideas. But he thought, 'If Germany helps me fight the British, my country can be free.' So he shook hands with the devil, hoping to free his mother.",
+        "In Germany, Subhas formed the 'Free India Centre' and started broadcasting on Azad Hind Radio — 'Free India Radio'. He spoke to Indians in their own language, telling them to rise against the British. He also started the Indian Legion — a small army of Indian soldiers who had been prisoners of war in Germany, now fighting for Subhas.",
+        "But Germany was far from India. Subhas realised he needed to go closer. So in 1943, he travelled by submarine — a long, dangerous journey of three months — from Germany to Japan. The Japanese were also fighting the British, and they had captured many Indian soldiers in Singapore and Malaya. These soldiers had been prisoners of war. Now they were ready to fight against the British — under Indian leadership.",
+        "A brave lady named Captain Lakshmi Sahgal had already organised a regiment of women soldiers — the Rani of Jhansi Regiment. When Subhas reached Singapore, he took charge of the Indian National Army (INA) — the Azad Hind Fauj. He stood before 12,000 Indian soldiers and said, 'Give me blood, and I shall give you freedom!' The soldiers roared, 'Inquilab Zindabad!' — 'Long live the revolution!'",
+        "Subhas Bose also formed a provisional government — the 'Azad Hind' government — meaning 'Free India' government. It was recognised by several countries that were enemies of Britain. Subhas became the Netaji — the leader. The Azad Hind government had its own flag, its own currency, its own army. It was a free Indian government in exile, ready to take back India.",
+        "In 1944, the INA, with Japanese help, marched towards India. They crossed into the Indian states of Manipur and Nagaland. They planted the Indian flag on Indian soil for the first time in over 100 years! They fought the British at the battles of Imphal and Kohima. But the British, with American help, defeated them. The monsoon rains came, supplies ran out, and the INA had to retreat. Many soldiers died of disease and starvation.",
+        "In 1945, Japan surrendered after the atom bombs were dropped on Hiroshima and Nagasaki. The INA was defeated. Subhas tried to escape to the Soviet Union to continue the fight. On 18 August 1945, he boarded a plane in Taipei (in Taiwan). The plane crashed. Subhas was badly burnt. He died in a hospital. He was just 48 years old. The whole of India wept. People said, 'Netaji is gone. But his dream of a free India will live.'",
+        "After the war, the British put the surviving INA soldiers on trial at the Red Fort in Delhi. The whole country rose up in their support. Even the Indian soldiers in the British Indian Navy mutinied in 1946 — the Royal Indian Navy Mutiny. The British realised, 'We can no longer trust the Indian armed forces. It is time to leave India.' Netaji's sacrifice had pushed the British to the edge. In our next story, we will see the final push — the Quit India Movement of 1942, and finally, freedom in 1947."
+      ]
+    },
+    {
+      "id": "quit_india",
+      "label": "11. Do or Die! (1942)",
+      "images": [
+        {
+          "file": "fig2_34_quit_india_stamp.png",
+          "caption": "A stamp honouring the Quit India Movement of 1942"
+        }
+      ],
+      "beats": [
+        "Welcome back! Today, we are getting close to the end of our long story. The year is 1942. The Second World War is raging. The British are busy fighting in Europe, Africa, and Asia. The Indian leaders thought, 'This is the time. We must strike now. We must tell the British: QUIT INDIA!'",
+        "In August 1942, the Indian National Congress had a big meeting in Bombay. They passed a resolution saying, 'The British must leave India immediately.' Gandhiji gave a famous speech. He said, 'I am not going to be satisfied with anything short of complete freedom. We shall either free India or die in the attempt. We shall not live to see the perpetuation of our slavery.' Then he gave the country a slogan: 'KARENGE YA MARENDE!' — meaning 'DO OR DIE!'",
+        "On 8 August 1942, the Congress passed the 'Quit India Resolution'. The next morning, on 9 August, the British arrested Gandhiji and all the senior Congress leaders. They were taken to prison. The British hoped, 'If we arrest the leaders, the people will not know what to do. The movement will fail.'",
+        "But the British were wrong. The Indian people were ready. Without their leaders, they organised themselves. Students went on strike. Workers stopped work. Government employees resigned. People cut telephone wires, tore up railway tracks, set fire to police stations and post offices. The whole country was in uproar. The movement spread like wildfire — from Bombay to Bengal, from Punjab to Madras.",
+        "Brave young men and women formed secret radio stations. They broadcast messages of freedom. One famous secret radio was run by Usha Mehta, a young woman from Bombay. She broadcast news and patriotic messages until the British caught her. She was sent to prison for four years. But her voice had given courage to millions.",
+        "There were also many protests by ordinary people. In a small town called Ballia in Uttar Pradesh, the people chased out the British officials and declared themselves 'free' for a few days! They even elected their own leader. The British had to send the army to take control again. This showed that even small towns were ready for freedom.",
+        "The British were ruthless. They sent in the army. They opened fire on crowds. They flogged people in public. They destroyed villages. Over 100,000 people were arrested. Thousands were killed. But the movement did not stop. It went underground — meaning, secret. People printed leaflets, organised secret meetings, and kept the spirit of freedom alive.",
+        "Even some Indian officials of the British government resigned. Many Indian Civil Service officers refused to cooperate. The British realised — the Indian people would never accept British rule again. The Quit India Movement had broken the back of British authority, even though the British stayed for five more years.",
+        "Some groups did not join the Quit India Movement. The Muslim League, led by Muhammad Ali Jinnah, did not support it. Jinnah had a different plan — he wanted a separate country called 'Pakistan' for Indian Muslims. We will talk about this in our next story. The Hindu Mahasabha also did not join the movement. And the Communists, who supported Russia, also did not join — because at that time, Russia was fighting on the same side as Britain in the Second World War.",
+        "Even though these groups did not join, the Quit India Movement showed the British something very important: the masses of India — ordinary farmers, workers, students, women — all wanted freedom. There was no turning back. The British could no longer pretend that only 'a few troublemakers' wanted independence.",
+        "In 1945, the Second World War ended. Britain was exhausted — it had spent all its money fighting Germany and Japan. The British people voted out Prime Minister Winston Churchill, who wanted to keep India by force. The new Prime Minister, Clement Attlee, said, 'We must give India its freedom. We cannot afford to hold it anymore.'",
+        "So the Quit India Movement of 1942 had done its job. It had shown the British that Indians would never stop fighting. It had drained the British of money and will. And it had prepared the Indian people for the final step — freedom. But before that final step, there was one more painful chapter: the idea of a separate Muslim nation called Pakistan. Let us turn to that sad, but important, story now."
+      ]
+    },
+    {
+      "id": "independence",
+      "label": "12. A New Country is Born (1947)",
+      "images": [
+        {
+          "file": "fig2_35_patel.png",
+          "caption": "Sardar Vallabhbhai Patel — the 'Iron Man of India' who united 565 princely states"
+        },
+        {
+          "file": "fig2_36_partition_train.png",
+          "caption": "A train carrying refugees during the Partition of 1947 — a sad and important moment in our history"
+        }
+      ],
+      "beats": [
+        "Welcome back, my little friend. This is the last story of our long journey. Today, we will see how India finally became free — but also how that freedom came with a great sadness: the Partition. Let me tell you the story carefully, because it is important to understand.",
+        "In the 1930s and 1940s, the Muslim League, led by Muhammad Ali Jinnah, began to argue that Indian Muslims were not just a religious community — they were a separate NATION. They said, 'Muslims and Hindus are different in food, dress, customs, and religion. So Muslims should have their own country, separate from Hindu India.' This was called the 'Two-Nation Theory'.",
+        "Many people, including Gandhiji and most Congress leaders, did not agree. They said, 'Hindus and Muslims have lived together in India for hundreds of years. We are ONE nation, with many religions.' But the Muslim League insisted. In 1940, at a meeting in Lahore, the League passed a resolution demanding a separate country called 'PAKISTAN' — meaning 'Land of the Pure'. This is called the LAHORE RESOLUTION or the Pakistan Resolution.",
+        "From 1940 onwards, relations between the Congress and the Muslim League got worse. In 1946, the Muslim League declared 16 August as 'Direct Action Day' — a day to demand Pakistan. Tragically, in Calcutta, this day turned into terrible Hindu-Muslim riots. About 4,000 people were killed in four days. Then the riots spread to other cities — Noakhali in Bengal, Bihar, and elsewhere. Neighbours killed neighbours. Friends became enemies. It was a very dark time.",
+        "Meanwhile, the British were exhausted from the war. They sent the CABINET MISSION in 1946 — a group of three British ministers — to discuss how India should become free. They proposed a loose federation: India would be one country, but Muslim-majority provinces could group together. The Congress accepted this at first, then disagreed. Jinnah also had objections. The mission failed to bring everyone together.",
+        "In early 1947, the British Prime Minister Attlee announced, 'Britain will leave India by June 1948 — at the latest.' Then a new Viceroy, Lord Mountbatten, was sent to India. He looked at the angry, divided country and decided, 'We cannot wait that long. We will leave by August 1947 — in just a few months!' The date was fixed: 15 August 1947. India would be free.",
+        "But there was a huge problem. The Muslim League demanded Pakistan. The Congress finally agreed, very reluctantly, to the PARTITION — the division of India into two countries: India (mostly Hindu) and Pakistan (mostly Muslim). The borders were drawn by a British lawyer named Cyril Radcliffe in just five weeks. He had never been to India before! He drew a line on a map — and that line cut through villages, fields, rivers, families.",
+        "When the borders were announced on 17 August 1947, all hell broke loose. Hindus and Sikhs in the new Pakistan territory panicked and fled to India. Muslims in India panicked and fled to Pakistan. About 14-15 MILLION people left their homes. They walked, took trains, bullock-carts — anything. On the way, mobs attacked them. About ONE MILLION people were killed in the violence. Trains arrived at stations full of dead bodies. It was the saddest chapter in our history.",
+        "One brave man tried to stop the killing. Gandhiji went on a fast in Calcutta in September 1947 — he refused to eat until Hindus and Muslims stopped killing each other. His frail old body grew weaker. People wept to see him so thin. Finally, the leaders of the riots came to him and promised, 'We will stop.' Gandhiji broke his fast. He then went to Delhi and did another fast. He was 78 years old.",
+        "On 15 August 1947, India became a free country. Jawaharlal Nehru, the first Prime Minister, gave a famous speech. He said, 'At the stroke of the midnight hour, when the world sleeps, India will awake to life and freedom.' The Indian flag — the tricolour of saffron, white, and green with the Ashoka Chakra in the middle — was hoisted. People danced in the streets. Sweets were distributed. Fireworks were lit. India was free at last!",
+        "But Gandhiji did not celebrate. He was sad about the Partition. He was in Calcutta, fasting and praying for peace. He said, 'This is not the freedom I dreamed of. My India is divided.' On 30 January 1948, just five months after independence, Gandhiji was shot dead by a man named Nathuram Godse, who believed Gandhiji was too kind to Muslims. The whole world wept. People said, 'The Father of the Nation is gone.'",
+        "Now let me tell you about another hero — Sardar Vallabhbhai Patel. People called him the 'Iron Man of India'. After independence, India had 565 PRINCELY STATES — small kingdoms ruled by maharajas and nawabs. The British said, 'These states can choose to join India, join Pakistan, or stay independent.' Sardar Patel went to each princely state and convinced the rulers to join India. He used persuasion, sometimes a little threat, but mostly diplomacy. In just one year, he had united 565 princely states into the new Republic of India. Without Sardar Patel, the India we know today on the map would not exist!",
+        "So, my little friend, our long road to freedom finally ended on 15 August 1947. Many brave hearts gave their lives — Khudiram Bose (18), Bhagat Singh (23), Rajguru, Sukhdev, Subhas Bose (48), Gandhiji (78), and millions of ordinary Indians whose names we do not know. Some gave their blood, some gave their youth, some gave their money, some gave their songs. Together, they won us our freedom. When you sing 'Jana Gana Mana' or 'Vande Mataram' next Independence Day, remember them. And remember — freedom is precious. Never take it for granted. Jai Hind!"
+      ]
+    }
+  ],
+  "notes": "<!-- ============================================\n     BEFORE WE BEGIN — Story-Time Words\n     A separate set of assets explaining every key term\n     and concept a student needs to understand BEFORE\n     starting the lectures.\n     ============================================ -->\n<div style=\"background: linear-gradient(135deg, #3b0764 0%, #5b21b6 100%); border: 1px solid #a78bfa; border-radius: 14px; padding: 22px 24px; margin-bottom: 28px;\">\n<h2 style=\"color: #ddd6fe; font-size: 22px; margin: 0 0 8px; font-weight: 700;\">📖 Before We Begin — Story-Time Words</h2>\n<p style=\"color: #ddd6fe; font-size: 13px; margin: 0 0 16px; line-height: 1.6;\">My little friend, before we begin our long story of how India became free, let us sit together and learn some special words. These are words you will hear many times in the stories ahead. Knowing them will help you follow the story better. Imagine we are sitting on a soft rug, with a cup of warm milk, and I am telling you these words one by one. Ready? Let's begin!</p>\n\n<div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\">\n<h3 style=\"color: #c4b5fd; font-size: 16px; margin: 0 0 8px;\">🌍 1. Our Country — India</h3>\n<p style=\"color: #e9d5ff; font-size: 13px; line-height: 1.6; margin: 0;\">India is the beautiful country where we live. It has tall mountains in the north (the Himalayas), wide rivers (the Ganga, Yamuna, Godavari, Krishna), green fields, big forests, sandy deserts, and a long, long seashore. People in India speak many languages — Hindi, Tamil, Bengali, Marathi, Telugu, Punjabi, and many more. They also follow different religions — mostly Hindu, but also Muslim, Sikh, Christian, Buddhist, Jain, and others. India has been home to humans for thousands and thousands of years. We love India very much. That is why we call it our MOTHERLAND — like a mother who takes care of us, and whom we must take care of in return.</p>\n</div>\n\n<div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\">\n<h3 style=\"color: #c4b5fd; font-size: 16px; margin: 0 0 8px;\">👑 2. The British and the East India Company</h3>\n<p style=\"color: #e9d5ff; font-size: 13px; line-height: 1.6; margin: 0;\">Far away from India, in a cold country called England, there lived a people called the British. They had big ships and big guns. About 250 years ago, a British company called the <strong>East India Company</strong> came to India. At first, they just wanted to buy and sell things — spices, cloth, tea. But slowly, they wanted MORE. They started taking our lands, making us pay heavy taxes, and treating Indians as if we were less important than them. They became the RULERS of India, not just traders. This made many Indians sad and angry.</p>\n</div>\n\n<div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\">\n<h3 style=\"color: #c4b5fd; font-size: 16px; margin: 0 0 8px;\">⚔️ 3. The Great Uprising of 1857</h3>\n<p style=\"color: #e9d5ff; font-size: 13px; line-height: 1.6; margin: 0;\">In the year 1857, the Indian people said, 'ENOUGH!' Soldiers, kings, farmers, even queens like Rani Lakshmibai of Jhansi — all of them joined hands and fought against the East India Company. This was called the <strong>Great Uprising</strong> (also called the Sepoy Mutiny or the First War of Independence). It was a big, brave fight. But sadly, the Indian side lost, because the British had better guns and more soldiers. After this fight, the British Crown (the Queen of England) took direct control of India from the East India Company.</p>\n</div>\n\n<div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\">\n<h3 style=\"color: #c4b5fd; font-size: 16px; margin: 0 0 8px;\">🗣️ 4. Freedom, Independence, and Swaraj</h3>\n<p style=\"color: #e9d5ff; font-size: 13px; line-height: 1.6; margin: 0;\">Imagine someone tells you what to wear, what to eat, when to sleep, and where to go — every single minute of every day. You would feel angry, wouldn't you? You would say, 'I want to make my OWN choices!' That is what <strong>FREEDOM</strong> means — making your own choices. <strong>INDEPENDENCE</strong> is a long word that means the same thing — when a country makes its own choices, without anyone else telling it what to do. The Sanskrit word for self-rule is <strong>SWARAJ</strong>. 'Swa' means 'self', and 'raj' means 'rule'. So Swaraj = rule by ourselves. <strong>Purna Swaraj</strong> means COMPLETE self-rule, with no British involved at all.</p>\n</div>\n\n<div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\">\n<h3 style=\"color: #c4b5fd; font-size: 16px; margin: 0 0 8px;\">🏛️ 5. The Indian National Congress</h3>\n<p style=\"color: #e9d5ff; font-size: 13px; line-height: 1.6; margin: 0;\">In 1885, some Indian leaders got together in Bombay (now Mumbai) and formed a group called the <strong>Indian National Congress</strong>. 'Congress' means 'a big meeting'. They wanted to meet regularly, talk about India's problems, and ask the British politely for changes. At first, they just asked for small reforms — like more Indians in government jobs. Later, they started demanding complete freedom. The Congress became the biggest group fighting for India's freedom. Many great leaders — like Dadabhai Naoroji, Tilak, Gokhale, Gandhiji, Nehru, Bose, Sardar Patel — all belonged to the Congress.</p>\n</div>\n\n<div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\">\n<h3 style=\"color: #c4b5fd; font-size: 16px; margin: 0 0 8px;\">🕊️ 6. Mahatma Gandhi and Non-Violence</h3>\n<p style=\"color: #e9d5ff; font-size: 13px; line-height: 1.6; margin: 0;\">Among all the freedom fighters, one man became very special. His name was <strong>Mohandas Karamchand Gandhi</strong>. People called him <strong>Mahatma</strong> Gandhi — 'Mahatma' means 'Great Soul'. He believed in <strong>NON-VIOLENCE</strong> — a Sanskrit word for it is <strong>AHIMSA</strong>. Non-violence means: fighting for what is right WITHOUT hurting anyone — no guns, no bombs, no hitting. He believed that Indians could defeat the British by refusing to cooperate with them — by not buying their things, not going to their schools, not paying their taxes. He called this method <strong>SATYAGRAHA</strong> — 'truth force' or 'soul force'. Gandhiji was a tiny, thin old man with a stick — but he had the biggest heart in India.</p>\n</div>\n\n<div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\">\n<h3 style=\"color: #c4b5fd; font-size: 16px; margin: 0 0 8px;\">🛍️ 7. Swadeshi and Boycott</h3>\n<p style=\"color: #e9d5ff; font-size: 13px; line-height: 1.6; margin: 0;\">Imagine your friend tells you, 'Do not buy things from that shop — they are mean!' So you stop buying from that shop. That is called a <strong>BOYCOTT</strong> — refusing to buy from or work with someone. Indians boycotted British goods — cloth, sugar, shoes — everything made in British factories. Instead, they started buying things made IN INDIA. This was called the <strong>SWADESHI</strong> movement. 'Swa' means 'self' or 'own', and 'desh' means 'country'. So Swadeshi = 'of our own country'. The British factories lost a lot of money because nobody was buying their stuff. This was a clever, peaceful way of fighting.</p>\n</div>\n\n<div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\">\n<h3 style=\"color: #c4b5fd; font-size: 16px; margin: 0 0 8px;\">⚔️ 8. Revolutionaries</h3>\n<p style=\"color: #e9d5ff; font-size: 13px; line-height: 1.6; margin: 0;\">Some young Indians felt that non-violence was too slow. They said, 'The British only understand force. We must fight them with weapons — guns, bombs.' These brave young men were called the <strong>REVOLUTIONARIES</strong>. Some famous revolutionaries were <strong>Khudiram Bose</strong> (just 18 when he was hanged), <strong>Bhagat Singh</strong> (just 23 when he was hanged), <strong>Chandrashekhar Azad</strong>, <strong>Subhas Chandra Bose</strong>, and many more. Please remember — they are NOT role models for us. They lived in a very hard time and made very hard choices. But their stories show how deeply they loved India.</p>\n</div>\n\n<div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\">\n<h3 style=\"color: #c4b5fd; font-size: 16px; margin: 0 0 8px;\">🎶 9. Vande Mataram — Our Song</h3>\n<p style=\"color: #e9d5ff; font-size: 13px; line-height: 1.6; margin: 0;\">In 1875, a writer named <strong>Bankim Chandra Chattopadhyay</strong> wrote a beautiful poem in Bengali. He called it <strong>Vande Mataram</strong> — meaning 'I bow to the Mother' or 'Praise to the Mother'. The Mother was not a real woman — she was our Mother India, the land itself. This poem became a magic word. When freedom fighters marched, they shouted 'Vande Mataram!' When they were sent to prison, they sang 'Vande Mataram'. When they were hanged, their last words were 'Vande Mataram'. In 1950, after India became free, 'Vande Mataram' was adopted as our National Song. You can sing it on Independence Day!</p>\n</div>\n\n<div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\">\n<h3 style=\"color: #c4b5fd; font-size: 16px; margin: 0 0 8px;\">🇵🇰 10. Pakistan and the Partition</h3>\n<p style=\"color: #e9d5ff; font-size: 13px; line-height: 1.6; margin: 0;\">In the 1930s and 1940s, some Indian Muslim leaders — especially a man named <strong>Muhammad Ali Jinnah</strong> — began to say, 'Muslims and Hindus are different. Muslims should have their OWN country.' They called this the <strong>Two-Nation Theory</strong>. They wanted a separate country called <strong>PAKISTAN</strong> — meaning 'Land of the Pure'. Many people did not agree — they thought Hindus and Muslims could live together as they had for hundreds of years. But in 1947, when the British finally left, they divided India into two countries: <strong>India</strong> (mostly Hindu) and <strong>Pakistan</strong> (mostly Muslim). This division was called the <strong>PARTITION</strong>. It was a very sad time — about 14 million people had to leave their homes, and about 1 million people died in the violence.</p>\n</div>\n\n<div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\">\n<h3 style=\"color: #c4b5fd; font-size: 16px; margin: 0 0 8px;\">🚂 11. Princely States</h3>\n<p style=\"color: #e9d5ff; font-size: 13px; line-height: 1.6; margin: 0;\">During British rule, India was not just one country. It was divided into two parts: (1) British India — directly ruled by the British, and (2) <strong>PRINCELY STATES</strong> — small kingdoms ruled by Indian maharajas and nawabs (like the Maharaja of Mysore or the Nizam of Hyderabad). There were 565 princely states! Some were as big as a country; some were as small as a town. The princes were allowed to rule their states, but under British 'supervision'. When India became free in 1947, the British said, 'These princely states can choose: join India, join Pakistan, or stay independent.' A great man named <strong>Sardar Vallabhbhai Patel</strong> convinced almost all the princes to join India. That is why India today is one country on the map, not 565 tiny countries.</p>\n</div>\n\n<div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\">\n<h3 style=\"color: #c4b5fd; font-size: 16px; margin: 0 0 8px;\">🕯️ 12. Martyr</h3>\n<p style=\"color: #e9d5ff; font-size: 13px; line-height: 1.6; margin: 0;\">A <strong>MARTYR</strong> is a person who is killed or who gives up their life because they believe in something very strongly. In our freedom story, there were many martyrs — Khudiram Bose, Bhagat Singh, Rajguru, Sukhdev, Chandrashekhar Azad, Subhas Bose, Mahatma Gandhi, and millions of ordinary Indians whose names we do not know. A long time ago, the Indian Council of Historical Research made a list of martyrs — and they found over 14,000 names! Behind every name is a story of a person who loved India so much that they gave their life for it. We remember them with respect and gratitude.</p>\n</div>\n\n<p style=\"color: #ddd6fe; font-size: 13px; line-height: 1.6; margin: 12px 0 0;\">Now that you know these special words, you are ready to begin our long story. Let's start with the very first chapter — what happened in 1858, just after the Great Uprising. Are you ready? Let's go! 🚀</p>\n</div>\n\n<!-- ============================================\n     KEY NOTES — Quick Reference\n     ============================================ -->\n<h2>📝 Key Notes — India's Long Road to Independence</h2>\n\n<h3>Timeline at a Glance</h3>\n<table class=\"styled-table\">\n<tr><th>Year</th><th>Event</th></tr>\n<tr><td><strong>1857</strong></td><td>The Great Uprising (also called Sepoy Mutiny or First War of Independence)</td></tr>\n<tr><td><strong>1858</strong></td><td>British Crown takes direct control of India from the East India Company; Royal Proclamation by Queen Victoria</td></tr>\n<tr><td><strong>1875</strong></td><td>(a) Arya Samaj founded by Swami Dayananda Saraswati in Bombay; (b) Bankim Chandra Chattopadhyay composes the poem 'Vande Mataram'</td></tr>\n<tr><td><strong>1882</strong></td><td>Bankim Chandra publishes the novel 'Anandamath' containing 'Vande Mataram'</td></tr>\n<tr><td><strong>1885</strong></td><td>Indian National Congress founded; first session in Bombay (28 December) with 72 delegates; first president W.C. Bonnerjee</td></tr>\n<tr><td><strong>1893</strong></td><td>Swami Vivekananda's famous speech at the Parliament of Religions in Chicago</td></tr>\n<tr><td><strong>1895</strong></td><td>Birsa Munda leads the Munda uprising against the British in Jharkhand</td></tr>\n<tr><td><strong>1902</strong></td><td>Anushilan Samiti founded in Calcutta</td></tr>\n<tr><td><strong>1905</strong></td><td>Partition of Bengal by Lord Curzon; birth of the Swadeshi and Boycott movements</td></tr>\n<tr><td><strong>1906</strong></td><td>All-India Muslim League founded at Dhaka</td></tr>\n<tr><td><strong>1907</strong></td><td>Congress splits at Surat between 'Moderates' and 'Nationalists' (also called Extremists)</td></tr>\n<tr><td><strong>1908</strong></td><td>Khudiram Bose hanged (18 years old); Alipore Bomb Case; Tilak imprisoned for sedition</td></tr>\n<tr><td><strong>1911</strong></td><td>Partition of Bengal annulled; British capital shifted from Calcutta to Delhi</td></tr>\n<tr><td><strong>1915</strong></td><td>Gandhi returns to India from South Africa</td></tr>\n<tr><td><strong>1916</strong></td><td>Home Rule Leagues launched by Tilak and Annie Besant; Lucknow Pact between Congress and Muslim League</td></tr>\n<tr><td><strong>1919</strong></td><td>Rowlatt Act passed; Jallianwala Bagh massacre (13 April) under General Dyer</td></tr>\n<tr><td><strong>1920-22</strong></td><td>Non-Cooperation Movement and Khilafat Movement; withdrawn after Chauri Chaura incident (Feb 1922)</td></tr>\n<tr><td><strong>1924</strong></td><td>Hindustan Republican Association (HRA) formed</td></tr>\n<tr><td><strong>1927-28</strong></td><td>Simon Commission boycotted; Lala Lajpat Rai dies after police lathi charge; Motilal Nehru Report</td></tr>\n<tr><td><strong>1928</strong></td><td>HRA reorganised as HSRA (Hindustan Socialist Republican Association)</td></tr>\n<tr><td><strong>1929</strong></td><td>Purna Swaraj demanded at Lahore Congress session (26 January 1930 chosen as Independence Day); Bhagat Singh and Batukeshwar Dutt throw bombs in Central Legislative Assembly</td></tr>\n<tr><td><strong>1930</strong></td><td>Civil Disobedience Movement begins; Salt March (12 March – 6 April 1930) from Sabarmati to Dandi; First Round Table Conference</td></tr>\n<tr><td><strong>1931</strong></td><td>Bhagat Singh, Rajguru, Sukhdev executed (23 March); Gandhi-Irwin Pact; Second Round Table Conference in London</td></tr>\n<tr><td><strong>1935</strong></td><td>Government of India Act introduces provincial autonomy</td></tr>\n<tr><td><strong>1940</strong></td><td>Lahore Resolution by Muslim League demands separate Muslim-majority states</td></tr>\n<tr><td><strong>1941</strong></td><td>Subhas Chandra Bose escapes from India to seek Axis support</td></tr>\n<tr><td><strong>1942</strong></td><td>Cripps Mission; Quit India Movement launched (8 August); mass arrests</td></tr>\n<tr><td><strong>1943</strong></td><td>Subhas Bose reorganises the Indian National Army; Provisional Government of Azad Hind proclaimed</td></tr>\n<tr><td><strong>1944</strong></td><td>INA campaigns in northeast India; defeated at Imphal and Kohima</td></tr>\n<tr><td><strong>1945</strong></td><td>INA trials at Red Fort; Royal Indian Navy Mutiny; Cabinet Mission Plan; World War II ends</td></tr>\n<tr><td><strong>1946</strong></td><td>Direct Action Day (16 August) called by Jinnah; widespread communal violence</td></tr>\n<tr><td><strong>1947</strong></td><td>India's Independence and Partition (15 August); Sardar Patel unites 565 princely states</td></tr>\n<tr><td><strong>1948</strong></td><td>Mahatma Gandhi assassinated (30 January) by Nathuram Godse</td></tr>\n<tr><td><strong>1950</strong></td><td>India becomes a Republic (26 January); 'Vande Mataram' adopted as the National Song; 'Jana Gana Mana' adopted as the National Anthem</td></tr>\n</table>\n\n<h3>Reform Movements (19th century)</h3>\n<table class=\"styled-table\">\n<tr><th>Movement</th><th>Founder</th><th>Year</th><th>Key ideas</th></tr>\n<tr><td>Brahmo Samaj</td><td>Raja Ram Mohan Roy</td><td>1828, Calcutta</td><td>Opposed child marriage, caste discrimination; supported widow rights and girls' education</td></tr>\n<tr><td>Arya Samaj</td><td>Swami Dayananda Saraswati</td><td>1875, Bombay</td><td>Return to the Vedas, rational thinking, equality, women's education, widow remarriage</td></tr>\n<tr><td>Shuddhi Movement</td><td>Arya Samaj leaders</td><td>Late 19th c.</td><td>Reconversion of people who had left Hinduism</td></tr>\n<tr><td>Other reformers</td><td>Vidyasagar, Syed Ahmed Khan, Jyotirao & Savitribai Phule</td><td>19th c.</td><td>Modern education, especially for girls and marginalised groups</td></tr>\n</table>\n\n<h3>Key Leaders of the Freedom Struggle</h3>\n<table class=\"styled-table\">\n<tr><th>Name</th><th>Role / contribution</th></tr>\n<tr><td>Raja Ram Mohan Roy</td><td>Founder of Brahmo Samaj; social reformer</td></tr>\n<tr><td>Swami Dayananda Saraswati</td><td>Founder of Arya Samaj; 'Back to the Vedas'</td></tr>\n<tr><td>Bankim Chandra Chattopadhyay</td><td>Wrote 'Vande Mataram' (1875) and the novel 'Anandamath' (1882)</td></tr>\n<tr><td>Swami Vivekananda</td><td>Disciple of Ramakrishna; inspired pride in Indian culture</td></tr>\n<tr><td>Bal Gangadhar Tilak</td><td>'Swaraj is my birthright'; started Ganpati and Shivaji festivals; Home Rule League</td></tr>\n<tr><td>Birsa Munda</td><td>Tribal leader from Jharkhand; led the Munda uprising (1895)</td></tr>\n<tr><td>Aurobindo Ghose</td><td>Revolutionary from Bengal; tried in the Alipore Bomb Case; later became a spiritual teacher in Pondicherry</td></tr>\n<tr><td>Khudiram Bose</td><td>Youngest revolutionary hanged (1908) at age 18</td></tr>\n<tr><td>Annie Besant</td><td>British-born Indian nationalist; started Home Rule League in Madras</td></tr>\n<tr><td>Mohandas K. Gandhi (Mahatma Gandhi)</td><td>Father of the Nation; led Non-Cooperation, Civil Disobedience, Salt March, Quit India</td></tr>\n<tr><td>Sarojini Naidu</td><td>The 'Nightingale of India'; led the Dharasana salt march</td></tr>\n<tr><td>Khan Abdul Ghaffar Khan</td><td>'Frontier Gandhi'; led the Khudai Khidmatgars (Red Shirts)</td></tr>\n<tr><td>Bhagat Singh</td><td>HSRA revolutionary; hanged on 23 March 1931 at age 23</td></tr>\n<tr><td>Chandrashekhar Azad</td><td>HSRA leader; shot himself in Allahabad's Alfred Park (1931) to avoid capture</td></tr>\n<tr><td>Bina Das</td><td>Revolutionary from Bengal; shot at the Governor of Bengal (1932)</td></tr>\n<tr><td>Subhas Chandra Bose (Netaji)</td><td>President of Congress (1938, 1939); founded the Forward Bloc; led the Indian National Army; died in a plane crash (1945)</td></tr>\n<tr><td>Chandra Singh Garhwali</td><td>Refused to fire on unarmed peaceful protesters in Peshawar (1930)</td></tr>\n<tr><td>Jawaharlal Nehru</td><td>First Prime Minister of independent India; delivered the 'Tryst with Destiny' speech</td></tr>\n<tr><td>Sardar Vallabhbhai Patel</td><td>The 'Iron Man of India'; united 565 princely states into the Republic of India</td></tr>\n<tr><td>Muhammad Ali Jinnah</td><td>Leader of the Muslim League; demanded Pakistan; became the first Governor-General of Pakistan</td></tr>\n</table>\n\n<h3>Major Movements and Their Methods</h3>\n<table class=\"styled-table\">\n<tr><th>Movement</th><th>Year</th><th>Leader(s)</th><th>Method</th></tr>\n<tr><td>Swadeshi Movement</td><td>1905-1908</td><td>Lal-Bal-Pal</td><td>Boycott of British goods; promotion of Indian goods</td></tr>\n<tr><td>Home Rule Movement</td><td>1916-1918</td><td>Tilak & Annie Besant</td><td>Public meetings, newspapers, leagues</td></tr>\n<tr><td>Non-Cooperation Movement</td><td>1920-1922</td><td>M.K. Gandhi</td><td>Boycott of British schools, courts, titles; non-violent</td></tr>\n<tr><td>Civil Disobedience (Salt March)</td><td>1930-1931</td><td>M.K. Gandhi</td><td>Breaking the Salt Law; non-violent</td></tr>\n<tr><td>Quit India Movement</td><td>1942</td><td>M.K. Gandhi & Congress</td><td>'Do or Die'; mass protests, underground activity</td></tr>\n<tr><td>INA Campaigns</td><td>1943-1944</td><td>Subhas Chandra Bose</td><td>Armed struggle with Japanese support</td></tr>\n</table>\n\n<h3>Important Acts and Laws</h3>\n<table class=\"styled-table\">\n<tr><th>Act / Law</th><th>Year</th><th>Why it mattered</th></tr>\n<tr><td>Arms Act</td><td>1878</td><td>Prohibited Indians from keeping arms; allowed the British to do so</td></tr>\n<tr><td>Vernacular Press Act</td><td>1878</td><td>Censored Indian-language newspapers</td></tr>\n<tr><td>Partition of Bengal</td><td>1905</td><td>Divided Bengal to weaken Indian unity; annulled in 1911</td></tr>\n<tr><td>Rowlatt Act</td><td>1919</td><td>Allowed arrest without trial for up to 2 years</td></tr>\n<tr><td>Government of India Act</td><td>1935</td><td>Introduced provincial autonomy; limited elected government in provinces</td></tr>\n<tr><td>Lahore Resolution</td><td>1940</td><td>Demanded separate Muslim-majority states (Pakistan)</td></tr>\n<tr><td>Cripps Mission</td><td>1942</td><td>Proposed dominion status after WWII; rejected by Indians</td></tr>\n<tr><td>Cabinet Mission Plan</td><td>1946</td><td>Proposed a loose federation; failed</td></tr>\n<tr><td>Indian Independence Act</td><td>1947</td><td>Granted independence and created the Partition</td></tr>\n</table>\n\n<h3>Our National Symbols</h3>\n<table class=\"styled-table\">\n<tr><th>Symbol</th><th>Origin</th><th>Adopted</th></tr>\n<tr><td>'Vande Mataram' (National Song)</td><td>Composed 1875 by Bankim Chandra; published in novel 'Anandamath' (1882); first sung at 1896 Congress Session</td><td>1950</td></tr>\n<tr><td>'Jana Gana Mana' (National Anthem)</td><td>Composed by Rabindranath Tagore</td><td>1950</td></tr>\n<tr><td>National Flag (Tricolour)</td><td>Saffron (courage), White (peace), Green (faith); with Ashoka Chakra in the centre</td><td>1947 (adopted by Constituent Assembly)</td></tr>\n<tr><td>National Anthem adopted</td><td>by the Constituent Assembly on 24 January 1950</td><td>1950</td></tr>\n</table>\n\n<h3>Snapshots — Key Takeaways</h3>\n<ul>\n<li>India's freedom struggle lasted nearly 200 years (1757–1947), with the modern phase from 1858.</li>\n<li>The British Crown took direct control of India from the East India Company in 1858 after the Great Uprising of 1857.</li>\n<li>Social reform movements (Brahmo Samaj, Arya Samaj, etc.) prepared Indian society for the freedom struggle.</li>\n<li>The Indian National Congress (1885) was the main political organisation fighting for freedom.</li>\n<li>The Swadeshi Movement (1905) was the first mass non-violent movement — Indians boycotted British goods.</li>\n<li>Revolutionaries (Khudiram, Bhagat Singh, Azad) chose armed struggle as a path to freedom.</li>\n<li>Mahatma Gandhi led major non-violent movements: Non-Cooperation (1920-22), Civil Disobedience (1930-34), Quit India (1942).</li>\n<li>Subhas Chandra Bose led the Indian National Army (INA) in armed struggle with Japanese support.</li>\n<li>The Muslim League's demand for a separate Muslim nation (Pakistan) led to the Partition of 1947.</li>\n<li>India became independent on 15 August 1947. Sardar Patel united 565 princely states into the new Republic of India.</li>\n<li>Mahatma Gandhi was assassinated on 30 January 1948 by Nathuram Godse.</li>\n<li>India became a Republic on 26 January 1950.</li>\n</ul>\n\n<h3>Books and Ideas Mentioned in the Chapter</h3>\n<table class=\"styled-table\">\n<tr><th>Book / Song</th><th>Author</th><th>Year</th></tr>\n<tr><td>'Vande Mataram' (poem)</td><td>Bankim Chandra Chattopadhyay</td><td>1875</td></tr>\n<tr><td>'Anandamath' (novel containing Vande Mataram)</td><td>Bankim Chandra Chattopadhyay</td><td>1882</td></tr>\n<tr><td>'New India' and 'Commonweal' (newspapers)</td><td>Annie Besant</td><td>1914-1917</td></tr>\n<tr><td>'Bande Mataram' (English daily)</td><td>Aurobindo Ghose</td><td>1906</td></tr>\n<tr><td>'India' (Tamil magazine)</td><td>Subramania Bharati</td><td>1906</td></tr>\n<tr><td>'Young India' (English weekly)</td><td>M.K. Gandhi</td><td>1919</td></tr>\n<tr><td>'Harijan' (English weekly)</td><td>M.K. Gandhi</td><td>1933</td></tr>\n</table>",
+  "practice": "<h2>✏️ Practice Time — Try These Questions!</h2>\n<p>My little friend, now that you have heard the stories, let's see how much you remember. Read each question, think for a moment, and then tap <strong>Show answer</strong> to check if you were right. Don't worry if you don't get them all right — even grown-ups forget sometimes!</p>\n\n<div class=\"practice-card\">\n<h3>Q1. The Big Year</h3>\n<p>In which year did India finally become free? (Hint: It was the 15th of August.)</p>\n<button class=\"reveal-btn\" onclick=\"this.nextElementSibling.style.display='block'; this.style.display='none';\">Show answer</button>\n<div class=\"reveal-answer\" style=\"display:none;\">\n<p>India became free on <strong>15 August 1947</strong>. That is why we celebrate Independence Day on 15 August every year!</p>\n</div>\n</div>\n\n<div class=\"practice-card\">\n<h3>Q2. Who was the Father of the Nation?</h3>\n<p>Which leader was called 'Mahatma' — meaning 'Great Soul' — and is known as the Father of our Nation?</p>\n<button class=\"reveal-btn\" onclick=\"this.nextElementSibling.style.display='block'; this.style.display='none';\">Show answer</button>\n<div class=\"reveal-answer\" style=\"display:none;\">\n<p><strong>Mohandas Karamchand Gandhi</strong>, also called Mahatma Gandhi. He led the freedom struggle using non-violence (ahimsa).</p>\n</div>\n</div>\n\n<div class=\"practice-card\">\n<h3>Q3. The Magic Song</h3>\n<p>What song, written by Bankim Chandra in 1875, became the magic word of the freedom struggle and is now our National Song?</p>\n<button class=\"reveal-btn\" onclick=\"this.nextElementSibling.style.display='block'; this.style.display='none';\">Show answer</button>\n<div class=\"reveal-answer\" style=\"display:none;\">\n<p><strong>'Vande Mataram'</strong> — meaning 'Praise to the Mother' or 'I bow to the Motherland'. Freedom fighters shouted this as a slogan. It was adopted as the National Song in 1950.</p>\n</div>\n</div>\n\n<div class=\"practice-card\">\n<h3>Q4. The Big Meeting in Bombay</h3>\n<p>In 1885, some Indian leaders got together in Bombay and formed which organisation?</p>\n<button class=\"reveal-btn\" onclick=\"this.nextElementSibling.style.display='block'; this.style.display='none';\">Show answer</button>\n<div class=\"reveal-answer\" style=\"display:none;\">\n<p>The <strong>Indian National Congress</strong>. It became the biggest group fighting for India's freedom.</p>\n</div>\n</div>\n\n<div class=\"practice-card\">\n<h3>Q5. The Big Walk</h3>\n<p>In 1930, Gandhiji walked 380 kilometres to the sea to make what? (Hint: It's something we eat every day!)</p>\n<button class=\"reveal-btn\" onclick=\"this.nextElementSibling.style.display='block'; this.style.display='none';\">Show answer</button>\n<div class=\"reveal-answer\" style=\"display:none;\">\n<p><strong>Salt!</strong> The British only allowed their own factories to make salt, and they taxed it. Gandhiji walked to the sea at Dandi and made his own salt to break the unfair law. This was called the Salt March or Dandi March.</p>\n</div>\n</div>\n\n<div class=\"practice-card\">\n<h3>Q6. Two Brave Young Men</h3>\n<p>Which two young revolutionaries were hanged on 23 March 1931, along with their friend Rajguru?</p>\n<button class=\"reveal-btn\" onclick=\"this.nextElementSibling.style.display='block'; this.style.display='none';\">Show answer</button>\n<div class=\"reveal-answer\" style=\"display:none;\">\n<p><strong>Bhagat Singh and Sukhdev</strong> (along with Rajguru). They were hanged in Lahore jail. Bhagat Singh was just 23 years old.</p>\n</div>\n</div>\n\n<div class=\"practice-card\">\n<h3>Q7. The Two Countries</h3>\n<p>When India became free in 1947, it was divided into two countries. What was the second country called?</p>\n<button class=\"reveal-btn\" onclick=\"this.nextElementSibling.style.display='block'; this.style.display='none';\">Show answer</button>\n<div class=\"reveal-answer\" style=\"display:none;\">\n<p><strong>Pakistan</strong> — meaning 'Land of the Pure'. The division was called the Partition. Many people had to leave their homes and move between the two new countries. It was a very sad time.</p>\n</div>\n</div>\n\n<div class=\"practice-card\">\n<h3>Q8. The Iron Man</h3>\n<p>Which leader, called the 'Iron Man of India', convinced 565 princely states to join the new Republic of India?</p>\n<button class=\"reveal-btn\" onclick=\"this.nextElementSibling.style.display='block'; this.style.display='none';\">Show answer</button>\n<div class=\"reveal-answer\" style=\"display:none;\">\n<p><strong>Sardar Vallabhbhai Patel</strong>. Without him, the India we see on the map today would not exist as one country!</p>\n</div>\n</div>\n\n<div class=\"practice-card\">\n<h3>Q9. Our National Anthem</h3>\n<p>Who composed 'Jana Gana Mana', our National Anthem?</p>\n<button class=\"reveal-btn\" onclick=\"this.nextElementSibling.style.display='block'; this.style.display='none';\">Show answer</button>\n<div class=\"reveal-answer\" style=\"display:none;\">\n<p>The great poet <strong>Rabindranath Tagore</strong>. He was the first Indian to win the Nobel Prize for Literature (in 1913).</p>\n</div>\n</div>\n\n<div class=\"practice-card\">\n<h3>Q10. The Slogan</h3>\n<p>Which movement in 1942 had the slogan 'Karenge ya Marenge' — meaning 'Do or Die'?</p>\n<button class=\"reveal-btn\" onclick=\"this.nextElementSibling.style.display='block'; this.style.display='none';\">Show answer</button>\n<div class=\"reveal-answer\" style=\"display:none;\">\n<p>The <strong>Quit India Movement</strong> of August 1942. Gandhiji gave this slogan, asking all Indians to either free India or die trying.</p>\n</div>\n</div>\n\n<div class=\"practice-card\">\n<h3>Q11. The Brave Soldier</h3>\n<p>Who was the leader of the Indian National Army (INA), also lovingly called 'Netaji'?</p>\n<button class=\"reveal-btn\" onclick=\"this.nextElementSibling.style.display='block'; this.style.display='none';\">Show answer</button>\n<div class=\"reveal-answer\" style=\"display:none;\">\n<p><strong>Subhas Chandra Bose</strong>. He escaped from India in 1941, travelled by submarine to Japan, and led the INA in 1943-44. He died in a plane crash in 1945.</p>\n</div>\n</div>\n\n<div class=\"practice-card\">\n<h3>Q12. The Royal Takeover</h3>\n<p>In 1858, after the Great Uprising, who took direct control of India from the East India Company?</p>\n<button class=\"reveal-btn\" onclick=\"this.nextElementSibling.style.display='block'; this.style.display='none';\">Show answer</button>\n<div class=\"reveal-answer\" style=\"display:none;\">\n<p><strong>Queen Victoria</strong> of England, through the British Crown. The British Crown now ruled India directly, with a representative called the Viceroy.</p>\n</div>\n</div>",
+  "realLife": [
+    {
+      "id": "vande_mataram",
+      "title": "🎶 The Story of Vande Mataram — Our National Song",
+      "viewBox": "0 0 700 600",
+      "svg": "<defs>\n          <pattern id=\"rl-grid-vm\" width=\"25\" height=\"25\" patternUnits=\"userSpaceOnUse\">\n            <path d=\"M 25 0 L 0 0 0 25\" fill=\"none\" stroke=\"#1e293b\" stroke-width=\"0.5\"/>\n          </pattern>\n        </defs>\n        <rect x=\"0\" y=\"0\" width=\"700\" height=\"600\" fill=\"url(#rl-grid-vm)\"/>\n\n        <!-- Beat 1: Mother India -->\n        <g class=\"el\" data-beat=\"1\">\n          <ellipse cx=\"350\" cy=\"280\" rx=\"40\" ry=\"55\" fill=\"#fbbf24\" opacity=\"0.7\"/>\n          <text x=\"350\" y=\"285\" fill=\"#1e293b\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"700\">Mother</text>\n          <text x=\"350\" y=\"300\" fill=\"#1e293b\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"700\">India</text>\n          <text x=\"350\" y=\"365\" fill=\"#94a3b8\" font-size=\"11\" text-anchor=\"middle\">The land — like a mother</text>\n        </g>\n\n        <!-- Beat 2: Bankim Chandra writes the poem (1875) -->\n        <g class=\"el\" data-beat=\"2\">\n          <g transform=\"translate(120,280)\">\n            <circle cx=\"0\" cy=\"0\" r=\"25\" fill=\"#fde047\"/>\n            <text x=\"0\" y=\"5\" fill=\"#1e293b\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"700\">BC</text>\n            <text x=\"0\" y=\"50\" fill=\"#fbbf24\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"600\">Bankim Chandra</text>\n            <text x=\"0\" y=\"65\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\">1875</text>\n          </g>\n          <path d=\"M 145 280 L 290 280\" stroke=\"#fbbf24\" stroke-width=\"2\" stroke-dasharray=\"4,3\" marker-end=\"url(#arrowVM)\"/>\n        </g>\n        <defs>\n          <marker id=\"arrowVM\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto\">\n            <path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#fbbf24\"/>\n          </marker>\n        </defs>\n\n        <!-- Beat 3: The novel Anandamath (1882) -->\n        <g class=\"el\" data-beat=\"3\">\n          <rect x=\"430\" y=\"220\" width=\"80\" height=\"100\" fill=\"#fef3c7\" stroke=\"#fbbf24\" stroke-width=\"2\"/>\n          <text x=\"470\" y=\"270\" fill=\"#92400e\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"700\">Ananda-</text>\n          <text x=\"470\" y=\"285\" fill=\"#92400e\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"700\">math</text>\n          <text x=\"470\" y=\"345\" fill=\"#fbbf24\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"600\">Novel (1882)</text>\n        </g>\n\n        <!-- Beat 4: Freedom fighters shout it -->\n        <g class=\"el\" data-beat=\"4\">\n          <g transform=\"translate(150,450)\">\n            <circle cx=\"0\" cy=\"0\" r=\"15\" fill=\"#fbbf24\" opacity=\"0.7\"/>\n            <text x=\"0\" y=\"30\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\">FF</text>\n          </g>\n          <g transform=\"translate(250,450)\">\n            <circle cx=\"0\" cy=\"0\" r=\"15\" fill=\"#fbbf24\" opacity=\"0.7\"/>\n            <text x=\"0\" y=\"30\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\">FF</text>\n          </g>\n          <g transform=\"translate(450,450)\">\n            <circle cx=\"0\" cy=\"0\" r=\"15\" fill=\"#fbbf24\" opacity=\"0.7\"/>\n            <text x=\"0\" y=\"30\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\">FF</text>\n          </g>\n          <g transform=\"translate(550,450)\">\n            <circle cx=\"0\" cy=\"0\" r=\"15\" fill=\"#fbbf24\" opacity=\"0.7\"/>\n            <text x=\"0\" y=\"30\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\">FF</text>\n          </g>\n          <text x=\"350\" y=\"420\" fill=\"#fbbf24\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"700\">\"Vande Mataram!\"</text>\n          <text x=\"350\" y=\"510\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\">Slogan during protests</text>\n        </g>\n\n        <!-- Beat 5: National Song (1950) -->\n        <g class=\"el\" data-beat=\"5\">\n          <rect x=\"60\" y=\"100\" width=\"580\" height=\"80\" rx=\"10\" fill=\"rgba(251,191,36,0.12)\" stroke=\"#fbbf24\" stroke-width=\"2\"/>\n          <text x=\"350\" y=\"135\" fill=\"#fbbf24\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"700\">National Song adopted — 1950</text>\n          <text x=\"350\" y=\"160\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\">Sung at schools and on Independence Day</text>\n        </g>",
+      "beats": [
+        "Once upon a time, in 1875, a kind writer named Bankim Chandra Chattopadhyay was sitting in his study in Bengal. He loved India very much. He looked out of his window and saw the green fields, the rivers, the smiling faces of his countrymen. He thought, 'India is like my MOTHER. She gives me food, water, air, and a home. I should write a poem to praise her.' And so he wrote the beautiful poem 'Vande Mataram' — meaning 'I bow to the Mother' or 'Praise to the Mother'.",
+        "Bankim Chandra was a writer of stories too. A few years later, in 1882, he wrote a story book called 'Anandamath'. In this book, he put the poem 'Vande Mataram'. The story was about brave sannyasis (holy men) who fought for their motherland. When readers read the book, they sang the poem. The poem made them feel proud of being Indian.",
+        "In the years that followed, the poem spread across India. Wherever freedom fighters marched — in Calcutta, in Bombay, in Madras, in Lahore — they shouted 'Vande Mataram!' as their slogan. The British government tried to ban the slogan. They arrested people who shouted it. But the more they tried to stop it, the louder the Indians shouted.",
+        "When freedom fighters were sent to prison, they sang 'Vande Mataram' inside the jail walls. When they were taken to court, they shouted 'Vande Mataram' before the judge. When they walked to the gallows to be hanged, their last words were often 'Vande Mataram'. The poem became a magic word — a word that made Indians feel brave and united.",
+        "When India finally became free in 1947, and our Constitution was adopted on 26 January 1950, 'Vande Mataram' was adopted as our National Song. (Our National Anthem is 'Jana Gana Mana', written by Rabindranath Tagore.) Even today, every Independence Day and Republic Day, Indians sing 'Vande Mataram' with pride. So next time you sing this song at school, remember: it was written long, long ago by a writer who loved India very much. And it carried Indians through 75 years of struggle, all the way to freedom!"
+      ],
+      "images": [
+        {
+          "file": "fig2_24_postage_stamp.png",
+          "caption": "A postage stamp honouring India's freedom struggle"
+        }
+      ]
+    },
+    {
+      "id": "salt_march_story",
+      "title": "🚶 The Story of the Salt March — Walking 380 km for a Pinch of Salt",
+      "viewBox": "0 0 700 600",
+      "svg": "<defs>\n          <pattern id=\"rl-grid-sm\" width=\"25\" height=\"25\" patternUnits=\"userSpaceOnUse\">\n            <path d=\"M 25 0 L 0 0 0 25\" fill=\"none\" stroke=\"#1e293b\" stroke-width=\"0.5\"/>\n          </pattern>\n        </defs>\n        <rect x=\"0\" y=\"0\" width=\"700\" height=\"600\" fill=\"url(#rl-grid-sm)\"/>\n\n        <!-- Beat 1: Gandhi with stick, starting walk -->\n        <g class=\"el\" data-beat=\"1\">\n          <g transform=\"translate(100,300)\">\n            <circle cx=\"0\" cy=\"-30\" r=\"12\" fill=\"#fbbf24\"/>\n            <path d=\"M 0 -18 L -10 20 L 10 20 Z\" fill=\"#fff\" stroke=\"#475569\" stroke-width=\"1.5\"/>\n            <line x1=\"0\" y1=\"-10\" x2=\"-15\" y2=\"10\" stroke=\"#475569\" stroke-width=\"3\"/>\n            <line x1=\"-15\" y1=\"10\" x2=\"-25\" y2=\"40\" stroke=\"#475569\" stroke-width=\"3\"/>\n            <line x1=\"0\" y1=\"-5\" x2=\"15\" y2=\"20\" stroke=\"#475569\" stroke-width=\"3\"/>\n            <line x1=\"15\" y1=\"20\" x2=\"25\" y2=\"40\" stroke=\"#475569\" stroke-width=\"3\"/>\n            <text x=\"0\" y=\"60\" fill=\"#fbbf24\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"700\">Gandhiji</text>\n          </g>\n          <text x=\"100\" y=\"230\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\">12 March 1930</text>\n          <text x=\"100\" y=\"245\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\">Sabarmati Ashram</text>\n        </g>\n\n        <!-- Beat 2: Walking route to Dandi -->\n        <g class=\"el\" data-beat=\"2\">\n          <path d=\"M 130 320 Q 250 280 380 350 T 600 320\" stroke=\"#fbbf24\" stroke-width=\"3\" stroke-dasharray=\"6,4\" fill=\"none\"/>\n          <text x=\"370\" y=\"270\" fill=\"#fbbf24\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"600\">380 km walk</text>\n        </g>\n\n        <!-- Beat 3: People join -->\n        <g class=\"el\" data-beat=\"3\">\n          <g transform=\"translate(200,400)\">\n            <circle cx=\"0\" cy=\"0\" r=\"8\" fill=\"#34d399\" opacity=\"0.7\"/>\n            <text x=\"0\" y=\"25\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\">villager</text>\n          </g>\n          <g transform=\"translate(280,400)\">\n            <circle cx=\"0\" cy=\"0\" r=\"8\" fill=\"#34d399\" opacity=\"0.7\"/>\n          </g>\n          <g transform=\"translate(360,400)\">\n            <circle cx=\"0\" cy=\"0\" r=\"8\" fill=\"#34d399\" opacity=\"0.7\"/>\n          </g>\n          <g transform=\"translate(440,400)\">\n            <circle cx=\"0\" cy=\"0\" r=\"8\" fill=\"#34d399\" opacity=\"0.7\"/>\n          </g>\n          <g transform=\"translate(520,400)\">\n            <circle cx=\"0\" cy=\"0\" r=\"8\" fill=\"#34d399\" opacity=\"0.7\"/>\n          </g>\n          <text x=\"370\" y=\"445\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\">Villagers joined along the way</text>\n        </g>\n\n        <!-- Beat 4: Reach Dandi, make salt -->\n        <g class=\"el\" data-beat=\"4\">\n          <g transform=\"translate(620,320)\">\n            <ellipse cx=\"0\" cy=\"0\" rx=\"30\" ry=\"10\" fill=\"#0ea5e9\" opacity=\"0.6\"/>\n            <text x=\"0\" y=\"-20\" fill=\"#fbbf24\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"700\">Sea at Dandi</text>\n            <text x=\"0\" y=\"35\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\">6 April 1930</text>\n            <!-- Pinch of salt -->\n            <circle cx=\"-15\" cy=\"-3\" r=\"2\" fill=\"#fff\" stroke=\"#94a3b8\" stroke-width=\"0.5\"/>\n            <circle cx=\"-10\" cy=\"-2\" r=\"2\" fill=\"#fff\" stroke=\"#94a3b8\" stroke-width=\"0.5\"/>\n            <circle cx=\"-5\" cy=\"-3\" r=\"2\" fill=\"#fff\" stroke=\"#94a3b8\" stroke-width=\"0.5\"/>\n            <circle cx=\"0\" cy=\"-2\" r=\"2\" fill=\"#fff\" stroke=\"#94a3b8\" stroke-width=\"0.5\"/>\n            <text x=\"0\" y=\"15\" fill=\"#34d399\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"700\">Salt!</text>\n          </g>\n        </g>\n\n        <!-- Beat 5: Whole country makes salt -->\n        <g class=\"el\" data-beat=\"5\">\n          <rect x=\"40\" y=\"480\" width=\"620\" height=\"80\" rx=\"10\" fill=\"rgba(52,211,153,0.1)\" stroke=\"#34d399\" stroke-width=\"2\"/>\n          <text x=\"350\" y=\"510\" fill=\"#34d399\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"700\">All of India started making salt!</text>\n          <text x=\"350\" y=\"530\" fill=\"#cbd5e1\" font-size=\"11\" text-anchor=\"middle\">The British law was broken — peacefully.</text>\n          <text x=\"350\" y=\"548\" fill=\"#cbd5e1\" font-size=\"11\" text-anchor=\"middle\">The whole world watched and admired India's courage.</text>\n        </g>",
+      "beats": [
+        "Once upon a time, on 12 March 1930, an old man named Mahatma Gandhi set out from his ashram in Sabarmati. He was 61 years old. He had a bamboo stick in his hand. He had 78 followers walking with him. They were going to the sea — to make salt! Why would anyone walk so far for salt? Let's find out.",
+        "The British had a very unfair law: only THEY could make and sell salt in India. Even if you lived next to the sea, you could not pick up a handful of salty sand and boil it. You had to buy British-made salt, and pay a tax on it! Gandhiji said, 'This is wrong. Salt is something every Indian eats — rich and poor, Hindu and Muslim. We must be free to make our own salt.'",
+        "So Gandhiji started walking. From Sabarmati to Dandi — a distance of 380 kilometres. That is like walking from one end of a big city to the other, and then walking back, and then walking again! Every day, he walked about 16 kilometres. He stopped in villages along the way. He spoke to the villagers. He told them about the unfair salt law.",
+        "As he walked, more and more people joined him. By the time he reached Dandi, after 24 days of walking, there were THOUSANDS of people walking with him! People came out of their homes to greet him. They gave him food and water. They sang 'Vande Mataram'. The whole country was watching this strange old man walking to the sea.",
+        "On 6 April 1930, Gandhiji reached the beach at Dandi. He bent down, picked up a handful of salty sea mud, and boiled it. He made salt! With that simple act, he broke the British law. The news spread across India like wildfire. From Kashmir to Kanyakumari, from Bombay to Bengal — Indians started making their own salt! The British arrested Gandhiji and tens of thousands of Indians. But they could not stop the movement. The whole world saw how brave and peaceful the Indian people were. The Salt March became one of the most famous non-violent protests in the history of the world!"
+      ],
+      "images": [
+        {
+          "file": "fig2_28_salt_march.png",
+          "caption": "Gandhiji leading the Salt March in 1930"
+        },
+        {
+          "file": "fig2_29_sarojini_naidu.png",
+          "caption": "Sarojini Naidu leading the Dharasana march"
+        },
+        {
+          "file": "fig2_31_round_table.png",
+          "caption": "Round Table Conference, 1931"
+        }
+      ]
+    },
+    {
+      "id": "bhagat_singh_story",
+      "title": "🌹 The Story of Brave Bhagat Singh — A Young Hero",
+      "viewBox": "0 0 700 600",
+      "svg": "<defs>\n          <pattern id=\"rl-grid-bs\" width=\"25\" height=\"25\" patternUnits=\"userSpaceOnUse\">\n            <path d=\"M 25 0 L 0 0 0 25\" fill=\"none\" stroke=\"#1e293b\" stroke-width=\"0.5\"/>\n          </pattern>\n        </defs>\n        <rect x=\"0\" y=\"0\" width=\"700\" height=\"600\" fill=\"url(#rl-grid-bs)\"/>\n\n        <!-- Beat 1: Young Bhagat Singh -->\n        <g class=\"el\" data-beat=\"1\">\n          <g transform=\"translate(150,300)\">\n            <circle cx=\"0\" cy=\"-25\" r=\"15\" fill=\"#fbbf24\"/>\n            <text x=\"0\" y=\"-22\" fill=\"#1e293b\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"700\">BS</text>\n            <path d=\"M 0 -10 L -12 20 L 12 20 Z\" fill=\"#dc2626\" opacity=\"0.7\"/>\n            <text x=\"0\" y=\"50\" fill=\"#fbbf24\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"700\">Young Bhagat</text>\n            <text x=\"0\" y=\"65\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\">Born 1907</text>\n          </g>\n        </g>\n\n        <!-- Beat 2: Hears about Jallianwala Bagh -->\n        <g class=\"el\" data-beat=\"2\">\n          <rect x=\"280\" y=\"220\" width=\"160\" height=\"80\" rx=\"10\" fill=\"rgba(220,38,38,0.15)\" stroke=\"#dc2626\" stroke-width=\"2\"/>\n          <text x=\"360\" y=\"250\" fill=\"#dc2626\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"700\">Hears of Jallianwala</text>\n          <text x=\"360\" y=\"265\" fill=\"#dc2626\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"700\">Bagh (1919)</text>\n          <text x=\"360\" y=\"290\" fill=\"#cbd5e1\" font-size=\"9\" text-anchor=\"middle\">Decides: I must fight!</text>\n          <path d=\"M 170 285 L 275 260\" stroke=\"#dc2626\" stroke-width=\"2\" stroke-dasharray=\"4,3\" marker-end=\"url(#arrowBS)\"/>\n        </g>\n        <defs>\n          <marker id=\"arrowBS\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto\">\n            <path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#dc2626\"/>\n          </marker>\n        </defs>\n\n        <!-- Beat 3: Joins HSRA -->\n        <g class=\"el\" data-beat=\"3\">\n          <g transform=\"translate(550,300)\">\n            <circle cx=\"0\" cy=\"0\" r=\"30\" fill=\"#fb923c\" opacity=\"0.3\" stroke=\"#fb923c\" stroke-width=\"2\"/>\n            <text x=\"0\" y=\"0\" fill=\"#fb923c\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"700\">HSRA</text>\n            <text x=\"0\" y=\"15\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\">1928</text>\n            <text x=\"0\" y=\"60\" fill=\"#fb923c\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"600\">Joins the group</text>\n          </g>\n        </g>\n\n        <!-- Beat 4: Throws bombs in Assembly (1929) -->\n        <g class=\"el\" data-beat=\"4\">\n          <rect x=\"250\" y=\"400\" width=\"200\" height=\"60\" rx=\"10\" fill=\"rgba(251,146,60,0.15)\" stroke=\"#fb923c\" stroke-width=\"2\"/>\n          <text x=\"350\" y=\"425\" fill=\"#fb923c\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"700\">Bombs in Assembly</text>\n          <text x=\"350\" y=\"445\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\">8 April 1929 — to 'make noise'</text>\n        </g>\n\n        <!-- Beat 5: Hanged (23 March 1931) -->\n        <g class=\"el\" data-beat=\"5\">\n          <rect x=\"60\" y=\"500\" width=\"580\" height=\"80\" rx=\"10\" fill=\"rgba(220,38,38,0.15)\" stroke=\"#dc2626\" stroke-width=\"2\"/>\n          <text x=\"350\" y=\"530\" fill=\"#dc2626\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"700\">Hanged on 23 March 1931 — just 23 years old</text>\n          <text x=\"350\" y=\"555\" fill=\"#cbd5e1\" font-size=\"11\" text-anchor=\"middle\">\"Down with British imperialism! Long live the revolution!\"</text>\n        </g>",
+      "beats": [
+        "Once upon a time, in 1907, a baby boy was born in a Sikh family in Punjab. His name was Bhagat Singh. He grew up in a family that loved India and wanted it to be free. As a small child, Bhagat used to listen to stories of brave kings and queens who fought for their land. He dreamed of being brave like them.",
+        "When Bhagat was about 12 years old, in 1919, something terrible happened. In a city called Amritsar, the British fired into a peaceful crowd at Jallianwala Bagh. Hundreds of men, women, and children died. When Bhagat heard about this, his little heart broke. He said to himself, 'When I grow up, I will fight the British. I will make them leave India.'",
+        "When Bhagat grew up, he joined a group of brave young men called the HSRA — Hindustan Socialist Republican Association. They believed that the British would only leave if forced. They did not believe in non-violence. They thought, 'Gandhiji's path is too slow. We must take a different, harder path.' Bhagat became one of the most important members of the HSRA.",
+        "In 1928, the British sent a strict police officer who beat the great leader Lala Lajpat Rai with lathis. Lala Lajpat Rai died of his wounds. Bhagat Singh and his friends were very angry. They shot the police officer who had given the order. Then, in April 1929, Bhagat Singh and his friend Batukeshwar Dutt went into the law-making assembly in Delhi and threw two small bombs. The bombs were not meant to hurt anyone — they were meant to make a loud noise and tell the country, 'We are here! We will fight!'",
+        "Bhagat Singh and Batukeshwar Dutt did not run away after throwing the bombs. They stood there and shouted, 'Long live the revolution!' Then they let themselves be arrested. They wanted to use the trial to tell the whole country about their ideas. The British put them in prison. Bhagat and his friends went on a hunger strike for 116 days, demanding that Indian prisoners be treated fairly. One of his friends, Jatin Das, died after 63 days of hunger strike. Finally, on 23 March 1931, Bhagat Singh, Rajguru, and Sukhdev were hanged in Lahore jail. Bhagat was just 23 years old. As he walked to the gallows, he shouted, 'Down with British imperialism! Long live the revolution!' The whole of India wept. He became a hero forever."
+      ],
+      "images": [
+        {
+          "file": "fig2_25_bhagat_singh.png",
+          "caption": "Bhagat Singh, Chandrashekhar Azad, and Ashfaqulla Khan"
+        }
+      ]
+    },
+    {
+      "id": "independence_day",
+      "title": "🇮🇳 The Story of 15 August 1947 — The Day India Became Free",
+      "viewBox": "0 0 700 600",
+      "svg": "<defs>\n          <pattern id=\"rl-grid-id\" width=\"25\" height=\"25\" patternUnits=\"userSpaceOnUse\">\n            <path d=\"M 25 0 L 0 0 0 25\" fill=\"none\" stroke=\"#1e293b\" stroke-width=\"0.5\"/>\n          </pattern>\n        </defs>\n        <rect x=\"0\" y=\"0\" width=\"700\" height=\"600\" fill=\"url(#rl-grid-id)\"/>\n\n        <!-- Beat 1: 14 August midnight -->\n        <g class=\"el\" data-beat=\"1\">\n          <text x=\"350\" y=\"100\" fill=\"#fbbf24\" font-size=\"16\" text-anchor=\"middle\" font-weight=\"700\">14 August 1947, midnight</text>\n          <text x=\"350\" y=\"125\" fill=\"#94a3b8\" font-size=\"12\" text-anchor=\"middle\">Nehru's 'Tryst with Destiny' speech</text>\n        </g>\n\n        <!-- Beat 2: Tricolour hoisted -->\n        <g class=\"el\" data-beat=\"2\">\n          <line x1=\"350\" y1=\"200\" x2=\"350\" y2=\"380\" stroke=\"#475569\" stroke-width=\"3\"/>\n          <rect x=\"350\" y=\"220\" width=\"120\" height=\"80\" fill=\"#f1f5f9\" stroke=\"#1e293b\" stroke-width=\"1\"/>\n          <rect x=\"350\" y=\"220\" width=\"120\" height=\"27\" fill=\"#fb923c\"/>\n          <rect x=\"350\" y=\"274\" width=\"120\" height=\"26\" fill=\"#34d399\"/>\n          <circle cx=\"410\" cy=\"260\" r=\"10\" fill=\"#1e3a8a\"/>\n          <text x=\"350\" y=\"320\" fill=\"#fbbf24\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"700\">Tricolour hoisted!</text>\n        </g>\n\n        <!-- Beat 3: People celebrate -->\n        <g class=\"el\" data-beat=\"3\">\n          <g transform=\"translate(150,450)\">\n            <circle cx=\"0\" cy=\"0\" r=\"12\" fill=\"#fbbf24\"/>\n            <text x=\"0\" y=\"30\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\">child</text>\n          </g>\n          <g transform=\"translate(250,440)\">\n            <circle cx=\"0\" cy=\"0\" r=\"12\" fill=\"#34d399\"/>\n            <text x=\"0\" y=\"30\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\">mother</text>\n          </g>\n          <g transform=\"translate(350,455)\">\n            <circle cx=\"0\" cy=\"0\" r=\"12\" fill=\"#f472b6\"/>\n            <text x=\"0\" y=\"30\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\">grandpa</text>\n          </g>\n          <g transform=\"translate(450,440)\">\n            <circle cx=\"0\" cy=\"0\" r=\"12\" fill=\"#fb923c\"/>\n            <text x=\"0\" y=\"30\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\">uncle</text>\n          </g>\n          <g transform=\"translate(550,455)\">\n            <circle cx=\"0\" cy=\"0\" r=\"12\" fill=\"#a78bfa\"/>\n            <text x=\"0\" y=\"30\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\">friend</text>\n          </g>\n          <text x=\"350\" y=\"510\" fill=\"#fbbf24\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"700\">India is free! Sweets, dances, fireworks!</text>\n        </g>\n\n        <!-- Beat 4: But also sad — Partition -->\n        <g class=\"el\" data-beat=\"4\">\n          <rect x=\"40\" y=\"540\" width=\"620\" height=\"50\" rx=\"10\" fill=\"rgba(220,38,38,0.1)\" stroke=\"#dc2626\" stroke-width=\"2\"/>\n          <text x=\"350\" y=\"565\" fill=\"#dc2626\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"700\">But also sad — the Partition of India &amp; Pakistan</text>\n          <text x=\"350\" y=\"580\" fill=\"#cbd5e1\" font-size=\"10\" text-anchor=\"middle\">14 million people left their homes; many lost their lives</text>\n        </g>",
+      "beats": [
+        "Once upon a time, on the night of 14 August 1947, at the stroke of midnight, a great thing happened. India became free! A leader named Jawaharlal Nehru stood up in the Constituent Assembly in Delhi and gave a famous speech. He said, 'At the stroke of the midnight hour, when the world sleeps, India will awake to life and freedom. A moment comes, which comes but rarely in history, when we step out from the old to the new, when an age ends, and when the soul of a nation, long suppressed, finds utterance.' This speech is called the 'Tryst with Destiny' speech.",
+        "On the morning of 15 August 1947, the Indian flag — the tricolour — was hoisted. The flag has three colours: saffron at the top (for courage), white in the middle (for peace and truth), and green at the bottom (for faith and chivalry). In the middle of the white band is a blue wheel called the Ashoka Chakra — it has 24 spokes and stands for the wheel of law. When the flag went up, the crowd of thousands of Indians shouted, 'JAI HIND!' and 'VANDE MATARAM!' Some people had tears of joy in their eyes.",
+        "All over India, people celebrated. In cities and villages, people distributed sweets. Children danced in the streets. Mothers sang lullabies about free India. Old people, who had waited for this day their whole lives, wept with happiness. There were fireworks at night. Trains decorated with flags ran across the country. For the first time in 200 years, India was ruled by Indians, not by foreigners.",
+        "But there was also great sadness. The Partition of India and Pakistan had happened just two days before. About 14 million people — Hindus, Sikhs, and Muslims — had to leave their homes and move between the two new countries. Trains carried refugees across the new border. Many were killed in the violence. Gandhiji, the Father of the Nation, did not celebrate — he was fasting and praying for peace in Calcutta. He said, 'This is not the freedom I dreamed of.'",
+        "Even with this sadness, 15 August 1947 was a historic day. India was free. The long road — from 1857 (the Great Uprising) to 1947 — had finally reached its destination. Millions of brave hearts — Khudiram, Bhagat Singh, Tilak, Gandhiji, Subhas Bose, Sarojini Naidu, Khan Abdul Ghaffar Khan, Sardar Patel, Nehru, and millions of ordinary Indians whose names we do not know — had walked this long road together. They gave their blood, their youth, their songs, their lives — so that you and I can be free today. Every Independence Day, when you sing 'Jana Gana Mana' and see the tricolour go up, remember them. And remember: freedom is a precious gift. Never take it for granted. Jai Hind!"
+      ],
+      "images": [
+        {
+          "file": "fig2_01_quit_india_women.png",
+          "caption": "Women marching in the 1942 Quit India Movement"
+        },
+        {
+          "file": "fig2_35_patel.png",
+          "caption": "Sardar Patel - the Iron Man of India"
+        },
+        {
+          "file": "fig2_36_partition_train.png",
+          "caption": "Train carrying refugees during the Partition"
+        }
+      ]
+    }
+  ],
+  "guidedPractice": [
+    {
+      "title": "When did India become free?",
+      "difficulty": "Easy",
+      "diffClass": "gp-easy",
+      "statement": "On what date did India finally become an independent country?",
+      "steps": [
+        {
+          "prompt": "Type the date (day, month, year).",
+          "validate": {
+            "type": "match",
+            "answers": [
+              "15 august 1947",
+              "august 15 1947",
+              "15/8/1947",
+              "15-8-1947",
+              "15th august 1947"
+            ]
+          },
+          "formatHint": "Example: 15 August 1947",
+          "explanation": "Yes! India became free on 15 August 1947. We celebrate Independence Day on this date every year.",
+          "hint": "It is in August, and the year starts with 194..."
+        }
+      ],
+      "finalAnswer": "India became independent on 15 August 1947."
+    },
+    {
+      "title": "Who was Mahatma Gandhi?",
+      "difficulty": "Easy",
+      "diffClass": "gp-easy",
+      "statement": "What was Mahatma Gandhi's full name, and what does 'Mahatma' mean?",
+      "steps": [
+        {
+          "prompt": "What is his full first name? (Hint: starts with 'Mohan...')",
+          "validate": {
+            "type": "match",
+            "answers": [
+              "mohandas",
+              "mohandas karamchand",
+              "mohandas karamchand gandhi"
+            ]
+          },
+          "formatHint": "First name",
+          "explanation": "Yes! His full name was Mohandas Karamchand Gandhi.",
+          "hint": "It starts with 'Mohandas'."
+        },
+        {
+          "prompt": "What does 'Mahatma' mean?",
+          "validate": {
+            "type": "match",
+            "answers": [
+              "great soul",
+              "great soul",
+              "great-soul"
+            ]
+          },
+          "formatHint": "Two words",
+          "explanation": "Yes! 'Mahatma' means 'Great Soul'.",
+          "hint": "Great + ___"
+        }
+      ],
+      "finalAnswer": "Mahatma Gandhi's full name was Mohandas Karamchand Gandhi. 'Mahatma' means 'Great Soul'."
+    },
+    {
+      "title": "Identify the song",
+      "difficulty": "Easy",
+      "diffClass": "gp-easy",
+      "statement": "What is the name of the song written by Bankim Chandra Chattopadhyay in 1875 that became a freedom slogan and is now our National Song?",
+      "steps": [
+        {
+          "prompt": "Type the name of the song.",
+          "validate": {
+            "type": "match",
+            "answers": [
+              "vande mataram",
+              "bande mataram"
+            ]
+          },
+          "formatHint": "Two words",
+          "explanation": "Yes! 'Vande Mataram' — meaning 'Praise to the Mother' or 'I bow to the Motherland'.",
+          "hint": "It starts with 'Vande'."
+        }
+      ],
+      "finalAnswer": "The song is 'Vande Mataram', written by Bankim Chandra Chattopadhyay in 1875. It was adopted as our National Song in 1950."
+    },
+    {
+      "title": "The Indian National Congress",
+      "difficulty": "Medium",
+      "diffClass": "gp-med",
+      "statement": "In which year and city was the Indian National Congress founded?",
+      "steps": [
+        {
+          "prompt": "What year? (Hint: 188...)",
+          "validate": {
+            "type": "regex",
+            "pattern": "^1885$",
+            "flags": "i"
+          },
+          "formatHint": "4-digit year",
+          "explanation": "Yes! The Indian National Congress was founded in 1885.",
+          "hint": "December 1885."
+        },
+        {
+          "prompt": "Which city? (Hint: now called Mumbai)",
+          "validate": {
+            "type": "match",
+            "answers": [
+              "bombay",
+              "mumbai"
+            ]
+          },
+          "formatHint": "City name",
+          "explanation": "Yes! The first session was held in Bombay (now Mumbai).",
+          "hint": "Now called Mumbai."
+        }
+      ],
+      "finalAnswer": "The Indian National Congress was founded in December 1885 in Bombay (now Mumbai). The first president was Womesh Chunder Bonnerjee."
+    },
+    {
+      "title": "The Salt March",
+      "difficulty": "Medium",
+      "diffClass": "gp-med",
+      "statement": "In 1930, Gandhiji walked 380 km to the sea to make what? And what was the village called where he reached?",
+      "steps": [
+        {
+          "prompt": "What did Gandhiji make at the sea? (Hint: we eat it every day)",
+          "validate": {
+            "type": "match",
+            "answers": [
+              "salt",
+              "salt!"
+            ]
+          },
+          "formatHint": "One word",
+          "explanation": "Yes! He made SALT — to break the British law that only the British could make and sell salt.",
+          "hint": "White, salty, eaten with food."
+        },
+        {
+          "prompt": "What was the seaside village called? (Hint: starts with 'D')",
+          "validate": {
+            "type": "match",
+            "answers": [
+              "dandi"
+            ]
+          },
+          "formatHint": "Village name",
+          "explanation": "Yes! The village was called Dandi. That is why it is called the Dandi March or the Salt March.",
+          "hint": "Starts with 'D'."
+        }
+      ],
+      "finalAnswer": "Gandhiji walked 380 km from Sabarmati Ashram to the village of Dandi to make salt, breaking the unfair British Salt Law. This was the Salt March or Dandi March of 1930."
+    },
+    {
+      "title": "Bhagat Singh",
+      "difficulty": "Medium",
+      "diffClass": "gp-med",
+      "statement": "Bhagat Singh was a young revolutionary. How old was he when he was hanged, and on what date?",
+      "steps": [
+        {
+          "prompt": "How old was Bhagat Singh when he was hanged? (Hint: a small number, between 20 and 25)",
+          "validate": {
+            "type": "regex",
+            "pattern": "^23$",
+            "flags": "i"
+          },
+          "formatHint": "Just the number",
+          "explanation": "Yes! Bhagat Singh was just 23 years old when he was hanged.",
+          "hint": "Just 2_ years old."
+        },
+        {
+          "prompt": "On what date was he hanged? (Hint: March 1931)",
+          "validate": {
+            "type": "match",
+            "answers": [
+              "23 march 1931",
+              "march 23 1931",
+              "23/3/1931"
+            ]
+          },
+          "formatHint": "Day Month Year",
+          "explanation": "Yes! Bhagat Singh was hanged on 23 March 1931, along with Rajguru and Sukhdev.",
+          "hint": "23 March 1931."
+        }
+      ],
+      "finalAnswer": "Bhagat Singh was just 23 years old when he was hanged on 23 March 1931, along with his friends Rajguru and Sukhdev, in Lahore jail."
+    },
+    {
+      "title": "The Quit India Movement",
+      "difficulty": "Hard",
+      "diffClass": "gp-hard",
+      "statement": "In 1942, Gandhiji gave a famous slogan during the Quit India Movement. The slogan in Hindi was 'Karenge ya Marenge' — what is its meaning in English?",
+      "steps": [
+        {
+          "prompt": "What does 'Karenge ya Marende' mean in English? (Hint: two short English words)",
+          "validate": {
+            "type": "match",
+            "answers": [
+              "do or die",
+              "do or die!",
+              "do-or-die"
+            ]
+          },
+          "formatHint": "Three words",
+          "explanation": "Yes! 'Karenge ya Marenge' means 'Do or Die' — meaning, either we will free India, or we will die trying.",
+          "hint": "DO ___ ___"
+        },
+        {
+          "prompt": "What did the Indians want the British to do? (Hint: starts with 'Q')",
+          "validate": {
+            "type": "match",
+            "answers": [
+              "quit india",
+              "quit",
+              "leave india"
+            ]
+          },
+          "formatHint": "Quit ___",
+          "explanation": "Yes! 'QUIT INDIA' — meaning, the British must leave India immediately.",
+          "hint": "Quit ___"
+        }
+      ],
+      "finalAnswer": "'Karenge ya Marenge' means 'Do or Die' in English. The Quit India Movement of 1942 demanded that the British QUIT INDIA immediately."
+    }
+  ],
+  "selfTest": [
+    {
+      "q": "In which year did the British Crown take direct control of India from the East India Company, after the Great Uprising of 1857?",
+      "steps": "After the Great Uprising of 1857 (also called the Sepoy Mutiny or the First War of Independence), the British Crown under <strong>Queen Victoria</strong> took direct control of India from the East India Company in <strong>1858</strong>. A 'Royal Proclamation' was issued promising (but not really keeping) certain rights.",
+      "answer": "1858 — the British Crown took over from the East India Company."
+    },
+    {
+      "q": "What is the meaning of 'Swaraj' and 'Purna Swaraj'?",
+      "steps": "<strong>Swaraj</strong> is a Sanskrit word: 'Swa' means 'self', 'raj' means 'rule'. So Swaraj means 'self-rule' or 'rule by ourselves'.<br><strong>Purna Swaraj</strong> means COMPLETE self-rule — full independence, with no British involvement at all.",
+      "answer": "Swaraj = self-rule; Purna Swaraj = complete independence."
+    },
+    {
+      "q": "Who founded the Brahmo Samaj and in which year? What were its main ideas?",
+      "steps": "The <strong>Brahmo Samaj</strong> was founded by <strong>Raja Ram Mohan Roy</strong> in <strong>1828 in Calcutta</strong>. It opposed child marriage, caste discrimination; supported widow rights and girls' education; promoted a monotheistic interpretation of Hinduism.",
+      "answer": "Raja Ram Mohan Roy founded the Brahmo Samaj in 1828 in Calcutta. Opposed child marriage and caste discrimination; supported widow rights and girls' education."
+    },
+    {
+      "q": "When and where was the Indian National Congress founded? Who was its first president?",
+      "steps": "The <strong>Indian National Congress</strong> was founded in <strong>December 1885 in Bombay</strong> (now Mumbai). The first session was held on 28 December 1885 with 72 delegates. The first president was <strong>Womesh Chunder Bonnerjee</strong>.",
+      "answer": "December 1885, Bombay (Mumbai). First president: Womesh Chunder Bonnerjee."
+    },
+    {
+      "q": "What was the Swadeshi Movement? Why was it launched?",
+      "steps": "The <strong>Swadeshi Movement</strong> was launched in <strong>1905</strong> in response to the British partition of Bengal. Swadeshi means 'of our own country'. Indians were asked to <strong>boycott</strong> British goods (cloth, sugar, shoes, etc.) and buy only Indian-made goods. This was the first major mass non-violent movement of the freedom struggle.",
+      "answer": "The Swadeshi Movement (1905) was a boycott of British goods and promotion of Indian goods. Launched in response to the Partition of Bengal."
+    },
+    {
+      "q": "Who was Khudiram Bose? How old was he when he was hanged?",
+      "steps": "<strong>Khudiram Bose</strong> was a young revolutionary from Bengal. He was given the task of throwing a bomb at a strict British judge named Kingsford in 1908. He was caught, tried, and hanged on <strong>11 August 1908</strong>. He was just <strong>18 years old</strong> — the youngest revolutionary to be martyred.",
+      "answer": "Khudiram Bose was a young revolutionary hanged on 11 August 1908 at age 18."
+    },
+    {
+      "q": "What was the Jallianwala Bagh massacre? When and where did it take place?",
+      "steps": "On <strong>13 April 1919</strong>, in <strong>Jallianwala Bagh</strong> in <strong>Amritsar, Punjab</strong>, a peaceful crowd of men, women, and children had gathered for the Baisakhi festival and to protest the Rowlatt Act. A British general named <strong>Reginald Dyer</strong> ordered his soldiers to fire into the crowd without warning. They fired 1,650 bullets. Officially, 379 people died; the actual number was probably much higher. The massacre shocked the entire nation.",
+      "answer": "13 April 1919, Jallianwala Bagh, Amritsar. General Dyer ordered his troops to fire on a peaceful crowd, killing hundreds."
+    },
+    {
+      "q": "What was the Non-Cooperation Movement? When was it launched and why was it called off?",
+      "steps": "The <strong>Non-Cooperation Movement</strong> (1920-1922) was launched by <strong>Mahatma Gandhi</strong> after the Jallianwala Bagh massacre and the Rowlatt Act. Indians were asked to: give up British titles, boycott British schools and colleges, boycott British courts, refuse to pay taxes, and resign from British government jobs. The movement was called off in <strong>February 1922</strong> after the <strong>Chauri Chaura incident</strong>, where an angry mob set fire to a police station, killing 22 policemen. Gandhiji was heart-broken by the violence.",
+      "answer": "The Non-Cooperation Movement (1920-22) was led by Gandhiji to boycott British institutions. Called off after the violent Chauri Chaura incident (Feb 1922)."
+    },
+    {
+      "q": "What was the Salt March (Dandi March)? When did it happen and why was it important?",
+      "steps": "The <strong>Salt March</strong> was a 380-kilometre walk from <strong>Sabarmati Ashram</strong> (near Ahmedabad) to the seaside village of <strong>Dandi</strong> in Gujarat. It was led by <strong>Mahatma Gandhi</strong> from 12 March to 6 April 1930. The aim was to break the unfair British law that only the British could make and sell salt. At Dandi, Gandhiji picked up salty sea mud and boiled it to make salt. This simple act began the Civil Disobedience Movement. The whole world watched and admired the courage of the Indian people.",
+      "answer": "12 March – 6 April 1930. Gandhiji walked 380 km from Sabarmati to Dandi to break the British salt law. It began the Civil Disobedience Movement."
+    },
+    {
+      "q": "Who was Subhas Chandra Bose? What was the Indian National Army (INA)?",
+      "steps": "<strong>Subhas Chandra Bose</strong> (1897-1945), also called <strong>Netaji</strong>, was a fiery leader who disagreed with Gandhiji's non-violence. He believed in armed struggle. He escaped from India in 1941, travelled by submarine to Japan in 1943, and took charge of the <strong>Indian National Army (INA)</strong> — also called <strong>Azad Hind Fauj</strong>. The INA was an army of Indian soldiers (mostly prisoners of war captured by the Japanese) who fought alongside the Japanese against the British. The INA's provisional government was called <strong>Azad Hind</strong>. The INA was defeated in 1944-45 at Imphal and Kohima. Subhas Bose died in a plane crash on 18 August 1945.",
+      "answer": "Subhas Bose (Netaji) led the Indian National Army (Azad Hind Fauj) with Japanese support. Defeated at Imphal/Kohima (1944). Bose died in a plane crash on 18 August 1945."
+    },
+    {
+      "q": "What was the Quit India Movement? What was its famous slogan?",
+      "steps": "The <strong>Quit India Movement</strong> was launched by the Indian National Congress on <strong>8 August 1942</strong>. It demanded that the British leave India immediately. Gandhiji gave the famous slogan <strong>'Karenge ya Marenge'</strong> — meaning <strong>'Do or Die'</strong>. The next day, the British arrested Gandhiji and all senior Congress leaders. But the movement spread across India, with strikes, protests, and underground activity. The British crushed it violently, but it became clear that the Indian people would never accept British rule again.",
+      "answer": "8 August 1942. Congress demanded the British leave India. Slogan: 'Karenge ya Marenge' = 'Do or Die'."
+    },
+    {
+      "q": "When did India become independent? Who was the first Prime Minister? What was the name of his famous speech?",
+      "steps": "India became independent on <strong>15 August 1947</strong>. The first Prime Minister was <strong>Jawaharlal Nehru</strong>. On the midnight of 14-15 August 1947, he gave a famous speech in the Constituent Assembly called the <strong>'Tryst with Destiny'</strong> speech. It began: 'At the stroke of the midnight hour, when the world sleeps, India will awake to life and freedom.'",
+      "answer": "15 August 1947. First PM: Jawaharlal Nehru. Speech: 'Tryst with Destiny'."
+    },
+    {
+      "q": "What was the Partition of India? When did it happen and what were its consequences?",
+      "steps": "The <strong>Partition</strong> was the division of British India into two independent countries: <strong>India</strong> (mostly Hindu) and <strong>Pakistan</strong> (mostly Muslim). It happened on <strong>14-15 August 1947</strong>. The borders were drawn by a British lawyer named <strong>Cyril Radcliffe</strong> in just five weeks. About <strong>14-15 million people</strong> were displaced — Hindus and Sikhs moving from Pakistan to India, Muslims moving from India to Pakistan. About <strong>1 million people</strong> died in the communal violence. It was the saddest chapter in our history.",
+      "answer": "14-15 August 1947. India was divided into India + Pakistan. ~14-15 million displaced; ~1 million killed in violence."
+    },
+    {
+      "q": "Who was Sardar Vallabhbhai Patel? Why is he called the 'Iron Man of India'?",
+      "steps": "<strong>Sardar Vallabhbhai Patel</strong> (1875-1950) was a senior leader of the Indian National Congress. After independence, he was given the task of integrating the <strong>565 princely states</strong> into the new Republic of India. Using persuasion, diplomacy, and sometimes the threat of force, he convinced almost all the princely rulers to join India within just one year. Without him, the India we see on the map today would not exist. He is called the <strong>'Iron Man of India'</strong> for his strong will.",
+      "answer": "Sardar Patel united 565 princely states into the new Republic of India (1947-48). Called the 'Iron Man of India' for his strong will."
+    },
+    {
+      "q": "When and by whom was Mahatma Gandhi assassinated?",
+      "steps": "Mahatma Gandhi was assassinated on <strong>30 January 1948</strong> by a man named <strong>Nathuram Godse</strong>. Godse shot Gandhi during a prayer meeting at Birla House in New Delhi. Godse believed Gandhi was too kind to Muslims. Gandhiji's last words were 'Hey Ram' — 'Oh God'. The whole world mourned. Gandhiji is honoured as the <strong>Father of the Nation</strong>.",
+      "answer": "30 January 1948, by Nathuram Godse at Birla House, New Delhi."
+    }
+  ]
+};
