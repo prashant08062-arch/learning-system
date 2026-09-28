@@ -22,7 +22,7 @@ No server required — runs entirely from the file system.
 | 🌍 Geography | World Geography: Some Glimpses | 6–8 | Image |
 | 📜 **History** | **India's Long Road to Independence** *(new!)* | **8** (story-form for 5-7 year olds) | Image |
 | ⚛️ Physics | Light: Mirrors and Lenses | 8 (with Class 6-7 scaffolding) | SVG |
-| 🌊 3D Water Body Atlas | 15 animated geography terms | 6–8 | Three.js (standalone) |
+| 🌊 3D Water Body Atlas | 15 animated geography terms — TEACHES each term step-by-step with "Teach Me" mode | 6–8 | Three.js (standalone) |
 | 🔬 3D Mirror & Lens Atlas | 10 interactive physics scenes | 6–8 | Three.js (standalone) |
 
 For a pedagogical review of Maths, Geography, and Physics chapters against the NCERT Class 6–7 syllabus, please see **`CLASS_6_7_SUITABILITY.md`**.
@@ -167,7 +167,49 @@ Based on NCERT Curiosity Grade 8 Science Chapter 10. The Grade 8 content is **pr
 
 ## What's in the 3D Water Body Atlas
 
-A standalone HTML page (`water_body_atlas.html`) that visualises **15 water-body terms** as animated 3D scenes using Three.js. Designed for classroom projection.
+A standalone HTML page (`water_body_atlas.html`) that **teaches** 15 water-body terms to Class 8 students through **animated, step-by-step classroom demonstrations** — not just static 3D models. Designed for classroom projection and individual study.
+
+### How it teaches (the "Teach Me" workflow)
+
+Each term has a 6-step teaching timeline that the student (or teacher) can play through:
+
+1. **Start with a simple scene** — e.g. for GULF: the sea meets the land.
+2. **Animate the feature forming** — e.g. water pushes deeply into the land.
+3. **Highlight the key part** — e.g. an arrow points at the narrow opening.
+4. **Show the term name** — e.g. a "GULF" label appears in 3D.
+5. **Real-world example on a mini-map** — e.g. the Persian Gulf location glows on a world map.
+6. **Side-by-side comparison** — e.g. Gulf (narrow mouth) vs Bay (wide mouth), shown as SVG diagrams.
+
+The animation **itself** explains the concept — text labels and narration supplement the visuals but don't replace them.
+
+### Controls
+
+- **🎓 Teach Me** — auto-advances the timeline, controlling camera, animations, highlights, and labels step-by-step. Press again to stop.
+- **⏸ Pause / ▶ Play** — pause or resume the timeline.
+- **↻ Replay** — restart from step 1.
+- **⟲ Reset View** — reset the camera to its default position.
+- **⏭ Step** — jump to the next teaching step manually.
+- **Scrubber slider** — drag to any point in the timeline.
+- **Drag** (mouse/touch) — rotate the 3D scene freely. **Scroll** — zoom. **Right-drag** — pan.
+
+### The 15 terms
+
+**Coastal Inlets:** Sea, Gulf, Bay, Strait, Canal
+**Ocean Floor:** Trench, Ridge, Reef, Atoll
+**Land–Water:** Isthmus, Peninsula, Cape, Delta, Estuary, Lagoon
+
+Each term includes:
+- An animated 3D scene that builds the feature step-by-step
+- A short Class-8-friendly narration
+- A real-world example with a glowing dot on a world mini-map (Persian Gulf, Bay of Bengal, Mariana Trench, Mid-Atlantic Ridge, Great Barrier Reef, Panama Isthmus, etc.)
+- A side-by-side SVG comparison with the most easily-confused term (Gulf↔Bay, Strait↔Isthmus, Canal↔Strait, Trench↔Ridge, Reef↔Atoll, Isthmus↔Strait, Peninsula↔Island, Cape↔Peninsula, Delta↔Estuary, Estuary↔Delta, Lagoon↔Lake)
+
+### Colors used (consistent across all terms)
+
+- 🔵 Blue — sea water (different shades for depth)
+- 🟢 Green / Brown — land (green for vegetated, brown for mountain/volcano)
+- 🟡 Yellow / Orange — the highlighted feature being explained
+- 🩷 Pink — the comparison feature
 
 ## System Architecture
 
@@ -221,7 +263,7 @@ Refresh `index.html` — your new chapter will appear under its subject.
 - 📱 **Fully responsive** — works on desktop, tablet, and mobile
 - 🎯 **Multi-section lectures** — only one sub-lecture visible at a time
 - 🌈 **Color-coded subjects** — each subject has its own accent color
-- 🌊 **3D Water Body Atlas** — 15 animated geography terms
+- 🌊 **3D Water Body Atlas** — 15 animated geography terms with a "Teach Me" guided mode that walks students through each concept step-by-step with camera control, highlights, labels, mini-maps, and side-by-side comparisons
 - 🔬 **3D Mirror & Lens Atlas** — 10 interactive physics scenes with simple analogies for Class 6-7
 - 📜 **History chapter** with story-form narration and "Before We Begin" vocabulary section
 

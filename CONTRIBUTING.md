@@ -522,27 +522,69 @@ curl -s -H "Authorization: token $GIT_PAT" \
 
 ## 🌊 Standalone 3D Atlases (optional — only if the user explicitly asks)
 
-If the user asks for an interactive 3D atlas alongside the chapter (similar to the existing `water_body_atlas.html` and `mirrors_lenses_3d_atlas.html`), build a self-contained HTML file using Three.js r128 from CDN:
+If the user asks for an interactive 3D atlas alongside the chapter (similar to the existing `water_body_atlas.html` and `mirrors_lenses_3d_atlas.html`), build a self-contained HTML file using Three.js r128 from CDN.
 
-- **Layout:** Sidebar (term buttons) + 3D viewport (canvas) + Info panel (definition, example, "what to watch in 3D")
+### IMPORTANT: Animated teaching, not static viewers
+
+The `water_body_atlas.html` was redesigned (Sept 2025) to TEACH each term through animation, not just display a 3D model. New atlases should follow the same pattern:
+
+- **Each term has a 6-step teaching timeline** (not just a static scene). Each step:
+  1. Starts with a simple scene
+  2. Animates the feature forming/appearing
+  3. Highlights the key part with arrows/colors (yellow/orange)
+  4. Shows the term name (3D label)
+  5. Shows a real-world example on a mini-map (SVG world map with a glowing dot)
+  6. Shows a side-by-side comparison with the most easily-confused term (SVG diagrams)
+- **The animation itself must explain the concept** — text alone is insufficient.
+- **Use simple procedural geometry/SVG/Canvas where possible** — no heavy external 3D assets.
+- **Colors are consistent:** blue=water, green/brown=land, yellow/orange=highlighted feature, pink=comparison feature.
+- **Keep text minimal and Class-8-friendly.**
+
+### Architecture of the redesigned atlas
+
+- **Layout (preserved):** Sidebar (term buttons) + 3D viewport (canvas) + Info panel (definition, example, mini-map, teaching-steps list, comparison table)
 - **Three.js r128 gotchas:**
   - No `THREE.Geometry` — use `THREE.BufferGeometry().setFromPoints([...])`
   - No `THREE.CapsuleGeometry` — provide a shim or use scaled spheres
   - `MeshStandardMaterial` instead of `MeshPhysicalMaterial` (no `transmission`/`thickness`)
   - `LineDashedMaterial` requires `line.computeLineDistances()` on the Line object, not the geometry
-- **Each term has a `SCENE_BUILDERS[termKey] = function(root) {...}` that builds a `THREE.Group`**
-- **Each term has a `TERMS[termKey]` object with:** name, pronounce, definition, example, activity prompt, "In one line (for Class 6-7)" simple summary, labels array
-- **Each term has a `LEGENDS[termKey]` object** with color swatches
-- **Animation loop** uses `requestAnimationFrame`, applies smooth camera rotation, and calls `currentSceneRoot.userData.updater(dt, t)` for scene-specific animations
-- **Orbit controls** implemented manually: mousedown (rotate), wheel (zoom), right-drag (pan), touch support
-- **Error handling:** wrap `initEngine()` in try/catch; wrap each `builder(currentSceneRoot)` call in try/catch so one bad scene doesn't break the others
+- **Each term has a `SCENE_CONTROLLERS[termKey] = function(root) { ... return { build, update, reset, steps, totalDuration }; }`** — the controller builds ALL 3D objects (initially invisible), then `update(t)` reveals/highlights/moves them based on the timeline `t` (in seconds).
+- **Each term has a `TERMS[termKey]` object** with: name, pronounce, icon, definition, example, compareTitle, compare (table data).
+- **Teaching controls (in the viewport bottom bar):**
+  - **🎓 Teach Me** — toggles auto-advance mode; the controller's `update(t)` drives camera, animations, highlights, labels.
+  - **⏸ Pause / ▶ Play** — pauses/resumes timeline progression.
+  - **↻ Replay** — restarts from t=0.
+  - **⟲ Reset View** — resets the camera.
+  - **⏭ Step** — snaps to the next step boundary.
+  - **Scrubber slider** — drag to any t; calls `update(t)` immediately for responsiveness.
+- **Camera tween helper:** `tweenCamera(t, t0, t1, fromPos, toPos, fromLookAt, toLookAt)` returns `{ pos, lookAt }` using smoothstep. Set `cameraOverride` to this object; the render loop applies it.
+- **Smoothstep helper:** `smoothAt(t, t0, t1, v0, v1)` for tweening object opacity/scale/position.
+- **Comparison overlay:** `showComparison(leftLabel, leftSVG, rightLabel, rightSVG)` displays two SVG diagrams side-by-side over the 3D viewport. Call `hideComparison()` when the comparison step is not active.
+- **3D labels:** `createTextLabel(text, color, size)` returns a `THREE.Sprite` with a CanvasTexture — useful for floating term names like "GULF", "BAY", etc.
+- **Highlight arrows:** `createHighlightArrow(from, to, color)` returns a `THREE.Group` with a shaft + arrowhead — useful for pointing at the key feature.
+- **Orbit controls:** drag (rotate), wheel (zoom), right-drag (pan), touch support.
+- **Error handling:** wrap `initEngine()` in try/catch; wrap each controller's `build()` call in try/catch so one bad scene doesn't break the others.
 
-Add a launcher button on the home screen (`index.html`) below the existing subject grid:
+### Add a launcher button on the home screen
+
+Add to `index.html` below the existing subject grid:
 ```html
 <div style="margin: 0 auto 16px; max-width: 760px; padding: 18px 22px; background: linear-gradient(135deg, #...); border-radius: 14px; ...">
   <a href="<atlas_filename>.html" target="_blank" style="background: #fbbf24; color: #0a1326; ...">🚀 Launch 3D Atlas →</a>
 </div>
 ```
+
+### Quality-checklist additions for atlases
+
+- [ ] Each term has at least 6 teaching steps in its timeline
+- [ ] The "Teach Me" button works — auto-advances the timeline, controls camera, reveals objects progressively
+- [ ] Each term's animation actually TEACHES the concept (not just shows a 3D model)
+- [ ] A real-world example mini-map (SVG world map with a glowing dot) appears in the info panel
+- [ ] A side-by-side SVG comparison overlay appears at the final step for easily-confused terms
+- [ ] All 6 controls work: Teach Me, Play/Pause, Replay, Reset View, Step, Scrubber
+- [ ] Camera tweens are smooth (use smoothstep, not linear interpolation)
+- [ ] Objects fade in/out smoothly (use `setOpacity(obj, t)` with smoothstep)
+- [ ] No console errors when switching between terms
 
 ---
 
