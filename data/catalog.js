@@ -127,7 +127,17 @@ window.CATALOG = {
       name: 'Biology',
       icon: '🧬',
       color: '#84cc16',
-      chapters: []
+      chapters: [
+        {
+          slug: 'how_nature_works_in_harmony',
+          title: 'How Nature Works in Harmony',
+          subtitle: 'Chapter 12 · Curiosity — Textbook of Science for Grade 8',
+          description: 'Discover how every part of nature is connected — from a single fish in a pond to the great mangrove forests that protect our coasts from cyclones. Covers habitats (biotic & abiotic), populations, communities, ecosystems, producers/consumers/decomposers, food chains, trophic levels, food webs, three types of interactions (mutualism/commensalism/parasitism), the cascade effect (Indian bullfrog ban), Sundarbans mangroves vs Cyclone Amphan 2020, elephant corridors, and sustainable farming. Story-form narration with 10 lectures, 4 real-life scenarios, 8 guided-practice problems, 14 self-test questions, 12 practice cards, and a 15-term Before-We-Begin vocabulary section.',
+          dataFile: 'data/biology/how_nature_works_in_harmony/chapter.js',
+          hasImages: false,
+          estimatedTime: '75 min'
+        }
+      ]
     }
   ]
 };

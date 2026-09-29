@@ -23,6 +23,7 @@ No server required — runs entirely from the file system.
 | 📜 **History** | **India's Long Road to Independence** *(new!)* | **8** (story-form for 5-7 year olds) | Image |
 | ⚛️ Physics | Light: Mirrors and Lenses | 8 (with Class 6-7 scaffolding) | SVG |
 | ⚛️ **Physics** | **Pressure, Winds, Storms, and Cyclones** *(new!)* | **8** | SVG |
+| 🧬 **Biology** | **How Nature Works in Harmony** *(new!)* | **8** | SVG |
 | 🌊 3D Water Body Atlas | 15 animated geography terms — TEACHES each term step-by-step with "Teach Me" mode | 6–8 | Three.js (standalone) |
 | 🔬 3D Mirror & Lens Atlas | 10 interactive physics scenes | 6–8 | Three.js (standalone) |
 
@@ -121,6 +122,53 @@ The Notes tab includes:
 - Memory Tricks ("HIGH to LOW", "Flash BOOM", "Bottoms are broad")
 - Quick Reference Card — single table with every formula and rule
 - Safety tips for lightning and cyclones
+
+## 🧬 What's in the Biology Chapter — *How Nature Works in Harmony* (NEW)
+
+Based on NCERT Curiosity — Textbook of Science for Grade 8, Chapter 12. A complete story-form treatment of ecosystems and how every part of nature is connected — including a powerful cyclone-connection (mangrove forests protect coasts from cyclones and tsunamis). Compressed into **10 story-form lectures** with **51 narrated beats**.
+
+### "Before We Begin" Story-Time Vocabulary Section
+
+15 key terms explained in story-form before the lectures begin: Habitat, Biotic, Abiotic, Population, Community, Ecosystem, Producer (Autotroph), Consumer (Heterotroph), Herbivore, Carnivore, Omnivore, Decomposer (Saprotroph), Food Chain, Food Web, Trophic Level, Mangrove Forest.
+
+### 10 Story-Form Lectures (51 beats)
+
+| # | Lecture | Topics |
+|---|---------|--------|
+| 1 | Habitats: Biotic & Abiotic | Pond vs forest, biotic vs abiotic components |
+| 2 | Population & Community | Individual → Population → Community → Ecosystem ladder |
+| 3 | Does Every Organism Matter? | Activity 12.3 — Pond A vs Pond B fish study, pollination cascade |
+| 4 | The Ecosystem | Three types of interactions, aquatic vs terrestrial, human-made |
+| 5 | Producers, Consumers, Decomposers | Autotrophs, heterotrophs, saprotrophs, cycle of life |
+| 6 | Food Chains & Trophic Levels | Grass → Grasshopper → Frog → Snake → Eagle, pyramid shape |
+| 7 | Food Webs | Interlinked chains, Activity 12.8 — every organism has many links |
+| 8 | Decomposers & Waste in Nature | Mushrooms, beetles on elephant dung, nutrient recycling |
+| 9 | Balance & Three Types of Interactions | Mutualism, commensalism, parasitism, cascade effect |
+| 10 | Ecosystems, Cyclones & Us | Sundarbans mangroves, Cyclone Amphan 2020, protected areas, sustainable farming |
+
+### Real-Life Story Scenarios (4)
+
+- 🐘 The Elephant Corridor (Odisha, Jharkhand — why elephants enter farms, solution: wildlife corridors)
+- 🐸 The Indian Bullfrog Export Ban (1980s cascade: frog decline → pests → pesticides → ban)
+- 🌳 Sundarbans vs Cyclone Amphan (2020) — how mangroves protect coasts from cyclones + 2004 Tsunami Cuddalore story
+- 🌾 From Green Revolution to Sustainable Farming — Vrikshayurveda, organic methods, Kunapa Jala
+
+### Practice Material
+
+- **8 guided-practice problems** with step-by-step validation (biotic vs abiotic, population vs community, build a food chain, trophic levels, what if frogs disappear, type of interaction, why mangroves protect, why decomposers are essential)
+- **12 practice cards** with reveal-answer buttons (habitat, biotic vs abiotic, population vs community, ecosystem, producers, types of consumers, food chain, food web, decomposers, types of interactions, mangroves vs cyclones, bullfrog ban)
+- **14 self-test questions** with worked-out answers covering every section
+
+### Comprehensive Key Notes
+
+The Notes tab includes:
+- "Before We Begin" 15-term vocabulary section
+- Section-by-section formula cards (Habitat = Biotic + Abiotic, Ecosystem = Community + Abiotic, Producers → Consumers → Decomposers cycle)
+- Worked examples (two-ponds experiment, Indian bullfrog cascade)
+- Common Mistakes section (10 pitfalls — confusing population vs community, food chain arrow direction, soil is abiotic not biotic, etc.)
+- Memory Tricks ("Biotic Begins life", "PCD: Producers/Consumers/Decomposers", "Pull one thread, the whole web shakes")
+- Quick Reference Card — single table with every key term, meaning, and example
+- **Cyclone connection**: full section on how mangrove forests protect coasts from cyclones and tsunamis (Sundarbans, Cyclone Amphan 2020, 2004 Tsunami Cuddalore village)
 
 ## 📜 What's in the History Chapter — *India's Long Road to Independence* (NEW)
 
