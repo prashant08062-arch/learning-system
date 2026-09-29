@@ -24,6 +24,7 @@ No server required — runs entirely from the file system.
 | ⚛️ Physics | Light: Mirrors and Lenses | 8 (with Class 6-7 scaffolding) | SVG |
 | ⚛️ **Physics** | **Pressure, Winds, Storms, and Cyclones** *(new!)* | **8** | SVG |
 | 🧬 **Biology** | **How Nature Works in Harmony** *(new!)* | **8** | SVG |
+| 🧬 **Biology** | **Our Home: Earth, a Unique Life Sustaining Planet** *(new!)* | **8** | SVG |
 | 🌊 3D Water Body Atlas | 15 animated geography terms — TEACHES each term step-by-step with "Teach Me" mode | 6–8 | Three.js (standalone) |
 | 🔬 3D Mirror & Lens Atlas | 10 interactive physics scenes | 6–8 | Three.js (standalone) |
 
@@ -169,6 +170,54 @@ The Notes tab includes:
 - Memory Tricks ("Biotic Begins life", "PCD: Producers/Consumers/Decomposers", "Pull one thread, the whole web shakes")
 - Quick Reference Card — single table with every key term, meaning, and example
 - **Cyclone connection**: full section on how mangrove forests protect coasts from cyclones and tsunamis (Sundarbans, Cyclone Amphan 2020, 2004 Tsunami Cuddalore village)
+
+## 🌍 What's in the Biology Chapter — *Our Home: Earth, a Unique Life Sustaining Planet* (NEW)
+
+Based on NCERT Curiosity — Textbook of Science for Grade 8, **Chapter 13 — the FINAL chapter of the Class 8 science textbook**. A complete story-form treatment of why Earth is the only planet that sustains life — covering its unique position, size, atmosphere, ozone layer, magnetic field, the four spheres, reproduction, and the triple planetary crisis. Compressed into **10 story-form lectures** with **50 narrated beats**.
+
+### "Before We Begin" Story-Time Vocabulary Section
+
+15 key terms explained in story-form before the lectures begin: Crust, Atmosphere, Hydrosphere, Geosphere, Biosphere, Habitable Zone (Goldilocks), Greenhouse Effect, Ozone Layer, Magnetic Field, Gravity, Genetic Material (Genes), Asexual Reproduction, Sexual Reproduction, Triple Planetary Crisis, Global Agreements.
+
+### 10 Story-Form Lectures (50 beats)
+
+| # | Lecture | Topics |
+|---|---------|--------|
+| 1 | Why is Earth Unique? | Crust like apple skin, ISRO Earth observation satellite (3000-image mosaic) |
+| 2 | Solar System & Greenhouse Effect | 8 planets, Venus hottest (CO₂ greenhouse), Earth = 15°C |
+| 3 | The Habitable Zone (Goldilocks) | Not too hot, not too cold — liquid water, Blue Planet, Mars exploration |
+| 4 | Size, Atmosphere & Ozone Layer | Right size → right gravity, ozone blocks UV rays |
+| 5 | Earth's Magnetic Field | Shield from solar wind + cosmic rays, molten iron core |
+| 6 | The Four Spheres | Atmosphere + Hydrosphere + Geosphere + Biosphere = Earth |
+| 7 | Asexual Reproduction | Single parent, exact copies (potato, ginger, Hydra, Planaria) |
+| 8 | Sexual Reproduction | Two parents, mixed genes, gametes, fertilisation, zygote, embryo |
+| 9 | Threats to Life — Triple Crisis | Climate change + Biodiversity loss + Pollution, global agreements |
+| 10 | What Can We Do? | Cut pollution, use clean energy, protect nature, small actions add up |
+
+### Real-Life Story Scenarios (4)
+
+- 🛰️ ISRO Mangalyaan — India's Mars Mission (2013, low-cost technology)
+- 🌡️ Why is Venus Hotter than Mercury? (the greenhouse effect mystery)
+- 🛡️ The Montreal Protocol — A Success Story (1987 CFC ban, ozone layer recovering)
+- 🌡️ The Paris Agreement & the 1.5°C Goal (2015 climate target, not on track as of 2025)
+
+### Practice Material
+
+- **8 guided-practice problems** with step-by-step validation (identify habitable zone planet, why Venus is hotter, crust = apple skin, four spheres matching, asexual vs sexual, magnetic field protection, why Earth holds atmosphere, triple planetary crisis)
+- **12 practice cards** with reveal-answer buttons (crust, 8 planets, hottest planet, habitable zone, Blue Planet, ozone layer, magnetic field, four spheres, vegetative propagation, gametes, triple crisis, Montreal Protocol)
+- **14 self-test questions** with worked-out answers covering every section
+
+### Comprehensive Key Notes
+
+The Notes tab includes:
+- "Before We Begin" 15-term vocabulary section
+- Section-by-section formula cards (Habitable Zone = Goldilocks, Right Size → Right Gravity, Atmosphere + Hydrosphere + Geosphere + Biosphere = Earth, Triple Crisis = Climate + Biodiversity + Pollution)
+- 8-planets table with temperatures, sizes, atmospheres, and types
+- Worked examples (Venus mystery, Mangalyaan, ozone hole recovery, Paris Agreement 1.5°C)
+- Common Mistakes section (10 pitfalls — including confusing greenhouse effect with ozone hole, thinking Mercury is hottest, gametes carrying all genes, etc.)
+- Memory Tricks ("My Very Educated Mother Just Served Us Noodles" for 8 planets, "Air, Water, Rock, Life" for four spheres, "Earth = apple, crust = skin")
+- Quick Reference Card — single table with every key term, meaning, and example
+- **Final chapter message**: "By working together and living responsibly, we can protect this unique planet and its future."
 
 ## 📜 What's in the History Chapter — *India's Long Road to Independence* (NEW)
 

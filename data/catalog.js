@@ -136,6 +136,15 @@ window.CATALOG = {
           dataFile: 'data/biology/how_nature_works_in_harmony/chapter.js',
           hasImages: false,
           estimatedTime: '75 min'
+        },
+        {
+          slug: 'our_home_earth',
+          title: 'Our Home: Earth, a Unique Life Sustaining Planet',
+          subtitle: 'Chapter 13 · Curiosity — Textbook of Science for Grade 8',
+          description: 'Discover why our home, planet Earth, is like no other place in the known universe — the only planet that sustains life. Covers Earth as unique (crust like apple skin, ISRO satellites), the solar system & greenhouse effect (Venus hottest planet mystery), the habitable/Goldilocks zone, Earth size & gravity, atmosphere, ozone layer (UV shield), magnetic field (solar wind shield), four spheres (atmosphere/hydrosphere/geosphere/biosphere), reproduction (asexual vs sexual, gametes, fertilisation, zygote), the triple planetary crisis (climate change, biodiversity loss, pollution), global agreements (Montreal Protocol, Earth Summit, Kyoto, Paris Agreement 1.5°C). Story-form narration with 10 lectures, 4 real-life scenarios (ISRO Mangalyaan, Venus mystery, Montreal Protocol success, Paris Agreement), 8 guided-practice problems, 14 self-test questions, 12 practice cards, and a 15-term Before-We-Begin vocabulary section.',
+          dataFile: 'data/biology/our_home_earth/chapter.js',
+          hasImages: false,
+          estimatedTime: '75 min'
         }
       ]
     }
