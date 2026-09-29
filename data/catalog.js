@@ -103,6 +103,15 @@ window.CATALOG = {
           dataFile: 'data/physics/light_mirrors_lenses/chapter.js',
           hasImages: false,
           estimatedTime: '50 min'
+        },
+        {
+          slug: 'pressure_winds_storms_cyclones',
+          title: 'Pressure, Winds, Storms, and Cyclones',
+          subtitle: 'Chapter 6 · Curiosity — Textbook of Science for Grade 8',
+          description: 'Discover how pressure shapes our world — from broad bag straps to cyclones. Covers the formula P = F/A, liquid pressure, atmospheric pressure, wind formation (high → low pressure), sea & land breezes, high-speed winds and reduced pressure (why roofs blow off), thunderstorms, lightning safety, and cyclones (eye, formation, destruction, IMD tracking). Story-form narration with 10 lectures, 4 real-life scenarios (Megha & Pawan bags, fishermen breezes, roof blow-off, Cyclone Amphan 2020), 8 guided-practice problems, 14 self-test questions, 12 practice cards, and a 15-term Before-We-Begin vocabulary section.',
+          dataFile: 'data/physics/pressure_winds_storms_cyclones/chapter.js',
+          hasImages: false,
+          estimatedTime: '75 min'
         }
       ]
     },

@@ -22,6 +22,7 @@ No server required — runs entirely from the file system.
 | 🌍 Geography | World Geography: Some Glimpses | 6–8 | Image |
 | 📜 **History** | **India's Long Road to Independence** *(new!)* | **8** (story-form for 5-7 year olds) | Image |
 | ⚛️ Physics | Light: Mirrors and Lenses | 8 (with Class 6-7 scaffolding) | SVG |
+| ⚛️ **Physics** | **Pressure, Winds, Storms, and Cyclones** *(new!)* | **8** | SVG |
 | 🌊 3D Water Body Atlas | 15 animated geography terms — TEACHES each term step-by-step with "Teach Me" mode | 6–8 | Three.js (standalone) |
 | 🔬 3D Mirror & Lens Atlas | 10 interactive physics scenes | 6–8 | Three.js (standalone) |
 
@@ -73,6 +74,53 @@ The Notes tab includes the "Before We Begin" vocabulary section, plus:
 - Common Mistakes section (10 pitfalls to avoid)
 - Memory Tricks for tricky formulas
 - Quick Reference Card — a single table with every formula in the chapter
+
+## ⚛️ What's in the Physics Chapter — *Pressure, Winds, Storms, and Cyclones* (NEW)
+
+Based on NCERT Curiosity — Textbook of Science for Grade 8, Chapter 6. A complete story-form treatment of pressure and how it shapes powerful natural events like thunderstorms and cyclones — compressed into **10 story-form lectures** with **55 narrated beats**.
+
+### "Before We Begin" Story-Time Vocabulary Section
+
+15 key terms explained in story-form before the lectures begin: Force, Area, Pressure, Liquid Pressure, Atmosphere, Atmospheric Pressure, Wind, High/Low Pressure, Sea Breeze, Land Breeze, Thunderstorm, Lightning, Thunder, Cyclone, Eye of the Cyclone.
+
+### 10 Story-Form Lectures (55 beats)
+
+| # | Lecture | Topics |
+|---|---------|--------|
+| 1 | What is Pressure? | Megha & Pawan's bags, broad vs narrow straps |
+| 2 | The Pressure Formula | P = F/A, newton, m², pascal (Pa) |
+| 3 | Liquids Also Exert Pressure | Activity 6.1 — pipes + balloons, height matters not amount |
+| 4 | Liquids Push in All Directions | Activity 6.2 — bottle with holes, dam broad base |
+| 5 | Air Exerts Pressure Too | Atmosphere, Activity 6.3 paper plate, Activity 6.4 rubber sucker, 2250 N |
+| 6 | How Winds Form | Activity 6.5 — balloon + straw, high → low pressure |
+| 7 | Sea Breeze and Land Breeze | Day/night reversal, fishermen's free ride |
+| 8 | High-Speed Winds = Low Pressure | Activity 6.6 — two balloons, why roofs blow off |
+| 9 | Thunderstorms and Lightning | Warm moist air, charge separation, lightning, thunder, safety |
+| 10 | Cyclones — Giant Spinning Storms | Warm ocean fuel, eye, storm surge, Amphan 2020, IMD |
+
+### Real-Life Story Scenarios (4)
+
+- 🎒 Megha & Pawan's Picnic Bags (calculate pressure on narrow vs broad straps — 5× difference)
+- 🚣 The Fishermen's Free Ride (sea & land breeze) — sail out at night, return at noon
+- 🏠 Why Do Roofs Blow OFF in Storms? (Bernoulli effect, keep windows open)
+- 🌀 Cyclone Amphan (2020) — peak winds 270 km/h, IMD tracking, evacuation
+
+### Practice Material
+
+- **8 guided-practice problems** with step-by-step validation (pressure calc, narrow vs broad strap, elephant foot pressure, wind direction, sea breeze, balloon experiment, lightning safety, cyclone eye)
+- **12 practice cards** with reveal-answer buttons (formula, calculations, sharp knife, liquid pressure, atmospheric pressure, wind direction, sea/land breeze, roof in storm, lightning safety, cyclone formation, eye of cyclone)
+- **14 self-test questions** with worked-out answers covering every section
+
+### Comprehensive Key Notes
+
+The Notes tab includes:
+- "Before We Begin" 15-term vocabulary section
+- Section-by-section formula cards (P = F/A, liquid pressure, atmospheric pressure, wind rule, high-speed wind rule, cyclone eye)
+- Worked examples and real-life applications
+- Common Mistakes section (10 pitfalls to avoid — including confusing sea/land breeze, lying flat during lightning, closing windows during storms)
+- Memory Tricks ("HIGH to LOW", "Flash BOOM", "Bottoms are broad")
+- Quick Reference Card — single table with every formula and rule
+- Safety tips for lightning and cyclones
 
 ## 📜 What's in the History Chapter — *India's Long Road to Independence* (NEW)
 
