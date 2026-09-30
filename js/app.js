@@ -613,100 +613,105 @@ function printNotes() {
   <style>
     @page { margin: 16mm 14mm; }
     * { box-sizing: border-box; }
+
+    /* ===== PRINT-FRIENDLY OVERRIDE ===== */
+    /* Force EVERYTHING to white background + dark text.
+       This overrides ALL inline styles (gradient cards, dark
+       rgba() backgrounds, light text colors, etc.) so the
+       printed PDF is truly print-friendly: black text on
+       white paper, minimal ink usage. */
+    * {
+      background: white !important;
+      color: #1e293b !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-      color: #1e293b;
-      background: #ffffff;
       margin: 0;
       padding: 0;
       line-height: 1.6;
       font-size: 12pt;
+      background: #ffffff !important;
+      color: #1e293b !important;
     }
+
     .print-header {
-      border-bottom: 3px solid ${subjectColor};
+      border-bottom: 3px solid #475569;
       padding-bottom: 14px;
       margin-bottom: 24px;
+      background: white !important;
     }
     .print-header-eyebrow {
       font-size: 10pt;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: #64748b;
+      color: #64748b !important;
       margin-bottom: 4px;
     }
     .print-header-title {
       font-size: 22pt;
       font-weight: 700;
-      color: #0f172a;
+      color: #0f172a !important;
       margin: 0 0 6px 0;
       line-height: 1.2;
     }
     .print-header-sub {
       font-size: 11pt;
-      color: #475569;
+      color: #475569 !important;
       margin: 0;
     }
+
+    /* Headings: dark text, bottom border for visual structure */
     h2 {
-      color: ${subjectColor};
+      color: #0f172a !important;
       font-size: 16pt;
       margin: 28px 0 10px;
       padding-bottom: 4px;
-      border-bottom: 1px solid #e2e8f0;
+      border-bottom: 2px solid #cbd5e1;
       page-break-after: avoid;
+      background: white !important;
     }
     h3 {
-      color: rgb(${accentR}, ${accentG}, ${accentB});
+      color: #1e293b !important;
       font-size: 13pt;
       font-weight: 700;
       margin: 22px 0 8px;
       page-break-after: avoid;
+      background: white !important;
     }
     h4 {
-      color: #1e293b;
+      color: #0f172a !important;
       font-size: 11.5pt;
       font-weight: 700;
       margin: 16px 0 6px;
       page-break-after: avoid;
+      background: white !important;
     }
     p {
       margin: 0 0 10px;
-      color: #1e293b;
+      color: #1e293b !important;
+      background: white !important;
     }
     ul, ol { margin: 6px 0 12px 22px; }
-    li { margin-bottom: 4px; color: #1e293b; }
-    strong { color: #0f172a; font-weight: 700; }
-    em { color: rgb(${Math.min(accentR + 40, 255)}, ${Math.min(accentG + 40, 255)}, ${Math.min(accentB + 40, 255)}); font-style: italic; }
+    li {
+      margin-bottom: 4px;
+      color: #1e293b !important;
+      background: white !important;
+    }
+    strong { color: #000 !important; font-weight: 700; }
+    em { color: #334155 !important; font-style: italic; }
     code {
       font-family: "SF Mono", "Monaco", "Consolas", monospace;
-      background: #f1f5f9;
-      color: #0f172a;
+      background: #f1f5f9 !important;
+      color: #0f172a !important;
       padding: 1px 5px;
       border-radius: 3px;
       font-size: 10.5pt;
     }
-    /* Preserve the inline "Before We Begin" gradient card on a light bg */
-    div[style*="linear-gradient"] {
-      color: #f8fafc !important;
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-    }
-    div[style*="linear-gradient"] h2,
-    div[style*="linear-gradient"] h3,
-    div[style*="linear-gradient"] p {
-      color: #f8fafc !important;
-    }
-    /* Practice cards and warning boxes — keep their accent backgrounds */
-    .practice-card,
-    .card,
-    .styled-table th,
-    .reveal-answer,
-    .formula-big,
-    .formula-sub,
-    .triples,
-    .triple {
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-    }
+
+    /* Cards: light gray background, colored LEFT border for type distinction */
     .card {
       background: #f8fafc !important;
       border: 1px solid #e2e8f0 !important;
@@ -715,27 +720,33 @@ function printNotes() {
       padding: 12px 16px !important;
       margin: 14px 0 !important;
     }
-    .card.warn { border-left-color: #f59e0b !important; }
-    .card.tip  { border-left-color: #10b981 !important; }
-    .card.formula { border-left-color: ${subjectColor} !important; }
+    .card.warn    { border-left-color: #f59e0b !important; }
+    .card.tip     { border-left-color: #10b981 !important; }
+    .card.formula { border-left-color: #6366f1 !important; }
     .card.history { border-left-color: #8b5cf6 !important; }
-    .card.open { border-left-color: #f97316 !important; }
+    .card.open    { border-left-color: #f97316 !important; }
     .card h4 { margin-top: 0; }
     .card ul, .card ol { margin-top: 6px; }
-    .card p { color: #1e293b; }
+    .card p { color: #1e293b !important; }
+
+    /* Formula display */
     .formula-big {
       font-size: 16pt;
       font-weight: 700;
-      color: ${subjectColor};
+      color: #0f172a !important;
       text-align: center;
       margin: 6px 0;
+      background: white !important;
     }
     .formula-sub {
       font-size: 10.5pt;
-      color: #475569;
+      color: #475569 !important;
       text-align: center;
       margin-bottom: 8px;
+      background: white !important;
     }
+
+    /* Tables: light gray header, zebra striping — no dark backgrounds */
     table.styled-table {
       width: 100%;
       border-collapse: collapse;
@@ -744,21 +755,24 @@ function printNotes() {
       page-break-inside: avoid;
     }
     .styled-table th {
-      background: ${subjectColor} !important;
-      color: #ffffff !important;
+      background: #e2e8f0 !important;
+      color: #0f172a !important;
       padding: 8px 10px;
       text-align: left;
-      border: 1px solid #cbd5e1;
+      border: 1px solid #94a3b8;
       font-weight: 700;
     }
     .styled-table td {
       padding: 7px 10px;
       border: 1px solid #e2e8f0;
-      color: #1e293b;
+      color: #1e293b !important;
+      background: white !important;
     }
     .styled-table tr:nth-child(even) td {
       background: #f8fafc !important;
     }
+
+    /* Practice cards */
     .practice-card {
       background: #f8fafc !important;
       border: 1px solid #e2e8f0 !important;
@@ -767,42 +781,106 @@ function printNotes() {
       margin: 12px 0 !important;
       page-break-inside: avoid;
     }
-    .practice-card h3 { color: ${subjectColor}; margin-top: 0; }
-    .practice-card p { color: #1e293b; }
+    .practice-card h3 {
+      color: #0f172a !important;
+      margin-top: 0;
+    }
+    .practice-card p { color: #1e293b !important; }
+
+    /* Hide reveal buttons; force-show answers */
     .reveal-btn { display: none; }
     .reveal-answer {
       display: block !important;
-      background: #ecfeff !important;
-      border-left: 3px solid ${subjectColor} !important;
+      background: #f1f5f9 !important;
+      border-left: 3px solid #64748b !important;
       padding: 8px 12px;
       border-radius: 4px;
       margin-top: 8px;
-      color: #1e293b;
+      color: #1e293b !important;
       font-size: 11pt;
     }
+
+    /* Triples */
     .triples {
       display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0;
     }
     .triple {
-      background: ${subjectColor} !important;
-      color: #ffffff !important;
+      background: #e2e8f0 !important;
+      color: #0f172a !important;
       padding: 6px 12px;
       border-radius: 6px;
       font-weight: 700;
       font-size: 11pt;
     }
-    /* Avoid awkward page breaks inside lecture/example blocks */
-    .problem, .scenario-dropdown, .lec-section { page-break-inside: avoid; }
+
+    /* The "Before We Begin" gradient card — override to a bordered box */
+    div[style*="linear-gradient"] {
+      background: white !important;
+      border: 2px solid #cbd5e1 !important;
+      border-radius: 10px;
+      padding: 16px 18px !important;
+    }
+    div[style*="linear-gradient"] h2,
+    div[style*="linear-gradient"] h3,
+    div[style*="linear-gradient"] p {
+      color: #1e293b !important;
+      background: white !important;
+    }
+
+    /* Override dark rgba() backgrounds inside the vocab boxes */
+    div[style*="rgba(15, 23, 42"],
+    div[style*="rgba(15,23,42"],
+    div[style*="background: rgba"],
+    div[style*="background:rgba"] {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 8px;
+    }
+
+    /* Answer badges and problem styling */
+    .answer-badge, .badge-easy, .badge-med, .badge-hard {
+      background: #e2e8f0 !important;
+      color: #0f172a !important;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 10pt;
+      font-weight: 700;
+    }
+    .problem {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px;
+      margin: 12px 0;
+      page-break-inside: avoid;
+    }
+    .answer {
+      background: #f1f5f9 !important;
+      border-left: 3px solid #64748b;
+      padding: 6px 10px;
+      border-radius: 4px;
+      color: #0f172a !important;
+      font-weight: 700;
+      display: block;
+      margin-top: 8px;
+    }
+
+    /* Avoid awkward page breaks */
+    .scenario-dropdown, .lec-section { page-break-inside: avoid; }
     img { max-width: 100%; height: auto; }
+
+    /* Footer */
     .print-footer {
       margin-top: 36px;
       padding-top: 12px;
       border-top: 1px solid #e2e8f0;
       font-size: 9.5pt;
-      color: #64748b;
+      color: #64748b !important;
       text-align: center;
+      background: white !important;
     }
-    .print-footer .print-chapter { font-weight: 600; color: #475569; }
+    .print-footer .print-chapter { font-weight: 600; color: #475569 !important; }
+
     @media print {
       body { font-size: 11pt; }
       .print-header { page-break-after: avoid; }
@@ -825,9 +903,6 @@ function printNotes() {
   </div>
 
   <script>
-    // Automatically trigger the browser's Print dialog. The student
-    // (or teacher) can then choose "Save as PDF" as the destination
-    // to export the notes to a PDF file, or pick a physical printer.
     window.addEventListener('load', function () {
       setTimeout(function () {
         window.focus();
