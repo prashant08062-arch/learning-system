@@ -19,6 +19,7 @@ No server required — runs entirely from the file system.
 |---------|---------|-------|------|
 | 🧮 Mathematics | The Baudhāyana–Pythagoras Theorem | 8 (sub-lectures 2.1–2.2 also work for Class 7) | SVG |
 | 🧮 **Mathematics** | **Fractions in Disguise** *(new!)* | **8** | SVG |
+| 🧮 **Mathematics** | **Proportional Reasoning–2** *(new!)* | **8** | SVG |
 | 🌍 Geography | World Geography: Some Glimpses | 6–8 | Image |
 | 📜 **History** | **India's Long Road to Independence** *(new!)* | **8** (story-form for 5-7 year olds) | Image |
 | ⚛️ Physics | Light: Mirrors and Lenses | 8 (with Class 6-7 scaffolding) | SVG |

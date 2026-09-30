@@ -38,6 +38,15 @@ window.CATALOG = {
           dataFile: 'data/maths/fractions_in_disguise/chapter.js',
           hasImages: false,
           estimatedTime: '75 min'
+        },
+        {
+          slug: 'proportional_reasoning_2',
+          title: 'Proportional Reasoning–2',
+          subtitle: 'Chapter 3 · Ganita Prakash · Grade 8 Part II',
+          description: 'Master ratios, multi-term proportions, dividing wholes, pie charts, direct and inverse proportions, and work problems. From idli batter recipes to map scales, from concrete mixtures to workers and days — learn how proportional reasoning shapes the world around us. Story-form narration with 10 lectures, 4 real-life scenarios (idli batter, map scale, concrete mixture, workers & days), 8 guided-practice problems, 14 self-test questions, 12 practice cards, and a 15-term Before-We-Begin vocabulary section.',
+          dataFile: 'data/maths/proportional_reasoning_2/chapter.js',
+          hasImages: false,
+          estimatedTime: '70 min'
         }
       ]
     },
