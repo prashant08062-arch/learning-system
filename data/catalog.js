@@ -1,161 +1,329 @@
 /* ============================================================
-   CATALOG — Master list of subjects and chapters
+   CATALOG — registers all chapters in the learning system
+   Supports grade/class filtering (Class 6, 7, 8, or All)
    ============================================================
-   To add a new chapter:
-     1. Create a folder: data/<subject>/<chapter_slug>/
-     2. Add a chapter.js file in that folder defining the chapter data
-     3. Add the chapter to the appropriate subject below
-     4. (Optional) Add an images/ subfolder with reference images
-
-   The chapter.js file must define a global variable:
-     window.CHAPTER_DATA = { ... };
-
-   See data/maths/baudhayana_pythagoras/chapter.js for an example.
+   Each chapter entry:
+     subject     : must match a subject id below
+     slug        : must match the folder name data/<subject>/<slug>/
+     title       : display title
+     chapterNo   : chapter number
+     grade       : 6, 7, or 8 (used for class filtering)
+     dataFile    : path to chapter.js
+     hasImages   : true if chapter has an images/ subfolder
+     estimatedTime : approximate study time
+     ready       : true when chapter has content built
    ============================================================ */
 
-window.CATALOG = {
-  subjects: [
-    {
-      id: 'maths',
-      name: 'Mathematics',
-      icon: '📐',
-      color: '#38bdf8',
-      chapters: [
-        {
-          slug: 'baudhayana_pythagoras',
-          title: 'The Baudhāyana–Pythagoras Theorem',
-          subtitle: 'Chapter 2 · Ganita Prakash · Grade 8 Part II',
-          description: 'Doubling squares, √2, the main theorem a² + b² = c², Baudhāyana triples, Fermat\'s Last Theorem, and the Līlāvatī lotus problem.',
-          dataFile: 'data/maths/baudhayana_pythagoras/chapter.js',
-          hasImages: false,
-          estimatedTime: '45 min'
-        },
-        {
-          slug: 'fractions_in_disguise',
-          title: 'Fractions in Disguise',
-          subtitle: 'Chapter 1 · Ganita Prakash · Grade 8 Part II',
-          description: 'Discover percentages — fractions wearing a clever disguise! Covers FDP conversions, percentage of a quantity, mental-math tricks, percentage increase/decrease, profit & loss, discounts & taxes, simple vs compound interest, depreciation, and the surprising truth about compound discounts (30% + 20% ≠ 50%!). Story-form narration with 10 lectures, 4 real-life scenarios, 8 guided-practice problems, 14 self-test questions, and a 15-term Before-We-Begin vocabulary section.',
-          dataFile: 'data/maths/fractions_in_disguise/chapter.js',
-          hasImages: false,
-          estimatedTime: '75 min'
-        },
-        {
-          slug: 'proportional_reasoning_2',
-          title: 'Proportional Reasoning–2',
-          subtitle: 'Chapter 3 · Ganita Prakash · Grade 8 Part II',
-          description: 'Master ratios, multi-term proportions, dividing wholes, pie charts, direct and inverse proportions, and work problems. From idli batter recipes to map scales, from concrete mixtures to workers and days — learn how proportional reasoning shapes the world around us. Story-form narration with 10 lectures, 4 real-life scenarios (idli batter, map scale, concrete mixture, workers & days), 8 guided-practice problems, 14 self-test questions, 12 practice cards, and a 15-term Before-We-Begin vocabulary section.',
-          dataFile: 'data/maths/proportional_reasoning_2/chapter.js',
-          hasImages: false,
-          estimatedTime: '70 min'
-        }
-      ]
-    },
-    {
-      id: 'geography',
-      name: 'Geography',
-      icon: '🌍',
-      color: '#34d399',
-      chapters: [
-        {
-          slug: 'world_geography',
-          title: 'World Geography: Some Glimpses',
-          subtitle: 'Chapter 1 · India and the World: Land and the People · Grade 8 Part 2',
-          description: 'A whirlwind tour of the Earth\'s landforms and water bodies — from the oceans to the continents, with real maps and satellite images.',
-          dataFile: 'data/geography/world_geography/chapter.js',
-          hasImages: true,
-          estimatedTime: '60 min'
-        }
-      ]
-    },
-    {
-      id: 'history',
-      name: 'History',
-      icon: '📜',
-      color: '#fbbf24',
-      chapters: [
-        {
-          slug: 'india_independence',
-          title: 'India\'s Long Road to Independence',
-          subtitle: 'Chapter 2 · Exploring Society: India and Beyond · Grade 8 Part 2',
-          description: 'A long, true story of how India became free — from the Royal Proclamation of 1858 to the Independence and Partition of 1947. Told in story-form for little listeners (5-7 year olds), with a \'Before We Begin\' story-time vocabulary section. 12 lectures covering 200 years of history, with 25 figures extracted from the original textbook PDF.',
-          dataFile: 'data/history/india_independence/chapter.js',
-          hasImages: true,
-          estimatedTime: '90 min'
-        }
-      ]
-    },
-    {
-      id: 'civics',
-      name: 'Civics',
-      icon: '⚖️',
-      color: '#a78bfa',
-      chapters: []
-    },
-    {
-      id: 'economics',
-      name: 'Economics',
-      icon: '💰',
-      color: '#fb923c',
-      chapters: []
-    },
-    {
-      id: 'physics',
-      name: 'Physics',
-      icon: '⚛️',
-      color: '#f472b6',
-      chapters: [
-        {
-          slug: 'light_mirrors_lenses',
-          title: 'Light: Mirrors and Lenses',
-          subtitle: 'Chapter 10 · Curiosity — Textbook of Science for Grade 8',
-          description: 'Spherical mirrors and lenses — image formation, the two laws of reflection, converging/diverging behaviour. Animated SVG ray diagrams + a 3D mirror-and-lens viewer make every Grade 8 concept crystal-clear even for Class 6–7 students.',
-          dataFile: 'data/physics/light_mirrors_lenses/chapter.js',
-          hasImages: false,
-          estimatedTime: '50 min'
-        },
-        {
-          slug: 'pressure_winds_storms_cyclones',
-          title: 'Pressure, Winds, Storms, and Cyclones',
-          subtitle: 'Chapter 6 · Curiosity — Textbook of Science for Grade 8',
-          description: 'Discover how pressure shapes our world — from broad bag straps to cyclones. Covers the formula P = F/A, liquid pressure, atmospheric pressure, wind formation (high → low pressure), sea & land breezes, high-speed winds and reduced pressure (why roofs blow off), thunderstorms, lightning safety, and cyclones (eye, formation, destruction, IMD tracking). Story-form narration with 10 lectures, 4 real-life scenarios (Megha & Pawan bags, fishermen breezes, roof blow-off, Cyclone Amphan 2020), 8 guided-practice problems, 14 self-test questions, 12 practice cards, and a 15-term Before-We-Begin vocabulary section.',
-          dataFile: 'data/physics/pressure_winds_storms_cyclones/chapter.js',
-          hasImages: false,
-          estimatedTime: '75 min'
-        }
-      ]
-    },
-    {
-      id: 'chemistry',
-      name: 'Chemistry',
-      icon: '🧪',
-      color: '#22d3ee',
-      chapters: []
-    },
-    {
-      id: 'biology',
-      name: 'Biology',
-      icon: '🧬',
-      color: '#84cc16',
-      chapters: [
-        {
-          slug: 'how_nature_works_in_harmony',
-          title: 'How Nature Works in Harmony',
-          subtitle: 'Chapter 12 · Curiosity — Textbook of Science for Grade 8',
-          description: 'Discover how every part of nature is connected — from a single fish in a pond to the great mangrove forests that protect our coasts from cyclones. Covers habitats (biotic & abiotic), populations, communities, ecosystems, producers/consumers/decomposers, food chains, trophic levels, food webs, three types of interactions (mutualism/commensalism/parasitism), the cascade effect (Indian bullfrog ban), Sundarbans mangroves vs Cyclone Amphan 2020, elephant corridors, and sustainable farming. Story-form narration with 10 lectures, 4 real-life scenarios, 8 guided-practice problems, 14 self-test questions, 12 practice cards, and a 15-term Before-We-Begin vocabulary section.',
-          dataFile: 'data/biology/how_nature_works_in_harmony/chapter.js',
-          hasImages: false,
-          estimatedTime: '75 min'
-        },
-        {
-          slug: 'our_home_earth',
-          title: 'Our Home: Earth, a Unique Life Sustaining Planet',
-          subtitle: 'Chapter 13 · Curiosity — Textbook of Science for Grade 8',
-          description: 'Discover why our home, planet Earth, is like no other place in the known universe — the only planet that sustains life. Covers Earth as unique (crust like apple skin, ISRO satellites), the solar system & greenhouse effect (Venus hottest planet mystery), the habitable/Goldilocks zone, Earth size & gravity, atmosphere, ozone layer (UV shield), magnetic field (solar wind shield), four spheres (atmosphere/hydrosphere/geosphere/biosphere), reproduction (asexual vs sexual, gametes, fertilisation, zygote), the triple planetary crisis (climate change, biodiversity loss, pollution), global agreements (Montreal Protocol, Earth Summit, Kyoto, Paris Agreement 1.5°C). Story-form narration with 10 lectures, 4 real-life scenarios (ISRO Mangalyaan, Venus mystery, Montreal Protocol success, Paris Agreement), 8 guided-practice problems, 14 self-test questions, 12 practice cards, and a 15-term Before-We-Begin vocabulary section.',
-          dataFile: 'data/biology/our_home_earth/chapter.js',
-          hasImages: false,
-          estimatedTime: '75 min'
-        }
-      ]
-    }
-  ]
-};
+window.SUBJECTS = [
+  {
+    id: 'maths',
+    name: 'Mathematics',
+    icon: '∑',
+    color: '#38bdf8',
+    blurb: 'Numbers, shapes, theorems, and proofs — the language of the universe.',
+    chapters: [
+      {
+        slug: 'perimeter_area',
+        title: 'Perimeter and Area',
+        chapterNumber: 6,
+        grade: 6,
+        dataFile: 'data/maths/perimeter_area/chapter.js',
+        hasImages: false,
+        estimatedTime: '45 min',
+        ready: true
+      },
+      {
+        slug: 'baudhayana_pythagoras',
+        title: 'The Baudhāyana–Pythagoras Theorem',
+        chapterNumber: 2,
+        grade: 8,
+        dataFile: 'data/maths/baudhayana_pythagoras/chapter.js',
+        hasImages: false,
+        estimatedTime: '45 min',
+        ready: false
+      },
+      {
+        slug: 'fractions_in_disguise',
+        title: 'Fractions in Disguise',
+        chapterNumber: 1,
+        grade: 8,
+        dataFile: 'data/maths/fractions_in_disguise/chapter.js',
+        hasImages: false,
+        estimatedTime: '75 min',
+        ready: false
+      },
+      {
+        slug: 'proportional_reasoning_2',
+        title: 'Proportional Reasoning–2',
+        chapterNumber: 3,
+        grade: 8,
+        dataFile: 'data/maths/proportional_reasoning_2/chapter.js',
+        hasImages: false,
+        estimatedTime: '70 min',
+        ready: false
+      }
+    ]
+  },
+  {
+    id: 'geography',
+    name: 'Geography',
+    icon: '🌐',
+    color: '#34d399',
+    blurb: 'Lands, climates, rivers, and the living Earth.',
+    chapters: [
+      {
+        slug: 'locating_places',
+        title: 'Locating Places on the Earth',
+        chapterNumber: 1,
+        grade: 6,
+        dataFile: 'data/geography/locating_places/chapter.js',
+        hasImages: false,
+        estimatedTime: '45 min',
+        ready: true
+      },
+      {
+        slug: 'oceans_continents',
+        title: 'Oceans and Continents',
+        chapterNumber: 2,
+        grade: 6,
+        dataFile: 'data/geography/oceans_continents/chapter.js',
+        hasImages: true,
+        estimatedTime: '40 min',
+        ready: true
+      },
+      {
+        slug: 'landforms_life',
+        title: 'Landforms and Life',
+        chapterNumber: 3,
+        grade: 6,
+        dataFile: 'data/geography/landforms_life/chapter.js',
+        hasImages: true,
+        estimatedTime: '50 min',
+        ready: true
+      },
+      {
+        slug: 'world_geography',
+        title: 'World Geography: Some Glimpses',
+        chapterNumber: 1,
+        grade: 8,
+        dataFile: 'data/geography/world_geography/chapter.js',
+        hasImages: true,
+        estimatedTime: '60 min',
+        ready: false
+      }
+    ]
+  },
+  {
+    id: 'history',
+    name: 'History',
+    icon: '📜',
+    color: '#fbbf24',
+    blurb: 'The tapestry of the past — kingdoms, peoples, ideas, and the long road to today.',
+    chapters: [
+      {
+        slug: 'india_bharat',
+        title: 'India, That Is Bharat',
+        chapterNumber: 5,
+        grade: 6,
+        dataFile: 'data/history/india_bharat/chapter.js',
+        hasImages: true,
+        estimatedTime: '40 min',
+        ready: true
+      },
+      {
+        slug: 'india_independence',
+        title: 'India\'s Long Road to Independence',
+        chapterNumber: 2,
+        grade: 8,
+        dataFile: 'data/history/india_independence/chapter.js',
+        hasImages: true,
+        estimatedTime: '60 min',
+        ready: false
+      }
+    ]
+  },
+  {
+    id: 'civics',
+    name: 'Civics',
+    icon: '⚖',
+    color: '#f472b6',
+    blurb: 'Government, rights, citizenship — how we live together.',
+    chapters: [
+      {
+        slug: 'family_community',
+        title: 'Family and Community',
+        chapterNumber: 9,
+        grade: 6,
+        dataFile: 'data/civics/family_community/chapter.js',
+        hasImages: false,
+        estimatedTime: '40 min',
+        ready: true
+      },
+      {
+        slug: 'grassroots_governance',
+        title: 'Grassroots Democracy \u2013 Part 1: Governance',
+        chapterNumber: 10,
+        grade: 6,
+        dataFile: 'data/civics/grassroots_governance/chapter.js',
+        hasImages: false,
+        estimatedTime: '45 min',
+        ready: true
+      },
+      {
+        slug: 'rural_local_government',
+        title: 'Grassroots Democracy \u2013 Part 2: Rural Local Government',
+        chapterNumber: 11,
+        grade: 6,
+        dataFile: 'data/civics/rural_local_government/chapter.js',
+        hasImages: false,
+        estimatedTime: '40 min',
+        ready: true
+      },
+      {
+        slug: 'urban_local_government',
+        title: 'Grassroots Democracy \u2013 Part 3: Urban Local Government',
+        chapterNumber: 12,
+        grade: 6,
+        dataFile: 'data/civics/urban_local_government/chapter.js',
+        hasImages: false,
+        estimatedTime: '40 min',
+        ready: true
+      }
+    ]
+  },
+  {
+    id: 'economics',
+    name: 'Economics',
+    icon: '₹',
+    color: '#a78bfa',
+    blurb: 'Money, markets, work, and the choices that shape our daily lives.',
+    chapters: []
+  },
+  {
+    id: 'physics',
+    name: 'Physics',
+    icon: '⚛',
+    color: '#22d3ee',
+    blurb: 'Motion, energy, light, and the rules that govern matter.',
+    chapters: [
+      {
+        slug: 'temperature_measurement',
+        title: 'Temperature and its Measurement',
+        chapterNumber: 7,
+        grade: 6,
+        dataFile: 'data/physics/temperature_measurement/chapter.js',
+        hasImages: false,
+        estimatedTime: '40 min',
+        ready: true
+      },
+      {
+        slug: 'beyond_earth',
+        title: 'Beyond Earth',
+        chapterNumber: 12,
+        grade: 6,
+        dataFile: 'data/physics/beyond_earth/chapter.js',
+        hasImages: false,
+        estimatedTime: '45 min',
+        ready: true
+      },
+      {
+        slug: 'light_mirrors_lenses',
+        title: 'Light: Mirrors and Lenses',
+        chapterNumber: 10,
+        grade: 8,
+        dataFile: 'data/physics/light_mirrors_lenses/chapter.js',
+        hasImages: false,
+        estimatedTime: '50 min',
+        ready: false
+      },
+      {
+        slug: 'pressure_winds_storms_cyclones',
+        title: 'Pressure, Winds, Storms, and Cyclones',
+        chapterNumber: 6,
+        grade: 8,
+        dataFile: 'data/physics/pressure_winds_storms_cyclones/chapter.js',
+        hasImages: false,
+        estimatedTime: '50 min',
+        ready: false
+      }
+    ]
+  },
+  {
+    id: 'chemistry',
+    name: 'Chemistry',
+    icon: '⚗',
+    color: '#fb923c',
+    blurb: 'Elements, atoms, reactions — the science of substance.',
+    chapters: [
+      {
+        slug: 'separation_methods',
+        title: 'Methods of Separation in Everyday Life',
+        chapterNumber: 9,
+        grade: 6,
+        dataFile: 'data/chemistry/separation_methods/chapter.js',
+        hasImages: false,
+        estimatedTime: '45 min',
+        ready: true
+      }
+    ]
+  },
+  {
+    id: 'biology',
+    name: 'Biology',
+    icon: '🧬',
+    color: '#a3e635',
+    blurb: 'Life in all its forms — cells, organisms, ecosystems, evolution.',
+    chapters: [
+      {
+        slug: 'mindful_eating',
+        title: 'Mindful Eating: A Path to a Healthy Body',
+        chapterNumber: 3,
+        grade: 6,
+        dataFile: 'data/biology/mindful_eating/chapter.js',
+        hasImages: false,
+        estimatedTime: '40 min',
+        ready: true
+      },
+      {
+        slug: 'living_creatures',
+        title: 'Living Creatures: Exploring their Characteristics',
+        chapterNumber: 10,
+        grade: 6,
+        dataFile: 'data/biology/living_creatures/chapter.js',
+        hasImages: false,
+        estimatedTime: '45 min',
+        ready: true
+      },
+      {
+        slug: 'natures_treasures',
+        title: "Nature's Treasures",
+        chapterNumber: 11,
+        grade: 6,
+        dataFile: 'data/biology/natures_treasures/chapter.js',
+        hasImages: false,
+        estimatedTime: '45 min',
+        ready: true
+      },
+      {
+        slug: 'how_nature_works_in_harmony',
+        title: 'How Nature Works in Harmony',
+        chapterNumber: 12,
+        grade: 8,
+        dataFile: 'data/biology/how_nature_works_in_harmony/chapter.js',
+        hasImages: false,
+        estimatedTime: '50 min',
+        ready: false
+      },
+      {
+        slug: 'our_home_earth',
+        title: 'Our Home: Earth, a Unique Life Sustaining Planet',
+        chapterNumber: 13,
+        grade: 8,
+        dataFile: 'data/biology/our_home_earth/chapter.js',
+        hasImages: false,
+        estimatedTime: '50 min',
+        ready: false
+      }
+    ]
+  }
+];

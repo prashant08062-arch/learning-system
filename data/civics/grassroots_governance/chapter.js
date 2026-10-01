@@ -1,0 +1,213 @@
+/* ============================================================
+   CHAPTER DATA — Grassroots Democracy – Part 1: Governance
+   Subject: civics (Grade 6, Governance and Democracy)
+   ============================================================
+   SVG elements are synced to beats: data-beat="N" reveals at beat N.
+   ============================================================ */
+
+window.CHAPTER_DATA = {
+  "meta": {
+    "subject": "civics",
+    "slug": "grassroots_governance",
+    "title": "Grassroots Democracy – Part 1: Governance",
+    "subtitle": "Chapter 10 · Governance and Democracy · Grade 6",
+    "chapterNumber": 10,
+    "type": "svg",
+    "intro": "Namaste, my little friend! When many people live together, they need rules to maintain harmony. In this chapter, animated diagrams will show you how governance works, the three organs of government, the three tiers, and what democracy means."
+  },
+  "lectures": [
+    {
+      "id": "governance_intro",
+      "label": "1. What is Governance?",
+      "viewBox": "0 0 600 460",
+      "svg": "<defs><marker id=\"arrG1\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 Z\" fill=\"#fbbf24\"/></marker></defs>\n<g class=\"el\" data-beat=\"1\"><text x=\"300\" y=\"30\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"20\" font-weight=\"700\">WHAT IS GOVERNANCE?</text></g>\n<!-- People living together -->\n<g class=\"el\" data-beat=\"2\">\n  <circle cx=\"120\" cy=\"100\" r=\"12\" fill=\"#38bdf8\"/><circle cx=\"160\" cy=\"100\" r=\"12\" fill=\"#34d399\"/><circle cx=\"200\" cy=\"100\" r=\"12\" fill=\"#f472b6\"/><circle cx=\"240\" cy=\"100\" r=\"12\" fill=\"#a78bfa\"/><circle cx=\"280\" cy=\"100\" r=\"12\" fill=\"#fbbf24\"/><circle cx=\"320\" cy=\"100\" r=\"12\" fill=\"#22d3ee\"/><circle cx=\"360\" cy=\"100\" r=\"12\" fill=\"#fb923c\"/><circle cx=\"400\" cy=\"100\" r=\"12\" fill=\"#a3e635\"/><circle cx=\"440\" cy=\"100\" r=\"12\" fill=\"#fbbf24\"/><circle cx=\"480\" cy=\"100\" r=\"12\" fill=\"#38bdf8\"/>\n  <text x=\"300\" y=\"135\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"11\">Many people living together</text>\n</g>\n<!-- Disagreements -->\n<g class=\"el\" data-beat=\"3\">\n  <text x=\"180\" y=\"180\" fill=\"#ef4444\" font-size=\"20\">⚠</text><text x=\"220\" y=\"180\" fill=\"#ef4444\" font-size=\"11\">Disagreements</text>\n  <text x=\"380\" y=\"180\" fill=\"#ef4444\" font-size=\"20\">⚠</text><text x=\"420\" y=\"180\" fill=\"#ef4444\" font-size=\"11\">Disorder</text>\n  <text x=\"300\" y=\"200\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"11\">Society would not function without rules</text>\n</g>\n<!-- Rules appearing -->\n<g class=\"el\" data-beat=\"4\">\n  <rect x=\"80\" y=\"220\" width=\"120\" height=\"35\" rx=\"6\" fill=\"rgba(56,189,248,0.15)\" stroke=\"#38bdf8\" stroke-width=\"1.5\"/>\n  <text x=\"140\" y=\"243\" text-anchor=\"middle\" fill=\"#38bdf8\" font-size=\"11\" font-weight=\"600\">Home rules</text>\n  <rect x=\"210\" y=\"220\" width=\"120\" height=\"35\" rx=\"6\" fill=\"rgba(52,211,153,0.15)\" stroke=\"#34d399\" stroke-width=\"1.5\"/>\n  <text x=\"270\" y=\"243\" text-anchor=\"middle\" fill=\"#34d399\" font-size=\"11\" font-weight=\"600\">School rules</text>\n  <rect x=\"340\" y=\"220\" width=\"120\" height=\"35\" rx=\"6\" fill=\"rgba(251,191,36,0.15)\" stroke=\"#fbbf24\" stroke-width=\"1.5\"/>\n  <text x=\"400\" y=\"243\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"11\" font-weight=\"600\">Traffic rules</text>\n  <rect x=\"470\" y=\"220\" width=\"60\" height=\"35\" rx=\"6\" fill=\"rgba(244,114,182,0.15)\" stroke=\"#f472b6\" stroke-width=\"1.5\"/>\n  <text x=\"500\" y=\"243\" text-anchor=\"middle\" fill=\"#f472b6\" font-size=\"11\" font-weight=\"600\">Laws</text>\n</g>\n<!-- Governance definition -->\n<g class=\"el\" data-beat=\"5\">\n  <rect x=\"60\" y=\"285\" width=\"480\" height=\"60\" rx=\"8\" fill=\"rgba(56,189,248,0.12)\" stroke=\"#38bdf8\" stroke-width=\"2\"/>\n  <text x=\"300\" y=\"308\" text-anchor=\"middle\" fill=\"#38bdf8\" font-size=\"13\" font-weight=\"700\">GOVERNANCE</text>\n  <text x=\"300\" y=\"325\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"11\">The process of taking decisions, organising society's life</text>\n  <text x=\"300\" y=\"338\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"11\">with rules, and ensuring they are followed</text>\n</g>\n<!-- Government definition -->\n<g class=\"el\" data-beat=\"6\">\n  <rect x=\"60\" y=\"365\" width=\"480\" height=\"60\" rx=\"8\" fill=\"rgba(251,191,36,0.12)\" stroke=\"#fbbf24\" stroke-width=\"2\"/>\n  <text x=\"300\" y=\"388\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"13\" font-weight=\"700\">GOVERNMENT</text>\n  <text x=\"300\" y=\"405\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"11\">The group of individuals or system that makes the rules</text>\n  <text x=\"300\" y=\"418\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"11\">and ensures they are followed</text>\n</g>",
+      "beats": [
+        "Namaste, my little friend! Human beings have been living in communities for a long time. When a large number of people live together, there can be disagreements and disorder, and rules become necessary to maintain order and harmony in the society.",
+        "Look at all these people living together. Each one has their own ideas, their own needs, their own opinions. Without rules, there would be chaos — everyone doing whatever they want, with no one to keep order. Society would not be able to function!",
+        "What would happen if no one followed the rules? A simple answer is that society would not be able to function. There would be disagreements, disorder, and everyone would suffer. That is why we need rules — at home, at school, on the road, everywhere.",
+        "There are probably some simple rules at home that you are expected to follow. The school where you study has rules too — some for students, others for teachers. Drivers on the road must obey traffic rules. Some of the more important rules are called laws.",
+        "The process of taking decisions, organising the society's life with different sets of rules, and ensuring that they are followed, is called governance. Governance is like the steering wheel of a ship — it keeps society moving in the right direction.",
+        "The group of individuals or the system that makes the rules and ensures that they are followed is called a government. The government makes laws, enforces them, and settles disputes. In our next story, we will learn about the three organs of government. Ready? Let's turn the page…"
+      ]
+    },
+    {
+      "id": "three_organs",
+      "label": "2. The Three Organs of Government",
+      "viewBox": "0 0 600 460",
+      "svg": "<defs><marker id=\"arrG2\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 Z\" fill=\"#fbbf24\"/></marker></defs>\n<g class=\"el\" data-beat=\"1\"><text x=\"300\" y=\"30\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"18\" font-weight=\"700\">THREE ORGANS OF GOVERNMENT</text></g>\n<!-- Governance center circle -->\n<g class=\"el\" data-beat=\"2\"><circle cx=\"300\" cy=\"220\" r=\"60\" fill=\"rgba(56,189,248,0.12)\" stroke=\"#38bdf8\" stroke-width=\"2\"/><text x=\"300\" y=\"216\" text-anchor=\"middle\" fill=\"#38bdf8\" font-size=\"14\" font-weight=\"700\">GOVERNANCE</text><text x=\"300\" y=\"232\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\">(good governance)</text></g>\n<!-- Legislature -->\n<g class=\"el\" data-beat=\"3\">\n  <circle cx=\"150\" cy=\"100\" r=\"50\" fill=\"rgba(52,211,153,0.15)\" stroke=\"#34d399\" stroke-width=\"2\"/>\n  <text x=\"150\" y=\"95\" text-anchor=\"middle\" fill=\"#34d399\" font-size=\"13\" font-weight=\"700\">LEGISLATURE</text>\n  <text x=\"150\" y=\"112\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"9\">Makes laws</text>\n  <line x1=\"180\" y1=\"130\" x2=\"250\" y2=\"180\" stroke=\"#34d399\" stroke-width=\"2\" marker-end=\"url(#arrG2)\"/>\n</g>\n<!-- Executive -->\n<g class=\"el\" data-beat=\"4\">\n  <circle cx=\"450\" cy=\"100\" r=\"50\" fill=\"rgba(251,191,36,0.15)\" stroke=\"#fbbf24\" stroke-width=\"2\"/>\n  <text x=\"450\" y=\"95\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"13\" font-weight=\"700\">EXECUTIVE</text>\n  <text x=\"450\" y=\"112\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"9\">Implements laws</text>\n  <line x1=\"420\" y1=\"130\" x2=\"350\" y2=\"180\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrG2)\"/>\n</g>\n<!-- Judiciary -->\n<g class=\"el\" data-beat=\"5\">\n  <circle cx=\"300\" cy=\"380\" r=\"50\" fill=\"rgba(244,114,182,0.15)\" stroke=\"#f472b6\" stroke-width=\"2\"/>\n  <text x=\"300\" y=\"375\" text-anchor=\"middle\" fill=\"#f472b6\" font-size=\"13\" font-weight=\"700\">JUDICIARY</text>\n  <text x=\"300\" y=\"392\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"9\">Decides if law broken</text>\n  <line x1=\"300\" y1=\"330\" x2=\"300\" y2=\"285\" stroke=\"#f472b6\" stroke-width=\"2\" marker-end=\"url(#arrG2)\"/>\n</g>\n<!-- Separation of powers -->\n<g class=\"el\" data-beat=\"6\">\n  <rect x=\"60\" y=\"415\" width=\"480\" height=\"35\" rx=\"8\" fill=\"rgba(167,139,250,0.12)\" stroke=\"#a78bfa\" stroke-width=\"1.5\"/>\n  <text x=\"300\" y=\"438\" text-anchor=\"middle\" fill=\"#a78bfa\" font-size=\"12\" font-weight=\"700\">Separation of Powers → Checks &amp; Balances</text>\n</g>",
+      "beats": [
+        "Welcome back, my little friend! In a system of good governance, the government has three branches or 'organs' that work together. Let's see them appear one by one in this diagram.",
+        "At the centre is governance — the whole system. Around it are three organs, each with a different job. They must be kept separate so that each can check what the other is doing. This is called the 'separation of powers'.",
+        "The first organ is the legislature. The legislature is the organ that makes new laws (or 'legislates'). Sometimes it also updates or removes existing laws. This is done by an assembly of representatives of the people — like the Lok Sabha and Rajya Sabha in India.",
+        "The second organ is the executive. The executive is the organ that implements (or 'executes') the laws. This includes the head of state (the President or Prime Minister), the ministers, and any agency responsible for enforcing 'law and order' — like the police.",
+        "The third organ is the judiciary. The judiciary is the system of courts which decides whether someone has broken the law and, if so, what course of action should be taken, including punishment if necessary. Sometimes it also examines whether a decision by the executive is right.",
+        "In a system of good governance, these three organs must be kept separate, although they interact and work together. This separation is called the 'separation of powers'. It provides a system of checks and balances — each organ can check what the other is doing. In our next story, we will learn about the three tiers of government. Ready? Let's turn the page…"
+      ]
+    },
+    {
+      "id": "three_tiers",
+      "label": "3. Three Tiers of Government",
+      "viewBox": "0 0 600 460",
+      "svg": "<defs><linearGradient id=\"tierG\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0%\" stop-color=\"#38bdf8\" stop-opacity=\"0.3\"/><stop offset=\"100%\" stop-color=\"#38bdf8\" stop-opacity=\"0.1\"/></linearGradient></defs>\n<g class=\"el\" data-beat=\"1\"><text x=\"300\" y=\"30\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"18\" font-weight=\"700\">THREE TIERS OF GOVERNMENT</text></g>\n<!-- Pyramid: National (top) -->\n<g class=\"el\" data-beat=\"2\">\n  <polygon points=\"300,80 250,130 350,130\" fill=\"url(#tierG)\" stroke=\"#38bdf8\" stroke-width=\"2\"/>\n  <text x=\"300\" y=\"112\" text-anchor=\"middle\" fill=\"#38bdf8\" font-size=\"11\" font-weight=\"700\">NATIONAL</text>\n  <text x=\"300\" y=\"124\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"9\">(Central Govt)</text>\n</g>\n<!-- State (middle) -->\n<g class=\"el\" data-beat=\"3\">\n  <polygon points=\"250,130 200,200 400,200 350,130\" fill=\"url(#tierG)\" stroke=\"#34d399\" stroke-width=\"2\"/>\n  <text x=\"300\" y=\"170\" text-anchor=\"middle\" fill=\"#34d399\" font-size=\"13\" font-weight=\"700\">STATE</text>\n  <text x=\"300\" y=\"186\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\">(State Govt)</text>\n</g>\n<!-- Local (bottom) -->\n<g class=\"el\" data-beat=\"4\">\n  <polygon points=\"200,200 100,300 500,300 400,200\" fill=\"url(#tierG)\" stroke=\"#fbbf24\" stroke-width=\"2\"/>\n  <text x=\"300\" y=\"245\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"14\" font-weight=\"700\">LOCAL</text>\n  <text x=\"300\" y=\"262\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"11\">(Village / Town level)</text>\n  <text x=\"300\" y=\"280\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\">Closest to the people</text>\n</g>\n<!-- Flood example -->\n<g class=\"el\" data-beat=\"5\">\n  <rect x=\"60\" y=\"325\" width=\"480\" height=\"80\" rx=\"8\" fill=\"rgba(34,211,238,0.1)\" stroke=\"#22d3ee\" stroke-width=\"1.5\"/>\n  <text x=\"300\" y=\"348\" text-anchor=\"middle\" fill=\"#22d3ee\" font-size=\"12\" font-weight=\"700\">FLOOD EXAMPLE:</text>\n  <text x=\"300\" y=\"365\" text-anchor=\"middle\" fill=\"#e2e8f0\" font-size=\"11\">Small flood → Local govt handles it</text>\n  <text x=\"300\" y=\"380\" text-anchor=\"middle\" fill=\"#e2e8f0\" font-size=\"11\">Several towns → State govt sends rescue teams</text>\n  <text x=\"300\" y=\"395\" text-anchor=\"middle\" fill=\"#e2e8f0\" font-size=\"11\">Massive flood → Central govt sends army &amp; relief</text>\n</g>\n<!-- Motto -->\n<g class=\"el\" data-beat=\"6\">\n  <text x=\"300\" y=\"435\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"600\">Govt of India motto: \"Satyameva Jayate\" (Truth alone triumphs)</text>\n</g>",
+      "beats": [
+        "Welcome back, my little friend! Any democratic government operates at multiple levels. In India, it functions at three levels or tiers — local, state, and national. Let's see the pyramid of government.",
+        "At the top of the pyramid is the national level — the Central or Union Government. It deals with matters that affect the whole country, like defence, foreign affairs, currency, and atomic energy. The Prime Minister leads the Central Government.",
+        "In the middle is the state level — the State Government. Each state in India has its own government, led by a Chief Minister. The state government deals with matters like police, public health, education, agriculture, and irrigation within the state.",
+        "At the bottom of the pyramid, closest to the people, is the local level — the Local Government. This includes village panchayats in rural areas and municipal corporations in urban areas. The local government deals with everyday matters like water, roads, and waste management.",
+        "Let me give you an example. Imagine heavy rain causes a flood. If it is not too severe, the local authorities may deal with it. If it involves several towns and many villages, the State Government will step in and send rescue teams. But if it's a massive flood, the Central Government may also come to help by sending the army and relief supplies.",
+        "Did you know? Many of our institutions have mottos inspired by ancient texts. The Government of India's motto is 'Satyameva Jayate', which means 'Truth alone triumphs'. The Supreme Court's motto is 'Yato Dharmastato Jayah' — 'Where there is dharma, there is victory.' In our next story, we will learn about democracy. Ready? Let's turn the page…"
+      ]
+    },
+    {
+      "id": "democracy",
+      "label": "4. What is Democracy?",
+      "viewBox": "0 0 600 460",
+      "svg": "<defs><marker id=\"arrG4\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8 Z\" fill=\"#fbbf24\"/></marker></defs>\n<g class=\"el\" data-beat=\"1\"><text x=\"300\" y=\"30\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"20\" font-weight=\"700\">WHAT IS DEMOCRACY?</text></g>\n<!-- Greek etymology -->\n<g class=\"el\" data-beat=\"2\">\n  <rect x=\"80\" y=\"60\" width=\"200\" height=\"50\" rx=\"8\" fill=\"rgba(52,211,153,0.15)\" stroke=\"#34d399\" stroke-width=\"2\"/>\n  <text x=\"180\" y=\"82\" text-anchor=\"middle\" fill=\"#34d399\" font-size=\"16\" font-weight=\"700\">demos</text>\n  <text x=\"180\" y=\"100\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\">Greek: \"people\"</text>\n  <rect x=\"320\" y=\"60\" width=\"200\" height=\"50\" rx=\"8\" fill=\"rgba(251,191,36,0.15)\" stroke=\"#fbbf24\" stroke-width=\"2\"/>\n  <text x=\"420\" y=\"82\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"16\" font-weight=\"700\">kratos</text>\n  <text x=\"420\" y=\"100\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\">Greek: \"rule\" or \"power\"</text>\n  <line x1=\"280\" y1=\"85\" x2=\"320\" y2=\"85\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrG4)\"/>\n</g>\n<!-- Democracy = rule of the people -->\n<g class=\"el\" data-beat=\"3\">\n  <rect x=\"100\" y=\"130\" width=\"400\" height=\"40\" rx=\"8\" fill=\"rgba(56,189,248,0.15)\" stroke=\"#38bdf8\" stroke-width=\"2\"/>\n  <text x=\"300\" y=\"156\" text-anchor=\"middle\" fill=\"#38bdf8\" font-size=\"15\" font-weight=\"700\">DEMOCRACY = \"Rule of the People\"</text>\n</g>\n<!-- Voting: hands raised -->\n<g class=\"el\" data-beat=\"4\">\n  <text x=\"300\" y=\"200\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"13\" font-weight=\"700\">VOTING (direct democracy example)</text>\n  <circle cx=\"120\" cy=\"250\" r=\"10\" fill=\"#38bdf8\"/><line x1=\"120\" y1=\"240\" x2=\"120\" y2=\"220\" stroke=\"#38bdf8\" stroke-width=\"3\"/>\n  <circle cx=\"160\" cy=\"250\" r=\"10\" fill=\"#34d399\"/><line x1=\"160\" y1=\"240\" x2=\"160\" y2=\"220\" stroke=\"#34d399\" stroke-width=\"3\"/>\n  <circle cx=\"200\" cy=\"250\" r=\"10\" fill=\"#f472b6\"/>\n  <circle cx=\"240\" cy=\"250\" r=\"10\" fill=\"#a78bfa\"/><line x1=\"240\" y1=\"240\" x2=\"240\" y2=\"220\" stroke=\"#a78bfa\" stroke-width=\"3\"/>\n  <circle cx=\"280\" cy=\"250\" r=\"10\" fill=\"#fbbf24\"/>\n  <circle cx=\"320\" cy=\"250\" r=\"10\" fill=\"#22d3ee\"/><line x1=\"320\" y1=\"240\" x2=\"320\" y2=\"220\" stroke=\"#22d3ee\" stroke-width=\"3\"/>\n  <circle cx=\"360\" cy=\"250\" r=\"10\" fill=\"#fb923c\"/>\n  <circle cx=\"400\" cy=\"250\" r=\"10\" fill=\"#a3e635\"/><line x1=\"400\" y1=\"240\" x2=\"400\" y2=\"220\" stroke=\"#a3e635\" stroke-width=\"3\"/>\n  <circle cx=\"440\" cy=\"250\" r=\"10\" fill=\"#fbbf24\"/><line x1=\"440\" y1=\"240\" x2=\"440\" y2=\"220\" stroke=\"#fbbf24\" stroke-width=\"3\"/>\n  <circle cx=\"480\" cy=\"250\" r=\"10\" fill=\"#38bdf8\"/>\n  <text x=\"300\" y=\"285\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\">Raise hands to vote — majority wins!</text>\n</g>\n<!-- Representative democracy -->\n<g class=\"el\" data-beat=\"5\">\n  <text x=\"300\" y=\"315\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"13\" font-weight=\"700\">REPRESENTATIVE DEMOCRACY (India)</text>\n  <circle cx=\"120\" cy=\"350\" r=\"8\" fill=\"#38bdf8\"/><circle cx=\"155\" cy=\"350\" r=\"8\" fill=\"#34d399\"/><circle cx=\"190\" cy=\"350\" r=\"8\" fill=\"#f472b6\"/><circle cx=\"225\" cy=\"350\" r=\"8\" fill=\"#a78bfa\"/><circle cx=\"260\" cy=\"350\" r=\"8\" fill=\"#fbbf24\"/>\n  <text x=\"190\" y=\"375\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"9\">People vote</text>\n  <line x1=\"280\" y1=\"350\" x2=\"320\" y2=\"350\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrG4)\"/>\n  <rect x=\"330\" y=\"335\" width=\"120\" height=\"35\" rx=\"6\" fill=\"rgba(251,191,36,0.15)\" stroke=\"#fbbf24\" stroke-width=\"2\"/>\n  <text x=\"390\" y=\"358\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"11\" font-weight=\"700\">Representative</text>\n  <text x=\"390\" y=\"375\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"9\">(MLA / MP)</text>\n  <line x1=\"450\" y1=\"350\" x2=\"490\" y2=\"350\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrG4)\"/>\n  <rect x=\"500\" y=\"335\" width=\"80\" height=\"35\" rx=\"6\" fill=\"rgba(56,189,248,0.15)\" stroke=\"#38bdf8\" stroke-width=\"2\"/>\n  <text x=\"540\" y=\"358\" text-anchor=\"middle\" fill=\"#38bdf8\" font-size=\"10\" font-weight=\"700\">Assembly</text>\n</g>\n<!-- India stats -->\n<g class=\"el\" data-beat=\"6\">\n  <rect x=\"60\" y=\"395\" width=\"480\" height=\"50\" rx=\"8\" fill=\"rgba(167,139,250,0.12)\" stroke=\"#a78bfa\" stroke-width=\"1.5\"/>\n  <text x=\"300\" y=\"418\" text-anchor=\"middle\" fill=\"#a78bfa\" font-size=\"13\" font-weight=\"700\">India = World's Largest Democracy!</text>\n  <text x=\"300\" y=\"435\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"11\">~970 million voters in 2024 · All citizens above 18 can vote</text>\n</g>",
+      "beats": [
+        "Welcome back, my little friend! You may have noticed that we mentioned 'representatives of the people'. This is one of the foundation stones of the system of governance adopted by most countries — democracy.",
+        "The word 'democracy' comes from two Greek words — demos meaning 'people', and kratos meaning 'rule' or 'power'. So 'democracy' literally means the 'rule of the people'. In a democracy, the power belongs to the people!",
+        "Democracy means 'rule of the people'. But can all people actually rule? It is clearly not possible. Imagine there is a problem that your class wants to bring to the attention of your school's principal. Will the entire class go to the principal? It would clearly not be practical.",
+        "In many schools, classes have a 'class monitor' or 'class representative' whom the whole class elected. It will be enough to send the representative to the principal. Similarly, in a direct democracy, every student's opinion is taken — like raising hands to vote for a picnic spot. The option with the most raised hands wins!",
+        "It is the same principle at the State or national levels. Through elections, people vote for representatives, who will be the elected members of their respective assemblies. They are called 'Members of Legislative Assembly' (MLAs) at the State level, and 'Member of Parliament' (MPs) at the national level. This is called representative democracy.",
+        "India is a representative democracy. It is also the world's largest democracy, with some 970 million voters in 2024! In principle, all Indian citizens above the age of 18 have the right to participate in these elections. So remember: democracy means rule of the people, and India is the world's largest democracy. The End."
+      ]
+    }
+  ],
+  "notes": "<div style=\"background: linear-gradient(135deg, #3b0764 0%, #5b21b6 100%); border: 1px solid #a78bfa; border-radius: 14px; padding: 22px 24px; margin-bottom: 28px;\">\n<h2 style=\"color: #ddd6fe; font-size: 22px; margin: 0 0 8px; font-weight: 700;\">📖 Before We Begin — Story-Time Words</h2>\n<p style=\"color: #ddd6fe; font-size: 13px; margin: 0 0 16px; line-height: 1.6;\">My little friend, before we learn about governance and democracy, let us learn some special words. Imagine we are sitting in a classroom, and I am telling you these words one by one. Ready? Let's begin!</p>\n<div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\"><h3 style=\"color: #c4b5fd; font-size: 16px; margin: 0 0 8px;\">⚖️ 1. Governance</h3><p style=\"color: #e9d5ff; font-size: 13px; line-height: 1.6; margin: 0;\">Governance is the process of taking decisions, organising the society's life with different sets of rules, and ensuring that they are followed. It is like the steering wheel of society — keeping everything moving in the right direction.</p></div>\n<div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\"><h3 style=\"color: #c4b5fd; font-size: 16px; margin: 0 0 8px;\">🏛️ 2. Government</h3><p style=\"color: #e9d5ff; font-size: 13px; line-height: 1.6; margin: 0;\">The government is the group of individuals or the system that makes the rules and ensures they are followed. It has three organs: legislature (makes laws), executive (implements laws), and judiciary (decides if laws are broken).</p></div>\n<div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\"><h3 style=\"color: #c4b5fd; font-size: 16px; margin: 0 0 8px;\">📜 3. Law</h3><p style=\"color: #e9d5ff; font-size: 13px; line-height: 1.6; margin: 0;\">A law is a rule made by the government that everyone must follow. Some rules at home or school are simple, but laws are the most important rules of society. Breaking a law can lead to punishment.</p></div>\n<div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\"><h3 style=\"color: #c4b5fd; font-size: 16px; margin: 0 0 8px;\">🏛️ 4. Legislature</h3><p style=\"color: #e9d5ff; font-size: 13px; line-height: 1.6; margin: 0;\">The legislature is the organ of government that makes new laws (or 'legislates'). Sometimes it also updates or removes existing laws. In India, the national legislature has two houses: Lok Sabha and Rajya Sabha.</p></div>\n<div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\"><h3 style=\"color: #c4b5fd; font-size: 16px; margin: 0 0 8px;\">⚔️ 5. Executive</h3><p style=\"color: #e9d5ff; font-size: 13px; line-height: 1.6; margin: 0;\">The executive is the organ that implements (or 'executes') the laws. This includes the head of state (President or Prime Minister), the ministers, and agencies like the police. At the national level, it is led by the Prime Minister.</p></div>\n<div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\"><h3 style=\"color: #c4b5fd; font-size: 16px; margin: 0 0 8px;\">⚖️ 6. Judiciary</h3><p style=\"color: #e9d5ff; font-size: 13px; line-height: 1.6; margin: 0;\">The judiciary is the system of courts which decides whether someone has broken the law and, if so, what punishment should be given. The Supreme Court is the highest court in India. The judiciary also checks if laws are fair.</p></div>\n<div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\"><h3 style=\"color: #c4b5fd; font-size: 16px; margin: 0 0 8px;\">🔷 7. Separation of Powers</h3><p style=\"color: #e9d5ff; font-size: 13px; line-height: 1.6; margin: 0;\">Separation of powers means keeping the three organs of government (legislature, executive, judiciary) separate from each other. This provides 'checks and balances' — each organ can check what the others are doing, so no one becomes too powerful.</p></div>\n<div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\"><h3 style=\"color: #c4b5fd; font-size: 16px; margin: 0 0 8px;\">🏔️ 8. Three Tiers</h3><p style=\"color: #e9d5ff; font-size: 13px; line-height: 1.6; margin: 0;\">The government functions at three levels or tiers: National (Central Government), State (State Government), and Local (village/town level). Each level deals with different matters. Local is closest to the people; national deals with the whole country.</p></div>\n<div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\"><h3 style=\"color: #c4b5fd; font-size: 16px; margin: 0 0 8px;\">🗳️ 9. Democracy</h3><p style=\"color: #e9d5ff; font-size: 13px; line-height: 1.6; margin: 0;\">Democracy means 'rule of the people' (from Greek: demos = people, kratos = rule). In a democracy, people vote to elect their representatives. India is the world's largest democracy with ~970 million voters. All citizens above 18 can vote.</p></div>\n<div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\"><h3 style=\"color: #c4b5fd; font-size: 16px; margin: 0 0 8px;\">📷 10. Voting</h3><p style=\"color: #e9d5ff; font-size: 13px; line-height: 1.6; margin: 0;\">Voting is the process by which people choose their representatives or decide on an issue. In direct democracy, everyone votes directly (like raising hands in class). In representative democracy, people vote for representatives (MLAs, MPs) who then make decisions.</p></div>\n</div>\n\n<h2>📝 Key Notes</h2>\n<h3>The Three Organs of Government</h3>\n<table class=\"styled-table\">\n<tr><th>Organ</th><th>Function</th><th>India (National)</th></tr>\n<tr><td><strong>Legislature</strong></td><td>Makes laws</td><td>Lok Sabha + Rajya Sabha</td></tr>\n<tr><td><strong>Executive</strong></td><td>Implements laws</td><td>President + Prime Minister + Ministers</td></tr>\n<tr><td><strong>Judiciary</strong></td><td>Decides if laws broken</td><td>Supreme Court</td></tr>\n</table>\n<h3>The Three Tiers of Government</h3>\n<table class=\"styled-table\">\n<tr><th>Tier</th><th>Level</th><th>Deals with</th></tr>\n<tr><td><strong>National</strong></td><td>Whole country</td><td>Defence, foreign affairs, currency</td></tr>\n<tr><td><strong>State</strong></td><td>One state</td><td>Police, health, education, agriculture</td></tr>\n<tr><td><strong>Local</strong></td><td>Village/town</td><td>Water, roads, waste management</td></tr>\n</table>\n<h3>Types of Democracy</h3>\n<table class=\"styled-table\">\n<tr><th>Type</th><th>How it works</th><th>Example</th></tr>\n<tr><td><strong>Direct democracy</strong></td><td>Everyone votes directly</td><td>Class raising hands for picnic spot</td></tr>\n<tr><td><strong>Representative democracy</strong></td><td>People elect representatives</td><td>India (MLAs, MPs)</td></tr>\n</table>",
+  "practice": "<h2>✏️ Practice</h2>\n<div class=\"practice-card\">\n<h3>🧠 Quick Recall</h3>\n<ol>\n<li>The process of taking decisions and organising society's life with rules is called ___.</li>\n<li>The group that makes rules and ensures they are followed is called the ___.</li>\n<li>The three organs of government are ___, ___, and ___.</li>\n<li>The organ that makes laws is the ___. The organ that implements laws is the ___. The organ that decides if laws are broken is the ___.</li>\n<li>Keeping the three organs separate is called the ___ of ___.</li>\n<li>The three tiers of government are ___, ___, and ___.</li>\n<li>'Democracy' comes from Greek words demos (___) and kratos (___).</li>\n<li>India is the world's ___ democracy with about ___ million voters in 2024.</li>\n<li>All Indian citizens above the age of ___ can vote.</li>\n<li>The Government of India's motto is \"___\" (Truth alone triumphs).</li>\n</ol>\n<button class=\"reveal-btn\">Reveal Answers</button>\n<div class=\"reveal-answer\">\n<ol>\n<li>governance</li>\n<li>government</li>\n<li>legislature, executive, judiciary</li>\n<li>legislature, executive, judiciary</li>\n<li>separation, powers</li>\n<li>national, state, local</li>\n<li>people, rule/power</li>\n<li>largest, 970</li>\n<li>18</li>\n<li>Satyameva Jayate</li>\n</ol>\n</div>\n</div>",
+  "realLife": [
+    {
+      "id": "class_monitor",
+      "title": "👥 The Class Monitor Story",
+      "viewBox": "0 0 600 400",
+      "svg": "<g class=\"el\" data-beat=\"1\"><text x=\"300\" y=\"30\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"18\" font-weight=\"700\">THE CLASS MONITOR STORY</text></g>\n<g class=\"el\" data-beat=\"2\"><circle cx=\"100\" cy=\"120\" r=\"10\" fill=\"#38bdf8\"/><circle cx=\"140\" cy=\"120\" r=\"10\" fill=\"#34d399\"/><circle cx=\"180\" cy=\"120\" r=\"10\" fill=\"#f472b6\"/><circle cx=\"220\" cy=\"120\" r=\"10\" fill=\"#a78bfa\"/><circle cx=\"260\" cy=\"120\" r=\"10\" fill=\"#fbbf24\"/><circle cx=\"300\" cy=\"120\" r=\"10\" fill=\"#22d3ee\"/><circle cx=\"340\" cy=\"120\" r=\"10\" fill=\"#fb923c\"/><circle cx=\"380\" cy=\"120\" r=\"10\" fill=\"#a3e635\"/><circle cx=\"420\" cy=\"120\" r=\"10\" fill=\"#fbbf24\"/><circle cx=\"460\" cy=\"120\" r=\"10\" fill=\"#38bdf8\"/><text x=\"280\" y=\"155\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"11\">Whole class — too many to go to principal!</text></g>\n<g class=\"el\" data-beat=\"3\"><rect x=\"250\" y=\"180\" width=\"100\" height=\"40\" rx=\"8\" fill=\"rgba(251,191,36,0.15)\" stroke=\"#fbbf24\" stroke-width=\"2\"/><text x=\"300\" y=\"205\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"700\">Class Monitor</text><text x=\"300\" y=\"220\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"9\">(elected by class)</text></g>\n<g class=\"el\" data-beat=\"4\"><rect x=\"200\" y=\"250\" width=\"200\" height=\"50\" rx=\"8\" fill=\"rgba(56,189,248,0.15)\" stroke=\"#38bdf8\" stroke-width=\"2\"/><text x=\"300\" y=\"272\" text-anchor=\"middle\" fill=\"#38bdf8\" font-size=\"12\" font-weight=\"700\">PRINCIPAL'S OFFICE</text><text x=\"300\" y=\"288\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\">Monitor presents the class's issue</text></g>\n<g class=\"el\" data-beat=\"5\"><rect x=\"60\" y=\"320\" width=\"480\" height=\"50\" rx=\"8\" fill=\"rgba(167,139,250,0.12)\" stroke=\"#a78bfa\" stroke-width=\"1.5\"/><text x=\"300\" y=\"343\" text-anchor=\"middle\" fill=\"#a78bfa\" font-size=\"12\" font-weight=\"700\">This is REPRESENTATIVE DEMOCRACY!</text><text x=\"300\" y=\"360\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\">People elect representatives (MLAs, MPs) who discuss laws in assemblies</text></g>",
+      "beats": [
+        "Imagine your class has a problem — maybe something is wrong with the classroom, or you want to propose a date for a field trip. The whole class needs to tell the principal.",
+        "But will the entire class go to the principal? It would clearly not be practical! Thirty students crowding into the principal's office would be chaos. There must be a better way.",
+        "In many schools, classes have a 'class monitor' or 'class representative' whom the whole class elected. Even if there is none, one representative can be selected for this specific purpose. The class elects one person to speak for everyone.",
+        "It will be enough to send the representative to the principal. The monitor presents the class's issue clearly, and the principal can respond. This is much more practical than the whole class going!",
+        "This is exactly how representative democracy works! It is the same principle at the State or national levels. Through elections, people vote for representatives, who will be the elected members of their respective assemblies. They are called MLAs at the State level and MPs at the national level. The representatives discuss laws, problems, and solutions in the assemblies — just like the monitor discusses the class's issue with the principal!"
+      ]
+    }
+  ],
+  "guidedPractice": [
+    {
+      "title": "Three Organs of Government",
+      "difficulty": "Medium",
+      "diffClass": "gp-med",
+      "statement": "What are the three organs of government? (Type all three, separated by commas.)",
+      "steps": [
+        {
+          "prompt": "Type the three organs.",
+          "validate": {
+            "type": "match",
+            "answers": [
+              "legislature, executive, judiciary",
+              "legislature executive judiciary"
+            ]
+          },
+          "formatHint": "Example: legislature, executive, judiciary",
+          "explanation": "Yes! The three organs are: legislature (makes laws), executive (implements laws), and judiciary (decides if laws are broken).",
+          "hint": "One makes laws, one implements, one judges."
+        }
+      ],
+      "finalAnswer": "The three organs are: legislature, executive, and judiciary."
+    },
+    {
+      "title": "Meaning of Democracy",
+      "difficulty": "Easy",
+      "diffClass": "gp-easy",
+      "statement": "What does 'democracy' literally mean? (It comes from Greek: demos + kratos)",
+      "steps": [
+        {
+          "prompt": "Type the meaning (3 words).",
+          "validate": {
+            "type": "match",
+            "answers": [
+              "rule of the people",
+              "rule of people",
+              "people's rule"
+            ]
+          },
+          "formatHint": "Example: rule of the people",
+          "explanation": "Yes! Democracy = demos (people) + kratos (rule) = 'rule of the people'.",
+          "hint": "It is about who rules."
+        }
+      ],
+      "finalAnswer": "Democracy means 'rule of the people'."
+    },
+    {
+      "title": "Voting Age in India",
+      "difficulty": "Easy",
+      "diffClass": "gp-easy",
+      "statement": "At what age can all Indian citizens vote?",
+      "steps": [
+        {
+          "prompt": "Type the number.",
+          "validate": {
+            "type": "match",
+            "answers": [
+              "18",
+              "eighteen"
+            ]
+          },
+          "formatHint": "Example: 18",
+          "explanation": "Yes! All Indian citizens above the age of 18 have the right to vote in elections.",
+          "hint": "It is the same age when you become a legal adult."
+        }
+      ],
+      "finalAnswer": "All Indian citizens above 18 can vote."
+    },
+    {
+      "title": "India's Voters",
+      "difficulty": "Medium",
+      "diffClass": "gp-med",
+      "statement": "India is the world's largest democracy. Approximately how many voters were there in 2024?",
+      "steps": [
+        {
+          "prompt": "Type the number (in millions).",
+          "validate": {
+            "type": "match",
+            "answers": [
+              "970",
+              "970 million",
+              "970 million",
+              "approximately 970"
+            ]
+          },
+          "formatHint": "Example: 970",
+          "explanation": "Yes! India had about 970 million voters in 2024 — making it the world's largest democracy.",
+          "hint": "Close to 1 billion."
+        }
+      ],
+      "finalAnswer": "India had about 970 million voters in 2024."
+    }
+  ],
+  "selfTest": [
+    {
+      "q": "What is the difference between governance and government?",
+      "steps": "1. Governance is the PROCESS of taking decisions and organising society with rules.<br>2. Government is the GROUP/SYSTEM that makes and enforces the rules.<br>3. Governance is the activity; government is the actor.",
+      "answer": "Governance is the process of taking decisions and organising society; government is the group or system that makes and enforces the rules."
+    },
+    {
+      "q": "Name the three organs of government and their functions.",
+      "steps": "1. Legislature — makes new laws<br>2. Executive — implements (executes) the laws<br>3. Judiciary — decides if someone has broken the law",
+      "answer": "Legislature (makes laws), Executive (implements laws), Judiciary (decides if laws are broken)."
+    },
+    {
+      "q": "What is 'separation of powers' and why is it important?",
+      "steps": "1. Separation of powers means keeping the three organs separate.<br>2. It provides 'checks and balances'.<br>3. Each organ can check what the others are doing.<br>4. This prevents any one organ from becoming too powerful.",
+      "answer": "Separation of powers keeps the three organs separate, providing checks and balances so no single organ becomes too powerful."
+    },
+    {
+      "q": "What are the three tiers of government in India?",
+      "steps": "1. National (Central/Union Government) — whole country<br>2. State (State Government) — one state<br>3. Local — village/town level",
+      "answer": "The three tiers are: National (Central), State, and Local government."
+    },
+    {
+      "q": "What is the difference between direct democracy and representative democracy?",
+      "steps": "1. Direct democracy: everyone votes directly on decisions (like raising hands in class).<br>2. Representative democracy: people elect representatives who make decisions (like India's MLAs and MPs).<br>3. India is a representative democracy.",
+      "answer": "Direct democracy: everyone votes directly. Representative democracy: people elect representatives (MLAs, MPs) who make decisions."
+    }
+  ]
+};

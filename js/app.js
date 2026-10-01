@@ -18,6 +18,18 @@
 
 (function() {
 'use strict';
+// ====================================================================
+// GRADE FILTERING — Class 6 / Class 7 / Class 8 / All
+// ====================================================================
+let currentGrade = localStorage.getItem('selectedGrade') || '6';
+
+function filterChaptersByGrade(chapters, grade) {
+  if (!chapters) return [];
+  if (grade === 'all') return chapters;
+  return chapters.filter(ch => String(ch.grade || '8') === grade);
+}
+
+
 
 // State
 let currentChapterData = null;
@@ -34,12 +46,14 @@ function renderHome() {
   grid.innerHTML = '';
 
   window.CATALOG.subjects.forEach(subject => {
+    const _filteredChapters = filterChaptersByGrade(subject.chapters, currentGrade);
+    if (_filteredChapters.length === 0) return;
     const card = document.createElement('div');
     card.className = 'subject-card';
     card.style.setProperty('--subject-color', subject.color);
     card.dataset.subjectId = subject.id;
 
-    const chapterCount = subject.chapters.length;
+    const chapterCount = _filteredChapters.length;
     const countLabel = chapterCount === 0 ? 'No chapters yet' :
                        chapterCount === 1 ? '1 chapter' :
                        `${chapterCount} chapters`;
@@ -51,7 +65,7 @@ function renderHome() {
       <div class="chapters-list">
         ${chapterCount === 0 ?
           '<div style="padding:14px; text-align:center; color:#64748b; font-size:12px; font-style:italic;">Chapters coming soon</div>' :
-          subject.chapters.map(ch => `
+          _filteredChapters.map(ch => `
             <div class="chapter-item" data-chapter-slug="${ch.slug}">
               <div class="chapter-item-title">${ch.title}</div>
               <div class="chapter-item-subtitle">${ch.subtitle}</div>
@@ -1529,6 +1543,15 @@ function renderSelfTest() {
 // INITIALIZATION
 // ====================================================================
 document.addEventListener('DOMContentLoaded', () => {
+  // Wire class selector
+  document.querySelectorAll('.class-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentGrade = btn.dataset.grade;
+      localStorage.setItem('selectedGrade', currentGrade);
+      document.querySelectorAll('.class-btn').forEach(b => b.classList.toggle('active', b.dataset.grade === currentGrade));
+      renderHome();
+    });
+  });
   renderHome();
 
   // Tab switching
