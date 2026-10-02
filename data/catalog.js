@@ -38,7 +38,8 @@ window.CATALOG = {
       color: '#fbbf24',
       chapters: [
         { slug: 'india_bharat', title: 'India, That Is Bharat', subtitle: 'Chapter 5 · Grade 6', description: 'The many names of India — from Sapta Sindhava to the Constitution.', grade: 6, dataFile: 'data/history/india_bharat/chapter.js', hasImages: true, estimatedTime: '40 min', ready: true },
-        { slug: 'india_independence', title: 'India\'s Long Road to Independence', subtitle: 'Chapter 2 · Grade 8', description: 'From 1858 to 1947 — 200 years of India\'s freedom struggle.', grade: 8, dataFile: 'data/history/india_independence/chapter.js', hasImages: true, estimatedTime: '60 min', ready: true }
+        { slug: 'india_independence', title: 'India\'s Long Road to Independence', subtitle: 'Chapter 2 · Grade 8', description: 'From 1858 to 1947 — 200 years of India\'s freedom struggle.', grade: 8, dataFile: 'data/history/india_independence/chapter.js', hasImages: true, estimatedTime: '60 min', ready: true },
+        { slug: 'indian_architecture', title: 'A Journey Through Indian Architecture', subtitle: 'Chapter 4 · Grade 8', description: 'Indian architecture from Indus Valley cities to stupas, temples, Indo-Islamic monuments, and Lutyens\' Delhi.', grade: 8, dataFile: 'data/history/indian_architecture/chapter.js', hasImages: false, estimatedTime: '50 min', ready: true }
       ]
     },
     {
@@ -50,7 +51,9 @@ window.CATALOG = {
         { slug: 'family_community', title: 'Family and Community', subtitle: 'Chapter 9 · Grade 6', description: 'Types of families, roles, values, and community action.', grade: 6, dataFile: 'data/civics/family_community/chapter.js', hasImages: false, estimatedTime: '40 min', ready: true },
         { slug: 'grassroots_governance', title: 'Grassroots Democracy – Part 1: Governance', subtitle: 'Chapter 10 · Grade 6', description: 'Governance, three organs of government, three tiers, democracy.', grade: 6, dataFile: 'data/civics/grassroots_governance/chapter.js', hasImages: false, estimatedTime: '45 min', ready: true },
         { slug: 'rural_local_government', title: 'Grassroots Democracy – Part 2: Rural Local Government', subtitle: 'Chapter 11 · Grade 6', description: 'Panchayati Raj — Gram Panchayat, Panchayat Samiti, Zila Parishad.', grade: 6, dataFile: 'data/civics/rural_local_government/chapter.js', hasImages: false, estimatedTime: '40 min', ready: true },
-        { slug: 'urban_local_government', title: 'Grassroots Democracy – Part 3: Urban Local Government', subtitle: 'Chapter 12 · Grade 6', description: 'Municipal Corporations, wards, and urban governance.', grade: 6, dataFile: 'data/civics/urban_local_government/chapter.js', hasImages: false, estimatedTime: '40 min', ready: true }
+        { slug: 'urban_local_government', title: 'Grassroots Democracy – Part 3: Urban Local Government', subtitle: 'Chapter 12 · Grade 6', description: 'Municipal Corporations, wards, and urban governance.', grade: 6, dataFile: 'data/civics/urban_local_government/chapter.js', hasImages: false, estimatedTime: '40 min', ready: true },
+        { slug: 'role_of_judiciary', title: 'The Role of the Judiciary in Our Society', subtitle: 'Chapter 4 · Grade 8', description: 'Justice, three-tier judiciary, Public Interest Litigation, Lok Adalats, and independence of judiciary.', grade: 8, dataFile: 'data/civics/role_of_judiciary/chapter.js', hasImages: false, estimatedTime: '45 min', ready: true },
+        { slug: 'citizenship_rights_duties', title: 'Citizenship: Rights and Duties', subtitle: 'Chapter 5 · Grade 8', description: 'Citizenship, six Fundamental Rights, eleven Fundamental Duties, and being a good citizen.', grade: 8, dataFile: 'data/civics/citizenship_rights_duties/chapter.js', hasImages: false, estimatedTime: '45 min', ready: true }
       ]
     },
     {
@@ -58,7 +61,9 @@ window.CATALOG = {
       name: 'Economics',
       icon: '₹',
       color: '#a78bfa',
-      chapters: []
+      chapters: [
+        { slug: 'population_urban', title: 'Dynamics of Population & India\'s Urban Landscape', subtitle: 'Chapters 6-7 · Grade 8', description: 'Demography, census, birth/death rates, population pyramid, demographic dividend, urbanisation, and Smart Cities.', grade: 8, dataFile: 'data/economics/population_urban/chapter.js', hasImages: false, estimatedTime: '55 min', ready: true }
+      ]
     },
     {
       id: 'physics',
