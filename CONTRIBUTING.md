@@ -2,17 +2,17 @@
 
 > **Purpose:** This is a complete, self-contained brief that lets ANY AI agent (with or without prior memory of this sandbox) add a new chapter to the existing `learning-system` GitHub repository. It captures every convention, code pattern, narration style, and testing protocol established across multiple sessions of work.
 >
-> **Copy-paste this entire document as your first user message to a fresh AI agent when you want it to add a new chapter.**
+> **Copy-paste this entire document as your first user message to a fresh AI agent when you want it to add a chapter.**
 
 ---
 
 ## 🎯 Your Mission
 
-You are adding a new chapter to an existing multi-subject interactive learning system hosted on GitHub. The system is a self-contained, browser-based HTML/JS/CSS app for Grade 6-8 students. Each chapter lives in its own `data/<subject>/<chapter_slug>/chapter.js` file.
+You are adding a new chapter to an existing multi-subject interactive learning system hosted on GitHub. The system is a self-contained, browser-based HTML/JS/CSS app for **Grade 6 and Grade 8** students. Each chapter lives in its own `data/<subject>/<chapter_slug>/chapter.js` file.
 
 The end deliverable is always:
 1. A new `chapter.js` file that defines `window.CHAPTER_DATA = { ... }` following the schema below.
-2. An updated `data/catalog.js` that registers the new chapter.
+2. An updated `data/catalog.js` that registers the new chapter (with a `grade` field).
 3. (Optional) An `images/` subfolder with reference images extracted from a PDF or sourced elsewhere.
 4. (Optional) Updates to `css/style.css` and `README.md`.
 5. All changes committed and pushed to the GitHub repository.
@@ -36,26 +36,60 @@ The end deliverable is always:
 ```
 learning-system/
 ├── index.html                       # Home screen + chapter screen + atlas launchers
+│                                   # Includes CLASS SELECTOR (Class 6 / 7 / 8 / All)
 ├── README.md                        # Documents all chapters
+├── CONTRIBUTING.md                 # THIS FILE — conventions for adding chapters
 ├── CLASS_6_7_SUITABILITY.md         # Pedagogical review
-├── css/style.css                    # Shared styles + subject-specific animations
+├── css/style.css                    # Shared styles + .el reveal rules + class selector CSS
 ├── js/
-│   ├── app.js                       # Renders 6 tabs per chapter
+│   ├── app.js                       # Renders 6 tabs per chapter + grade filtering
 │   ├── globe.js                     # Three.js Earth viewer (for geography chapter)
 │   └── tts.js                       # Web Speech API text-to-speech
 ├── vendor/three.min.js              # Three.js r128 (MIT) bundled locally
 ├── data/
 │   ├── catalog.js                   # ← EDIT THIS to register new chapters
-│   ├── maths/baudhayana_pythagoras/chapter.js
-│   ├── geography/world_geography/chapter.js (+ images/)
-│   ├── history/india_independence/chapter.js (+ images/)  ← example for image-type
-│   ├── physics/light_mirrors_lenses/chapter.js             ← example for svg-type
-│   ├── civics/, economics/, chemistry/, biology/           ← empty, ready for chapters
+│   │                               #   Uses window.CATALOG = { subjects: [...] }
+│   │                               #   Each chapter MUST have a `grade` field (6 or 8)
+│   │
+│   │  ── CLASS 6 CHAPTERS (15) ──
+│   ├── maths/perimeter_area/chapter.js               # Ch 6: Perimeter and Area
+│   ├── geography/locating_places/chapter.js           # Ch 1: Locating Places on the Earth
+│   ├── geography/oceans_continents/chapter.js (+ images/)  # Ch 2: Oceans and Continents
+│   ├── geography/landforms_life/chapter.js (+ images/)     # Ch 3: Landforms and Life
+│   ├── history/india_bharat/chapter.js (+ images/)        # Ch 5: India, That Is Bharat
+│   ├── civics/family_community/chapter.js                 # Ch 9: Family and Community
+│   ├── civics/grassroots_governance/chapter.js             # Ch 10: Governance
+│   ├── civics/rural_local_government/chapter.js            # Ch 11: Rural Local Government
+│   ├── civics/urban_local_government/chapter.js            # Ch 12: Urban Local Government
+│   ├── physics/temperature_measurement/chapter.js          # Ch 7: Temperature
+│   ├── physics/beyond_earth/chapter.js                     # Ch 12: Beyond Earth
+│   ├── chemistry/separation_methods/chapter.js             # Ch 9: Separation Methods
+│   ├── biology/mindful_eating/chapter.js                   # Ch 3: Mindful Eating
+│   ├── biology/living_creatures/chapter.js                 # Ch 10: Living Creatures
+│   ├── biology/natures_treasures/chapter.js                # Ch 11: Nature's Treasures
+│   │
+│   │  ── CLASS 8 CHAPTERS (9) ──
+│   ├── maths/baudhayana_pythagoras/chapter.js          # Ch 2: Baudhāyana–Pythagoras
+│   ├── maths/fractions_in_disguise/chapter.js          # Ch 1: Fractions in Disguise
+│   ├── maths/proportional_reasoning_2/chapter.js       # Ch 3: Proportional Reasoning
+│   ├── geography/world_geography/chapter.js (+ images/)    # Ch 1: World Geography
+│   ├── history/india_independence/chapter.js (+ images/)    # Ch 2: India Independence
+│   ├── physics/light_mirrors_lenses/chapter.js             # Ch 10: Light: Mirrors & Lenses
+│   ├── physics/pressure_winds_storms_cyclones/chapter.js    # Ch 6: Pressure & Cyclones
+│   ├── biology/how_nature_works_in_harmony/chapter.js       # Ch 12: Nature in Harmony
+│   ├── biology/our_home_earth/chapter.js                   # Ch 13: Our Home: Earth
+│   │
+│   ├── civics/                                         # Empty, ready for Class 7/8 chapters
+│   ├── economics/                                      # Empty, ready for chapters
+│   ├── chemistry/                                      # Has 1 Class 6 chapter
+│   └── biology/                                        # Has 3 Class 6 + 2 Class 8 chapters
 ├── water_body_atlas.html            # Standalone 3D atlas (Three.js, geography)
 └── mirrors_lenses_3d_atlas.html     # Standalone 3D atlas (Three.js, physics)
 ```
 
 **Subjects defined in `catalog.js`:** maths, geography, history, civics, economics, physics, chemistry, biology — each with an icon and a colour. To add a brand-new subject, edit the `subjects` array in `data/catalog.js`.
+
+**Total chapters: 24** (15 Class 6 + 9 Class 8). The home page has a **class selector** that filters chapters by grade.
 
 ---
 
@@ -90,6 +124,23 @@ window.CHAPTER_DATA = {
     "imagesBasePath": "data/history/india_independence/images/",
     "intro": "Brief description shown on the home screen and as chapter intro."
   },
+
+  // ──────────────────────────────────────────────────────────────
+  // CATALOG REGISTRATION — you MUST also add this chapter to catalog.js
+  // ──────────────────────────────────────────────────────────────
+  // In data/catalog.js, under the appropriate subject's chapters[] array, add:
+  //
+  //   {
+  //     slug: 'india_independence',           // must match meta.slug
+  //     title: 'India\'s Long Road to Independence',
+  //     subtitle: 'Chapter 2 · Grade 8',     // shown on home screen
+  //     description: 'A long, true story...', // short description
+  //     grade: 8,                            // ⚠️ REQUIRED: 6, 7, or 8
+  //     dataFile: 'data/history/india_independence/chapter.js',
+  //     hasImages: true,                     // true if images/ subfolder exists
+  //     estimatedTime: '60 min',
+  //     ready: true                           // true = chapter.js exists and works
+  //   }
 
   // LECTURES — one entry per sub-lecture. Each lecture has multiple "beats"
   // (narration text). As each beat plays, the next SVG element (with matching
@@ -179,11 +230,27 @@ window.CHAPTER_DATA = {
 
 | Use case | type | Lectures contain | Real-life contains |
 |---|---|---|---|
-| Math, physics, chemistry (diagrammatic) | `"svg"` | `viewBox` + `svg` (with `class="el" data-beat="N"` elements) | `viewBox` + `svg` |
-| History, biology (photos, paintings) | `"image"` | `images: [...]` array | `images: [...]` array |
+| Math, physics, chemistry, civics (diagrammatic) | `"svg"` | `viewBox` + `svg` (with `class="el" data-beat="N"` elements) | `viewBox` + `svg` |
+| History, biology (photos, paintings, satellite images) | `"image"` | `images: [...]` array | `images: [...]` array |
 | Geography with 3D Earth | `"globe"` | `beatLocations: [...]` (keys into `meta.locations`) + optional `beatImages` | `images: [...]` array |
 
 **IMPORTANT**: For image-type chapters, real-life scenarios MUST also use `images: [...]` arrays — NOT `svg`. The app.js determines this based on `meta.type === 'image' || 'globe'` for both lectures and real-life scenarios.
+
+### ⚠️ Per-lecture SVG override (mixed chapters)
+
+A chapter with `meta.type: "image"` can have **individual lectures** that use SVG boards instead of images. Simply provide `viewBox` + `svg` on that lecture (instead of `images`), and the app will render it as an SVG board. This is useful for chapters that need both real photos (maps, satellite images) and animated diagrams:
+
+```javascript
+// In an image-type chapter, a lecture can override to SVG:
+{
+  id: 'constitution',
+  label: '5. The Constitution',
+  viewBox: '0 0 600 460',     // ← provides viewBox + svg → uses SVG mode
+  svg: '<g class="el" data-beat="1">...</g>',
+  // NO images: [...] field → app detects SVG override
+  beats: ['Beat 1...', 'Beat 2...']
+}
+```
 
 ---
 
@@ -377,6 +444,66 @@ After generating chapter.js, ALWAYS run these checks:
    ```
 
 ---
+
+## 🎨 CSS — SVG Element Reveal Rules (MANDATORY for SVG-type chapters)
+
+The `css/style.css` file already contains the following CSS rules that make SVG elements with `class="el"` start hidden and reveal beat-by-beat. These rules are **already in the repo** — you do NOT need to add them again. But you MUST ensure your SVG uses `class="el"` (not `class="ann-el"`) for the reveal animation to work:
+
+```css
+/* SVG element reveal — supports both .ann-el and .el classes */
+.svg-board .ann-el,
+.svg-board .el {
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: scale(0.92);
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.svg-board .ann-el.visible,
+.svg-board .el.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+.svg-board .ann-el.pulse,
+.svg-board .el.pulse {
+  animation: svgPulse 1.4s ease-out;
+}
+@keyframes svgPulse {
+  0%   { filter: drop-shadow(0 0 0 rgba(56,189,248,0)); }
+  30%  { filter: drop-shadow(0 0 14px rgba(56,189,248,0.7)); }
+  100% { filter: drop-shadow(0 0 0 rgba(56,189,248,0)); }
+}
+```
+
+**⚠️ CRITICAL: SVG Beat Sync Rule**
+
+Each SVG `<g>` element with `class="el" data-beat="N"` becomes visible when beat N is narrated (i.e., when `currentBeat = N - 1`). Therefore:
+
+- `data-beat="1"` → visible when beat 1 is narrated (first beat)
+- `data-beat="2"` → visible when beat 2 is narrated
+- ...
+- `data-beat="N"` → visible when beat N is narrated (last beat)
+
+**Each lecture MUST have exactly `len(beats)` data-beat groups**, numbered `1, 2, 3, ..., N`. If you have more SVG groups than beats, the extra groups will all appear on the last beat (they get clamped). If you have fewer groups than beats, the last group stays visible for remaining beats.
+
+**Verification script** (run after generating each chapter):
+```bash
+node -e "
+const fs = require('fs');
+const vm = require('vm');
+const code = fs.readFileSync('data/<subject>/<slug>/chapter.js', 'utf-8');
+const sandbox = { window: {} };
+vm.runInNewContext(code, sandbox);
+const data = sandbox.window.CHAPTER_DATA;
+data.lectures.forEach(lec => {
+  if (!lec.svg) return;
+  const beats = lec.beats.length;
+  const groups = (lec.svg.match(/data-beat=\"\d+\"/g) || []).length;
+  const ok = groups === beats;
+  console.log((ok ? '✓' : '✗') + ' ' + lec.id + ': ' + beats + ' beats, ' + groups + ' groups');
+});
+"
+```
 
 ## 🎨 CSS Additions (optional, for animated SVG/3D scenes)
 
@@ -592,6 +719,7 @@ Add to `index.html` below the existing subject grid:
 
 - [ ] JSON in chapter.js parses successfully (`JSON.parse` in Node)
 - [ ] All 4 (or more) lectures have correct number of beats vs SVG elements / images
+- [ ] **SVG beat sync: each lecture has `data-beat` values `1, 2, 3, ..., N` matching `len(beats)` exactly**
 - [ ] Notes HTML contains "Before We Begin" vocabulary section at the top
 - [ ] Notes HTML contains "Key Notes" with timeline, key leaders table, etc.
 - [ ] Practice tab has reveal-answer buttons (count matches what was promised)
@@ -599,8 +727,10 @@ Add to `index.html` below the existing subject grid:
 - [ ] Guided practice problems accept the expected answers (test with sample inputs)
 - [ ] Self-test questions and answers present
 - [ ] Chapter registered in `data/catalog.js` with correct `subject` id, `slug`, `dataFile` path, `hasImages` flag, `estimatedTime`
-- [ ] Browser opens `index.html`, chapter appears under its subject, all 6 tabs load without errors
-- [ ] For SVG chapters: beats advance and reveal SVG elements progressively
+- [ ] **Chapter has a `grade` field in catalog.js** (6, 7, or 8) — without this, the class selector won't show it
+- [ ] **Catalog entry has `subtitle` and `description` fields** (required by app.js for rendering)
+- [ ] Browser opens `index.html`, chapter appears under its subject when the correct class is selected, all 6 tabs load without errors
+- [ ] For SVG chapters: beats advance and reveal SVG elements progressively (beat 1 shows only 1 element, beat 2 shows 2, etc.)
 - [ ] For image chapters: images transition correctly as beats advance
 - [ ] VLM (vision model) verifies the screenshots look correct
 - [ ] README.md updated to mention the new chapter in the chapters table
@@ -611,18 +741,110 @@ Add to `index.html` below the existing subject grid:
 
 ---
 
-## 🎯 Worked Example — the existing chapters in the repo
+## 🎯 Worked Examples — chapters in the repo
 
-For reference, the repo contains 4 fully-built chapters you should study before building your own:
+For reference, the repo contains **24 fully-built chapters** across 7 subjects and 2 grades:
+
+### Class 6 chapters (15)
 
 | Chapter | Subject | Type | What to study |
 |---|---|---|---|
-| The Baudhāyana-Pythagoras Theorem | maths | svg | How to author SVG with `class="el" data-beat"` for progressive reveal |
+| Perimeter and Area | maths | svg | Animated SVG boards for geometric shapes, formulas appearing beat-by-beat |
+| Locating Places on the Earth | geography | svg | SVG globe with latitudes/longitudes, compass rose, time zones |
+| Oceans and Continents | geography | svg + image | SVG for diagrams + image for world map (per-lecture override) |
+| Landforms and Life | geography | svg + image | SVG for mountains/plateaus + image for satellite photo |
+| India, That Is Bharat | history | image + svg | Image for maps + SVG for Constitution scroll and word-flow diagram |
+| Family and Community | civics | svg | Family trees, community circles, community action stories |
+| Grassroots Democracy (3 chapters) | civics | svg | Three organs of government, three-tier pyramid, Panchayati Raj |
+| Temperature and its Measurement | physics | svg | Thermometer diagrams, temperature scales, measurement steps |
+| Beyond Earth | physics | svg | Stars, constellations, Solar System, Moon phases |
+| Methods of Separation | chemistry | svg | Handpicking, winnowing, filtration, evaporation diagrams |
+| Mindful Eating | biology | svg | Food components, balanced diet, mindful eating habits |
+| Living Creatures | biology | svg | Living vs non-living, characteristics, habitats, life cycles |
+| Nature's Treasures | biology | svg | Natural resources, air composition, forests, conservation |
+
+### Class 8 chapters (9)
+
+| Chapter | Subject | Type | What to study |
+|---|---|---|---|
+| The Baudhāyana-Pythagoras Theorem | maths | svg | How to author SVG with `class="el" data-beat` for progressive reveal |
+| Fractions in Disguise | maths | svg | Percentages, FDP conversions, profit & loss, compound interest |
+| Proportional Reasoning–2 | maths | svg | Ratios, proportions, pie charts, direct/inverse proportions |
 | World Geography: Some Glimpses | geography | globe + image | How to use 3D globe + image-based real-life scenarios |
 | **India's Long Road to Independence** | **history** | **image** | **The "Before We Begin" pattern, story-form narration, supplementary hierarchy + Viceroy timeline sections** |
 | Light: Mirrors and Lenses | physics | svg | The "Class 6-7 Quick Reference" pattern, plus a companion standalone 3D atlas |
+| Pressure, Winds, Storms, and Cyclones | physics | svg | Pressure formula, wind formation, cyclones, lightning safety |
+| How Nature Works in Harmony | biology | svg | Habitats, ecosystems, food chains, cascade effect |
+| Our Home: Earth | biology | svg | Earth as unique planet, solar system, four spheres |
 
-When in doubt about a convention, look at how the existing `data/history/india_independence/chapter.js` does it — it's the most comprehensive example (12 lectures, 140 beats, "Before We Begin" + "British Administration" + Key Notes + 4 real-life scenarios + 7 guided practice + 15 self-test + 12 practice cards + 25 images).
+When in doubt about a convention, look at how the existing chapters do it. For Class 6 SVG patterns, `data/civics/family_community/chapter.js` is a good simple example. For Class 8 image-type, `data/history/india_independence/chapter.js` is the most comprehensive example (12 lectures, 140 beats, "Before We Begin" + "British Administration" + Key Notes + 4 real-life scenarios + 7 guided practice + 15 self-test + 12 practice cards + 25 images).
+
+---
+
+## 🏫 Class Selector — Grade Filtering
+
+The home page (`index.html`) includes a **class selector bar** that lets users filter chapters by grade:
+
+```
+[Select Class:] [Class 6] [Class 7] [Class 8] [All Classes]
+```
+
+- **Default:** Class 6 (stored in `localStorage` as `selectedGrade`)
+- **Clicking a button** filters subjects/chapters by the `grade` field in `catalog.js`
+- **Subjects with no chapters** for the selected grade are hidden
+- **Stats** (subjects/ready/total) update dynamically based on the filter
+
+### How grade filtering works in `app.js`
+
+```javascript
+let currentGrade = localStorage.getItem('selectedGrade') || '6';
+
+function filterChaptersByGrade(chapters, grade) {
+  if (!chapters) return [];
+  if (grade === 'all') return chapters;
+  return chapters.filter(ch => String(ch.grade || '8') === grade);
+}
+```
+
+In `renderHome()`, each subject's chapters are filtered before rendering:
+```javascript
+const _filteredChapters = filterChaptersByGrade(subject.chapters, currentGrade);
+if (_filteredChapters.length === 0) return; // skip subjects with no chapters for this grade
+```
+
+### catalog.js format
+
+The catalog uses `window.CATALOG = { subjects: [...] }` (NOT `window.SUBJECTS`). Each chapter entry MUST include:
+
+```javascript
+window.CATALOG = {
+  subjects: [
+    {
+      id: 'maths',
+      name: 'Mathematics',
+      icon: '📐',
+      color: '#38bdf8',
+      chapters: [
+        {
+          slug: 'perimeter_area',
+          title: 'Perimeter and Area',
+          subtitle: 'Chapter 6 · Grade 6',     // shown on home screen
+          description: 'Perimeter and area of rectangles...',  // short description
+          grade: 6,                            // ⚠️ REQUIRED for class selector
+          dataFile: 'data/maths/perimeter_area/chapter.js',
+          hasImages: false,
+          estimatedTime: '45 min',
+          ready: true                          // true = chapter.js exists and works
+        }
+      ]
+    }
+  ]
+};
+```
+
+### CSS for the class selector
+
+Already in `css/style.css` — uses `.class-selector-bar`, `.class-btn`, `.class-btn.active` classes.
 
 ---
 
