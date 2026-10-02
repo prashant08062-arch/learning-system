@@ -121,7 +121,16 @@ function loadChapter(subject, chapter) {
 
   // Update top bar
   document.getElementById('chapterTopSubject').textContent = subject.name;
-  document.getElementById('chapterTopTitle').textContent = chapter.title;
+  const chapterTopTitleEl = document.getElementById('chapterTopTitle');
+  chapterTopTitleEl.textContent = chapter.title;
+  // Stash the slug on the title element so proctor.js can pick it up
+  // (proctor.js uses a MutationObserver on the chapter screen)
+  chapterTopTitleEl.dataset.slug = chapter.slug || '';
+
+  // Start auto-proctoring for this chapter (if student is logged in)
+  if (window.Proctor && chapter.slug) {
+    window.Proctor.startProctoring(chapter.slug);
+  }
 
   // Show loading state
   document.getElementById('lectureContainer').innerHTML =
@@ -161,6 +170,8 @@ function goHome() {
   document.getElementById('homeScreen').style.display = 'block';
   document.getElementById('chapterScreen').style.display = 'none';
   if (window.TTS) TTS.stopSpeaking();
+  // Stop proctoring when returning to home screen
+  if (window.Proctor) window.Proctor.stopProctoring();
   // Dispose all globe viewers
   Object.values(lecStates).forEach(s => {
     if (s.globe && typeof s.globe.dispose === 'function') s.globe.dispose();
@@ -183,6 +194,10 @@ function switchTab(tabId) {
   if (tab) tab.classList.add('active');
   if (section) section.classList.add('active');
   if (window.TTS) TTS.stopSpeaking();
+  // Track tab open in proctor progress
+  if (window.Proctor && window.Proctor.trackTabOpen && currentChapter) {
+    window.Proctor.trackTabOpen(currentChapter.slug, tabId);
+  }
   window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
@@ -484,6 +499,10 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
     renderBoard();
     progressFill.style.width = ((state.currentBeat + 1) / state.beats.length * 100) + '%';
     counterEl.textContent = `${state.currentBeat + 1} / ${state.beats.length}`;
+    // Track lecture beat progress in proctor
+    if (window.Proctor && window.Proctor.trackLectureBeat && currentChapter) {
+      window.Proctor.trackLectureBeat(currentChapter.slug, state.currentBeat + 1, state.beats.length);
+    }
   }
 
   function clearTimers() { clearTimeout(state.playTimer); }
@@ -1434,6 +1453,11 @@ function gpCheckAnswer() {
     input.disabled = true;
     document.getElementById('gpCheck').disabled = true;
 
+    // Track practice problem in proctor
+    if (window.Proctor && window.Proctor.trackPractice && currentChapter) {
+      window.Proctor.trackPractice(currentChapter.slug, true);
+    }
+
     const feedback = document.getElementById('gpFeedback');
     feedback.className = 'gp-feedback show success';
     feedback.textContent = step.explanation;
@@ -1458,6 +1482,10 @@ function gpCheckAnswer() {
     gpState.attempts++;
     input.classList.add('wrong');
     input.classList.remove('correct');
+    // Track practice attempt (incorrect)
+    if (gpState.attempts === 1 && window.Proctor && window.Proctor.trackPractice && currentChapter) {
+      window.Proctor.trackPractice(currentChapter.slug, false);
+    }
     const feedback = document.getElementById('gpFeedback');
     feedback.className = 'gp-feedback show error';
     feedback.textContent = 'Try again.';
@@ -1533,8 +1561,14 @@ function renderSelfTest() {
   container.querySelectorAll('.reveal-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const steps = btn.nextElementSibling;
+      const wasRevealed = steps.classList.contains('revealed');
       steps.classList.toggle('revealed');
       btn.textContent = steps.classList.contains('revealed') ? 'Hide Answer' : 'Reveal Answer';
+      // Track self-test answer in proctor (count each question only once)
+      if (!wasRevealed && window.Proctor && window.Proctor.trackSelfTest && currentChapter) {
+        // Self-test is reveal-based, so we count as "answered" (no correctness check)
+        window.Proctor.trackSelfTest(currentChapter.slug, true);
+      }
     });
   });
 }
@@ -1589,5 +1623,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+  // ============================================================
+  // AUTH GATE — After app finishes rendering, trigger auth init
+  // so the login overlay appears on top of the fully-built page.
+  // ============================================================
+  if (window.Auth && typeof window.Auth._showOverlay === 'function') {
+    if (!window.Auth.isLoggedIn()) {
+      window.Auth._showOverlay();
+    }
+  }
 
 })();

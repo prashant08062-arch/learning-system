@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Parent Dashboard — Learning System</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* Parent-dashboard specific styles */
+  body { background: #0a1326; color: #e2e8f0; font-family: 'Segoe UI', system-ui, sans-serif; }
+
+  .pd-container {
+    max-width: 1200px; margin: 0 auto; padding: 24px 20px 80px;
+  }
+  .pd-header {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+    padding: 20px 0; margin-bottom: 24px;
+    border-bottom: 1px solid #1e293b;
+  }
+  .pd-header h1 {
+    color: #38bdf8; font-size: 26px; font-weight: 700;
+    margin: 0; letter-spacing: -0.5px;
+  }
+  .pd-header .pd-sub { color: #94a3b8; font-size: 13px; margin-top: 4px; }
+  .pd-header .pd-parent-info {
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  .pd-header .pd-parent-info .pd-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: #38bdf8; color: #0a1326;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 700;
+  }
+  .pd-header .pd-parent-info .pd-meta { line-height: 1.3; }
+  .pd-header .pd-parent-info .pd-meta strong { color: #e2e8f0; font-size: 14px; }
+  .pd-header .pd-parent-info .pd-meta small { color: #94a3b8; font-size: 12px; display:block; }
+  .pd-logout {
+    background: transparent; color: #94a3b8;
+    border: 1px solid #334155;
+    padding: 9px 18px; border-radius: 8px;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    transition: all .2s; font-family: inherit;
+  }
+  .pd-logout:hover { border-color: #fca5a5; color: #fca5a5; }
+
+  /* Empty / no-students */
+  .pd-empty {
+    background: #0f172a; border: 1px dashed #334155;
+    border-radius: 14px; padding: 48px 24px; text-align: center;
+  }
+  .pd-empty h3 { color: #e2e8f0; font-size: 18px; margin: 0 0 8px; }
+  .pd-empty p { color: #94a3b8; font-size: 14px; margin: 0; line-height: 1.6; }
+
+  /* Summary cards */
+  .pd-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px; margin-bottom: 28px;
+  }
+  .pd-stat-card {
+    background: #0f172a; border: 1px solid #1e293b;
+    border-radius: 12px; padding: 16px 18px;
+  }
+  .pd-stat-card .pd-stat-label {
+    color: #94a3b8; font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .pd-stat-card .pd-stat-value {
+    color: #38bdf8; font-size: 26px; font-weight: 700; margin-top: 4px;
+  }
+  .pd-stat-card .pd-stat-sub { color: #64748b; font-size: 11px; margin-top: 2px; }
+
+  /* Student card */
+  .pd-student-card {
+    background: #0f172a; border: 1px solid #1e293b;
+    border-radius: 14px; padding: 20px 22px; margin-bottom: 18px;
+  }
+  .pd-student-header {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px; margin-bottom: 16px;
+    padding-bottom: 14px; border-bottom: 1px solid #1e293b;
+  }
+  .pd-student-name { color: #e2e8f0; font-size: 18px; font-weight: 700; }
+  .pd-student-meta { color: #94a3b8; font-size: 12px; }
+  .pd-student-avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: #38bdf8; color: #0a1326;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 700; flex-shrink: 0;
+  }
+  .pd-student-id-block {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .pd-chip {
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 11px; font-weight: 600;
+    background: #1e293b; color: #94a3b8;
+  }
+  .pd-chip.danger { background: #7f1d1d; color: #fee2e2; }
+  .pd-chip.warn   { background: #78350f; color: #fef3c7; }
+  .pd-chip.ok     { background: #064e3b; color: #d1fae5; }
+
+  /* Sections */
+  .pd-section-title {
+    color: #38bdf8; font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.6px;
+    margin: 16px 0 10px;
+  }
+
+  /* Chapter table */
+  .pd-chapter-table {
+    width: 100%; border-collapse: collapse;
+    font-size: 13px;
+  }
+  .pd-chapter-table th {
+    text-align: left; color: #94a3b8; font-weight: 600;
+    padding: 8px 10px; border-bottom: 1px solid #1e293b;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px;
+  }
+  .pd-chapter-table td {
+    padding: 10px; border-bottom: 1px solid #1e293b;
+    color: #e2e8f0; vertical-align: middle;
+  }
+  .pd-chapter-table tr:hover td { background: rgba(56, 189, 248, 0.04); }
+  .pd-chapter-name { font-weight: 600; color: #f1f5f9; }
+  .pd-progress-wrap {
+    background: #1e293b; border-radius: 6px; overflow: hidden;
+    height: 8px; width: 120px; position: relative;
+  }
+  .pd-progress-fill {
+    height: 100%; background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+    transition: width .3s;
+  }
+  .pd-progress-text { font-size: 11px; color: #94a3b8; margin-top: 3px; }
+  .pd-empty-row td {
+    color: #64748b; text-align: center; font-style: italic; padding: 24px;
+  }
+
+  /* Proctor logs */
+  .pd-log-list {
+    max-height: 220px; overflow-y: auto;
+    background: #0a1326; border: 1px solid #1e293b;
+    border-radius: 8px; padding: 6px;
+  }
+  .pd-log-item {
+    padding: 8px 10px; border-bottom: 1px solid #1e293b;
+    font-size: 12px; display: flex; justify-content: space-between;
+    align-items: center; gap: 8px;
+  }
+  .pd-log-item:last-child { border-bottom: 0; }
+  .pd-log-type {
+    display: inline-block; padding: 2px 8px; border-radius: 4px;
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+  }
+  .pd-log-type.tab_switch { background: #78350f; color: #fef3c7; }
+  .pd-log-type.session_terminated { background: #7f1d1d; color: #fee2e2; }
+  .pd-log-time { color: #64748b; font-size: 11px; }
+  .pd-log-reason { color: #94a3b8; font-size: 11px; }
+  .pd-log-empty { color: #64748b; font-style: italic; padding: 14px; text-align: center; font-size: 12px; }
+
+  /* Custom scrollbar */
+  .pd-log-list::-webkit-scrollbar { width: 6px; }
+  .pd-log-list::-webkit-scrollbar-track { background: #0a1326; }
+  .pd-log-list::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+
+  /* Login screen */
+  .pd-login-screen {
+    position: fixed; inset: 0; background: #0a1326;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px; z-index: 1000;
+  }
+  .pd-login-card {
+    background: #0f172a; border: 1px solid #1e293b;
+    border-radius: 16px; padding: 32px 28px;
+    max-width: 380px; width: 100%; text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .pd-login-card h2 { color: #38bdf8; font-size: 22px; margin: 0 0 8px; }
+  .pd-login-card p  { color: #94a3b8; font-size: 13px; margin: 0 0 20px; line-height: 1.6; }
+  .pd-login-btn {
+    display: inline-block; padding: 12px 24px;
+    background: #38bdf8; color: #0a1326;
+    border-radius: 8px; font-weight: 700; font-size: 14px;
+    text-decoration: none; transition: background .2s;
+  }
+  .pd-login-btn:hover { background: #7dd3fc; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     LOGIN GATE — shown if no parent is logged in
+     ============================================================ -->
+<div id="pdLoginGate" class="pd-login-screen" style="display:none;">
+  <div class="pd-login-card">
+    <div style="font-size:48px;margin-bottom:8px;">🔒</div>
+    <h2>Parent Access Required</h2>
+    <p>Please log in as a parent from the main app to view the Parent Dashboard.</p>
+    <a href="index.html" class="pd-login-btn">Go to Login →</a>
+  </div>
+</div>
+
+<!-- ============================================================
+     DASHBOARD
+     ============================================================ -->
+<div id="pdDashboard" style="display:none;">
+  <div class="pd-container">
+
+    <header class="pd-header">
+      <div>
+        <h1>👨‍👩‍👧 Parent Dashboard</h1>
+        <div class="pd-sub">Monitor your child's learning progress, scores, and proctoring activity.</div>
+      </div>
+      <div class="pd-parent-info">
+        <div class="pd-avatar" id="pdParentAvatar">P</div>
+        <div class="pd-meta">
+          <strong id="pdParentName">Parent</strong>
+          <small id="pdParentEmail">—</small>
+        </div>
+        <button class="pd-logout" id="pdLogoutBtn">Logout</button>
+      </div>
+    </header>
+
+    <!-- Summary stats -->
+    <div class="pd-summary" id="pdSummary"></div>
+
+    <!-- Student cards render here -->
+    <div id="pdStudentsContainer"></div>
+
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   Parent Dashboard — pure client-side rendering
+   Reads: learning_system_users, learning_system_current_user,
+          learning_system_progress_<uid>, learning_system_proctor_logs_<uid>
+   ============================================================ */
+(function() {
+'use strict';
+
+const USERS_KEY        = 'learning_system_users';
+const CURRENT_USER_KEY = 'learning_system_current_user';
+
+function getUsers() {
+  try {
+    const raw = localStorage.getItem(USERS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) { return []; }
+}
+function getCurrentUser() {
+  try {
+    const raw = localStorage.getItem(CURRENT_USER_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) { return null; }
+}
+function getProgress(uid) {
+  try {
+    const raw = localStorage.getItem(`learning_system_progress_${uid}`);
+    return raw ? JSON.parse(raw) : {};
+  } catch (e) { return {}; }
+}
+function getLogs(uid) {
+  try {
+    const raw = localStorage.getItem(`learning_system_proctor_logs_${uid}`);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) { return []; }
+}
+
+function escapeHtml(s) {
+  if (s == null) return '';
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function formatTime(seconds) {
+  if (!seconds || seconds < 1) return '0s';
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = seconds % 60;
+  if (h > 0) return `${h}h ${m}m`;
+  if (m > 0) return `${m}m ${s}s`;
+  return `${s}s`;
+}
+function formatDate(iso) {
+  if (!iso) return '—';
+  try {
+    const d = new Date(iso);
+    return d.toLocaleString(undefined, {
+      year: 'numeric', month: 'short', day: 'numeric',
+      hour: '2-digit', minute: '2-digit'
+    });
+  } catch (e) { return iso; }
+}
+
+/* ----------------------------------------------------------
+   Render the dashboard
+   ---------------------------------------------------------- */
+function render() {
+  const currentUser = getCurrentUser();
+  if (!currentUser || currentUser.role !== 'parent') {
+    document.getElementById('pdLoginGate').style.display = 'flex';
+    document.getElementById('pdDashboard').style.display = 'none';
+    return;
+  }
+  document.getElementById('pdLoginGate').style.display = 'none';
+  document.getElementById('pdDashboard').style.display = 'block';
+
+  // Header info
+  const parentName  = currentUser.parentName || 'Parent';
+  const parentEmail = currentUser.parentEmail || '—';
+  const initials = parentName.split(/\s+/).map(w => w[0] || '').slice(0, 2).join('').toUpperCase() || 'P';
+  document.getElementById('pdParentAvatar').textContent = initials;
+  document.getElementById('pdParentName').textContent = parentName;
+  document.getElementById('pdParentEmail').textContent = parentEmail;
+
+  // Find all student accounts linked to this parent email
+  const allUsers = getUsers();
+  const students = allUsers.filter(u => u.parentEmail === parentEmail);
+
+  if (students.length === 0) {
+    document.getElementById('pdSummary').innerHTML = '';
+    document.getElementById('pdStudentsContainer').innerHTML = `
+      <div class="pd-empty">
+        <h3>No student accounts linked</h3>
+        <p>No students are currently associated with your parent email <strong>${escapeHtml(parentEmail)}</strong>.</p>
+      </div>
+    `;
+    return;
+  }
+
+  renderSummary(students);
+  renderStudents(students);
+}
+
+function renderSummary(students) {
+  let totalChapters = 0;
+  let totalTime = 0;
+  let totalPractice = 0;
+  let totalPracticeCorrect = 0;
+  let totalSelfTest = 0;
+  let totalSelfTestCorrect = 0;
+  let totalViolations = 0;
+  let totalTerminations = 0;
+
+  students.forEach(s => {
+    const p = getProgress(s.id);
+    Object.values(p).forEach(ch => {
+      if (ch.visited) totalChapters += 1;
+      totalTime += (ch.timeSpent || 0);
+      totalPractice += (ch.practiceAnswered || 0);
+      totalPracticeCorrect += (ch.practiceCorrect || 0);
+      totalSelfTest += (ch.selfTestAnswered || 0);
+      totalSelfTestCorrect += (ch.selfTestCorrect || 0);
+    });
+    const logs = getLogs(s.id);
+    logs.forEach(l => {
+      if (l.type === 'tab_switch') totalViolations += 1;
+      if (l.type === 'session_terminated') totalTerminations += 1;
+    });
+  });
+
+  const practicePct = totalPractice > 0 ? Math.round((totalPracticeCorrect / totalPractice) * 100) : 0;
+  const selfTestPct = totalSelfTest > 0 ? Math.round((totalSelfTestCorrect / totalSelfTest) * 100) : 0;
+
+  const summary = document.getElementById('pdSummary');
+  summary.innerHTML = `
+    <div class="pd-stat-card">
+      <div class="pd-stat-label">Students</div>
+      <div class="pd-stat-value">${students.length}</div>
+      <div class="pd-stat-sub">Linked to your account</div>
+    </div>
+    <div class="pd-stat-card">
+      <div class="pd-stat-label">Chapters Visited</div>
+      <div class="pd-stat-value">${totalChapters}</div>
+      <div class="pd-stat-sub">Across all students</div>
+    </div>
+    <div class="pd-stat-card">
+      <div class="pd-stat-label">Total Time</div>
+      <div class="pd-stat-value">${formatTime(totalTime)}</div>
+      <div class="pd-stat-sub">Time spent learning</div>
+    </div>
+    <div class="pd-stat-card">
+      <div class="pd-stat-label">Practice Score</div>
+      <div class="pd-stat-value">${practicePct}%</div>
+      <div class="pd-stat-sub">${totalPracticeCorrect}/${totalPractice} correct</div>
+    </div>
+    <div class="pd-stat-card">
+      <div class="pd-stat-label">Self-Test Score</div>
+      <div class="pd-stat-value">${selfTestPct}%</div>
+      <div class="pd-stat-sub">${totalSelfTestCorrect}/${totalSelfTest} correct</div>
+    </div>
+    <div class="pd-stat-card">
+      <div class="pd-stat-label">Proctor Violations</div>
+      <div class="pd-stat-value">${totalViolations}</div>
+      <div class="pd-stat-sub">${totalTerminations} session terminations</div>
+    </div>
+  `;
+}
+
+function renderStudents(students) {
+  const container = document.getElementById('pdStudentsContainer');
+  container.innerHTML = students.map(s => renderStudentCard(s)).join('');
+}
+
+function renderStudentCard(student) {
+  const progress = getProgress(student.id);
+  const logs = getLogs(student.id);
+  const chapterSlugs = Object.keys(progress);
+  const visitedCount = chapterSlugs.filter(s => progress[s].visited).length;
+  const totalTime = Object.values(progress).reduce((sum, p) => sum + (p.timeSpent || 0), 0);
+  const totalPractice = Object.values(progress).reduce((sum, p) => sum + (p.practiceAnswered || 0), 0);
+  const totalPracticeCorrect = Object.values(progress).reduce((sum, p) => sum + (p.practiceCorrect || 0), 0);
+  const totalSelfTest = Object.values(progress).reduce((sum, p) => sum + (p.selfTestAnswered || 0), 0);
+  const totalSelfTestCorrect = Object.values(progress).reduce((sum, p) => sum + (p.selfTestCorrect || 0), 0);
+
+  const tabSwitches = logs.filter(l => l.type === 'tab_switch').length;
+  const terminations = logs.filter(l => l.type === 'session_terminated').length;
+
+  const initials = (student.name || 'S').split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase() || 'S';
+  const practicePct = totalPractice > 0 ? Math.round((totalPracticeCorrect / totalPractice) * 100) : 0;
+  const selfTestPct = totalSelfTest > 0 ? Math.round((totalSelfTestCorrect / totalSelfTest) * 100) : 0;
+
+  // Status chip
+  let statusChip = '<span class="pd-chip ok">No Issues</span>';
+  if (terminations > 0) {
+    statusChip = `<span class="pd-chip danger">${terminations} Session${terminations > 1 ? 's' : ''} Terminated</span>`;
+  } else if (tabSwitches >= 3) {
+    statusChip = `<span class="pd-chip warn">${tabSwitches} Tab Switch Warnings</span>`;
+  } else if (tabSwitches > 0) {
+    statusChip = `<span class="pd-chip warn">${tabSwitches} Tab Switch${tabSwitches > 1 ? 'es' : ''}</span>`;
+  }
+
+  // Chapter rows
+  let chapterRows = '';
+  if (chapterSlugs.length === 0) {
+    chapterRows = `<div class="pd-empty-row" style="padding:24px;text-align:center;color:#64748b;font-style:italic;font-size:13px;">
+      No chapters visited yet.
+    </div>`;
+  } else {
+    chapterRows = chapterSlugs.map(slug => {
+      const ch = progress[slug];
+      const lecturePct = ch.totalLectures > 0
+        ? Math.min(100, Math.round((ch.lecturesCompleted / ch.totalLectures) * 100))
+        : (ch.visited ? 100 : 0);
+      const practicePctCh = ch.practiceAnswered > 0
+        ? Math.round((ch.practiceCorrect / ch.practiceAnswered) * 100)
+        : 0;
+      const selfTestPctCh = ch.selfTestAnswered > 0
+        ? Math.round((ch.selfTestCorrect / ch.selfTestAnswered) * 100)
+        : 0;
+      return `
+        <tr>
+          <td>
+            <div class="pd-chapter-name">${escapeHtml(slug.replace(/_/g, ' '))}</div>
+            <div class="pd-progress-text">Last: ${formatDate(ch.lastVisited)}</div>
+          </td>
+          <td>
+            <div class="pd-progress-wrap"><div class="pd-progress-fill" style="width:${lecturePct}%"></div></div>
+            <div class="pd-progress-text">${ch.lecturesCompleted || 0}/${ch.totalLectures || 0} beats (${lecturePct}%)</div>
+          </td>
+          <td>${formatTime(ch.timeSpent || 0)}</td>
+          <td>
+            <div>${ch.practiceCorrect || 0}/${ch.practiceAnswered || 0}</div>
+            <div class="pd-progress-text">${practicePctCh}%</div>
+          </td>
+          <td>
+            <div>${ch.selfTestCorrect || 0}/${ch.selfTestAnswered || 0}</div>
+            <div class="pd-progress-text">${selfTestPctCh}%</div>
+          </td>
+          <td>${(ch.tabsOpened || []).join(', ') || '—'}</td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  // Proctor log entries
+  let logHtml = '';
+  if (logs.length === 0) {
+    logHtml = `<div class="pd-log-empty">No proctoring violations recorded. 🎉</div>`;
+  } else {
+    const recentLogs = logs.slice().reverse().slice(0, 50);
+    logHtml = recentLogs.map(l => `
+      <div class="pd-log-item">
+        <div>
+          <span class="pd-log-type ${l.type}">${l.type.replace(/_/g, ' ')}</span>
+          ${l.chapter ? `<span style="margin-left:8px;color:#94a3b8;">${escapeHtml(l.chapter.replace(/_/g, ' '))}</span>` : ''}
+          ${l.reason ? `<div class="pd-log-reason">${escapeHtml(l.reason)}</div>` : ''}
+          ${l.warning ? `<div class="pd-log-reason">Warning ${l.warning}</div>` : ''}
+        </div>
+        <div class="pd-log-time">${formatDate(l.timestamp)}</div>
+      </div>
+    `).join('');
+  }
+
+  return `
+    <article class="pd-student-card">
+      <header class="pd-student-header">
+        <div class="pd-student-id-block">
+          <div class="pd-student-avatar">${initials}</div>
+          <div>
+            <div class="pd-student-name">${escapeHtml(student.name)}</div>
+            <div class="pd-student-meta">Class ${escapeHtml(student.grade || '—')} · ${escapeHtml(student.email || '')}</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <span class="pd-chip">📖 ${visitedCount} chapters</span>
+          <span class="pd-chip">⏱ ${formatTime(totalTime)}</span>
+          <span class="pd-chip">✏️ ${practicePct}% practice</span>
+          <span class="pd-chip">🧪 ${selfTestPct}% self-test</span>
+          ${statusChip}
+        </div>
+      </header>
+
+      <div class="pd-section-title">📚 Chapter Progress</div>
+      <div style="overflow-x:auto;">
+        <table class="pd-chapter-table">
+          <thead>
+            <tr>
+              <th>Chapter</th>
+              <th>Lecture Progress</th>
+              <th>Time Spent</th>
+              <th>Practice</th>
+              <th>Self-Test</th>
+              <th>Tabs Opened</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${chapterRows}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pd-section-title">🛡️ Proctor Logs</div>
+      <div class="pd-log-list">${logHtml}</div>
+    </article>
+  `;
+}
+
+/* ----------------------------------------------------------
+   Logout
+   ---------------------------------------------------------- */
+document.getElementById('pdLogoutBtn').addEventListener('click', () => {
+  if (confirm('Logout from parent dashboard?')) {
+    localStorage.removeItem(CURRENT_USER_KEY);
+    window.location.href = 'index.html';
+  }
+});
+
+/* ----------------------------------------------------------
+   Init
+   ---------------------------------------------------------- */
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', render);
+} else {
+  render();
+}
+
+})();
+</script>
+</body>
+</html>
