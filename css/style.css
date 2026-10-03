@@ -204,8 +204,12 @@ body { overflow-x: hidden; }
 .fullscreen-btn:hover { background: #475569; }
 .fullscreen-btn.active { background: #0ea5e9; color: white; }
 
-/* Full-screen reading mode — hides top bar, tabs, and expands content */
-.chapter-screen.fullscreen-mode .chapter-top-bar { display: none; }
+/* Full-screen reading mode — shows only logout button, hides the rest */
+.chapter-screen.fullscreen-mode .chapter-top-bar { display: flex; justify-content: flex-end; padding: 6px 16px; }
+.chapter-screen.fullscreen-mode .chapter-top-bar .back-btn,
+.chapter-screen.fullscreen-mode .chapter-top-bar .chapter-top-title,
+.chapter-screen.fullscreen-mode .chapter-top-bar .fullscreen-btn { display: none; }
+.chapter-screen.fullscreen-mode .chapter-logout-btn { display: block !important; }
 .chapter-screen.fullscreen-mode .tabs { display: none; }
 .chapter-screen.fullscreen-mode .section { padding-top: 0; }
 .chapter-screen.fullscreen-mode .content {

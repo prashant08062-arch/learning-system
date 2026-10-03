@@ -1596,6 +1596,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // Back button
   document.getElementById('backBtn').addEventListener('click', goHome);
 
+  // Logout button on chapter screen
+  var chapterLogoutBtn = document.getElementById('chapterLogoutBtn');
+  if (chapterLogoutBtn) {
+    chapterLogoutBtn.addEventListener('click', function() {
+      if (confirm('Are you sure you want to logout?')) {
+        if (window.Proctor) window.Proctor.stopProctoring();
+        if (window.Auth) window.Auth.logout();
+      }
+    });
+  }
+
   // Fullscreen reading mode
   const fullscreenBtn = document.getElementById('fullscreenBtn');
   const exitFullscreenBtn = document.getElementById('exitFullscreenBtn');
