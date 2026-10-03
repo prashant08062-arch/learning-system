@@ -711,15 +711,26 @@ window.Auth = {
     // Hide user bar
     const bar = document.getElementById('userBar');
     if (bar) bar.style.display = 'none';
-    // Go to home screen first (hide chapter screen)
-    const hs = document.getElementById('homeScreen');
-    const cs = document.getElementById('chapterScreen');
-    if (hs) hs.style.display = 'block';
-    if (cs) cs.style.display = 'none';
-    // Remove any immersive overlay
-    const im = document.querySelector('.immersive-overlay.active');
-    if (im) im.classList.remove('active');
-    document.body.style.overflow = '';
+
+    // FULL TEARDOWN of the active lecture player.
+    // This stops timers, TTS voice, globe/webgl render loops,
+    // removes immersive overlay DOM nodes, and resets chapter
+    // tracking. Without this, the player stays alive (and the
+    // voice keeps reading) after the auth overlay appears.
+    if (window.App && typeof window.App.teardownActiveContent === 'function') {
+      window.App.teardownActiveContent();
+    } else {
+      // Fallback path if app.js hasn't loaded yet — partial cleanup
+      try { if (window.TTS && TTS.stopSpeaking) TTS.stopSpeaking(); } catch(e) {}
+      const im = document.querySelector('.immersive-overlay.active');
+      if (im) im.classList.remove('active');
+      document.body.style.overflow = '';
+      const hs = document.getElementById('homeScreen');
+      const cs = document.getElementById('chapterScreen');
+      if (hs) hs.style.display = 'block';
+      if (cs) cs.style.display = 'none';
+    }
+
     // Now show the auth overlay (slight delay to let DOM settle)
     setTimeout(function() { showOverlay(); }, 100);
   },

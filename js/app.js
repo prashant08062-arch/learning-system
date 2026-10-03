@@ -1923,4 +1923,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // ============================================================
+  // PUBLIC TEARDOWN — callable by auth.js on logout
+  // Fully stops every active lecture player: timers, TTS voice,
+  // globe/webgl viewers, immersive overlays, and state registry.
+  // Without this, the player keeps running (and the voice keeps
+  // reading) even after the auth overlay is shown.
+  // ============================================================
+  window.App = window.App || {};
+  window.App.teardownActiveContent = function() {
+    // 1) Stop every lecture's playback loop (timers + TTS + UI state)
+    Object.values(lecStates).forEach(function(s) {
+      try { if (typeof s.stop === 'function') s.stop(); } catch(e) {}
+    });
+    // 2) Hard-stop any in-flight speech (covers TTS started outside lecStates)
+    try { if (window.TTS && typeof TTS.stopSpeaking === 'function') TTS.stopSpeaking(); } catch(e) {}
+    // 3) Dispose globe/webgl viewers so render loops stop
+    Object.values(lecStates).forEach(function(s) {
+      try { if (s.globe && typeof s.globe.dispose === 'function') s.globe.dispose(); } catch(e) {}
+    });
+    // 4) Clear the lecture-state registry so stale timers can't re-arm
+    Object.keys(lecStates).forEach(function(k) { delete lecStates[k]; });
+    // 5) Remove every immersive overlay element from the DOM
+    //    (auth.js used to only strip .active — the element stayed
+    //     in the DOM with pending timers attached to its buttons.)
+    document.querySelectorAll('.immersive-overlay').forEach(function(el) { el.remove(); });
+    // 6) Reset body scroll state
+    document.body.style.overflow = '';
+    // 7) Hide chapter screen, show home screen
+    var hs = document.getElementById('homeScreen');
+    var cs = document.getElementById('chapterScreen');
+    if (hs) hs.style.display = 'block';
+    if (cs) cs.style.display = 'none';
+    // 8) Reset chapter-tracking state
+    currentChapterData = null;
+    currentSubject = null;
+    currentChapter = null;
+    gpState = null;
+    // 9) Scroll to top
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  };
+
 })();
