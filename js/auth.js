@@ -326,8 +326,16 @@ function switchAuthTab(name) {
 }
 
 /* ----------------------------------------------------------
-   SIGNUP
+   SIGNUP — with OTP verification
    ---------------------------------------------------------- */
+
+// Store pending OTPs temporarily (in-memory, cleared on page reload)
+var pendingOTPs = {};
+
+function generateOTP() {
+  return String(Math.floor(100000 + Math.random() * 900000));
+}
+
 function handleSignup(e) {
   e.preventDefault();
   const name         = document.getElementById('suName').value.trim();
@@ -352,28 +360,126 @@ function handleSignup(e) {
     return showToast('An account with this student email already exists', 'error');
   }
 
-  const user = {
+  // Generate OTP and show OTP verification step
+  var otp = generateOTP();
+  pendingOTPs[email] = {
+    otp: otp,
+    expires: Date.now() + 5 * 60 * 1000, // 5 minute expiry
+    userData: { name, grade, email, password, parentName, parentEmail, parentPhone, parentPassword }
+  };
+
+  // Show OTP input UI
+  showOTPStep(email, otp);
+}
+
+function showOTPStep(email, otp) {
+  // Create or update OTP verification section in the signup form
+  var form = document.getElementById('signupForm');
+  if (!form) return;
+
+  // Remove any existing OTP section
+  var existingOTP = document.getElementById('otpSection');
+  if (existingOTP) existingOTP.remove();
+
+  // Create OTP verification section
+  var otpHTML = '<div id="otpSection" style="margin-top:16px;padding:16px;background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.3);border-radius:10px;">' +
+    '<h4 style="color:#38bdf8;font-size:14px;margin:0 0 8px;">🔐 OTP Verification</h4>' +
+    '<p style="color:#94a3b8;font-size:12px;margin:0 0 10px;">A 6-digit OTP has been generated for <strong>' + email + '</strong>. ' +
+    'For this pilot version, the OTP is shown below. In production, it would be sent via email/SMS.</p>' +
+    '<div style="background:rgba(251,191,36,0.15);border:1px solid #fbbf24;border-radius:8px;padding:8px 12px;margin:0 0 12px;text-align:center;">' +
+    '<span style="color:#fbbf24;font-size:24px;font-weight:700;letter-spacing:8px;">' + otp + '</span>' +
+    '</div>' +
+    '<input type="text" id="otpInput" placeholder="Enter 6-digit OTP" maxlength="6" style="width:100%;padding:10px 12px;background:#1e293b;border:1px solid #334155;border-radius:8px;color:#e2e8f0;font-size:16px;text-align:center;letter-spacing:4px;font-family:monospace;margin-bottom:10px;" />' +
+    '<div style="display:flex;gap:8px;">' +
+    '<button type="button" id="otpVerifyBtn" style="flex:1;background:#0ea5e9;color:#fff;border:none;padding:10px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">Verify OTP &amp; Create Account</button>' +
+    '<button type="button" id="otpResendBtn" style="background:#334155;color:#94a3b8;border:none;padding:10px 14px;border-radius:8px;font-size:12px;cursor:pointer;">Resend</button>' +
+    '<button type="button" id="otpCancelBtn" style="background:#334155;color:#94a3b8;border:none;padding:10px 14px;border-radius:8px;font-size:12px;cursor:pointer;">Cancel</button>' +
+    '</div>' +
+    '<p style="color:#64748b;font-size:10px;margin:8px 0 0;text-align:center;">OTP expires in 5 minutes</p>' +
+    '</div>';
+
+  form.insertAdjacentHTML('beforeend', otpHTML);
+
+  // Wire buttons
+  document.getElementById('otpVerifyBtn').addEventListener('click', verifyOTP);
+  document.getElementById('otpResendBtn').addEventListener('click', function() {
+    var newOTP = generateOTP();
+    pendingOTPs[email].otp = newOTP;
+    pendingOTPs[email].expires = Date.now() + 5 * 60 * 1000;
+    // Update the displayed OTP
+    var otpDisplay = document.querySelector('#otpSection span[style*="letter-spacing"]');
+    if (otpDisplay) otpDisplay.textContent = newOTP;
+    showToast('New OTP generated!', 'info');
+  });
+  document.getElementById('otpCancelBtn').addEventListener('click', function() {
+    delete pendingOTPs[email];
+    var otpSection = document.getElementById('otpSection');
+    if (otpSection) otpSection.remove();
+    showToast('OTP cancelled', 'info');
+  });
+
+  // Focus the OTP input
+  setTimeout(function() { document.getElementById('otpInput').focus(); }, 100);
+}
+
+function verifyOTP() {
+  var email = document.getElementById('suEmail').value.trim().toLowerCase();
+  var enteredOTP = document.getElementById('otpInput').value.trim();
+
+  if (!enteredOTP) return showToast('Please enter the OTP', 'error');
+  if (enteredOTP.length !== 6) return showToast('OTP must be 6 digits', 'error');
+
+  var pending = pendingOTPs[email];
+  if (!pending) return showToast('OTP expired or not found. Please try again.', 'error');
+  if (Date.now() > pending.expires) {
+    delete pendingOTPs[email];
+    return showToast('OTP has expired. Please request a new one.', 'error');
+  }
+  if (enteredOTP !== pending.otp) {
+    return showToast('Incorrect OTP. Please check and try again.', 'error');
+  }
+
+  // OTP verified — create the account
+  var d = pending.userData;
+  delete pendingOTPs[email];
+
+  var user = {
     id: 'user_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8),
-    name,
-    grade,
-    email,
-    passwordHash: simpleHash(password),
-    parentName,
-    parentEmail,
-    parentPhone,
-    parentPasswordHash: simpleHash(parentPassword),
+    name: d.name,
+    grade: d.grade,
+    email: d.email,
+    passwordHash: simpleHash(d.password),
+    parentName: d.parentName,
+    parentEmail: d.parentEmail,
+    parentPhone: d.parentPhone,
+    parentPasswordHash: simpleHash(d.parentPassword),
     role: 'student',
+    otpVerified: true,
     createdAt: new Date().toISOString()
   };
+  var users = getUsers();
   users.push(user);
   saveUsers(users);
 
   // Auto-login after signup
   saveCurrentUser(user);
-  showToast('Account created! Welcome, ' + name, 'success');
+  showToast('Account created & verified! Welcome, ' + d.name, 'success');
   hideOverlay();
   buildUserBar();
   updateUserBar();
+
+  // Lock grade to student's registered grade
+  if (d.grade) {
+    localStorage.setItem('selectedGrade', String(d.grade));
+    var sb = document.querySelector('.class-selector-bar');
+    if (sb) sb.style.display = 'none';
+    var btns = document.querySelectorAll('.class-btn');
+    btns.forEach(function(b) { b.classList.toggle('active', b.dataset.grade === String(d.grade)); });
+    // Dispatch a custom event that app.js listens for to re-render
+    setTimeout(function() {
+      window.dispatchEvent(new CustomEvent('auth-grade-change', { detail: { grade: String(d.grade) } }));
+    }, 100);
+  }
 }
 
 /* ----------------------------------------------------------
@@ -399,6 +505,18 @@ function handleStudentLogin(e) {
   hideOverlay();
   buildUserBar();
   updateUserBar();
+
+  // Lock grade to student's registered grade
+  if (user.grade) {
+    localStorage.setItem('selectedGrade', String(user.grade));
+    var sb = document.querySelector('.class-selector-bar');
+    if (sb) sb.style.display = 'none';
+    var btns = document.querySelectorAll('.class-btn');
+    btns.forEach(function(b) { b.classList.toggle('active', b.dataset.grade === String(user.grade)); });
+    setTimeout(function() {
+      window.dispatchEvent(new CustomEvent('auth-grade-change', { detail: { grade: String(user.grade) } }));
+    }, 100);
+  }
 }
 
 /* ----------------------------------------------------------
@@ -517,7 +635,7 @@ function buildUserBar() {
 }
 
 function updateUserBar() {
-  const user = getCurrentUser();
+  const user = window.Auth.getCurrentUser();
   if (!user || user.role === 'parent') {
     const bar = document.getElementById('userBar');
     if (bar) bar.style.display = 'none';
@@ -585,13 +703,25 @@ window.Auth = {
   logout: function() {
     saveCurrentUser(null);
     showToast('Logged out', 'success');
-    // Hide proctor + show overlay
+    // Stop proctoring
     if (window.Proctor && window.Proctor.stopProctoring) {
       window.Proctor.stopProctoring();
     }
     hideProctorBadge();
-    updateUserBar();
-    showOverlay();
+    // Hide user bar
+    const bar = document.getElementById('userBar');
+    if (bar) bar.style.display = 'none';
+    // Go to home screen first (hide chapter screen)
+    const hs = document.getElementById('homeScreen');
+    const cs = document.getElementById('chapterScreen');
+    if (hs) hs.style.display = 'block';
+    if (cs) cs.style.display = 'none';
+    // Remove any immersive overlay
+    const im = document.querySelector('.immersive-overlay.active');
+    if (im) im.classList.remove('active');
+    document.body.style.overflow = '';
+    // Now show the auth overlay (slight delay to let DOM settle)
+    setTimeout(function() { showOverlay(); }, 100);
   },
   getCurrentUser: function() {
     try {
@@ -617,7 +747,7 @@ window.Auth = {
    INITIALIZATION — runs on page load
    ---------------------------------------------------------- */
 function init() {
-  const user = getCurrentUser();
+  const user = window.Auth.getCurrentUser();
   if (user && user.role === 'student') {
     // Logged in as student — show app + user bar
     hideOverlay();

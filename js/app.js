@@ -1763,15 +1763,55 @@ function renderSelfTest() {
 // INITIALIZATION
 // ====================================================================
 document.addEventListener('DOMContentLoaded', () => {
-  // Wire class selector
+  // Wire class selector — but lock to student's registered grade if logged in
   document.querySelectorAll('.class-btn').forEach(btn => {
     btn.addEventListener('click', () => {
+      // If student is logged in, lock to their grade
+      var user = window.Auth ? window.Auth.getCurrentUser() : null;
+      if (user && user.role === 'student' && user.grade) {
+        // Force the grade back to the student's registered grade
+        currentGrade = String(user.grade);
+        // Don't allow switching
+        return;
+      }
       currentGrade = btn.dataset.grade;
       localStorage.setItem('selectedGrade', currentGrade);
       document.querySelectorAll('.class-btn').forEach(b => b.classList.toggle('active', b.dataset.grade === currentGrade));
       renderHome();
     });
   });
+
+  // After login, lock grade to student's registered grade
+  function lockGradeToStudent() {
+    var user = window.Auth ? window.Auth.getCurrentUser() : null;
+    if (user && user.role === 'student' && user.grade) {
+      currentGrade = String(user.grade);
+      localStorage.setItem('selectedGrade', currentGrade);
+      // Hide the class selector entirely (student can only see their grade)
+      var selectorBar = document.querySelector('.class-selector-bar');
+      if (selectorBar) selectorBar.style.display = 'none';
+      // Mark the student's grade button as active
+      document.querySelectorAll('.class-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.grade === currentGrade);
+      });
+      renderHome();
+    } else {
+      // Show class selector for non-logged-in or parent users
+      var selectorBar = document.querySelector('.class-selector-bar');
+      if (selectorBar) selectorBar.style.display = '';
+    }
+  }
+
+  // Call lockGradeToStudent whenever the user bar is updated (login/logout)
+  // We patch the Auth._updateUserBar to also call our lock function
+  if (window.Auth) {
+    var origUpdate = window.Auth._updateUserBar;
+    window.Auth._updateUserBar = function() {
+      if (origUpdate) origUpdate();
+      lockGradeToStudent();
+    };
+  }
+
   renderHome();
 
   // Tab switching
@@ -1828,7 +1868,59 @@ document.addEventListener('DOMContentLoaded', () => {
   if (window.Auth && typeof window.Auth._showOverlay === 'function') {
     if (!window.Auth.isLoggedIn()) {
       window.Auth._showOverlay();
+    } else {
+      // Logged in — lock grade to student's registered grade
+      var u = window.Auth.getCurrentUser();
+      if (u && u.grade) {
+        currentGrade = String(u.grade);
+        localStorage.setItem('selectedGrade', currentGrade);
+        var sb = document.querySelector('.class-selector-bar');
+        if (sb) sb.style.display = 'none';
+        document.querySelectorAll('.class-btn').forEach(function(b) {
+          b.classList.toggle('active', b.dataset.grade === currentGrade);
+        });
+        renderHome();
+      }
     }
   }
+
+  // Also patch _updateUserBar to re-lock grade after login/signup
+  if (window.Auth && window.Auth._updateUserBar) {
+    var origUUB = window.Auth._updateUserBar;
+    window.Auth._updateUserBar = function() {
+      if (origUUB) origUUB();
+      // Lock grade to student's registered grade
+      var u = window.Auth.getCurrentUser();
+      if (u && u.role === 'student' && u.grade) {
+        currentGrade = String(u.grade);
+        localStorage.setItem('selectedGrade', currentGrade);
+        var sb = document.querySelector('.class-selector-bar');
+        if (sb) sb.style.display = 'none';
+        document.querySelectorAll('.class-btn').forEach(function(b) {
+          b.classList.toggle('active', b.dataset.grade === currentGrade);
+        });
+        renderHome();
+      } else {
+        // Not logged in — show class selector
+        var sb2 = document.querySelector('.class-selector-bar');
+        if (sb2) sb2.style.display = '';
+      }
+    };
+  }
+
+  // Listen for auth-grade-change event (dispatched by auth.js after login/signup)
+  window.addEventListener('auth-grade-change', function(e) {
+    var grade = e.detail.grade;
+    if (grade) {
+      currentGrade = grade;
+      localStorage.setItem('selectedGrade', grade);
+      var sb = document.querySelector('.class-selector-bar');
+      if (sb) sb.style.display = 'none';
+      document.querySelectorAll('.class-btn').forEach(function(b) {
+        b.classList.toggle('active', b.dataset.grade === grade);
+      });
+      renderHome();
+    }
+  });
 
 })();
