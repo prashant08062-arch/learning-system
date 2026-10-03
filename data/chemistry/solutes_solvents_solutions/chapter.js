@@ -1,0 +1,135 @@
+/* CHAPTER DATA — The Amazing World of Solutes, Solvents, and Solutions
+   Subject: chemistry (Grade 8, Chapter 9) */
+
+window.CHAPTER_DATA = {
+  "meta": {
+    "subject": "chemistry",
+    "slug": "solutes_solvents_solutions",
+    "title": "The Amazing World of Solutes, Solvents, and Solutions",
+    "subtitle": "Chapter 9 · Curiosity — Textbook of Science for Grade 8",
+    "chapterNumber": 9,
+    "type": "svg",
+    "intro": "Discover solutions! Learn how solutes dissolve in solvents, what saturation means, how temperature affects solubility, and why objects float or sink based on density."
+  },
+  "lectures": [
+    {
+      "id": "solute_solvent",
+      "label": "9.1 Solute, Solvent & Solution",
+      "viewBox": "0 0 800 600",
+      "svg": "<rect x=\"40\" y=\"40\" width=\"720\" height=\"520\" fill=\"#0f172a\" stroke=\"#1e293b\" rx=\"12\"/>\n<g class=\"el\" data-beat=\"1\">\n          <text x=\"400\" y=\"80\" fill=\"#22d3ee\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\">SOLUTE, SOLVENT &amp; SOLUTION</text>\n        </g><g class=\"el\" data-beat=\"2\">\n          <rect x=\"80\" y=\"130\" width=\"180\" height=\"150\" rx=\"10\" fill=\"rgba(56,189,248,0.1)\" stroke=\"#38bdf8\"/><text x=\"170\" y=\"160\" fill=\"#38bdf8\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\">SOLUTE</text><text x=\"170\" y=\"190\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\">Gets dissolved</text><text x=\"170\" y=\"215\" fill=\"#cbd5e1\" font-size=\"11\" text-anchor=\"middle\">Salt, sugar</text><text x=\"170\" y=\"245\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\">Smaller amount</text>\n        </g><g class=\"el\" data-beat=\"3\">\n          <rect x=\"310\" y=\"130\" width=\"180\" height=\"150\" rx=\"10\" fill=\"rgba(52,211,153,0.1)\" stroke=\"#34d399\"/><text x=\"400\" y=\"160\" fill=\"#34d399\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\">SOLVENT</text><text x=\"400\" y=\"190\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\">Does the dissolving</text><text x=\"400\" y=\"215\" fill=\"#cbd5e1\" font-size=\"11\" text-anchor=\"middle\">Water, alcohol</text><text x=\"400\" y=\"245\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\">Larger amount</text>\n        </g><g class=\"el\" data-beat=\"4\">\n          <rect x=\"540\" y=\"130\" width=\"180\" height=\"150\" rx=\"10\" fill=\"rgba(251,191,36,0.1)\" stroke=\"#fbbf24\"/><text x=\"630\" y=\"160\" fill=\"#fbbf24\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\">SOLUTION</text><text x=\"630\" y=\"190\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\">Homogeneous</text><text x=\"630\" y=\"210\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\">mixture</text><text x=\"630\" y=\"235\" fill=\"#cbd5e1\" font-size=\"11\" text-anchor=\"middle\">Salt water</text><text x=\"630\" y=\"255\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\">Uniform throughout</text>\n        </g><g class=\"el\" data-beat=\"5\">\n          <rect x=\"80\" y=\"330\" width=\"640\" height=\"80\" rx=\"10\" fill=\"rgba(167,139,250,0.1)\" stroke=\"#a78bfa\"/><text x=\"400\" y=\"358\" fill=\"#a78bfa\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\">Examples:</text><text x=\"400\" y=\"382\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\">Salt + Water = Salt water solution | Sugar + Water = Sugar solution</text><text x=\"400\" y=\"400\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\">Oxygen + Nitrogen = Air (gas solution)</text>\n        </g><g class=\"el\" data-beat=\"6\">\n          <rect x=\"80\" y=\"450\" width=\"640\" height=\"50\" rx=\"8\" fill=\"rgba(52,211,153,0.1)\" stroke=\"#34d399\"/><text x=\"400\" y=\"478\" fill=\"#34d399\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\">Water is called the \"Universal Solvent\" — it dissolves more substances than anything else!</text>\n        </g>",
+      "beats": [
+        "Namaste, my friend! Today we enter the amazing world of SOLUTIONS — where substances dissolve and mix at the particle level! Let us discover what solutes, solvents, and solutions are.",
+        "The SOLUTE is the substance that gets dissolved. It is usually present in a smaller amount. When you make salt water, the salt is the solute. In sugar water, sugar is the solute. The solute breaks down into particles that spread throughout the solvent.",
+        "The SOLVENT is the substance that does the dissolving. It is usually present in a larger amount. Water is the most common solvent — it is called the 'Universal Solvent' because it dissolves more substances than any other liquid! In salt water, water is the solvent.",
+        "The SOLUTION is the result — a homogeneous mixture where the solute is evenly distributed throughout the solvent. Salt water is a solution: you cannot see the salt particles, and it tastes the same everywhere. Air is also a solution (gas in gas): oxygen dissolved in nitrogen.",
+        "Examples: Salt + Water = Salt water solution. Sugar + Water = Sugar solution. Oxygen + Nitrogen = Air (a gas solution). Carbon dioxide + Water = Soda (before you open it!). In every case, the solute particles spread evenly throughout the solvent, creating a uniform mixture.",
+        "Water is called the 'Universal Solvent' because it dissolves so many substances — more than any other liquid. This is why water is essential for life: it carries dissolved nutrients through plants and animals, dissolves minerals in soil for plants to absorb, and transports waste in our bodies. Without water's amazing dissolving power, life would not exist!"
+      ]
+    },
+    {
+      "id": "solubility",
+      "label": "9.2 Solubility & Saturation",
+      "viewBox": "0 0 800 600",
+      "svg": "<rect x=\"40\" y=\"40\" width=\"720\" height=\"520\" fill=\"#0f172a\" stroke=\"#1e293b\" rx=\"12\"/>\n<g class=\"el\" data-beat=\"1\">\n          <text x=\"400\" y=\"80\" fill=\"#22d3ee\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\">SOLUBILITY &amp; SATURATION</text>\n        </g><g class=\"el\" data-beat=\"2\">\n          <rect x=\"80\" y=\"130\" width=\"280\" height=\"100\" rx=\"8\" fill=\"rgba(56,189,248,0.1)\" stroke=\"#38bdf8\"/><text x=\"220\" y=\"160\" fill=\"#38bdf8\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\">UNSATURATED</text><text x=\"220\" y=\"185\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\">Can dissolve more solute</text><text x=\"220\" y=\"205\" fill=\"#94a3b8\" font-size=\"11\" text-anchor=\"middle\">e.g. little salt in water</text>\n        </g><g class=\"el\" data-beat=\"3\">\n          <rect x=\"440\" y=\"130\" width=\"280\" height=\"100\" rx=\"8\" fill=\"rgba(244,114,182,0.1)\" stroke=\"#f472b6\"/><text x=\"580\" y=\"160\" fill=\"#f472b6\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\">SATURATED</text><text x=\"580\" y=\"185\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\">Cannot dissolve more</text><text x=\"580\" y=\"205\" fill=\"#94a3b8\" font-size=\"11\" text-anchor=\"middle\">Extra solute stays solid</text>\n        </g><g class=\"el\" data-beat=\"4\">\n          <rect x=\"80\" y=\"270\" width=\"640\" height=\"80\" rx=\"10\" fill=\"rgba(251,191,36,0.1)\" stroke=\"#fbbf24\"/><text x=\"400\" y=\"295\" fill=\"#fbbf24\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\">Temperature Effect</text><text x=\"400\" y=\"320\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\">Hot water dissolves MORE sugar than cold water</text><text x=\"400\" y=\"340\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\">Higher temp = higher solubility (for most solids)</text>\n        </g><g class=\"el\" data-beat=\"5\">\n          <rect x=\"80\" y=\"390\" width=\"640\" height=\"80\" rx=\"10\" fill=\"rgba(167,139,250,0.1)\" stroke=\"#a78bfa\"/><text x=\"400\" y=\"415\" fill=\"#a78bfa\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\">Gas Solubility (opposite!)</text><text x=\"400\" y=\"440\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\">Warm soda goes flat → gases LESS soluble at higher temp</text><text x=\"400\" y=\"460\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\">More pressure = more gas dissolves (carbonated drinks under pressure)</text>\n        </g>",
+      "beats": [
+        "Welcome back! Today we explore how much solute can dissolve in a solvent. Can you keep adding sugar to water forever? No! There is a limit — and it is called SATURATION.",
+        "An UNSATURATED solution can still dissolve more solute. If you add a spoon of salt to a glass of water and it all dissolves, the solution is unsaturated — you could add more salt and it would still dissolve.",
+        "A SATURATED solution cannot dissolve any more solute. If you keep adding salt, eventually the water cannot dissolve any more — the extra salt just sits at the bottom. The solution is now saturated. The maximum amount of solute that can dissolve is called the SOLUBILITY.",
+        "Temperature has a big effect on solubility. For most solids, HOT water dissolves MORE than cold water. That is why you can dissolve more sugar in hot tea than in iced tea! Higher temperature gives particles more energy, allowing more solute particles to fit between solvent particles.",
+        "For GASES, it is the OPPOSITE! Gases are LESS soluble at higher temperatures. That is why warm soda goes flat — the carbon dioxide gas escapes from the warm liquid. And gases are MORE soluble at higher pressure — that is why soda is bottled under pressure. When you open the bottle, the pressure drops, and the gas bubbles out!"
+      ]
+    },
+    {
+      "id": "density",
+      "label": "9.5 What Is Density?",
+      "viewBox": "0 0 800 600",
+      "svg": "<rect x=\"40\" y=\"40\" width=\"720\" height=\"520\" fill=\"#0f172a\" stroke=\"#1e293b\" rx=\"12\"/>\n<g class=\"el\" data-beat=\"1\">\n          <text x=\"400\" y=\"80\" fill=\"#22d3ee\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\">DENSITY</text><text x=\"400\" y=\"105\" fill=\"#94a3b8\" font-size=\"12\" text-anchor=\"middle\">How much mass is packed into a given volume</text>\n        </g><g class=\"el\" data-beat=\"2\">\n          <rect x=\"200\" y=\"150\" width=\"400\" height=\"50\" rx=\"8\" fill=\"rgba(251,191,36,0.15)\" stroke=\"#fbbf24\" stroke-width=\"2\"/><text x=\"400\" y=\"183\" fill=\"#fbbf24\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\">D = m / V</text><text x=\"400\" y=\"200\" fill=\"#94a3b8\" font-size=\"11\" text-anchor=\"middle\">Density = mass ÷ volume</text>\n        </g><g class=\"el\" data-beat=\"3\">\n          <rect x=\"80\" y=\"230\" width=\"280\" height=\"100\" rx=\"8\" fill=\"rgba(56,189,248,0.1)\" stroke=\"#38bdf8\"/><text x=\"220\" y=\"258\" fill=\"#38bdf8\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\">FLOATS</text><text x=\"220\" y=\"282\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\">Object density &lt; water density</text><text x=\"220\" y=\"302\" fill=\"#cbd5e1\" font-size=\"11\" text-anchor=\"middle\">Wood, ice, oil</text>\n        </g><g class=\"el\" data-beat=\"4\">\n          <rect x=\"440\" y=\"230\" width=\"280\" height=\"100\" rx=\"8\" fill=\"rgba(244,114,182,0.1)\" stroke=\"#f472b6\"/><text x=\"580\" y=\"258\" fill=\"#f472b6\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\">SINKS</text><text x=\"580\" y=\"282\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\">Object density &gt; water density</text><text x=\"580\" y=\"302\" fill=\"#cbd5e1\" font-size=\"11\" text-anchor=\"middle\">Iron, stone, gold</text>\n        </g><g class=\"el\" data-beat=\"5\">\n          <rect x=\"80\" y=\"380\" width=\"640\" height=\"100\" rx=\"10\" fill=\"rgba(52,211,153,0.1)\" stroke=\"#34d399\"/><text x=\"400\" y=\"408\" fill=\"#34d399\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\">Example: Iron bar</text><text x=\"400\" y=\"433\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\">Mass = 78 g, Volume = 10 cm³</text><text x=\"400\" y=\"455\" fill=\"#fbbf24\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\">Density = 78/10 = 7.8 g/cm³ (sinks in water!)</text>\n        </g><g class=\"el\" data-beat=\"6\">\n          <text x=\"400\" y=\"520\" fill=\"#a78bfa\" font-size=\"12\" font-weight=\"700\" text-anchor=\"middle\">Water density = 1.0 g/cm³ → anything with density > 1 sinks!</text>\n        </g>",
+      "beats": [
+        "Welcome back! Today we discover DENSITY — the secret behind why some things float and others sink! Have you ever wondered why a huge steel ship floats but a tiny pebble sinks? The answer is density.",
+        "Density is the amount of mass packed into a given volume. The formula is simple: Density = mass ÷ volume, or D = m/V. If two objects are the same size (volume), the heavier one (more mass) has higher density. Think of a box of feathers vs a box of stones — same size, but the stones have much higher density because they pack more mass into the same volume.",
+        "An object FLOATS in water if its density is LESS than water's density. Wood floats because its density (0.6 g/cm³) is less than water (1.0 g/cm³). Ice floats because its density (0.92 g/cm³) is less than water. Oil floats because it is less dense than water.",
+        "An object SINKS if its density is MORE than water's density. Iron sinks because its density (7.8 g/cm³) is much more than water (1.0 g/cm³). Stone sinks. Gold sinks (19.3 g/cm³). A pebble sinks because it is denser than water.",
+        "Example: An iron bar has a mass of 78 grams and a volume of 10 cm³. Density = 78 ÷ 10 = 7.8 g/cm³. Since 7.8 > 1.0 (water's density), the iron bar sinks. But a steel ship floats because it is shaped to trap air inside — making the overall density (including the air) less than water!",
+        "Water has a density of 1.0 g/cm³ — this is the benchmark. Anything with density > 1.0 sinks. Anything < 1.0 floats. This simple rule explains why icebergs float (0.92), why hot air balloons rise (hot air is less dense), and why submarines can dive and surface by changing their density!"
+      ]
+    }
+  ],
+  "notes": "<div style=\"background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); border: 1px solid #818cf8; border-radius: 14px; padding: 22px 24px; margin-bottom: 28px;\"><h2 style=\"color: #c7d2fe; font-size: 22px; margin: 0 0 8px; font-weight: 700;\">📖 Before We Begin — Story-Time Words</h2><p style=\"color: #c7d2fe; font-size: 13px; margin: 0 0 16px; line-height: 1.6;\">My young friend, before we explore this chapter, let us learn some special words. These words will appear again and again in our stories. Ready? Let us begin!</p><div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\"><h3 style=\"color: #a5b4fc; font-size: 16px; margin: 0 0 8px;\">🧂 1. Solute</h3><p style=\"color: #e0e7ff; font-size: 13px; line-height: 1.6; margin: 0;\">The substance that gets dissolved in a solution. Usually present in smaller amount. Examples: salt, sugar.</p></div><div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\"><h3 style=\"color: #a5b4fc; font-size: 16px; margin: 0 0 8px;\">💧 2. Solvent</h3><p style=\"color: #e0e7ff; font-size: 13px; line-height: 1.6; margin: 0;\">The substance that dissolves the solute. Usually present in larger amount. Water is the 'universal solvent'.</p></div><div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\"><h3 style=\"color: #a5b4fc; font-size: 16px; margin: 0 0 8px;\">🥤 3. Solution</h3><p style=\"color: #e0e7ff; font-size: 13px; line-height: 1.6; margin: 0;\">A homogeneous mixture of solute dissolved in solvent. Uniform throughout. Example: salt water.</p></div><div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\"><h3 style=\"color: #a5b4fc; font-size: 16px; margin: 0 0 8px;\">⚖️ 4. Solubility</h3><p style=\"color: #e0e7ff; font-size: 13px; line-height: 1.6; margin: 0;\">The maximum amount of solute that can dissolve in a given amount of solvent at a specific temperature.</p></div><div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\"><h3 style=\"color: #a5b4fc; font-size: 16px; margin: 0 0 8px;\">✅ 5. Saturated</h3><p style=\"color: #e0e7ff; font-size: 13px; line-height: 1.6; margin: 0;\">A solution that cannot dissolve any more solute. Adding more solute results in undissolved solid at the bottom.</p></div><div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\"><h3 style=\"color: #a5b4fc; font-size: 16px; margin: 0 0 8px;\">📊 6. Concentrated</h3><p style=\"color: #e0e7ff; font-size: 13px; line-height: 1.6; margin: 0;\">A solution with a large amount of solute relative to solvent.</p></div><div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\"><h3 style=\"color: #a5b4fc; font-size: 16px; margin: 0 0 8px;\">📉 7. Dilute</h3><p style=\"color: #e0e7ff; font-size: 13px; line-height: 1.6; margin: 0;\">A solution with a small amount of solute relative to solvent.</p></div><div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\"><h3 style=\"color: #a5b4fc; font-size: 16px; margin: 0 0 8px;\">🌡️ 8. Temperature Effect</h3><p style=\"color: #e0e7ff; font-size: 13px; line-height: 1.6; margin: 0;\">Most solids dissolve MORE at higher temps. Gases dissolve LESS at higher temps (warm soda goes flat).</p></div><div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\"><h3 style=\"color: #a5b4fc; font-size: 16px; margin: 0 0 8px;\">气压 9. Pressure Effect</h3><p style=\"color: #e0e7ff; font-size: 13px; line-height: 1.6; margin: 0;\">Gases are more soluble at higher pressure. Carbonated drinks are bottled under pressure.</p></div><div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\"><h3 style=\"color: #a5b4fc; font-size: 16px; margin: 0 0 8px;\">📐 10. Density</h3><p style=\"color: #e0e7ff; font-size: 13px; line-height: 1.6; margin: 0;\">Mass per unit volume: D = m/V. Measured in g/cm³. Water = 1.0 g/cm³.</p></div><div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\"><h3 style=\"color: #a5b4fc; font-size: 16px; margin: 0 0 8px;\">⬆️ 11. Float</h3><p style=\"color: #e0e7ff; font-size: 13px; line-height: 1.6; margin: 0;\">An object floats if its density is less than the fluid's density. D_object < D_fluid.</p></div><div style=\"background: rgba(15, 23, 42, 0.5); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px;\"><h3 style=\"color: #a5b4fc; font-size: 16px; margin: 0 0 8px;\">⬇️ 12. Sink</h3><p style=\"color: #e0e7ff; font-size: 13px; line-height: 1.6; margin: 0;\">An object sinks if its density is more than the fluid's density. D_object > D_fluid.</p></div></div><h2>📝 Key Notes — Chapter 9: Solutes, Solvents, and Solutions</h2>\n<table class=\"styled-table\"><tr><th>Term</th><th>Definition</th><th>Example</th></tr>\n<tr><td>Solute</td><td>Gets dissolved</td><td>Salt in salt water</td></tr>\n<tr><td>Solvent</td><td>Does the dissolving</td><td>Water in salt water</td></tr>\n<tr><td>Solution</td><td>Homogeneous mixture</td><td>Salt water</td></tr>\n<tr><td>Solubility</td><td>Max solute that dissolves</td><td>36g salt per 100g water (25°C)</td></tr></table>\n<h3>Density Formula</h3>\n<div class=\"card formula\"><div class=\"formula-big\">D = m / V</div><div class=\"formula-sub\">Density = mass ÷ volume (units: g/cm³)</div></div>\n<h3>Floating & Sinking</h3>\n<table class=\"styled-table\"><tr><th>Object</th><th>Density (g/cm³)</th><th>Float/Sink in water?</th></tr>\n<tr><td>Water</td><td>1.0</td><td>— (benchmark)</td></tr>\n<tr><td>Ice</td><td>0.92</td><td>Floats</td></tr>\n<tr><td>Wood</td><td>0.6</td><td>Floats</td></tr>\n<tr><td>Oil</td><td>0.9</td><td>Floats</td></tr>\n<tr><td>Iron</td><td>7.8</td><td>Sinks</td></tr>\n<tr><td>Gold</td><td>19.3</td><td>Sinks</td></tr></table>\n<div class=\"card tip\"><p><strong>Memory trick:</strong> \"Less dense = Floats up. More dense = Sinks down.\" Water = 1.0. Below 1.0 = float. Above 1.0 = sink. Hot water is less dense (particles spread out). Cold water is denser.</p></div>",
+  "practice": "<h2>✏️ Practice</h2><div class=\"practice-card\"><h3>🧠 Quick Recall</h3><ol><li>In salt water, ___ is the solute and ___ is the solvent. (salt, water)</li><li>A ___ solution cannot dissolve any more solute. (saturated)</li><li>Hot water dissolves ___ sugar than cold water. (more)</li><li>Warm soda goes flat because gases are ___ soluble at higher temp. (less)</li><li>Density = ___ ÷ ___. (mass, volume)</li><li>Water density = ___ g/cm³. (1.0)</li><li>An object with density 0.8 will ___ in water. (float)</li></ol><button class=\"reveal-btn\" onclick=\"this.nextElementSibling.style.display='block';this.style.display='none'\">Reveal Answers</button><div class=\"reveal-answer\" style=\"display:none\"><ol><li>salt, water</li><li>saturated</li><li>more</li><li>less</li><li>mass, volume</li><li>1.0</li><li>float</li></ol></div></div>",
+  "realLife": [
+    {
+      "id": "soda_fizz",
+      "title": "🥤 1. Why Does Soda Go Flat?",
+      "viewBox": "0 0 800 500",
+      "svg": "<g class=\"el\" data-beat=\"1\">\n          <text x=\"400\" y=\"200\" fill=\"#fbbf24\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\">Why does soda go flat when warm?</text><text x=\"400\" y=\"235\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\">CO₂ gas is less soluble in warm liquid!</text><text x=\"400\" y=\"270\" fill=\"#34d399\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\">Opening the bottle drops pressure → gas escapes as bubbles</text>\n        </g>",
+      "beats": [
+        "Soda is carbonated water — carbon dioxide gas dissolved under high pressure. When you open the bottle, the pressure drops, and the gas becomes less soluble. Bubbles of CO₂ rise and escape. If you leave the soda in the sun, it goes flat even faster — because gases are LESS soluble at higher temperatures. Cold soda stays fizzy longer!"
+      ]
+    }
+  ],
+  "guidedPractice": [
+    {
+      "title": "Calculate density",
+      "difficulty": "Easy",
+      "diffClass": "gp-easy",
+      "statement": "A block has mass 50 g and volume 25 cm³. What is its density? Will it float?",
+      "viewBox": "0 0 800 300",
+      "svg": "<g class=\"gel\" data-beat=\"1\"><text x=\"400\" y=\"150\" fill=\"#fbbf24\" font-size=\"14\" text-anchor=\"middle\">D = 50 ÷ 25 = ? g/cm³</text></g>",
+      "steps": [
+        {
+          "prompt": "What is 50 ÷ 25?",
+          "validate": {
+            "type": "pureNum",
+            "value": 2
+          },
+          "formatHint": "Example: 1.5",
+          "explanation": "Yes! D = 2.0 g/cm³. Since 2.0 > 1.0 (water), it SINKS!",
+          "hint": "50 divided by 25"
+        }
+      ],
+      "finalAnswer": "D = 2.0 g/cm³. Since 2.0 > 1.0, it sinks in water."
+    }
+  ],
+  "selfTest": [
+    {
+      "q": "What is a solute? Give an example.",
+      "steps": "The substance that gets dissolved. Example: salt in salt water.",
+      "answer": "Solute = dissolved substance. Example: salt."
+    },
+    {
+      "q": "What is a saturated solution?",
+      "steps": "A solution that cannot dissolve any more solute at that temperature.",
+      "answer": "Cannot dissolve more solute at that temperature."
+    },
+    {
+      "q": "Why does hot water dissolve more sugar than cold water?",
+      "steps": "Higher temperature → particles have more energy → more space between solvent particles → more solute fits.",
+      "answer": "Higher temp = more energy = more solute can dissolve."
+    },
+    {
+      "q": "Why does warm soda go flat?",
+      "steps": "Gases are less soluble at higher temperatures. CO₂ escapes from warm liquid.",
+      "answer": "Gases less soluble at high temp → CO₂ escapes."
+    },
+    {
+      "q": "What is the formula for density?",
+      "steps": "D = m/V (mass divided by volume).",
+      "answer": "D = m/V"
+    },
+    {
+      "q": "Will an object with density 0.8 g/cm³ float or sink in water?",
+      "steps": "0.8 < 1.0 (water density) → it floats!",
+      "answer": "Floats (0.8 < 1.0)."
+    },
+    {
+      "q": "Why does ice float on water?",
+      "steps": "Ice density (0.92) < water density (1.0). Ice is less dense!",
+      "answer": "Ice density (0.92) < water (1.0) → floats."
+    },
+    {
+      "q": "Why does a steel ship float but a steel ball sinks?",
+      "steps": "Ship is shaped to trap air → overall density (including air) < water. Steel ball has no air → density > water.",
+      "answer": "Ship traps air → overall density < water. Ball has no air → sinks."
+    }
+  ]
+};

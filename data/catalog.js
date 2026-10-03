@@ -74,7 +74,8 @@ window.CATALOG = {
         { slug: 'temperature_measurement', title: 'Temperature and its Measurement', subtitle: 'Chapter 7 · Grade 6', description: 'What is temperature, thermometers, scales, and measurement.', grade: 6, dataFile: 'data/physics/temperature_measurement/chapter.js', hasImages: false, estimatedTime: '40 min', ready: true },
         { slug: 'beyond_earth', title: 'Beyond Earth', subtitle: 'Chapter 12 · Grade 6', description: 'Stars, constellations, the Solar System, Moon, and space exploration.', grade: 6, dataFile: 'data/physics/beyond_earth/chapter.js', hasImages: false, estimatedTime: '45 min', ready: true },
         { slug: 'light_mirrors_lenses', title: 'Light: Mirrors and Lenses', subtitle: 'Chapter 10 · Grade 8', description: 'Spherical mirrors, lenses, image formation, laws of reflection.', grade: 8, dataFile: 'data/physics/light_mirrors_lenses/chapter.js', hasImages: false, estimatedTime: '50 min', ready: true },
-        { slug: 'pressure_winds_storms_cyclones', title: 'Pressure, Winds, Storms, and Cyclones', subtitle: 'Chapter 6 · Grade 8', description: 'Pressure, wind formation, cyclones, and lightning safety.', grade: 8, dataFile: 'data/physics/pressure_winds_storms_cyclones/chapter.js', hasImages: false, estimatedTime: '50 min', ready: true }
+        { slug: 'pressure_winds_storms_cyclones', title: 'Pressure, Winds, Storms, and Cyclones', subtitle: 'Chapter 6 · Grade 8', description: 'Pressure, wind formation, cyclones, and lightning safety.', grade: 8, dataFile: 'data/physics/pressure_winds_storms_cyclones/chapter.js', hasImages: false, estimatedTime: '50 min', ready: true },
+        { slug: 'keeping_time_skies', title: 'Keeping Time with the Skies', subtitle: 'Chapter 11 · Grade 8', description: 'Moon phases, calendars (lunar/solar/luni-solar), festivals & astronomy, artificial satellites.', grade: 8, dataFile: 'data/physics/keeping_time_skies/chapter.js', hasImages: false, estimatedTime: '45 min', ready: true }
       ]
     },
     {
@@ -83,7 +84,10 @@ window.CATALOG = {
       icon: '⚗',
       color: '#fb923c',
       chapters: [
-        { slug: 'separation_methods', title: 'Methods of Separation in Everyday Life', subtitle: 'Chapter 9 · Grade 6', description: 'Handpicking, threshing, winnowing, sieving, filtration, evaporation.', grade: 6, dataFile: 'data/chemistry/separation_methods/chapter.js', hasImages: false, estimatedTime: '45 min', ready: true }
+        { slug: 'separation_methods', title: 'Methods of Separation in Everyday Life', subtitle: 'Chapter 9 · Grade 6', description: 'Handpicking, threshing, winnowing, sieving, filtration, evaporation.', grade: 6, dataFile: 'data/chemistry/separation_methods/chapter.js', hasImages: false, estimatedTime: '45 min', ready: true },
+        { slug: 'particulate_nature_matter', title: 'Particulate Nature of Matter', subtitle: 'Chapter 7 · Grade 8', description: 'Particle theory, three states of matter, interparticle spacing, temperature & motion.', grade: 8, dataFile: 'data/chemistry/particulate_nature_matter/chapter.js', hasImages: false, estimatedTime: '45 min', ready: true },
+        { slug: 'elements_compounds_mixtures', title: 'Elements, Compounds, and Mixtures', subtitle: 'Chapter 8 · Grade 8', description: 'Mixtures (homo/heterogeneous), elements, compounds, minerals.', grade: 8, dataFile: 'data/chemistry/elements_compounds_mixtures/chapter.js', hasImages: false, estimatedTime: '45 min', ready: true },
+        { slug: 'solutes_solvents_solutions', title: 'Solutes, Solvents, and Solutions', subtitle: 'Chapter 9 · Grade 8', description: 'Solutions, solubility, saturation, gas solubility, density, floating & sinking.', grade: 8, dataFile: 'data/chemistry/solutes_solvents_solutions/chapter.js', hasImages: false, estimatedTime: '45 min', ready: true }
       ]
     },
     {
