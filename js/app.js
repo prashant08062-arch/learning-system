@@ -298,6 +298,7 @@ function renderLectures() {
         <button class="control-btn lec-next">⏭</button>
         <div class="progress-bar lec-progress"><div class="progress-fill lec-progress-fill" style="width:0%"></div></div>
         <div class="beat-counter lec-counter">1 / ${lec.beats.length}</div>
+        <button class="control-btn lec-immersive-btn" title="Immersive mode — full-screen animation with beat text at bottom" style="margin-left:auto;">🎬</button>
       </div>
     `;
     container.appendChild(sectionEl);
@@ -570,6 +571,191 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
   };
 
   updateUI();
+
+  // ----------------------------------------------------------------
+  // IMMERSIVE MODE — full-screen animation + current beat at bottom
+  // ----------------------------------------------------------------
+  const immersiveBtn = sectionEl.querySelector('.lec-immersive-btn');
+  let immersiveOverlay = null;
+
+  function enterImmersive() {
+    // Create overlay if not exists or was removed from DOM
+    if (!immersiveOverlay || !document.body.contains(immersiveOverlay)) {
+      immersiveOverlay = document.createElement('div');
+      immersiveOverlay.className = 'immersive-overlay';
+      immersiveOverlay.innerHTML = `
+        <div class="immersive-canvas" id="imCanvas-${lec.id}"></div>
+        <div class="immersive-title-bar">
+          <span class="im-title">${(currentChapterData.meta || {}).title || ''}</span>
+          <span class="im-section">${lec.label}</span>
+        </div>
+        <button class="immersive-close-btn" id="imClose-${lec.id}">✕ Exit</button>
+        <div class="immersive-beat-panel">
+          <div class="immersive-beat-number" id="imBeatNum-${lec.id}"></div>
+          <div class="immersive-beat-text" id="imBeatText-${lec.id}"></div>
+          <div class="immersive-controls">
+            <button class="ctrl-btn" id="imPrev-${lec.id}">⏮</button>
+            <button class="ctrl-btn primary" id="imPlay-${lec.id}">▶</button>
+            <button class="ctrl-btn" id="imNext-${lec.id}">⏭</button>
+            <div class="progress-bar" id="imProgress-${lec.id}"><div class="progress-fill" id="imProgressFill-${lec.id}" style="width:0%"></div></div>
+            <div class="beat-counter" id="imCounter-${lec.id}">1 / ${lec.beats.length}</div>
+            <div class="immersive-voice">
+              <button id="imVoice-${lec.id}" class="${state.voiceOn ? 'active' : ''}">🔊 Voice</button>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(immersiveOverlay);
+
+      // Wire close button
+      immersiveOverlay.querySelector(`#imClose-${lec.id}`).addEventListener('click', exitImmersive);
+
+      // Wire controls
+      immersiveOverlay.querySelector(`#imPrev-${lec.id}`).addEventListener('click', () => {
+        state.isPlaying = false;
+        clearTimers(); if (window.TTS) TTS.stopSpeaking();
+        goToBeat(state.currentBeat - 1);
+      });
+      immersiveOverlay.querySelector(`#imNext-${lec.id}`).addEventListener('click', () => {
+        state.isPlaying = false;
+        clearTimers(); if (window.TTS) TTS.stopSpeaking();
+        goToBeat(state.currentBeat + 1);
+      });
+      immersiveOverlay.querySelector(`#imPlay-${lec.id}`).addEventListener('click', () => {
+        togglePlay();
+      });
+      immersiveOverlay.querySelector(`#imProgress-${lec.id}`).addEventListener('click', (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const idx = Math.floor(((e.clientX - rect.left) / rect.width) * state.beats.length);
+        state.isPlaying = false; playBtn.textContent = '▶';
+        clearTimers(); if (window.TTS) TTS.stopSpeaking();
+        goToBeat(Math.max(0, Math.min(state.beats.length - 1, idx)));
+      });
+      immersiveOverlay.querySelector(`#imVoice-${lec.id}`).addEventListener('click', (e) => {
+        state.voiceOn = !state.voiceOn;
+        e.target.classList.toggle('active', state.voiceOn);
+        const mainToggle = sectionEl.querySelector('.lec-voice-toggle');
+        if (mainToggle) mainToggle.classList.toggle('on', state.voiceOn);
+      });
+
+      // ESC to exit
+      immersiveOverlay.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') exitImmersive();
+      });
+    }
+
+    // Clone the SVG/images into the immersive canvas
+    const imCanvas = immersiveOverlay.querySelector(`#imCanvas-${lec.id}`);
+    imCanvas.innerHTML = '';
+    if (isGlobeType) {
+      // For globe, just show a message (globe can't be easily cloned)
+      imCanvas.innerHTML = '<div style="color:#94a3b8;font-size:14px;text-align:center;padding:40px;">Globe view not available in immersive mode. Please use the standard view.</div>';
+    } else if (isImageType) {
+      // Clone images
+      const imgClone = sectionEl.querySelector('.canvas-stack').cloneNode(true);
+      imgClone.style.cssText = 'display:flex;align-items:center;justify-content:center;width:100%;height:100%;position:relative;';
+      imgClone.querySelectorAll('img').forEach(img => {
+        img.style.cssText = 'position:absolute;max-width:90%;max-height:90%;opacity:0;transition:opacity 0.4s;';
+        if (img.classList.contains('visible')) img.style.opacity = '1';
+      });
+      imCanvas.appendChild(imgClone);
+      // Store ref for updating
+      state._imImgEls = Array.from(imgClone.querySelectorAll('img'));
+    } else {
+      // Clone SVG
+      const svgOrig = sectionEl.querySelector('svg.lec-board');
+      if (svgOrig) {
+        const svgClone = svgCloneWithState(svgOrig);
+        imCanvas.appendChild(svgClone);
+        state._imBoardEls = Array.from(svgClone.querySelectorAll('.el'));
+      }
+    }
+
+    immersiveOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    updateImmersiveUI();
+    // Request focus for keyboard events
+    setTimeout(() => immersiveOverlay.tabIndex = 0, 0);
+    immersiveOverlay.focus();
+  }
+
+  function svgCloneWithState(origSvg) {
+    // Deep clone the SVG and copy visibility classes
+    const clone = origSvg.cloneNode(true);
+    const origEls = origSvg.querySelectorAll('.el');
+    const cloneEls = clone.querySelectorAll('.el');
+    cloneEls.forEach((el, i) => {
+      if (origEls[i]) {
+        el.setAttribute('class', origEls[i].getAttribute('class') || '');
+      }
+    });
+    return clone;
+  }
+
+  function exitImmersive() {
+    if (immersiveOverlay) {
+      immersiveOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+
+  function updateImmersiveUI() {
+    if (!immersiveOverlay || !immersiveOverlay.classList.contains('active')) return;
+
+    // Update beat text
+    const beatNumEl = immersiveOverlay.querySelector(`#imBeatNum-${lec.id}`);
+    const beatTextEl = immersiveOverlay.querySelector(`#imBeatText-${lec.id}`);
+    if (beatNumEl) beatNumEl.textContent = `Beat ${state.currentBeat + 1} of ${state.beats.length}`;
+    if (beatTextEl) {
+      // Fade transition
+      beatTextEl.classList.add('fade');
+      setTimeout(() => {
+        beatTextEl.textContent = state.beats[state.currentBeat];
+        beatTextEl.classList.remove('fade');
+      }, 150);
+    }
+
+    // Update controls
+    const playBtnIm = immersiveOverlay.querySelector(`#imPlay-${lec.id}`);
+    if (playBtnIm) playBtnIm.textContent = state.isPlaying ? '⏸' : '▶';
+    const progressFillIm = immersiveOverlay.querySelector(`#imProgressFill-${lec.id}`);
+    if (progressFillIm) progressFillIm.style.width = ((state.currentBeat + 1) / state.beats.length * 100) + '%';
+    const counterIm = immersiveOverlay.querySelector(`#imCounter-${lec.id}`);
+    if (counterIm) counterIm.textContent = `${state.currentBeat + 1} / ${state.beats.length}`;
+
+    // Update SVG/image visibility in immersive canvas
+    if (isImageType && state._imImgEls) {
+      const targetIdx = state.imgPerBeat[state.currentBeat] || 0;
+      state._imImgEls.forEach((img, i) => {
+        img.style.opacity = (i === targetIdx) ? '1' : '0';
+      });
+    } else if (state._imBoardEls && !isGlobeType) {
+      state._imBoardEls.forEach(el => {
+        const bn = parseInt(el.dataset.beat, 10);
+        el.classList.toggle('visible', bn <= state.currentBeat + 1);
+        el.classList.remove('pulse');
+        if (bn === state.currentBeat + 1) {
+          void el.offsetWidth;
+          el.classList.add('pulse');
+        }
+      });
+    }
+  }
+
+  // Patch the original updateUI to also update immersive
+  const origUpdateUI = updateUI;
+  updateUI = function() {
+    origUpdateUI();
+    updateImmersiveUI();
+  };
+  state.updateUI = updateUI;
+
+  // Wire the immersive toggle button
+  if (immersiveBtn) {
+    immersiveBtn.addEventListener('click', function() {
+      try { enterImmersive(); } catch(e) { console.error('Immersive mode error:', e.message, e.stack); alert('Immersive mode error: ' + e.message); }
+    });
+  }
 }
 
 // ====================================================================

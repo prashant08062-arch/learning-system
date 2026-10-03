@@ -210,6 +210,144 @@ body { overflow-x: hidden; }
 .chapter-screen.fullscreen-mode .chapter-top-bar .chapter-top-title,
 .chapter-screen.fullscreen-mode .chapter-top-bar .fullscreen-btn { display: none; }
 .chapter-screen.fullscreen-mode .chapter-logout-btn { display: block !important; }
+
+/* ============================================================
+   IMMERSIVE LECTURE MODE — full-screen animation + beat text at bottom
+   Toggle: 🎬 Immersive button in the lecture controls bar
+   ============================================================ */
+.immersive-overlay {
+  position: fixed; inset: 0; z-index: 95000;
+  background: #0a0e1a;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+.immersive-overlay.active { display: flex; }
+
+/* Animation area — fills most of the screen */
+.immersive-canvas {
+  flex: 1 1 auto;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  overflow: hidden;
+  position: relative;
+  background: radial-gradient(ellipse at center, #1a2235 0%, #0a0e1a 100%);
+}
+.immersive-canvas svg,
+.immersive-canvas img {
+  max-width: 95%; max-height: 95%;
+  width: auto; height: auto;
+  display: block;
+  filter: drop-shadow(0 4px 30px rgba(56,189,248,0.15));
+}
+.immersive-canvas .globe-container {
+  width: 100%; height: 100%;
+}
+
+/* Lecture title (top-left, small) */
+.immersive-title-bar {
+  position: absolute; top: 12px; left: 16px;
+  z-index: 10;
+  display: flex; align-items: center; gap: 10px;
+}
+.immersive-title-bar .im-title {
+  font-size: 13px; color: #94a3b8; font-weight: 600;
+}
+.immersive-title-bar .im-section {
+  font-size: 11px; color: #64748b;
+}
+
+/* Close button (top-right) */
+.immersive-close-btn {
+  position: absolute; top: 12px; right: 16px; z-index: 10;
+  background: rgba(30,41,59,0.9); color: #e2e8f0;
+  border: 1px solid #334155; border-radius: 8px;
+  padding: 8px 14px; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: all .2s;
+  font-family: inherit;
+}
+.immersive-close-btn:hover {
+  background: #ef4444; color: #fff; border-color: #ef4444;
+}
+
+/* Beat text panel (bottom) */
+.immersive-beat-panel {
+  flex: 0 0 auto;
+  background: rgba(10, 14, 26, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(56,189,248,0.2);
+  padding: 20px 32px 16px;
+  min-height: 80px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.immersive-beat-number {
+  font-size: 11px; color: #38bdf8; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.immersive-beat-text {
+  font-size: 18px; line-height: 1.6; color: #f1f5f9;
+  max-width: 900px; text-align: center;
+  font-weight: 400;
+  transition: opacity 0.3s ease;
+}
+.immersive-beat-text.fade { opacity: 0; }
+
+/* Floating controls (bottom, above beat text) */
+.immersive-controls {
+  display: flex; align-items: center; gap: 10px;
+  margin-top: 8px;
+}
+.immersive-controls .ctrl-btn {
+  background: rgba(30,41,59,0.9); color: #e2e8f0;
+  border: 1px solid #334155; border-radius: 8px;
+  padding: 8px 14px; font-size: 14px; cursor: pointer;
+  transition: all .2s; font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+.immersive-controls .ctrl-btn:hover { background: #475569; }
+.immersive-controls .ctrl-btn.primary {
+  background: #0ea5e9; color: #fff; border-color: #0ea5e9;
+  width: 48px; height: 48px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.immersive-controls .ctrl-btn.primary:hover { background: #38bdf8; }
+.immersive-controls .progress-bar {
+  width: 200px; height: 4px; background: #1e293b;
+  border-radius: 2px; overflow: hidden; cursor: pointer;
+}
+.immersive-controls .progress-fill {
+  height: 100%; background: #38bdf8; transition: width 0.3s;
+}
+.immersive-controls .beat-counter {
+  font-size: 12px; color: #94a3b8; min-width: 50px;
+}
+
+/* Voice toggle in immersive mode */
+.immersive-voice {
+  display: flex; align-items: center; gap: 6px;
+  margin-left: 8px;
+}
+.immersive-voice button {
+  background: rgba(30,41,59,0.9); color: #94a3b8;
+  border: 1px solid #334155; border-radius: 6px;
+  padding: 6px 10px; font-size: 11px; cursor: pointer;
+  font-family: inherit;
+}
+.immersive-voice button.active { color: #38bdf8; border-color: #38bdf8; }
+
+/* Mobile: smaller text, compact controls */
+@media (max-width: 480px) {
+  .immersive-beat-text { font-size: 15px; }
+  .immersive-beat-panel { padding: 14px 16px 12px; }
+  .immersive-controls { gap: 6px; }
+  .immersive-controls .progress-bar { width: 100px; }
+  .immersive-controls .ctrl-btn { padding: 6px 10px; font-size: 12px; }
+  .immersive-controls .ctrl-btn.primary { width: 40px; height: 40px; font-size: 14px; }
+  .immersive-title-bar .im-title { font-size: 11px; }
+  .immersive-close-btn { padding: 6px 10px; font-size: 11px; }
+}
 .chapter-screen.fullscreen-mode .tabs { display: none; }
 .chapter-screen.fullscreen-mode .section { padding-top: 0; }
 .chapter-screen.fullscreen-mode .content {
