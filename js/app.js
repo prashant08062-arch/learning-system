@@ -262,7 +262,22 @@ function renderLectures() {
       const imgs = (lec.images || []).map((img, bi) =>
         `<img class="el" data-beat="${bi+1}" src="${basePath}${img.file}" alt="${img.caption || ''}" loading="lazy" />`
       ).join('\n          ');
-      canvasContent = `<div class="canvas-stack">${imgs}</div>`;
+
+      if (lec.svg) {
+        // HYBRID (image + SVG overlay): the historical image stays as a
+        // backdrop, and an SVG layer on top shows beat-synced bullets,
+        // year markers, arrows and highlights — so the screen feels
+        // alive even on beats that share the same image.
+        canvasContent = `
+          <div class="canvas-stack hybrid-stack">
+            <div class="image-layer">${imgs}</div>
+            <svg class="lec-board lec-overlay" viewBox="${lec.viewBox || '0 0 600 460'}" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+              ${lec.svg}
+            </svg>
+          </div>`;
+      } else {
+        canvasContent = `<div class="canvas-stack">${imgs}</div>`;
+      }
     } else {
       // SVG-based: inline SVG with groups
       canvasContent = `
@@ -408,6 +423,9 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
   let boardEls, imgEls;
   if (isImageType) {
     imgEls = Array.from(sectionEl.querySelectorAll('.canvas-stack img.el'));
+    // HYBRID: also collect SVG overlay elements (if present) so they
+    // can be revealed beat-by-beat on top of the cycling image.
+    boardEls = Array.from(sectionEl.querySelectorAll('svg.lec-overlay .el'));
   } else if (!isGlobeType) {
     boardEls = Array.from(sectionEl.querySelectorAll('svg.lec-board .el'));
   }
@@ -471,6 +489,7 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
     if (isGlobeType) {
       renderGlobe();
     } else if (isImageType) {
+      // 1) Cycle the background image per beat (existing behaviour).
       const targetIdx = state.imgPerBeat[state.currentBeat] || 0;
       imgEls.forEach((img, i) => {
         const shouldShow = i === targetIdx;
@@ -482,6 +501,21 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
           img.classList.add('pulse');
         }
       });
+      // 2) HYBRID: also reveal SVG overlay elements beat-by-beat
+      // (only present when lec.svg was defined). This is what makes
+      // the screen feel synced with the narration even on beats
+      // that share the same background image.
+      if (boardEls && boardEls.length) {
+        boardEls.forEach(el => {
+          const bn = parseInt(el.dataset.beat, 10);
+          el.classList.toggle('visible', bn <= state.currentBeat + 1);
+          el.classList.remove('pulse');
+          if (bn === state.currentBeat + 1) {
+            void el.offsetWidth;
+            el.classList.add('pulse');
+          }
+        });
+      }
     } else {
       boardEls.forEach(el => {
         const bn = parseInt(el.dataset.beat, 10);
@@ -651,16 +685,31 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
       // For globe, just show a message (globe can't be easily cloned)
       imCanvas.innerHTML = '<div style="color:#94a3b8;font-size:14px;text-align:center;padding:40px;">Globe view not available in immersive mode. Please use the standard view.</div>';
     } else if (isImageType) {
-      // Clone images
-      const imgClone = sectionEl.querySelector('.canvas-stack').cloneNode(true);
-      imgClone.style.cssText = 'display:flex;align-items:center;justify-content:center;width:100%;height:100%;position:relative;';
-      imgClone.querySelectorAll('img').forEach(img => {
-        img.style.cssText = 'position:absolute;max-width:90%;max-height:90%;opacity:0;transition:opacity 0.4s;';
+      // Clone the whole canvas-stack — for hybrid mode this includes
+      // BOTH the image layer AND the SVG overlay layer, so the
+      // immersive view stays in sync beat-by-beat just like the
+      // standard view.
+      const stackOrig = sectionEl.querySelector('.canvas-stack');
+      const stackClone = stackOrig.cloneNode(true);
+      // Use aspect-ratio (NOT height:100%) so the SVG's 600x460
+      // viewBox renders at the correct shape inside the immersive
+      // canvas. Without this, the stack stretches to fill the
+      // available height and the SVG gets squashed, making the
+      // bullet cards invisible at the edges.
+      stackClone.style.cssText = 'display:block;width:100%;max-height:100%;position:relative;aspect-ratio:600/460;margin:0 auto;';
+      // Reset image visibility — it will be re-applied by updateImmersiveUI
+      stackClone.querySelectorAll('img').forEach(img => {
+        img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity 0.4s;';
         if (img.classList.contains('visible')) img.style.opacity = '1';
       });
-      imCanvas.appendChild(imgClone);
-      // Store ref for updating
-      state._imImgEls = Array.from(imgClone.querySelectorAll('img'));
+      // Reset SVG overlay element visibility — re-applied below
+      stackClone.querySelectorAll('svg.lec-overlay .el').forEach(el => {
+        el.classList.remove('visible', 'pulse');
+      });
+      imCanvas.appendChild(stackClone);
+      // Store refs for both image and overlay updates
+      state._imImgEls = Array.from(stackClone.querySelectorAll('img'));
+      state._imBoardEls = Array.from(stackClone.querySelectorAll('svg.lec-overlay .el'));
     } else {
       // Clone SVG
       const svgOrig = sectionEl.querySelector('svg.lec-board');
@@ -725,10 +774,23 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
 
     // Update SVG/image visibility in immersive canvas
     if (isImageType && state._imImgEls) {
+      // 1) Cycle the background image per beat
       const targetIdx = state.imgPerBeat[state.currentBeat] || 0;
       state._imImgEls.forEach((img, i) => {
         img.style.opacity = (i === targetIdx) ? '1' : '0';
       });
+      // 2) HYBRID: reveal SVG overlay elements beat-by-beat (if any)
+      if (state._imBoardEls && state._imBoardEls.length) {
+        state._imBoardEls.forEach(el => {
+          const bn = parseInt(el.dataset.beat, 10);
+          el.classList.toggle('visible', bn <= state.currentBeat + 1);
+          el.classList.remove('pulse');
+          if (bn === state.currentBeat + 1) {
+            void el.offsetWidth;
+            el.classList.add('pulse');
+          }
+        });
+      }
     } else if (state._imBoardEls && !isGlobeType) {
       state._imBoardEls.forEach(el => {
         const bn = parseInt(el.dataset.beat, 10);
