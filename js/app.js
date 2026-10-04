@@ -501,14 +501,14 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
           img.classList.add('pulse');
         }
       });
-      // 2) HYBRID: also reveal SVG overlay elements beat-by-beat
-      // (only present when lec.svg was defined). This is what makes
-      // the screen feel synced with the narration even on beats
-      // that share the same background image.
+      // 2) HYBRID: reveal ONLY the current beat's SVG element.
+      // Each beat is a complete, self-contained illustration — so
+      // when the beat changes, the previous illustration disappears
+      // and the new one takes its place. (Fresh beat = fresh screen.)
       if (boardEls && boardEls.length) {
         boardEls.forEach(el => {
           const bn = parseInt(el.dataset.beat, 10);
-          el.classList.toggle('visible', bn <= state.currentBeat + 1);
+          el.classList.toggle('visible', bn === state.currentBeat + 1);
           el.classList.remove('pulse');
           if (bn === state.currentBeat + 1) {
             void el.offsetWidth;
@@ -517,6 +517,9 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
         });
       }
     } else {
+      // Pure-SVG chapters (e.g., Civics): accumulate — each beat
+      // adds to the diagram, building it up like a teacher drawing
+      // on a board.
       boardEls.forEach(el => {
         const bn = parseInt(el.dataset.beat, 10);
         el.classList.toggle('visible', bn <= state.currentBeat + 1);
@@ -779,11 +782,13 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
       state._imImgEls.forEach((img, i) => {
         img.style.opacity = (i === targetIdx) ? '1' : '0';
       });
-      // 2) HYBRID: reveal SVG overlay elements beat-by-beat (if any)
+      // 2) HYBRID: reveal ONLY the current beat's SVG element
+      // (fresh beat = fresh screen — previous beat's illustration
+      // disappears when the new one appears)
       if (state._imBoardEls && state._imBoardEls.length) {
         state._imBoardEls.forEach(el => {
           const bn = parseInt(el.dataset.beat, 10);
-          el.classList.toggle('visible', bn <= state.currentBeat + 1);
+          el.classList.toggle('visible', bn === state.currentBeat + 1);
           el.classList.remove('pulse');
           if (bn === state.currentBeat + 1) {
             void el.offsetWidth;
@@ -792,6 +797,7 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
         });
       }
     } else if (state._imBoardEls && !isGlobeType) {
+      // Pure-SVG chapters: accumulate (build up diagram)
       state._imBoardEls.forEach(el => {
         const bn = parseInt(el.dataset.beat, 10);
         el.classList.toggle('visible', bn <= state.currentBeat + 1);
