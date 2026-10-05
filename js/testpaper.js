@@ -1510,8 +1510,12 @@ function saveTestResult(uid, result) {
 }
 
 // ============================================================
-// TEST UI RENDERING
+// TEST UI RENDERING — Written exam with timer + image upload
 // ============================================================
+
+const TEST_DURATION_SECONDS = 45 * 60; // 45 minutes
+let testTimerInterval = null;
+let testTimeRemaining = TEST_DURATION_SECONDS;
 
 function renderTestPaperTab(chapterData) {
   const container = document.getElementById('testpaperContent');
@@ -1542,10 +1546,21 @@ function renderTestPaperTab(chapterData) {
         <div class="testpaper-struct-row"><span class="testpaper-struct-sec">E</span> Case Study / Word Problem <span class="testpaper-struct-marks">4 × 1 = 4</span></div>
         <div class="testpaper-struct-total">Total: 15 questions · 32 marks</div>
       </div>
+      <div class="testpaper-instructions">
+        <h4>📝 Instructions</h4>
+        <ul>
+          <li><strong>Solve on paper</strong> — write your answers on a physical notebook or plain paper.</li>
+          <li><strong>45-minute timer</strong> — the test auto-submits when time runs out.</li>
+          <li><strong>Upload a photo</strong> of your answer sheet at the end (JPG/PNG, phone camera is fine).</li>
+          <li><strong>Detailed model answers</strong> will be available in your parent's dashboard after submission.</li>
+          <li>Questions are <strong>randomized</strong> — each attempt gets different values.</li>
+        </ul>
+      </div>
       <div class="testpaper-info">
-        <span>⏱ No time limit</span>
+        <span>⏱ 45 minutes</span>
         <span>🎲 Randomized each attempt</span>
-        <span>📊 Solutions recorded for parents</span>
+        <span>📸 Image upload submission</span>
+        <span>📊 Model answers for parents</span>
       </div>
       <button class="testpaper-start-btn" id="testpaperStartBtn">🚀 Start Test</button>
     </div>
@@ -1581,6 +1596,16 @@ function startTest(chapterData) {
 
   let html = `
     <div class="testpaper-active">
+      <div class="testpaper-timer-bar" id="testpaperTimerBar">
+        <div class="testpaper-timer-info">
+          <span class="testpaper-timer-label">⏱ Time Remaining</span>
+          <span class="testpaper-timer-value" id="testpaperTimerValue">45:00</span>
+        </div>
+        <div class="testpaper-timer-meta">
+          <span>${questions.length} questions · ${totalMarks} marks</span>
+          <span id="testpaperTimerWarning"></span>
+        </div>
+      </div>
       <div class="testpaper-header">
         <h2>📋 ${chapterData.meta.title} — Test Paper</h2>
         <div class="testpaper-meta">
@@ -1591,7 +1616,6 @@ function startTest(chapterData) {
       <form id="testpaperForm">
   `;
 
-  let qCounter = 0;
   sections.forEach(sec => {
     html += `<div class="testpaper-section-header">
       <span class="testpaper-section-id">Section ${sec.id}</span>
@@ -1605,105 +1629,192 @@ function startTest(chapterData) {
           <span class="testpaper-q-marks">[${q.marks} mark${q.marks > 1 ? 's' : ''}]</span>
         </div>
         <div class="testpaper-q-text">${q.question}</div>
-        <div class="testpaper-options">
-  `;
-      q.options.forEach((opt, oi) => {
-        html += `<label class="testpaper-option">
-          <input type="radio" name="q${qCounter}" value="${escapeAttr(opt)}" />
-          <span>${escapeHtml(opt)}</span>
-        </label>`;
-      });
-      html += `</div></div>`;
-      qCounter++;
+        <div class="testpaper-answer-space">
+          <div class="testpaper-answer-label">📝 Your working / answer (optional — you can also solve on paper and upload a photo at the end):</div>
+          <textarea class="testpaper-answer-input" data-qnum="${q.number}" rows="${q.marks <= 1 ? 2 : q.marks <= 2 ? 3 : q.marks <= 3 ? 4 : 6}" placeholder="Write your solution here..."></textarea>
+        </div>
+      </div>`;
     });
   });
 
   html += `
+      <div class="testpaper-upload-section">
+        <h3>📸 Upload Answer Sheet</h3>
+        <p>Take a clear photo of your solved answer sheet and upload it here. The image will be saved with your test and shown to your parent along with the model answers.</p>
+        <div class="testpaper-upload-area" id="testpaperUploadArea">
+          <input type="file" id="testpaperImageInput" accept="image/*" capture="environment" style="display:none;" />
+          <div class="testpaper-upload-prompt" id="testpaperUploadPrompt">
+            <span style="font-size:36px;">📷</span>
+            <p>Click to upload or capture a photo of your answer sheet</p>
+            <small>JPG / PNG · phone camera is fine</small>
+          </div>
+          <div class="testpaper-upload-preview" id="testpaperUploadPreview" style="display:none;">
+            <img id="testpaperUploadImg" alt="Answer sheet preview" />
+            <button type="button" class="testpaper-upload-remove" id="testpaperUploadRemove">✕ Remove</button>
+          </div>
+        </div>
+      </div>
       <div class="testpaper-submit-area">
         <button type="submit" class="testpaper-submit-btn">✓ Submit Test</button>
+        <p class="testpaper-submit-hint">You can submit before the timer ends. The test will auto-submit at 0:00.</p>
       </div>
     </form>
   </div>`;
 
   container.innerHTML = html;
 
+  // Start the countdown timer
+  testTimeRemaining = TEST_DURATION_SECONDS;
+  updateTimerDisplay();
+  testTimerInterval = setInterval(function() {
+    testTimeRemaining--;
+    updateTimerDisplay();
+    if (testTimeRemaining <= 0) {
+      clearInterval(testTimerInterval);
+      testTimerInterval = null;
+      // Auto-submit
+      submitTest(chapterData, questions, true);
+    }
+  }, 1000);
+
+  // Wire up image upload
+  const uploadArea = document.getElementById('testpaperUploadArea');
+  const imageInput = document.getElementById('testpaperImageInput');
+  const uploadPrompt = document.getElementById('testpaperUploadPrompt');
+  const uploadPreview = document.getElementById('testpaperUploadPreview');
+  const uploadImg = document.getElementById('testpaperUploadImg');
+  const uploadRemove = document.getElementById('testpaperUploadRemove');
+
+  uploadPrompt.addEventListener('click', function() { imageInput.click(); });
+  imageInput.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    // Read and compress the image
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      const img = new Image();
+      img.onload = function() {
+        // Compress: resize to max 1200px width, JPEG quality 0.7
+        const canvas = document.createElement('canvas');
+        const maxW = 1200;
+        let w = img.width, h = img.height;
+        if (w > maxW) { h = Math.round(h * maxW / w); w = maxW; }
+        canvas.width = w; canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, w, h);
+        const compressed = canvas.toDataURL('image/jpeg', 0.7);
+        uploadImg.src = compressed;
+        uploadPreview.style.display = 'block';
+        uploadPrompt.style.display = 'none';
+        // Store the compressed image on the preview element
+        uploadPreview.dataset.image = compressed;
+      };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+  uploadRemove.addEventListener('click', function() {
+    uploadPreview.style.display = 'none';
+    uploadPrompt.style.display = 'block';
+    delete uploadPreview.dataset.image;
+    imageInput.value = '';
+  });
+
+  // Wire up form submit
   document.getElementById('testpaperForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    gradeTest(chapterData, questions);
+    if (testTimerInterval) { clearInterval(testTimerInterval); testTimerInterval = null; }
+    submitTest(chapterData, questions, false);
   });
 }
 
-function gradeTest(chapterData, questions) {
+function updateTimerDisplay() {
+  const el = document.getElementById('testpaperTimerValue');
+  if (!el) return;
+  const m = Math.floor(testTimeRemaining / 60);
+  const s = testTimeRemaining % 60;
+  el.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+  // Change color when time is running low
+  const timerBar = document.getElementById('testpaperTimerBar');
+  const warning = document.getElementById('testpaperTimerWarning');
+  if (testTimeRemaining <= 300) { // 5 min
+    timerBar.classList.add('urgent');
+    if (warning) warning.textContent = '⚠ Less than 5 minutes!';
+  } else if (testTimeRemaining <= 600) { // 10 min
+    timerBar.classList.add('warning');
+    if (warning) warning.textContent = '';
+  }
+}
+
+function submitTest(chapterData, questions, isAutoSubmit) {
   const container = document.getElementById('testpaperContent');
   const form = document.getElementById('testpaperForm');
 
-  let correct = 0;
-  let earnedMarks = 0;
   const totalMarks = questions.reduce((s, q) => s + q.marks, 0);
   const results = [];
 
-  questions.forEach((q, i) => {
-    const selected = form.querySelector(`input[name="q${i}"]:checked`);
-    const studentAnswer = selected ? selected.value : '(no answer)';
-    const isCorrect = studentAnswer === q.answer;
-    if (isCorrect) {
-      correct++;
-      earnedMarks += q.marks;
-    }
+  // Collect text answers
+  questions.forEach(q => {
+    const ta = form.querySelector(`textarea[data-qnum="${q.number}"]`);
+    const studentAnswer = ta ? ta.value.trim() : '';
     results.push({
       number: q.number,
       section: q.section,
       sectionLabel: q.sectionLabel,
       question: q.question,
       studentAnswer: studentAnswer,
-      correctAnswer: q.answer,
-      isCorrect: isCorrect,
-      marks: q.marks,
-      solution: q.solution
+      modelAnswer: q.solution,
+      marks: q.marks
     });
   });
 
-  const pct = Math.round((earnedMarks / totalMarks) * 100);
+  // Collect uploaded image
+  const uploadPreview = document.getElementById('testpaperUploadPreview');
+  const uploadedImage = (uploadPreview && uploadPreview.dataset.image) ? uploadPreview.dataset.image : null;
 
-  // Save to localStorage for parent review
-  const user = window.Auth ? window.Auth.getCurrentUser() : null;
-  // Use email as the uid (students don't have an `id` field — email is unique)
-  const uid = user ? user.email : 'unknown';
+  const timeTaken = TEST_DURATION_SECONDS - testTimeRemaining;
+
   const testRecord = {
     timestamp: new Date().toISOString(),
-    studentEmail: uid,
-    studentName: user ? user.name : 'Unknown',
-    grade: user ? user.grade : '—',
+    studentEmail: (window.Auth && window.Auth.getCurrentUser()) ? window.Auth.getCurrentUser().email : 'unknown',
+    studentName: (window.Auth && window.Auth.getCurrentUser()) ? window.Auth.getCurrentUser().name : 'Unknown',
+    grade: (window.Auth && window.Auth.getCurrentUser()) ? window.Auth.getCurrentUser().grade : '—',
     chapterSlug: chapterData.meta.slug,
     chapterTitle: chapterData.meta.title,
     subject: chapterData.meta.subject || 'maths',
     totalQuestions: questions.length,
-    correctAnswers: correct,
     totalMarks: totalMarks,
-    earnedMarks: earnedMarks,
-    percentage: pct,
+    timeLimitSeconds: TEST_DURATION_SECONDS,
+    timeTakenSeconds: timeTaken,
+    isAutoSubmitted: isAutoSubmit,
+    // No auto-grading for written exam — parent reviews
+    uploadedImage: uploadedImage,
     results: results
   };
+
+  // Save to localStorage
+  const uid = testRecord.studentEmail;
   saveTestResult(uid, testRecord);
 
-  // Track in proctor progress
-  if (window.Proctor && window.Proctor.trackTestPaper) {
-    window.Proctor.trackTestPaper(chapterData.meta.slug, correct, questions.length, pct);
-  }
-
-  // Show results
+  // Show the "submitted" screen with model answers for self-review
   let html = `
     <div class="testpaper-result">
-      <div class="testpaper-score-banner ${pct >= 80 ? 'excellent' : pct >= 60 ? 'good' : pct >= 40 ? 'average' : 'poor'}">
-        <div class="testpaper-score-pct">${pct}%</div>
-        <div class="testpaper-score-detail">${correct} / ${questions.length} correct · ${earnedMarks} / ${totalMarks} marks</div>
-        <div class="testpaper-score-label">${pct >= 80 ? '🌟 Excellent!' : pct >= 60 ? '👍 Good job!' : pct >= 40 ? '📖 Keep practicing' : '💪 Needs more practice'}</div>
+      <div class="testpaper-score-banner ${isAutoSubmit ? 'auto' : 'manual'}">
+        <div class="testpaper-score-icon">${isAutoSubmit ? '⏰' : '✓'}</div>
+        <div class="testpaper-score-pct">Submitted</div>
+        <div class="testpaper-score-detail">${isAutoSubmit ? 'Test auto-submitted (time up)' : 'Test submitted successfully'}</div>
+        <div class="testpaper-score-label">Time taken: ${Math.floor(timeTaken / 60)}m ${timeTaken % 60}s · ${questions.length} questions · ${totalMarks} marks</div>
+      </div>
+      <div class="testpaper-submitted-info">
+        <p>✅ Your test has been recorded and sent to your parent's dashboard.</p>
+        <p>📋 The detailed <strong>model answers</strong> below show the correct solutions for each question. Compare them with your own answers to self-evaluate.</p>
+        ${uploadedImage ? '<p>📸 Your uploaded answer sheet image has been saved and will be visible to your parent.</p>' : '<p>⚠ No image was uploaded. Your parent will only see the model answers.</p>'}
       </div>
       <div class="testpaper-solutions">
-        <h3>📝 Detailed Solutions</h3>
+        <h3>📝 Model Answers (for self-review)</h3>
   `;
 
-  // Group results by section for display
+  // Group results by section
   const sectionsMap = {};
   results.forEach(r => {
     const sid = r.section || 'A';
@@ -1721,21 +1832,21 @@ function gradeTest(chapterData, questions) {
       <span class="testpaper-sol-section-marks">${secMarks} × ${secQuestions.length} = ${secMarks * secQuestions.length} marks</span>
     </div>`;
     secQuestions.forEach(r => {
+      const hasAnswer = r.studentAnswer && r.studentAnswer.length > 0;
       html += `
-        <div class="testpaper-solution-card ${r.isCorrect ? 'correct' : 'incorrect'}">
+        <div class="testpaper-solution-card model">
           <div class="testpaper-sol-header">
             <span class="testpaper-sol-num">Q${r.number}</span>
             <span class="testpaper-sol-marks">[${r.marks} mark${r.marks > 1 ? 's' : ''}]</span>
-            <span class="testpaper-sol-result">${r.isCorrect ? '✓ Correct' : '✗ Incorrect'}</span>
+            <span class="testpaper-sol-result">${hasAnswer ? '✓ Answered' : '○ Not answered'}</span>
           </div>
           <div class="testpaper-sol-question">${r.question}</div>
-          <div class="testpaper-sol-answers">
-            <div class="testpaper-sol-row"><strong>Your answer:</strong> <span class="${r.isCorrect ? 'ans-correct' : 'ans-wrong'}">${escapeHtml(r.studentAnswer)}</span></div>
-            ${!r.isCorrect ? `<div class="testpaper-sol-row"><strong>Correct answer:</strong> <span class="ans-correct">${escapeHtml(r.correctAnswer)}</span></div>` : ''}
-          </div>
+          ${hasAnswer ? `<div class="testpaper-sol-answers">
+            <div class="testpaper-sol-row"><strong>Your answer:</strong> <span class="ans-neutral">${escapeHtml(r.studentAnswer)}</span></div>
+          </div>` : ''}
           <div class="testpaper-sol-steps">
-            <strong>Solution:</strong><br>
-            ${r.solution}
+            <strong>Model Answer:</strong><br>
+            ${r.modelAnswer}
           </div>
         </div>
       `;

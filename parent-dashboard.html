@@ -239,6 +239,92 @@
   }
   .pd-test-sol-steps strong { color: #38bdf8; }
 
+  /* New: test status badge, image display, section headers */
+  .pd-test-status {
+    background: rgba(56,189,248,0.18);
+    color: #38bdf8;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .pd-test-image-section {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #1e293b;
+  }
+  .pd-test-image-section h4 {
+    color: #38bdf8;
+    font-size: 13px;
+    margin: 0 0 10px;
+  }
+  .pd-test-image {
+    max-width: 100%;
+    border-radius: 8px;
+    border: 2px solid #38bdf8;
+    cursor: pointer;
+    transition: transform .15s;
+  }
+  .pd-test-image:hover { transform: scale(1.02); }
+  .pd-test-no-image {
+    color: #fca5a5;
+    font-size: 12px;
+    font-style: italic;
+    padding: 12px;
+    background: rgba(239,68,68,0.08);
+    border-radius: 6px;
+    margin-bottom: 16px;
+  }
+  .pd-test-model-answers h4 {
+    color: #fbbf24;
+    font-size: 13px;
+    margin: 0 0 12px;
+  }
+  .pd-test-sol-section-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    margin: 12px 0 8px;
+    background: linear-gradient(135deg, rgba(56,189,248,0.10), rgba(56,189,248,0.03));
+    border: 1px solid rgba(56,189,248,0.25);
+    border-radius: 6px;
+    flex-wrap: wrap;
+  }
+  .pd-test-sol-section-id {
+    background: #38bdf8;
+    color: #0a1326;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .pd-test-sol-section-label {
+    color: #e2e8f0;
+    font-size: 12px;
+    font-weight: 600;
+    flex: 1;
+  }
+  .pd-test-sol-section-marks {
+    color: #fbbf24;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .pd-test-sol.answered { border-left: 4px solid #22c55e; }
+  .pd-test-sol.not-answered { border-left: 4px solid #64748b; }
+  .pd-test-sol-result {
+    margin-left: auto;
+    font-size: 11px;
+    font-weight: 700;
+    color: #94a3b8;
+  }
+  .pd-test-sol.answered .pd-test-sol-result { color: #22c55e; }
+  .pd-ans-neutral {
+    color: #cbd5e1;
+    font-weight: 600;
+  }
+
   /* Login screen */
   .pd-login-screen {
     position: fixed; inset: 0; background: #0a1326;
@@ -429,8 +515,6 @@ function renderSummary(students) {
   let totalViolations = 0;
   let totalTerminations = 0;
   let totalTests = 0;
-  let totalTestMarks = 0;
-  let totalTestEarned = 0;
 
   students.forEach(s => {
     const p = getProgress(s.email || s.id);
@@ -448,16 +532,11 @@ function renderSummary(students) {
       if (l.type === 'session_terminated') totalTerminations += 1;
     });
     const tests = getTestResults(s.email || s.id);
-    tests.forEach(t => {
-      totalTests += 1;
-      totalTestMarks += (t.totalMarks || 0);
-      totalTestEarned += (t.earnedMarks || 0);
-    });
+    totalTests += tests.length;
   });
 
   const practicePct = totalPractice > 0 ? Math.round((totalPracticeCorrect / totalPractice) * 100) : 0;
   const selfTestPct = totalSelfTest > 0 ? Math.round((totalSelfTestCorrect / totalSelfTest) * 100) : 0;
-  const testPct = totalTestMarks > 0 ? Math.round((totalTestEarned / totalTestMarks) * 100) : 0;
 
   const summary = document.getElementById('pdSummary');
   summary.innerHTML = `
@@ -488,8 +567,8 @@ function renderSummary(students) {
     </div>
     <div class="pd-stat-card">
       <div class="pd-stat-label">📋 Test Papers</div>
-      <div class="pd-stat-value">${testPct}%</div>
-      <div class="pd-stat-sub">${totalTests} attempted · ${totalTestEarned}/${totalTestMarks} marks</div>
+      <div class="pd-stat-value">${totalTests}</div>
+      <div class="pd-stat-sub">Submitted · pending review</div>
     </div>
     <div class="pd-stat-card">
       <div class="pd-stat-label">Proctor Violations</div>
@@ -603,27 +682,48 @@ function renderStudentCard(student) {
     // Show most recent first, up to 10
     const recentTests = testResults.slice().reverse().slice(0, 10);
     testHtml = recentTests.map((t, idx) => {
-      const pct = t.percentage || 0;
-      const pctClass = pct >= 80 ? 'excellent' : pct >= 60 ? 'good' : pct >= 40 ? 'average' : 'poor';
       const testId = `test-${student.email || student.id}-${testResults.length - idx}`;
-      // Build solutions HTML
+      const timeMin = Math.floor((t.timeTakenSeconds || 0) / 60);
+      const timeSec = (t.timeTakenSeconds || 0) % 60;
+      const submittedLabel = t.isAutoSubmitted ? '⏰ Auto-submitted (time up)' : '✓ Submitted';
+      const hasImage = !!t.uploadedImage;
+      // Build solutions HTML (grouped by section)
       let solsHtml = '';
       if (t.results && t.results.length) {
-        solsHtml = t.results.map((r, ri) => `
-          <div class="pd-test-sol ${r.isCorrect ? 'correct' : 'incorrect'}">
-            <div class="pd-test-sol-header">
-              <span class="pd-test-sol-num">Q${ri + 1}</span>
-              <span class="pd-test-sol-marks">[${r.marks} marks]</span>
-              <span class="pd-test-sol-result">${r.isCorrect ? '✓' : '✗'}</span>
-            </div>
-            <div class="pd-test-sol-q">${escapeHtml(r.question)}</div>
-            <div class="pd-test-sol-ans">
-              <div><strong>Student:</strong> <span class="${r.isCorrect ? 'pd-ans-correct' : 'pd-ans-wrong'}">${escapeHtml(r.studentAnswer)}</span></div>
-              ${!r.isCorrect ? `<div><strong>Correct:</strong> <span class="pd-ans-correct">${escapeHtml(r.correctAnswer)}</span></div>` : ''}
-            </div>
-            <div class="pd-test-sol-steps">${r.solution || ''}</div>
-          </div>
-        `).join('');
+        // Group by section
+        const secMap = {};
+        t.results.forEach(r => {
+          const sid = r.section || 'A';
+          if (!secMap[sid]) secMap[sid] = [];
+          secMap[sid].push(r);
+        });
+        Object.keys(secMap).sort().forEach(sid => {
+          const secQs = secMap[sid];
+          const secLabel = secQs[0].sectionLabel || ('Section ' + sid);
+          const secMarks = secQs[0].marks;
+          solsHtml += `<div class="pd-test-sol-section-header">
+            <span class="pd-test-sol-section-id">Section ${sid}</span>
+            <span class="pd-test-sol-section-label">${secLabel.replace(/^Section [A-E] — /, '')}</span>
+            <span class="pd-test-sol-section-marks">${secMarks} × ${secQs.length} = ${secMarks * secQs.length} marks</span>
+          </div>`;
+          secQs.forEach(r => {
+            const hasAnswer = r.studentAnswer && r.studentAnswer.length > 0;
+            solsHtml += `
+              <div class="pd-test-sol ${hasAnswer ? 'answered' : 'not-answered'}">
+                <div class="pd-test-sol-header">
+                  <span class="pd-test-sol-num">Q${r.number}</span>
+                  <span class="pd-test-sol-marks">[${r.marks} mark${r.marks > 1 ? 's' : ''}]</span>
+                  <span class="pd-test-sol-result">${hasAnswer ? '✓ Answered' : '○ Not answered'}</span>
+                </div>
+                <div class="pd-test-sol-q">${escapeHtml(r.question)}</div>
+                ${hasAnswer ? `<div class="pd-test-sol-ans">
+                  <div><strong>Student's answer:</strong> <span class="pd-ans-neutral">${escapeHtml(r.studentAnswer)}</span></div>
+                </div>` : ''}
+                <div class="pd-test-sol-steps"><strong>Model Answer:</strong><br>${r.modelAnswer || r.solution || ''}</div>
+              </div>
+            `;
+          });
+        });
       }
       return `
         <div class="pd-test-card">
@@ -633,13 +733,22 @@ function renderStudentCard(student) {
               <span class="pd-test-date">${formatDate(t.timestamp)}</span>
             </div>
             <div class="pd-test-score">
-              <span class="pd-test-pct pd-pct-${pctClass}">${pct}%</span>
-              <span class="pd-test-detail">${t.correctAnswers}/${t.totalQuestions} correct · ${t.earnedMarks}/${t.totalMarks} marks</span>
-              <span class="pd-test-expand">▼ click to view solutions</span>
+              <span class="pd-test-status">${submittedLabel}</span>
+              <span class="pd-test-detail">${t.totalQuestions} questions · ${t.totalMarks} marks · ${timeMin}m ${timeSec}s</span>
+              <span class="pd-test-expand">▼ click to view answer sheet &amp; model answers</span>
             </div>
           </div>
           <div class="pd-test-solutions" id="${testId}" style="display:none;">
-            ${solsHtml}
+            ${hasImage ? `
+              <div class="pd-test-image-section">
+                <h4>📸 Student's Answer Sheet</h4>
+                <img src="${t.uploadedImage}" alt="Answer sheet" class="pd-test-image" />
+              </div>
+            ` : `<div class="pd-test-no-image">⚠ No image was uploaded by the student.</div>`}
+            <div class="pd-test-model-answers">
+              <h4>📝 Model Answers (for parent to compare)</h4>
+              ${solsHtml}
+            </div>
           </div>
         </div>
       `;
