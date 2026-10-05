@@ -164,6 +164,81 @@
   .pd-log-list::-webkit-scrollbar-track { background: #0a1326; }
   .pd-log-list::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
 
+  /* Test paper attempts */
+  .pd-test-list {
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .pd-test-card {
+    background: #0a1326; border: 1px solid #1e293b;
+    border-radius: 10px; overflow: hidden;
+  }
+  .pd-test-header {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 12px; padding: 14px 16px; cursor: pointer;
+    transition: background .15s; flex-wrap: wrap;
+  }
+  .pd-test-header:hover { background: #0f172a; }
+  .pd-test-info { display: flex; flex-direction: column; gap: 2px; }
+  .pd-test-chapter { color: #e2e8f0; font-size: 13px; font-weight: 600; }
+  .pd-test-date { color: #64748b; font-size: 11px; }
+  .pd-test-score { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .pd-test-pct {
+    font-size: 18px; font-weight: 700; padding: 4px 12px;
+    border-radius: 6px;
+  }
+  .pd-pct-excellent { background: rgba(34,197,94,0.18); color: #22c55e; }
+  .pd-pct-good { background: rgba(56,189,248,0.18); color: #38bdf8; }
+  .pd-pct-average { background: rgba(251,191,36,0.18); color: #fbbf24; }
+  .pd-pct-poor { background: rgba(239,68,68,0.18); color: #ef4444; }
+  .pd-test-detail { color: #94a3b8; font-size: 12px; }
+  .pd-test-expand { color: #38bdf8; font-size: 11px; font-weight: 600; }
+
+  .pd-test-solutions {
+    padding: 12px 16px; border-top: 1px solid #1e293b;
+    background: #080f1f;
+    max-height: 600px; overflow-y: auto;
+  }
+  .pd-test-sol {
+    background: #0f172a; border: 1px solid #1e293b;
+    border-radius: 8px; padding: 12px 14px; margin-bottom: 10px;
+  }
+  .pd-test-sol:last-child { margin-bottom: 0; }
+  .pd-test-sol.correct { border-left: 4px solid #22c55e; }
+  .pd-test-sol.incorrect { border-left: 4px solid #ef4444; }
+  .pd-test-sol-header {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+  }
+  .pd-test-sol-num {
+    background: #334155; color: #f1f5f9;
+    padding: 2px 8px; border-radius: 4px;
+    font-size: 11px; font-weight: 700;
+  }
+  .pd-test-sol-marks { color: #fbbf24; font-size: 10px; font-weight: 600; }
+  .pd-test-sol-result {
+    margin-left: auto; font-size: 13px; font-weight: 700;
+  }
+  .pd-test-sol.correct .pd-test-sol-result { color: #22c55e; }
+  .pd-test-sol.incorrect .pd-test-sol-result { color: #ef4444; }
+  .pd-test-sol-q {
+    color: #e2e8f0; font-size: 13px; line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .pd-test-sol-ans {
+    background: rgba(8,15,30,0.5); border-radius: 4px;
+    padding: 8px 10px; margin-bottom: 8px;
+    font-size: 12px; color: #cbd5e1;
+  }
+  .pd-test-sol-ans div { margin-bottom: 3px; }
+  .pd-test-sol-ans div:last-child { margin-bottom: 0; }
+  .pd-ans-correct { color: #22c55e; font-weight: 700; }
+  .pd-ans-wrong { color: #ef4444; font-weight: 700; }
+  .pd-test-sol-steps {
+    background: rgba(56,189,248,0.06); border-left: 3px solid #38bdf8;
+    border-radius: 3px; padding: 8px 10px;
+    color: #cbd5e1; font-size: 12px; line-height: 1.55;
+  }
+  .pd-test-sol-steps strong { color: #38bdf8; }
+
   /* Login screen */
   .pd-login-screen {
     position: fixed; inset: 0; background: #0a1326;
@@ -267,6 +342,12 @@ function getLogs(uid) {
     return raw ? JSON.parse(raw) : [];
   } catch (e) { return []; }
 }
+function getTestResults(uid) {
+  try {
+    const raw = localStorage.getItem(`learning_system_test_results_${uid}`);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) { return []; }
+}
 
 function escapeHtml(s) {
   if (s == null) return '';
@@ -347,9 +428,12 @@ function renderSummary(students) {
   let totalSelfTestCorrect = 0;
   let totalViolations = 0;
   let totalTerminations = 0;
+  let totalTests = 0;
+  let totalTestMarks = 0;
+  let totalTestEarned = 0;
 
   students.forEach(s => {
-    const p = getProgress(s.id);
+    const p = getProgress(s.email || s.id);
     Object.values(p).forEach(ch => {
       if (ch.visited) totalChapters += 1;
       totalTime += (ch.timeSpent || 0);
@@ -358,15 +442,22 @@ function renderSummary(students) {
       totalSelfTest += (ch.selfTestAnswered || 0);
       totalSelfTestCorrect += (ch.selfTestCorrect || 0);
     });
-    const logs = getLogs(s.id);
+    const logs = getLogs(s.email || s.id);
     logs.forEach(l => {
       if (l.type === 'tab_switch') totalViolations += 1;
       if (l.type === 'session_terminated') totalTerminations += 1;
+    });
+    const tests = getTestResults(s.email || s.id);
+    tests.forEach(t => {
+      totalTests += 1;
+      totalTestMarks += (t.totalMarks || 0);
+      totalTestEarned += (t.earnedMarks || 0);
     });
   });
 
   const practicePct = totalPractice > 0 ? Math.round((totalPracticeCorrect / totalPractice) * 100) : 0;
   const selfTestPct = totalSelfTest > 0 ? Math.round((totalSelfTestCorrect / totalSelfTest) * 100) : 0;
+  const testPct = totalTestMarks > 0 ? Math.round((totalTestEarned / totalTestMarks) * 100) : 0;
 
   const summary = document.getElementById('pdSummary');
   summary.innerHTML = `
@@ -396,6 +487,11 @@ function renderSummary(students) {
       <div class="pd-stat-sub">${totalSelfTestCorrect}/${totalSelfTest} correct</div>
     </div>
     <div class="pd-stat-card">
+      <div class="pd-stat-label">📋 Test Papers</div>
+      <div class="pd-stat-value">${testPct}%</div>
+      <div class="pd-stat-sub">${totalTests} attempted · ${totalTestEarned}/${totalTestMarks} marks</div>
+    </div>
+    <div class="pd-stat-card">
       <div class="pd-stat-label">Proctor Violations</div>
       <div class="pd-stat-value">${totalViolations}</div>
       <div class="pd-stat-sub">${totalTerminations} session terminations</div>
@@ -409,8 +505,8 @@ function renderStudents(students) {
 }
 
 function renderStudentCard(student) {
-  const progress = getProgress(student.id);
-  const logs = getLogs(student.id);
+  const progress = getProgress(student.email || student.id);
+  const logs = getLogs(student.email || student.id);
   const chapterSlugs = Object.keys(progress);
   const visitedCount = chapterSlugs.filter(s => progress[s].visited).length;
   const totalTime = Object.values(progress).reduce((sum, p) => sum + (p.timeSpent || 0), 0);
@@ -498,6 +594,58 @@ function renderStudentCard(student) {
     `).join('');
   }
 
+  // Test paper attempts
+  const testResults = getTestResults(student.email || student.id);
+  let testHtml = '';
+  if (testResults.length === 0) {
+    testHtml = `<div class="pd-log-empty">No test papers attempted yet.</div>`;
+  } else {
+    // Show most recent first, up to 10
+    const recentTests = testResults.slice().reverse().slice(0, 10);
+    testHtml = recentTests.map((t, idx) => {
+      const pct = t.percentage || 0;
+      const pctClass = pct >= 80 ? 'excellent' : pct >= 60 ? 'good' : pct >= 40 ? 'average' : 'poor';
+      const testId = `test-${student.email || student.id}-${testResults.length - idx}`;
+      // Build solutions HTML
+      let solsHtml = '';
+      if (t.results && t.results.length) {
+        solsHtml = t.results.map((r, ri) => `
+          <div class="pd-test-sol ${r.isCorrect ? 'correct' : 'incorrect'}">
+            <div class="pd-test-sol-header">
+              <span class="pd-test-sol-num">Q${ri + 1}</span>
+              <span class="pd-test-sol-marks">[${r.marks} marks]</span>
+              <span class="pd-test-sol-result">${r.isCorrect ? '✓' : '✗'}</span>
+            </div>
+            <div class="pd-test-sol-q">${escapeHtml(r.question)}</div>
+            <div class="pd-test-sol-ans">
+              <div><strong>Student:</strong> <span class="${r.isCorrect ? 'pd-ans-correct' : 'pd-ans-wrong'}">${escapeHtml(r.studentAnswer)}</span></div>
+              ${!r.isCorrect ? `<div><strong>Correct:</strong> <span class="pd-ans-correct">${escapeHtml(r.correctAnswer)}</span></div>` : ''}
+            </div>
+            <div class="pd-test-sol-steps">${r.solution || ''}</div>
+          </div>
+        `).join('');
+      }
+      return `
+        <div class="pd-test-card">
+          <div class="pd-test-header" onclick="document.getElementById('${testId}').style.display = (document.getElementById('${testId}').style.display === 'block' ? 'none' : 'block');">
+            <div class="pd-test-info">
+              <span class="pd-test-chapter">${escapeHtml(t.chapterTitle || t.chapterSlug)}</span>
+              <span class="pd-test-date">${formatDate(t.timestamp)}</span>
+            </div>
+            <div class="pd-test-score">
+              <span class="pd-test-pct pd-pct-${pctClass}">${pct}%</span>
+              <span class="pd-test-detail">${t.correctAnswers}/${t.totalQuestions} correct · ${t.earnedMarks}/${t.totalMarks} marks</span>
+              <span class="pd-test-expand">▼ click to view solutions</span>
+            </div>
+          </div>
+          <div class="pd-test-solutions" id="${testId}" style="display:none;">
+            ${solsHtml}
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
   return `
     <article class="pd-student-card">
       <header class="pd-student-header">
@@ -535,6 +683,9 @@ function renderStudentCard(student) {
           </tbody>
         </table>
       </div>
+
+      <div class="pd-section-title">📋 Test Paper Attempts (with detailed solutions)</div>
+      <div class="pd-test-list">${testHtml}</div>
 
       <div class="pd-section-title">🛡️ Proctor Logs</div>
       <div class="pd-log-list">${logHtml}</div>

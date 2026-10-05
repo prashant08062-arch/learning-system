@@ -93,6 +93,7 @@
     <button class="tab" data-tab="reallife">🌍 Real Life</button>
     <button class="tab" data-tab="guided">🎯 Guided Practice</button>
     <button class="tab" data-tab="selftest">🧪 Self-Test</button>
+    <button class="tab tab-testpaper" data-tab="testpaper" style="display:none;">📋 Test Paper</button>
   </div>
 
   <!-- LECTURE -->
@@ -126,6 +127,11 @@
     <div class="content self-test" id="selftestContent"></div>
   </div>
 
+  <!-- TEST PAPER (Maths only) -->
+  <div class="section" id="testpaper">
+    <div class="content" id="testpaperContent"></div>
+  </div>
+
   <!-- Exit-fullscreen floating button (only visible in fullscreen mode) -->
   <button class="exit-fullscreen-btn" id="exitFullscreenBtn">✕ Exit Fullscreen</button>
 </div>
@@ -144,5 +150,6 @@
 <!-- Proctor (progress tracking + auto-proctor) — runs alongside app.js -->
 <script src="js/proctor.js"></script>
 <script src="js/app.js"></script>
+<script src="js/testpaper.js"></script>
 </body>
 </html>

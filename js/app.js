@@ -217,6 +217,23 @@ function renderChapter() {
   renderGuidedPractice();
   renderSelfTest();
 
+  // Test Paper tab — only show for Maths chapters
+  var testpaperTab = document.querySelector('.tab-testpaper');
+  if (testpaperTab) {
+    var subj = currentChapterData.meta.subject || (currentSubject ? currentSubject.id : '');
+    if (subj === 'maths' && window.TestPaper) {
+      testpaperTab.style.display = '';
+      // Render the test paper intro
+      window.TestPaper.render(currentChapterData);
+    } else {
+      testpaperTab.style.display = 'none';
+      // If the test paper tab was active, switch back to lecture
+      if (testpaperTab.classList.contains('active')) {
+        switchTab('lecture');
+      }
+    }
+  }
+
   // Populate voice-select dropdowns after rendering (they are created dynamically)
   if (window.TTS && TTS.pickVoice) {
     setTimeout(() => TTS.pickVoice(), 100);
