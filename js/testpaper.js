@@ -1446,15 +1446,43 @@ function gcd(a, b) {
 // TEST PAPER GENERATION
 // ============================================================
 
+// Section structure: A(1m×6) + B(2m×4) + C(3m×3) + D(5m×1) + E(4m×1) = 15 questions, 32 marks
+const SECTIONS = [
+  { id: 'A', label: 'Section A — Multiple Choice & Very Short Answer', marks: 1, count: 6 },
+  { id: 'B', label: 'Section B — Short Answer Questions (Type I)',    marks: 2, count: 4 },
+  { id: 'C', label: 'Section C — Short Answer Questions (Type II)',   marks: 3, count: 3 },
+  { id: 'D', label: 'Section D — Long Answer / Application Question', marks: 5, count: 1 },
+  { id: 'E', label: 'Section E — Case Study / Word Problem',          marks: 4, count: 1 }
+];
+
 function generateTestPaper(chapterSlug) {
   const bank = QUESTION_BANK[chapterSlug];
   if (!bank || bank.length === 0) return null;
 
-  // Generate one question from each generator
-  const questions = bank.map((gen, i) => {
+  // Total questions needed = 15 (6+4+3+1+1)
+  // We call generators round-robin to produce 15 distinct questions.
+  // Since each generator uses random values, calling it twice
+  // produces different questions.
+  const questions = [];
+  for (let i = 0; i < 15; i++) {
+    const gen = bank[i % bank.length];
     const q = gen();
-    q.number = i + 1;
-    return q;
+    q.generatorIndex = i % bank.length;
+    questions.push(q);
+  }
+
+  // Assign sections based on the SECTIONS config
+  let qIdx = 0;
+  let qNum = 1;
+  SECTIONS.forEach(sec => {
+    for (let i = 0; i < sec.count; i++) {
+      const q = questions[qIdx];
+      q.section = sec.id;
+      q.sectionLabel = sec.label;
+      q.marks = sec.marks;  // override marks to match section
+      q.number = qNum++;
+      qIdx++;
+    }
   });
 
   return questions;
@@ -1506,11 +1534,18 @@ function renderTestPaperTab(chapterData) {
     <div class="testpaper-intro">
       <h2>📋 Full-Length Test Paper</h2>
       <p>${chapterData.meta.title}</p>
+      <div class="testpaper-structure">
+        <div class="testpaper-struct-row"><span class="testpaper-struct-sec">A</span> Multiple Choice &amp; Very Short Answer <span class="testpaper-struct-marks">1 × 6 = 6</span></div>
+        <div class="testpaper-struct-row"><span class="testpaper-struct-sec">B</span> Short Answer (Type I) <span class="testpaper-struct-marks">2 × 4 = 8</span></div>
+        <div class="testpaper-struct-row"><span class="testpaper-struct-sec">C</span> Short Answer (Type II) <span class="testpaper-struct-marks">3 × 3 = 9</span></div>
+        <div class="testpaper-struct-row"><span class="testpaper-struct-sec">D</span> Long Answer / Application <span class="testpaper-struct-marks">5 × 1 = 5</span></div>
+        <div class="testpaper-struct-row"><span class="testpaper-struct-sec">E</span> Case Study / Word Problem <span class="testpaper-struct-marks">4 × 1 = 4</span></div>
+        <div class="testpaper-struct-total">Total: 15 questions · 32 marks</div>
+      </div>
       <div class="testpaper-info">
-        <span>📝 ${bank.length} questions</span>
-        <span>⏱ No time limit (work at your own pace)</span>
+        <span>⏱ No time limit</span>
         <span>🎲 Randomized each attempt</span>
-        <span>📊 Detailed solutions recorded for parents</span>
+        <span>📊 Solutions recorded for parents</span>
       </div>
       <button class="testpaper-start-btn" id="testpaperStartBtn">🚀 Start Test</button>
     </div>
@@ -1533,6 +1568,17 @@ function startTest(chapterData) {
 
   const totalMarks = questions.reduce((s, q) => s + q.marks, 0);
 
+  // Group questions by section for rendering
+  const sections = [];
+  let currentSection = null;
+  questions.forEach(q => {
+    if (!currentSection || currentSection.id !== q.section) {
+      currentSection = { id: q.section, label: q.sectionLabel, marks: q.marks, questions: [] };
+      sections.push(currentSection);
+    }
+    currentSection.questions.push(q);
+  });
+
   let html = `
     <div class="testpaper-active">
       <div class="testpaper-header">
@@ -1545,22 +1591,31 @@ function startTest(chapterData) {
       <form id="testpaperForm">
   `;
 
-  questions.forEach((q, i) => {
-    html += `<div class="testpaper-question" data-qnum="${q.number}">
-      <div class="testpaper-q-header">
-        <span class="testpaper-q-num">Q${i + 1}</span>
-        <span class="testpaper-q-marks">[${q.marks} marks]</span>
-      </div>
-      <div class="testpaper-q-text">${q.question}</div>
-      <div class="testpaper-options">
+  let qCounter = 0;
+  sections.forEach(sec => {
+    html += `<div class="testpaper-section-header">
+      <span class="testpaper-section-id">Section ${sec.id}</span>
+      <span class="testpaper-section-label">${sec.label.replace(/^Section [A-E] — /, '')}</span>
+      <span class="testpaper-section-marks">${sec.marks} × ${sec.questions.length} = ${sec.marks * sec.questions.length} marks</span>
+    </div>`;
+    sec.questions.forEach(q => {
+      html += `<div class="testpaper-question" data-qnum="${q.number}">
+        <div class="testpaper-q-header">
+          <span class="testpaper-q-num">Q${q.number}</span>
+          <span class="testpaper-q-marks">[${q.marks} mark${q.marks > 1 ? 's' : ''}]</span>
+        </div>
+        <div class="testpaper-q-text">${q.question}</div>
+        <div class="testpaper-options">
   `;
-    q.options.forEach((opt, oi) => {
-      html += `<label class="testpaper-option">
-        <input type="radio" name="q${i}" value="${escapeAttr(opt)}" />
-        <span>${escapeHtml(opt)}</span>
-      </label>`;
+      q.options.forEach((opt, oi) => {
+        html += `<label class="testpaper-option">
+          <input type="radio" name="q${qCounter}" value="${escapeAttr(opt)}" />
+          <span>${escapeHtml(opt)}</span>
+        </label>`;
+      });
+      html += `</div></div>`;
+      qCounter++;
     });
-    html += `</div></div>`;
   });
 
   html += `
@@ -1597,6 +1652,8 @@ function gradeTest(chapterData, questions) {
     }
     results.push({
       number: q.number,
+      section: q.section,
+      sectionLabel: q.sectionLabel,
       question: q.question,
       studentAnswer: studentAnswer,
       correctAnswer: q.answer,
@@ -1646,25 +1703,43 @@ function gradeTest(chapterData, questions) {
         <h3>📝 Detailed Solutions</h3>
   `;
 
-  results.forEach((r, i) => {
-    html += `
-      <div class="testpaper-solution-card ${r.isCorrect ? 'correct' : 'incorrect'}">
-        <div class="testpaper-sol-header">
-          <span class="testpaper-sol-num">Q${i + 1}</span>
-          <span class="testpaper-sol-marks">[${r.marks} marks]</span>
-          <span class="testpaper-sol-result">${r.isCorrect ? '✓ Correct' : '✗ Incorrect'}</span>
+  // Group results by section for display
+  const sectionsMap = {};
+  results.forEach(r => {
+    const sid = r.section || 'A';
+    if (!sectionsMap[sid]) sectionsMap[sid] = [];
+    sectionsMap[sid].push(r);
+  });
+  const sectionIds = Object.keys(sectionsMap).sort();
+  sectionIds.forEach(sid => {
+    const secQuestions = sectionsMap[sid];
+    const secLabel = secQuestions[0].sectionLabel || ('Section ' + sid);
+    const secMarks = secQuestions[0].marks;
+    html += `<div class="testpaper-sol-section-header">
+      <span class="testpaper-sol-section-id">Section ${sid}</span>
+      <span class="testpaper-sol-section-label">${secLabel.replace(/^Section [A-E] — /, '')}</span>
+      <span class="testpaper-sol-section-marks">${secMarks} × ${secQuestions.length} = ${secMarks * secQuestions.length} marks</span>
+    </div>`;
+    secQuestions.forEach(r => {
+      html += `
+        <div class="testpaper-solution-card ${r.isCorrect ? 'correct' : 'incorrect'}">
+          <div class="testpaper-sol-header">
+            <span class="testpaper-sol-num">Q${r.number}</span>
+            <span class="testpaper-sol-marks">[${r.marks} mark${r.marks > 1 ? 's' : ''}]</span>
+            <span class="testpaper-sol-result">${r.isCorrect ? '✓ Correct' : '✗ Incorrect'}</span>
+          </div>
+          <div class="testpaper-sol-question">${r.question}</div>
+          <div class="testpaper-sol-answers">
+            <div class="testpaper-sol-row"><strong>Your answer:</strong> <span class="${r.isCorrect ? 'ans-correct' : 'ans-wrong'}">${escapeHtml(r.studentAnswer)}</span></div>
+            ${!r.isCorrect ? `<div class="testpaper-sol-row"><strong>Correct answer:</strong> <span class="ans-correct">${escapeHtml(r.correctAnswer)}</span></div>` : ''}
+          </div>
+          <div class="testpaper-sol-steps">
+            <strong>Solution:</strong><br>
+            ${r.solution}
+          </div>
         </div>
-        <div class="testpaper-sol-question">${r.question}</div>
-        <div class="testpaper-sol-answers">
-          <div class="testpaper-sol-row"><strong>Your answer:</strong> <span class="${r.isCorrect ? 'ans-correct' : 'ans-wrong'}">${escapeHtml(r.studentAnswer)}</span></div>
-          ${!r.isCorrect ? `<div class="testpaper-sol-row"><strong>Correct answer:</strong> <span class="ans-correct">${escapeHtml(r.correctAnswer)}</span></div>` : ''}
-        </div>
-        <div class="testpaper-sol-steps">
-          <strong>Solution:</strong><br>
-          ${r.solution}
-        </div>
-      </div>
-    `;
+      `;
+    });
   });
 
   html += `
