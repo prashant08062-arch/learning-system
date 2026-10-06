@@ -519,29 +519,40 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
         }
       });
       // 2) HYBRID: reveal ONLY the current beat's SVG element.
-      // Each beat is a complete, self-contained illustration — so
-      // when the beat changes, the previous illustration disappears
-      // and the new one takes its place. (Fresh beat = fresh screen.)
+      // Uses RANK-BASED matching: sort elements by data-beat value,
+      // then the Nth element in sorted order = beat N. This handles
+      // SVGs where data-beat starts at 2 or has gaps — the first
+      // element still shows at beat 1.
       if (boardEls && boardEls.length) {
-        boardEls.forEach(el => {
-          const bn = parseInt(el.dataset.beat, 10);
-          el.classList.toggle('visible', bn === state.currentBeat + 1);
+        const sortedEls = Array.from(boardEls).sort((a, b) =>
+          parseInt(a.dataset.beat, 10) - parseInt(b.dataset.beat, 10)
+        );
+        const currentRank = state.currentBeat; // 0-based rank
+        sortedEls.forEach((el, i) => {
+          const isCurrent = i === currentRank;
+          el.classList.toggle('visible', isCurrent);
           el.classList.remove('pulse');
-          if (bn === state.currentBeat + 1) {
+          if (isCurrent) {
             void el.offsetWidth;
             el.classList.add('pulse');
           }
         });
       }
     } else {
-      // Pure-SVG chapters (e.g., Civics): accumulate — each beat
-      // adds to the diagram, building it up like a teacher drawing
-      // on a board.
-      boardEls.forEach(el => {
-        const bn = parseInt(el.dataset.beat, 10);
-        el.classList.toggle('visible', bn <= state.currentBeat + 1);
+      // Pure-SVG chapters: accumulate — each beat adds to the diagram.
+      // Uses RANK-BASED matching: sort elements by data-beat value,
+      // then show the first (currentBeat + 1) elements. This handles
+      // SVGs where data-beat starts at 2 or has gaps — the first
+      // element still shows at beat 1.
+      const sortedEls = Array.from(boardEls).sort((a, b) =>
+        parseInt(a.dataset.beat, 10) - parseInt(b.dataset.beat, 10)
+      );
+      const showCount = state.currentBeat + 1; // 1-based count
+      sortedEls.forEach((el, i) => {
+        const shouldShow = i < showCount;
+        el.classList.toggle('visible', shouldShow);
         el.classList.remove('pulse');
-        if (bn === state.currentBeat + 1) {
+        if (i === showCount - 1) {
           void el.offsetWidth;
           el.classList.add('pulse');
         }
@@ -562,6 +573,8 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
 
   function clearTimers() { clearTimeout(state.playTimer); }
 
+  let currentTTS = null;  // Track the current TTS handle to prevent stale onEnd callbacks
+
   function goToBeat(index) {
     if (index < 0 || index >= state.beats.length) return;
     state.currentBeat = index;
@@ -569,16 +582,32 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
     if (!state.isPlaying) return;
     clearTimers();
 
+    // Capture the beat index at the time of this call. If a stale
+    // onEnd callback fires later (from a previous TTS.speak that was
+    // cancelled), it will check this capture and NOT advance.
+    const beatAtCallTime = state.currentBeat;
+
     const advance = () => {
       if (!state.isPlaying) return;
+      // Only advance if we're still on the same beat — prevents
+      // double-advancing if a stale onEnd fires after a new beat
+      // has already started.
+      if (state.currentBeat !== beatAtCallTime) return;
       if (state.currentBeat < state.beats.length - 1) goToBeat(state.currentBeat + 1);
       else { state.isPlaying = false; playBtn.textContent = '▶'; }
     };
 
     if (state.voiceOn && window.TTS) {
-      TTS.speak(state.beats[state.currentBeat], {
+      // Stop any previous speech cleanly
+      if (currentTTS && currentTTS.cancel) currentTTS.cancel();
+      TTS.stopSpeaking();
+      currentTTS = TTS.speak(state.beats[state.currentBeat], {
         rate: state.ttsRate,
-        onEnd: () => { state.playTimer = setTimeout(advance, 500); }
+        onEnd: () => {
+          // Only schedule advance if we're still on this beat
+          if (state.currentBeat !== beatAtCallTime) return;
+          state.playTimer = setTimeout(advance, 500);
+        }
       });
     } else {
       const estMs = Math.max(2500, (state.beats[state.currentBeat].length / 14) * 1000);
@@ -621,6 +650,7 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
     state.isPlaying = false;
     playBtn.textContent = '▶';
     clearTimers();
+    if (currentTTS && currentTTS.cancel) currentTTS.cancel();
     if (window.TTS) TTS.stopSpeaking();
   };
 
@@ -799,27 +829,35 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
       state._imImgEls.forEach((img, i) => {
         img.style.opacity = (i === targetIdx) ? '1' : '0';
       });
-      // 2) HYBRID: reveal ONLY the current beat's SVG element
-      // (fresh beat = fresh screen — previous beat's illustration
-      // disappears when the new one appears)
+      // 2) HYBRID: reveal ONLY the current beat's SVG element.
+      // Uses RANK-BASED matching (same as renderBoard).
       if (state._imBoardEls && state._imBoardEls.length) {
-        state._imBoardEls.forEach(el => {
-          const bn = parseInt(el.dataset.beat, 10);
-          el.classList.toggle('visible', bn === state.currentBeat + 1);
+        const sortedEls = Array.from(state._imBoardEls).sort((a, b) =>
+          parseInt(a.dataset.beat, 10) - parseInt(b.dataset.beat, 10)
+        );
+        const currentRank = state.currentBeat;
+        sortedEls.forEach((el, i) => {
+          const isCurrent = i === currentRank;
+          el.classList.toggle('visible', isCurrent);
           el.classList.remove('pulse');
-          if (bn === state.currentBeat + 1) {
+          if (isCurrent) {
             void el.offsetWidth;
             el.classList.add('pulse');
           }
         });
       }
     } else if (state._imBoardEls && !isGlobeType) {
-      // Pure-SVG chapters: accumulate (build up diagram)
-      state._imBoardEls.forEach(el => {
-        const bn = parseInt(el.dataset.beat, 10);
-        el.classList.toggle('visible', bn <= state.currentBeat + 1);
+      // Pure-SVG chapters: accumulate (build up diagram).
+      // Uses RANK-BASED matching (same as renderBoard).
+      const sortedEls = Array.from(state._imBoardEls).sort((a, b) =>
+        parseInt(a.dataset.beat, 10) - parseInt(b.dataset.beat, 10)
+      );
+      const showCount = state.currentBeat + 1;
+      sortedEls.forEach((el, i) => {
+        const shouldShow = i < showCount;
+        el.classList.toggle('visible', shouldShow);
         el.classList.remove('pulse');
-        if (bn === state.currentBeat + 1) {
+        if (i === showCount - 1) {
           void el.offsetWidth;
           el.classList.add('pulse');
         }

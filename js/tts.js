@@ -100,28 +100,112 @@ function speak(text, opts = {}) {
     return null;
   }
   speech.cancel();
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.rate = opts.rate || 1;
-  utter.pitch = opts.pitch || 1;
-  utter.volume = opts.volume || 1;
-  utter.voice = opts.voice || preferredVoice;
-  utter.lang = (utter.voice && utter.voice.lang) || 'en-IN';
 
+  // Split long text into sentence-sized chunks. Chrome's
+  // speechSynthesis has a known bug where utterances longer than
+  // ~15 seconds get cut off without firing onend. By splitting
+  // into sentences and speaking them sequentially, each chunk is
+  // short enough to complete reliably.
+  const chunks = chunkText(text);
+  if (chunks.length === 0) {
+    if (opts.onEnd) opts.onEnd();
+    return null;
+  }
+
+  let chunkIdx = 0;
   let called = false;
+  let currentUtter = null;
+
   const finishOnce = () => {
     if (called) return;
     called = true;
     if (opts.onEnd) opts.onEnd();
   };
 
-  const estimatedMs = Math.max(1500, (text.length / 14) * 1000 / (opts.rate || 1));
-  const safety = setTimeout(finishOnce, estimatedMs + 4000);
+  // Safety timeout: if speech stalls (Chrome bug), force-finish
+  // after a generous estimate. Reset on each chunk to avoid
+  // premature firing.
+  let safetyTimer = null;
+  const resetSafety = () => {
+    if (safetyTimer) clearTimeout(safetyTimer);
+    const chunkMs = Math.max(2000, (chunks[chunkIdx].length / 14) * 1000 / (opts.rate || 1));
+    safetyTimer = setTimeout(finishOnce, chunkMs + 6000);
+  };
 
-  utter.onend = () => { clearTimeout(safety); finishOnce(); };
-  utter.onerror = () => { clearTimeout(safety); finishOnce(); };
+  const speakNextChunk = () => {
+    if (chunkIdx >= chunks.length) {
+      if (safetyTimer) clearTimeout(safetyTimer);
+      finishOnce();
+      return;
+    }
+    const chunk = chunks[chunkIdx];
+    const utter = new SpeechSynthesisUtterance(chunk);
+    utter.rate = opts.rate || 1;
+    utter.pitch = opts.pitch || 1;
+    utter.volume = opts.volume || 1;
+    utter.voice = opts.voice || preferredVoice;
+    utter.lang = (utter.voice && utter.voice.lang) || 'en-IN';
 
-  speech.speak(utter);
-  return utter;
+    utter.onend = () => {
+      if (safetyTimer) clearTimeout(safetyTimer);
+      chunkIdx++;
+      speakNextChunk();
+    };
+    utter.onerror = () => {
+      if (safetyTimer) clearTimeout(safetyTimer);
+      chunkIdx++;
+      speakNextChunk();
+    };
+
+    currentUtter = utter;
+    resetSafety();
+    speech.speak(utter);
+  };
+
+  speakNextChunk();
+  return { cancel: () => { called = true; if (safetyTimer) clearTimeout(safetyTimer); speech.cancel(); } };
+}
+
+// Split text into sentence-sized chunks (max ~200 chars each).
+// Splits on sentence boundaries (. ! ? …) and long dashes.
+function chunkText(text) {
+  if (!text || text.length < 180) return [text];
+  const chunks = [];
+  // Split on sentence-ending punctuation followed by space, keeping the punctuation
+  const sentences = text.match(/[^.!?…]+[.!?…]+|\S+[^.!?…]*$/g) || [text];
+  let current = '';
+  for (const s of sentences) {
+    if ((current + s).length > 200) {
+      if (current) { chunks.push(current); current = ''; }
+      // If a single sentence is very long, split on commas
+      if (s.length > 200) {
+        const parts = s.split(/,\s*/);
+        let part = '';
+        for (const p of parts) {
+          if ((part + p).length > 200) {
+            if (part) { chunks.push(part); part = ''; }
+            if (p.length > 200) {
+              // Hard-split very long pieces
+              for (let i = 0; i < p.length; i += 200) {
+                chunks.push(p.slice(i, i + 200));
+              }
+            } else {
+              part = p + ', ';
+            }
+          } else {
+            part += p + ', ';
+          }
+        }
+        if (part) chunks.push(part);
+      } else {
+        chunks.push(s);
+      }
+    } else {
+      current += s;
+    }
+  }
+  if (current) chunks.push(current);
+  return chunks;
 }
 
 function stopSpeaking() {
