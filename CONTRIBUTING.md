@@ -53,6 +53,8 @@ learning-system/
 │   ├── tts.js                       # Web Speech API TTS with sentence chunking
 │   ├── testpaper.js                 # CBSE-style test paper engine (Maths only)
 │   │                               # 5-section format, 45-min timer, image upload
+│   ├── enhancements.js              # Progressive hints + contextual doubts + mastery tracking
+│   │                               # (offline-first enhancement layer for guided practice + lectures)
 │   ├── globe.js                     # Three.js Earth viewer (for geography chapter)
 │   └── globe-mirror-atlas.js        # Mirror & lens 3D atlas (for physics chapter)
 ├── vendor/three.min.js              # Three.js r128 (MIT) bundled locally
@@ -739,6 +741,7 @@ Add to `index.html` below the existing subject grid:
 - [ ] All 4 (or more) lectures have correct number of beats vs SVG elements / images
 - [ ] **SVG beat sync: `data-beat` values can start at any number — the rank-based matching handles gaps. But for best results, use 1, 2, 3, ..., N**
 - [ ] **If this is a Maths chapter: add test paper question generators to `js/testpaper.js` `QUESTION_BANK[slug]`**
+- [ ] **If this chapter has guided practice: run `python3 /home/z/my-project/scripts/generate_enhancements_cli.py` to generate progressive hints, contextual doubts, and topic tags**
 - [ ] **After editing SVGs: re-run `python3 /home/z/my-project/scripts/universal_animations.py` to add animation classes**
 - [ ] Notes HTML contains "Before We Begin" vocabulary section at the top
 - [ ] Notes HTML contains "Key Notes" with timeline, key leaders table, etc.
@@ -1072,6 +1075,143 @@ Shows per-student:
 
 ---
 
+## 🚀 Enhancement Layer (js/enhancements.js)
+
+Three offline-first features that add classroom-like engagement:
+progressive hints, contextual doubts, and mastery tracking.
+All three work 100% offline (no server, no API calls at runtime).
+
+### 1. Progressive Hints (Guided Practice)
+
+Guided practice problems now show **3 levels of hints** that appear
+progressively as the student struggles:
+
+| Trigger | Hint Level | Content |
+|---------|-----------|----------|
+| After 2 wrong attempts | Level 1 | Concept reminder (don't give away the answer) |
+| After 3 wrong attempts | Level 2 | Formula/method (partial solution) |
+| After 4 wrong attempts | Level 3 | Nearly complete solution (one step away) |
+
+**Data format** in `chapter.js` guided practice steps:
+```javascript
+"steps": [
+  {
+    "prompt": "Find the profit if CP = ₹200 and SP = ₹250.",
+    "validate": { "type": "match", "answers": ["50", "₹50", "Rs 50"] },
+    "hints": [
+      "Hint 1: Profit = Selling Price minus Cost Price",
+      "Hint 2: Profit = ₹250 - ₹200 = ?",
+      "Hint 3: The answer is ₹50. You spent ₹200 and got ₹250, so you gained ₹50."
+    ],
+    "explanation": "Profit = SP - CP = 250 - 200 = ₹50"
+  }
+]
+```
+
+Falls back to old single-hint behavior (`step.hint` string) if
+`step.hints` array isn't present.
+
+### 2. Contextual Doubts (Lecture Beats)
+
+Each beat in the transcript can have pre-generated FAQs that students
+expand by clicking a "💬 Common Questions" button.
+
+**Data format** in `chapter.js` at lecture level:
+```javascript
+"lectures": [
+  {
+    "id": "profit_loss",
+    "beats": ["Namaste, my little friend! Today we learn about profit...", ...],
+    "beatDoubts": [
+      {
+        "beat": 1,
+        "doubts": [
+          { "q": "Why is profit calculated on cost price?", "a": "Because CP is your investment..." },
+          { "q": "What if SP is less than CP?", "a": "Then it's a loss, not a profit..." }
+        ]
+      },
+      { "beat": 2, "doubts": [...] }
+    ]
+  }
+]
+```
+
+The doubt button appears automatically when `beatDoubts` is present.
+Clicking expands a panel showing Q&A pairs (click question to reveal
+answer). 100% offline — all content pre-generated at build time.
+
+### 3. Mastery Tracking
+
+Tracks per-topic accuracy across guided practice problems and gates
+progression based on mastery level.
+
+**Topic tagging** in `chapter.js` guided practice:
+```javascript
+"guidedPractice": [
+  {
+    "title": "Profit calculation",
+    "topic": "profit_loss",       // ← add this field
+    "difficulty": "Easy",
+    "steps": [...]
+  }
+]
+```
+
+**Mastery levels** (stored in `learning_system_mastery_<email>`):
+
+| Level | Condition | Badge |
+|-------|-----------|-------|
+| `untried` | 0 attempts | (none) |
+| `struggling` | <50% accuracy after 3+ attempts | 💪 Keep Trying |
+| `learning` | 50-79% accuracy | 📖 Learning |
+| `mastered` | ≥80% accuracy with ≥3 attempts | ✅ Mastered |
+
+**Progression gate:** If a student has <50% accuracy after 3+ attempts
+on a topic, a prompt appears: "💡 You seem to be finding this tricky.
+Try reviewing the lecture, then come back."
+
+**Mastery badge** shown next to problem title in guided practice.
+
+### Generating Enhancement Content with LLM
+
+Use `scripts/generate_enhancements_cli.py` to auto-generate hints,
+doubts, and topic tags for any chapter:
+
+```bash
+# Generate for a specific chapter (modify CHAPTER_PATH in the script)
+python3 /home/z/my-project/scripts/generate_enhancements_cli.py
+```
+
+The script uses the `z-ai` CLI (free LLM) to:
+1. Tag each guided practice problem with a `topic` field
+2. Generate 3 progressive hints per guided practice step
+3. Generate 2 contextual doubt FAQs per lecture beat
+
+Output is written directly into the chapter.js file. Review the
+LLM-generated content before pushing.
+
+**Current coverage:**
+- `fractions_in_disguise` (Profit & Loss): 8 topics, 54 hints, 130 doubts
+
+**To add for other chapters:** Copy the script, change `CHAPTER_PATH`,
+run. Cost: ~₹0 (free LLM CLI). Time: ~5-10 minutes per chapter.
+
+### Hooks in app.js
+
+The enhancement layer hooks into app.js at 4 points:
+
+| Hook | Location | What it does |
+|------|----------|-------------|
+| `injectDoubtButton()` | `renderTranscript()` | Adds 💬 button to each beat |
+| `showProgressiveHint()` | `gpCheckAnswer()` (wrong branch) | Shows level 1/2/3 hints |
+| `recordAttempt(true/false)` | `gpCheckAnswer()` (both branches) | Updates mastery store |
+| `renderMasteryBadge()` + `checkGateAndPrompt()` | `gpLoad()` | Shows badge + gate prompt |
+
+All hooks check `if (window.Enhancements)` before calling, so the
+system degrades gracefully if `enhancements.js` isn't loaded.
+
+---
+
 ## 📝 Final Note — the User's Voice
 
 When the user invokes this prompt, they will say something like:
@@ -1085,9 +1225,15 @@ Your job is to:
 4. **Include a "Before We Begin" section** explaining 10-15 key terms in story-form.
 5. **Add real-life scenarios, guided practice, self-test, practice cards** matching the chapter content.
 6. **If the user asks for a "hierarchy" or "chronological list"** — add an SVG diagram + HTML table in the notes section.
-7. **Test in the browser, verify with VLM, push to GitHub.**
+7. **If this is a Maths chapter with guided practice:** run `python3 /home/z/my-project/scripts/generate_enhancements_cli.py` (after updating `CHAPTER_PATH` in the script) to auto-generate progressive hints, contextual doubts, and topic tags.
+8. **Test in the browser, verify with VLM, push to GitHub.**
 
 Do not ask clarifying questions if the user's intent is clear from the PDF and the existing chapters. Just build it. **The pattern is well-established — follow it.**
+
+**After building a new chapter, always run these post-processing scripts:**
+1. `python3 /home/z/my-project/scripts/universal_animations.py` — adds animation classes to all SVGs
+2. `python3 /home/z/my-project/scripts/generate_enhancements_cli.py` — generates progressive hints, contextual doubts, and topic tags (update `CHAPTER_PATH` in the script first)
+3. If Maths: add test paper generators to `js/testpaper.js`
 
 ---
 
