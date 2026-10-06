@@ -471,6 +471,10 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
       const div = document.createElement('div');
       div.className = 'beat ' + (i === state.currentBeat ? 'current' : i < state.currentBeat ? 'past' : 'future');
       div.innerHTML = `<div class="beat-number">Beat ${i + 1} of ${state.beats.length}</div><div class="beat-text">${beat}</div>`;
+      // Inject "💬 Common Doubts" button if this beat has pre-generated FAQs
+      if (window.Enhancements && window.Enhancements.injectDoubtButton) {
+        window.Enhancements.injectDoubtButton(div, i, lec);
+      }
       transcriptEl.appendChild(div);
     });
     const cur = transcriptEl.querySelector('.beat.current');
@@ -1718,7 +1722,24 @@ function gpLoad(idx) {
   gpState.attempts = 0;
 
   const p = problems[idx];
-  document.getElementById('gpNum').textContent = `Problem ${idx + 1} of ${problems.length} · ${p.title}`;
+  var masteryBadge = '';
+  if (window.Enhancements && window.Enhancements.renderMasteryBadge && currentChapter) {
+    masteryBadge = window.Enhancements.renderMasteryBadge(currentChapter.slug, p.topic || p.title);
+  }
+  document.getElementById('gpNum').innerHTML = `Problem ${idx + 1} of ${problems.length} · ${p.title}` + (masteryBadge ? ' ' + masteryBadge : '');
+
+  // Show gate prompt if student is struggling with this topic
+  if (window.Enhancements && window.Enhancements.checkGateAndPrompt && currentChapter) {
+    var gatePrompt = window.Enhancements.checkGateAndPrompt(currentChapter.slug, p.topic || p.title, p.title);
+    if (gatePrompt) {
+      var hintEl = document.getElementById('gpHint');
+      if (hintEl) {
+        hintEl.classList.add('show');
+        hintEl.innerHTML = gatePrompt;
+      }
+    }
+  }
+
   document.getElementById('gpBadge').textContent = p.difficulty;
   document.getElementById('gpBadge').className = 'gp-badge ' + p.diffClass;
   document.getElementById('gpStatement').textContent = p.statement;
@@ -1813,6 +1834,11 @@ function gpCheckAnswer() {
       window.Proctor.trackPractice(currentChapter.slug, true);
     }
 
+    // Mastery tracking: record the correct attempt
+    if (window.Enhancements && window.Enhancements.recordAttempt && currentChapter) {
+      window.Enhancements.recordAttempt(currentChapter.slug, p.topic || p.title, true);
+    }
+
     const feedback = document.getElementById('gpFeedback');
     feedback.className = 'gp-feedback show success';
     feedback.textContent = step.explanation;
@@ -1845,10 +1871,20 @@ function gpCheckAnswer() {
     feedback.className = 'gp-feedback show error';
     feedback.textContent = 'Try again.';
 
-    if (gpState.attempts >= 5) {
+    // Progressive hints: show level 1 after 2 wrong, level 2 after 3,
+    // level 3 (full solution) after 4. Falls back to old single-hint
+    // behaviour if step.hints array isn't present.
+    if (window.Enhancements && window.Enhancements.showProgressiveHint) {
+      window.Enhancements.showProgressiveHint(step, gpState);
+    } else if (gpState.attempts >= 5) {
       const hint = document.getElementById('gpHint');
       hint.classList.add('show');
       hint.textContent = step.hint || "You're close — keep trying. Re-read the question carefully.";
+    }
+
+    // Mastery tracking: record the wrong attempt
+    if (window.Enhancements && window.Enhancements.recordAttempt && currentChapter) {
+      window.Enhancements.recordAttempt(currentChapter.slug, p.topic || p.title, false);
     }
 
     setTimeout(() => input.classList.remove('wrong'), 600);

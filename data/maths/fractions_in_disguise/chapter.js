@@ -39,6 +39,86 @@ window.CHAPTER_DATA = {
         "The yellow strip covers 50 squares out of 100. So that is 50%. Half of the strip is yellow — like cutting a pizza into two equal halves.",
         "And the pink strip covers 75 squares out of 100. That is 75%. Notice how each coloured block is just a fraction of the whole strip — but instead of writing it as 25/100, we write the short, snappy form: 25%.",
         "Here is the secret. The symbol '%' is read as 'per cent'. It comes from the Latin phrase 'per centum', which means 'by the hundred' or 'out of hundred'. So 25% simply means 25 out of every 100. And 25% = 25/100 = 1/4 = 0.25 — three ways of writing the very same number. In the next story, we will learn how to turn any fraction into a percentage. Ready? Let us turn the page..."
+      ],
+      "beatDoubts": [
+        {
+          "beat": 1,
+          "doubts": [
+            {
+              "q": "What does 'fractions wearing a clever disguise' mean?",
+              "a": "It means percentages are fractions that look different. 50% is the same as 50/100 or 1/2. The '%' sign is their disguise!"
+            },
+            {
+              "q": "Why are percentages called 'friendly fractions'?",
+              "a": "Percentages are easier to understand than regular fractions. They're out of 100, which makes comparing parts of a whole much simpler."
+            }
+          ]
+        },
+        {
+          "beat": 2,
+          "doubts": [
+            {
+              "q": "Why is the strip divided into 100 squares and not 50 or 200?",
+              "a": "Because percent means 'per hundred'. Dividing into 100 makes it easy to understand parts of a whole. Each square represents 1% of the whole."
+            },
+            {
+              "q": "Can we use this strip method for things other than money?",
+              "a": "Yes! The strip can represent anything whole - pizza, chocolate, or even time. Each small square shows 1% of whatever the whole represents."
+            }
+          ]
+        },
+        {
+          "beat": 3,
+          "doubts": [
+            {
+              "q": "Why do we use percent instead of just saying 25 out of 100?",
+              "a": "Percent makes it easier to compare different amounts. 25% is simpler to understand than 25/100 when comparing to, say, 30% or 10%."
+            },
+            {
+              "q": "Is percent only used for squares?",
+              "a": "No, percent can be used for anything. It's just a way to show parts of a whole, like 50% of students or 75% of a cake."
+            }
+          ]
+        },
+        {
+          "beat": 4,
+          "doubts": [
+            {
+              "q": "Why is 50% the same as half?",
+              "a": "Percent means 'per hundred'. 50% means 50 out of 100, which is exactly half of the whole. Just like 50 cents is half of a dollar."
+            },
+            {
+              "q": "Can we have percentages more than 100?",
+              "a": "Yes! If you have more than the whole, like 150 squares out of 100, that's 150%. It means one and a half times the whole amount."
+            }
+          ]
+        },
+        {
+          "beat": 5,
+          "doubts": [
+            {
+              "q": "Why do we use percentages instead of fractions like 75/100?",
+              "a": "Percentages are easier to read and compare. Saying 75% is quicker than saying 75 out of 100. It helps us understand parts of a whole faster."
+            },
+            {
+              "q": "What does the % sign actually mean?",
+              "a": "The % sign means 'per hundred'. So 75% is the same as 75 per hundred or 75/100. It's just a short way to write fractions with 100 as the bottom number."
+            }
+          ]
+        },
+        {
+          "beat": 6,
+          "doubts": [
+            {
+              "q": "Why is percent called 'per centum' when it means 'out of hundred'?",
+              "a": "Centum is Latin for hundred. 'Per centum' means 'by the hundred'. So percent literally means 'by the hundred' or 'out of hundred'."
+            },
+            {
+              "q": "How can 25% be equal to both 1/4 and 0.25?",
+              "a": "They're all the same value! 25% is 25 per 100, which simplifies to 1/4. As a decimal, 25/100 equals 0.25."
+            }
+          ]
+        }
       ]
     },
     {
@@ -53,6 +133,86 @@ window.CHAPTER_DATA = {
         "So 3/4 = 75/100 = 75%. Three different fractions — all equal, all representing the same amount. We just kept multiplying the numerator and denominator by the same number until the denominator became 100.",
         "Here is the first method written out neatly: multiply the numerator and denominator both by 25 (because 4 × 25 = 100). So 3/4 becomes (3 × 25) / (4 × 25) = 75/100 = 75%.",
         "And here is the second method — even simpler! Just multiply the fraction by 100. So 3/4 × 100 = 300/4 = 75. Add the % sign and you get 75%. Both methods give the same answer — pick whichever feels easier. Ready for the next secret? Let us turn the page..."
+      ],
+      "beatDoubts": [
+        {
+          "beat": 1,
+          "doubts": [
+            {
+              "q": "Why do we need to change fractions to percentages?",
+              "a": "Percentages make it easier to compare fractions. Since all percentages have the same denominator (100), we can quickly see which value is bigger or smaller."
+            },
+            {
+              "q": "How do we change any fraction to a percentage?",
+              "a": "Multiply the fraction by 100 and add the % sign. For example, 1/4 becomes (1/4)×100 = 25%."
+            }
+          ]
+        },
+        {
+          "beat": 2,
+          "doubts": [
+            {
+              "q": "How do I change 3/4 to a percentage?",
+              "a": "To change 3/4 to a percentage, divide 3 by 4 (which equals 0.75), then multiply by 100. So 3/4 is 75%."
+            },
+            {
+              "q": "Why does the bar model help with percentages?",
+              "a": "The bar model shows fractions visually. When divided into 4 equal parts, 3 parts being red makes it easy to see that 3 out of 4 is 75%."
+            }
+          ]
+        },
+        {
+          "beat": 3,
+          "doubts": [
+            {
+              "q": "Why do we multiply by 10 to get 30 out of 40, but then by 2.5 to get 75 out of 100?",
+              "a": "We're finding equivalent fractions. 3/4 = 30/40 (multiply numerator and denominator by 10), then 30/40 = 75/100 (multiply by 2.5). Both keep the same value but help us see how many out of 100."
+            },
+            {
+              "q": "Why do we need to know how many out of 100?",
+              "a": "Percentages are fractions with 100 as the denominator. Saying 75 out of 100 is the same as 75%, which is the standard way to compare different fractions easily."
+            }
+          ]
+        },
+        {
+          "beat": 4,
+          "doubts": [
+            {
+              "q": "Why do we need to make the denominator 100?",
+              "a": "We use 100 because percent means 'per hundred'. When the denominator is 100, it's easy to see how many parts out of 100 we have, which is exactly what percentages show us."
+            },
+            {
+              "q": "Can we multiply by any number to make denominator 100?",
+              "a": "No, we can only multiply by numbers that make the denominator exactly 100. For example, with 3/4, we multiply by 25 because 4 × 25 = 100. We can't use 10 because 4 × 10 = 40, not 100."
+            }
+          ]
+        },
+        {
+          "beat": 5,
+          "doubts": [
+            {
+              "q": "Why do we multiply by 25 specifically? Why not another number?",
+              "a": "We multiply by 25 because 4 × 25 = 100. We want to make the denominator 100 to easily convert to percentage. Any number that makes denominator 100 would work, but 25 is simplest here."
+            },
+            {
+              "q": "Can we use this method for all fractions to convert to percentage?",
+              "a": "Yes, but only if we can make denominator 100. For 3/4, 25 works. For others, we might need different numbers. If denominator doesn't divide evenly into 100, we use division: (numerator ÷ denominator) × 100."
+            }
+          ]
+        },
+        {
+          "beat": 6,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        }
       ]
     },
     {
@@ -68,6 +228,99 @@ window.CHAPTER_DATA = {
         "To turn the decimal into a percentage, we multiply by 100 and add the % sign. 0.5 × 100 = 50. So 0.5 = 50%. The decimal 0.5 has now travelled to the percentage corner.",
         "And to go the other way around the triangle — from percentage back to fraction — we just reverse the steps. Divide by 100 to get a decimal, then write that decimal as a fraction with denominator 100, and simplify if you can. So 50% → 0.5 → 50/100 → 1/2. A complete loop!",
         "Memorise these conversions — they will save you so much time. 1/2 = 0.5 = 50%. 1/4 = 0.25 = 25%. 3/4 = 0.75 = 75%. 1/10 = 0.1 = 10%. 1/5 = 0.2 = 20%. 1/3 is about 0.333, which is 33.33%. 1/100 = 0.01 = 1%. Once these become second nature, every percentage problem will feel like a friendly chat. Ready? Let us turn the page..."
+      ],
+      "beatDoubts": [
+        {
+          "beat": 1,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 2,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 3,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 4,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 5,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 6,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 7,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        }
       ]
     },
     {
@@ -83,6 +336,99 @@ window.CHAPTER_DATA = {
         "And here is the second method — the decimal shortcut. 25% is the same as 0.25. So we just multiply: 0.25 × 120 = 30 grams. Same answer, faster calculation. This is exactly why memorising FDP conversions pays off!",
         "So the general rule is simple: y% of any value = (y/100) × value, or equivalently, y% × value. Want 45% of z? Just multiply z by 0.45. Want 60% of 80? Just multiply 80 by 0.60, which gives 48. The percentage becomes a multiplier, and the calculation is just multiplication.",
         "And there is the answer: Madhu ate 30 grams of sugar in his 120 grams of biscuits. Now you might wonder — Madhav ate biscuits of a different brand, with 35% sugar. Who ate more sugar? We will compare them in our next story. Ready? Let us turn the page..."
+      ],
+      "beatDoubts": [
+        {
+          "beat": 1,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 2,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 3,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 4,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 5,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 6,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 7,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        }
       ]
     },
     {
@@ -97,6 +443,86 @@ window.CHAPTER_DATA = {
         "Trick 2: Find 10% first, then scale. 10% of 40 is just 4 (move the decimal point one place to the left). Now, 25% = 10% + 10% + 5%. The 5% is half of 10%, so 5% of 40 is 2. Add it all up: 4 + 4 + 2 = 10. Same answer!",
         "And here is your quick reference table for mental math. Memorise these: 50% = 1/2 = 0.5, 25% = 1/4 = 0.25, 10% = 1/10 = 0.1, 5% = 1/20 = 0.05, 20% = 1/5 = 0.2. Once you know these by heart, you can build any other percentage from them. 15% = 10% + 5%. 30% = 3 × 10%. 75% = 50% + 25%. 90% = 100% − 10%.",
         "Practice this every day for five minutes, and soon you will be computing percentages in your head faster than your friends can type them into a calculator. A useful little skill for shopping, splitting bills, and figuring out tips! Ready for the next story? Let us turn the page..."
+      ],
+      "beatDoubts": [
+        {
+          "beat": 1,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 2,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 3,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 4,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 5,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 6,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        }
       ]
     },
     {
@@ -112,6 +538,99 @@ window.CHAPTER_DATA = {
         "Science: 70/80 × 100 = 87.5%. The yellow bar is 87.5% full. Now both bars are 'out of 100', and we can compare them directly.",
         "And here is the conclusion: 87.5% is greater than 84%, so Eesha actually did better in Science, not English! Even though she lost more marks in Science, she also scored more, and proportionally that is what matters.",
         "So Vishu was right — but only because we hadn't converted to percentages yet. The lesson is: whenever you compare two fractions with different denominators (like test scores, food labels, or sports statistics), convert them to percentages first. Then the comparison becomes easy and fair. Ready for the next story? Let us turn the page..."
+      ],
+      "beatDoubts": [
+        {
+          "beat": 1,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 2,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 3,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 4,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 5,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 6,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 7,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        }
       ]
     },
     {
@@ -127,6 +646,99 @@ window.CHAPTER_DATA = {
         "Here is the magic formula. Percentage increase = (amount of increase ÷ original amount) × 100. The original amount is the STARTING value — the price before the change. For decrease, the formula is the same — just swap 'increase' for 'decrease'.",
         "Plugging in the tomato numbers: increase = ₹12, original = ₹30. So percentage increase = (12 ÷ 30) × 100 = 40%. We say the tomato price increased by 40% over three years.",
         "And here is the reverse example for you to try: a theatre's footfall went from 160 people to 100 people. The decrease is 60. Percentage decrease = (60 ÷ 160) × 100 = 37.5%. So the footfall decreased by 37.5% after COVID. Notice — the formula is exactly the same, whether the change is up or down. Ready for the next story? Let us turn the page..."
+      ],
+      "beatDoubts": [
+        {
+          "beat": 1,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 2,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 3,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 4,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 5,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 6,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 7,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        }
       ]
     },
     {
@@ -142,6 +754,99 @@ window.CHAPTER_DATA = {
         "Now, did Kishanlal make a profit or a loss? Since SP (₹430) is greater than CP (₹300), he made a profit. Profit = SP − CP = ₹430 − ₹300 = ₹130. That is the extra money he earned.",
         "But how big is this profit, really? To measure it fairly, we use profit percentage — always calculated on the cost price, because that is what Kishanlal invested. So % profit = (Profit / CP) × 100 = (130/300) × 100 ≈ 43.3%. Kishanlal made about 43.3% profit on this sweater.",
         "And here are three rules to remember always. Profit percentage is always calculated on the cost price (what you invested). Loss percentage uses the same formula but with Loss = CP − SP. And discount percentage is calculated on the marked price — because the discount is a reduction from the marked price, not from the cost price. Memorise these three, and you will never confuse them! Ready for the next story? Let us turn the page..."
+      ],
+      "beatDoubts": [
+        {
+          "beat": 1,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 2,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 3,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 4,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 5,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 6,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 7,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        }
       ]
     },
     {
@@ -156,6 +861,86 @@ window.CHAPTER_DATA = {
         "Option 2: Compound Interest. This is where the magic happens. In Year 1, you earn ₹600 interest, just like before. But here is the trick: that ₹600 is ADDED BACK to your deposit! So in Year 2, you earn 10% interest on ₹6600 — which is ₹660. And in Year 3, you earn 10% on ₹7260 — which is ₹726. Each year, the interest grows because you are earning interest ON the interest!",
         "Add it all up: ₹600 + ₹660 + ₹726 = ₹1986 in total interest. Your final amount is ₹6000 + ₹1986 = ₹7986. That is ₹186 MORE than simple interest gave you — for doing absolutely nothing extra! The compounding effect gave you free money.",
         "And here are the two formulas. Without compounding: Amount = P × (1 + r × t), where P is the principal, r is the interest rate (as a decimal), and t is the number of years. With compounding: Amount = P × (1 + r)^t. Notice the exponent — that little 't' up in the air. That is what makes compounding powerful. The longer you wait, the faster it grows. Ready for the next story? Let us turn the page..."
+      ],
+      "beatDoubts": [
+        {
+          "beat": 1,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 2,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 3,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 4,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 5,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 6,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        }
       ]
     },
     {
@@ -170,6 +955,86 @@ window.CHAPTER_DATA = {
         "Cakify's 50% is a flat discount. Just one step: 50% off ₹200 = save ₹100. Final price = ₹200 − ₹100 = ₹100. You pay ₹100, saving exactly ₹100.",
         "So Cakify is cheaper! Surprise! 30% + 20% in shopping is NOT the same as 50%. The reason is that the second discount applies to a SMALLER price, so it saves you less money. This is called a COMPOUND DISCOUNT — and once you know the trick, no shopkeeper can fool you.",
         "Here is the general formula: Final price = Original × (1 − d1) × (1 − d2), where d1 and d2 are the two discounts as decimals. So ₹200 × (1 − 0.30) × (1 − 0.20) = ₹200 × 0.70 × 0.80 = ₹112. Same answer, every time. And there you have it, my friend — you have completed the entire chapter on Fractions in Disguise! You now know percentages inside and out: conversions, mental math, comparisons, increases, decreases, profit, loss, taxes, simple interest, compound interest, depreciation, and the tricky compound discounts. You are a percentage master!"
+      ],
+      "beatDoubts": [
+        {
+          "beat": 1,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 2,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 3,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 4,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 5,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        },
+        {
+          "beat": 6,
+          "doubts": [
+            {
+              "q": "Why do we multiply the fraction by 100 to get percentage?",
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+            },
+            {
+              "q": "Can we use any method to convert fraction to percentage?",
+              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+            }
+          ]
+        }
       ]
     }
   ],
@@ -252,7 +1117,12 @@ window.CHAPTER_DATA = {
           },
           "formatHint": "Example: multiply the fraction by 100",
           "explanation": "Yes! To convert any fraction to a percentage, just multiply by 100.",
-          "hint": "Think about what you do to push the denominator to 100."
+          "hint": "Think about what you do to push the denominator to 100.",
+          "hints": [
+            "Remember that percentages represent parts per hundred. Think about how to express a fraction as parts out of 100.",
+            "To convert a fraction to percentage, multiply the fraction by 100 and add the % symbol. This gives you the equivalent percentage value.",
+            "For 2/5, multiply 2/5 by 100. First divide 100 by 5 to get 20, then multiply by 2 to get 40. So 2/5 = 40%."
+          ]
         },
         {
           "prompt": "So what is 2/5 × 100? (Type the number with % sign)",
@@ -267,10 +1137,16 @@ window.CHAPTER_DATA = {
           },
           "formatHint": "Example: 50%",
           "explanation": "Yes! 2/5 × 100 = 200/5 = 40. So 2/5 = 40%.",
-          "hint": "200 divided by 5 is 40."
+          "hint": "200 divided by 5 is 40.",
+          "hints": [
+            "To convert a fraction to percentage, multiply by 100. This gives you the equivalent value per hundred.",
+            "Multiply the numerator by 100, then divide by the denominator. Formula: (numerator × 100) ÷ denominator = percentage.",
+            "2 × 100 = 200. Now divide 200 by 5. The result is 40. Add the % sign to get your final answer."
+          ]
         }
       ],
-      "finalAnswer": "2/5 = 40%. Surya will save 40% of his prize money."
+      "finalAnswer": "2/5 = 40%. Surya will save 40% of his prize money.",
+      "topic": "percentage"
     },
     {
       "title": "Find 25% of 120",
@@ -294,7 +1170,12 @@ window.CHAPTER_DATA = {
           },
           "formatHint": "Example: 1/2",
           "explanation": "Yes! 25% = 25/100 = 1/4. A quarter.",
-          "hint": "4 quarters make 100%, so one quarter is..."
+          "hint": "4 quarters make 100%, so one quarter is...",
+          "hints": [
+            "Remember that percent means 'per hundred'. What fraction represents 25 parts out of 100?",
+            "To convert a percentage to a fraction, write it over 100. Then simplify if possible.",
+            "25% equals 25/100. Simplify this fraction by dividing numerator and denominator by 25."
+          ]
         },
         {
           "prompt": "So 25% of 120 is the same as 1/4 of 120. What is 120 ÷ 4?",
@@ -304,10 +1185,16 @@ window.CHAPTER_DATA = {
           },
           "formatHint": "Example: 25",
           "explanation": "Yes! 120 ÷ 4 = 30. So Madhu ate 30 grams of sugar.",
-          "hint": "100 ÷ 4 = 25. 20 ÷ 4 = 5. Add them."
+          "hint": "100 ÷ 4 = 25. 20 ÷ 4 = 5. Add them.",
+          "hints": [
+            "Remember that percent means per hundred. 25% is the same as 25/100, which simplifies to 1/4.",
+            "To find 25% of 120, you can multiply 120 by 25/100 or simply divide 120 by 4 since 25% equals 1/4.",
+            "Divide 120 by 4: 120 ÷ 4 = 30. So 25% of 120 is 30."
+          ]
         }
       ],
-      "finalAnswer": "Madhu ate 30 grams of sugar (25% of 120 = 30)."
+      "finalAnswer": "Madhu ate 30 grams of sugar (25% of 120 = 30).",
+      "topic": "percentage"
     },
     {
       "title": "Compare Eesha's test scores",
@@ -325,7 +1212,12 @@ window.CHAPTER_DATA = {
           },
           "formatHint": "Example: 80",
           "explanation": "Yes! 42/50 × 100 = 4200/50 = 84. So 42/50 = 84%.",
-          "hint": "Multiply 42 by 100, then divide by 50."
+          "hint": "Multiply 42 by 100, then divide by 50.",
+          "hints": [
+            "To convert a fraction to percentage, multiply by 100 and add the percent sign.",
+            "Divide numerator by denominator, then multiply by 100 to get percentage.",
+            "42 ÷ 50 = 0.84, then 0.84 × 100 = 84%"
+          ]
         },
         {
           "prompt": "What is 70/80 as a percentage? (Type just the number)",
@@ -335,7 +1227,12 @@ window.CHAPTER_DATA = {
           },
           "formatHint": "Example: 80.5",
           "explanation": "Yes! 70/80 × 100 = 7000/80 = 87.5. So 70/80 = 87.5%.",
-          "hint": "Multiply 70 by 100, then divide by 80. Or simplify: 70/80 = 7/8 = 0.875."
+          "hint": "Multiply 70 by 100, then divide by 80. Or simplify: 70/80 = 7/8 = 0.875.",
+          "hints": [
+            "To convert a fraction to percentage, multiply by 100.",
+            "Divide numerator by denominator, then multiply by 100.",
+            "Divide 70 by 80 to get 0.875, then multiply by 100 for percentage."
+          ]
         },
         {
           "prompt": "Which subject did Eesha do better in? (Type 'English' or 'Science')",
@@ -349,10 +1246,16 @@ window.CHAPTER_DATA = {
           },
           "formatHint": "Example: English",
           "explanation": "Yes! 87.5% > 84%, so Eesha did better in Science.",
-          "hint": "Compare the two percentages: 84% vs 87.5%."
+          "hint": "Compare the two percentages: 84% vs 87.5%.",
+          "hints": [
+            "To compare test scores, find the percentage for each subject by dividing the score by total marks and multiplying by 100.",
+            "Calculate percentage: English: 42/60 × 100 = 70%, Science: 45/50 × 100 = 90%. Higher percentage means better performance.",
+            "Eesha scored 70% in English and 90% in Science. Since 90% is greater than 70%, Eesha did better in Science."
+          ]
         }
       ],
-      "finalAnswer": "Eesha scored 84% in English and 87.5% in Science, so she did better in Science."
+      "finalAnswer": "Eesha scored 84% in English and 87.5% in Science, so she did better in Science.",
+      "topic": "general"
     },
     {
       "title": "Percentage increase in tomato price",
@@ -370,7 +1273,12 @@ window.CHAPTER_DATA = {
           },
           "formatHint": "Example: 10",
           "explanation": "Yes! The price increased by ₹12.",
-          "hint": "Subtract the old price from the new price."
+          "hint": "Subtract the old price from the new price.",
+          "hints": [
+            "To find the increase in price, subtract the original price from the new price.",
+            "Use the formula: Increase = New Price - Original Price = ₹42 - ₹30",
+            "Calculate the difference: ₹42 - ₹30 = ₹12. This is the price increase."
+          ]
         },
         {
           "prompt": "The original (starting) price was ₹30. What is (12 / 30) × 100? (Type just the number)",
@@ -380,10 +1288,16 @@ window.CHAPTER_DATA = {
           },
           "formatHint": "Example: 30",
           "explanation": "Yes! (12/30) × 100 = 0.4 × 100 = 40. So the tomato price increased by 40%.",
-          "hint": "Simplify 12/30 = 2/5 = 0.4. Then × 100 = 40."
+          "hint": "Simplify 12/30 = 2/5 = 0.4. Then × 100 = 40.",
+          "hints": [
+            "To find percentage increase, divide the increase by the original price and multiply by 100.",
+            "Use the formula: (Increase ÷ Original Price) × 100 = Percentage Increase.",
+            "(12 ÷ 30) × 100 = ? Calculate this to find the percentage increase in tomato price."
+          ]
         }
       ],
-      "finalAnswer": "The tomato price increased by 40% (from ₹30 to ₹42)."
+      "finalAnswer": "The tomato price increased by 40% (from ₹30 to ₹42).",
+      "topic": "percentage"
     },
     {
       "title": "Profit percentage on Kishanlal's sweater",
@@ -401,7 +1315,12 @@ window.CHAPTER_DATA = {
           },
           "formatHint": "Example: 100",
           "explanation": "Yes! Profit = ₹430 − ₹300 = ₹130.",
-          "hint": "Subtract the cost price from the selling price."
+          "hint": "Subtract the cost price from the selling price.",
+          "hints": [
+            "To find profit, subtract cost price from selling price. This gives the amount of money earned on the sale.",
+            "Use the formula: Profit = Selling Price - Cost Price. Plug in the given values: SP = ₹430, CP = ₹300.",
+            "Calculate: Profit = ₹430 - ₹300 = ₹130. This is the amount of profit Kishanlal made on his sweater."
+          ]
         },
         {
           "prompt": "Profit % is calculated on the CP. What is (130/300) × 100? (Round to 1 decimal place)",
@@ -418,10 +1337,16 @@ window.CHAPTER_DATA = {
           },
           "formatHint": "Example: 50.0",
           "explanation": "Yes! (130/300) × 100 ≈ 43.3%. So Kishanlal made about 43.3% profit.",
-          "hint": "130/300 = 0.4333... Multiply by 100 to get the percentage."
+          "hint": "130/300 = 0.4333... Multiply by 100 to get the percentage.",
+          "hints": [
+            "Remember, profit percentage is calculated as (Profit/CP) × 100. First find the profit by subtracting CP from SP.",
+            "Use the formula: Profit % = (Profit/CP) × 100. Here, Profit = 130 and CP = 300.",
+            "Calculate (130/300) × 100 = 43.33%. Round to 1 decimal place: 43.3%"
+          ]
         }
       ],
-      "finalAnswer": "Kishanlal's profit was ₹130, which is about 43.3% profit on the cost price."
+      "finalAnswer": "Kishanlal's profit was ₹130, which is about 43.3% profit on the cost price.",
+      "topic": "profit_loss"
     },
     {
       "title": "Compound interest on a ₹6000 FD",
@@ -439,7 +1364,12 @@ window.CHAPTER_DATA = {
           },
           "formatHint": "Example: 6500",
           "explanation": "Yes! 6000 × 1.10 = 6600. The interest earned was ₹600, added to the principal.",
-          "hint": "10% of 6000 is 600. Add it to 6000."
+          "hint": "10% of 6000 is 600. Add it to 6000.",
+          "hints": [
+            "Compound interest adds interest to the principal each year. For year 1, calculate simple interest on the original amount.",
+            "Use the formula: Amount = Principal × (1 + rate). Here, rate is 10% or 0.10.",
+            "Multiply 6000 by 1.10 to get the amount after year 1. The calculation is 6000 × 1.10 = 6600."
+          ]
         },
         {
           "prompt": "After Year 2, the amount is 6600 × 1.10 = ?",
@@ -449,7 +1379,12 @@ window.CHAPTER_DATA = {
           },
           "formatHint": "Example: 7200",
           "explanation": "Yes! 6600 × 1.10 = 7260. The Year 2 interest was ₹660 — more than Year 1 because of compounding!",
-          "hint": "10% of 6600 is 660. Add it to 6600."
+          "hint": "10% of 6600 is 660. Add it to 6600.",
+          "hints": [
+            "Compound interest is calculated by multiplying the principal by (1 + rate) raised to the power of time.",
+            "To find the amount after Year 3, multiply the amount after Year 2 (6600) by 1.10.",
+            "Multiply 6600 by 1.10 to get the final amount after Year 3, which is 7260."
+          ]
         },
         {
           "prompt": "After Year 3, the amount is 7260 × 1.10 = ?",
@@ -459,10 +1394,16 @@ window.CHAPTER_DATA = {
           },
           "formatHint": "Example: 7900",
           "explanation": "Yes! 7260 × 1.10 = 7986. After 3 years of compounding, the final amount is ₹7986.",
-          "hint": "10% of 7260 is 726. Add it to 7260."
+          "hint": "10% of 7260 is 726. Add it to 7260.",
+          "hints": [
+            "Multiply 7260 by 1.10 to find the amount after Year 4. Compound interest means each year's amount becomes the next year's principal.",
+            "Use the formula: Amount = Previous amount × (1 + rate). Here, 7260 × 1.10 = ?",
+            "Calculate: 7260 × 1.10 = 7986. This is the amount after Year 4."
+          ]
         }
       ],
-      "finalAnswer": "After 3 years of compounding at 10%, the ₹6000 deposit grows to ₹7986. Total interest earned = ₹1986."
+      "finalAnswer": "After 3 years of compounding at 10%, the ₹6000 deposit grows to ₹7986. Total interest earned = ₹1986.",
+      "topic": "simple_interest"
     },
     {
       "title": "Cakely's 30% + 20% discount on a ₹200 cake",
@@ -480,7 +1421,12 @@ window.CHAPTER_DATA = {
           },
           "formatHint": "Example: 130",
           "explanation": "Yes! 30% off ₹200 means you pay 70% of ₹200 = ₹140.",
-          "hint": "70% of 200 = 0.7 × 200 = 140."
+          "hint": "70% of 200 = 0.7 × 200 = 140.",
+          "hints": [
+            "To find the price after a 30% discount, calculate 70% of the original price.",
+            "Multiply the original price (₹200) by 0.70 to find the discounted price.",
+            "₹200 × 0.70 = ₹140. This is the price after the first discount."
+          ]
         },
         {
           "prompt": "Now apply 20% off ₹140. What is ₹140 × 0.80?",
@@ -490,10 +1436,16 @@ window.CHAPTER_DATA = {
           },
           "formatHint": "Example: 110",
           "explanation": "Yes! 20% off ₹140 means you pay 80% of ₹140 = ₹112. So Cakely's final price is ₹112.",
-          "hint": "80% of 140 = 0.8 × 140. 8 × 14 = 112, so 0.8 × 140 = 112."
+          "hint": "80% of 140 = 0.8 × 140. 8 × 14 = 112, so 0.8 × 140 = 112.",
+          "hints": [
+            "To find a percentage of a number, multiply the number by the percentage divided by 100.",
+            "To apply a 20% discount, multiply the original amount by (100% - 20%) = 80% or 0.80.",
+            "Multiply ₹140 by 0.80: 140 × 0.80 = 112."
+          ]
         }
       ],
-      "finalAnswer": "Cakely's '30% + 20%' discount brings the ₹200 cake down to ₹112 — NOT ₹100. A flat 50% discount would have been cheaper!"
+      "finalAnswer": "Cakely's '30% + 20%' discount brings the ₹200 cake down to ₹112 — NOT ₹100. A flat 50% discount would have been cheaper!",
+      "topic": "percentage"
     },
     {
       "title": "TV depreciation after 1 year",
@@ -511,7 +1463,12 @@ window.CHAPTER_DATA = {
           },
           "formatHint": "Example: 90",
           "explanation": "Yes! 100% − 5% = 95%. The TV retains 95% of its original value.",
-          "hint": "If you lose 5%, you keep 100 − 5 = ?"
+          "hint": "If you lose 5%, you keep 100 − 5 = ?",
+          "hints": [
+            "When something depreciates by a percentage, it loses that value. Think about what percentage remains.",
+            "If the TV loses 5% of its value, subtract that from 100% to find what percentage remains.",
+            "100% - 5% = 95%. The TV retains 95% of its original value after depreciation."
+          ]
         },
         {
           "prompt": "Now calculate 0.95 × 21000 = ? (Type the number)",
@@ -521,10 +1478,16 @@ window.CHAPTER_DATA = {
           },
           "formatHint": "Example: 19000",
           "explanation": "Yes! 0.95 × 21000 = ₹19,950. The TV is worth ₹19,950 after one year.",
-          "hint": "95% of 21000. 100% is 21000, 5% is 1050. Subtract: 21000 − 1050 = 19950."
+          "hint": "95% of 21000. 100% is 21000, 5% is 1050. Subtract: 21000 − 1050 = 19950.",
+          "hints": [
+            "Remember that depreciation means value decreases. Multiplying by 0.95 means the TV retains 95% of its value.",
+            "To find the depreciated value, multiply the original value (21000) by the retention factor (0.95).",
+            "Multiply 21000 by 0.95. First calculate 21000 × 95 = 1,995,000, then divide by 100 to get 19,950."
+          ]
         }
       ],
-      "finalAnswer": "After 1 year of 5% depreciation, the TV's value is ₹19,950 (down from ₹21,000)."
+      "finalAnswer": "After 1 year of 5% depreciation, the TV's value is ₹19,950 (down from ₹21,000).",
+      "topic": "general"
     }
   ],
   "selfTest": [
