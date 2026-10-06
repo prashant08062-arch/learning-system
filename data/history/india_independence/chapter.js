@@ -27,20 +27,12 @@ window.CHAPTER_DATA = {
     "subtitle": "Chapter 2 · Exploring Society: India and Beyond · Grade 8 Part 2",
     "chapterNumber": 2,
     "type": "svg",
-    "imagesBasePath": "data/history/india_independence/images/",
     "intro": "A long, true story of how India became free — from the Royal Proclamation of 1858 to the Independence and Partition of 1947. Told in story-form for little listeners, with a 'Before We Begin' story-time vocabulary section. Meet Mahatma Gandhi, Bhagat Singh, Subhas Bose, Sarojini Naidu, Sardar Patel, and millions of brave hearts who gave their all for Mother India. Now includes a special analytical lecture — 'How Ideas Travelled: Press, Poetry & Symbols' — explaining the cultural machinery of the freedom struggle for Alpha-plus students."
   },
   "lectures": [
     {
       "id": "queen_takes_over",
       "label": "1. The Queen Takes Over (1858)",
-      "images": [
-        {
-          "file": "fig2_01_quit_india_women.png",
-          "caption": "Brave Indian women marching in Bombay in 1942, asking the British to leave India",
-          "atBeat": 1
-        }
-      ],
       "beats": [
         "Namaste, my little friend! Welcome to a very special story-time. Today, I am going to tell you a true story — the story of how our country, India, became free. But this story does not begin with freedom. It begins a long, long time ago, when India was not free at all. Are you ready? Let's sit down and listen…",
         "Once upon a time, there was a big company far away in a country called England. The company was called the East India Company. They came to India to trade — to buy and sell things like spices, cloth, and tea. But slowly, slowly, they stopped being just traders. They became rulers. They started telling Indians what to do, took our lands, made us pay heavy taxes, and did not treat us fairly.",
@@ -54,38 +46,11 @@ window.CHAPTER_DATA = {
         "All these unfair things made the Indian people very angry and very sad. But they were also very brave. They started to think, 'This is OUR country. WE should rule it. WE should decide what happens here.' And that thought — that simple, beautiful thought — was the seed of our freedom story. In the next story, we will meet some very good teachers who tried to fix Indian society from the inside. Are you ready? Let's turn the page…"
       ],
       "viewBox": "0 0 600 460",
-      "svg": "\n\n<!-- Shared defs: arrow markers, glow filter -->\n<defs>\n  <marker id=\"arrL1\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\">\n    <path d=\"M0,0 L8,4 L0,8 Z\" fill=\"#fbbf24\"/>\n  </marker>\n  <marker id=\"arrGreen\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\">\n    <path d=\"M0,0 L8,4 L0,8 Z\" fill=\"#34d399\"/>\n  </marker>\n  <marker id=\"arrOrange\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\">\n    <path d=\"M0,0 L8,4 L0,8 Z\" fill=\"#fb923c\"/>\n  </marker>\n  <filter id=\"glowL1\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"3\" result=\"blur\"/>\n    <feMerge>\n      <feMergeNode in=\"blur\"/>\n      <feMergeNode in=\"SourceGraphic\"/>\n    </feMerge>\n  </filter>\n</defs>\n\n<!-- BEAT 1: Welcome — Union Jack fading to Indian Tricolour -->\n<g class=\"el\" data-beat=\"1\">\n  <!-- Title -->\n  <text x=\"300\" y=\"30\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"16\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">INDIA'S LONG ROAD TO INDEPENDENCE</text>\n\n  <!-- Large Indian Tricolour (center) -->\n  <rect x=\"175\" y=\"90\" width=\"250\" height=\"170\" rx=\"2\" fill=\"#0f172a\" stroke=\"#334155\" stroke-width=\"1\"/>\n  <rect x=\"175\" y=\"90\" width=\"250\" height=\"57\" fill=\"#f97316\"/>\n  <rect x=\"175\" y=\"147\" width=\"250\" height=\"56\" fill=\"#ffffff\"/>\n  <rect x=\"175\" y=\"203\" width=\"250\" height=\"57\" fill=\"#22c55e\"/>\n  <!-- Ashoka Chakra -->\n  <circle cx=\"300\" cy=\"175\" r=\"22\" fill=\"none\" stroke=\"#1e40af\" stroke-width=\"2\"/>\n  <g stroke=\"#1e40af\" stroke-width=\"1.2\">\n    <line x1=\"300\" y1=\"153\" x2=\"300\" y2=\"197\"/>\n    <line x1=\"278\" y1=\"175\" x2=\"322\" y2=\"175\"/>\n    <line x1=\"284\" y1=\"159\" x2=\"316\" y2=\"191\"/>\n    <line x1=\"316\" y1=\"159\" x2=\"284\" y2=\"191\"/>\n    <line x1=\"289\" y1=\"154\" x2=\"311\" y2=\"196\"/>\n    <line x1=\"311\" y1=\"154\" x2=\"289\" y2=\"196\"/>\n    <line x1=\"289\" y1=\"196\" x2=\"311\" y2=\"154\"/>\n    <line x1=\"311\" y1=\"196\" x2=\"289\" y2=\"154\"/>\n  </g>\n\n  <!-- Small fading Union Jack in top-left corner -->\n  <g opacity=\"0.22\" transform=\"translate(40,40) scale(0.5)\">\n    <rect x=\"0\" y=\"0\" width=\"60\" height=\"40\" fill=\"#1e3a8a\"/>\n    <path d=\"M0,0 L60,40 M60,0 L0,40\" stroke=\"#ffffff\" stroke-width=\"6\"/>\n    <path d=\"M0,0 L60,40 M60,0 L0,40\" stroke=\"#dc2626\" stroke-width=\"3\"/>\n    <rect x=\"22\" y=\"0\" width=\"16\" height=\"40\" fill=\"#ffffff\"/>\n    <rect x=\"0\" y=\"12\" width=\"60\" height=\"16\" fill=\"#ffffff\"/>\n    <rect x=\"26\" y=\"0\" width=\"8\" height=\"40\" fill=\"#dc2626\"/>\n    <rect x=\"0\" y=\"16\" width=\"60\" height=\"8\" fill=\"#dc2626\"/>\n  </g>\n  <text x=\"55\" y=\"78\" text-anchor=\"middle\" fill=\"#64748b\" font-size=\"9\" font-style=\"italic\"> fading…</text>\n\n  <!-- Subtitle -->\n  <text x=\"300\" y=\"290\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"12\" font-family=\"Inter,system-ui,sans-serif\">The story of how India became free…</text>\n  <text x=\"300\" y=\"310\" text-anchor=\"middle\" fill=\"#64748b\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">But this story begins when India was NOT free.</text>\n</g>\n\n<!-- BEAT 2: East India Company — trading box with arrows, zoom -->\n<g class=\"el\" data-beat=\"2\">\n  <!-- \"TRADING\" label on the left -->\n  <text x=\"85\" y=\"165\" text-anchor=\"middle\" fill=\"#38bdf8\" font-size=\"13\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">TRADING</text>\n\n  <!-- Inward arrow: spices, tea coming in -->\n  <line x1=\"105\" y1=\"160\" x2=\"195\" y2=\"160\" stroke=\"#34d399\" stroke-width=\"2.5\" marker-end=\"url(#arrGreen)\"/>\n  <text x=\"130\" y=\"150\" fill=\"#34d399\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">spices, tea</text>\n  <text x=\"135\" y=\"178\" fill=\"#475569\" font-size=\"8\">⚓</text>\n\n  <!-- East India Company box (center) -->\n  <rect x=\"200\" y=\"130\" width=\"200\" height=\"70\" rx=\"8\" fill=\"rgba(251,191,36,0.15)\" stroke=\"#fbbf24\" stroke-width=\"2\"/>\n  <text x=\"300\" y=\"158\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"14\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">EAST INDIA</text>\n  <text x=\"300\" y=\"180\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"14\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">COMPANY</text>\n  <text x=\"300\" y=\"196\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"8\" font-family=\"Inter,system-ui,sans-serif\">England 🇬🇧</text>\n\n  <!-- Outward arrow: cloth going out -->\n  <line x1=\"405\" y1=\"160\" x2=\"495\" y2=\"160\" stroke=\"#fb923c\" stroke-width=\"2.5\" marker-end=\"url(#arrOrange)\"/>\n  <text x=\"430\" y=\"150\" fill=\"#fb923c\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">cloth, silk</text>\n\n  <!-- Zoom / growth outer dashed box -->\n  <rect x=\"70\" y=\"100\" width=\"460\" height=\"130\" rx=\"14\" fill=\"none\" stroke=\"#fbbf24\" stroke-width=\"1\" opacity=\"0.4\" stroke-dasharray=\"6,4\"/>\n  <text x=\"530\" y=\"115\" fill=\"#fbbf24\" font-size=\"9\" opacity=\"0.6\">↗ grows</text>\n\n  <!-- Bottom caption -->\n  <text x=\"300\" y=\"260\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"11\" font-family=\"Inter,system-ui,sans-serif\">Traders → Rulers (took lands, imposed heavy taxes)</text>\n</g>\n\n<!-- BEAT 3: Great Uprising 1857 — fire around EIC box -->\n<g class=\"el\" data-beat=\"3\">\n  <!-- Year 1857 large -->\n  <text x=\"300\" y=\"110\" text-anchor=\"middle\" fill=\"#ef4444\" font-size=\"28\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">1857</text>\n  <text x=\"300\" y=\"128\" text-anchor=\"middle\" fill=\"#fca5a5\" font-size=\"11\" font-weight=\"600\" font-family=\"Inter,system-ui,sans-serif\">GREAT UPRISING</text>\n\n  <!-- Flames around the EIC box (reusing position from beat 2) -->\n  <!-- Left flames -->\n  <path d=\"M180 140 Q175 130 178 120 Q170 125 172 110 Q168 120 165 115 Q172 130 175 140 Z\" fill=\"#f97316\" opacity=\"0.85\"/>\n  <path d=\"M175 175 Q170 185 173 195 Q165 190 168 200 Q175 190 180 195 Q175 185 175 175 Z\" fill=\"#ef4444\" opacity=\"0.85\"/>\n  <!-- Right flames -->\n  <path d=\"M420 140 Q425 130 422 120 Q430 125 428 110 Q432 120 435 115 Q428 130 425 140 Z\" fill=\"#f97316\" opacity=\"0.85\"/>\n  <path d=\"M425 175 Q430 185 427 195 Q435 190 432 200 Q425 190 420 195 Q425 185 425 175 Z\" fill=\"#ef4444\" opacity=\"0.85\"/>\n  <!-- Top flames -->\n  <path d=\"M260 125 Q255 115 258 105 Q250 110 252 95 Q248 105 245 100 Q252 115 255 125 Z\" fill=\"#fbbf24\" opacity=\"0.85\"/>\n  <path d=\"M340 125 Q345 115 342 105 Q350 110 348 95 Q352 105 355 100 Q348 115 345 125 Z\" fill=\"#fbbf24\" opacity=\"0.85\"/>\n\n  <!-- \"ENOUGH!\" speech bubble -->\n  <rect x=\"240\" y=\"220\" width=\"120\" height=\"30\" rx=\"6\" fill=\"rgba(239,68,68,0.2)\" stroke=\"#ef4444\" stroke-width=\"1.5\"/>\n  <text x=\"300\" y=\"240\" text-anchor=\"middle\" fill=\"#ef4444\" font-size=\"14\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">\"ENOUGH!\"</text>\n\n  <!-- Who joined: soldiers, kings, farmers, queens -->\n  <text x=\"120\" y=\"280\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">🪖 Soldiers</text>\n  <text x=\"220\" y=\"280\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">👑 Kings</text>\n  <text x=\"330\" y=\"280\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">🌾 Farmers</text>\n  <text x=\"440\" y=\"280\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">👸 Queens</text>\n\n  <!-- Result -->\n  <text x=\"300\" y=\"310\" text-anchor=\"middle\" fill=\"#fca5a5\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">Brave fight — but India lost (British had better guns)</text>\n</g>\n\n<!-- BEAT 4: Queen Victoria takes over — Crown + Royal Proclamation -->\n<g class=\"el\" data-beat=\"4\">\n  <!-- British Crown SVG -->\n  <g transform=\"translate(220,340)\">\n    <path d=\"M0 30 L20 0 L40 25 L60 0 L80 30 L80 45 L0 45 Z\" fill=\"#fbbf24\" stroke=\"#eab308\" stroke-width=\"1.5\"/>\n    <circle cx=\"20\" cy=\"0\" r=\"4\" fill=\"#ef4444\"/>\n    <circle cx=\"60\" cy=\"0\" r=\"4\" fill=\"#3b82f6\"/>\n    <circle cx=\"40\" cy=\"25\" r=\"4\" fill=\"#22c55e\"/>\n    <rect x=\"0\" y=\"42\" width=\"80\" height=\"6\" fill=\"#eab308\"/>\n  </g>\n  <text x=\"260\" y=\"410\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"11\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">QUEEN VICTORIA</text>\n\n  <!-- Arrow from crown to proclamation -->\n  <line x1=\"300\" y1=\"335\" x2=\"300\" y2=\"375\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrL1)\" transform=\"translate(0,-30)\"/>\n\n  <!-- \"Royal Proclamation\" glowing box -->\n  <rect x=\"180\" y=\"340\" width=\"240\" height=\"50\" rx=\"8\" fill=\"rgba(251,191,36,0.15)\" stroke=\"#fbbf24\" stroke-width=\"2\" filter=\"url(#glowL1)\"/>\n  <text x=\"300\" y=\"362\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"14\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">📜 Royal Proclamation</text>\n  <text x=\"300\" y=\"380\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">1858 · India ruled in the Queen's name</text>\n\n  <!-- Viceroy box -->\n  <rect x=\"220\" y=\"400\" width=\"160\" height=\"40\" rx=\"6\" fill=\"rgba(56,189,248,0.12)\" stroke=\"#38bdf8\" stroke-width=\"1.5\"/>\n  <text x=\"300\" y=\"418\" text-anchor=\"middle\" fill=\"#38bdf8\" font-size=\"12\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">VICEROY</text>\n  <text x=\"300\" y=\"432\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">Queen's representative in India</text>\n</g>\n\n<!-- BEAT 5: Promises on paper — old letter with highlighted phrases -->\n<g class=\"el\" data-beat=\"5\">\n  <!-- Parchment / old letter -->\n  <path d=\"M120 90 Q115 90 115 95 L115 345 Q115 350 120 350 L480 350 Q485 350 485 345 L485 95 Q485 90 480 90 Z\" fill=\"#fef3c7\" stroke=\"#d4a574\" stroke-width=\"2\" opacity=\"0.95\"/>\n  <!-- Letter header -->\n  <text x=\"300\" y=\"115\" text-anchor=\"middle\" fill=\"#92400e\" font-size=\"12\" font-weight=\"700\" font-family=\"Georgia,serif\">Royal Proclamation of 1858</text>\n  <line x1=\"180\" y1=\"125\" x2=\"420\" y2=\"125\" stroke=\"#d4a574\" stroke-width=\"0.5\"/>\n\n  <!-- Text lines (simulating old handwriting) -->\n  <g stroke=\"#92400e\" stroke-width=\"0.6\" opacity=\"0.5\">\n    <line x1=\"140\" y1=\"145\" x2=\"460\" y2=\"145\"/>\n    <line x1=\"140\" y1=\"158\" x2=\"460\" y2=\"158\"/>\n    <line x1=\"140\" y1=\"171\" x2=\"440\" y2=\"171\"/>\n    <line x1=\"140\" y1=\"184\" x2=\"460\" y2=\"184\"/>\n  </g>\n\n  <!-- Promise 1: highlighted glowing phrase -->\n  <rect x=\"135\" y=\"195\" width=\"250\" height=\"24\" rx=\"4\" fill=\"rgba(251,191,36,0.25)\" stroke=\"#fbbf24\" stroke-width=\"1\" filter=\"url(#glowL1)\"/>\n  <text x=\"260\" y=\"212\" text-anchor=\"middle\" fill=\"#92400e\" font-size=\"10\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">\"just like all her other subjects\"</text>\n\n  <g stroke=\"#92400e\" stroke-width=\"0.6\" opacity=\"0.5\">\n    <line x1=\"140\" y1=\"230\" x2=\"460\" y2=\"230\"/>\n    <line x1=\"140\" y1=\"243\" x2=\"450\" y2=\"243\"/>\n  </g>\n\n  <!-- Promise 2: highlighted glowing phrase -->\n  <rect x=\"135\" y=\"255\" width=\"320\" height=\"24\" rx=\"4\" fill=\"rgba(251,191,36,0.25)\" stroke=\"#fbbf24\" stroke-width=\"1\" filter=\"url(#glowL1)\"/>\n  <text x=\"295\" y=\"272\" text-anchor=\"middle\" fill=\"#92400e\" font-size=\"10\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">\"no one would force Indians to change their religion\"</text>\n\n  <g stroke=\"#92400e\" stroke-width=\"0.6\" opacity=\"0.5\">\n    <line x1=\"140\" y1=\"290\" x2=\"460\" y2=\"290\"/>\n    <line x1=\"140\" y1=\"303\" x2=\"430\" y2=\"303\"/>\n    <line x1=\"140\" y1=\"316\" x2=\"450\" y2=\"316\"/>\n  </g>\n\n  <!-- Caption -->\n  <text x=\"300\" y=\"345\" text-anchor=\"middle\" fill=\"#92400e\" font-size=\"10\" font-style=\"italic\" font-family=\"Inter,system-ui,sans-serif\">Promises sounded very nice on paper…</text>\n\n  <!-- Wax seal -->\n  <circle cx=\"450\" cy=\"330\" r=\"14\" fill=\"#dc2626\" opacity=\"0.7\"/>\n  <text x=\"450\" y=\"334\" text-anchor=\"middle\" fill=\"#fef3c7\" font-size=\"8\" font-weight=\"700\">VR</text>\n</g>\n\n<!-- BEAT 6: Promises NOT kept — red X over the promises, Resident watching -->\n<g class=\"el\" data-beat=\"6\">\n  <!-- \"REALITY\" label -->\n  <rect x=\"40\" y=\"90\" width=\"100\" height=\"26\" rx=\"4\" fill=\"rgba(239,68,68,0.2)\" stroke=\"#ef4444\" stroke-width=\"1.5\"/>\n  <text x=\"90\" y=\"107\" text-anchor=\"middle\" fill=\"#ef4444\" font-size=\"12\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">⚠ REALITY</text>\n\n  <!-- Indian Prince figure (left) -->\n  <g transform=\"translate(120,150)\">\n    <!-- turban -->\n    <path d=\"M15 5 Q25 -5 35 5 L35 12 L15 12 Z\" fill=\"#fbbf24\"/>\n    <!-- head -->\n    <circle cx=\"25\" cy=\"20\" r=\"10\" fill=\"#fbbf24\"/>\n    <!-- body -->\n    <rect x=\"15\" y=\"30\" width=\"20\" height=\"30\" rx=\"4\" fill=\"#a78bfa\"/>\n    <text x=\"25\" y=\"78\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">Indian Prince</text>\n    <text x=\"25\" y=\"90\" text-anchor=\"middle\" fill=\"#64748b\" font-size=\"8\" font-family=\"Inter,system-ui,sans-serif\">(told he could rule)</text>\n  </g>\n\n  <!-- British Resident watching (right of prince) -->\n  <g transform=\"translate(220,145)\">\n    <!-- top hat -->\n    <rect x=\"16\" y=\"0\" width=\"18\" height=\"8\" fill=\"#1e293b\"/>\n    <rect x=\"13\" y=\"7\" width=\"24\" height=\"3\" fill=\"#1e293b\"/>\n    <!-- head -->\n    <circle cx=\"25\" cy=\"18\" r=\"9\" fill=\"#fbbf24\"/>\n    <!-- body (red coat) -->\n    <rect x=\"15\" y=\"27\" width=\"20\" height=\"28\" rx=\"4\" fill=\"#dc2626\"/>\n    <!-- eyes watching (binoculars) -->\n    <circle cx=\"22\" cy=\"17\" r=\"2\" fill=\"#1e293b\"/>\n    <circle cx=\"28\" cy=\"17\" r=\"2\" fill=\"#1e293b\"/>\n    <text x=\"25\" y=\"70\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">British \"Resident\"</text>\n    <text x=\"25\" y=\"82\" text-anchor=\"middle\" fill=\"#64748b\" font-size=\"8\" font-family=\"Inter,system-ui,sans-serif\">(watching every decision)</text>\n  </g>\n\n  <!-- Arrow showing Resident watching Prince -->\n  <path d=\"M210 165 Q190 160 165 165\" fill=\"none\" stroke=\"#ef4444\" stroke-width=\"1.5\" stroke-dasharray=\"3,2\" marker-end=\"url(#arrL1)\"/>\n\n  <!-- Big red X over \"kept promises\" -->\n  <text x=\"400\" y=\"180\" text-anchor=\"middle\" fill=\"#64748b\" font-size=\"11\" font-family=\"Inter,system-ui,sans-serif\">Promises on paper:</text>\n  <rect x=\"350\" y=\"190\" width=\"180\" height=\"30\" rx=\"4\" fill=\"rgba(251,191,36,0.1)\" stroke=\"#fbbf24\" stroke-width=\"1\" opacity=\"0.5\"/>\n  <text x=\"440\" y=\"210\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\" opacity=\"0.5\">\"fair treatment\"</text>\n  <line x1=\"345\" y1=\"188\" x2=\"535\" y2=\"222\" stroke=\"#ef4444\" stroke-width=\"3\" opacity=\"0.8\"/>\n\n  <text x=\"440\" y=\"245\" text-anchor=\"middle\" fill=\"#ef4444\" font-size=\"13\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">NOT KEPT</text>\n\n  <!-- Analogy box -->\n  <rect x=\"60\" y=\"260\" width=\"480\" height=\"50\" rx=\"6\" fill=\"rgba(239,68,68,0.08)\" stroke=\"#ef4444\" stroke-width=\"1\" stroke-dasharray=\"4,3\"/>\n  <text x=\"300\" y=\"280\" text-anchor=\"middle\" fill=\"#fca5a5\" font-size=\"11\" font-weight=\"600\" font-family=\"Inter,system-ui,sans-serif\">Like being told: \"Yes, you can play in your room…</text>\n  <text x=\"300\" y=\"296\" text-anchor=\"middle\" fill=\"#fca5a5\" font-size=\"11\" font-weight=\"600\" font-family=\"Inter,system-ui,sans-serif\">…but I will stand at the door and tell you which toys to pick.\"</text>\n</g>\n\n<!-- BEAT 7: Taxes, famines, ruined weavers -->\n<g class=\"el\" data-beat=\"7\">\n  <!-- Heavy weight labeled TAXES pressing down -->\n  <g transform=\"translate(80,110)\">\n    <rect x=\"0\" y=\"0\" width=\"100\" height=\"60\" rx=\"4\" fill=\"#7f1d1d\" stroke=\"#ef4444\" stroke-width=\"2\"/>\n    <text x=\"50\" y=\"28\" text-anchor=\"middle\" fill=\"#fef3c7\" font-size=\"13\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">TAXES</text>\n    <text x=\"50\" y=\"45\" text-anchor=\"middle\" fill=\"#fca5a5\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">heavy burden</text>\n    <!-- Down arrows -->\n    <path d=\"M30 60 L30 75 L25 75 L35 75\" stroke=\"#ef4444\" stroke-width=\"2\" fill=\"none\"/>\n    <path d=\"M70 60 L70 75 L65 75 L75 75\" stroke=\"#ef4444\" stroke-width=\"2\" fill=\"none\"/>\n  </g>\n\n  <!-- Farmer figure being crushed -->\n  <g transform=\"translate(105,195)\">\n    <text x=\"25\" y=\"0\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"18\">🌾</text>\n    <text x=\"25\" y=\"15\" text-anchor=\"middle\" fill=\"#64748b\" font-size=\"8\" font-family=\"Inter,system-ui,sans-serif\">farmer</text>\n  </g>\n\n  <!-- Empty bowl = famine -->\n  <g transform=\"translate(260,130)\">\n    <path d=\"M0 0 L60 0 L55 30 Q30 40 5 30 Z\" fill=\"rgba(120,53,15,0.3)\" stroke=\"#92400e\" stroke-width=\"1.5\"/>\n    <text x=\"30\" y=\"50\" text-anchor=\"middle\" fill=\"#ef4444\" font-size=\"11\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">FAMINE</text>\n    <text x=\"30\" y=\"64\" text-anchor=\"middle\" fill=\"#fca5a5\" font-size=\"8\" font-family=\"Inter,system-ui,sans-serif\">no food for months</text>\n    <text x=\"30\" y=\"80\" text-anchor=\"middle\" fill=\"#64748b\" font-size=\"8\" font-family=\"Inter,system-ui,sans-serif\">many died</text>\n  </g>\n\n  <!-- Broken loom / ruined weavers -->\n  <g transform=\"translate(410,120)\">\n    <rect x=\"0\" y=\"0\" width=\"80\" height=\"50\" rx=\"4\" fill=\"rgba(168,85,247,0.12)\" stroke=\"#a78bfa\" stroke-width=\"1.5\"/>\n    <text x=\"40\" y=\"20\" text-anchor=\"middle\" fill=\"#a78bfa\" font-size=\"10\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">WEAVERS</text>\n    <text x=\"40\" y=\"35\" text-anchor=\"middle\" fill=\"#c4b5fd\" font-size=\"8\" font-family=\"Inter,system-ui,sans-serif\">&amp; potters</text>\n    <text x=\"40\" y=\"48\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"8\" font-family=\"Inter,system-ui,sans-serif\">ruined ✕</text>\n    <!-- Crack lines -->\n    <path d=\"M10 5 L20 25 L15 45\" stroke=\"#ef4444\" stroke-width=\"1\" opacity=\"0.6\"/>\n    <path d=\"M70 5 L60 25 L65 45\" stroke=\"#ef4444\" stroke-width=\"1\" opacity=\"0.6\"/>\n  </g>\n\n  <!-- Reason: British factory goods cheaper -->\n  <rect x=\"80\" y=\"280\" width=\"440\" height=\"40\" rx=\"6\" fill=\"rgba(56,189,248,0.08)\" stroke=\"#38bdf8\" stroke-width=\"1\"/>\n  <text x=\"300\" y=\"298\" text-anchor=\"middle\" fill=\"#38bdf8\" font-size=\"11\" font-weight=\"600\" font-family=\"Inter,system-ui,sans-serif\">Why? British factory-made goods were cheaper</text>\n  <text x=\"300\" y=\"312\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">Indian craftsmen could not compete</text>\n</g>\n\n<!-- BEAT 8: Arms Act 1878 — Indians vs British weapons -->\n<g class=\"el\" data-beat=\"8\">\n  <!-- Title -->\n  <rect x=\"150\" y=\"90\" width=\"300\" height=\"34\" rx=\"6\" fill=\"rgba(239,68,68,0.15)\" stroke=\"#ef4444\" stroke-width=\"1.5\"/>\n  <text x=\"300\" y=\"112\" text-anchor=\"middle\" fill=\"#ef4444\" font-size=\"14\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">ARMS ACT — 1878</text>\n\n  <!-- Two-column comparison -->\n  <!-- Indians (left) -->\n  <rect x=\"60\" y=\"145\" width=\"220\" height=\"160\" rx=\"8\" fill=\"rgba(239,68,68,0.08)\" stroke=\"#ef4444\" stroke-width=\"2\"/>\n  <text x=\"170\" y=\"170\" text-anchor=\"middle\" fill=\"#fca5a5\" font-size=\"13\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">INDIANS</text>\n\n  <!-- Crossed-out rifle -->\n  <g transform=\"translate(120,190)\">\n    <rect x=\"0\" y=\"5\" width=\"80\" height=\"8\" rx=\"2\" fill=\"#64748b\"/>\n    <rect x=\"70\" y=\"2\" width=\"10\" height=\"14\" rx=\"2\" fill=\"#475569\"/>\n    <rect x=\"0\" y=\"13\" width=\"20\" height=\"15\" rx=\"2\" fill=\"#475569\"/>\n    <line x1=\"-5\" y1=\"0\" x2=\"85\" y2=\"25\" stroke=\"#ef4444\" stroke-width=\"3\"/>\n  </g>\n  <text x=\"170\" y=\"240\" text-anchor=\"middle\" fill=\"#ef4444\" font-size=\"22\" font-weight=\"700\">✕</text>\n  <text x=\"170\" y=\"262\" text-anchor=\"middle\" fill=\"#fca5a5\" font-size=\"11\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">NO weapons allowed</text>\n  <text x=\"170\" y=\"278\" text-anchor=\"middle\" fill=\"#64748b\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">(could be arrested)</text>\n\n  <!-- British (right) -->\n  <rect x=\"320\" y=\"145\" width=\"220\" height=\"160\" rx=\"8\" fill=\"rgba(34,197,94,0.08)\" stroke=\"#22c55e\" stroke-width=\"2\"/>\n  <text x=\"430\" y=\"170\" text-anchor=\"middle\" fill=\"#86efac\" font-size=\"13\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">BRITISH</text>\n\n  <!-- Rifle with checkmark -->\n  <g transform=\"translate(380,190)\">\n    <rect x=\"0\" y=\"5\" width=\"80\" height=\"8\" rx=\"2\" fill=\"#94a3b8\"/>\n    <rect x=\"70\" y=\"2\" width=\"10\" height=\"14\" rx=\"2\" fill=\"#cbd5e1\"/>\n    <rect x=\"0\" y=\"13\" width=\"20\" height=\"15\" rx=\"2\" fill=\"#cbd5e1\"/>\n  </g>\n  <text x=\"430\" y=\"240\" text-anchor=\"middle\" fill=\"#22c55e\" font-size=\"22\" font-weight=\"700\">✓</text>\n  <text x=\"430\" y=\"262\" text-anchor=\"middle\" fill=\"#86efac\" font-size=\"11\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">Weapons allowed</text>\n  <text x=\"430\" y=\"278\" text-anchor=\"middle\" fill=\"#64748b\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">(full freedom)</text>\n\n  <!-- \"UNFAIR\" stamp -->\n  <text x=\"300\" y=\"335\" text-anchor=\"middle\" fill=\"#ef4444\" font-size=\"16\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">VERY UNFAIR!</text>\n</g>\n\n<!-- BEAT 9: Vernacular Press Act 1878 — censored newspaper -->\n<g class=\"el\" data-beat=\"9\">\n  <!-- Title -->\n  <rect x=\"120\" y=\"90\" width=\"360\" height=\"34\" rx=\"6\" fill=\"rgba(239,68,68,0.15)\" stroke=\"#ef4444\" stroke-width=\"1.5\"/>\n  <text x=\"300\" y=\"112\" text-anchor=\"middle\" fill=\"#ef4444\" font-size=\"13\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">VERNACULAR PRESS ACT — 1878</text>\n\n  <!-- Newspaper -->\n  <rect x=\"120\" y=\"145\" width=\"300\" height=\"180\" rx=\"4\" fill=\"#f8fafc\" stroke=\"#475569\" stroke-width=\"1.5\"/>\n  <!-- Newspaper header -->\n  <rect x=\"130\" y=\"155\" width=\"280\" height=\"20\" fill=\"#1e293b\"/>\n  <text x=\"270\" y=\"169\" text-anchor=\"middle\" fill=\"#f8fafc\" font-size=\"11\" font-weight=\"700\" font-family=\"Georgia,serif\">केसरी  ·  কেশরী  ·  கேசரி</text>\n  <text x=\"270\" y=\"185\" text-anchor=\"middle\" fill=\"#475569\" font-size=\"8\" font-family=\"Inter,system-ui,sans-serif\">(Indian-language newspaper)</text>\n\n  <!-- Text columns -->\n  <g stroke=\"#94a3b8\" stroke-width=\"0.5\">\n    <line x1=\"140\" y1=\"200\" x2=\"260\" y2=\"200\"/>\n    <line x1=\"140\" y1=\"210\" x2=\"260\" y2=\"210\"/>\n    <line x1=\"140\" y1=\"220\" x2=\"250\" y2=\"220\"/>\n    <line x1=\"140\" y1=\"230\" x2=\"260\" y2=\"230\"/>\n    <line x1=\"140\" y1=\"240\" x2=\"245\" y2=\"240\"/>\n    <line x1=\"140\" y1=\"250\" x2=\"260\" y2=\"250\"/>\n    <line x1=\"140\" y1=\"260\" x2=\"255\" y2=\"260\"/>\n    <line x1=\"280\" y1=\"200\" x2=\"400\" y2=\"200\"/>\n    <line x1=\"280\" y1=\"210\" x2=\"395\" y2=\"210\"/>\n    <line x1=\"280\" y1=\"220\" x2=\"400\" y2=\"220\"/>\n    <line x1=\"280\" y1=\"230\" x2=\"390\" y2=\"230\"/>\n    <line x1=\"280\" y1=\"240\" x2=\"400\" y2=\"240\"/>\n    <line x1=\"280\" y1=\"250\" x2=\"385\" y2=\"250\"/>\n    <line x1=\"280\" y1=\"260\" x2=\"400\" y2=\"260\"/>\n  </g>\n\n  <!-- RED \"CENSORED\" stamp diagonal -->\n  <g transform=\"rotate(-15, 270, 230)\">\n    <rect x=\"190\" y=\"215\" width=\"160\" height=\"30\" rx=\"4\" fill=\"none\" stroke=\"#dc2626\" stroke-width=\"3\"/>\n    <text x=\"270\" y=\"237\" text-anchor=\"middle\" fill=\"#dc2626\" font-size=\"16\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">CENSORED</text>\n  </g>\n\n  <!-- Scissors icon -->\n  <text x=\"80\" y=\"200\" fill=\"#94a3b8\" font-size=\"24\">✂</text>\n  <text x=\"450\" y=\"200\" fill=\"#94a3b8\" font-size=\"24\">✂</text>\n\n  <!-- Caption -->\n  <text x=\"300\" y=\"345\" text-anchor=\"middle\" fill=\"#fca5a5\" font-size=\"11\" font-weight=\"600\" font-family=\"Inter,system-ui,sans-serif\">British could shut down any Indian-language newspaper</text>\n  <text x=\"300\" y=\"360\" text-anchor=\"middle\" fill=\"#64748b\" font-size=\"9\" font-style=\"italic\" font-family=\"Inter,system-ui,sans-serif\">(English-language papers were spared — too few readers to matter)</text>\n</g>\n\n<!-- BEAT 10: Seed of freedom — sprout growing, forward arrow -->\n<g class=\"el\" data-beat=\"10\">\n  <!-- Ground/soil -->\n  <rect x=\"0\" y=\"340\" width=\"600\" height=\"40\" fill=\"#451a03\" opacity=\"0.7\"/>\n  <text x=\"300\" y=\"362\" text-anchor=\"middle\" fill=\"#fef3c7\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">the soil of Indian hearts</text>\n\n  <!-- Sprout growing from the soil -->\n  <g transform=\"translate(280,270)\">\n    <!-- stem -->\n    <path d=\"M20 70 Q18 50 20 30 Q22 15 20 5\" stroke=\"#22c55e\" stroke-width=\"3\" fill=\"none\"/>\n    <!-- left leaf -->\n    <path d=\"M20 40 Q5 35 0 25 Q10 28 20 40 Z\" fill=\"#22c55e\"/>\n    <!-- right leaf -->\n    <path d=\"M20 30 Q35 25 40 15 Q30 18 20 30 Z\" fill=\"#16a34a\"/>\n    <!-- top bud -->\n    <circle cx=\"20\" cy=\"5\" r=\"4\" fill=\"#fbbf24\"/>\n  </g>\n\n  <!-- Sun/shine rays above -->\n  <g transform=\"translate(280,160)\">\n    <circle cx=\"20\" cy=\"20\" r=\"12\" fill=\"#fbbf24\" opacity=\"0.8\"/>\n    <g stroke=\"#fbbf24\" stroke-width=\"1.5\" opacity=\"0.6\">\n      <line x1=\"20\" y1=\"0\" x2=\"20\" y2=\"-8\"/>\n      <line x1=\"35\" y1=\"5\" x2=\"40\" y2=\"0\"/>\n      <line x1=\"40\" y1=\"20\" x2=\"48\" y2=\"20\"/>\n      <line x1=\"0\" y1=\"20\" x2=\"-8\" y2=\"20\"/>\n      <line x1=\"5\" y1=\"5\" x2=\"0\" y2=\"0\"/>\n    </g>\n  </g>\n\n  <!-- \"THE SEED OF FREEDOM\" label -->\n  <rect x=\"150\" y=\"100\" width=\"300\" height=\"34\" rx=\"6\" fill=\"rgba(34,197,94,0.15)\" stroke=\"#22c55e\" stroke-width=\"2\"/>\n  <text x=\"300\" y=\"122\" text-anchor=\"middle\" fill=\"#22c55e\" font-size=\"14\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">🌱 THE SEED OF FREEDOM</text>\n\n  <!-- Thought bubble: \"This is OUR country. WE should rule it.\" -->\n  <rect x=\"330\" y=\"200\" width=\"240\" height=\"50\" rx=\"8\" fill=\"rgba(56,189,248,0.12)\" stroke=\"#38bdf8\" stroke-width=\"1.5\"/>\n  <text x=\"450\" y=\"220\" text-anchor=\"middle\" fill=\"#38bdf8\" font-size=\"11\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">\"This is OUR country.</text>\n  <text x=\"450\" y=\"236\" text-anchor=\"middle\" fill=\"#38bdf8\" font-size=\"11\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">WE should rule it.\"</text>\n\n  <!-- Forward arrow: \"Next: The Good Teachers\" -->\n  <rect x=\"420\" y=\"340\" width=\"170\" height=\"36\" rx=\"6\" fill=\"rgba(251,191,36,0.15)\" stroke=\"#fbbf24\" stroke-width=\"1.5\"/>\n  <text x=\"505\" y=\"358\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"11\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">Next →</text>\n  <text x=\"505\" y=\"370\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"8\" font-family=\"Inter,system-ui,sans-serif\">The Good Teachers</text>\n</g>\n"
+      "svg": "\n<!-- BEAT 1: Title + welcome -->\n<g class=\"el\" data-beat=\"1\">\n  <text x=\"300\" y=\"40\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"20\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">INDIA'S LONG ROAD TO INDEPENDENCE</text>\n  <text x=\"300\" y=\"62\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"12\" font-family=\"Inter,system-ui,sans-serif\">A true story of how India became free</text>\n  <rect x=\"150\" y=\"90\" width=\"300\" height=\"70\" rx=\"10\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\"/>\n  <text x=\"300\" y=\"115\" text-anchor=\"middle\" fill=\"#38bdf8\" font-size=\"13\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">FROM 1858 TO 1947</text>\n  <text x=\"300\" y=\"135\" text-anchor=\"middle\" fill=\"#cbd5e1\" font-size=\"11\" font-family=\"Inter,system-ui,sans-serif\">200 years of India's freedom struggle</text>\n  <text x=\"300\" y=\"150\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">But this story begins when India was NOT free…</text>\n</g>\n\n<!-- BEAT 2: East India Company — traders → rulers -->\n<g class=\"el\" data-beat=\"2\">\n  <rect x=\"40\" y=\"180\" width=\"240\" height=\"90\" rx=\"10\" fill=\"rgba(251,191,36,0.10)\" stroke=\"#fbbf24\" stroke-width=\"2\"/>\n  <text x=\"160\" y=\"205\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"13\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">EAST INDIA COMPANY</text>\n  <text x=\"160\" y=\"225\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">England 🇬🇧</text>\n  <text x=\"160\" y=\"245\" text-anchor=\"middle\" fill=\"#cbd5e1\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">Came to trade: spices, cloth, tea</text>\n  <text x=\"160\" y=\"260\" text-anchor=\"middle\" fill=\"#cbd5e1\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">Slowly became RULERS</text>\n  <line x1=\"290\" y1=\"225\" x2=\"310\" y2=\"225\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrL1)\"/>\n  <rect x=\"320\" y=\"180\" width=\"240\" height=\"90\" rx=\"10\" fill=\"rgba(239,68,68,0.10)\" stroke=\"#ef4444\" stroke-width=\"2\"/>\n  <text x=\"440\" y=\"205\" text-anchor=\"middle\" fill=\"#ef4444\" font-size=\"13\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">TOOK OVER INDIA</text>\n  <text x=\"440\" y=\"225\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">Took our lands</text>\n  <text x=\"440\" y=\"245\" text-anchor=\"middle\" fill=\"#cbd5e1\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">Heavy taxes</text>\n  <text x=\"440\" y=\"260\" text-anchor=\"middle\" fill=\"#cbd5e1\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">Did not treat us fairly</text>\n</g>\n\n<!-- BEAT 3: Great Uprising 1857 -->\n<g class=\"el\" data-beat=\"3\">\n  <rect x=\"80\" y=\"290\" width=\"440\" height=\"80\" rx=\"10\" fill=\"rgba(239,68,68,0.10)\" stroke=\"#ef4444\" stroke-width=\"2\"/>\n  <text x=\"300\" y=\"312\" text-anchor=\"middle\" fill=\"#ef4444\" font-size=\"16\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">1857 — THE GREAT UPRISING</text>\n  <text x=\"300\" y=\"332\" text-anchor=\"middle\" fill=\"#fca5a5\" font-size=\"11\" font-family=\"Inter,system-ui,sans-serif\">Soldiers · Kings · Farmers · Queens — all joined hands</text>\n  <text x=\"300\" y=\"348\" text-anchor=\"middle\" fill=\"#cbd5e1\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">\"ENOUGH!\" they said — and fought bravely</text>\n  <text x=\"300\" y=\"362\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">India lost (British had better guns) — but the seed was sown</text>\n</g>\n\n<!-- BEAT 4: Queen Victoria takes over (1858) -->\n<g class=\"el\" data-beat=\"4\">\n  <rect x=\"40\" y=\"390\" width=\"260\" height=\"70\" rx=\"10\" fill=\"rgba(251,191,36,0.10)\" stroke=\"#fbbf24\" stroke-width=\"2\"/>\n  <text x=\"170\" y=\"412\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"13\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">QUEEN VICTORIA</text>\n  <text x=\"170\" y=\"430\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">\"The Company made a mess.</text>\n  <text x=\"170\" y=\"444\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">I will take over now.\"</text>\n  <text x=\"170\" y=\"456\" text-anchor=\"middle\" fill=\"#cbd5e1\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">1858 · Royal Proclamation</text>\n  <line x1=\"310\" y1=\"425\" x2=\"330\" y2=\"425\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrL1)\"/>\n  <rect x=\"340\" y=\"390\" width=\"220\" height=\"70\" rx=\"10\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\"/>\n  <text x=\"450\" y=\"412\" text-anchor=\"middle\" fill=\"#38bdf8\" font-size=\"13\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">VICEROY</text>\n  <text x=\"450\" y=\"430\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">Queen's representative</text>\n  <text x=\"450\" y=\"444\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">Ruled India in her name</text>\n  <text x=\"450\" y=\"456\" text-anchor=\"middle\" fill=\"#cbd5e1\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">Had a lot of power</text>\n</g>\n\n<!-- BEAT 5: Promises on paper -->\n<g class=\"el\" data-beat=\"5\">\n  <rect x=\"60\" y=\"180\" width=\"480\" height=\"110\" rx=\"10\" fill=\"rgba(251,191,36,0.08)\" stroke=\"#fbbf24\" stroke-width=\"1.5\"/>\n  <text x=\"300\" y=\"202\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"13\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">📜 THE QUEEN'S PROMISES (on paper)</text>\n  <rect x=\"80\" y=\"215\" width=\"200\" height=\"28\" rx=\"5\" fill=\"rgba(56,189,248,0.12)\" stroke=\"#38bdf8\" stroke-width=\"1\"/>\n  <text x=\"180\" y=\"233\" text-anchor=\"middle\" fill=\"#38bdf8\" font-size=\"10\" font-weight=\"600\" font-family=\"Inter,system-ui,sans-serif\">\"Fair treatment for all\"</text>\n  <rect x=\"80\" y=\"250\" width=\"200\" height=\"28\" rx=\"5\" fill=\"rgba(52,211,153,0.12)\" stroke=\"#34d399\" stroke-width=\"1\"/>\n  <text x=\"180\" y=\"268\" text-anchor=\"middle\" fill=\"#34d399\" font-size=\"10\" font-weight=\"600\" font-family=\"Inter,system-ui,sans-serif\">\"No forced religion change\"</text>\n  <rect x=\"300\" y=\"215\" width=\"220\" height=\"63\" rx=\"5\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\" stroke-width=\"1\"/>\n  <text x=\"410\" y=\"235\" text-anchor=\"middle\" fill=\"#a78bfa\" font-size=\"10\" font-weight=\"600\" font-family=\"Inter,system-ui,sans-serif\">\"Princes can keep</text>\n  <text x=\"410\" y=\"249\" text-anchor=\"middle\" fill=\"#a78bfa\" font-size=\"10\" font-weight=\"600\" font-family=\"Inter,system-ui,sans-serif\">their kingdoms\"</text>\n  <text x=\"410\" y=\"267\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">Sounded very nice…</text>\n</g>\n\n<!-- BEAT 6: Promises NOT kept -->\n<g class=\"el\" data-beat=\"6\">\n  <rect x=\"40\" y=\"300\" width=\"520\" height=\"80\" rx=\"10\" fill=\"rgba(239,68,68,0.08)\" stroke=\"#ef4444\" stroke-width=\"2\"/>\n  <text x=\"300\" y=\"322\" text-anchor=\"middle\" fill=\"#ef4444\" font-size=\"14\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">⚠ REALITY: PROMISES NOT KEPT</text>\n  <text x=\"300\" y=\"342\" text-anchor=\"middle\" fill=\"#fca5a5\" font-size=\"11\" font-family=\"Inter,system-ui,sans-serif\">Indian princes watched by British \"Residents\"</text>\n  <text x=\"300\" y=\"358\" text-anchor=\"middle\" fill=\"#cbd5e1\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">Like being told: \"Yes, play in your room…</text>\n  <text x=\"300\" y=\"372\" text-anchor=\"middle\" fill=\"#cbd5e1\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">…but I'll stand at the door and tell you which toys to pick.\"</text>\n</g>\n\n<!-- BEAT 7: Taxes, famines, ruined weavers -->\n<g class=\"el\" data-beat=\"7\">\n  <rect x=\"40\" y=\"390\" width=\"160\" height=\"75\" rx=\"8\" fill=\"rgba(239,68,68,0.10)\" stroke=\"#ef4444\" stroke-width=\"1.5\"/>\n  <text x=\"120\" y=\"412\" text-anchor=\"middle\" fill=\"#ef4444\" font-size=\"11\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">💰 HEAVY TAXES</text>\n  <text x=\"120\" y=\"430\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">Poor farmers</text>\n  <text x=\"120\" y=\"445\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">went hungry</text>\n  <text x=\"120\" y=\"458\" text-anchor=\"middle\" fill=\"#cbd5e1\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">Terrible famines</text>\n  <rect x=\"220\" y=\"390\" width=\"160\" height=\"75\" rx=\"8\" fill=\"rgba(251,146,60,0.10)\" stroke=\"#fb923c\" stroke-width=\"1.5\"/>\n  <text x=\"300\" y=\"412\" text-anchor=\"middle\" fill=\"#fb923c\" font-size=\"11\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">🔥 FAMINES</text>\n  <text x=\"300\" y=\"430\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">No food for months</text>\n  <text x=\"300\" y=\"445\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">Many people died</text>\n  <text x=\"300\" y=\"458\" text-anchor=\"middle\" fill=\"#cbd5e1\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">across India</text>\n  <rect x=\"400\" y=\"390\" width=\"160\" height=\"75\" rx=\"8\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\" stroke-width=\"1.5\"/>\n  <text x=\"480\" y=\"412\" text-anchor=\"middle\" fill=\"#a78bfa\" font-size=\"11\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">🧶 WEAVERS RUINED</text>\n  <text x=\"480\" y=\"430\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">British factory cloth</text>\n  <text x=\"480\" y=\"445\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">was cheaper</text>\n  <text x=\"480\" y=\"458\" text-anchor=\"middle\" fill=\"#cbd5e1\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">Indian crafts died</text>\n</g>\n\n<!-- BEAT 8: Arms Act 1878 -->\n<g class=\"el\" data-beat=\"8\">\n  <rect x=\"40\" y=\"180\" width=\"250\" height=\"100\" rx=\"10\" fill=\"rgba(239,68,68,0.10)\" stroke=\"#ef4444\" stroke-width=\"2\"/>\n  <text x=\"165\" y=\"205\" text-anchor=\"middle\" fill=\"#ef4444\" font-size=\"13\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">INDIANS</text>\n  <text x=\"165\" y=\"225\" text-anchor=\"middle\" fill=\"#fca5a5\" font-size=\"20\" font-weight=\"700\">✕</text>\n  <text x=\"165\" y=\"245\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">NO weapons allowed</text>\n  <text x=\"165\" y=\"260\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">(could be arrested)</text>\n  <text x=\"165\" y=\"272\" text-anchor=\"middle\" fill=\"#cbd5e1\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">ARMS ACT · 1878</text>\n  <rect x=\"310\" y=\"180\" width=\"250\" height=\"100\" rx=\"10\" fill=\"rgba(34,197,94,0.10)\" stroke=\"#22c55e\" stroke-width=\"2\"/>\n  <text x=\"435\" y=\"205\" text-anchor=\"middle\" fill=\"#22c55e\" font-size=\"13\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">BRITISH</text>\n  <text x=\"435\" y=\"225\" text-anchor=\"middle\" fill=\"#86efac\" font-size=\"20\" font-weight=\"700\">✓</text>\n  <text x=\"435\" y=\"245\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">Weapons allowed</text>\n  <text x=\"435\" y=\"260\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">Full freedom</text>\n  <text x=\"435\" y=\"272\" text-anchor=\"middle\" fill=\"#cbd5e1\" font-size=\"9\" font-family=\"Inter,system-ui,sans-serif\">VERY UNFAIR!</text>\n</g>\n\n<!-- BEAT 9: Vernacular Press Act 1878 -->\n<g class=\"el\" data-beat=\"9\">\n  <rect x=\"60\" y=\"300\" width=\"480\" height=\"90\" rx=\"10\" fill=\"rgba(239,68,68,0.08)\" stroke=\"#ef4444\" stroke-width=\"2\"/>\n  <text x=\"300\" y=\"322\" text-anchor=\"middle\" fill=\"#ef4444\" font-size=\"13\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">VERNACULAR PRESS ACT · 1878</text>\n  <text x=\"300\" y=\"342\" text-anchor=\"middle\" fill=\"#fca5a5\" font-size=\"11\" font-family=\"Inter,system-ui,sans-serif\">British could shut down any Indian-language newspaper</text>\n  <text x=\"300\" y=\"358\" text-anchor=\"middle\" fill=\"#cbd5e1\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">Hindi · Bengali · Marathi · Tamil · Urdu newspapers censored</text>\n  <text x=\"300\" y=\"372\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">(English-language papers were spared — too few readers to matter)</text>\n  <text x=\"300\" y=\"384\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"10\" font-weight=\"600\" font-family=\"Inter,system-ui,sans-serif\">= British were AFRAID of India's mother tongues</text>\n</g>\n\n<!-- BEAT 10: Seed of freedom -->\n<g class=\"el\" data-beat=\"10\">\n  <rect x=\"60\" y=\"390\" width=\"480\" height=\"75\" rx=\"10\" fill=\"rgba(34,197,94,0.10)\" stroke=\"#22c55e\" stroke-width=\"2\"/>\n  <text x=\"300\" y=\"412\" text-anchor=\"middle\" fill=\"#22c55e\" font-size=\"14\" font-weight=\"700\" font-family=\"Inter,system-ui,sans-serif\">🌱 THE SEED OF FREEDOM</text>\n  <text x=\"300\" y=\"432\" text-anchor=\"middle\" fill=\"#cbd5e1\" font-size=\"11\" font-family=\"Inter,system-ui,sans-serif\">\"This is OUR country. WE should rule it.\"</text>\n  <text x=\"300\" y=\"448\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"10\" font-family=\"Inter,system-ui,sans-serif\">A simple, beautiful thought — the seed of our freedom story</text>\n  <text x=\"300\" y=\"460\" text-anchor=\"middle\" fill=\"#fbbf24\" font-size=\"10\" font-weight=\"600\" font-family=\"Inter,system-ui,sans-serif\">→ Next: The Good Teachers</text>\n</g>\n"
     },
     {
       "id": "good_teachers",
       "label": "2. The Good Teachers",
-      "images": [
-        {
-          "file": "fig2_08_19th_century_painting.png",
-          "atBeat": 1,
-          "caption": "India in the late 19th century — the era of social reformers who awakened India's conscience"
-        },
-        {
-          "file": "fig2_10_birsa_munda.png",
-          "atBeat": 4,
-          "caption": "Swami Dayananda Saraswati — founder of the Arya Samaj (1875), who said 'Go back to the Vedas'"
-        },
-        {
-          "file": "fig2_13_national_council_education.png",
-          "atBeat": 6,
-          "caption": "Education reformers — Vidyasagar, Syed Ahmed Khan, and the Phule family who opened schools for all"
-        },
-        {
-          "file": "fig2_14_bharat_mata.png",
-          "atBeat": 8,
-          "caption": "'Vande Mataram' — Bankim Chandra's poem that became India's national song"
-        },
-        {
-          "file": "fig2_08_19th_century_painting.png",
-          "atBeat": 10,
-          "caption": "Swami Vivekananda — who told Indians 'Be brave! Believe in yourself!'"
-        }
-      ],
       "beats": [
         "Welcome back, my little friend! In the last story, we learned how the British took over India and made many unfair rules. Today, before we meet the freedom fighters, let's meet some very kind teachers. Long ago, India had some old customs that were not so nice — like little girls being married off when they were still children, or widows being treated badly, or some people being called 'low' just because of the family they were born in. These good teachers wanted to fix these unfair things.",
         "The first good teacher was a kind man named Raja Ram Mohan Roy. People called him 'Raja' which means 'King', but he was a king of IDEAS, not of land. In 1828 — almost 200 years ago — he started a group called the Brahmo Samaj in a big city called Calcutta. He said, 'Little children should not be married. Widows should be treated with respect. Girls should go to school just like boys. ALL people are equal.'",
@@ -105,28 +70,6 @@ window.CHAPTER_DATA = {
     {
       "id": "big_meeting",
       "label": "3. A Big Meeting in Bombay (1885)",
-      "images": [
-        {
-          "file": "fig2_07_aoc_hume.png",
-          "caption": "Allan Octavian Hume, the kind British gentleman who helped start the Indian National Congress",
-          "atBeat": 2
-        },
-        {
-          "file": "fig2_08_19th_century_painting.png",
-          "caption": "India in the late 19th century — many voices beginning to speak",
-          "atBeat": 3
-        },
-        {
-          "file": "fig2_10_birsa_munda.png",
-          "caption": "Birsa Munda, the brave young tribal leader who fought for his people's land",
-          "atBeat": 9
-        },
-        {
-          "file": "fig2_09_tilak.png",
-          "atBeat": 6,
-          "caption": "Bal Gangadhar Tilak — who said 'Swaraj is my birthright!'"
-        }
-      ],
       "beats": [
         "Welcome back, my little friend! Today, our story takes us to the city of Bombay — the city we now call Mumbai. The date is December 1885, a long time ago. A very special meeting is about to happen. Imagine a big hall with chairs, fans humming from the ceiling, and 72 Indian gentlemen walking in. They are wearing white kurtas, dhotis, turbans of many colours. Why have they come? Let's find out!",
         "The idea for this meeting came from a kind British gentleman named Allan Octavian Hume. Yes, he was British — but he was different. He loved India and felt sad that Indians had no voice in how their country was run. So he wrote letters to many Indian leaders and said, 'Why don't we have a meeting? Let us form a group where Indians can talk about their problems politely and ask the British government to make changes.'",
@@ -146,23 +89,6 @@ window.CHAPTER_DATA = {
     {
       "id": "swadeshi",
       "label": "4. Our Own Things! (1905)",
-      "images": [
-        {
-          "file": "fig2_11_lal_bal_pal.png",
-          "caption": "The 'Lal-Bal-Pal' trio — three brave leaders of the Swadeshi movement",
-          "atBeat": 3
-        },
-        {
-          "file": "fig2_14_bharat_mata.png",
-          "caption": "'Bharat Mata' — the painting of Mother India by Abanindranath Tagore",
-          "atBeat": 7
-        },
-        {
-          "file": "fig2_13_national_council_education.png",
-          "caption": "Logo of the National Council of Education — Indians opening their own colleges",
-          "atBeat": 10
-        }
-      ],
       "beats": [
         "Welcome back! In the last story, we met the Indian National Congress and the brave leaders like Tilak. Today, we will learn about a special year — 1905. In this year, the British did something very unfair to the people of Bengal, and Indians responded with a beautiful idea. Let me tell you what happened.",
         "Bengal was a very big province in eastern India — so big that the British said, 'It is too big to rule properly. We will divide it into two parts — East Bengal and West Bengal.' But here was the secret reason: Bengal was the home of many clever, brave Indian leaders. The British were afraid of these leaders. So they thought, 'If we split Bengal, the leaders will be divided and weak.'",
@@ -186,23 +112,6 @@ window.CHAPTER_DATA = {
     {
       "id": "revolutionaries",
       "label": "5. The Brave Bomb-Throwers",
-      "images": [
-        {
-          "file": "fig2_17_khudiram_bose.png",
-          "caption": "Khudiram Bose — the brave 18-year-old who gave his life for India",
-          "atBeat": 3
-        },
-        {
-          "file": "fig2_19_revolutionaries.png",
-          "caption": "Brave revolutionaries who fought for India's freedom",
-          "atBeat": 6
-        },
-        {
-          "file": "fig2_20_cellular_jail.png",
-          "caption": "The Cellular Jail in the Andaman Islands — where freedom fighters were sent far from home",
-          "atBeat": 8
-        }
-      ],
       "beats": [
         "Welcome back, my little friend. In the last story, we met the Swadeshi movement — buying Indian things and boycotting British things. But some young Indians felt that this was too slow. They said, 'The British only understand force. We must fight them with weapons!' These brave young men were called the REVOLUTIONARIES. Let me tell you their story — but please remember, these are NOT role models for you. They lived in a very hard time, and they made hard choices.",
         "In 1902, in a city called Calcutta, some young men started a secret group called the Anushilan Samiti. 'Anushilan' means 'training' or 'practice'. They met in small rooms, did exercises, learned to use swords and small pistols, and read books about freedom. They wanted to inspire Indians by doing brave, daring acts against the British.",
@@ -223,18 +132,6 @@ window.CHAPTER_DATA = {
     {
       "id": "home_rule",
       "label": "6. Home Means Freedom (1916)",
-      "images": [
-        {
-          "file": "fig2_16_surat_split.png",
-          "caption": "Indian leaders in a meeting — sometimes they agreed, sometimes they argued",
-          "atBeat": 3
-        },
-        {
-          "file": "fig2_24_postage_stamp.png",
-          "caption": "A stamp honouring India's struggle for self-rule",
-          "atBeat": 6
-        }
-      ],
       "beats": [
         "Welcome back, my little friend! Today, our story takes us to the years 1916-1918. The world was fighting a great big war — the First World War — far away in Europe. While the British were busy with that war, some Indian leaders said, 'This is a good time to demand our rights. The British need us. Let us ask for HOME RULE.'",
         "HOME RULE means ruling your own home — your own country — while still being friendly with bigger countries. It does not mean full independence. It means: 'We, Indians, will make laws for India. But India will still be a part of the British Empire, like a friendly cousin.' This was a step towards full freedom, but not full freedom yet.",
@@ -254,18 +151,6 @@ window.CHAPTER_DATA = {
     {
       "id": "amritsar",
       "label": "7. A Sad Day in Amritsar (1919)",
-      "images": [
-        {
-          "file": "fig2_21_gandhi_spinning.png",
-          "caption": "Mahatma Gandhi spinning khadi cloth on a charkha — symbol of self-reliance",
-          "atBeat": 2
-        },
-        {
-          "file": "fig2_22_jallianwala_memorial.png",
-          "caption": "The Martyrs' Memorial at Jallianwala Bagh in Amritsar — built to remember those who died",
-          "atBeat": 6
-        }
-      ],
       "beats": [
         "Welcome back, my little friend. Today's story is a very sad one. But it is an important story — because sometimes, sad things make people wake up and fight harder for what is right. Let me tell you what happened on a spring day in 1919, in a beautiful city called Amritsar, in Punjab.",
         "First, let me introduce you to a man who would change the freedom struggle forever. His name was Mohandas Karamchand Gandhi. People called him 'Mahatma' Gandhi — 'Mahatma' means 'Great Soul'. He had been working in South Africa, fighting for the rights of Indians there using a new method called SATYAGRAHA. Satyagraha means 'truth force' or 'soul force' — fighting for what is right WITHOUT violence, WITHOUT guns, WITHOUT bombs.",
@@ -288,13 +173,6 @@ window.CHAPTER_DATA = {
     {
       "id": "bhagat_singh",
       "label": "8. Brave Bhagat Singh",
-      "images": [
-        {
-          "file": "fig2_25_bhagat_singh.png",
-          "caption": "Bhagat Singh, Chandrashekhar Azad, and Ashfaqulla Khan — brave young revolutionaries",
-          "atBeat": 3
-        }
-      ],
       "beats": [
         "Welcome back, my little friend. In our last story, we met Mahatma Gandhi and his non-violent movement. But some young Indians felt that non-violence was too slow. They said, 'The British will not leave just because we ask nicely. We must show them we are serious — even if it costs us our lives.' Today, we will meet some of these brave young revolutionaries. Again, please remember — they are not role models for you. They lived in a hard time and made hard choices.",
         "In 1924, some young men in north India — Ram Prasad Bismil, Sachindra Sanyal, and others — formed a group called the Hindustan Republican Association (HRA). Their goal was to organize an armed revolution against the British. They collected weapons, made bombs, and robbed a train at a place called Kakori in 1925 to get money for their work. Many were arrested and hanged.",
@@ -315,33 +193,6 @@ window.CHAPTER_DATA = {
     {
       "id": "salt_march",
       "label": "9. Walking to the Sea (1930)",
-      "images": [
-        {
-          "file": "fig2_27_lahore_session.png",
-          "caption": "The Lahore session of the Congress in 1929, where Purna Swaraj was demanded",
-          "atBeat": 2
-        },
-        {
-          "file": "fig2_28_salt_march.png",
-          "caption": "Gandhiji leading the Salt (Dandi) March — 380 km on foot, 1930",
-          "atBeat": 4
-        },
-        {
-          "file": "fig2_29_sarojini_naidu.png",
-          "caption": "Sarojini Naidu — the 'Nightingale of India' — leading the salt march at Dharasana",
-          "atBeat": 8
-        },
-        {
-          "file": "fig2_30_ghaffar_khan.png",
-          "caption": "Khan Abdul Ghaffar Khan — the 'Frontier Gandhi' — and his Khudai Khidmatgars",
-          "atBeat": 10
-        },
-        {
-          "file": "fig2_31_round_table.png",
-          "caption": "The Round Table Conference in London, 1931 — Gandhiji representing India",
-          "atBeat": 12
-        }
-      ],
       "beats": [
         "Welcome back, my little friend! Today, our story takes us to a beautiful moment — when an old man with a stick walked 380 kilometres to the sea, just to make a pinch of salt. This sounds strange, doesn't it? Why would anyone walk so far for salt? Let me explain.",
         "First, let me tell you about a meeting that happened in 1929, in the city of Lahore (now in Pakistan). The Indian National Congress had a big meeting there. They said, 'We have had enough of asking politely. We do not want Home Rule anymore. We want PURNA SWARAJ — meaning COMPLETE independence. India will be a completely free country!' They chose 26 January 1930 as 'Independence Day' — and many Indians celebrated it that day, even though India was not actually free yet.",
@@ -364,13 +215,6 @@ window.CHAPTER_DATA = {
     {
       "id": "how_ideas_travelled",
       "label": "10. How Ideas Travelled: Press, Poetry & Symbols",
-      "images": [
-        {
-          "file": "fig2_24_postage_stamp.png",
-          "caption": "A postage stamp honouring the freedom struggle — how small printed objects carried the idea of freedom across millions of homes.",
-          "atBeat": 1
-        }
-      ],
       "beats": [
         "Namaste, my little friend. So far we have met kings, lawyers, judges, and marchers. But today, I want to tell you about a different kind of freedom fighter — the kind that did not carry a gun, did not go to jail, and sometimes did not even leave their village. I want to tell you about the people who fought with POEMS, with NEWSPAPERS, and with PICTURES. Because — and this is the most important thing I will say — freedom was won in the Indian MIND before it was won on the Indian map.",
         "Let me give you the problem first. In the year 1900, out of every 100 Indians, only about 6 could read. The other 94 could not. There were no televisions. There were no radios. There were no mobile phones. The British controlled the post office, the telegraph, and the law courts. If you wanted to tell 300 million Indians that the British were being unfair — how would you do it? You could not send a WhatsApp message. You could not put up a poster in Hindi and expect everyone to read it. This was the great puzzle of the freedom struggle: how do you unite a vast, mostly illiterate country against the most powerful empire on Earth?",
@@ -391,13 +235,6 @@ window.CHAPTER_DATA = {
     {
       "id": "subhas_bose",
       "label": "11. The Brave Soldier Subhas",
-      "images": [
-        {
-          "file": "fig2_32_subhas_bose.png",
-          "caption": "Subhas Chandra Bose — 'Netaji' — the brave leader of the Indian National Army",
-          "atBeat": 3
-        }
-      ],
       "beats": [
         "Welcome back! In our last story, we met Gandhiji's Salt March. Today, we will meet another leader — a brave, fiery man who respected Gandhiji but disagreed with his slow, peaceful methods. His name was Subhas Chandra Bose. People lovingly called him 'Netaji' — meaning 'Respected Leader'. Let me tell you his story.",
         "Subhas Chandra Bose was born in 1897 in Cuttack, Odisha. He was a very bright student. He went to England to study for the Indian Civil Service — that means he could have become a high-ranking British officer in India! But while in England, he heard about the Jallianwala Bagh massacre and the cruel treatment of Indians. He decided, 'I will not work for the British. I will fight them!' He resigned from the Civil Service in 1921 and came back to India.",
@@ -418,13 +255,6 @@ window.CHAPTER_DATA = {
     {
       "id": "quit_india",
       "label": "12. Do or Die! (1942)",
-      "images": [
-        {
-          "file": "fig2_34_quit_india_stamp.png",
-          "caption": "A stamp honouring the Quit India Movement of 1942",
-          "atBeat": 3
-        }
-      ],
       "beats": [
         "Welcome back! Today, we are getting close to the end of our long story. The year is 1942. The Second World War is raging. The British are busy fighting in Europe, Africa, and Asia. The Indian leaders thought, 'This is the time. We must strike now. We must tell the British: QUIT INDIA!'",
         "In August 1942, the Indian National Congress had a big meeting in Bombay. They passed a resolution saying, 'The British must leave India immediately.' Gandhiji gave a famous speech. He said, 'I am not going to be satisfied with anything short of complete freedom. We shall either free India or die in the attempt. We shall not live to see the perpetuation of our slavery.' Then he gave the country a slogan: 'KARENGE YA MARENDE!' — meaning 'DO OR DIE!'",
@@ -445,18 +275,6 @@ window.CHAPTER_DATA = {
     {
       "id": "independence",
       "label": "13. A New Country is Born (1947)",
-      "images": [
-        {
-          "file": "fig2_35_patel.png",
-          "caption": "Sardar Vallabhbhai Patel — the 'Iron Man of India' who united 565 princely states",
-          "atBeat": 5
-        },
-        {
-          "file": "fig2_36_partition_train.png",
-          "caption": "A train carrying refugees during the Partition of 1947 — a sad and important moment in our history",
-          "atBeat": 8
-        }
-      ],
       "beats": [
         "Welcome back, my little friend. This is the last story of our long journey. Today, we will see how India finally became free — but also how that freedom came with a great sadness: the Partition. Let me tell you the story carefully, because it is important to understand.",
         "In the 1930s and 1940s, the Muslim League, led by Muhammad Ali Jinnah, began to argue that Indian Muslims were not just a religious community — they were a separate NATION. They said, 'Muslims and Hindus are different in food, dress, customs, and religion. So Muslims should have their own country, separate from Hindu India.' This was called the 'Two-Nation Theory'.",
@@ -490,12 +308,6 @@ window.CHAPTER_DATA = {
         "In the years that followed, the poem spread across India. Wherever freedom fighters marched — in Calcutta, in Bombay, in Madras, in Lahore — they shouted 'Vande Mataram!' as their slogan. The British government tried to ban the slogan. They arrested people who shouted it. But the more they tried to stop it, the louder the Indians shouted.",
         "When freedom fighters were sent to prison, they sang 'Vande Mataram' inside the jail walls. When they were taken to court, they shouted 'Vande Mataram' before the judge. When they walked to the gallows to be hanged, their last words were often 'Vande Mataram'. The poem became a magic word — a word that made Indians feel brave and united.",
         "When India finally became free in 1947, and our Constitution was adopted on 26 January 1950, 'Vande Mataram' was adopted as our National Song. (Our National Anthem is 'Jana Gana Mana', written by Rabindranath Tagore.) Even today, every Independence Day and Republic Day, Indians sing 'Vande Mataram' with pride. So next time you sing this song at school, remember: it was written long, long ago by a writer who loved India very much. And it carried Indians through 75 years of struggle, all the way to freedom!"
-      ],
-      "images": [
-        {
-          "file": "fig2_24_postage_stamp.png",
-          "caption": "A postage stamp honouring India's freedom struggle"
-        }
       ]
     },
     {
@@ -509,20 +321,6 @@ window.CHAPTER_DATA = {
         "So Gandhiji started walking. From Sabarmati to Dandi — a distance of 380 kilometres. That is like walking from one end of a big city to the other, and then walking back, and then walking again! Every day, he walked about 16 kilometres. He stopped in villages along the way. He spoke to the villagers. He told them about the unfair salt law.",
         "As he walked, more and more people joined him. By the time he reached Dandi, after 24 days of walking, there were THOUSANDS of people walking with him! People came out of their homes to greet him. They gave him food and water. They sang 'Vande Mataram'. The whole country was watching this strange old man walking to the sea.",
         "On 6 April 1930, Gandhiji reached the beach at Dandi. He bent down, picked up a handful of salty sea mud, and boiled it. He made salt! With that simple act, he broke the British law. The news spread across India like wildfire. From Kashmir to Kanyakumari, from Bombay to Bengal — Indians started making their own salt! The British arrested Gandhiji and tens of thousands of Indians. But they could not stop the movement. The whole world saw how brave and peaceful the Indian people were. The Salt March became one of the most famous non-violent protests in the history of the world!"
-      ],
-      "images": [
-        {
-          "file": "fig2_28_salt_march.png",
-          "caption": "Gandhiji leading the Salt March in 1930"
-        },
-        {
-          "file": "fig2_29_sarojini_naidu.png",
-          "caption": "Sarojini Naidu leading the Dharasana march"
-        },
-        {
-          "file": "fig2_31_round_table.png",
-          "caption": "Round Table Conference, 1931"
-        }
       ]
     },
     {
@@ -536,12 +334,6 @@ window.CHAPTER_DATA = {
         "When Bhagat grew up, he joined a group of brave young men called the HSRA — Hindustan Socialist Republican Association. They believed that the British would only leave if forced. They did not believe in non-violence. They thought, 'Gandhiji's path is too slow. We must take a different, harder path.' Bhagat became one of the most important members of the HSRA.",
         "In 1928, the British sent a strict police officer who beat the great leader Lala Lajpat Rai with lathis. Lala Lajpat Rai died of his wounds. Bhagat Singh and his friends were very angry. They shot the police officer who had given the order. Then, in April 1929, Bhagat Singh and his friend Batukeshwar Dutt went into the law-making assembly in Delhi and threw two small bombs. The bombs were not meant to hurt anyone — they were meant to make a loud noise and tell the country, 'We are here! We will fight!'",
         "Bhagat Singh and Batukeshwar Dutt did not run away after throwing the bombs. They stood there and shouted, 'Long live the revolution!' Then they let themselves be arrested. They wanted to use the trial to tell the whole country about their ideas. The British put them in prison. Bhagat and his friends went on a hunger strike for 116 days, demanding that Indian prisoners be treated fairly. One of his friends, Jatin Das, died after 63 days of hunger strike. Finally, on 23 March 1931, Bhagat Singh, Rajguru, and Sukhdev were hanged in Lahore jail. Bhagat was just 23 years old. As he walked to the gallows, he shouted, 'Down with British imperialism! Long live the revolution!' The whole of India wept. He became a hero forever."
-      ],
-      "images": [
-        {
-          "file": "fig2_25_bhagat_singh.png",
-          "caption": "Bhagat Singh, Chandrashekhar Azad, and Ashfaqulla Khan"
-        }
       ]
     },
     {
@@ -555,20 +347,6 @@ window.CHAPTER_DATA = {
         "All over India, people celebrated. In cities and villages, people distributed sweets. Children danced in the streets. Mothers sang lullabies about free India. Old people, who had waited for this day their whole lives, wept with happiness. There were fireworks at night. Trains decorated with flags ran across the country. For the first time in 200 years, India was ruled by Indians, not by foreigners.",
         "But there was also great sadness. The Partition of India and Pakistan had happened just two days before. About 14 million people — Hindus, Sikhs, and Muslims — had to leave their homes and move between the two new countries. Trains carried refugees across the new border. Many were killed in the violence. Gandhiji, the Father of the Nation, did not celebrate — he was fasting and praying for peace in Calcutta. He said, 'This is not the freedom I dreamed of.'",
         "Even with this sadness, 15 August 1947 was a historic day. India was free. The long road — from 1857 (the Great Uprising) to 1947 — had finally reached its destination. Millions of brave hearts — Khudiram, Bhagat Singh, Tilak, Gandhiji, Subhas Bose, Sarojini Naidu, Khan Abdul Ghaffar Khan, Sardar Patel, Nehru, and millions of ordinary Indians whose names we do not know — had walked this long road together. They gave their blood, their youth, their songs, their lives — so that you and I can be free today. Every Independence Day, when you sing 'Jana Gana Mana' and see the tricolour go up, remember them. And remember: freedom is a precious gift. Never take it for granted. Jai Hind!"
-      ],
-      "images": [
-        {
-          "file": "fig2_01_quit_india_women.png",
-          "caption": "Women marching in the 1942 Quit India Movement"
-        },
-        {
-          "file": "fig2_35_patel.png",
-          "caption": "Sardar Patel - the Iron Man of India"
-        },
-        {
-          "file": "fig2_36_partition_train.png",
-          "caption": "Train carrying refugees during the Partition"
-        }
       ]
     }
   ],
