@@ -535,6 +535,10 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
           if (isCurrent) {
             void el.offsetWidth;
             el.classList.add('pulse');
+            // Restart CSS animations inside this beat group so
+            // they play from the beginning when the beat becomes
+            // active (not on page load).
+            restartSVGAnimations(el);
           }
         });
       }
@@ -550,14 +554,44 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
       const showCount = state.currentBeat + 1; // 1-based count
       sortedEls.forEach((el, i) => {
         const shouldShow = i < showCount;
+        const wasVisible = el.classList.contains('visible');
         el.classList.toggle('visible', shouldShow);
         el.classList.remove('pulse');
         if (i === showCount - 1) {
           void el.offsetWidth;
           el.classList.add('pulse');
+          // Restart CSS animations for the newly-visible beat
+          if (!wasVisible) restartSVGAnimations(el);
         }
       });
     }
+  }
+
+  // Restart CSS animations inside an SVG element.
+  // Uses the Web Animations API (getAnimations) to reset each
+  // animation's currentTime to 0, which properly restarts it.
+  // Falls back to the clone-replace technique if getAnimations
+  // is not available.
+  function restartSVGAnimations(el) {
+    const animated = el.querySelectorAll('.area-tile, .fade-in, .draw-line, .perim-dot, .perim-dot-square');
+    animated.forEach(function(animEl) {
+      // Use Web Animations API if available (Chrome, Firefox, Edge)
+      if (animEl.getAnimations) {
+        const anims = animEl.getAnimations();
+        if (anims.length > 0) {
+          anims.forEach(function(anim) {
+            anim.cancel();  // reset to initial state
+            anim.play();    // restart from beginning
+          });
+          return;
+        }
+      }
+      // Fallback: clone and replace (forces a fresh element)
+      const clone = animEl.cloneNode(true);
+      if (animEl.parentNode) {
+        animEl.parentNode.replaceChild(clone, animEl);
+      }
+    });
   }
 
   function updateUI() {
