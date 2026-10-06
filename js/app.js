@@ -560,8 +560,11 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
         if (i === showCount - 1) {
           void el.offsetWidth;
           el.classList.add('pulse');
-          // Restart CSS animations for the newly-visible beat
-          if (!wasVisible) restartSVGAnimations(el);
+          // Restart CSS animations for the newly-visible beat.
+          // Always restart (not just when !wasVisible) because
+          // navigating back to a previously-seen beat should also
+          // replay the animations.
+          restartSVGAnimations(el);
         }
       });
     }
@@ -573,7 +576,16 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
   // Falls back to the clone-replace technique if getAnimations
   // is not available.
   function restartSVGAnimations(el) {
-    const animated = el.querySelectorAll('.area-tile, .fade-in, .draw-line, .perim-dot, .perim-dot-square');
+    // Select ALL animated elements — includes both the original
+    // animation classes (area-tile, fade-in, draw-line, perim-dot,
+    // perim-dot-square) and the universal ones (anim-fade-in,
+    // anim-pop-in, anim-draw, anim-pulse-in, anim-slide-left,
+    // anim-slide-right).
+    const animated = el.querySelectorAll(
+      '.area-tile, .fade-in, .draw-line, .perim-dot, .perim-dot-square, ' +
+      '.anim-fade-in, .anim-pop-in, .anim-draw, .anim-pulse-in, ' +
+      '.anim-slide-left, .anim-slide-right'
+    );
     animated.forEach(function(animEl) {
       // Use Web Animations API if available (Chrome, Firefox, Edge)
       if (animEl.getAnimations) {
