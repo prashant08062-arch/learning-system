@@ -31,7 +31,7 @@ window.CHAPTER_DATA = {
       "id": "what_is_percent",
       "label": "1.1 What Does % Mean?",
       "viewBox": "0 0 800 620",
-      "svg": "<defs>\n  <pattern id=\"grid1\" width=\"40\" height=\"40\" patternUnits=\"userSpaceOnUse\">\n    <path d=\"M 40 0 L 0 0 0 40\" fill=\"none\" stroke=\"#1e293b\" stroke-width=\"0.5\"/>\n  </pattern>\n</defs><style>\n/* === UNIVERSAL ANIMATION SYSTEM === */\n/* Applied to all lectures across all subjects */\n\n/* Fade-in for text elements */\n.anim-fade-in {\n  opacity: 0;\n  animation: anim-fade 0.5s ease forwards;\n}\n@keyframes anim-fade {\n  from { opacity: 0; transform: translateY(8px); }\n  to { opacity: 1; transform: translateY(0); }\n}\n\n/* Pop-in for rectangles and boxes */\n.anim-pop-in {\n  opacity: 0;\n  transform-origin: center;\n  animation: anim-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;\n}\n@keyframes anim-pop {\n  0% { opacity: 0; transform: scale(0.7); }\n  60% { opacity: 1; transform: scale(1.08); }\n  100% { opacity: 1; transform: scale(1); }\n}\n\n/* Draw for lines and paths (stroke draws itself) */\n.anim-draw {\n  stroke-dasharray: 1000;\n  stroke-dashoffset: 1000;\n  animation: anim-draw-line 0.8s ease forwards;\n}\n@keyframes anim-draw-line {\n  to { stroke-dashoffset: 0; }\n}\n\n/* Pulse-in for circles and key points */\n.anim-pulse-in {\n  opacity: 0;\n  animation: anim-pulse-in-anim 0.5s ease forwards;\n}\n@keyframes anim-pulse-in-anim {\n  0% { opacity: 0; transform: scale(0); }\n  50% { opacity: 1; transform: scale(1.3); }\n  100% { opacity: 1; transform: scale(1); }\n}\n\n/* Slide-in from left */\n.anim-slide-left {\n  opacity: 0;\n  animation: anim-slide-l 0.5s ease forwards;\n}\n@keyframes anim-slide-l {\n  from { opacity: 0; transform: translateX(-20px); }\n  to { opacity: 1; transform: translateX(0); }\n}\n\n/* Slide-in from right */\n.anim-slide-right {\n  opacity: 0;\n  animation: anim-slide-r 0.5s ease forwards;\n}\n@keyframes anim-slide-r {\n  from { opacity: 0; transform: translateX(20px); }\n  to { opacity: 1; transform: translateX(0); }\n}\n\n/* Staggered delays (applied via inline style) */\n/* Uses animation-delay set by the Python script */\n</style>\n<rect x=\"40\" y=\"60\" width=\"720\" height=\"540\" fill=\"url(#grid1)\"/>\n<g class=\"el\" data-beat=\"2\">\n          <rect x=\"40\" y=\"60\" width=\"720\" height=\"60\" fill=\"rgba(56,189,248,0.12)\" stroke=\"#38bdf8\" stroke-width=\"2\"   />\n<text x=\"400\" y=\"100\" fill=\"#38bdf8\" font-size=\"22\" font-weight=\"700\" text-anchor=\"middle\"  >\n        </g>\n<g class=\"el\" data-beat=\"3\">\n          <rect x=\"40\" y=\"120\" width=\"180\" height=\"60\" fill=\"rgba(52,211,153,0.35)\" stroke=\"#34d399\" stroke-width=\"2\"   />\n<text x=\"130\" y=\"160\" fill=\"#34d399\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"130\" y=\"200\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"  >\n        </g>\n<g class=\"el\" data-beat=\"4\">\n          <rect x=\"40\" y=\"220\" width=\"360\" height=\"60\" fill=\"rgba(251,191,36,0.35)\" stroke=\"#fbbf24\" stroke-width=\"2\"   />\n<text x=\"220\" y=\"260\" fill=\"#fbbf24\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"220\" y=\"300\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"  >\n        </g>\n<g class=\"el\" data-beat=\"5\">\n          <rect x=\"40\" y=\"320\" width=\"540\" height=\"60\" fill=\"rgba(244,114,182,0.35)\" stroke=\"#f472b6\" stroke-width=\"2\"   />\n<text x=\"310\" y=\"360\" fill=\"#f472b6\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"310\" y=\"400\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"  >\n        </g>\n<g class=\"el\" data-beat=\"6\">\n          <rect x=\"40\" y=\"440\" width=\"720\" height=\"120\" rx=\"14\" fill=\"rgba(167,139,250,0.12)\" stroke=\"#a78bfa\" stroke-width=\"2\"   />\n<text x=\"400\" y=\"478\" fill=\"#a78bfa\" font-size=\"22\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"508\" fill=\"#c4b5fd\" font-size=\"14\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"534\" fill=\"#c4b5fd\" font-size=\"14\" text-anchor=\"middle\"  >\n        </g>",
+      "svg": "<defs>\n  <pattern id=\"grid1\" width=\"40\" height=\"40\" patternUnits=\"userSpaceOnUse\">\n    <path d=\"M 40 0 L 0 0 0 40\" fill=\"none\" stroke=\"#1e293b\" stroke-width=\"0.5\"/>\n  </pattern>\n</defs>\n<rect x=\"40\" y=\"60\" width=\"720\" height=\"540\" fill=\"url(#grid1)\"/>\n<g class=\"el\" data-beat=\"2\">\n          <rect x=\"40\" y=\"60\" width=\"720\" height=\"60\" fill=\"rgba(56,189,248,0.12)\" stroke=\"#38bdf8\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"400\" y=\"100\" fill=\"#38bdf8\" font-size=\"22\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">100 squares = 1 whole</text>\n        </g>\n<g class=\"el\" data-beat=\"3\">\n          <rect x=\"40\" y=\"120\" width=\"180\" height=\"60\" fill=\"rgba(52,211,153,0.35)\" stroke=\"#34d399\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"130\" y=\"160\" fill=\"#34d399\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">25</text>\n<text x=\"130\" y=\"200\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">25 out of 100</text>\n        </g>\n<g class=\"el\" data-beat=\"4\">\n          <rect x=\"40\" y=\"220\" width=\"360\" height=\"60\" fill=\"rgba(251,191,36,0.35)\" stroke=\"#fbbf24\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"220\" y=\"260\" fill=\"#fbbf24\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">50</text>\n<text x=\"220\" y=\"300\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">50 out of 100</text>\n        </g>\n<g class=\"el\" data-beat=\"5\">\n          <rect x=\"40\" y=\"320\" width=\"540\" height=\"60\" fill=\"rgba(244,114,182,0.35)\" stroke=\"#f472b6\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"310\" y=\"360\" fill=\"#f472b6\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">75</text>\n<text x=\"310\" y=\"400\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">75 out of 100</text>\n        </g>\n<g class=\"el\" data-beat=\"6\">\n          <rect x=\"40\" y=\"440\" width=\"720\" height=\"120\" rx=\"14\" fill=\"rgba(167,139,250,0.12)\" stroke=\"#a78bfa\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"400\" y=\"478\" fill=\"#a78bfa\" font-size=\"22\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">%</text>\n<text x=\"400\" y=\"508\" fill=\"#c4b5fd\" font-size=\"14\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Latin: \"per centum\" = \"by the hundred\"</text>\n<text x=\"400\" y=\"534\" fill=\"#c4b5fd\" font-size=\"14\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">25% = 25/100 = 1/4 = 0.25</text>\n        </g>",
       "beats": [
         "Namaste, my young friend! Welcome to a brand-new chapter. Today, we are going to meet some very friendly fractions — fractions wearing a clever disguise.",
         "Look at the long strip at the top of the screen. I have divided it into 100 equal little squares. The whole strip represents ONE complete thing — like one full pizza, one full chocolate bar, or 100 rupees.",
@@ -45,12 +45,8 @@ window.CHAPTER_DATA = {
           "beat": 1,
           "doubts": [
             {
-              "q": "What does 'fractions wearing a clever disguise' mean?",
-              "a": "It means percentages are fractions that look different. 50% is the same as 50/100 or 1/2. The '%' sign is their disguise!"
-            },
-            {
-              "q": "Why are percentages called 'friendly fractions'?",
-              "a": "Percentages are easier to understand than regular fractions. They're out of 100, which makes comparing parts of a whole much simpler."
+              "q": "What does the author mean by fractions wearing a clever disguise?",
+              "a": "The author is talking about percentages. Percentages are fractions that look different because they're written with a % sign instead of a fraction bar. For example, 50% is the same as 50/100 or 1/2."
             }
           ]
         },
@@ -58,12 +54,12 @@ window.CHAPTER_DATA = {
           "beat": 2,
           "doubts": [
             {
-              "q": "Why is the strip divided into 100 squares and not 50 or 200?",
-              "a": "Because percent means 'per hundred'. Dividing into 100 makes it easy to understand parts of a whole. Each square represents 1% of the whole."
+              "q": "Why is the strip divided into 100 squares? Why not 10 or 50?",
+              "a": "We use 100 squares because percent means 'per hundred'. It makes it easy to understand parts of a whole. 100 squares help us see how many parts out of 100 we're dealing with."
             },
             {
-              "q": "Can we use this strip method for things other than money?",
-              "a": "Yes! The strip can represent anything whole - pizza, chocolate, or even time. Each small square shows 1% of whatever the whole represents."
+              "q": "Can the strip represent things other than food and money?",
+              "a": "Yes! The strip can represent anything whole - like a full day, a whole class, or a complete book. Any whole thing can be divided into 100 equal parts."
             }
           ]
         },
@@ -71,12 +67,12 @@ window.CHAPTER_DATA = {
           "beat": 3,
           "doubts": [
             {
-              "q": "Why do we use percent instead of just saying 25 out of 100?",
-              "a": "Percent makes it easier to compare different amounts. 25% is simpler to understand than 25/100 when comparing to, say, 30% or 10%."
+              "q": "What does percent mean in simple words?",
+              "a": "Percent means 'per hundred'. So 25% means 25 out of every 100 parts. It's a way to compare parts to a whole of 100."
             },
             {
-              "q": "Is percent only used for squares?",
-              "a": "No, percent can be used for anything. It's just a way to show parts of a whole, like 50% of students or 75% of a cake."
+              "q": "Why do we use percentages instead of regular fractions?",
+              "a": "Percentages make it easier to compare different fractions. When everything is out of 100, we can quickly see which amount is bigger."
             }
           ]
         },
@@ -84,12 +80,12 @@ window.CHAPTER_DATA = {
           "beat": 4,
           "doubts": [
             {
-              "q": "Why is 50% the same as half?",
-              "a": "Percent means 'per hundred'. 50% means 50 out of 100, which is exactly half of the whole. Just like 50 cents is half of a dollar."
+              "q": "What does the % sign mean exactly?",
+              "a": "The % sign means 'per hundred'. So 50% is 50 out of every 100. It's a way to show parts of a whole when the whole is divided into 100 equal parts."
             },
             {
-              "q": "Can we have percentages more than 100?",
-              "a": "Yes! If you have more than the whole, like 150 squares out of 100, that's 150%. It means one and a half times the whole amount."
+              "q": "Why do we use percentages instead of just saying 50 out of 100?",
+              "a": "Percentages make it easier to compare different amounts. Saying 50% is simpler than 50/100, and we can quickly understand if something is half, quarter, or three-quarters of a whole."
             }
           ]
         },
@@ -97,12 +93,12 @@ window.CHAPTER_DATA = {
           "beat": 5,
           "doubts": [
             {
-              "q": "Why do we use percentages instead of fractions like 75/100?",
-              "a": "Percentages are easier to read and compare. Saying 75% is quicker than saying 75 out of 100. It helps us understand parts of a whole faster."
+              "q": "Why do we use % instead of writing fractions like 75/100?",
+              "a": "% is shorter and easier to read. It means 'per hundred' so 75% is the same as 75/100. % helps us compare numbers quickly without writing big fractions."
             },
             {
-              "q": "What does the % sign actually mean?",
-              "a": "The % sign means 'per hundred'. So 75% is the same as 75 per hundred or 75/100. It's just a short way to write fractions with 100 as the bottom number."
+              "q": "How do I convert between fractions and percentages?",
+              "a": "To convert fraction to %, multiply by 100. For 25/100: 25/100 × 100 = 25%. To convert % to fraction, write it over 100. So 75% = 75/100."
             }
           ]
         },
@@ -110,12 +106,12 @@ window.CHAPTER_DATA = {
           "beat": 6,
           "doubts": [
             {
-              "q": "Why is percent called 'per centum' when it means 'out of hundred'?",
-              "a": "Centum is Latin for hundred. 'Per centum' means 'by the hundred'. So percent literally means 'by the hundred' or 'out of hundred'."
+              "q": "What does 'per centum' mean and why do we use % instead?",
+              "a": "'Per centum' is Latin for 'by the hundred'. We use % because it's shorter and easier to write. It's just a special symbol to show a number is out of 100."
             },
             {
               "q": "How can 25% be equal to both 1/4 and 0.25?",
-              "a": "They're all the same value! 25% is 25 per 100, which simplifies to 1/4. As a decimal, 25/100 equals 0.25."
+              "a": "They're all different ways to show the same value. 25% means 25 out of 100, which simplifies to 1/4, and as a decimal, it's 0.25."
             }
           ]
         }
@@ -125,7 +121,7 @@ window.CHAPTER_DATA = {
       "id": "fraction_to_percent",
       "label": "1.2 Fractions ↔ Percentages",
       "viewBox": "0 0 800 600",
-      "svg": "<style>\n/* === UNIVERSAL ANIMATION SYSTEM === */\n/* Applied to all lectures across all subjects */\n\n/* Fade-in for text elements */\n.anim-fade-in {\n  opacity: 0;\n  animation: anim-fade 0.5s ease forwards;\n}\n@keyframes anim-fade {\n  from { opacity: 0; transform: translateY(8px); }\n  to { opacity: 1; transform: translateY(0); }\n}\n\n/* Pop-in for rectangles and boxes */\n.anim-pop-in {\n  opacity: 0;\n  transform-origin: center;\n  animation: anim-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;\n}\n@keyframes anim-pop {\n  0% { opacity: 0; transform: scale(0.7); }\n  60% { opacity: 1; transform: scale(1.08); }\n  100% { opacity: 1; transform: scale(1); }\n}\n\n/* Draw for lines and paths (stroke draws itself) */\n.anim-draw {\n  stroke-dasharray: 1000;\n  stroke-dashoffset: 1000;\n  animation: anim-draw-line 0.8s ease forwards;\n}\n@keyframes anim-draw-line {\n  to { stroke-dashoffset: 0; }\n}\n\n/* Pulse-in for circles and key points */\n.anim-pulse-in {\n  opacity: 0;\n  animation: anim-pulse-in-anim 0.5s ease forwards;\n}\n@keyframes anim-pulse-in-anim {\n  0% { opacity: 0; transform: scale(0); }\n  50% { opacity: 1; transform: scale(1.3); }\n  100% { opacity: 1; transform: scale(1); }\n}\n\n/* Slide-in from left */\n.anim-slide-left {\n  opacity: 0;\n  animation: anim-slide-l 0.5s ease forwards;\n}\n@keyframes anim-slide-l {\n  from { opacity: 0; transform: translateX(-20px); }\n  to { opacity: 1; transform: translateX(0); }\n}\n\n/* Slide-in from right */\n.anim-slide-right {\n  opacity: 0;\n  animation: anim-slide-r 0.5s ease forwards;\n}\n@keyframes anim-slide-r {\n  from { opacity: 0; transform: translateX(20px); }\n  to { opacity: 1; transform: translateX(0); }\n}\n\n/* Staggered delays (applied via inline style) */\n/* Uses animation-delay set by the Python script */\n</style>\n\n\n\n\n<rect x=\"40\" y=\"40\" width=\"720\" height=\"540\" fill=\"#0f172a\" stroke=\"#1e293b\" rx=\"12\"/>\n<g class=\"el\" data-beat=\"2\">\n          <text x=\"400\" y=\"100\" fill=\"#38bdf8\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">\n<text x=\"400\" y=\"130\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">\n        </g>\n<g class=\"el\" data-beat=\"3\">\n          <rect x=\"60\" y=\"170\" width=\"680\" height=\"60\" fill=\"#1e293b\" stroke=\"#475569\"   />\n<line x1=\"230\" y1=\"170\" x2=\"230\" y2=\"230\" stroke=\"#475569\"   />\n<line x1=\"400\" y1=\"170\" x2=\"400\" y2=\"230\" stroke=\"#475569\"   />\n<line x1=\"570\" y1=\"170\" x2=\"570\" y2=\"230\" stroke=\"#475569\"   />\n<rect x=\"60\" y=\"170\" width=\"510\" height=\"60\" fill=\"rgba(244,114,182,0.4)\" stroke=\"#f472b6\"   />\n<text x=\"145\" y=\"208\" fill=\"#f472b6\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"315\" y=\"208\" fill=\"#f472b6\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"485\" y=\"208\" fill=\"#f472b6\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"655\" y=\"208\" fill=\"#94a3b8\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"  >\n        </g>\n<g class=\"el\" data-beat=\"4\">\n          <text x=\"180\" y=\"280\" fill=\"#34d399\" font-size=\"14\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">\n<text x=\"400\" y=\"280\" fill=\"#34d399\" font-size=\"14\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">\n<text x=\"620\" y=\"280\" fill=\"#34d399\" font-size=\"14\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">\n<text x=\"400\" y=\"312\" fill=\"#34d399\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">\n        </g>\n<g class=\"el\" data-beat=\"5\">\n          <rect x=\"60\" y=\"350\" width=\"680\" height=\"80\" rx=\"10\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\"   />\n<text x=\"400\" y=\"378\" fill=\"#38bdf8\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"408\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"  >\n        </g>\n<g class=\"el\" data-beat=\"6\">\n          <rect x=\"60\" y=\"450\" width=\"680\" height=\"100\" rx=\"10\" fill=\"rgba(251,191,36,0.10)\" stroke=\"#fbbf24\" stroke-width=\"2\"   />\n<text x=\"400\" y=\"478\" fill=\"#fbbf24\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"508\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"534\" fill=\"#94a3b8\" font-size=\"12\" text-anchor=\"middle\"  >\n        </g>",
+      "svg": "<rect x=\"40\" y=\"40\" width=\"720\" height=\"540\" fill=\"#0f172a\" stroke=\"#1e293b\" rx=\"12\"/>\n<g class=\"el\" data-beat=\"2\">\n          <text x=\"400\" y=\"100\" fill=\"#38bdf8\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">Example: 3/4 as a percentage?</text>\n<text x=\"400\" y=\"130\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">3 out of every 4 squares is red</text>\n        </g>\n<g class=\"el\" data-beat=\"3\">\n          <rect x=\"60\" y=\"170\" width=\"680\" height=\"60\" fill=\"#1e293b\" stroke=\"#475569\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<line x1=\"230\" y1=\"170\" x2=\"230\" y2=\"230\" stroke=\"#475569\" class=\"anim-draw\" style=\"animation-delay: 0.15s\" />\n<line x1=\"400\" y1=\"170\" x2=\"400\" y2=\"230\" stroke=\"#475569\" class=\"anim-draw\" style=\"animation-delay: 0.30s\" />\n<line x1=\"570\" y1=\"170\" x2=\"570\" y2=\"230\" stroke=\"#475569\" class=\"anim-draw\" style=\"animation-delay: 0.45s\" />\n<rect x=\"60\" y=\"170\" width=\"510\" height=\"60\" fill=\"rgba(244,114,182,0.4)\" stroke=\"#f472b6\" class=\"anim-pop-in\" style=\"animation-delay: 0.60s\" />\n<text x=\"145\" y=\"208\" fill=\"#f472b6\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.75s\">1/4</text>\n<text x=\"315\" y=\"208\" fill=\"#f472b6\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.90s\">1/4</text>\n<text x=\"485\" y=\"208\" fill=\"#f472b6\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 1.05s\">1/4</text>\n<text x=\"655\" y=\"208\" fill=\"#94a3b8\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 1.20s\">1/4</text>\n        </g>\n<g class=\"el\" data-beat=\"4\">\n          <text x=\"180\" y=\"280\" fill=\"#34d399\" font-size=\"14\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">× 25</text>\n<text x=\"400\" y=\"280\" fill=\"#34d399\" font-size=\"14\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">3 × 25 = 75</text>\n<text x=\"620\" y=\"280\" fill=\"#34d399\" font-size=\"14\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">× 25</text>\n<text x=\"400\" y=\"312\" fill=\"#34d399\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">3/4 = 75/100 = 75%</text>\n        </g>\n<g class=\"el\" data-beat=\"5\">\n          <rect x=\"60\" y=\"350\" width=\"680\" height=\"80\" rx=\"10\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"400\" y=\"378\" fill=\"#38bdf8\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Method 1: Multiply top and bottom by 25</text>\n<text x=\"400\" y=\"408\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">3/4 = (3 × 25) / (4 × 25) = 75/100 = 75%</text>\n        </g>\n<g class=\"el\" data-beat=\"6\">\n          <rect x=\"60\" y=\"450\" width=\"680\" height=\"100\" rx=\"10\" fill=\"rgba(251,191,36,0.10)\" stroke=\"#fbbf24\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"400\" y=\"478\" fill=\"#fbbf24\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Method 2: Multiply the fraction by 100</text>\n<text x=\"400\" y=\"508\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">3/4 × 100 = 300/4 = 75%</text>\n<text x=\"400\" y=\"534\" fill=\"#94a3b8\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">(Any fraction a/b becomes a percentage via a/b × 100)</text>\n        </g>",
       "beats": [
         "Welcome back, my friend! In the last story, we met the percentage — a fraction whose denominator is 100. Now, here is a question: if I give you any fraction, can you dress it up as a percentage? Yes, you can! Let us see how, using a beautiful example from the textbook.",
         "Surya is mixing red and yellow paint to make a deep orange colour for a sunset painting. The red paint makes up 3/4 of the mixture. What percentage is red? Look at the bar model — it is divided into 4 equal parts, and 3 of those parts are red.",
@@ -140,11 +136,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we need to change fractions to percentages?",
-              "a": "Percentages make it easier to compare fractions. Since all percentages have the same denominator (100), we can quickly see which value is bigger or smaller."
+              "a": "Percentages make it easier to compare fractions. Since they all have denominator 100, we can quickly see which is bigger. Like 3/4 (75%) is more than 2/3 (67%)."
             },
             {
               "q": "How do we change any fraction to a percentage?",
-              "a": "Multiply the fraction by 100 and add the % sign. For example, 1/4 becomes (1/4)×100 = 25%."
+              "a": "Multiply the fraction by 100. For example, 1/5 becomes (1/5) × 100 = 20%. This works because percentage means 'per hundred'."
             }
           ]
         },
@@ -152,12 +148,12 @@ window.CHAPTER_DATA = {
           "beat": 2,
           "doubts": [
             {
-              "q": "How do I change 3/4 to a percentage?",
-              "a": "To change 3/4 to a percentage, divide 3 by 4 (which equals 0.75), then multiply by 100. So 3/4 is 75%."
+              "q": "Why do we need to convert fractions to percentages?",
+              "a": "Percentages help us understand parts of a whole more easily. They make comparing different amounts simpler and are commonly used in daily life like discounts and scores."
             },
             {
-              "q": "Why does the bar model help with percentages?",
-              "a": "The bar model shows fractions visually. When divided into 4 equal parts, 3 parts being red makes it easy to see that 3 out of 4 is 75%."
+              "q": "How do I change 3/4 into a percentage?",
+              "a": "Divide 3 by 4 (which equals 0.75), then multiply by 100 to get 75%. So 3/4 is the same as 75%."
             }
           ]
         },
@@ -165,12 +161,12 @@ window.CHAPTER_DATA = {
           "beat": 3,
           "doubts": [
             {
-              "q": "Why do we multiply by 10 to get 30 out of 40, but then by 2.5 to get 75 out of 100?",
-              "a": "We're finding equivalent fractions. 3/4 = 30/40 (multiply numerator and denominator by 10), then 30/40 = 75/100 (multiply by 2.5). Both keep the same value but help us see how many out of 100."
+              "q": "Why do we multiply by 10 to get from 3/4 to 30/40? Why not multiply by other numbers?",
+              "a": "We multiply by 10 because we want to reach a denominator of 100 eventually. Any number that divides both 4 and 100 works. 10 is convenient because 4×10=40, and we can continue to 100."
             },
             {
-              "q": "Why do we need to know how many out of 100?",
-              "a": "Percentages are fractions with 100 as the denominator. Saying 75 out of 100 is the same as 75%, which is the standard way to compare different fractions easily."
+              "q": "Why can't we just divide 3 by 4 to get 0.75 and convert to 75% directly?",
+              "a": "The beat shows the reasoning behind the conversion. Understanding how fractions scale helps with more complex problems. Direct division is faster, but knowing the 'why' makes math concepts stronger."
             }
           ]
         },
@@ -179,11 +175,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we need to make the denominator 100?",
-              "a": "We use 100 because percent means 'per hundred'. When the denominator is 100, it's easy to see how many parts out of 100 we have, which is exactly what percentages show us."
+              "a": "We use 100 because percent means 'per hundred'. Making the denominator 100 helps us easily see how many parts out of 100 we have, which is what percentages show."
             },
             {
-              "q": "Can we multiply by any number to make denominator 100?",
-              "a": "No, we can only multiply by numbers that make the denominator exactly 100. For example, with 3/4, we multiply by 25 because 4 × 25 = 100. We can't use 10 because 4 × 10 = 40, not 100."
+              "q": "Can we multiply by any number to get denominator 100?",
+              "a": "Yes, but we must multiply both numerator and denominator by the same number to keep the fraction equal. For 3/4, we multiply by 25 to get 75/100."
             }
           ]
         },
@@ -191,12 +187,12 @@ window.CHAPTER_DATA = {
           "beat": 5,
           "doubts": [
             {
-              "q": "Why do we multiply by 25 specifically? Why not another number?",
-              "a": "We multiply by 25 because 4 × 25 = 100. We want to make the denominator 100 to easily convert to percentage. Any number that makes denominator 100 would work, but 25 is simplest here."
+              "q": "Why do we multiply both numerator and denominator by 25?",
+              "a": "We multiply by 25 because 4 × 25 = 100. This creates a denominator of 100, making it easy to convert to a percentage."
             },
             {
-              "q": "Can we use this method for all fractions to convert to percentage?",
-              "a": "Yes, but only if we can make denominator 100. For 3/4, 25 works. For others, we might need different numbers. If denominator doesn't divide evenly into 100, we use division: (numerator ÷ denominator) × 100."
+              "q": "Can we use other numbers instead of 25 to convert fractions to percentages?",
+              "a": "Yes, but 25 is easiest for 3/4 because it gives us 100 as the denominator. Other methods would work but might be more complicated."
             }
           ]
         },
@@ -205,11 +201,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         }
@@ -219,7 +215,7 @@ window.CHAPTER_DATA = {
       "id": "fdp_trio",
       "label": "1.3 The FDP Trio",
       "viewBox": "0 0 800 580",
-      "svg": "<rect x=\"40\" y=\"40\" width=\"720\" height=\"520\" fill=\"#0f172a\" stroke=\"#1e293b\" rx=\"12\"/>\n<defs><marker id=\"arr1\" markerWidth=\"8\" markerHeight=\"8\" refX=\"4\" refY=\"4\" orient=\"auto\"><polygon points=\"0,0 8,4 0,8\" fill=\"#fbbf24\"/></marker></defs><style>\n/* === UNIVERSAL ANIMATION SYSTEM === */\n/* Applied to all lectures across all subjects */\n\n/* Fade-in for text elements */\n.anim-fade-in {\n  opacity: 0;\n  animation: anim-fade 0.5s ease forwards;\n}\n@keyframes anim-fade {\n  from { opacity: 0; transform: translateY(8px); }\n  to { opacity: 1; transform: translateY(0); }\n}\n\n/* Pop-in for rectangles and boxes */\n.anim-pop-in {\n  opacity: 0;\n  transform-origin: center;\n  animation: anim-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;\n}\n@keyframes anim-pop {\n  0% { opacity: 0; transform: scale(0.7); }\n  60% { opacity: 1; transform: scale(1.08); }\n  100% { opacity: 1; transform: scale(1); }\n}\n\n/* Draw for lines and paths (stroke draws itself) */\n.anim-draw {\n  stroke-dasharray: 1000;\n  stroke-dashoffset: 1000;\n  animation: anim-draw-line 0.8s ease forwards;\n}\n@keyframes anim-draw-line {\n  to { stroke-dashoffset: 0; }\n}\n\n/* Pulse-in for circles and key points */\n.anim-pulse-in {\n  opacity: 0;\n  animation: anim-pulse-in-anim 0.5s ease forwards;\n}\n@keyframes anim-pulse-in-anim {\n  0% { opacity: 0; transform: scale(0); }\n  50% { opacity: 1; transform: scale(1.3); }\n  100% { opacity: 1; transform: scale(1); }\n}\n\n/* Slide-in from left */\n.anim-slide-left {\n  opacity: 0;\n  animation: anim-slide-l 0.5s ease forwards;\n}\n@keyframes anim-slide-l {\n  from { opacity: 0; transform: translateX(-20px); }\n  to { opacity: 1; transform: translateX(0); }\n}\n\n/* Slide-in from right */\n.anim-slide-right {\n  opacity: 0;\n  animation: anim-slide-r 0.5s ease forwards;\n}\n@keyframes anim-slide-r {\n  from { opacity: 0; transform: translateX(20px); }\n  to { opacity: 1; transform: translateX(0); }\n}\n\n/* Staggered delays (applied via inline style) */\n/* Uses animation-delay set by the Python script */\n</style>\n<g class=\"el\" data-beat=\"2\">\n          <text x=\"400\" y=\"90\" fill=\"#fbbf24\" font-size=\"22\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">\n<text x=\"400\" y=\"118\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">\n        </g>\n<g class=\"el\" data-beat=\"3\">\n          <polygon points=\"400,170 200,400 600,400\" fill=\"none\" stroke=\"#38bdf8\" stroke-width=\"2\"   />\n<circle cx=\"400\" cy=\"170\" r=\"42\" fill=\"rgba(56,189,248,0.2)\" stroke=\"#38bdf8\" stroke-width=\"2\"   />\n<text x=\"400\" y=\"167\" fill=\"#38bdf8\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"190\" fill=\"#38bdf8\" font-size=\"16\" text-anchor=\"middle\"  >\n        </g>\n<g class=\"el\" data-beat=\"4\">\n          <circle cx=\"200\" cy=\"400\" r=\"42\" fill=\"rgba(52,211,153,0.2)\" stroke=\"#34d399\" stroke-width=\"2\" class=\"anim-pulse-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"200\" y=\"397\" fill=\"#34d399\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">\n<text x=\"200\" y=\"420\" fill=\"#34d399\" font-size=\"16\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">\n        </g>\n<g class=\"el\" data-beat=\"5\">\n          <circle cx=\"600\" cy=\"400\" r=\"42\" fill=\"rgba(244,114,182,0.2)\" stroke=\"#f472b6\" stroke-width=\"2\" class=\"anim-pulse-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"600\" y=\"397\" fill=\"#f472b6\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">\n<text x=\"600\" y=\"420\" fill=\"#f472b6\" font-size=\"16\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">\n        </g>\n<g class=\"el\" data-beat=\"6\">\n          <line x1=\"370\" y1=\"200\" x2=\"240\" y2=\"365\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arr1)\" class=\"anim-draw\" style=\"animation-delay: 0.00s\" />\n<text x=\"290\" y=\"280\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"700\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">\n<line x1=\"560\" y1=\"365\" x2=\"430\" y2=\"200\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arr1)\" class=\"anim-draw\" style=\"animation-delay: 0.30s\" />\n<text x=\"495\" y=\"280\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"700\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">\n<line x1=\"245\" y1=\"400\" x2=\"555\" y2=\"400\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arr1)\" class=\"anim-draw\" style=\"animation-delay: 0.60s\" />\n<text x=\"400\" y=\"392\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"700\"   class=\"anim-fade-in\" style=\"animation-delay: 0.75s\">\n        </g>\n<g class=\"el\" data-beat=\"7\">\n          <rect x=\"60\" y=\"440\" width=\"680\" height=\"100\" rx=\"10\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\" stroke-width=\"2\"   />\n<text x=\"400\" y=\"465\" fill=\"#a78bfa\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"100\" y=\"495\" fill=\"#38bdf8\" font-size=\"12\" text-anchor=\"middle\"  >\n<text x=\"270\" y=\"495\" fill=\"#38bdf8\" font-size=\"12\" text-anchor=\"middle\"  >\n<text x=\"440\" y=\"495\" fill=\"#38bdf8\" font-size=\"12\" text-anchor=\"middle\"  >\n<text x=\"615\" y=\"495\" fill=\"#38bdf8\" font-size=\"12\" text-anchor=\"middle\"  >\n<text x=\"180\" y=\"520\" fill=\"#34d399\" font-size=\"12\" text-anchor=\"middle\"  >\n<text x=\"360\" y=\"520\" fill=\"#34d399\" font-size=\"12\" text-anchor=\"middle\"  >\n<text x=\"540\" y=\"520\" fill=\"#34d399\" font-size=\"12\" text-anchor=\"middle\"  >\n        </g>",
+      "svg": "<rect x=\"40\" y=\"40\" width=\"720\" height=\"520\" fill=\"#0f172a\" stroke=\"#1e293b\" rx=\"12\"/>\n<defs><marker id=\"arr1\" markerWidth=\"8\" markerHeight=\"8\" refX=\"4\" refY=\"4\" orient=\"auto\"><polygon points=\"0,0 8,4 0,8\" fill=\"#fbbf24\"/></marker></defs>\n<g class=\"el\" data-beat=\"2\">\n          <text x=\"400\" y=\"90\" fill=\"#fbbf24\" font-size=\"22\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">The FDP Trio</text>\n<text x=\"400\" y=\"118\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Fractions · Decimals · Percentages</text>\n        </g>\n<g class=\"el\" data-beat=\"3\">\n          <polygon points=\"400,170 200,400 600,400\" fill=\"none\" stroke=\"#38bdf8\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<circle cx=\"400\" cy=\"170\" r=\"42\" fill=\"rgba(56,189,248,0.2)\" stroke=\"#38bdf8\" stroke-width=\"2\" class=\"anim-pulse-in\" style=\"animation-delay: 0.15s\" />\n<text x=\"400\" y=\"167\" fill=\"#38bdf8\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Fraction</text>\n<text x=\"400\" y=\"190\" fill=\"#38bdf8\" font-size=\"16\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">1/2</text>\n        </g>\n<g class=\"el\" data-beat=\"4\">\n          <circle cx=\"200\" cy=\"400\" r=\"42\" fill=\"rgba(52,211,153,0.2)\" stroke=\"#34d399\" stroke-width=\"2\" class=\"anim-pulse-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"200\" y=\"397\" fill=\"#34d399\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Decimal</text>\n<text x=\"200\" y=\"420\" fill=\"#34d399\" font-size=\"16\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">0.5</text>\n        </g>\n<g class=\"el\" data-beat=\"5\">\n          <circle cx=\"600\" cy=\"400\" r=\"42\" fill=\"rgba(244,114,182,0.2)\" stroke=\"#f472b6\" stroke-width=\"2\" class=\"anim-pulse-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"600\" y=\"397\" fill=\"#f472b6\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Percent</text>\n<text x=\"600\" y=\"420\" fill=\"#f472b6\" font-size=\"16\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">50%</text>\n        </g>\n<g class=\"el\" data-beat=\"6\">\n          <line x1=\"370\" y1=\"200\" x2=\"240\" y2=\"365\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arr1)\" class=\"anim-draw\" style=\"animation-delay: 0.00s\" />\n<text x=\"290\" y=\"280\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"700\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">divide</text>\n<line x1=\"560\" y1=\"365\" x2=\"430\" y2=\"200\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arr1)\" class=\"anim-draw\" style=\"animation-delay: 0.30s\" />\n<text x=\"495\" y=\"280\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"700\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">× 100</text>\n<line x1=\"245\" y1=\"400\" x2=\"555\" y2=\"400\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arr1)\" class=\"anim-draw\" style=\"animation-delay: 0.60s\" />\n<text x=\"400\" y=\"392\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"700\"   class=\"anim-fade-in\" style=\"animation-delay: 0.75s\">× 100%</text>\n        </g>\n<g class=\"el\" data-beat=\"7\">\n          <rect x=\"60\" y=\"440\" width=\"680\" height=\"100\" rx=\"10\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"400\" y=\"465\" fill=\"#a78bfa\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Quick conversions to memorise</text>\n<text x=\"100\" y=\"495\" fill=\"#38bdf8\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">1/2 = 0.5 = 50%</text>\n<text x=\"270\" y=\"495\" fill=\"#38bdf8\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">1/4 = 0.25 = 25%</text>\n<text x=\"440\" y=\"495\" fill=\"#38bdf8\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.60s\">3/4 = 0.75 = 75%</text>\n<text x=\"615\" y=\"495\" fill=\"#38bdf8\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.75s\">1/10 = 0.1 = 10%</text>\n<text x=\"180\" y=\"520\" fill=\"#34d399\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.90s\">1/5 = 0.2 = 20%</text>\n<text x=\"360\" y=\"520\" fill=\"#34d399\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 1.05s\">1/3 = 0.333... = 33.33%</text>\n<text x=\"540\" y=\"520\" fill=\"#34d399\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 1.20s\">1/100 = 0.01 = 1%</text>\n        </g>",
       "beats": [
         "Welcome back, my friend! Today I want to introduce you to three best friends who always travel together. Their names are Fraction, Decimal, and Percentage — and I call them the FDP Trio. Whenever you see one, the other two are hiding nearby!",
         "Look at the triangle on the screen. Three circles, one at each corner. The top circle is the Fraction. The bottom-left is the Decimal. And the bottom-right is the Percentage. They are all the very same number, just wearing different outfits.",
@@ -235,11 +231,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -248,11 +244,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -261,11 +257,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -274,11 +270,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -287,11 +283,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -300,11 +296,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -313,11 +309,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         }
@@ -327,7 +323,7 @@ window.CHAPTER_DATA = {
       "id": "percent_of_quantity",
       "label": "1.4 Percentage of Some Quantity",
       "viewBox": "0 0 800 600",
-      "svg": "<style>\n/* === UNIVERSAL ANIMATION SYSTEM === */\n/* Applied to all lectures across all subjects */\n\n/* Fade-in for text elements */\n.anim-fade-in {\n  opacity: 0;\n  animation: anim-fade 0.5s ease forwards;\n}\n@keyframes anim-fade {\n  from { opacity: 0; transform: translateY(8px); }\n  to { opacity: 1; transform: translateY(0); }\n}\n\n/* Pop-in for rectangles and boxes */\n.anim-pop-in {\n  opacity: 0;\n  transform-origin: center;\n  animation: anim-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;\n}\n@keyframes anim-pop {\n  0% { opacity: 0; transform: scale(0.7); }\n  60% { opacity: 1; transform: scale(1.08); }\n  100% { opacity: 1; transform: scale(1); }\n}\n\n/* Draw for lines and paths (stroke draws itself) */\n.anim-draw {\n  stroke-dasharray: 1000;\n  stroke-dashoffset: 1000;\n  animation: anim-draw-line 0.8s ease forwards;\n}\n@keyframes anim-draw-line {\n  to { stroke-dashoffset: 0; }\n}\n\n/* Pulse-in for circles and key points */\n.anim-pulse-in {\n  opacity: 0;\n  animation: anim-pulse-in-anim 0.5s ease forwards;\n}\n@keyframes anim-pulse-in-anim {\n  0% { opacity: 0; transform: scale(0); }\n  50% { opacity: 1; transform: scale(1.3); }\n  100% { opacity: 1; transform: scale(1); }\n}\n\n/* Slide-in from left */\n.anim-slide-left {\n  opacity: 0;\n  animation: anim-slide-l 0.5s ease forwards;\n}\n@keyframes anim-slide-l {\n  from { opacity: 0; transform: translateX(-20px); }\n  to { opacity: 1; transform: translateX(0); }\n}\n\n/* Slide-in from right */\n.anim-slide-right {\n  opacity: 0;\n  animation: anim-slide-r 0.5s ease forwards;\n}\n@keyframes anim-slide-r {\n  from { opacity: 0; transform: translateX(20px); }\n  to { opacity: 1; transform: translateX(0); }\n}\n\n/* Staggered delays (applied via inline style) */\n/* Uses animation-delay set by the Python script */\n</style>\n\n\n\n\n<rect x=\"40\" y=\"40\" width=\"720\" height=\"520\" fill=\"#0f172a\" stroke=\"#1e293b\" rx=\"12\"/>\n<g class=\"el\" data-beat=\"2\">\n          <text x=\"400\" y=\"90\" fill=\"#38bdf8\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">\n<text x=\"400\" y=\"118\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">\n        </g>\n<g class=\"el\" data-beat=\"3\">\n          <rect x=\"60\" y=\"160\" width=\"680\" height=\"50\" fill=\"#1e293b\" stroke=\"#475569\"   />\n<rect x=\"60\" y=\"160\" width=\"170\" height=\"50\" fill=\"rgba(244,114,182,0.4)\" stroke=\"#f472b6\"   />\n<text x=\"145\" y=\"192\" fill=\"#f472b6\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"500\" y=\"192\" fill=\"#94a3b8\" font-size=\"12\" text-anchor=\"middle\"  >\n        </g>\n<g class=\"el\" data-beat=\"4\">\n          <text x=\"100\" y=\"245\" fill=\"#34d399\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">\n<text x=\"270\" y=\"245\" fill=\"#34d399\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">\n<text x=\"440\" y=\"245\" fill=\"#34d399\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">\n<text x=\"610\" y=\"245\" fill=\"#34d399\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">\n<text x=\"745\" y=\"245\" fill=\"#34d399\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.60s\">\n<line x1=\"270\" y1=\"220\" x2=\"270\" y2=\"260\" stroke=\"#34d399\" stroke-width=\"2\" class=\"anim-draw\" style=\"animation-delay: 0.75s\" />\n<line x1=\"440\" y1=\"220\" x2=\"440\" y2=\"260\" stroke=\"#34d399\" stroke-width=\"2\" class=\"anim-draw\" style=\"animation-delay: 0.90s\" />\n<line x1=\"610\" y1=\"220\" x2=\"610\" y2=\"260\" stroke=\"#34d399\" stroke-width=\"2\" class=\"anim-draw\" style=\"animation-delay: 1.05s\" />\n        </g>\n<g class=\"el\" data-beat=\"5\">\n          <rect x=\"60\" y=\"290\" width=\"320\" height=\"100\" rx=\"10\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\"   />\n<text x=\"220\" y=\"315\" fill=\"#38bdf8\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"220\" y=\"345\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"  >\n<text x=\"220\" y=\"368\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"  >\n        </g>\n<g class=\"el\" data-beat=\"6\">\n          <rect x=\"420\" y=\"290\" width=\"320\" height=\"100\" rx=\"10\" fill=\"rgba(251,191,36,0.10)\" stroke=\"#fbbf24\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"580\" y=\"315\" fill=\"#fbbf24\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">\n<text x=\"580\" y=\"345\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">\n<text x=\"580\" y=\"368\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">\n        </g>\n<g class=\"el\" data-beat=\"7\">\n          <rect x=\"60\" y=\"410\" width=\"680\" height=\"120\" rx=\"10\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\" stroke-width=\"2\"   />\n<text x=\"400\" y=\"438\" fill=\"#a78bfa\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"468\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"498\" fill=\"#94a3b8\" font-size=\"12\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"518\" fill=\"#34d399\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"  >\n        </g>",
+      "svg": "<rect x=\"40\" y=\"40\" width=\"720\" height=\"520\" fill=\"#0f172a\" stroke=\"#1e293b\" rx=\"12\"/>\n<g class=\"el\" data-beat=\"2\">\n          <text x=\"400\" y=\"90\" fill=\"#38bdf8\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">25% of 120 = ?</text>\n<text x=\"400\" y=\"118\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Madhu ate 120 g of biscuits with 25% sugar</text>\n        </g>\n<g class=\"el\" data-beat=\"3\">\n          <rect x=\"60\" y=\"160\" width=\"680\" height=\"50\" fill=\"#1e293b\" stroke=\"#475569\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<rect x=\"60\" y=\"160\" width=\"170\" height=\"50\" fill=\"rgba(244,114,182,0.4)\" stroke=\"#f472b6\" class=\"anim-pop-in\" style=\"animation-delay: 0.15s\" />\n<text x=\"145\" y=\"192\" fill=\"#f472b6\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">25% (sugar)</text>\n<text x=\"500\" y=\"192\" fill=\"#94a3b8\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">75% (other stuff)</text>\n        </g>\n<g class=\"el\" data-beat=\"4\">\n          <text x=\"100\" y=\"245\" fill=\"#34d399\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">0</text>\n<text x=\"270\" y=\"245\" fill=\"#34d399\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">30 g</text>\n<text x=\"440\" y=\"245\" fill=\"#34d399\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">60 g</text>\n<text x=\"610\" y=\"245\" fill=\"#34d399\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">90 g</text>\n<text x=\"745\" y=\"245\" fill=\"#34d399\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.60s\">120 g</text>\n<line x1=\"270\" y1=\"220\" x2=\"270\" y2=\"260\" stroke=\"#34d399\" stroke-width=\"2\" class=\"anim-draw\" style=\"animation-delay: 0.75s\" />\n<line x1=\"440\" y1=\"220\" x2=\"440\" y2=\"260\" stroke=\"#34d399\" stroke-width=\"2\" class=\"anim-draw\" style=\"animation-delay: 0.90s\" />\n<line x1=\"610\" y1=\"220\" x2=\"610\" y2=\"260\" stroke=\"#34d399\" stroke-width=\"2\" class=\"anim-draw\" style=\"animation-delay: 1.05s\" />\n        </g>\n<g class=\"el\" data-beat=\"5\">\n          <rect x=\"60\" y=\"290\" width=\"320\" height=\"100\" rx=\"10\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"220\" y=\"315\" fill=\"#38bdf8\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Method 1: Proportion</text>\n<text x=\"220\" y=\"345\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">25/100 = s/120</text>\n<text x=\"220\" y=\"368\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">s = 25/100 × 120 = 30 g</text>\n        </g>\n<g class=\"el\" data-beat=\"6\">\n          <rect x=\"420\" y=\"290\" width=\"320\" height=\"100\" rx=\"10\" fill=\"rgba(251,191,36,0.10)\" stroke=\"#fbbf24\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"580\" y=\"315\" fill=\"#fbbf24\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Method 2: Decimal</text>\n<text x=\"580\" y=\"345\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">25% = 0.25</text>\n<text x=\"580\" y=\"368\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">0.25 × 120 = 30 g</text>\n        </g>\n<g class=\"el\" data-beat=\"7\">\n          <rect x=\"60\" y=\"410\" width=\"680\" height=\"120\" rx=\"10\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"400\" y=\"438\" fill=\"#a78bfa\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">In general: y% of value = (y/100) × value</text>\n<text x=\"400\" y=\"468\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Example: 45% of z = (45/100) × z = 0.45 × z</text>\n<text x=\"400\" y=\"498\" fill=\"#94a3b8\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">\"Per cent\" means \"per hundred\" — so multiply by y/100</text>\n<text x=\"400\" y=\"518\" fill=\"#34d399\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.60s\">Answer: Madhu ate 30 g of sugar</text>\n        </g>",
       "beats": [
         "Welcome back! So we know what percentages are, and we know how to convert them. But percentages are not just numbers floating in the air — they describe parts of REAL things. Today, let us ask: how much sugar did Madhu really eat?",
         "Madhu ate 120 grams of biscuits. The label says his biscuits are 25% sugar. So 25% of those 120 grams is sugar. The question is: how many grams is that exactly? Look at the bar model — the pink strip is 25% of the total length.",
@@ -343,11 +339,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -356,11 +352,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -369,11 +365,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -382,11 +378,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -395,11 +391,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -408,11 +404,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -421,11 +417,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         }
@@ -435,7 +431,7 @@ window.CHAPTER_DATA = {
       "id": "freehand_math",
       "label": "1.5 Free-hand Computation",
       "viewBox": "0 0 800 600",
-      "svg": "<style>\n/* === UNIVERSAL ANIMATION SYSTEM === */\n/* Applied to all lectures across all subjects */\n\n/* Fade-in for text elements */\n.anim-fade-in {\n  opacity: 0;\n  animation: anim-fade 0.5s ease forwards;\n}\n@keyframes anim-fade {\n  from { opacity: 0; transform: translateY(8px); }\n  to { opacity: 1; transform: translateY(0); }\n}\n\n/* Pop-in for rectangles and boxes */\n.anim-pop-in {\n  opacity: 0;\n  transform-origin: center;\n  animation: anim-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;\n}\n@keyframes anim-pop {\n  0% { opacity: 0; transform: scale(0.7); }\n  60% { opacity: 1; transform: scale(1.08); }\n  100% { opacity: 1; transform: scale(1); }\n}\n\n/* Draw for lines and paths (stroke draws itself) */\n.anim-draw {\n  stroke-dasharray: 1000;\n  stroke-dashoffset: 1000;\n  animation: anim-draw-line 0.8s ease forwards;\n}\n@keyframes anim-draw-line {\n  to { stroke-dashoffset: 0; }\n}\n\n/* Pulse-in for circles and key points */\n.anim-pulse-in {\n  opacity: 0;\n  animation: anim-pulse-in-anim 0.5s ease forwards;\n}\n@keyframes anim-pulse-in-anim {\n  0% { opacity: 0; transform: scale(0); }\n  50% { opacity: 1; transform: scale(1.3); }\n  100% { opacity: 1; transform: scale(1); }\n}\n\n/* Slide-in from left */\n.anim-slide-left {\n  opacity: 0;\n  animation: anim-slide-l 0.5s ease forwards;\n}\n@keyframes anim-slide-l {\n  from { opacity: 0; transform: translateX(-20px); }\n  to { opacity: 1; transform: translateX(0); }\n}\n\n/* Slide-in from right */\n.anim-slide-right {\n  opacity: 0;\n  animation: anim-slide-r 0.5s ease forwards;\n}\n@keyframes anim-slide-r {\n  from { opacity: 0; transform: translateX(20px); }\n  to { opacity: 1; transform: translateX(0); }\n}\n\n/* Staggered delays (applied via inline style) */\n/* Uses animation-delay set by the Python script */\n</style>\n\n\n\n\n<rect x=\"40\" y=\"40\" width=\"720\" height=\"520\" fill=\"#0f172a\" stroke=\"#1e293b\" rx=\"12\"/>\n<g class=\"el\" data-beat=\"2\">\n          <text x=\"400\" y=\"90\" fill=\"#fbbf24\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">\n<text x=\"400\" y=\"118\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">\n        </g>\n<g class=\"el\" data-beat=\"3\">\n          <rect x=\"60\" y=\"150\" width=\"680\" height=\"80\" rx=\"10\" fill=\"rgba(52,211,153,0.10)\" stroke=\"#34d399\" stroke-width=\"2\"   />\n<text x=\"400\" y=\"178\" fill=\"#34d399\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"208\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"  >\n        </g>\n<g class=\"el\" data-beat=\"4\">\n          <rect x=\"60\" y=\"250\" width=\"680\" height=\"80\" rx=\"10\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\"   />\n<text x=\"400\" y=\"278\" fill=\"#38bdf8\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"308\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"  >\n        </g>\n<g class=\"el\" data-beat=\"5\">\n          <rect x=\"60\" y=\"350\" width=\"680\" height=\"200\" rx=\"10\" fill=\"rgba(167,139,250,0.08)\" stroke=\"#a78bfa\" stroke-width=\"2\"   />\n<text x=\"400\" y=\"378\" fill=\"#a78bfa\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"  >\n<line x1=\"60\" y1=\"395\" x2=\"740\" y2=\"395\" stroke=\"#475569\"/>\n<text x=\"100\" y=\"412\" fill=\"#94a3b8\" font-size=\"11\"  >\n<text x=\"240\" y=\"412\" fill=\"#94a3b8\" font-size=\"11\"  >\n<text x=\"345\" y=\"412\" fill=\"#94a3b8\" font-size=\"11\"  >\n<text x=\"450\" y=\"412\" fill=\"#94a3b8\" font-size=\"11\"  >\n<text x=\"555\" y=\"412\" fill=\"#94a3b8\" font-size=\"11\"  >\n<text x=\"660\" y=\"412\" fill=\"#94a3b8\" font-size=\"11\"  >\n<line x1=\"60\" y1=\"420\" x2=\"740\" y2=\"420\" stroke=\"#475569\"/>\n<text x=\"100\" y=\"438\" fill=\"#cbd5e1\" font-size=\"11\"  >\n<text x=\"240\" y=\"438\" fill=\"#38bdf8\" font-size=\"11\"  >\n<text x=\"345\" y=\"438\" fill=\"#38bdf8\" font-size=\"11\"  >\n<text x=\"450\" y=\"438\" fill=\"#38bdf8\" font-size=\"11\"  >\n<text x=\"555\" y=\"438\" fill=\"#38bdf8\" font-size=\"11\"  >\n<text x=\"660\" y=\"438\" fill=\"#38bdf8\" font-size=\"11\"  >\n<text x=\"100\" y=\"462\" fill=\"#cbd5e1\" font-size=\"11\"  >\n<text x=\"240\" y=\"462\" fill=\"#34d399\" font-size=\"11\"  >\n<text x=\"345\" y=\"462\" fill=\"#34d399\" font-size=\"11\"  >\n<text x=\"450\" y=\"462\" fill=\"#34d399\" font-size=\"11\"  >\n<text x=\"555\" y=\"462\" fill=\"#34d399\" font-size=\"11\"  >\n<text x=\"660\" y=\"462\" fill=\"#34d399\" font-size=\"11\"  >\n<line x1=\"60\" y1=\"472\" x2=\"740\" y2=\"472\" stroke=\"#475569\"/>\n<text x=\"100\" y=\"492\" fill=\"#cbd5e1\" font-size=\"11\"  >\n<text x=\"240\" y=\"492\" fill=\"#fbbf24\" font-size=\"11\"  >\n<text x=\"345\" y=\"492\" fill=\"#fbbf24\" font-size=\"11\"  >\n<text x=\"450\" y=\"492\" fill=\"#fbbf24\" font-size=\"11\"  >\n<text x=\"555\" y=\"492\" fill=\"#fbbf24\" font-size=\"11\"  >\n<text x=\"660\" y=\"492\" fill=\"#fbbf24\" font-size=\"11\"  >\n<text x=\"100\" y=\"514\" fill=\"#cbd5e1\" font-size=\"11\"  >\n<text x=\"240\" y=\"514\" fill=\"#fbbf24\" font-size=\"11\"  >\n<text x=\"345\" y=\"514\" fill=\"#fbbf24\" font-size=\"11\"  >\n<text x=\"450\" y=\"514\" fill=\"#fbbf24\" font-size=\"11\"  >\n<text x=\"555\" y=\"514\" fill=\"#fbbf24\" font-size=\"11\"  >\n<text x=\"660\" y=\"514\" fill=\"#fbbf24\" font-size=\"11\"  >\n        </g>",
+      "svg": "<rect x=\"40\" y=\"40\" width=\"720\" height=\"520\" fill=\"#0f172a\" stroke=\"#1e293b\" rx=\"12\"/>\n<g class=\"el\" data-beat=\"2\">\n          <text x=\"400\" y=\"90\" fill=\"#fbbf24\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">Mental Math Tricks</text>\n<text x=\"400\" y=\"118\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Find 25% of 40 — without pen and paper!</text>\n        </g>\n<g class=\"el\" data-beat=\"3\">\n          <rect x=\"60\" y=\"150\" width=\"680\" height=\"80\" rx=\"10\" fill=\"rgba(52,211,153,0.10)\" stroke=\"#34d399\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"400\" y=\"178\" fill=\"#34d399\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Trick 1: Use the fraction form</text>\n<text x=\"400\" y=\"208\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">25% = 1/4, so 25% of 40 = 40 ÷ 4 = 10</text>\n        </g>\n<g class=\"el\" data-beat=\"4\">\n          <rect x=\"60\" y=\"250\" width=\"680\" height=\"80\" rx=\"10\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"400\" y=\"278\" fill=\"#38bdf8\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Trick 2: 10% first, then scale</text>\n<text x=\"400\" y=\"308\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">10% of 40 = 4.  25% = 10% + 10% + 5% = 4 + 4 + 2 = 10</text>\n        </g>\n<g class=\"el\" data-beat=\"5\">\n          <rect x=\"60\" y=\"350\" width=\"680\" height=\"200\" rx=\"10\" fill=\"rgba(167,139,250,0.08)\" stroke=\"#a78bfa\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"400\" y=\"378\" fill=\"#a78bfa\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Quick mental-reference table</text>\n<line x1=\"60\" y1=\"395\" x2=\"740\" y2=\"395\" stroke=\"#475569\" class=\"anim-draw\" style=\"animation-delay: 0.30s\" />\n<text x=\"100\" y=\"412\" fill=\"#94a3b8\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">Per cent</text>\n<text x=\"240\" y=\"412\" fill=\"#94a3b8\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 0.60s\">50%</text>\n<text x=\"345\" y=\"412\" fill=\"#94a3b8\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 0.75s\">25%</text>\n<text x=\"450\" y=\"412\" fill=\"#94a3b8\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 0.90s\">10%</text>\n<text x=\"555\" y=\"412\" fill=\"#94a3b8\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 1.05s\">5%</text>\n<text x=\"660\" y=\"412\" fill=\"#94a3b8\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 1.20s\">20%</text>\n<line x1=\"60\" y1=\"420\" x2=\"740\" y2=\"420\" stroke=\"#475569\" class=\"anim-draw\" style=\"animation-delay: 1.35s\" />\n<text x=\"100\" y=\"438\" fill=\"#cbd5e1\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 1.50s\">Fraction</text>\n<text x=\"240\" y=\"438\" fill=\"#38bdf8\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 1.65s\">1/2</text>\n<text x=\"345\" y=\"438\" fill=\"#38bdf8\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 1.80s\">1/4</text>\n<text x=\"450\" y=\"438\" fill=\"#38bdf8\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 1.95s\">1/10</text>\n<text x=\"555\" y=\"438\" fill=\"#38bdf8\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 2.10s\">1/20</text>\n<text x=\"660\" y=\"438\" fill=\"#38bdf8\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 2.25s\">1/5</text>\n<text x=\"100\" y=\"462\" fill=\"#cbd5e1\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 2.40s\">Decimal</text>\n<text x=\"240\" y=\"462\" fill=\"#34d399\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 2.55s\">0.5</text>\n<text x=\"345\" y=\"462\" fill=\"#34d399\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 2.70s\">0.25</text>\n<text x=\"450\" y=\"462\" fill=\"#34d399\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 2.85s\">0.1</text>\n<text x=\"555\" y=\"462\" fill=\"#34d399\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 3.00s\">0.05</text>\n<text x=\"660\" y=\"462\" fill=\"#34d399\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 3.15s\">0.2</text>\n<line x1=\"60\" y1=\"472\" x2=\"740\" y2=\"472\" stroke=\"#475569\" class=\"anim-draw\" style=\"animation-delay: 3.30s\" />\n<text x=\"100\" y=\"492\" fill=\"#cbd5e1\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 3.45s\">of 100</text>\n<text x=\"240\" y=\"492\" fill=\"#fbbf24\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 3.60s\">50</text>\n<text x=\"345\" y=\"492\" fill=\"#fbbf24\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 3.75s\">25</text>\n<text x=\"450\" y=\"492\" fill=\"#fbbf24\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 3.90s\">10</text>\n<text x=\"555\" y=\"492\" fill=\"#fbbf24\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 4.05s\">5</text>\n<text x=\"660\" y=\"492\" fill=\"#fbbf24\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 4.20s\">20</text>\n<text x=\"100\" y=\"514\" fill=\"#cbd5e1\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 4.35s\">of 200</text>\n<text x=\"240\" y=\"514\" fill=\"#fbbf24\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 4.50s\">100</text>\n<text x=\"345\" y=\"514\" fill=\"#fbbf24\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 4.65s\">50</text>\n<text x=\"450\" y=\"514\" fill=\"#fbbf24\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 4.80s\">20</text>\n<text x=\"555\" y=\"514\" fill=\"#fbbf24\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 4.95s\">10</text>\n<text x=\"660\" y=\"514\" fill=\"#fbbf24\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 5.10s\">40</text>\n        </g>",
       "beats": [
         "Welcome back, my friend! Today I want to share a secret with you — a secret that lets you compute percentages in your head, without pen or paper. It feels almost like magic. Are you ready?",
         "Here is the question: what is 25% of 40? You might think we need to do long multiplication. But there is a much faster way. Look at this trick.",
@@ -450,11 +446,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -463,11 +459,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -476,11 +472,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -489,11 +485,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -502,11 +498,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -515,11 +511,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         }
@@ -529,7 +525,7 @@ window.CHAPTER_DATA = {
       "id": "compare_proportions",
       "label": "1.6 Comparing Proportions",
       "viewBox": "0 0 800 600",
-      "svg": "<style>\n/* === UNIVERSAL ANIMATION SYSTEM === */\n/* Applied to all lectures across all subjects */\n\n/* Fade-in for text elements */\n.anim-fade-in {\n  opacity: 0;\n  animation: anim-fade 0.5s ease forwards;\n}\n@keyframes anim-fade {\n  from { opacity: 0; transform: translateY(8px); }\n  to { opacity: 1; transform: translateY(0); }\n}\n\n/* Pop-in for rectangles and boxes */\n.anim-pop-in {\n  opacity: 0;\n  transform-origin: center;\n  animation: anim-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;\n}\n@keyframes anim-pop {\n  0% { opacity: 0; transform: scale(0.7); }\n  60% { opacity: 1; transform: scale(1.08); }\n  100% { opacity: 1; transform: scale(1); }\n}\n\n/* Draw for lines and paths (stroke draws itself) */\n.anim-draw {\n  stroke-dasharray: 1000;\n  stroke-dashoffset: 1000;\n  animation: anim-draw-line 0.8s ease forwards;\n}\n@keyframes anim-draw-line {\n  to { stroke-dashoffset: 0; }\n}\n\n/* Pulse-in for circles and key points */\n.anim-pulse-in {\n  opacity: 0;\n  animation: anim-pulse-in-anim 0.5s ease forwards;\n}\n@keyframes anim-pulse-in-anim {\n  0% { opacity: 0; transform: scale(0); }\n  50% { opacity: 1; transform: scale(1.3); }\n  100% { opacity: 1; transform: scale(1); }\n}\n\n/* Slide-in from left */\n.anim-slide-left {\n  opacity: 0;\n  animation: anim-slide-l 0.5s ease forwards;\n}\n@keyframes anim-slide-l {\n  from { opacity: 0; transform: translateX(-20px); }\n  to { opacity: 1; transform: translateX(0); }\n}\n\n/* Slide-in from right */\n.anim-slide-right {\n  opacity: 0;\n  animation: anim-slide-r 0.5s ease forwards;\n}\n@keyframes anim-slide-r {\n  from { opacity: 0; transform: translateX(20px); }\n  to { opacity: 1; transform: translateX(0); }\n}\n\n/* Staggered delays (applied via inline style) */\n/* Uses animation-delay set by the Python script */\n</style>\n\n\n\n\n<rect x=\"40\" y=\"40\" width=\"720\" height=\"520\" fill=\"#0f172a\" stroke=\"#1e293b\" rx=\"12\"/>\n<g class=\"el\" data-beat=\"2\">\n          <text x=\"400\" y=\"90\" fill=\"#38bdf8\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">\n<text x=\"400\" y=\"118\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">\n        </g>\n<g class=\"el\" data-beat=\"3\">\n          <rect x=\"60\" y=\"160\" width=\"500\" height=\"40\" fill=\"#1e293b\" stroke=\"#475569\"   />\n<rect x=\"60\" y=\"160\" width=\"420\" height=\"40\" fill=\"rgba(52,211,153,0.4)\" stroke=\"#34d399\"   />\n<text x=\"80\" y=\"185\" fill=\"#34d399\" font-size=\"12\"  >\n<text x=\"580\" y=\"185\" fill=\"#94a3b8\" font-size=\"11\"  >\n        </g>\n<g class=\"el\" data-beat=\"4\">\n          <rect x=\"60\" y=\"220\" width=\"500\" height=\"40\" fill=\"#1e293b\" stroke=\"#475569\"   />\n<rect x=\"60\" y=\"220\" width=\"437\" height=\"40\" fill=\"rgba(251,191,36,0.4)\" stroke=\"#fbbf24\"   />\n<text x=\"80\" y=\"245\" fill=\"#fbbf24\" font-size=\"12\"  >\n<text x=\"580\" y=\"245\" fill=\"#94a3b8\" font-size=\"11\"  >\n        </g>\n<g class=\"el\" data-beat=\"5\">\n          <rect x=\"60\" y=\"290\" width=\"320\" height=\"100\" rx=\"10\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\"   />\n<text x=\"220\" y=\"315\" fill=\"#38bdf8\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"220\" y=\"345\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"  >\n<text x=\"220\" y=\"368\" fill=\"#34d399\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"  >\n        </g>\n<g class=\"el\" data-beat=\"6\">\n          <rect x=\"420\" y=\"290\" width=\"320\" height=\"100\" rx=\"10\" fill=\"rgba(244,114,182,0.10)\" stroke=\"#f472b6\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"580\" y=\"315\" fill=\"#f472b6\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">\n<text x=\"580\" y=\"345\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">\n<text x=\"580\" y=\"368\" fill=\"#fbbf24\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">\n        </g>\n<g class=\"el\" data-beat=\"7\">\n          <rect x=\"60\" y=\"410\" width=\"680\" height=\"120\" rx=\"10\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\" stroke-width=\"2\"   />\n<text x=\"400\" y=\"445\" fill=\"#a78bfa\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"475\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"500\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"522\" fill=\"#34d399\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"  >\n        </g>",
+      "svg": "<rect x=\"40\" y=\"40\" width=\"720\" height=\"520\" fill=\"#0f172a\" stroke=\"#1e293b\" rx=\"12\"/>\n<g class=\"el\" data-beat=\"2\">\n          <text x=\"400\" y=\"90\" fill=\"#38bdf8\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">Eesha's Test Scores</text>\n<text x=\"400\" y=\"118\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">English: 42/50   ·   Science: 70/80</text>\n        </g>\n<g class=\"el\" data-beat=\"3\">\n          <rect x=\"60\" y=\"160\" width=\"500\" height=\"40\" fill=\"#1e293b\" stroke=\"#475569\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<rect x=\"60\" y=\"160\" width=\"420\" height=\"40\" fill=\"rgba(52,211,153,0.4)\" stroke=\"#34d399\" class=\"anim-pop-in\" style=\"animation-delay: 0.15s\" />\n<text x=\"80\" y=\"185\" fill=\"#34d399\" font-size=\"12\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">English: 42 out of 50 = 84%</text>\n<text x=\"580\" y=\"185\" fill=\"#94a3b8\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">/50</text>\n        </g>\n<g class=\"el\" data-beat=\"4\">\n          <rect x=\"60\" y=\"220\" width=\"500\" height=\"40\" fill=\"#1e293b\" stroke=\"#475569\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<rect x=\"60\" y=\"220\" width=\"437\" height=\"40\" fill=\"rgba(251,191,36,0.4)\" stroke=\"#fbbf24\" class=\"anim-pop-in\" style=\"animation-delay: 0.15s\" />\n<text x=\"80\" y=\"245\" fill=\"#fbbf24\" font-size=\"12\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Science: 70 out of 80 = 87.5%</text>\n<text x=\"580\" y=\"245\" fill=\"#94a3b8\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">/80</text>\n        </g>\n<g class=\"el\" data-beat=\"5\">\n          <rect x=\"60\" y=\"290\" width=\"320\" height=\"100\" rx=\"10\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"220\" y=\"315\" fill=\"#38bdf8\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">English as %</text>\n<text x=\"220\" y=\"345\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">42/50 × 100</text>\n<text x=\"220\" y=\"368\" fill=\"#34d399\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">= 84%</text>\n        </g>\n<g class=\"el\" data-beat=\"6\">\n          <rect x=\"420\" y=\"290\" width=\"320\" height=\"100\" rx=\"10\" fill=\"rgba(244,114,182,0.10)\" stroke=\"#f472b6\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"580\" y=\"315\" fill=\"#f472b6\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Science as %</text>\n<text x=\"580\" y=\"345\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">70/80 × 100</text>\n<text x=\"580\" y=\"368\" fill=\"#fbbf24\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">= 87.5%</text>\n        </g>\n<g class=\"el\" data-beat=\"7\">\n          <rect x=\"60\" y=\"410\" width=\"680\" height=\"120\" rx=\"10\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"400\" y=\"445\" fill=\"#a78bfa\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Conclusion</text>\n<text x=\"400\" y=\"475\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Both scores are now comparable — both are \"out of 100\"</text>\n<text x=\"400\" y=\"500\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">87.5% &gt; 84%, so Eesha did better in Science</text>\n<text x=\"400\" y=\"522\" fill=\"#34d399\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.60s\">Vishu was right — convert to % before comparing!</text>\n        </g>",
       "beats": [
         "Welcome back, my friend! Today let us solve a quarrel between three friends. Eesha took two tests: she scored 42 out of 50 in English, and 70 out of 80 in Science. Eesha thinks she did better in English because she lost fewer marks. Reema thinks she did better in Science because she scored more. And Vishu says we just cannot compare them. Who do you think is right?",
         "Look at the green bar — that is Eesha's English score. She got 42 marks out of 50. The bar is mostly green because 42 is most of 50.",
@@ -545,11 +541,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -558,11 +554,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -571,11 +567,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -584,11 +580,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -597,11 +593,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -610,11 +606,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -623,11 +619,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         }
@@ -637,7 +633,7 @@ window.CHAPTER_DATA = {
       "id": "increase_decrease",
       "label": "1.7 Percentage Increase and Decrease",
       "viewBox": "0 0 800 600",
-      "svg": "<style>\n/* === UNIVERSAL ANIMATION SYSTEM === */\n/* Applied to all lectures across all subjects */\n\n/* Fade-in for text elements */\n.anim-fade-in {\n  opacity: 0;\n  animation: anim-fade 0.5s ease forwards;\n}\n@keyframes anim-fade {\n  from { opacity: 0; transform: translateY(8px); }\n  to { opacity: 1; transform: translateY(0); }\n}\n\n/* Pop-in for rectangles and boxes */\n.anim-pop-in {\n  opacity: 0;\n  transform-origin: center;\n  animation: anim-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;\n}\n@keyframes anim-pop {\n  0% { opacity: 0; transform: scale(0.7); }\n  60% { opacity: 1; transform: scale(1.08); }\n  100% { opacity: 1; transform: scale(1); }\n}\n\n/* Draw for lines and paths (stroke draws itself) */\n.anim-draw {\n  stroke-dasharray: 1000;\n  stroke-dashoffset: 1000;\n  animation: anim-draw-line 0.8s ease forwards;\n}\n@keyframes anim-draw-line {\n  to { stroke-dashoffset: 0; }\n}\n\n/* Pulse-in for circles and key points */\n.anim-pulse-in {\n  opacity: 0;\n  animation: anim-pulse-in-anim 0.5s ease forwards;\n}\n@keyframes anim-pulse-in-anim {\n  0% { opacity: 0; transform: scale(0); }\n  50% { opacity: 1; transform: scale(1.3); }\n  100% { opacity: 1; transform: scale(1); }\n}\n\n/* Slide-in from left */\n.anim-slide-left {\n  opacity: 0;\n  animation: anim-slide-l 0.5s ease forwards;\n}\n@keyframes anim-slide-l {\n  from { opacity: 0; transform: translateX(-20px); }\n  to { opacity: 1; transform: translateX(0); }\n}\n\n/* Slide-in from right */\n.anim-slide-right {\n  opacity: 0;\n  animation: anim-slide-r 0.5s ease forwards;\n}\n@keyframes anim-slide-r {\n  from { opacity: 0; transform: translateX(20px); }\n  to { opacity: 1; transform: translateX(0); }\n}\n\n/* Staggered delays (applied via inline style) */\n/* Uses animation-delay set by the Python script */\n</style>\n\n\n\n\n<rect x=\"40\" y=\"40\" width=\"720\" height=\"520\" fill=\"#0f172a\" stroke=\"#1e293b\" rx=\"12\"/>\n<g class=\"el\" data-beat=\"2\">\n          <text x=\"400\" y=\"90\" fill=\"#fbbf24\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">\n<text x=\"400\" y=\"118\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">\n        </g>\n<g class=\"el\" data-beat=\"3\">\n          <rect x=\"60\" y=\"160\" width=\"300\" height=\"40\" fill=\"rgba(56,189,248,0.35)\" stroke=\"#38bdf8\"   />\n<text x=\"210\" y=\"185\" fill=\"#38bdf8\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"  >\n        </g>\n<g class=\"el\" data-beat=\"4\">\n          <rect x=\"60\" y=\"220\" width=\"420\" height=\"40\" fill=\"rgba(244,114,182,0.35)\" stroke=\"#f472b6\"   />\n<text x=\"270\" y=\"245\" fill=\"#f472b6\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"510\" y=\"245\" fill=\"#94a3b8\" font-size=\"12\"  >\n        </g>\n<g class=\"el\" data-beat=\"5\">\n          <rect x=\"60\" y=\"290\" width=\"680\" height=\"80\" rx=\"10\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\" stroke-width=\"2\"   />\n<text x=\"400\" y=\"318\" fill=\"#a78bfa\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"345\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"365\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"  >\n        </g>\n<g class=\"el\" data-beat=\"6\">\n          <rect x=\"60\" y=\"390\" width=\"680\" height=\"80\" rx=\"10\" fill=\"rgba(52,211,153,0.10)\" stroke=\"#34d399\" stroke-width=\"2\"   />\n<text x=\"400\" y=\"418\" fill=\"#34d399\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"445\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"463\" fill=\"#34d399\" font-size=\"13\" text-anchor=\"middle\"  >\n        </g>\n<g class=\"el\" data-beat=\"7\">\n          <rect x=\"60\" y=\"490\" width=\"680\" height=\"50\" rx=\"10\" fill=\"rgba(251,191,36,0.10)\" stroke=\"#fbbf24\" stroke-width=\"2\"   />\n<text x=\"400\" y=\"510\" fill=\"#fbbf24\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"528\" fill=\"#cbd5e1\" font-size=\"11\" text-anchor=\"middle\"  >\n        </g>",
+      "svg": "<rect x=\"40\" y=\"40\" width=\"720\" height=\"520\" fill=\"#0f172a\" stroke=\"#1e293b\" rx=\"12\"/>\n<g class=\"el\" data-beat=\"2\">\n          <text x=\"400\" y=\"90\" fill=\"#fbbf24\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">Tomato Price Story</text>\n<text x=\"400\" y=\"118\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">3 years ago: ₹30/kg   ·   Now: ₹42/kg</text>\n        </g>\n<g class=\"el\" data-beat=\"3\">\n          <rect x=\"60\" y=\"160\" width=\"300\" height=\"40\" fill=\"rgba(56,189,248,0.35)\" stroke=\"#38bdf8\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"210\" y=\"185\" fill=\"#38bdf8\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Old price: ₹30</text>\n        </g>\n<g class=\"el\" data-beat=\"4\">\n          <rect x=\"60\" y=\"220\" width=\"420\" height=\"40\" fill=\"rgba(244,114,182,0.35)\" stroke=\"#f472b6\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"270\" y=\"245\" fill=\"#f472b6\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">New price: ₹42</text>\n<text x=\"510\" y=\"245\" fill=\"#94a3b8\" font-size=\"12\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">increase = ₹12</text>\n        </g>\n<g class=\"el\" data-beat=\"5\">\n          <rect x=\"60\" y=\"290\" width=\"680\" height=\"80\" rx=\"10\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"400\" y=\"318\" fill=\"#a78bfa\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Percentage increase formula</text>\n<text x=\"400\" y=\"345\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">% increase = (amount of increase / original amount) × 100</text>\n<text x=\"400\" y=\"365\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">% decrease = (amount of decrease / original amount) × 100</text>\n        </g>\n<g class=\"el\" data-beat=\"6\">\n          <rect x=\"60\" y=\"390\" width=\"680\" height=\"80\" rx=\"10\" fill=\"rgba(52,211,153,0.10)\" stroke=\"#34d399\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"400\" y=\"418\" fill=\"#34d399\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Plug in the numbers</text>\n<text x=\"400\" y=\"445\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">(12 / 30) × 100 = 40%</text>\n<text x=\"400\" y=\"463\" fill=\"#34d399\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">Tomato price increased by 40% over 3 years</text>\n        </g>\n<g class=\"el\" data-beat=\"7\">\n          <rect x=\"60\" y=\"490\" width=\"680\" height=\"50\" rx=\"10\" fill=\"rgba(251,191,36,0.10)\" stroke=\"#fbbf24\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"400\" y=\"510\" fill=\"#fbbf24\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Try the reverse: Theatre footfall 160 → 100</text>\n<text x=\"400\" y=\"528\" fill=\"#cbd5e1\" font-size=\"11\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Decrease = 60.  % decrease = (60/160) × 100 = 37.5%</text>\n        </g>",
       "beats": [
         "Welcome back, my friend! Today we will learn how to describe CHANGE using percentages. Prices go up. Populations go down. Rainfall increases. Sales drop. All these changes can be measured as a percentage — and that makes them easy to compare.",
         "Here is a real story from the textbook. Three years ago, tomatoes cost ₹30 per kilogram. Today they cost ₹42 per kilogram. The blue bar shows the old price — short. The pink bar shows the new price — taller.",
@@ -653,11 +649,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -666,11 +662,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -679,11 +675,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -692,11 +688,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -705,11 +701,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -718,11 +714,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -731,11 +727,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         }
@@ -745,7 +741,7 @@ window.CHAPTER_DATA = {
       "id": "profit_loss",
       "label": "1.8 Profit and Loss",
       "viewBox": "0 0 800 600",
-      "svg": "<style>\n/* === UNIVERSAL ANIMATION SYSTEM === */\n/* Applied to all lectures across all subjects */\n\n/* Fade-in for text elements */\n.anim-fade-in {\n  opacity: 0;\n  animation: anim-fade 0.5s ease forwards;\n}\n@keyframes anim-fade {\n  from { opacity: 0; transform: translateY(8px); }\n  to { opacity: 1; transform: translateY(0); }\n}\n\n/* Pop-in for rectangles and boxes */\n.anim-pop-in {\n  opacity: 0;\n  transform-origin: center;\n  animation: anim-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;\n}\n@keyframes anim-pop {\n  0% { opacity: 0; transform: scale(0.7); }\n  60% { opacity: 1; transform: scale(1.08); }\n  100% { opacity: 1; transform: scale(1); }\n}\n\n/* Draw for lines and paths (stroke draws itself) */\n.anim-draw {\n  stroke-dasharray: 1000;\n  stroke-dashoffset: 1000;\n  animation: anim-draw-line 0.8s ease forwards;\n}\n@keyframes anim-draw-line {\n  to { stroke-dashoffset: 0; }\n}\n\n/* Pulse-in for circles and key points */\n.anim-pulse-in {\n  opacity: 0;\n  animation: anim-pulse-in-anim 0.5s ease forwards;\n}\n@keyframes anim-pulse-in-anim {\n  0% { opacity: 0; transform: scale(0); }\n  50% { opacity: 1; transform: scale(1.3); }\n  100% { opacity: 1; transform: scale(1); }\n}\n\n/* Slide-in from left */\n.anim-slide-left {\n  opacity: 0;\n  animation: anim-slide-l 0.5s ease forwards;\n}\n@keyframes anim-slide-l {\n  from { opacity: 0; transform: translateX(-20px); }\n  to { opacity: 1; transform: translateX(0); }\n}\n\n/* Slide-in from right */\n.anim-slide-right {\n  opacity: 0;\n  animation: anim-slide-r 0.5s ease forwards;\n}\n@keyframes anim-slide-r {\n  from { opacity: 0; transform: translateX(20px); }\n  to { opacity: 1; transform: translateX(0); }\n}\n\n/* Staggered delays (applied via inline style) */\n/* Uses animation-delay set by the Python script */\n</style>\n\n\n\n\n<rect x=\"40\" y=\"40\" width=\"720\" height=\"520\" fill=\"#0f172a\" stroke=\"#1e293b\" rx=\"12\"/>\n<g class=\"el\" data-beat=\"2\">\n          <text x=\"400\" y=\"90\" fill=\"#38bdf8\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">\n<text x=\"400\" y=\"118\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">\n        </g>\n<g class=\"el\" data-beat=\"3\">\n          <rect x=\"60\" y=\"160\" width=\"200\" height=\"100\" rx=\"10\" fill=\"rgba(56,189,248,0.15)\" stroke=\"#38bdf8\" stroke-width=\"2\"   />\n<text x=\"160\" y=\"190\" fill=\"#38bdf8\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"160\" y=\"212\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"  >\n<text x=\"160\" y=\"234\" fill=\"#cbd5e1\" font-size=\"11\" text-anchor=\"middle\"  >\n        </g>\n<g class=\"el\" data-beat=\"4\">\n          <rect x=\"290\" y=\"160\" width=\"200\" height=\"100\" rx=\"10\" fill=\"rgba(251,191,36,0.15)\" stroke=\"#fbbf24\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"390\" y=\"190\" fill=\"#fbbf24\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">\n<text x=\"390\" y=\"212\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">\n<text x=\"390\" y=\"234\" fill=\"#cbd5e1\" font-size=\"11\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">\n        </g>\n<g class=\"el\" data-beat=\"5\">\n          <rect x=\"520\" y=\"160\" width=\"200\" height=\"100\" rx=\"10\" fill=\"rgba(52,211,153,0.15)\" stroke=\"#34d399\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"620\" y=\"190\" fill=\"#34d399\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">\n<text x=\"620\" y=\"212\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">\n<text x=\"620\" y=\"234\" fill=\"#cbd5e1\" font-size=\"11\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">\n        </g>\n<g class=\"el\" data-beat=\"6\">\n          <rect x=\"60\" y=\"290\" width=\"320\" height=\"100\" rx=\"10\" fill=\"rgba(244,114,182,0.10)\" stroke=\"#f472b6\" stroke-width=\"2\"   />\n<text x=\"220\" y=\"315\" fill=\"#f472b6\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"220\" y=\"342\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"  >\n<text x=\"220\" y=\"362\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"  >\n        </g>\n<g class=\"el\" data-beat=\"7\">\n          <rect x=\"420\" y=\"290\" width=\"320\" height=\"100\" rx=\"10\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"580\" y=\"315\" fill=\"#a78bfa\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">\n<text x=\"580\" y=\"342\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">\n<text x=\"580\" y=\"362\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">\n        </g>\n<g class=\"el\" data-beat=\"8\">\n          <rect x=\"60\" y=\"410\" width=\"680\" height=\"120\" rx=\"10\" fill=\"rgba(56,189,248,0.08)\" stroke=\"#38bdf8\" stroke-width=\"2\"   />\n<text x=\"400\" y=\"438\" fill=\"#38bdf8\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"465\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"488\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"511\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"  >\n        </g>",
+      "svg": "<rect x=\"40\" y=\"40\" width=\"720\" height=\"520\" fill=\"#0f172a\" stroke=\"#1e293b\" rx=\"12\"/>\n<g class=\"el\" data-beat=\"2\">\n          <text x=\"400\" y=\"90\" fill=\"#38bdf8\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">Kishanlal's Sweater Business</text>\n<text x=\"400\" y=\"118\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Three important prices in any sale</text>\n        </g>\n<g class=\"el\" data-beat=\"3\">\n          <rect x=\"60\" y=\"160\" width=\"200\" height=\"100\" rx=\"10\" fill=\"rgba(56,189,248,0.15)\" stroke=\"#38bdf8\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"160\" y=\"190\" fill=\"#38bdf8\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">CP</text>\n<text x=\"160\" y=\"212\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Cost Price</text>\n<text x=\"160\" y=\"234\" fill=\"#cbd5e1\" font-size=\"11\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">₹300 (paid to wholesaler)</text>\n        </g>\n<g class=\"el\" data-beat=\"4\">\n          <rect x=\"290\" y=\"160\" width=\"200\" height=\"100\" rx=\"10\" fill=\"rgba(251,191,36,0.15)\" stroke=\"#fbbf24\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"390\" y=\"190\" fill=\"#fbbf24\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">MP</text>\n<text x=\"390\" y=\"212\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Marked Price</text>\n<text x=\"390\" y=\"234\" fill=\"#cbd5e1\" font-size=\"11\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">₹480 (quoted to customer)</text>\n        </g>\n<g class=\"el\" data-beat=\"5\">\n          <rect x=\"520\" y=\"160\" width=\"200\" height=\"100\" rx=\"10\" fill=\"rgba(52,211,153,0.15)\" stroke=\"#34d399\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"620\" y=\"190\" fill=\"#34d399\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">SP</text>\n<text x=\"620\" y=\"212\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Selling Price</text>\n<text x=\"620\" y=\"234\" fill=\"#cbd5e1\" font-size=\"11\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">₹430 (after bargaining)</text>\n        </g>\n<g class=\"el\" data-beat=\"6\">\n          <rect x=\"60\" y=\"290\" width=\"320\" height=\"100\" rx=\"10\" fill=\"rgba(244,114,182,0.10)\" stroke=\"#f472b6\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"220\" y=\"315\" fill=\"#f472b6\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Profit calculation</text>\n<text x=\"220\" y=\"342\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Profit = SP − CP</text>\n<text x=\"220\" y=\"362\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">= ₹430 − ₹300 = ₹130</text>\n        </g>\n<g class=\"el\" data-beat=\"7\">\n          <rect x=\"420\" y=\"290\" width=\"320\" height=\"100\" rx=\"10\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"580\" y=\"315\" fill=\"#a78bfa\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Profit percentage</text>\n<text x=\"580\" y=\"342\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">% profit = (Profit / CP) × 100</text>\n<text x=\"580\" y=\"362\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">= (130/300) × 100 ≈ 43.3%</text>\n        </g>\n<g class=\"el\" data-beat=\"8\">\n          <rect x=\"60\" y=\"410\" width=\"680\" height=\"120\" rx=\"10\" fill=\"rgba(56,189,248,0.08)\" stroke=\"#38bdf8\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"400\" y=\"438\" fill=\"#38bdf8\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Three rules to remember</text>\n<text x=\"400\" y=\"465\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">1. Profit % is always calculated on the COST PRICE (what you invested)</text>\n<text x=\"400\" y=\"488\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">2. Loss % uses the same formula but with Loss = CP − SP</text>\n<text x=\"400\" y=\"511\" fill=\"#cbd5e1\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.60s\">3. Discount % is calculated on the MARKED PRICE</text>\n        </g>",
       "beats": [
         "Welcome back, my friend! Today we step into Kishanlal's sweater shop. He is a retailer who buys sweaters from a wholesaler and sells them to customers. There are three important prices in any sale, and Kishanlal knows them all by heart.",
         "First, the Cost Price — CP for short. This is what Kishanlal paid to the wholesaler. For this sweater, he paid ₹300. That is his investment.",
@@ -761,11 +757,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -774,11 +770,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -787,11 +783,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -800,11 +796,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -813,11 +809,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -826,11 +822,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -839,11 +835,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         }
@@ -853,7 +849,7 @@ window.CHAPTER_DATA = {
       "id": "compounding_growth",
       "label": "1.9 Growth and Compounding",
       "viewBox": "0 0 800 600",
-      "svg": "<style>\n/* === UNIVERSAL ANIMATION SYSTEM === */\n/* Applied to all lectures across all subjects */\n\n/* Fade-in for text elements */\n.anim-fade-in {\n  opacity: 0;\n  animation: anim-fade 0.5s ease forwards;\n}\n@keyframes anim-fade {\n  from { opacity: 0; transform: translateY(8px); }\n  to { opacity: 1; transform: translateY(0); }\n}\n\n/* Pop-in for rectangles and boxes */\n.anim-pop-in {\n  opacity: 0;\n  transform-origin: center;\n  animation: anim-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;\n}\n@keyframes anim-pop {\n  0% { opacity: 0; transform: scale(0.7); }\n  60% { opacity: 1; transform: scale(1.08); }\n  100% { opacity: 1; transform: scale(1); }\n}\n\n/* Draw for lines and paths (stroke draws itself) */\n.anim-draw {\n  stroke-dasharray: 1000;\n  stroke-dashoffset: 1000;\n  animation: anim-draw-line 0.8s ease forwards;\n}\n@keyframes anim-draw-line {\n  to { stroke-dashoffset: 0; }\n}\n\n/* Pulse-in for circles and key points */\n.anim-pulse-in {\n  opacity: 0;\n  animation: anim-pulse-in-anim 0.5s ease forwards;\n}\n@keyframes anim-pulse-in-anim {\n  0% { opacity: 0; transform: scale(0); }\n  50% { opacity: 1; transform: scale(1.3); }\n  100% { opacity: 1; transform: scale(1); }\n}\n\n/* Slide-in from left */\n.anim-slide-left {\n  opacity: 0;\n  animation: anim-slide-l 0.5s ease forwards;\n}\n@keyframes anim-slide-l {\n  from { opacity: 0; transform: translateX(-20px); }\n  to { opacity: 1; transform: translateX(0); }\n}\n\n/* Slide-in from right */\n.anim-slide-right {\n  opacity: 0;\n  animation: anim-slide-r 0.5s ease forwards;\n}\n@keyframes anim-slide-r {\n  from { opacity: 0; transform: translateX(20px); }\n  to { opacity: 1; transform: translateX(0); }\n}\n\n/* Staggered delays (applied via inline style) */\n/* Uses animation-delay set by the Python script */\n</style>\n\n\n\n\n<rect x=\"40\" y=\"40\" width=\"720\" height=\"520\" fill=\"#0f172a\" stroke=\"#1e293b\" rx=\"12\"/>\n<g class=\"el\" data-beat=\"2\">\n          <text x=\"400\" y=\"90\" fill=\"#fbbf24\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">\n<text x=\"400\" y=\"118\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">\n        </g>\n<g class=\"el\" data-beat=\"3\">\n          <rect x=\"60\" y=\"160\" width=\"320\" height=\"220\" rx=\"10\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\"   />\n<text x=\"220\" y=\"188\" fill=\"#38bdf8\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"220\" y=\"215\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"  >\n<text x=\"220\" y=\"240\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"  >\n<text x=\"220\" y=\"265\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"  >\n<text x=\"220\" y=\"295\" fill=\"#34d399\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"220\" y=\"320\" fill=\"#34d399\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"220\" y=\"350\" fill=\"#94a3b8\" font-size=\"11\" text-anchor=\"middle\"  >\n<text x=\"220\" y=\"368\" fill=\"#94a3b8\" font-size=\"11\" text-anchor=\"middle\"  >\n        </g>\n<g class=\"el\" data-beat=\"4\">\n          <rect x=\"420\" y=\"160\" width=\"320\" height=\"220\" rx=\"10\" fill=\"rgba(251,191,36,0.10)\" stroke=\"#fbbf24\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"580\" y=\"188\" fill=\"#fbbf24\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">\n<text x=\"580\" y=\"215\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">\n<text x=\"580\" y=\"240\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">\n<text x=\"580\" y=\"265\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.60s\">\n<text x=\"580\" y=\"295\" fill=\"#34d399\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.75s\">\n<text x=\"580\" y=\"320\" fill=\"#34d399\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.90s\">\n<text x=\"580\" y=\"350\" fill=\"#94a3b8\" font-size=\"11\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 1.05s\">\n<text x=\"580\" y=\"368\" fill=\"#94a3b8\" font-size=\"11\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 1.20s\">\n        </g>\n<g class=\"el\" data-beat=\"5\">\n          <rect x=\"60\" y=\"400\" width=\"680\" height=\"60\" rx=\"10\" fill=\"rgba(244,114,182,0.10)\" stroke=\"#f472b6\" stroke-width=\"2\"   />\n<text x=\"400\" y=\"425\" fill=\"#f472b6\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"448\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"  >\n        </g>\n<g class=\"el\" data-beat=\"6\">\n          <rect x=\"60\" y=\"480\" width=\"680\" height=\"60\" rx=\"10\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\" stroke-width=\"2\"   />\n<text x=\"400\" y=\"505\" fill=\"#a78bfa\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"525\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"  >\n        </g>",
+      "svg": "<rect x=\"40\" y=\"40\" width=\"720\" height=\"520\" fill=\"#0f172a\" stroke=\"#1e293b\" rx=\"12\"/>\n<g class=\"el\" data-beat=\"2\">\n          <text x=\"400\" y=\"90\" fill=\"#fbbf24\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">₹6000 at 10% interest, 3 years</text>\n<text x=\"400\" y=\"118\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Two ways: simple interest vs compound interest</text>\n        </g>\n<g class=\"el\" data-beat=\"3\">\n          <rect x=\"60\" y=\"160\" width=\"320\" height=\"220\" rx=\"10\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"220\" y=\"188\" fill=\"#38bdf8\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Simple Interest (no compounding)</text>\n<text x=\"220\" y=\"215\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Year 1: ₹6000 → ₹6600 (+ ₹600)</text>\n<text x=\"220\" y=\"240\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">Year 2: ₹6000 → ₹6600 (+ ₹600)</text>\n<text x=\"220\" y=\"265\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.60s\">Year 3: ₹6000 → ₹6600 (+ ₹600)</text>\n<text x=\"220\" y=\"295\" fill=\"#34d399\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.75s\">Total interest: ₹1800</text>\n<text x=\"220\" y=\"320\" fill=\"#34d399\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.90s\">Final amount: ₹7800</text>\n<text x=\"220\" y=\"350\" fill=\"#94a3b8\" font-size=\"11\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 1.05s\">Formula: P × (1 + r × t)</text>\n<text x=\"220\" y=\"368\" fill=\"#94a3b8\" font-size=\"11\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 1.20s\">= 6000 × (1 + 0.1 × 3) = 7800</text>\n        </g>\n<g class=\"el\" data-beat=\"4\">\n          <rect x=\"420\" y=\"160\" width=\"320\" height=\"220\" rx=\"10\" fill=\"rgba(251,191,36,0.10)\" stroke=\"#fbbf24\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"580\" y=\"188\" fill=\"#fbbf24\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Compound Interest (compounding)</text>\n<text x=\"580\" y=\"215\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Year 1: ₹6000 → ₹6600 (+ ₹600)</text>\n<text x=\"580\" y=\"240\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">Year 2: ₹6600 → ₹7260 (+ ₹660)</text>\n<text x=\"580\" y=\"265\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.60s\">Year 3: ₹7260 → ₹7986 (+ ₹726)</text>\n<text x=\"580\" y=\"295\" fill=\"#34d399\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.75s\">Total interest: ₹1986</text>\n<text x=\"580\" y=\"320\" fill=\"#34d399\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.90s\">Final amount: ₹7986</text>\n<text x=\"580\" y=\"350\" fill=\"#94a3b8\" font-size=\"11\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 1.05s\">Formula: P × (1 + r)^t</text>\n<text x=\"580\" y=\"368\" fill=\"#94a3b8\" font-size=\"11\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 1.20s\">= 6000 × 1.1^3 = 7986</text>\n        </g>\n<g class=\"el\" data-beat=\"5\">\n          <rect x=\"60\" y=\"400\" width=\"680\" height=\"60\" rx=\"10\" fill=\"rgba(244,114,182,0.10)\" stroke=\"#f472b6\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"400\" y=\"425\" fill=\"#f472b6\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Difference: ₹7986 − ₹7800 = ₹186</text>\n<text x=\"400\" y=\"448\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Compounding gives you MORE money — interest earns interest!</text>\n        </g>\n<g class=\"el\" data-beat=\"6\">\n          <rect x=\"60\" y=\"480\" width=\"680\" height=\"60\" rx=\"10\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"400\" y=\"505\" fill=\"#a78bfa\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Two formulas</text>\n<text x=\"400\" y=\"525\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">No compounding: Amount = P × (1 + r × t)   ·   Compounding: Amount = P × (1 + r)^t</text>\n        </g>",
       "beats": [
         "Welcome back, my friend! Today I will tell you one of the most powerful ideas in all of mathematics — the idea that makes banks, investments, and even populations grow. It is called COMPOUNDING. And once you understand it, you will never look at a bank the same way again.",
         "Here is the setup. You deposit ₹6000 in a fixed deposit (FD) at the bank. The bank pays you 10% interest per year. After 3 years, how much money will you have? The surprising answer is — it depends on which KIND of interest the bank offers! There are two options.",
@@ -868,11 +864,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -881,11 +877,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -894,11 +890,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -907,11 +903,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -920,11 +916,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -933,11 +929,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         }
@@ -947,7 +943,7 @@ window.CHAPTER_DATA = {
       "id": "tricky_percentages",
       "label": "1.10 Tricky Percentages",
       "viewBox": "0 0 800 600",
-      "svg": "<style>\n/* === UNIVERSAL ANIMATION SYSTEM === */\n/* Applied to all lectures across all subjects */\n\n/* Fade-in for text elements */\n.anim-fade-in {\n  opacity: 0;\n  animation: anim-fade 0.5s ease forwards;\n}\n@keyframes anim-fade {\n  from { opacity: 0; transform: translateY(8px); }\n  to { opacity: 1; transform: translateY(0); }\n}\n\n/* Pop-in for rectangles and boxes */\n.anim-pop-in {\n  opacity: 0;\n  transform-origin: center;\n  animation: anim-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;\n}\n@keyframes anim-pop {\n  0% { opacity: 0; transform: scale(0.7); }\n  60% { opacity: 1; transform: scale(1.08); }\n  100% { opacity: 1; transform: scale(1); }\n}\n\n/* Draw for lines and paths (stroke draws itself) */\n.anim-draw {\n  stroke-dasharray: 1000;\n  stroke-dashoffset: 1000;\n  animation: anim-draw-line 0.8s ease forwards;\n}\n@keyframes anim-draw-line {\n  to { stroke-dashoffset: 0; }\n}\n\n/* Pulse-in for circles and key points */\n.anim-pulse-in {\n  opacity: 0;\n  animation: anim-pulse-in-anim 0.5s ease forwards;\n}\n@keyframes anim-pulse-in-anim {\n  0% { opacity: 0; transform: scale(0); }\n  50% { opacity: 1; transform: scale(1.3); }\n  100% { opacity: 1; transform: scale(1); }\n}\n\n/* Slide-in from left */\n.anim-slide-left {\n  opacity: 0;\n  animation: anim-slide-l 0.5s ease forwards;\n}\n@keyframes anim-slide-l {\n  from { opacity: 0; transform: translateX(-20px); }\n  to { opacity: 1; transform: translateX(0); }\n}\n\n/* Slide-in from right */\n.anim-slide-right {\n  opacity: 0;\n  animation: anim-slide-r 0.5s ease forwards;\n}\n@keyframes anim-slide-r {\n  from { opacity: 0; transform: translateX(20px); }\n  to { opacity: 1; transform: translateX(0); }\n}\n\n/* Staggered delays (applied via inline style) */\n/* Uses animation-delay set by the Python script */\n</style>\n\n\n\n\n<rect x=\"40\" y=\"40\" width=\"720\" height=\"520\" fill=\"#0f172a\" stroke=\"#1e293b\" rx=\"12\"/>\n<g class=\"el\" data-beat=\"2\">\n          <text x=\"400\" y=\"90\" fill=\"#fbbf24\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">\n<text x=\"400\" y=\"118\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">\n        </g>\n<g class=\"el\" data-beat=\"3\">\n          <rect x=\"60\" y=\"160\" width=\"320\" height=\"200\" rx=\"10\" fill=\"rgba(244,114,182,0.10)\" stroke=\"#f472b6\" stroke-width=\"2\"   />\n<text x=\"220\" y=\"190\" fill=\"#f472b6\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"220\" y=\"218\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"  >\n<text x=\"220\" y=\"240\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"  >\n<text x=\"220\" y=\"265\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"  >\n<text x=\"220\" y=\"287\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"  >\n<text x=\"220\" y=\"320\" fill=\"#f472b6\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"220\" y=\"345\" fill=\"#94a3b8\" font-size=\"11\" text-anchor=\"middle\"  >\n        </g>\n<g class=\"el\" data-beat=\"4\">\n          <rect x=\"420\" y=\"160\" width=\"320\" height=\"200\" rx=\"10\" fill=\"rgba(52,211,153,0.10)\" stroke=\"#34d399\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"580\" y=\"190\" fill=\"#34d399\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">\n<text x=\"580\" y=\"218\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">\n<text x=\"580\" y=\"240\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">\n<text x=\"580\" y=\"287\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.60s\">\n<text x=\"580\" y=\"320\" fill=\"#34d399\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.75s\">\n<text x=\"580\" y=\"345\" fill=\"#94a3b8\" font-size=\"11\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.90s\">\n        </g>\n<g class=\"el\" data-beat=\"5\">\n          <rect x=\"60\" y=\"380\" width=\"680\" height=\"60\" rx=\"10\" fill=\"rgba(251,191,36,0.10)\" stroke=\"#fbbf24\" stroke-width=\"2\"   />\n<text x=\"400\" y=\"405\" fill=\"#fbbf24\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"428\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"  >\n        </g>\n<g class=\"el\" data-beat=\"6\">\n          <rect x=\"60\" y=\"460\" width=\"680\" height=\"80\" rx=\"10\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\" stroke-width=\"2\"   />\n<text x=\"400\" y=\"485\" fill=\"#a78bfa\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"510\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"  >\n<text x=\"400\" y=\"530\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"  >\n        </g>",
+      "svg": "<rect x=\"40\" y=\"40\" width=\"720\" height=\"520\" fill=\"#0f172a\" stroke=\"#1e293b\" rx=\"12\"/>\n<g class=\"el\" data-beat=\"2\">\n          <text x=\"400\" y=\"90\" fill=\"#fbbf24\" font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">Cakely vs Cakify</text>\n<text x=\"400\" y=\"118\" fill=\"#94a3b8\" font-size=\"13\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Cake worth ₹200. Which is the better discount?</text>\n        </g>\n<g class=\"el\" data-beat=\"3\">\n          <rect x=\"60\" y=\"160\" width=\"320\" height=\"200\" rx=\"10\" fill=\"rgba(244,114,182,0.10)\" stroke=\"#f472b6\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"220\" y=\"190\" fill=\"#f472b6\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Cakely: 30% + 20% off</text>\n<text x=\"220\" y=\"218\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Step 1: 30% off ₹200 → save ₹60</text>\n<text x=\"220\" y=\"240\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">Price becomes ₹200 − ₹60 = ₹140</text>\n<text x=\"220\" y=\"265\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.60s\">Step 2: 20% off ₹140 → save ₹28</text>\n<text x=\"220\" y=\"287\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.75s\">Final price: ₹140 − ₹28 = ₹112</text>\n<text x=\"220\" y=\"320\" fill=\"#f472b6\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.90s\">You pay: ₹112</text>\n<text x=\"220\" y=\"345\" fill=\"#94a3b8\" font-size=\"11\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 1.05s\">(Saved ₹88 — that is 44% off!)</text>\n        </g>\n<g class=\"el\" data-beat=\"4\">\n          <rect x=\"420\" y=\"160\" width=\"320\" height=\"200\" rx=\"10\" fill=\"rgba(52,211,153,0.10)\" stroke=\"#34d399\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"580\" y=\"190\" fill=\"#34d399\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Cakify: 50% off</text>\n<text x=\"580\" y=\"218\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Step 1: 50% off ₹200 → save ₹100</text>\n<text x=\"580\" y=\"240\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">Final price: ₹200 − ₹100 = ₹100</text>\n<text x=\"580\" y=\"287\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.60s\">No second step — flat discount</text>\n<text x=\"580\" y=\"320\" fill=\"#34d399\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.75s\">You pay: ₹100</text>\n<text x=\"580\" y=\"345\" fill=\"#94a3b8\" font-size=\"11\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.90s\">(Saved ₹100 — exactly 50% off)</text>\n        </g>\n<g class=\"el\" data-beat=\"5\">\n          <rect x=\"60\" y=\"380\" width=\"680\" height=\"60\" rx=\"10\" fill=\"rgba(251,191,36,0.10)\" stroke=\"#fbbf24\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"400\" y=\"405\" fill=\"#fbbf24\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Surprise! 30% + 20% ≠ 50%</text>\n<text x=\"400\" y=\"428\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">In shopping, \"30% + 20%\" means apply 30% first, THEN apply 20% on the reduced price.</text>\n        </g>\n<g class=\"el\" data-beat=\"6\">\n          <rect x=\"60\" y=\"460\" width=\"680\" height=\"80\" rx=\"10\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n<text x=\"400\" y=\"485\" fill=\"#a78bfa\" font-size=\"13\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Compound discount formula</text>\n<text x=\"400\" y=\"510\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Final price = Original × (1 − d1) × (1 − d2)</text>\n<text x=\"400\" y=\"530\" fill=\"#cbd5e1\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">₹200 × 0.70 × 0.80 = ₹112 ✓</text>\n        </g>",
       "beats": [
         "Welcome back, my friend! For our final story, I want to share a clever trick that shops use all the time. It is a trap that catches many shoppers — but not you, not after today!",
         "There are two bakeries. Cakely offers a '30% + 20% discount' on all cakes. Cakify offers a flat '50% discount' on all cakes. You want to buy a cake worth ₹200. Which bakery is cheaper? At first glance, 30 + 20 = 50, so they should be the same. Right? Wrong! Let us see why.",
@@ -962,11 +958,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -975,11 +971,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -988,11 +984,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -1001,11 +997,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -1014,11 +1010,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         },
@@ -1027,11 +1023,11 @@ window.CHAPTER_DATA = {
           "doubts": [
             {
               "q": "Why do we multiply the fraction by 100 to get percentage?",
-              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction into how many parts out of 100. For example, 3/4 becomes 75 out of 100, which is 75%."
+              "a": "Percent means 'per hundred'. Multiplying by 100 converts the fraction to how many parts out of 100. For example, 3/4 × 100 = 75 means 75 out of 100, which is 75%."
             },
             {
-              "q": "Can we use any method to convert fraction to percentage?",
-              "a": "Yes! Both methods work. The first method (not shown here) might be dividing numerator by denominator and multiplying by 100. Choose whichever method you find easier to understand and calculate."
+              "q": "What if multiplying by 100 gives a decimal number?",
+              "a": "If you get a decimal, just write it as is with the % sign. For example, 1/8 × 100 = 12.5%, which means 12.5 out of 100 parts."
             }
           ]
         }
@@ -1119,9 +1115,9 @@ window.CHAPTER_DATA = {
           "explanation": "Yes! To convert any fraction to a percentage, just multiply by 100.",
           "hint": "Think about what you do to push the denominator to 100.",
           "hints": [
-            "Remember that percentages represent parts per hundred. Think about how to express a fraction as parts out of 100.",
-            "To convert a fraction to percentage, multiply the fraction by 100 and add the % symbol. This gives you the equivalent percentage value.",
-            "For 2/5, multiply 2/5 by 100. First divide 100 by 5 to get 20, then multiply by 2 to get 40. So 2/5 = 40%."
+            "To convert a fraction to a percentage, you need to find what part of 100 the fraction represents.",
+            "The formula is: multiply the fraction by 100. This gives you the percentage value directly.",
+            "Multiply 2/5 by 100. First multiply 2 by 100, then divide by 5 to get the final percentage."
           ]
         },
         {
@@ -1139,9 +1135,9 @@ window.CHAPTER_DATA = {
           "explanation": "Yes! 2/5 × 100 = 200/5 = 40. So 2/5 = 40%.",
           "hint": "200 divided by 5 is 40.",
           "hints": [
-            "To convert a fraction to percentage, multiply by 100. This gives you the equivalent value per hundred.",
-            "Multiply the numerator by 100, then divide by the denominator. Formula: (numerator × 100) ÷ denominator = percentage.",
-            "2 × 100 = 200. Now divide 200 by 5. The result is 40. Add the % sign to get your final answer."
+            "To convert a fraction to percentage, multiply by 100 and add the percent sign.",
+            "Multiply the numerator by 100, then divide by the denominator: (2 × 100) ÷ 5",
+            "2 × 100 = 200, then 200 ÷ 5 = 40, so the answer is 40%"
           ]
         }
       ],
@@ -1172,9 +1168,9 @@ window.CHAPTER_DATA = {
           "explanation": "Yes! 25% = 25/100 = 1/4. A quarter.",
           "hint": "4 quarters make 100%, so one quarter is...",
           "hints": [
-            "Remember that percent means 'per hundred'. What fraction represents 25 parts out of 100?",
-            "To convert a percentage to a fraction, write it over 100. Then simplify if possible.",
-            "25% equals 25/100. Simplify this fraction by dividing numerator and denominator by 25."
+            "Remember that percent means per hundred. Think about what fraction 25 out of 100 simplifies to.",
+            "To convert percent to fraction, write it over 100 and simplify. 25% = ?/100",
+            "25% equals 25/100 which simplifies to 1/4. Now find one fourth of 120."
           ]
         },
         {
@@ -1187,9 +1183,9 @@ window.CHAPTER_DATA = {
           "explanation": "Yes! 120 ÷ 4 = 30. So Madhu ate 30 grams of sugar.",
           "hint": "100 ÷ 4 = 25. 20 ÷ 4 = 5. Add them.",
           "hints": [
-            "Remember that percent means per hundred. 25% is the same as 25/100, which simplifies to 1/4.",
+            "Remember that percent means per hundred. 25% is the same as 25/100 which simplifies to 1/4.",
             "To find 25% of 120, you can multiply 120 by 25/100 or simply divide 120 by 4 since 25% equals 1/4.",
-            "Divide 120 by 4: 120 ÷ 4 = 30. So 25% of 120 is 30."
+            "Now calculate 120 ÷ 4. This will give you 25% of 120, which is the answer to the problem."
           ]
         }
       ],
@@ -1214,9 +1210,9 @@ window.CHAPTER_DATA = {
           "explanation": "Yes! 42/50 × 100 = 4200/50 = 84. So 42/50 = 84%.",
           "hint": "Multiply 42 by 100, then divide by 50.",
           "hints": [
-            "To convert a fraction to percentage, multiply by 100 and add the percent sign.",
-            "Divide numerator by denominator, then multiply by 100 to get percentage.",
-            "42 ÷ 50 = 0.84, then 0.84 × 100 = 84%"
+            "To convert a fraction to percentage, multiply by 100. This gives you the value out of 100.",
+            "Multiply numerator by 100 and divide by denominator: (42 × 100) ÷ 50 = ?",
+            "Calculate: 42 × 100 = 4200, then 4200 ÷ 50 = 84. So 42/50 = 84%"
           ]
         },
         {
@@ -1229,9 +1225,9 @@ window.CHAPTER_DATA = {
           "explanation": "Yes! 70/80 × 100 = 7000/80 = 87.5. So 70/80 = 87.5%.",
           "hint": "Multiply 70 by 100, then divide by 80. Or simplify: 70/80 = 7/8 = 0.875.",
           "hints": [
-            "To convert a fraction to percentage, multiply by 100.",
-            "Divide numerator by denominator, then multiply by 100.",
-            "Divide 70 by 80 to get 0.875, then multiply by 100 for percentage."
+            "To convert a fraction to percentage, multiply by 100 and add the % symbol.",
+            "Divide numerator by denominator, then multiply by 100. So 70 ÷ 80 × 100 = ?",
+            "70 ÷ 80 = 0.875. Multiply by 100 to get 87.5%. So 70/80 = 87.5%."
           ]
         },
         {
@@ -1248,9 +1244,9 @@ window.CHAPTER_DATA = {
           "explanation": "Yes! 87.5% > 84%, so Eesha did better in Science.",
           "hint": "Compare the two percentages: 84% vs 87.5%.",
           "hints": [
-            "To compare test scores, find the percentage for each subject by dividing the score by total marks and multiplying by 100.",
-            "Calculate percentage: English: 42/60 × 100 = 70%, Science: 45/50 × 100 = 90%. Higher percentage means better performance.",
-            "Eesha scored 70% in English and 90% in Science. Since 90% is greater than 70%, Eesha did better in Science."
+            "To compare test scores, look at the actual numbers. Which subject has a higher score?",
+            "Find the difference between the two scores. A positive difference means better performance in that subject.",
+            "Calculate Science score minus English score. If the result is positive, Science is the better subject."
           ]
         }
       ],
@@ -1276,8 +1272,8 @@ window.CHAPTER_DATA = {
           "hint": "Subtract the old price from the new price.",
           "hints": [
             "To find the increase in price, subtract the original price from the new price.",
-            "Use the formula: Increase = New Price - Original Price = ₹42 - ₹30",
-            "Calculate the difference: ₹42 - ₹30 = ₹12. This is the price increase."
+            "Use the formula: Increase = New price - Original price",
+            "Increase = ₹42 - ₹30 = ₹12"
           ]
         },
         {
@@ -1290,9 +1286,9 @@ window.CHAPTER_DATA = {
           "explanation": "Yes! (12/30) × 100 = 0.4 × 100 = 40. So the tomato price increased by 40%.",
           "hint": "Simplify 12/30 = 2/5 = 0.4. Then × 100 = 40.",
           "hints": [
-            "To find percentage increase, divide the increase by the original price and multiply by 100.",
-            "Use the formula: (Increase ÷ Original Price) × 100 = Percentage Increase.",
-            "(12 ÷ 30) × 100 = ? Calculate this to find the percentage increase in tomato price."
+            "To find percentage increase, calculate the increase amount divided by original price, then multiply by 100.",
+            "Percentage increase = (increase/original price) × 100. Here, increase is 12 and original price is 30.",
+            "Calculate (12 ÷ 30) × 100. Divide 12 by 30 first, then multiply the result by 100 to get the percentage."
           ]
         }
       ],
@@ -1317,9 +1313,9 @@ window.CHAPTER_DATA = {
           "explanation": "Yes! Profit = ₹430 − ₹300 = ₹130.",
           "hint": "Subtract the cost price from the selling price.",
           "hints": [
-            "To find profit, subtract cost price from selling price. This gives the amount of money earned on the sale.",
-            "Use the formula: Profit = Selling Price - Cost Price. Plug in the given values: SP = ₹430, CP = ₹300.",
-            "Calculate: Profit = ₹430 - ₹300 = ₹130. This is the amount of profit Kishanlal made on his sweater."
+            "To find profit, subtract cost price from selling price. Profit = SP - CP.",
+            "Use the formula: Profit = Selling Price - Cost Price. SP = ₹430, CP = ₹300.",
+            "Profit = SP - CP = ₹430 - ₹300 = ₹130. This is the profit amount."
           ]
         },
         {
@@ -1339,9 +1335,9 @@ window.CHAPTER_DATA = {
           "explanation": "Yes! (130/300) × 100 ≈ 43.3%. So Kishanlal made about 43.3% profit.",
           "hint": "130/300 = 0.4333... Multiply by 100 to get the percentage.",
           "hints": [
-            "Remember, profit percentage is calculated as (Profit/CP) × 100. First find the profit by subtracting CP from SP.",
+            "Profit percentage is calculated as (Profit/CP) × 100. First find the profit amount.",
             "Use the formula: Profit % = (Profit/CP) × 100. Here, Profit = 130 and CP = 300.",
-            "Calculate (130/300) × 100 = 43.33%. Round to 1 decimal place: 43.3%"
+            "Calculate (130/300) × 100 = 43.333... Round to 1 decimal place: 43.3"
           ]
         }
       ],
@@ -1366,9 +1362,9 @@ window.CHAPTER_DATA = {
           "explanation": "Yes! 6000 × 1.10 = 6600. The interest earned was ₹600, added to the principal.",
           "hint": "10% of 6000 is 600. Add it to 6000.",
           "hints": [
-            "Compound interest adds interest to the principal each year. For year 1, calculate simple interest on the original amount.",
-            "Use the formula: Amount = Principal × (1 + rate). Here, rate is 10% or 0.10.",
-            "Multiply 6000 by 1.10 to get the amount after year 1. The calculation is 6000 × 1.10 = 6600."
+            "Compound interest means earning interest on your interest. The formula is Amount = Principal × (1 + rate)^time.",
+            "For Year 1: Multiply principal (6000) by (1 + interest rate). If rate is 10%, calculate 6000 × 1.10.",
+            "After Year 1: 6000 × 1.10 = 6600. This is the new principal for Year 2."
           ]
         },
         {
@@ -1381,9 +1377,9 @@ window.CHAPTER_DATA = {
           "explanation": "Yes! 6600 × 1.10 = 7260. The Year 2 interest was ₹660 — more than Year 1 because of compounding!",
           "hint": "10% of 6600 is 660. Add it to 6600.",
           "hints": [
-            "Compound interest is calculated by multiplying the principal by (1 + rate) raised to the power of time.",
-            "To find the amount after Year 3, multiply the amount after Year 2 (6600) by 1.10.",
-            "Multiply 6600 by 1.10 to get the final amount after Year 3, which is 7260."
+            "Compound interest means each year's interest is calculated on the previous amount including accumulated interest.",
+            "For compound interest: Amount = Principal × (1 + rate)^time. Here, multiply 6600 by 1.10 to find the new amount.",
+            "Multiply 6600 by 1.10: 6600 × 1.10 = 7260. This is the amount after Year 3."
           ]
         },
         {
@@ -1396,9 +1392,9 @@ window.CHAPTER_DATA = {
           "explanation": "Yes! 7260 × 1.10 = 7986. After 3 years of compounding, the final amount is ₹7986.",
           "hint": "10% of 7260 is 726. Add it to 7260.",
           "hints": [
-            "Multiply 7260 by 1.10 to find the amount after Year 4. Compound interest means each year's amount becomes the next year's principal.",
-            "Use the formula: Amount = Previous amount × (1 + rate). Here, 7260 × 1.10 = ?",
-            "Calculate: 7260 × 1.10 = 7986. This is the amount after Year 4."
+            "To find the amount after Year 4, multiply the Year 3 amount by 1.10 (10% interest).",
+            "Use the compound interest formula: Amount = Principal × (1 + rate)^time. Here, multiply 7260 by 1.10.",
+            "Multiply 7260 by 1.10: 7260 × 1.10 = 7986. The amount after Year 4 is ₹7986."
           ]
         }
       ],
@@ -1423,9 +1419,9 @@ window.CHAPTER_DATA = {
           "explanation": "Yes! 30% off ₹200 means you pay 70% of ₹200 = ₹140.",
           "hint": "70% of 200 = 0.7 × 200 = 140.",
           "hints": [
-            "To find the price after a 30% discount, calculate 70% of the original price.",
-            "Multiply the original price (₹200) by 0.70 to find the discounted price.",
-            "₹200 × 0.70 = ₹140. This is the price after the first discount."
+            "To find the price after 30% discount, calculate 30% of 200 and subtract it from 200.",
+            "Multiply the original price by (100% - discount percentage). So, 200 × (1 - 0.30) = 200 × 0.70.",
+            "After calculating 200 × 0.70, you get 140. This is the price after the first discount."
           ]
         },
         {
@@ -1438,9 +1434,9 @@ window.CHAPTER_DATA = {
           "explanation": "Yes! 20% off ₹140 means you pay 80% of ₹140 = ₹112. So Cakely's final price is ₹112.",
           "hint": "80% of 140 = 0.8 × 140. 8 × 14 = 112, so 0.8 × 140 = 112.",
           "hints": [
-            "To find a percentage of a number, multiply the number by the percentage divided by 100.",
-            "To apply a 20% discount, multiply the original amount by (100% - 20%) = 80% or 0.80.",
-            "Multiply ₹140 by 0.80: 140 × 0.80 = 112."
+            "To find 20% of ₹140, multiply 140 by 0.20. Then subtract this amount from ₹140.",
+            "Calculate 20% of 140: 140 × 0.20 = 28. Then subtract: 140 - 28 = 112.",
+            "The answer is 112. You can also directly multiply 140 by 0.80 to get the discounted price."
           ]
         }
       ],
@@ -1465,9 +1461,9 @@ window.CHAPTER_DATA = {
           "explanation": "Yes! 100% − 5% = 95%. The TV retains 95% of its original value.",
           "hint": "If you lose 5%, you keep 100 − 5 = ?",
           "hints": [
-            "When something depreciates by a percentage, it loses that value. Think about what percentage remains.",
-            "If the TV loses 5% of its value, subtract that from 100% to find what percentage remains.",
-            "100% - 5% = 95%. The TV retains 95% of its original value after depreciation."
+            "Remember that depreciation means the value decreases. If it depreciates by 5%, what percentage remains?",
+            "Subtract the depreciation percentage from 100%: 100% - 5% = ?%",
+            "The TV retains 100% - 5% = 95% of its original value after depreciation."
           ]
         },
         {
@@ -1480,9 +1476,9 @@ window.CHAPTER_DATA = {
           "explanation": "Yes! 0.95 × 21000 = ₹19,950. The TV is worth ₹19,950 after one year.",
           "hint": "95% of 21000. 100% is 21000, 5% is 1050. Subtract: 21000 − 1050 = 19950.",
           "hints": [
-            "Remember that depreciation means value decreases. Multiplying by 0.95 means the TV retains 95% of its value.",
-            "To find the depreciated value, multiply the original value (21000) by the retention factor (0.95).",
-            "Multiply 21000 by 0.95. First calculate 21000 × 95 = 1,995,000, then divide by 100 to get 19,950."
+            "Remember that depreciation means the value decreases by a certain percentage.",
+            "Multiply the original value by 0.95 to find the value after 1 year of depreciation.",
+            "Calculate 0.95 × 21000 = 19950, which is the TV's value after 1 year."
           ]
         }
       ],
