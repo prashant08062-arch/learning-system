@@ -37,14 +37,24 @@ The end deliverable is always:
 learning-system/
 ├── index.html                       # Home screen + chapter screen + atlas launchers
 │                                   # Includes CLASS SELECTOR (Class 6 / 7 / 8 / All)
+│                                   # Includes AUTH OVERLAY (login/signup with OTP)
 ├── README.md                        # Documents all chapters
 ├── CONTRIBUTING.md                 # THIS FILE — conventions for adding chapters
 ├── CLASS_6_7_SUITABILITY.md         # Pedagogical review
+├── parent-dashboard.html            # Parent dashboard (progress + test papers + proctor logs)
 ├── css/style.css                    # Shared styles + .el reveal rules + class selector CSS
+│                                   # + test paper CSS + animation CSS + immersive mode CSS
 ├── js/
-│   ├── app.js                       # Renders 6 tabs per chapter + grade filtering
+│   ├── app.js                       # Renders 7 tabs per chapter + grade filtering
+│   │                               # + rank-based SVG matching + restartSVGAnimations()
+│   │                               # + logout teardown (window.App.teardownActiveContent)
+│   ├── auth.js                      # Student/parent auth + OTP verification + user bar
+│   ├── proctor.js                   # Progress tracking + auto-proctoring (tab-switch detection)
+│   ├── tts.js                       # Web Speech API TTS with sentence chunking
+│   ├── testpaper.js                 # CBSE-style test paper engine (Maths only)
+│   │                               # 5-section format, 45-min timer, image upload
 │   ├── globe.js                     # Three.js Earth viewer (for geography chapter)
-│   └── tts.js                       # Web Speech API text-to-speech
+│   └── globe-mirror-atlas.js        # Mirror & lens 3D atlas (for physics chapter)
 ├── vendor/three.min.js              # Three.js r128 (MIT) bundled locally
 ├── data/
 │   ├── catalog.js                   # ← EDIT THIS to register new chapters
@@ -54,42 +64,50 @@ learning-system/
 │   │  ── CLASS 6 CHAPTERS (15) ──
 │   ├── maths/perimeter_area/chapter.js               # Ch 6: Perimeter and Area
 │   ├── geography/locating_places/chapter.js           # Ch 1: Locating Places on the Earth
-│   ├── geography/oceans_continents/chapter.js (+ images/)  # Ch 2: Oceans and Continents
-│   ├── geography/landforms_life/chapter.js (+ images/)     # Ch 3: Landforms and Life
-│   ├── history/india_bharat/chapter.js (+ images/)        # Ch 5: India, That Is Bharat
-│   ├── civics/family_community/chapter.js                 # Ch 9: Family and Community
-│   ├── civics/grassroots_governance/chapter.js             # Ch 10: Governance
-│   ├── civics/rural_local_government/chapter.js            # Ch 11: Rural Local Government
-│   ├── civics/urban_local_government/chapter.js            # Ch 12: Urban Local Government
-│   ├── physics/temperature_measurement/chapter.js          # Ch 7: Temperature
-│   ├── physics/beyond_earth/chapter.js                     # Ch 12: Beyond Earth
-│   ├── chemistry/separation_methods/chapter.js             # Ch 9: Separation Methods
-│   ├── biology/mindful_eating/chapter.js                   # Ch 3: Mindful Eating
-│   ├── biology/living_creatures/chapter.js                 # Ch 10: Living Creatures
-│   ├── biology/natures_treasures/chapter.js                # Ch 11: Nature's Treasures
+│   ├── geography/oceans_continents/chapter.js         # Ch 2: Oceans and Continents
+│   ├── geography/landforms_life/chapter.js            # Ch 3: Landforms and Life
+│   ├── history/india_bharat/chapter.js                # Ch 5: India, That Is Bharat
+│   ├── civics/family_community/chapter.js             # Ch 9: Family and Community
+│   ├── civics/grassroots_governance/chapter.js         # Ch 10: Governance
+│   ├── civics/rural_local_government/chapter.js        # Ch 11: Rural Local Government
+│   ├── civics/urban_local_government/chapter.js        # Ch 12: Urban Local Government
+│   ├── physics/temperature_measurement/chapter.js      # Ch 7: Temperature
+│   ├── physics/beyond_earth/chapter.js                 # Ch 12: Beyond Earth
+│   ├── chemistry/separation_methods/chapter.js          # Ch 9: Separation Methods
+│   ├── biology/mindful_eating/chapter.js                # Ch 3: Mindful Eating
+│   ├── biology/living_creatures/chapter.js              # Ch 10: Living Creatures
+│   ├── biology/natures_treasures/chapter.js             # Ch 11: Nature's Treasures
 │   │
-│   │  ── CLASS 8 CHAPTERS (9) ──
+│   │  ── CLASS 8 CHAPTERS (20) ──
 │   ├── maths/baudhayana_pythagoras/chapter.js          # Ch 2: Baudhāyana–Pythagoras
-│   ├── maths/fractions_in_disguise/chapter.js          # Ch 1: Fractions in Disguise
-│   ├── maths/proportional_reasoning_2/chapter.js       # Ch 3: Proportional Reasoning
-│   ├── geography/world_geography/chapter.js (+ images/)    # Ch 1: World Geography
-│   ├── history/india_independence/chapter.js (+ images/)    # Ch 2: India Independence
-│   ├── physics/light_mirrors_lenses/chapter.js             # Ch 10: Light: Mirrors & Lenses
-│   ├── physics/pressure_winds_storms_cyclones/chapter.js    # Ch 6: Pressure & Cyclones
-│   ├── biology/how_nature_works_in_harmony/chapter.js       # Ch 12: Nature in Harmony
-│   ├── biology/our_home_earth/chapter.js                   # Ch 13: Our Home: Earth
-│   │
-│   ├── civics/                                         # Empty, ready for Class 7/8 chapters
-│   ├── economics/                                      # Empty, ready for chapters
-│   ├── chemistry/                                      # Has 1 Class 6 chapter
-│   └── biology/                                        # Has 3 Class 6 + 2 Class 8 chapters
+│   ├── maths/fractions_in_disguise/chapter.js           # Ch 1: Fractions in Disguise
+│   ├── maths/proportional_reasoning_2/chapter.js        # Ch 3: Proportional Reasoning
+│   ├── maths/exploring_geometric_themes/chapter.js       # Ch 4: Geometric Themes
+│   ├── maths/tales_by_dots_and_lines/chapter.js          # Ch 5: Tales by Dots and Lines
+│   ├── maths/algebra_play/chapter.js                     # Ch 6: Algebra Play
+│   ├── maths/area/chapter.js                             # Ch 7: Area
+│   ├── geography/world_geography/chapter.js               # Ch 1: World Geography
+│   ├── history/india_independence/chapter.js              # Ch 2: India Independence
+│   ├── history/indian_architecture/chapter.js             # Ch 4: Indian Architecture
+│   ├── civics/role_of_judiciary/chapter.js                # Ch 4: Role of the Judiciary
+│   ├── civics/citizenship_rights_duties/chapter.js        # Ch 5: Citizenship
+│   ├── economics/population_urban/chapter.js              # Ch 6-7: Population & Urban
+│   ├── physics/light_mirrors_lenses/chapter.js            # Ch 10: Light: Mirrors & Lenses
+│   ├── physics/pressure_winds_storms_cyclones/chapter.js   # Ch 6: Pressure & Cyclones
+│   ├── physics/keeping_time_skies/chapter.js               # Ch 11: Keeping Time with Skies
+│   ├── chemistry/particulate_nature_matter/chapter.js       # Ch 7: Particulate Nature
+│   ├── chemistry/elements_compounds_mixtures/chapter.js      # Ch 8: Elements, Compounds, Mixtures
+│   ├── chemistry/solutes_solvents_solutions/chapter.js       # Ch 9: Solutes, Solvents, Solutions
+│   ├── biology/how_nature_works_in_harmony/chapter.js        # Ch 12: Nature in Harmony
+│   └── biology/our_home_earth/chapter.js                    # Ch 13: Our Home: Earth
+│
 ├── water_body_atlas.html            # Standalone 3D atlas (Three.js, geography)
 └── mirrors_lenses_3d_atlas.html     # Standalone 3D atlas (Three.js, physics)
 ```
 
 **Subjects defined in `catalog.js`:** maths, geography, history, civics, economics, physics, chemistry, biology — each with an icon and a colour. To add a brand-new subject, edit the `subjects` array in `data/catalog.js`.
 
-**Total chapters: 24** (15 Class 6 + 9 Class 8). The home page has a **class selector** that filters chapters by grade.
+**Total chapters: 35** (15 Class 6 + 20 Class 8). The home page has a **class selector** that filters chapters by grade.
 
 ---
 
@@ -719,7 +737,9 @@ Add to `index.html` below the existing subject grid:
 
 - [ ] JSON in chapter.js parses successfully (`JSON.parse` in Node)
 - [ ] All 4 (or more) lectures have correct number of beats vs SVG elements / images
-- [ ] **SVG beat sync: each lecture has `data-beat` values `1, 2, 3, ..., N` matching `len(beats)` exactly**
+- [ ] **SVG beat sync: `data-beat` values can start at any number — the rank-based matching handles gaps. But for best results, use 1, 2, 3, ..., N**
+- [ ] **If this is a Maths chapter: add test paper question generators to `js/testpaper.js` `QUESTION_BANK[slug]`**
+- [ ] **After editing SVGs: re-run `python3 /home/z/my-project/scripts/universal_animations.py` to add animation classes**
 - [ ] Notes HTML contains "Before We Begin" vocabulary section at the top
 - [ ] Notes HTML contains "Key Notes" with timeline, key leaders table, etc.
 - [ ] Practice tab has reveal-answer buttons (count matches what was promised)
@@ -763,21 +783,35 @@ For reference, the repo contains **24 fully-built chapters** across 7 subjects a
 | Living Creatures | biology | svg | Living vs non-living, characteristics, habitats, life cycles |
 | Nature's Treasures | biology | svg | Natural resources, air composition, forests, conservation |
 
-### Class 8 chapters (9)
+### Class 8 chapters (20)
 
 | Chapter | Subject | Type | What to study |
 |---|---|---|---|
+| Perimeter and Area | maths | svg | Animated SVG boards with dot-tracing perimeter + tile-filling area |
 | The Baudhāyana-Pythagoras Theorem | maths | svg | How to author SVG with `class="el" data-beat` for progressive reveal |
 | Fractions in Disguise | maths | svg | Percentages, FDP conversions, profit & loss, compound interest |
 | Proportional Reasoning–2 | maths | svg | Ratios, proportions, pie charts, direct/inverse proportions |
+| Exploring Geometric Themes | maths | svg | Fractals (Sierpinski), 3D solid views, Euler's formula |
+| Tales by Dots and Lines | maths | svg | Mean, median, dot plots, outlier resistance |
+| Algebra Play | maths | svg | Think-of-a-number tricks, number pyramids, algebraic proofs |
+| Area | maths | svg | Area of rectangles, triangles, parallelograms, trapeziums |
 | World Geography: Some Glimpses | geography | globe + image | How to use 3D globe + image-based real-life scenarios |
-| **India's Long Road to Independence** | **history** | **image** | **The "Before We Begin" pattern, story-form narration, supplementary hierarchy + Viceroy timeline sections** |
+| **India's Long Road to Independence** | **history** | **svg** | **Enhanced for Alpha-plus students: "How Ideas Travelled" analytical lecture, conceptual depth beats, hand-crafted SVG diagrams** |
+| A Journey Through Indian Architecture | history | svg | Pure-SVG chapters with accumulating beat-by-beat diagrams |
+| India, That Is Bharat | history | svg | Pure-SVG with etymology tree, map-like layout, Constitution page |
+| The Role of the Judiciary | civics | svg | Justice concept, three-tier judiciary, PIL, Lok Adalats |
+| Citizenship: Rights and Duties | civics | svg | Six Fundamental Rights, eleven Fundamental Duties |
+| Dynamics of Population & Urban Landscape | economics | svg | Demography, population pyramid, demographic dividend, Smart Cities |
 | Light: Mirrors and Lenses | physics | svg | The "Class 6-7 Quick Reference" pattern, plus a companion standalone 3D atlas |
 | Pressure, Winds, Storms, and Cyclones | physics | svg | Pressure formula, wind formation, cyclones, lightning safety |
+| Keeping Time with the Skies | physics | svg | Moon phases, calendars, festivals & astronomy, artificial satellites |
+| Particulate Nature of Matter | chemistry | svg | Particle theory, three states, interparticle spacing |
+| Elements, Compounds, and Mixtures | chemistry | svg | Mixtures, elements, compounds, minerals |
+| Solutes, Solvents, and Solutions | chemistry | svg | Solutions, solubility, saturation, density |
 | How Nature Works in Harmony | biology | svg | Habitats, ecosystems, food chains, cascade effect |
 | Our Home: Earth | biology | svg | Earth as unique planet, solar system, four spheres |
 
-When in doubt about a convention, look at how the existing chapters do it. For Class 6 SVG patterns, `data/civics/family_community/chapter.js` is a good simple example. For Class 8 image-type, `data/history/india_independence/chapter.js` is the most comprehensive example (12 lectures, 140 beats, "Before We Begin" + "British Administration" + Key Notes + 4 real-life scenarios + 7 guided practice + 15 self-test + 12 practice cards + 25 images).
+When in doubt about a convention, look at how the existing chapters do it. For Class 6 SVG patterns, `data/civics/family_community/chapter.js` is a good simple example. For Class 8 SVG patterns, `data/history/india_independence/chapter.js` is the most comprehensive example (13 lectures including "How Ideas Travelled" analytical lecture, 140+ beats, enhanced conceptual depth for Alpha-plus students, "Before We Begin" + "British Administration" + Key Notes + 4 real-life scenarios + 7 guided practice + 15 self-test + 12 practice cards). Note: this chapter is now `type: "svg"` (converted from image-type), with all lectures using hand-crafted or concept-board SVGs with universal animations.
 
 ---
 
@@ -866,6 +900,175 @@ When invoked inside the Super Z environment, you have access to:
 - **`agent-browser`** is the headless browser for visual testing — open the page, take screenshots, click buttons by ref, eval JavaScript, capture console errors
 - **`z-ai vision`** (the VLM skill) verifies screenshots render correctly — always run it on at least one screenshot before pushing to GitHub
 - The **`pdf` skill** is for generating PDFs from text — for extracting text/images from a PDF, use `pdftotext` and `pdfimages` directly via Bash
+
+---
+
+## 📋 Test Paper System (js/testpaper.js)
+
+A **7th tab** ("📋 Test Paper") appears ONLY for **Maths chapters**. It provides a CBSE-style written exam with:
+
+### Structure (15 questions, 32 marks)
+| Section | Type | Questions | Marks Each | Total |
+|---------|------|-----------|------------|-------|
+| A | MCQ & Very Short Answer | 6 | 1 | 6 |
+| B | Short Answer (Type I) | 4 | 2 | 8 |
+| C | Short Answer (Type II) | 3 | 3 | 9 |
+| D | Long Answer / Application | 1 | 5 | 5 |
+| E | Case Study / Word Problem | 1 | 4 | 4 |
+
+### Features
+- **45-minute countdown timer** (auto-submits at 0:00, yellow at 10 min, red+pulse at 5 min)
+- **Open-ended text areas** for each question (NOT MCQ — students write their answers)
+- **Image upload** for answer sheet photo (compressed to max 1200px JPEG 0.7 quality before localStorage)
+- **Model answers** shown after submission for self-review
+- **Test results recorded to localStorage** (`learning_system_test_results_<email>`) with full question text, student answer, model answer, and uploaded image
+- **Parent dashboard integration** — parents see each test attempt with expandable answer sheet image + model answers grouped by section
+- **Random question generation** — each attempt gets different values (e.g., different rectangle dimensions, different profit percentages)
+
+### Question Bank
+Each Maths chapter has 10 random question generators in `QUESTION_BANK[chapterSlug]`. The `generateTestPaper()` function calls generators round-robin to produce 15 questions, then assigns sections A-E based on position.
+
+### Adding Test Paper to a New Maths Chapter
+Add generators to `QUESTION_BANK` in `js/testpaper.js`:
+```javascript
+'new_chapter_slug': [
+  function() {
+    // Generate random values
+    const a = ri(3, 15), b = ri(3, 15);
+    const answer = a * b;
+    return {
+      type: 'mcq',
+      marks: 2,
+      question: `Find the area of a rectangle with length ${a} cm and width ${b} cm.`,
+      options: [`${answer} cm²`, ...].sort(() => Math.random() - 0.5),
+      answer: `${answer} cm²`,
+      solution: `Area = length × width = ${a} × ${b} = <strong>${answer} cm²</strong>`
+    };
+  },
+  // ... 9 more generators
+]
+```
+
+---
+
+## 🎬 Universal Animation System
+
+ALL 169 lectures across all subjects have animated SVGs that play in sync with the narration.
+
+### Animation Classes (by SVG element tag)
+| Tag | Class | Effect |
+|-----|-------|--------|
+| `<text>` | `anim-fade-in` | Fade + slide up |
+| `<rect>` | `anim-pop-in` | Scale bounce (0.7→1.08→1) + fade |
+| `<line>` | `anim-draw` | Stroke draws itself (dashoffset) |
+| `<path>` | `anim-draw` | Stroke draws itself |
+| `<circle>` | `anim-pulse-in` | Fade + pulse scale |
+| `<polygon>` | `anim-pop-in` | Scale bounce + fade |
+
+### Staggered Timing
+Elements within each beat group are staggered by 0.15s via `animation-delay` inline style. The first element appears immediately, the second 0.15s later, etc.
+
+### Animation Restart
+`restartSVGAnimations(el)` in `app.js` uses the Web Animations API (`element.getAnimations()`) to cancel and replay all animations when a beat becomes visible:
+```javascript
+anims.forEach(function(anim) {
+  anim.cancel();  // reset to initial state
+  anim.play();    // restart from beginning
+});
+```
+This is called in `renderBoard()` every time a beat becomes active — even when navigating back to a previously-seen beat.
+
+### Special Animations (Perimeter & Area chapter)
+- **Perimeter dot**: CSS `offset-path` moves a glowing dot along the rectangle boundary
+- **Area tiles**: 20 green tiles fill column-by-column with staggered 0.15s delays
+
+### CSS Location
+The universal animation CSS is injected inline in each lecture's SVG via a `<style>` tag (see `UNIVERSAL_CSS` in `scripts/universal_animations.py`). The classes are:
+- `.anim-fade-in`, `.anim-pop-in`, `.anim-draw`, `.anim-pulse-in`
+- `.anim-slide-left`, `.anim-slide-right`
+- Plus chapter-specific: `.area-tile`, `.fade-in`, `.draw-line`, `.perim-dot`, `.perim-dot-square`
+
+### Re-running the Animation Script
+```bash
+python3 /home/z/my-project/scripts/universal_animations.py
+```
+This is **idempotent** — it strips previous animation classes and re-adds them cleanly. Safe to re-run after editing chapter SVGs.
+
+---
+
+## 🔊 TTS Engine — Sentence Chunking (js/tts.js)
+
+Chrome's `speechSynthesis` has a known bug where utterances longer than ~15 seconds get cut off without firing `onend`. The TTS engine now:
+
+1. **Splits long text into sentence-sized chunks** (~200 chars each) using `chunkText()`
+2. **Speaks chunks sequentially** — each chunk's `onend` triggers the next chunk
+3. **`onEnd` callback only fires after ALL chunks are spoken**
+4. **Safety timer resets per chunk** (generous 6s buffer)
+
+This ensures the narration doesn't get cut off mid-beat, and the beat doesn't advance until the entire narration is complete.
+
+---
+
+## 📐 Rank-Based SVG Beat Matching (js/app.js)
+
+SVG elements are matched to beats by **rank** (position in sorted order), NOT by absolute `data-beat` number. This handles SVGs where:
+- `data-beat` starts at 2 (not 1)
+- `data-beat` has gaps (e.g., 2,3,4,5,6 for 6 beats)
+- `data-beat` has extras (e.g., 8 elements for 7 beats)
+
+**How it works**: `renderBoard()` sorts all `.el` elements by their `data-beat` value, then:
+- **Pure-SVG (accumulating)**: shows the first N elements for beat N
+- **Hybrid (exclusive)**: shows only the Nth element for beat N
+
+This means the first SVG element always shows at beat 1, regardless of its `data-beat` number.
+
+---
+
+## 🔐 Authentication System (js/auth.js)
+
+### Student Account
+- Signup with name, grade, email, password, parent name, parent email, parent phone
+- **OTP verification** (dev-mode: OTP shown on screen, 5-min expiry)
+- Login with email + password
+- Grade is locked to the student's registered grade (class selector hidden)
+
+### Parent Account
+- Login from `parent-dashboard.html` with parent email + password
+- Sees all students linked to their parent email
+- Dashboard shows: chapter progress, practice scores, self-test scores, **test paper attempts with uploaded images + model answers**, proctor logs
+
+### Logout Teardown
+`window.App.teardownActiveContent()` in `app.js` is called by `auth.js` logout. It:
+1. Stops all lecture playback (timers, TTS, globe viewers)
+2. Removes immersive overlay DOM elements
+3. Resets chapter tracking state
+4. Shows the auth overlay
+
+---
+
+## 🛡️ Proctoring System (js/proctor.js)
+
+### Auto-Proctoring
+When a student opens a chapter, proctoring starts automatically:
+- **Fullscreen mode** (exits = violation)
+- **Tab switch detection** (visibilitychange + blur events)
+- **3 warnings** → session terminated on 5th violation
+- Violations logged to `learning_system_proctor_logs_<email>`
+
+### Progress Tracking
+Tracks in `learning_system_progress_<email>`:
+- Chapters visited, time spent per chapter
+- Lecture beats completed (e.g., 3/10 beats)
+- Practice problems answered/correct
+- Self-test questions answered/correct
+- Tabs opened
+
+### Parent Dashboard
+Shows per-student:
+- Summary cards (chapters, time, practice %, self-test %, test papers, violations)
+- Chapter progress table
+- Test paper attempts (expandable: shows uploaded answer sheet image + model answers grouped by section A-E)
+- Proctor violation logs
 
 ---
 
