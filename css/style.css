@@ -1545,22 +1545,38 @@ svg.rl-board rect[fill*="url(#mirror"] {
 /* ============================================================
    SVG Board Element Reveal — supports both .ann-el and .el classes
    Added for Class 6 chapters that use class="el" data-beat="N"
+
+   C14 fix: previously the selector was `.svg-board .el` but no SVG in
+   any chapter uses class="svg-board" — they all use lec-board / rl-board /
+   gp-board. The rules were dead code. Now we match the actual class names.
    ============================================================ */
-.svg-board .ann-el,
-.svg-board .el {
+svg.lec-board .ann-el,
+svg.lec-board .el,
+svg.rl-board .ann-el,
+svg.rl-board .el,
+svg.gp-board .ann-el,
+svg.gp-board .el {
   opacity: 0;
   transition: opacity 0.5s ease, transform 0.5s ease;
   transform: scale(0.92);
   transform-origin: center;
   transform-box: fill-box;
 }
-.svg-board .ann-el.visible,
-.svg-board .el.visible {
+svg.lec-board .ann-el.visible,
+svg.lec-board .el.visible,
+svg.rl-board .ann-el.visible,
+svg.rl-board .el.visible,
+svg.gp-board .ann-el.visible,
+svg.gp-board .el.visible {
   opacity: 1;
   transform: scale(1);
 }
-.svg-board .ann-el.pulse,
-.svg-board .el.pulse {
+svg.lec-board .ann-el.pulse,
+svg.lec-board .el.pulse,
+svg.rl-board .ann-el.pulse,
+svg.rl-board .el.pulse,
+svg.gp-board .ann-el.pulse,
+svg.gp-board .el.pulse {
   animation: svgPulse 1.4s ease-out;
 }
 @keyframes svgPulse {
@@ -1568,16 +1584,36 @@ svg.rl-board rect[fill*="url(#mirror"] {
   30%  { filter: drop-shadow(0 0 14px rgba(56,189,248,0.7)); }
   100% { filter: drop-shadow(0 0 0 rgba(56,189,248,0)); }
 }
-.svg-board .ann-el path,
-.svg-board .ann-el line,
-.svg-board .ann-el polygon,
-.svg-board .ann-el rect,
-.svg-board .ann-el circle,
-.svg-board .el path,
-.svg-board .el line,
-.svg-board .el polygon,
-.svg-board .el rect,
-.svg-board .el circle {
+svg.lec-board .ann-el path,
+svg.lec-board .ann-el line,
+svg.lec-board .ann-el polygon,
+svg.lec-board .ann-el rect,
+svg.lec-board .ann-el circle,
+svg.lec-board .el path,
+svg.lec-board .el line,
+svg.lec-board .el polygon,
+svg.lec-board .el rect,
+svg.lec-board .el circle,
+svg.rl-board .ann-el path,
+svg.rl-board .ann-el line,
+svg.rl-board .ann-el polygon,
+svg.rl-board .ann-el rect,
+svg.rl-board .ann-el circle,
+svg.rl-board .el path,
+svg.rl-board .el line,
+svg.rl-board .el polygon,
+svg.rl-board .el rect,
+svg.rl-board .el circle,
+svg.gp-board .ann-el path,
+svg.gp-board .ann-el line,
+svg.gp-board .ann-el polygon,
+svg.gp-board .ann-el rect,
+svg.gp-board .ann-el circle,
+svg.gp-board .el path,
+svg.gp-board .el line,
+svg.gp-board .el polygon,
+svg.gp-board .el rect,
+svg.gp-board .el circle {
   transition: all 0.5s ease;
 }
 
@@ -1732,8 +1768,8 @@ svg.rl-board rect[fill*="url(#mirror"] {
   /* Footer */
   .home-footer { padding: 16px !important; font-size: 11px !important; }
 
-  /* Proctor badge */
-  #proctorBadge { font-size: 10px !important; padding: 4px 8px !important; top: 8px !important; left: 8px !important; }
+  /* Proctor badge — BUG #2 fix: positioned at top-right, not top-left */
+  #proctorBadge { font-size: 10px !important; padding: 4px 8px !important; top: 8px !important; right: 8px !important; left: auto !important; }
 }
 
 /* ---- Tablet (481-820px) enhancements ---- */
@@ -2691,6 +2727,13 @@ svg.rl-board rect[fill*="url(#mirror"] {
    (moved from inline SVG <style> to main stylesheet)
    ============================================================ */
 
+/* C15 fix: previously `.perim-dot` had a hardcoded `offset-path` to a specific
+   140,120→380,120→380,280→140,280 rectangle. Any chapter using `.perim-dot`
+   on a different shape would still animate along that fixed rectangle.
+   The fix: provide a DEFAULT path (the original Baudhāyana-Pythagoras one)
+   but allow it to be overridden per-element via inline style or by a
+   data-path attribute. Chapters that need a custom path should set
+   `style="offset-path: path('M...')"` directly on the element. */
 .perim-dot {
   offset-path: path('M140,120 L380,120 L380,280 L140,280 Z');
   offset-rotate: 0deg;
@@ -2820,3 +2863,34 @@ svg.rl-board rect[fill*="url(#mirror"] {
 .chalk-delay-18 { animation-delay: 9.0s; }
 .chalk-delay-19 { animation-delay: 9.5s; }
 .chalk-delay-20 { animation-delay: 10.0s; }
+
+/* ============================================================
+   E1 fix: prefers-reduced-motion support
+   Users who request reduced motion at the OS level (via System Settings
+   → Accessibility → Reduce Motion on macOS, or Settings → Accessibility →
+   Remove Animations on Android) will get this branch. We disable ALL
+   CSS animations and transitions; elements appear at their final state.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* SVG element reveals: skip the fade-in/scale, show immediately. */
+  svg.lec-board .el, svg.rl-board .el, svg.gp-board .el,
+  svg.lec-board .ann-el, svg.rl-board .ann-el, svg.gp-board .ann-el {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  /* Chalkboard timeline elements: show without fade. */
+  .anim-fade-in, .anim-pop-in, .anim-draw, .anim-pulse-in,
+  .anim-slide-left, .anim-slide-right, .chalk-fade, .chalk-pulse,
+  .chalk-draw, .photon, .photon-slow, .area-tile,
+  .perim-dot, .perim-dot-square {
+    animation: none !important;
+    opacity: 1 !important;
+    stroke-dashoffset: 0 !important;
+  }
+}

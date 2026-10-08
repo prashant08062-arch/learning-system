@@ -133,6 +133,11 @@ function speak(text, opts = {}) {
   };
 
   const speakNextChunk = () => {
+    // A3 fix: if cancel() was called, do NOT advance to the next chunk.
+    // Previously, when cancel() aborted the current utterance, Chrome fired
+    // utter.onerror which incremented chunkIdx and called speakNextChunk(),
+    // causing the NEXT chunk to be queued anyway — defeating the cancel.
+    if (called) return;
     if (chunkIdx >= chunks.length) {
       if (safetyTimer) clearTimeout(safetyTimer);
       finishOnce();
@@ -151,8 +156,38 @@ function speak(text, opts = {}) {
       chunkIdx++;
       speakNextChunk();
     };
-    utter.onerror = () => {
+    utter.onerror = (event) => {
+      // A3 fix: same guard — don't proceed if we've been cancelled.
+      if (called) return;
       if (safetyTimer) clearTimeout(safetyTimer);
+      // BUG #7 fix (live-play audit): don't blindly advance to the next chunk
+      // on every onerror. Chrome fires onerror for various reasons:
+      //  - "interrupted" — speech was cancelled (usually by another speak())
+      //  - "canceled" — explicitly cancelled via speech.cancel()
+      //  - "not-allowed" — browser blocked autoplay (no user gesture yet)
+      //  - "synthesis-failed" — TTS engine failed (e.g. no voices)
+      //  - "audio-busy" — another TTS is using the audio device
+      //
+      // For "interrupted" / "canceled", the cancel() call already set `called`,
+      // so we'll hit the early-return above. For "not-allowed" / "audio-busy",
+      // we want to STOP — don't keep trying to speak chunks that will all
+      // fail the same way. For "synthesis-failed" (common when there are 0
+      // voices), advancing is harmless but wastes CPU; just stop.
+      const errType = (event && event.error) || 'unknown';
+      console.warn('TTS utter.onerror:', errType);
+      if (errType === 'not-allowed' || errType === 'audio-busy' || errType === 'synthesis-failed') {
+        // Stop the lecture — further chunks will all fail the same way.
+        // Don't set `called = true` because the caller's onEnd still wants
+        // to fire — just don't queue the next chunk.
+        if (safetyTimer) clearTimeout(safetyTimer);
+        // Skip to the end so the lecture's onEnd can fire and the lecture
+        // auto-advances via the playTimer (without audio).
+        chunkIdx = chunks.length;
+        finishOnce();
+        return;
+      }
+      // For other errors (e.g. "interrupted" with no specific cause),
+      // advance to the next chunk — same as before.
       chunkIdx++;
       speakNextChunk();
     };
@@ -163,13 +198,25 @@ function speak(text, opts = {}) {
   };
 
   speakNextChunk();
-  return { cancel: () => { called = true; if (safetyTimer) clearTimeout(safetyTimer); speech.cancel(); } };
+  // A3 fix + C2 fix: cancel() now reliably stops speech.
+  // - `called = true` is checked at the top of speakNextChunk() so any
+  //   pending onerror/onend callbacks become no-ops.
+  // - speech.cancel() is asynchronous in Chrome; we don't need to schedule
+  //   a follow-up since the `called` guard catches the eventual onerror.
+  return { cancel: () => {
+    called = true;
+    if (safetyTimer) clearTimeout(safetyTimer);
+    try { speech.cancel(); } catch (e) { /* ignore */ }
+  } };
 }
 
 // Split text into sentence-sized chunks (max ~200 chars each).
 // Splits on sentence boundaries (. ! ? …) and long dashes.
 function chunkText(text) {
-  if (!text || text.length < 180) return [text];
+  // C1 fix: return [] for null/undefined so we never create
+  // new SpeechSynthesisUtterance(null) which would speak the word "null".
+  if (!text) return [];
+  if (text.length < 180) return [text];
   const chunks = [];
   // Split on sentence-ending punctuation followed by space, keeping the punctuation
   const sentences = text.match(/[^.!?…]+[.!?…]+|\S+[^.!?…]*$/g) || [text];

@@ -26,7 +26,14 @@ let currentGrade = localStorage.getItem('selectedGrade') || '6';
 function filterChaptersByGrade(chapters, grade) {
   if (!chapters) return [];
   if (grade === 'all') return chapters;
-  return chapters.filter(ch => String(ch.grade || '8') === grade);
+  // C13 fix: support `grade` being a single number OR an array (e.g. [6, 7, 8])
+  // for chapters like light_mirrors_lenses which is Grade 8 content enhanced
+  // with scaffolding for Class 6-7 students.
+  return chapters.filter(ch => {
+    const g = ch.grade;
+    if (Array.isArray(g)) return g.map(String).includes(String(grade));
+    return String(g || '8') === String(grade);
+  });
 }
 
 
@@ -194,6 +201,32 @@ function switchTab(tabId) {
   if (tab) tab.classList.add('active');
   if (section) section.classList.add('active');
   if (window.TTS) TTS.stopSpeaking();
+  // A10 fix: also stop ALL lecture timers and reset play state for every
+  // lecture. Previously, switching tabs only stopped TTS — but the lecture's
+  // playTimer kept firing `advance()`, which called TTS.speak() again on a
+  // hidden tab. The user would hear the lecture continue in the background
+  // after switching to Notes/Practice/etc.
+  //
+  // BUG #9 fix: but DON'T fully destroy the state — the user might come back
+  // to the Lecture tab and expect their position to be preserved. We pause
+  // playback (clear timers + reset isPlaying + stop TTS) but leave the state
+  // object intact so they can resume.
+  Object.values(lecStates).forEach(s => {
+    if (typeof s.pause === 'function') {
+      s.pause();
+    } else if (typeof s.stop === 'function') {
+      s.stop();
+      // BUG #3/#9 fix: stop() sets _destroyed=true, but for switchTab we want
+      // to revive so the user can resume. Unset the flag.
+      if (typeof s.revive === 'function') s.revive();
+    } else {
+      if (s.isPlaying) s.isPlaying = false;
+      if (s.playTimer) { clearTimeout(s.playTimer); s.playTimer = null; }
+    }
+  });
+  if (window.ChalkboardTimeline) window.ChalkboardTimeline.clear();
+  // Reset any visible play buttons
+  document.querySelectorAll('.lec-play').forEach(btn => { btn.textContent = '▶'; });
   // Track tab open in proctor progress
   if (window.Proctor && window.Proctor.trackTabOpen && currentChapter) {
     window.Proctor.trackTabOpen(currentChapter.slug, tabId);
@@ -333,6 +366,14 @@ function renderLectures() {
         <button class="control-btn lec-immersive-btn" title="Immersive mode — full-screen animation with beat text at bottom" style="margin-left:auto;">🎬</button>
       </div>
     `;
+    // BUG #5 fix: mark non-active lecture sections as aria-hidden so screen
+    // readers don't announce multiple .lec-counter elements with different
+    // beat counts (only the first one is correct).
+    if (i !== 0) {
+      sectionEl.setAttribute('aria-hidden', 'true');
+    } else {
+      sectionEl.setAttribute('aria-hidden', 'false');
+    }
     container.appendChild(sectionEl);
 
     // Initialize state for this lecture
@@ -343,14 +384,26 @@ function renderLectures() {
   container.querySelectorAll('.lec-sec-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const lecId = btn.dataset.lec;
-      Object.values(lecStates).forEach(s => { if (s.stop) s.stop(); });
+      // BUG #9 fix: use pause() instead of stop() so the user can resume
+      // the lecture they were on. Also doesn't set _destroyed, so the state
+      // remains usable when they come back.
+      Object.values(lecStates).forEach(s => { if (s.pause) s.pause(); else if (s.stop) s.stop(); });
       document.querySelectorAll('.lec-sec-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      document.querySelectorAll('.lec-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.lec-section').forEach(s => {
+        s.classList.remove('active');
+        // BUG #5 fix: hide inactive sections from screen readers and
+        // assistive tech so they don't announce multiple .lec-counter
+        // elements with different beat counts.
+        s.setAttribute('aria-hidden', 'true');
+      });
       const target = document.querySelector(`.lec-section[data-lec-section="${lecId}"]`);
       if (target) {
         target.classList.add('active');
+        target.setAttribute('aria-hidden', 'false');
         const st = lecStates[lecId];
+        // BUG #3 fix: revive the state in case it was previously destroyed
+        if (st && typeof st.revive === 'function') st.revive();
         if (st && st.updateUI) st.updateUI();
       }
       window.scrollTo({ top: 0, behavior: 'instant' });
@@ -360,14 +413,20 @@ function renderLectures() {
   document.querySelectorAll('#lectureSectionBar .lec-sec-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const lecId = btn.dataset.lec;
-      Object.values(lecStates).forEach(s => { if (s.stop) s.stop(); });
+      // BUG #9 fix: pause instead of stop — preserves state for resume.
+      Object.values(lecStates).forEach(s => { if (s.pause) s.pause(); else if (s.stop) s.stop(); });
       document.querySelectorAll('#lectureSectionBar .lec-sec-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      document.querySelectorAll('.lec-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.lec-section').forEach(s => {
+        s.classList.remove('active');
+        s.setAttribute('aria-hidden', 'true');  // BUG #5 fix
+      });
       const target = document.querySelector(`.lec-section[data-lec-section="${lecId}"]`);
       if (target) {
         target.classList.add('active');
+        target.setAttribute('aria-hidden', 'false');  // BUG #5 fix
         const st = lecStates[lecId];
+        if (st && typeof st.revive === 'function') st.revive();  // BUG #3 fix
         if (st && st.updateUI) st.updateUI();
       }
       window.scrollTo({ top: 0, behavior: 'instant' });
@@ -425,7 +484,9 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
     playTimer: null,
     voiceOn: true,
     ttsRate: 1,
-    globe: null
+    globe: null,
+    _destroyed: false,    // BUG #3 fix: set true by state.stop(); checked by advance() and goToBeat()
+    _wasPlayingBeforeTabSwitch: false  // BUG #9 fix: auto-resume after returning from another tab
   };
   lecStates[lecId] = state;
 
@@ -447,7 +508,10 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
     boardEls = Array.from(sectionEl.querySelectorAll('svg.lec-board .el'));
   }
 
-  // Initialize globe if this is a globe-type lecture
+  // Initialize globe if this is a globe-type lecture.
+  // B10 fix: wrap GlobeViewer construction in try/catch. If the constructor
+  // throws (e.g. WebGL unavailable, three.min.js failed to load), we surface
+  // a helpful error message instead of leaving an empty container.
   if (isGlobeType && window.GlobeViewer) {
     const globeContainer = sectionEl.querySelector('.globe-container');
     if (globeContainer) {
@@ -456,9 +520,16 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
         // Remove loading indicator
         const loading = globeContainer.querySelector('.globe-loading');
         if (loading) loading.remove();
-        state.globe = new GlobeViewer(globeContainer);
-        // Focus on the first beat's location
-        renderGlobe();
+        try {
+          state.globe = new GlobeViewer(globeContainer);
+          // Focus on the first beat's location
+          renderGlobe();
+        } catch (e) {
+          console.error('GlobeViewer failed to initialize:', e);
+          globeContainer.innerHTML = '<div style="color:#fca5a5;padding:40px;text-align:center;font-size:14px;">' +
+            '🌍 Could not initialize 3D globe.<br>' +
+            '<small style="color:#94a3b8;">' + (e.message || 'Unknown error') + '</small></div>';
+        }
       }, 100);
     }
   }
@@ -561,6 +632,22 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
         const wasVisible = el.classList.contains('visible');
         el.classList.toggle('visible', shouldShow);
         el.classList.remove('pulse');
+        // B11 fix: cancel CSS animations on elements that are being hidden,
+        // so navigating backward doesn't leave dozens of offscreen keyframe
+        // animations consuming CPU.
+        if (!shouldShow && wasVisible) {
+          if (el.getAnimations) {
+            el.getAnimations().forEach(a => { try { a.cancel(); } catch (e) {} });
+          }
+          // Also cancel animations on descendant elements.
+          if (el.querySelectorAll) {
+            el.querySelectorAll('*').forEach(child => {
+              if (child.getAnimations) {
+                child.getAnimations().forEach(a => { try { a.cancel(); } catch (e) {} });
+              }
+            });
+          }
+        }
         if (i === showCount - 1) {
           void el.offsetWidth;
           el.classList.add('pulse');
@@ -705,6 +792,11 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
 
   function goToBeat(index) {
     if (index < 0 || index >= state.beats.length) return;
+    // BUG #3 fix: if the lecture state has been destroyed (logout / termination),
+    // do nothing. Previously, queued `advance()` closures would fire AFTER
+    // teardown, calling TTS.speak() on a stale state and generating redundant
+    // STOP events.
+    if (state._destroyed) return;
     state.currentBeat = index;
     updateUI();
     if (!state.isPlaying) return;
@@ -716,6 +808,9 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
     const beatAtCallTime = state.currentBeat;
 
     const advance = () => {
+      // BUG #3 fix: check _destroyed FIRST, before any other early-return.
+      // This stops the advance chain even if a stale closure fires after teardown.
+      if (state._destroyed) return;
       if (!state.isPlaying) return;
       // Only advance if we're still on the same beat — prevents
       // double-advancing if a stale onEnd fires after a new beat
@@ -732,6 +827,9 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
       currentTTS = TTS.speak(state.beats[state.currentBeat], {
         rate: state.ttsRate,
         onEnd: () => {
+          // BUG #3 fix: also check _destroyed here — TTS.onEnd can fire
+          // after teardown, scheduling a setTimeout that fires `advance()` later.
+          if (state._destroyed) return;
           // Only schedule advance if we're still on this beat
           if (state.currentBeat !== beatAtCallTime) return;
           state.playTimer = setTimeout(advance, 500);
@@ -744,6 +842,9 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
   }
 
   function togglePlay() {
+    // BUG #3 fix: if the state was destroyed (e.g. by logout then re-enter chapter),
+    // revive it on user click. The user's intent is to play, not to be told "no".
+    if (state._destroyed && typeof state.revive === 'function') state.revive();
     state.isPlaying = !state.isPlaying;
     playBtn.textContent = state.isPlaying ? '⏸' : '▶';
     if (state.isPlaying) {
@@ -1032,13 +1133,67 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
     }
   }
 
-  // Patch the original updateUI to also update immersive
-  const origUpdateUI = updateUI;
-  updateUI = function() {
-    origUpdateUI();
+  // A7 fix: previously, this block reassigned the function declaration
+  // `updateUI` and captured the original as `origUpdateUI`. On re-init,
+  // `origUpdateUI` would capture the *previous reassignment*, leading to
+  // double-invocation or unbounded recursion.
+  //
+  // New approach: create a single `immersiveUpdateUI` that wraps `updateUI`
+  // and assigns it to `state.updateUI` only — leaving the original function
+  // declaration untouched. Re-init creates a fresh wrapper, no stacking.
+  const immersiveUpdateUI = function() {
+    updateUI();
     updateImmersiveUI();
   };
-  state.updateUI = updateUI;
+  state.updateUI = immersiveUpdateUI;
+  // A10 fix: also expose a `stop()` method on the state so switchTab and
+  // goHome can fully tear down a lecture's playback (timers + TTS + chalkboard).
+  // BUG #3 fix: also set `state._destroyed = true` so any queued `advance()`
+  // closures (from previously-scheduled playTimer) become no-ops.
+  state.stop = function() {
+    state._destroyed = true;  // BUG #3 fix: gate all future goToBeat/advance calls
+    if (state.isPlaying) {
+      state.isPlaying = false;
+      try { playBtn.textContent = '▶'; } catch (e) {}
+    }
+    if (state.playTimer) { clearTimeout(state.playTimer); state.playTimer = null; }
+    if (window.ChalkboardTimeline) window.ChalkboardTimeline.clear();
+    if (currentTTS && currentTTS.cancel) {
+      try { currentTTS.cancel(); } catch (e) {}
+      currentTTS = null;
+    }
+    if (window.TTS) TTS.stopSpeaking();
+  };
+  // BUG #9 fix: a softer pause() that clears timers and TTS but does NOT
+  // set _destroyed. Used by switchTab so the user can resume from the same
+  // beat when they come back to the Lecture tab.
+  state.pause = function() {
+    if (state.isPlaying) {
+      // Remember that we were playing, so auto-resume can pick this up
+      // (though auto-resume currently requires the user to click ▶ —
+      // auto-resume without a user gesture is blocked by browser audio policies).
+      state._wasPlayingBeforeTabSwitch = true;
+      state.isPlaying = false;
+      try { playBtn.textContent = '▶'; } catch (e) {}
+    } else {
+      state._wasPlayingBeforeTabSwitch = false;
+    }
+    if (state.playTimer) { clearTimeout(state.playTimer); state.playTimer = null; }
+    if (window.ChalkboardTimeline) window.ChalkboardTimeline.clear();
+    if (currentTTS && currentTTS.cancel) {
+      try { currentTTS.cancel(); } catch (e) {}
+      currentTTS = null;
+    }
+    if (window.TTS) TTS.stopSpeaking();
+    // Do NOT set _destroyed — let goToBeat/advance work when the user resumes
+  };
+  // BUG #3 fix: companion revive() that un-sets _destroyed. Called when the
+  // user re-enters a chapter after going home, before any new playback starts.
+  state.revive = function() {
+    state._destroyed = false;
+    state.isPlaying = false;
+    state.playTimer = null;
+  };
 
   // Wire the immersive toggle button
   if (immersiveBtn) {
@@ -1482,10 +1637,21 @@ function renderRealLife() {
       ).join('\n                ');
       canvasContent = `<div class="canvas-stack rl-stack" data-scenario="${sc.id}">${imgs}</div>`;
     } else {
+      // B8 fix: parse the scenario's viewBox and use its width/height for the
+      // background rect. Previously the rect was hardcoded 550×700, which
+      // mismatches scenarios with viewBoxes like "80 60 400 620" and leaves
+      // the grid clipped or offset.
+      let rectW = 550, rectH = 700;
+      if (sc.viewBox) {
+        const parts = String(sc.viewBox).split(/[\s,]+/).map(Number);
+        if (parts.length >= 4 && isFinite(parts[2]) && isFinite(parts[3])) {
+          rectW = parts[2]; rectH = parts[3];
+        }
+      }
       canvasContent = `
         <svg class="rl-board" viewBox="${sc.viewBox}" preserveAspectRatio="xMidYMid meet">
           <defs><pattern id="rl-grid-${sc.id}" width="25" height="25" patternUnits="userSpaceOnUse"><path d="M 25 0 L 0 0 0 25" fill="none" stroke="#1e293b" stroke-width="0.5"/></pattern></defs>
-          <rect x="0" y="0" width="550" height="700" fill="url(#rl-grid-${sc.id})" />
+          <rect x="0" y="0" width="${rectW}" height="${rectH}" fill="url(#rl-grid-${sc.id})" />
           ${sc.svg || ''}
         </svg>`;
     }
@@ -1894,7 +2060,11 @@ function gpUpdateBeats() {
   scene.querySelectorAll('.gel').forEach(el => {
     const beat = parseInt(el.dataset.beat, 10);
     const wasVisible = el.classList.contains('visible');
-    const isVisible = beat <= gpState.stepIdx;
+    // C19 fix: data-beat is 1-based but gpState.stepIdx is 0-based, so
+    // beat (1, 2, 3, …) should be visible when stepIdx >= beat - 1.
+    // Previously the check was `beat <= gpState.stepIdx` which meant the
+    // first beat (data-beat=1) was invisible until the student reached step 2.
+    const isVisible = beat <= gpState.stepIdx + 1;
     el.classList.toggle('visible', isVisible);
     el.classList.remove('pulse');
     if (!wasVisible && isVisible) {

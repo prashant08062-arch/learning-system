@@ -1459,15 +1459,22 @@ function generateTestPaper(chapterSlug) {
   const bank = QUESTION_BANK[chapterSlug];
   if (!bank || bank.length === 0) return null;
 
-  // Total questions needed = 15 (6+4+3+1+1)
-  // We call generators round-robin to produce 15 distinct questions.
-  // Since each generator uses random values, calling it twice
-  // produces different questions.
+  // A2 fix: previously generators were called round-robin (i % bank.length)
+  // which meant indices 0..(15-bank.length) were called TWICE. Each call
+  // produces a different randomized question, but the same *concept* would
+  // appear in both Section A (1 mark) and Section E (4 marks), so a trivial
+  // 1-mark question might be re-graded as a 5-mark long-answer question.
+  //
+  // New approach: shuffle the generator list once, take each generator at
+  // most once, and only reuse when we need more questions than the bank has.
+  // Reused questions are flagged so the renderer can mark them.
+  const shuffled = bank.slice().sort(() => Math.random() - 0.5);
   const questions = [];
   for (let i = 0; i < 15; i++) {
-    const gen = bank[i % bank.length];
+    const gen = shuffled[i % shuffled.length];
     const q = gen();
-    q.generatorIndex = i % bank.length;
+    q.generatorIndex = i % shuffled.length;
+    q.reused = i >= shuffled.length;  // true if we wrapped around
     questions.push(q);
   }
 
@@ -1516,6 +1523,7 @@ function saveTestResult(uid, result) {
 const TEST_DURATION_SECONDS = 45 * 60; // 45 minutes
 let testTimerInterval = null;
 let testTimeRemaining = TEST_DURATION_SECONDS;
+let testSubmitted = false;  // C9 fix: guard against double-submit
 
 function renderTestPaperTab(chapterData) {
   const container = document.getElementById('testpaperContent');
@@ -1572,6 +1580,14 @@ function renderTestPaperTab(chapterData) {
 }
 
 function startTest(chapterData) {
+  // C10 fix: clear any prior interval before starting a new one. Without
+  // this, retaking a test starts a second setInterval and both decrement
+  // testTimeRemaining — the timer runs twice as fast.
+  if (testTimerInterval) { clearInterval(testTimerInterval); testTimerInterval = null; }
+  // C9 fix: guard against double-submit. Once the test is submitted (manual
+  // or auto), we set `testSubmitted = true` to prevent submitTest from
+  // running again on a stale form.
+  testSubmitted = false;
   const container = document.getElementById('testpaperContent');
   const slug = chapterData.meta.slug;
   const questions = generateTestPaper(slug);
@@ -1623,12 +1639,30 @@ function startTest(chapterData) {
       <span class="testpaper-section-marks">${sec.marks} × ${sec.questions.length} = ${sec.marks * sec.questions.length} marks</span>
     </div>`;
     sec.questions.forEach(q => {
+      // A8 fix: render MCQ options as radio inputs when the question has an
+      // `options` array. Previously every question — including MCQs — was
+      // rendered as a blank textarea, so students couldn't see the choices.
+      let optionsHtml = '';
+      if (q.type === 'mcq' && Array.isArray(q.options) && q.options.length > 0) {
+        optionsHtml = '<div class="testpaper-options">' +
+          q.options.map(function(opt) {
+            const safeOpt = escapeHtml(opt);
+            const safeAttr = escapeAttr(opt);
+            return '<label class="testpaper-option">' +
+              '<input type="radio" name="q' + q.number + '" value="' + safeAttr + '">' +
+              '<span>' + safeOpt + '</span>' +
+              '</label>';
+          }).join('') +
+          '</div>';
+      }
       html += `<div class="testpaper-question" data-qnum="${q.number}">
         <div class="testpaper-q-header">
           <span class="testpaper-q-num">Q${q.number}</span>
           <span class="testpaper-q-marks">[${q.marks} mark${q.marks > 1 ? 's' : ''}]</span>
+          ${q.reused ? '<span class="testpaper-q-reused" title="This concept was reused because the question bank has fewer than 15 unique generators.">↻</span>' : ''}
         </div>
-        <div class="testpaper-q-text">${q.question}</div>
+        <div class="testpaper-q-text">${escapeHtml(q.question)}</div>
+        ${optionsHtml}
         <div class="testpaper-answer-space">
           <div class="testpaper-answer-label">📝 Your working / answer (optional — you can also solve on paper and upload a photo at the end):</div>
           <textarea class="testpaper-answer-input" data-qnum="${q.number}" rows="${q.marks <= 1 ? 2 : q.marks <= 2 ? 3 : q.marks <= 3 ? 4 : 6}" placeholder="Write your solution here..."></textarea>
@@ -1747,25 +1781,59 @@ function updateTimerDisplay() {
 }
 
 function submitTest(chapterData, questions, isAutoSubmit) {
+  // C9 fix: guard against double-submit. Both the auto-submit (timer expired)
+  // and manual-submit (button click) paths can fire; without this guard the
+  // second call sees an empty form and overwrites the saved record.
+  if (testSubmitted) return;
+  testSubmitted = true;
+
   const container = document.getElementById('testpaperContent');
   const form = document.getElementById('testpaperForm');
 
   const totalMarks = questions.reduce((s, q) => s + q.marks, 0);
   const results = [];
 
-  // Collect text answers
+  // Collect answers — for MCQ questions read the selected radio, otherwise
+  // read the textarea. A8 fix.
   questions.forEach(q => {
-    const ta = form.querySelector(`textarea[data-qnum="${q.number}"]`);
-    const studentAnswer = ta ? ta.value.trim() : '';
+    let studentAnswer = '';
+    if (q.type === 'mcq') {
+      const checked = form.querySelector(`input[name="q${q.number}"]:checked`);
+      studentAnswer = checked ? checked.value : '';
+    } else {
+      const ta = form.querySelector(`textarea[data-qnum="${q.number}"]`);
+      studentAnswer = ta ? ta.value.trim() : '';
+    }
     results.push({
       number: q.number,
       section: q.section,
       sectionLabel: q.sectionLabel,
       question: q.question,
+      options: q.options || null,
       studentAnswer: studentAnswer,
       modelAnswer: q.solution,
+      correctAnswer: q.answer || null,
       marks: q.marks
     });
+  });
+
+  // B2 fix: compute a basic auto-score for MCQ questions. Written-answer
+  // questions are still marked as 'ungraded' for parent review.
+  let earnedMarks = 0;
+  let gradedMarks = 0;
+  let ungradedMarks = 0;
+  results.forEach(r => {
+    if (r.correctAnswer && r.studentAnswer) {
+      // MCQ — auto-grade
+      const isCorrect = String(r.studentAnswer).trim() === String(r.correctAnswer).trim();
+      r.isCorrect = isCorrect;
+      r.graded = true;
+      if (isCorrect) earnedMarks += r.marks;
+      gradedMarks += r.marks;
+    } else {
+      r.graded = false;
+      ungradedMarks += r.marks;
+    }
   });
 
   // Collect uploaded image
@@ -1784,24 +1852,55 @@ function submitTest(chapterData, questions, isAutoSubmit) {
     subject: chapterData.meta.subject || 'maths',
     totalQuestions: questions.length,
     totalMarks: totalMarks,
+    earnedMarks: earnedMarks,
+    gradedMarks: gradedMarks,
+    ungradedMarks: ungradedMarks,
     timeLimitSeconds: TEST_DURATION_SECONDS,
     timeTakenSeconds: timeTaken,
     isAutoSubmitted: isAutoSubmit,
-    // No auto-grading for written exam — parent reviews
     uploadedImage: uploadedImage,
     results: results
   };
 
-  // Save to localStorage
+  // Save to localStorage. C11 fix: wrap in try/catch to handle quota errors
+  // (base64 images can each be 200-400 KB, and localStorage caps at ~5 MB).
   const uid = testRecord.studentEmail;
-  saveTestResult(uid, testRecord);
+  try {
+    saveTestResult(uid, testRecord);
+  } catch (e) {
+    // Quota exceeded — drop oldest results and retry once.
+    console.warn('saveTestResult quota error, pruning old results:', e.message);
+    try {
+      localStorage.removeItem(TEST_RESULTS_KEY_PREFIX + uid);
+      saveTestResult(uid, testRecord);
+    } catch (e2) {
+      // Last resort: drop the uploaded image and try once more.
+      testRecord.uploadedImage = null;
+      try {
+        localStorage.removeItem(TEST_RESULTS_KEY_PREFIX + uid);
+        saveTestResult(uid, testRecord);
+      } catch (e3) {
+        console.error('Could not save test result even after pruning:', e3.message);
+        showToast('Could not save your test result. Your progress will not be recorded.', 'error');
+      }
+    }
+  }
+  if (testTimerInterval) { clearInterval(testTimerInterval); testTimerInterval = null; }
+
+  // B2 fix: show the score in the banner instead of just "Submitted".
+  const scorePct = gradedMarks > 0 ? Math.round((earnedMarks / gradedMarks) * 100) : null;
+  const scoreLabel = (gradedMarks > 0 && ungradedMarks > 0)
+    ? `${earnedMarks} / ${gradedMarks} (auto-graded) · ${ungradedMarks} marks pending parent review`
+    : (gradedMarks > 0)
+      ? `${earnedMarks} / ${totalMarks} (${scorePct}%)`
+      : `Submitted — ${ungradedMarks} marks pending parent review`;
 
   // Show the "submitted" screen with model answers for self-review
   let html = `
     <div class="testpaper-result">
       <div class="testpaper-score-banner ${isAutoSubmit ? 'auto' : 'manual'}">
-        <div class="testpaper-score-icon">${isAutoSubmit ? '⏰' : '✓'}</div>
-        <div class="testpaper-score-pct">Submitted</div>
+        <div class="testpaper-score-icon">${isAutoSubmit ? '⏱' : '✓'}</div>
+        <div class="testpaper-score-pct">${scoreLabel}</div>
         <div class="testpaper-score-detail">${isAutoSubmit ? 'Test auto-submitted (time up)' : 'Test submitted successfully'}</div>
         <div class="testpaper-score-label">Time taken: ${Math.floor(timeTaken / 60)}m ${timeTaken % 60}s · ${questions.length} questions · ${totalMarks} marks</div>
       </div>
@@ -1833,14 +1932,32 @@ function submitTest(chapterData, questions, isAutoSubmit) {
     </div>`;
     secQuestions.forEach(r => {
       const hasAnswer = r.studentAnswer && r.studentAnswer.length > 0;
+      // B2 fix: show graded result indicator for MCQs
+      const resultBadge = r.graded
+        ? (r.isCorrect
+            ? '<span class="testpaper-sol-result correct">✓ Correct</span>'
+            : '<span class="testpaper-sol-result incorrect">✗ Incorrect</span>')
+        : (hasAnswer ? '<span class="testpaper-sol-result">✓ Answered</span>' : '<span class="testpaper-sol-result">○ Not answered</span>');
+      const optionsHtml = (r.options && r.options.length > 0)
+        ? '<div class="testpaper-sol-options">' +
+            r.options.map(function(opt) {
+              const isChosen = (opt === r.studentAnswer);
+              const isCorrect = (opt === r.correctAnswer);
+              const cls = isCorrect ? ' opt-correct' : (isChosen ? ' opt-chosen-wrong' : '');
+              const marker = isCorrect ? ' ✓' : (isChosen ? ' ✗ (your answer)' : '');
+              return '<div class="testpaper-sol-option' + cls + '">' + escapeHtml(opt) + marker + '</div>';
+            }).join('') +
+          '</div>'
+        : '';
       html += `
         <div class="testpaper-solution-card model">
           <div class="testpaper-sol-header">
             <span class="testpaper-sol-num">Q${r.number}</span>
             <span class="testpaper-sol-marks">[${r.marks} mark${r.marks > 1 ? 's' : ''}]</span>
-            <span class="testpaper-sol-result">${hasAnswer ? '✓ Answered' : '○ Not answered'}</span>
+            ${resultBadge}
           </div>
-          <div class="testpaper-sol-question">${r.question}</div>
+          <div class="testpaper-sol-question">${escapeHtml(r.question)}</div>
+          ${optionsHtml}
           ${hasAnswer ? `<div class="testpaper-sol-answers">
             <div class="testpaper-sol-row"><strong>Your answer:</strong> <span class="ans-neutral">${escapeHtml(r.studentAnswer)}</span></div>
           </div>` : ''}
@@ -1878,11 +1995,13 @@ function escapeHtml(s) {
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
-
+// C5 fix: escapeAttr was previously dead code. It is now used by the MCQ
+// renderer (A8 fix) to safely emit option text into radio input value attributes.
 function escapeAttr(s) {
-  return escapeHtml(s).replace(/'/g, '&#39;');
+  return escapeHtml(s);
 }
 
 // ============================================================

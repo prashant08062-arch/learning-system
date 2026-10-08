@@ -28,9 +28,42 @@
 const PROGRESS_KEY  = (uid) => `learning_system_progress_${uid}`;
 const LOGS_KEY      = (uid) => `learning_system_proctor_logs_${uid}`;
 
-const MAX_WARNINGS_BEFORE_TERMINATE = 5;
-const WARNING_THRESHOLD             = 3;
+// BUG #1 fix (live-play audit): the previous threshold of 5 was far too
+// aggressive for a daily-learning app. A student who briefly checks a
+// calculator tab, Wikipedia, or their email would hit 5 violations within
+// a few minutes and get force-logged-out — appearing as "audio lapses"
+// because the lecture was killed mid-playback.
+//
+// New thresholds:
+// - Proctoring is OPT-IN. It only activates when the parent has explicitly
+//   enabled "exam mode" from the parent dashboard (stored as
+//   `learning_system_proctor_enabled_<uid>` = 'true'). For daily learning,
+//   no proctoring — students can freely switch tabs.
+// - When proctoring IS enabled (exam mode), the threshold is 15 violations
+//   before termination, with warnings starting at 8.
+// - Tab-switch violations are only counted if the tab was hidden for more
+//   than 2 seconds (filters out accidental Cmd+Tab flicks).
+const MAX_WARNINGS_BEFORE_TERMINATE = 15;
+const WARNING_THRESHOLD             = 8;
 const FULLSCREEN_CHECK_MS           = 2000;
+const TAB_SWITCH_MIN_DURATION_MS    = 2000;  // ignore focus losses shorter than this
+const PROCTOR_ENABLED_KEY = (uid) => `learning_system_proctor_enabled_${uid}`;
+
+function isProctorEnabled() {
+  const uid = getCurrentUserId();
+  if (!uid) return false;
+  try {
+    return localStorage.getItem(PROCTOR_ENABLED_KEY(uid)) === 'true';
+  } catch (e) { return false; }
+}
+
+function setProctorEnabled(uid, enabled) {
+  if (!uid) return;
+  try {
+    if (enabled) localStorage.setItem(PROCTOR_ENABLED_KEY(uid), 'true');
+    else localStorage.removeItem(PROCTOR_ENABLED_KEY(uid));
+  } catch (e) { /* ignore */ }
+}
 
 /* ----------------------------------------------------------
    State
@@ -43,13 +76,17 @@ let fullscreenTimer     = null;
 let chapterTimers       = {};   // slug -> { startedAt, accumulated }
 let currentTimerSlug    = null;
 let currentTimerStart   = null;
+let tabHiddenAt         = 0;     // BUG #1 fix: track when tab became hidden, to filter brief focus losses
+let pendingBlurTimeout  = null;  // BUG #1 fix: defer blur violation to check if it's a real tab switch
 
 /* ----------------------------------------------------------
    Storage helpers
    ---------------------------------------------------------- */
 function getCurrentUserId() {
   const u = window.Auth && window.Auth.getCurrentUser ? window.Auth.getCurrentUser() : null;
-  return u ? u.id : null;
+  if (!u) return null;
+  // Prefer explicit id; fall back to parentEmail (C7 fix — parent sessions had no id)
+  return u.id || u.parentEmail || u.email || null;
 }
 
 function getProgressStore(userId) {
@@ -87,7 +124,11 @@ function ensureChapterEntry(store, slug) {
     store[slug] = {
       visited: false,
       lastVisited: null,
-      lecturesCompleted: 0,
+      // B5 fix: track BOTH the max beat reached (for resume) AND a set of completed
+      // lecture ids (for "how many lectures finished"). The old `lecturesCompleted`
+      // field actually stored max beat — parent dashboard math was nonsense.
+      maxBeatReached: 0,
+      completedLectures: [],   // array of lecture ids whose full beat sequence was viewed
       totalLectures: 0,
       tabsOpened: [],
       practiceAnswered: 0,
@@ -122,17 +163,27 @@ function trackTabOpen(slug, tab) {
   saveProgressStore(store);
 }
 
-function trackLectureBeat(slug, beatNum, totalBeats) {
+function trackLectureBeat(slug, beatNum, totalBeats, lectureId) {
   if (!slug) return;
   const store = getProgressStore();
   const entry = ensureChapterEntry(store, slug);
-  // Track the highest beat reached
-  if (beatNum > entry.lecturesCompleted) {
-    entry.lecturesCompleted = beatNum;
+  // B5 fix: track max beat reached separately from completed lectures.
+  if (beatNum > entry.maxBeatReached) {
+    entry.maxBeatReached = beatNum;
   }
   if (totalBeats > entry.totalLectures) {
     entry.totalLectures = totalBeats;
   }
+  // If a lectureId was supplied AND this beat is the final beat, mark the lecture complete.
+  if (lectureId && beatNum >= totalBeats) {
+    if (!entry.completedLectures.includes(lectureId)) {
+      entry.completedLectures.push(lectureId);
+    }
+  }
+  // Backward-compat: keep legacy `lecturesCompleted` as a mirror of maxBeatReached
+  // so old parent-dashboard code keeps working, but the canonical field is
+  // `completedLectures.length`.
+  entry.lecturesCompleted = entry.maxBeatReached;
   saveProgressStore(store);
 }
 
@@ -199,12 +250,17 @@ function getAllProgress(userId) {
 /* ----------------------------------------------------------
    Toast helper (shared with auth.js)
    ---------------------------------------------------------- */
+// B6 fix: export a single shared toast so auth.js and proctor.js don't both
+// render their own toast at the same screen position.
 function showToast(message, type) {
-  if (window.Auth && window.Auth._toast) return window.Auth._toast(message, type);
-  let toast = document.getElementById('proctorToast');
+  // Prefer the auth.js toast if it has been exposed (single source of truth)
+  if (window.Auth && typeof window.Auth._toast === 'function') {
+    return window.Auth._toast(message, type);
+  }
+  let toast = document.getElementById('sharedToast');
   if (!toast) {
     toast = document.createElement('div');
-    toast.id = 'proctorToast';
+    toast.id = 'sharedToast';
     toast.style.cssText = [
       'position:fixed','top:20px','left:50%','transform:translateX(-50%)',
       'z-index:100001','padding:12px 22px','border-radius:8px',
@@ -234,8 +290,25 @@ function showToast(message, type) {
 }
 
 /* ----------------------------------------------------------
-   Fullscreen helpers
+   Fullscreen helpers (A1 fix)
    ---------------------------------------------------------- */
+// A1 fix: detect up-front whether fullscreen is even supported on this browser.
+// iOS Safari does NOT support Element.requestFullscreen on non-video elements,
+// so the periodic fullscreen check would generate a false-positive violation
+// every 2 seconds and terminate the session in ~10s. We only enforce
+// fullscreen when it's actually achievable.
+function canFullscreen() {
+  const el = document.documentElement;
+  return !!(el.requestFullscreen ||
+            el.webkitRequestFullscreen ||
+            el.mozRequestFullScreen ||
+            el.msRequestFullscreen) &&
+         // iOS Safari reports webkitRequestFullscreen but only works on <video>.
+         // Detect iOS and disable fullscreen enforcement there.
+         !(/iPad|iPhone|iPod/.test(navigator.userAgent) &&
+            !(window.MSStream));
+}
+
 function requestFullscreen() {
   const el = document.documentElement;
   const req = el.requestFullscreen
@@ -301,6 +374,14 @@ function showTerminationOverlay(reason) {
     ].join(';');
     document.body.appendChild(overlay);
   }
+  // C6 fix: escape the reason text before interpolating into innerHTML.
+  // Currently only ever called with fixed strings, but unsafe pattern.
+  const safeReason = String(reason || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
   overlay.innerHTML = `
     <div style="background:#0f172a;border:1px solid #7f1d1d;border-radius:16px;padding:36px 28px;max-width:480px;width:100%;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,0.7);">
       <div style="font-size:54px;margin-bottom:8px;">🛑</div>
@@ -309,7 +390,7 @@ function showTerminationOverlay(reason) {
         Your learning session has been terminated due to a proctoring violation.
       </p>
       <p style="color:#94a3b8;font-size:13px;line-height:1.5;margin:0 0 22px;background:#1e293b;padding:10px 14px;border-radius:8px;border:1px solid #334155;">
-        <strong style="color:#fbbf24;">Reason:</strong> ${reason}
+        <strong style="color:#fbbf24;">Reason:</strong> ${safeReason}
       </p>
       <p style="color:#64748b;font-size:11px;margin:0 0 18px;">
         This incident has been logged and will be visible to your parent in the Parent Dashboard.
@@ -326,6 +407,14 @@ function showTerminationOverlay(reason) {
     overlay.innerHTML = '';
     // Hide proctor badge
     if (window.Auth && window.Auth._hideProctorBadge) window.Auth._hideProctorBadge();
+    // BUG #4 fix (live-play audit): call App.teardownActiveContent() to fully
+    // tear down the lecture player — including the immersive overlay, all
+    // timers, TTS voice, and chalkboard timeline. Without this, the
+    // `.immersive-overlay.active` element and `body.overflow=hidden` style
+    // persist into the next chapter session and the user sees a frozen screen.
+    if (window.App && typeof window.App.teardownActiveContent === 'function') {
+      try { window.App.teardownActiveContent(); } catch (e) { console.error('teardownActiveContent error:', e); }
+    }
     // Go home using app's goHome if available
     if (typeof window.goHome === 'function') {
       window.goHome();
@@ -344,9 +433,21 @@ function showTerminationOverlay(reason) {
 
 /* ----------------------------------------------------------
    Tab-switch / blur violation handler
+   A1 fix: debounce violations (so a single tab switch doesn't fire both
+   visibilitychange AND blur) and require the document to actually be hidden
+   before counting a blur as a violation.
    ---------------------------------------------------------- */
+let lastViolationAt = 0;
+const VIOLATION_DEBOUNCE_MS = 800;
+
 function handleViolation(reason) {
   if (!proctoringActive) return;
+  const now = Date.now();
+  // A1 fix: debounce — within 800ms, count only ONE violation per incident.
+  // This prevents a single tab switch from firing both `visibilitychange`
+  // and `blur` and being counted twice.
+  if (now - lastViolationAt < VIOLATION_DEBOUNCE_MS) return;
+  lastViolationAt = now;
   tabSwitchCount += 1;
   logViolation({
     type: 'tab_switch',
@@ -357,13 +458,13 @@ function handleViolation(reason) {
 
   if (tabSwitchCount >= MAX_WARNINGS_BEFORE_TERMINATE) {
     // Terminate session
-    const reason = `${MAX_WARNINGS_BEFORE_TERMINATE} tab switches detected during proctored session`;
+    const termReason = `${MAX_WARNINGS_BEFORE_TERMINATE} tab switches detected during proctored session`;
     logViolation({
       type: 'session_terminated',
       chapter: activeChapterSlug,
-      reason
+      reason: termReason
     });
-    showTerminationOverlay(reason);
+    showTerminationOverlay(termReason);
     stopProctoring();
   } else if (tabSwitchCount >= WARNING_THRESHOLD) {
     showWarning(tabSwitchCount);
@@ -380,23 +481,60 @@ function bindListeners() {
   if (listenersBound) return;
   listenersBound = true;
 
-  // visibilitychange — fires when user switches tab/minimizes
+  // visibilitychange — fires when user switches tab/minimizes. This is the
+  // authoritative signal; blur alone is too noisy (browser chrome clicks,
+  // DevTools open, OS notifications, etc. all fire blur).
+  //
+  // BUG #1 fix: only count as a violation if the tab was hidden for more than
+  // TAB_SWITCH_MIN_DURATION_MS (2 seconds). Filters out accidental Cmd+Tab
+  // flicks where the user immediately returns.
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden && proctoringActive) {
-      handleViolation('Tab became hidden (visibilitychange)');
+    if (document.hidden) {
+      if (proctoringActive) {
+        tabHiddenAt = Date.now();
+      }
+    } else {
+      // Tab became visible again
+      if (proctoringActive && tabHiddenAt > 0) {
+        const hiddenDuration = Date.now() - tabHiddenAt;
+        if (hiddenDuration >= TAB_SWITCH_MIN_DURATION_MS) {
+          handleViolation(`Tab was hidden for ${Math.round(hiddenDuration/1000)}s`);
+        }
+        tabHiddenAt = 0;
+      }
     }
   });
 
-  // window blur — fires when window loses focus
+  // window blur — A1 fix: only count as a violation if the document is ALSO
+  // hidden. Most browsers fire blur for many benign reasons (clicking the
+  // address bar, opening DevTools, clicking a notification) and these should
+  // NOT trigger a violation on their own.
+  // BUG #1 fix: even when document.hidden is true, defer the violation by
+  // TAB_SWITCH_MIN_DURATION_MS so we can cancel it if the user returns quickly.
   window.addEventListener('blur', () => {
-    if (proctoringActive) {
-      handleViolation('Window lost focus (blur event)');
+    if (proctoringActive && document.hidden) {
+      if (pendingBlurTimeout) clearTimeout(pendingBlurTimeout);
+      pendingBlurTimeout = setTimeout(() => {
+        // Re-check that the document is still hidden after the timeout
+        if (proctoringActive && document.hidden) {
+          handleViolation('Window lost focus while tab hidden');
+        }
+        pendingBlurTimeout = null;
+      }, TAB_SWITCH_MIN_DURATION_MS);
+    }
+  });
+  // Cancel pending blur violation if window regains focus quickly
+  window.addEventListener('focus', () => {
+    if (pendingBlurTimeout) {
+      clearTimeout(pendingBlurTimeout);
+      pendingBlurTimeout = null;
     }
   });
 
-  // Detect user exiting fullscreen manually (ESC / F11)
+  // Detect user exiting fullscreen manually (ESC / F11) — only enforce if
+  // fullscreen is supported on this browser (A1 fix).
   const onFsChange = () => {
-    if (proctoringActive && !isInFullscreen()) {
+    if (proctoringActive && canFullscreen() && !isInFullscreen()) {
       handleViolation('Exited fullscreen during proctored session');
     }
   };
@@ -415,11 +553,25 @@ function startProctoring(chapterSlug) {
     // Not logged in — skip proctoring (e.g., preview)
     return;
   }
+  // BUG #1 fix: proctoring is opt-in. Only active when parent has enabled
+  // "exam mode" for this student. Daily learning has NO proctoring — students
+  // can freely switch tabs without losing their session.
+  if (!isProctorEnabled()) {
+    // Still track chapter visit + start the timer (for progress dashboard),
+    // but do NOT bind visibility/blur/fullscreen violation listeners.
+    activeChapterSlug = chapterSlug;
+    trackChapterVisit(chapterSlug);
+    trackTabOpen(chapterSlug, 'lecture');
+    startTimer(chapterSlug);
+    return;
+  }
   bindListeners();
   activeChapterSlug = chapterSlug;
   proctoringActive = true;
   tabSwitchCount = 0;
   warningShown = false;
+  lastViolationAt = 0;
+  tabHiddenAt = 0;
 
   // Show badge
   if (window.Auth && window.Auth._showProctorBadge) window.Auth._showProctorBadge();
@@ -429,18 +581,41 @@ function startProctoring(chapterSlug) {
   trackTabOpen(chapterSlug, 'lecture');
   startTimer(chapterSlug);
 
-  showToast('🔒 Proctoring active. Please stay on this tab.', 'warning');
+  showToast('🔒 Exam mode active. Please stay on this tab.', 'warning');
 
-  // Request fullscreen — wrapped in setTimeout so it fires after click
-  setTimeout(() => requestFullscreen(), 100);
-
-  // Periodic fullscreen check
-  if (fullscreenTimer) clearInterval(fullscreenTimer);
-  fullscreenTimer = setInterval(() => {
-    if (proctoringActive && !isInFullscreen()) {
-      handleViolation('Not in fullscreen during proctored session');
-    }
-  }, FULLSCREEN_CHECK_MS);
+  // A1 fix: do NOT defer fullscreen via setTimeout. Calling requestFullscreen()
+  // from inside startProctoring (which is invoked from app.js loadChapter, NOT
+  // a user gesture) means the browser will reject the request. The rejection is
+  // silent, and then the periodic 2s check fires violations until termination.
+  //
+  // The correct flow: app.js's chapter-card click handler (which IS a user
+  // gesture) should call window.Proctor.requestFullscreen() directly. We
+  // attempt it here as a best-effort, but we DO NOT start the periodic
+  // fullscreen check unless fullscreen is actually supported AND we are
+  // currently in fullscreen.
+  //
+  // Best-effort attempt — if it works, great; if not, no harm.
+  if (canFullscreen()) {
+    try { requestFullscreen(); } catch (e) { /* ignore */ }
+    // Periodic fullscreen check — only enforce if we successfully entered
+    // fullscreen at some point during this session. We track that with
+    // `everEnteredFullscreen`.
+    if (fullscreenTimer) clearInterval(fullscreenTimer);
+    let everEnteredFullscreen = isInFullscreen();
+    fullscreenTimer = setInterval(() => {
+      if (!proctoringActive) return;
+      if (isInFullscreen()) {
+        everEnteredFullscreen = true;
+      } else if (everEnteredFullscreen) {
+        // We WERE in fullscreen and now we're not — that's a manual exit.
+        handleViolation('Not in fullscreen during proctored session');
+      }
+      // If we never entered fullscreen, don't fault the user — the browser
+      // may simply not have honoured the request (e.g. iOS).
+    }, FULLSCREEN_CHECK_MS);
+  }
+  // If canFullscreen() is false (iOS Safari), we skip fullscreen enforcement
+  // entirely and rely only on visibilitychange + blur for proctoring.
 }
 
 function stopProctoring() {
@@ -487,52 +662,26 @@ window.Proctor = {
   getProctorLogs,
   requestFullscreen,
   exitFullscreen,
+  canFullscreen,
+  isProctorEnabled,
+  setProctorEnabled,
   dismissTermination
 };
 
 /* ----------------------------------------------------------
-   Bridge with app.js — auto-proctor when chapter loads
-   We expose a helper that app.js (or its hooks) can call,
-   AND we monkey-patch the existing loadChapter / switchTab /
-   goHome if they exist on the global scope.
+   Bridge with app.js (B1 fix — simplified)
 
-   Since app.js is wrapped in an IIFE, the cleanest approach
-   is for app.js to call window.Proctor.startProctoring(slug)
-   itself. We also add DOM-level hooks as a fallback:
-   listen for the chapter screen becoming visible.
+   Previously, this file used a MutationObserver on #chapterScreen to
+   auto-start proctoring when the chapter screen became visible. That
+   caused double-starts (app.js loadChapter AND the observer both fired
+   startProctoring) and silently discarded the first timer's elapsed time.
+
+   The observer has been removed. app.js is now the sole authority and
+   calls window.Proctor.startProctoring(slug) directly from loadChapter.
+
+   C7 fix: getCurrentUserId now falls back to parentEmail/email if `id`
+   is absent, so parent sessions no longer write to
+   `learning_system_progress_undefined`.
    ---------------------------------------------------------- */
-function hookIntoApp() {
-  // Observe chapter screen visibility to auto-start/stop proctoring
-  const chapterScreen = document.getElementById('chapterScreen');
-  const homeScreen    = document.getElementById('homeScreen');
-  if (!chapterScreen) return;
-
-  const observer = new MutationObserver(() => {
-    const chapterVisible = chapterScreen.style.display !== 'none' &&
-                           window.getComputedStyle(chapterScreen).display !== 'none';
-    if (chapterVisible) {
-      // Chapter is shown — proctoring will start when a chapter loads
-      // (we need a slug — read from chapterTopTitle's parent dataset if available)
-      const titleEl = document.getElementById('chapterTopTitle');
-      if (titleEl && titleEl.dataset && titleEl.dataset.slug && !proctoringActive) {
-        // Start proctoring
-        startProctoring(titleEl.dataset.slug);
-      }
-    } else if (!chapterVisible && proctoringActive) {
-      // Chapter hidden — stop proctoring
-      stopProctoring();
-    }
-  });
-  observer.observe(chapterScreen, { attributes: true, attributeFilter: ['style'] });
-  if (homeScreen) {
-    observer.observe(homeScreen, { attributes: true, attributeFilter: ['style'] });
-  }
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', hookIntoApp);
-} else {
-  hookIntoApp();
-}
 
 })();

@@ -25,6 +25,21 @@ const CURRENT_USER_KEY  = 'learning_system_current_user';
    Uses an XOR salt + base64. Sufficient for an offline app
    where there is no server and no real password security.
    ---------------------------------------------------------- */
+// C3 fix: replaced deprecated `unescape()` with TextEncoder-based UTF-8 → base64.
+// The original implementation used `btoa(unescape(encodeURIComponent(xored)))`
+// which is functionally correct but `unescape` is deprecated since ES5.
+function utf8ToBase64(str) {
+  try {
+    const bytes = new TextEncoder().encode(str);
+    let bin = '';
+    for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+    return btoa(bin);
+  } catch (e) {
+    // Fallback for very old browsers
+    return btoa(encodeURIComponent(str));
+  }
+}
+
 function simpleHash(str) {
   let hash = 0;
   const salt = 'LSSalt_v1::';
@@ -40,7 +55,7 @@ function simpleHash(str) {
     xored += String.fromCharCode(str.charCodeAt(i) ^ ((hash >>> 0) % 251));
   }
   try {
-    return btoa(unescape(encodeURIComponent(xored))) + '_' + (hash >>> 0).toString(16);
+    return utf8ToBase64(xored) + '_' + (hash >>> 0).toString(16);
   } catch (e) {
     return String(hash >>> 0);
   }
@@ -64,8 +79,18 @@ function saveUsers(users) {
 
 function saveCurrentUser(user) {
   if (user) {
-    // Save a copy (without storing hashed password in session if you prefer)
-    localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
+    // A4 fix: strip password hashes before persisting the current user to
+    // localStorage. Previously the entire user object — including
+    // passwordHash and parentPasswordHash — was stored under
+    // `learning_system_current_user`. Anyone with DevTools access could read
+    // their own hash and brute-force common passwords offline.
+    //
+    // The hashes are still kept in the `learning_system_users` registry
+    // (needed for login verification), just not duplicated in the session.
+    const safe = Object.assign({}, user);
+    delete safe.passwordHash;
+    delete safe.parentPasswordHash;
+    localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(safe));
   } else {
     localStorage.removeItem(CURRENT_USER_KEY);
   }
@@ -76,6 +101,12 @@ function saveCurrentUser(user) {
    ---------------------------------------------------------- */
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+// C8 fix: phone number format check. Accepts:
+//   +91 98765 43210, 9876543210, +1-555-123-4567, etc.
+function isValidPhone(phone) {
+  const digits = phone.replace(/[^\d]/g, '');
+  return /^[+]?[\d\s-]{7,20}$/.test(phone) && digits.length >= 8 && digits.length <= 15;
 }
 function showToast(message, type) {
   let toast = document.getElementById('authToast');
@@ -353,6 +384,9 @@ function handleSignup(e) {
   if (!parentName) return showToast('Please enter parent name', 'error');
   if (!isValidEmail(parentEmail)) return showToast('Invalid parent email', 'error');
   if (!parentPhone) return showToast('Please enter parent phone', 'error');
+  // C8 fix: validate phone number format. Accepts optional leading +,
+  // digits, spaces, and hyphens; length 8–15 digits after stripping.
+  if (!isValidPhone(parentPhone)) return showToast('Invalid parent phone number', 'error');
   if (parentPassword.length < 4) return showToast('Parent password must be at least 4 characters', 'error');
 
   const users = getUsers();
@@ -382,10 +416,15 @@ function showOTPStep(email, otp) {
   if (existingOTP) existingOTP.remove();
 
   // Create OTP verification section
+  // A5 fix: The OTP is still displayed inline because this is an offline
+  // localStorage-only app with no backend to deliver it. We now make this
+  // explicit in the UI label ("Confirm Signup (Pilot Code)" instead of
+  // "OTP Verification") and in the descriptive copy. Previously the label
+  // implied a real delivery channel which doesn't exist.
   var otpHTML = '<div id="otpSection" style="margin-top:16px;padding:16px;background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.3);border-radius:10px;">' +
-    '<h4 style="color:#38bdf8;font-size:14px;margin:0 0 8px;">🔐 OTP Verification</h4>' +
-    '<p style="color:#94a3b8;font-size:12px;margin:0 0 10px;">A 6-digit OTP has been generated for <strong>' + email + '</strong>. ' +
-    'For this pilot version, the OTP is shown below. In production, it would be sent via email/SMS.</p>' +
+    '<h4 style="color:#38bdf8;font-size:14px;margin:0 0 8px;">🔐 Confirm Signup (Pilot Code)</h4>' +
+    '<p style="color:#94a3b8;font-size:12px;margin:0 0 10px;">This is an offline pilot — there is no email/SMS gateway, so your confirm code is shown below. ' +
+    'In a production deployment this would be sent via email/SMS to <strong>' + email + '</strong>.</p>' +
     '<div style="background:rgba(251,191,36,0.15);border:1px solid #fbbf24;border-radius:8px;padding:8px 12px;margin:0 0 12px;text-align:center;">' +
     '<span style="color:#fbbf24;font-size:24px;font-weight:700;letter-spacing:8px;">' + otp + '</span>' +
     '</div>' +
@@ -657,21 +696,27 @@ function buildProctorBadge() {
   if (document.getElementById('proctorBadge')) return;
   const badge = document.createElement('div');
   badge.id = 'proctorBadge';
+  // BUG #2 fix (live-play audit): previously the badge was at top:20px; left:20px
+  // with width ~163px, which physically overlapped the "📝 Key Notes" tab button
+  // (which sits at left:103-222px). Users could not click Notes.
+  // Now positioned at top-RIGHT, well clear of the tab bar.
   badge.innerHTML = `
     <style>
       #proctorBadge {
-        position: fixed; top: 20px; left: 20px; z-index: 9500;
+        position: fixed; top: 12px; right: 16px; z-index: 9500;
         background: #7f1d1d; color: #fef2f2;
         border: 1px solid #fca5a5;
-        padding: 8px 14px; border-radius: 20px;
-        font-size: 12px; font-weight: 700;
-        display: none; align-items: center; gap: 8px;
-        box-shadow: 0 6px 18px rgba(127, 29, 29, 0.5);
+        padding: 6px 12px; border-radius: 16px;
+        font-size: 11px; font-weight: 700;
+        display: none; align-items: center; gap: 6px;
+        box-shadow: 0 4px 12px rgba(127, 29, 29, 0.5);
         font-family: 'Segoe UI', system-ui, sans-serif;
+        max-width: 200px;
       }
       #proctorBadge .pb-dot {
-        width: 8px; height: 8px; border-radius: 50%;
+        width: 7px; height: 7px; border-radius: 50%;
         background: #f87171; animation: pb-pulse 1.5s infinite;
+        flex-shrink: 0;
       }
       @keyframes pb-pulse {
         0%, 100% { opacity: 1; transform: scale(1); }
@@ -679,7 +724,7 @@ function buildProctorBadge() {
       }
     </style>
     <span class="pb-dot"></span>
-    <span>Proctoring Active</span>
+    <span>Exam Mode Active</span>
   `;
   document.body.appendChild(badge);
 }
@@ -751,7 +796,12 @@ window.Auth = {
   _updateUserBar: updateUserBar,
   _showProctorBadge: showProctorBadge,
   _hideProctorBadge: hideProctorBadge,
-  _getUsers: getUsers
+  _getUsers: getUsers,
+  // B6 fix: export a single shared toast so proctor.js can defer to auth.js
+  // for toast rendering, instead of each file creating its own DOM toast
+  // that overlaps at the same screen position.
+  _toast: showToast,
+  _isValidPhone: isValidPhone
 };
 
 /* ----------------------------------------------------------

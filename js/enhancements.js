@@ -156,7 +156,16 @@ function toggleDoubtPanel(beatDiv, doubts, btn) {
 
 function escapeHtml(s) {
   if (s == null) return '';
-  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  // C4 fix: also escape `"` and `'` so that escaped strings are safe to
+  // interpolate into both element content AND into attribute values.
+  // Previously only &, <, > were escaped, which broke inline onclick handlers
+  // (B4) whenever a doubt text contained an apostrophe.
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 

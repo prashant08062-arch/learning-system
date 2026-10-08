@@ -362,15 +362,24 @@ Each term includes:
 ```
 learning_system/
 ├── index.html                   # Main entry point (home screen + chapter screen + two atlas launchers)
+├── parent-dashboard.html        # Parent view: progress, proctor logs, test results
 ├── water_body_atlas.html        # Standalone 3D Water Body Atlas (Three.js)
 ├── mirrors_lenses_3d_atlas.html # Standalone 3D Mirror & Lens Atlas (Three.js)
 ├── CLASS_6_7_SUITABILITY.md     # Pedagogical review + enhancement approach
+├── CONTRIBUTING.md              # Developer guide for adding new chapters
+├── README.md                    # This file
 ├── css/style.css                # All styles (shared across all chapters + physics light-ray animations)
 ├── js/
-│   ├── tts.js                   # Text-to-Speech engine (shared)
+│   ├── tts.js                   # Text-to-Speech engine (shared, chunked for Chrome's 15s bug)
 │   ├── globe.js                 # 3D Earth globe viewer (for geography chapter)
-│   └── app.js                   # Main application logic (shared)
+│   ├── app.js                   # Main application logic (shared)
+│   ├── auth.js                  # Student/parent auth, signup, login (localStorage-only)
+│   ├── proctor.js               # Auto-proctor: fullscreen, tab-switch detection, progress tracking
+│   ├── testpaper.js             # Test paper generation + 45-min timer + image upload + auto-grading (MCQ)
+│   ├── enhancements.js          # Mastery tracking, common doubts, progress summaries
+│   └── chalkboard-timeline.js   # Per-beat element reveal scheduler (synced with TTS)
 ├── vendor/three.min.js          # Three.js (MIT) bundled for offline use
+├── download/                    # Generated reports and spreadsheets (not part of runtime)
 └── data/
     ├── catalog.js               # Master list of subjects & chapters (REGISTER HERE)
     ├── maths/baudhayana_pythagoras/chapter.js
@@ -391,6 +400,45 @@ data/<subject>/<chapter_slug>/
 ### Step 2: Create the `chapter.js` file
 Inside that folder, create `chapter.js` defining `window.CHAPTER_DATA`. See the History chapter (`data/history/india_independence/chapter.js`) for a complete working example with the story-form pattern + "Before We Begin" vocabulary section.
 
+#### Required top-level keys
+
+| Key | Type | Description |
+|---|---|---|
+| `meta` | Object | `{ slug, title, subtitle, subject, type, grade, imagesBasePath? }` — `type` is `'svg'` / `'image'` / `'globe'` |
+| `lectures` | Array | Each lecture: `{ id, label, viewBox, svg, beats[], timeline?, timelines? }`. `beats` is an array of strings (narration per beat). |
+| `notes` | HTML string | Key Notes content (the only field rendered as raw HTML). |
+| `practice` | HTML string | Reveal-answer cards. |
+| `realLife` | Array | Each scenario: `{ id, title, viewBox?, svg?, images?, steps[] }`. |
+| `guidedPractice` | Array | Each problem: `{ title, difficulty, diffClass, statement, viewBox, svg, steps[] }`. Each step has a `validate` object (see below). |
+| `selfTest` | Array | Each item: `{ q, a, hint? }`. |
+
+#### `validate` schema (REQUIRED for every guided-practice step)
+
+A guided-practice step with an empty `validate: {}` can never be marked correct — `gpValidate` falls through to `default: return false`. Always supply ONE of:
+
+| type | Example | Notes |
+|---|---|---|
+| `match` | `{ type: 'match', answers: ['5 cm', '5cm'] }` | Exact string match (case-insensitive, punctuation-stripped). |
+| `regex` | `{ type: 'regex', pattern: '^\\d+\\s*cm$', flags: 'i' }` | Regex test on cleaned input. |
+| `pureNum` | `{ type: 'pureNum', value: 25 }` | Number only, ignores trailing period. |
+| `numUnit` | `{ type: 'numUnit', value: 5, unit: 'cm\|centimetres?\|centimeters?' }` | Number + unit, unit is a regex. |
+| `formula` | `{ type: 'formula', forms: ['a^2+b^2=c^2', 'c^2=a^2+b^2'] }` | Algebraic formula, multiple forms accepted. |
+
+#### `timelines` schema (optional, used for chalkboard-style synced reveals)
+
+```js
+lec.timelines = [
+  { beat: 2, steps: [
+    { delay: 0,    show: ['title'] },
+    { delay: 3000, show: ['mirror-glass', 'mirror-silver'], draw: ['mirror-frame'] },
+    { delay: 5000, photon: ['cb-photon-glow', 'cb-photon-core'] },  // elements with <animateMotion>
+    { delay: 7000, pulse: ['cb-bounces'] }
+  ]}
+];
+```
+
+**Photon note (A9):** Elements listed under `photon:` must have a `<animateMotion>` child element defining the travel path — CSS `offset-path` does NOT work without `class="photon"` AND a valid path, and the `.photon` class alone is insufficient on its own. Always include `<animateMotion dur="3s" repeatCount="indefinite" begin="indefinite" path="M x1 y1 L x2 y2 L x3 y3"/>` inside the photon `<circle>`.
+
 ### Step 3: Register the chapter in `data/catalog.js`
 Add the chapter to the appropriate subject's `chapters` array.
 
@@ -399,7 +447,7 @@ Refresh `index.html` — your new chapter will appear under its subject.
 
 ## Features
 
-- 🎓 **6 tabs per chapter**: Lecture, Key Notes, Practice, Real Life, Guided Practice, Self-Test
+- 🎓 **7 tabs per chapter** (6 always visible + 1 conditional): Lecture, Key Notes, Practice, Real Life, Guided Practice, Self-Test, and **Test Paper** (Maths chapters only)
 - 🔊 **Text-to-Speech narration** with speed control and voice selection
 - 🎬 **Animated lectures** with synchronized SVG elements or images
 - ✏️ **Interactive guided practice** with answer validation and hints

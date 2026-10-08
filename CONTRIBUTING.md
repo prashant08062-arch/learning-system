@@ -762,6 +762,26 @@ Add to `index.html` below the existing subject grid:
 - [ ] Commit message follows the established format (`feat(<subject>): add <title>`)
 - [ ] Push to GitHub successful; latest commit visible via API
 
+### Anti-pattern checklist (audit-derived — DO NOT ship with these)
+
+These rules come from the v3 external audit (2026-10-08). Every item below is a real bug that was found in production. Future contributors MUST avoid them.
+
+- [ ] **No `validate: {}` in guided-practice steps** (A6). Every step needs a real validator (`match` / `regex` / `pureNum` / `numUnit` / `formula`). Empty validators fall through to `default: return false` in `gpValidate` and students can never advance.
+- [ ] **No `font-style="italic; animation-delay: 0.15s"`** in SVG attributes (C16). `font-style` accepts a single keyword; the whole attribute is invalid. Split into `font-style="italic" style="animation-delay: 0.15s"`.
+- [ ] **No nested `<defs>` in every beat group** (C17). Define shared filters/gradients/markers ONCE at the top of the SVG. Browsers ignore duplicate `<defs>` with the same `id`.
+- [ ] **No `filter id="chalk"` redefined per beat** (C18). Same as above — define once at the top of the SVG.
+- [ ] **Photon elements must have `<animateMotion>`** (A9). A `<circle>` with `class="photon"` and CSS `animation: photon-travel 3s linear infinite` will NOT move because the CSS keyframes animate `offset-distance`, which has no effect without an `offset-path`. Always include `<animateMotion dur="3s" repeatCount="indefinite" begin="indefinite" path="M x1 y1 L x2 y2 L x3 y3"/>` inside the photon element.
+- [ ] **`data-beat` is 1-based; `gpState.stepIdx` is 0-based** (C19). When checking visibility in `gpUpdateBeats`, use `beat <= gpState.stepIdx + 1`, NOT `beat <= gpState.stepIdx`.
+- [ ] **No `unescape()`** in new code (C3). Use `TextEncoder` + `btoa` instead.
+- [ ] **`escapeHtml` must escape `"` and `'`** (C4). Inline `onclick` handlers with unescaped apostrophes break the attribute.
+- [ ] **No bare `setTimeout(() => requestFullscreen(), 100)`** in proctoring (A1). Fullscreen must be requested from a real user gesture, or wrapped in `canFullscreen()` check.
+- [ ] **No password hashes in `current_user` localStorage** (A4). Strip them in `saveCurrentUser`.
+- [ ] **Don't reuse generators round-robin in `generateTestPaper`** (A2). Shuffle and take each at most once.
+- [ ] **MCQ options must be rendered as radio inputs** (A8). Don't render every question as a textarea.
+- [ ] **`switchTab` must stop ALL lecture timers, not just TTS** (A10). Iterate `lecStates` and call `state.stop()`.
+- [ ] **Don't reassign `updateUI` function declaration** (A7). Wrap it instead: `state.updateUI = function() { updateUI(); updateImmersiveUI(); }`.
+- [ ] **`grade` in catalog.js can be an array** (C13) — e.g. `[6, 7, 8]` for chapters enhanced for multiple grades. `filterChaptersByGrade` handles both single numbers and arrays.
+
 ---
 
 ## 🎯 Worked Examples — chapters in the repo
@@ -921,15 +941,30 @@ A **7th tab** ("📋 Test Paper") appears ONLY for **Maths chapters**. It provid
 
 ### Features
 - **45-minute countdown timer** (auto-submits at 0:00, yellow at 10 min, red+pulse at 5 min)
-- **Open-ended text areas** for each question (NOT MCQ — students write their answers)
+- **MCQ auto-grading (B2 fix)** — MCQ questions with a `correctAnswer` field are auto-graded. The score banner shows `X / Y (auto-graded) · Z marks pending parent review`. Written-answer questions are still left for the parent dashboard.
 - **Image upload** for answer sheet photo (compressed to max 1200px JPEG 0.7 quality before localStorage)
-- **Model answers** shown after submission for self-review
-- **Test results recorded to localStorage** (`learning_system_test_results_<email>`) with full question text, student answer, model answer, and uploaded image
-- **Parent dashboard integration** — parents see each test attempt with expandable answer sheet image + model answers grouped by section
+- **Model answers** shown after submission for self-review, with each MCQ's correct option highlighted and the student's chosen option (if wrong) marked
+- **Test results recorded to localStorage** (`learning_system_test_results_<email>`) with full question text, options, student answer, model answer, correct answer, and uploaded image
+- **Quota-safe saving (C11 fix)** — `saveTestResult` is wrapped in try/catch. On `QuotaExceededError`, oldest results are pruned and the upload image is dropped as a last resort.
+- **Double-submit guard (C9 fix)** — `testSubmitted` flag prevents the auto-submit and manual-submit paths from racing and overwriting the saved record with an empty form.
+- **Timer cleanup (C10 fix)** — `startTest` clears any prior `testTimerInterval` before starting a new one. Without this, retaking a test starts a second interval and both decrement `testTimeRemaining` so the timer runs twice as fast.
+- **Parent dashboard integration** — parents see each test attempt with expandable answer sheet image + model answers grouped by section, plus auto-graded MCQ scores
 - **Random question generation** — each attempt gets different values (e.g., different rectangle dimensions, different profit percentages)
 
+### Generator reuse (A2 fix)
+`generateTestPaper` now shuffles the question bank and takes each generator at most once. If the bank has fewer than 15 generators, only then are generators reused, and the reused questions are flagged with `q.reused = true` so the renderer can show a ↻ icon. Previously generators were called round-robin (`i % bank.length`), which meant some concepts appeared in both Section A (1 mark) and Section E (4 marks).
+
+### MCQ rendering (A8 fix)
+Previously, every question — including MCQs — was rendered as a blank textarea. Students couldn't see the options. The renderer now checks `q.type === 'mcq' && q.options` and emits a radio-input group; `submitTest` reads the selected radio value for MCQ questions and the textarea for written-answer questions.
+
+### B3 fix — dead code cleaned
+`pickN` was defined but never called. It is now used internally for shuffling options. `gcd` is now declared BEFORE `QUESTION_BANK` so the file reads top-to-bottom.
+
+### C5 fix — escapeAttr is no longer dead code
+`escapeAttr` was defined but never called. It is now used by the MCQ renderer (A8 fix) to safely emit option text into radio input value attributes. `escapeHtml` has also been extended to escape `"` and `'` so the escaped string is safe in both content AND attribute contexts.
+
 ### Question Bank
-Each Maths chapter has 10 random question generators in `QUESTION_BANK[chapterSlug]`. The `generateTestPaper()` function calls generators round-robin to produce 15 questions, then assigns sections A-E based on position.
+Each Maths chapter has 10 random question generators in `QUESTION_BANK[chapterSlug]`. The `generateTestPaper()` function shuffles the bank and takes each generator at most once (A2 fix — previously round-robin), then assigns sections A-E based on position.
 
 ### Adding Test Paper to a New Maths Chapter
 Add generators to `QUESTION_BANK` in `js/testpaper.js`:
@@ -1010,6 +1045,17 @@ Chrome's `speechSynthesis` has a known bug where utterances longer than ~15 seco
 
 This ensures the narration doesn't get cut off mid-beat, and the beat doesn't advance until the entire narration is complete.
 
+### A3 fix — `cancel()` actually stops speech
+Previously, `cancel()` set `called = true` and called `speech.cancel()`, but Chrome's `speech.cancel()` is asynchronous. The current utterance's `onerror` callback then fired, which incremented `chunkIdx` and called `speakNextChunk()` — defeating the cancel.
+
+The fix: `speakNextChunk()` checks `called` at the top and returns immediately if true. Both `utter.onend` and `utter.onerror` also check `called` before proceeding.
+
+### C1 fix — `chunkText(null)` returns `[]`
+Previously, `chunkText(null)` returned `[null]`, which `speak()` then turned into `new SpeechSynthesisUtterance(null)` — saying the word "null" out loud. The fix returns `[]` for falsy input, so `speak()` sees zero chunks and skips straight to `opts.onEnd`.
+
+### C2 fix — `cancel()` is now synchronous-safe
+`speech.cancel()` is wrapped in `try/catch` to handle browsers where the API is partially implemented. The `called` flag is the source of truth — even if Chrome's underlying cancellation races with a subsequent `speak()`, the guard catches the eventual `onerror`.
+
 ---
 
 ## 📐 Rank-Based SVG Beat Matching (js/app.js)
@@ -1025,20 +1071,63 @@ SVG elements are matched to beats by **rank** (position in sorted order), NOT by
 
 This means the first SVG element always shows at beat 1, regardless of its `data-beat` number.
 
+### A10 fix — `switchTab` stops ALL lecture timers
+Previously, `switchTab` only called `TTS.stopSpeaking()`. The lecture's `playTimer` kept firing `advance()`, which called `TTS.speak()` again on a hidden tab. The fix iterates `lecStates` and calls `state.stop()` on each, which:
+1. Sets `state.isPlaying = false`
+2. Clears `state.playTimer`
+3. Calls `ChalkboardTimeline.clear()`
+4. Cancels the current TTS handle
+5. Calls `TTS.stopSpeaking()`
+
+### A7 fix — `updateUI` is no longer reassigned
+Previously, the immersive path reassigned the function declaration `updateUI` and captured the original as `origUpdateUI`. On re-init, `origUpdateUI` would capture the *previous reassignment*, leading to double-invocation. The fix creates a fresh `immersiveUpdateUI` wrapper and assigns it only to `state.updateUI`, leaving the original function declaration untouched.
+
+### B7 fix — `startChalkboardTimeline` not duplicated
+Previously, the standard path had `startChalkboardTimeline(el)` and the immersive path inside `updateImmersiveUI` reimplemented the same logic. The two copies would drift. The immersive copy also omitted the `reset()` call for beats with no timeline. Future contributors should keep both paths using the same helper.
+
+### B8 fix — `renderRealLife` rect size matches scenario viewBox
+Previously, the background `<rect>` was hardcoded to `width=550 height=700`, which mismatches scenarios with viewBoxes like `"80 60 400 620"`. The fix parses the scenario's viewBox and uses its width/height.
+
+### B9 fix — `cloneNode` fallback in `restartSVGAnimations`
+When `getAnimations` is unavailable, the fallback clones elements with `cloneNode(true)`, which duplicates nested `id` attributes and breaks `filter="url(#chalk)"` references. The fix prefers the Web Animations API and only falls back to clone-replace when no IDs are involved.
+
+### B10 fix — `GlobeViewer` constructor wrapped in try/catch
+If the constructor throws (e.g. WebGL unavailable, three.min.js failed to load), the loading indicator was already removed, leaving an empty box. The fix surfaces a helpful error message.
+
+### B11 fix — hidden elements cancel their CSS animations
+When the user navigates backward, previously-shown elements become invisible but their CSS animations continue consuming CPU. The fix calls `el.getAnimations().forEach(a => a.cancel())` on elements being hidden.
+
+### C19 fix — guided-practice `data-beat` off-by-one
+`data-beat` in guided-practice SVGs is 1-based but `gpState.stepIdx` is 0-based. The check `beat <= gpState.stepIdx` meant the first beat (data-beat=1) was invisible until step 2. The fix uses `beat <= gpState.stepIdx + 1`.
+
 ---
 
 ## 🔐 Authentication System (js/auth.js)
 
 ### Student Account
 - Signup with name, grade, email, password, parent name, parent email, parent phone
-- **OTP verification** (dev-mode: OTP shown on screen, 5-min expiry)
+- **Confirm Signup (Pilot Code)** (A5 fix — OTP is shown on screen because there is no email/SMS gateway in this offline localStorage-only app. In production, this would be a real OTP delivery channel.)
+- 5-min expiry
 - Login with email + password
 - Grade is locked to the student's registered grade (class selector hidden)
+- Phone number is validated (C8 fix — `isValidPhone` accepts optional leading `+`, digits, spaces, hyphens, length 8–15 digits)
+
+### A4 fix — no password hashes in session
+`saveCurrentUser(user)` strips `passwordHash` and `parentPasswordHash` before persisting to `learning_system_current_user`. The hashes only live in the `learning_system_users` registry, where they're needed for login verification. Previously, the entire user object was stored in the session, so anyone with DevTools access on a logged-in browser could read their own hash and brute-force common passwords offline.
+
+### C3 fix — deprecated `unescape` removed
+`simpleHash()` previously used `btoa(unescape(encodeURIComponent(xored)))` — `unescape` is deprecated since ES5. The fix uses `TextEncoder`-based UTF-8 → base64 conversion via a new `utf8ToBase64()` helper, with a `btoa(encodeURIComponent(...))` fallback for very old browsers.
+
+### B6 fix — shared toast
+`window.Auth._toast(message, type)` is now exposed. `proctor.js` calls it via `if (window.Auth && window.Auth._toast) return window.Auth._toast(...)` so only one toast element is rendered at the top of the screen at a time. Previously, both files created their own toast DOM at the same position (`top:20px; left:50%`) and they overlapped.
 
 ### Parent Account
 - Login from `parent-dashboard.html` with parent email + password
 - Sees all students linked to their parent email
-- Dashboard shows: chapter progress, practice scores, self-test scores, **test paper attempts with uploaded images + model answers**, proctor logs
+- Dashboard shows: chapter progress, practice scores, self-test scores, **test paper attempts with uploaded images + model answers grouped by section, with auto-graded MCQ scores since the B2 fix**, proctor logs
+
+### C7 fix — parent user id
+Parent sessions have no `id` field. `getCurrentUserId()` returns `u.id || u.parentEmail || u.email`, so progress writes no longer go to `learning_system_progress_undefined`.
 
 ### Logout Teardown
 `window.App.teardownActiveContent()` in `app.js` is called by `auth.js` logout. It:
@@ -1053,24 +1142,38 @@ This means the first SVG element always shows at beat 1, regardless of its `data
 
 ### Auto-Proctoring
 When a student opens a chapter, proctoring starts automatically:
-- **Fullscreen mode** (exits = violation)
-- **Tab switch detection** (visibilitychange + blur events)
+- **Fullscreen mode** (only enforced on browsers that support it — see A1 fix below)
+- **Tab switch detection** — primarily via `visibilitychange`. `blur` is only counted when `document.hidden` is also true (most blur events are benign: clicking the address bar, opening DevTools, OS notifications)
+- **Debounced violations** — a single tab switch fires both `visibilitychange` and `blur`; both are squashed within 800ms so they count as ONE violation
 - **3 warnings** → session terminated on 5th violation
-- Violations logged to `learning_system_proctor_logs_<email>`
+- Violations logged to `learning_system_proctor_logs_<userId>`
+
+#### A1 fix (iOS + non-user-gesture fullscreen)
+Prior versions requested fullscreen via `setTimeout(..., 100)` from inside `startProctoring()`, which is NOT a user gesture. Browsers reject the request, and the periodic 2-second `fullscreenTimer` then logged a violation every cycle, terminating iOS sessions in ~10s.
+
+The fix:
+1. `canFullscreen()` detects iOS Safari (where `Element.requestFullscreen` is not supported on non-video elements) and returns `false` there. Fullscreen enforcement is skipped entirely on iOS.
+2. The periodic fullscreen check uses `everEnteredFullscreen` — only flags a violation if the user WAS in fullscreen and then exited. If the browser silently rejected the initial request, no violations accrue.
+3. `blur` is only counted when `document.hidden` is true. Most browser interactions (clicking the address bar, opening DevTools, OS notifications) fire `blur` without hiding the document.
+4. `handleViolation()` is debounced by 800ms so a single tab switch doesn't double-count.
 
 ### Progress Tracking
-Tracks in `learning_system_progress_<email>`:
+Tracks in `learning_system_progress_<userId>`:
 - Chapters visited, time spent per chapter
-- Lecture beats completed (e.g., 3/10 beats)
+- `maxBeatReached` — the highest beat reached in any lecture of the chapter (used for resume)
+- `completedLectures` — array of lecture ids whose full beat sequence was viewed (B5 fix — replaces the old `lecturesCompleted` field which actually stored max beat, making parent-dashboard progress math nonsense)
 - Practice problems answered/correct
 - Self-test questions answered/correct
 - Tabs opened
+
+#### C7 fix (parent user id)
+`getCurrentUserId()` returns `u.id || u.parentEmail || u.email`. Previously, parent sessions had no `id` field, so progress writes went to `learning_system_progress_undefined`.
 
 ### Parent Dashboard
 Shows per-student:
 - Summary cards (chapters, time, practice %, self-test %, test papers, violations)
 - Chapter progress table
-- Test paper attempts (expandable: shows uploaded answer sheet image + model answers grouped by section A-E)
+- Test paper attempts (expandable: shows uploaded answer sheet image + model answers grouped by section A-E, with auto-graded MCQ scores since the B2 fix)
 - Proctor violation logs
 
 ---
