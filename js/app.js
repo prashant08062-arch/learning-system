@@ -607,18 +607,20 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
           break;
         }
       }
-      // If no timeline for this beat, reset all timeline elements
+      
+      // ALWAYS reset ALL timeline elements from ALL beats before
+      // starting a new timeline. This ensures beat 2's elements
+      // are hidden when navigating to beat 3, etc.
+      var allSteps = [];
+      lec.timelines.forEach(function(tl) { allSteps = allSteps.concat(tl.steps); });
+      if (window.ChalkboardTimeline) {
+        window.ChalkboardTimeline.reset(svgEl, allSteps);
+      }
+      
       if (!timelineSteps) {
-        // Collect all steps from all timelines to reset
-        var allSteps = [];
-        lec.timelines.forEach(function(tl) { allSteps = allSteps.concat(tl.steps); });
-        if (window.ChalkboardTimeline) {
-          window.ChalkboardTimeline.reset(svgEl, allSteps);
-        }
         return;
       }
     } else if (lec.timeline) {
-      // Single timeline
       if (lec.timeline.beat !== beatNum) {
         if (window.ChalkboardTimeline) {
           window.ChalkboardTimeline.reset(svgEl, lec.timeline.steps);
@@ -630,10 +632,12 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
       return;
     }
     
-    // Start the timeline
-    if (timelineSteps && window.ChalkboardTimeline) {
-      window.ChalkboardTimeline.start(svgEl, timelineSteps);
-    }
+    // Small delay before starting to let the reset settle
+    setTimeout(function() {
+      if (timelineSteps && window.ChalkboardTimeline) {
+        window.ChalkboardTimeline.start(svgEl, timelineSteps);
+      }
+    }, 10);
   }
 
   // Restart CSS animations inside an SVG element.

@@ -40,18 +40,108 @@ window.CHAPTER_DATA = {
         "Let me end with a teaser for our next lecture. We now know the shapes of these mirrors. But what kind of IMAGES do they form? Why does a concave mirror sometimes give a big image and sometimes a small upside-down one? Why does a convex mirror always give a small image? In our next lecture, we will perform activities to find out. Until then, take a spoon, look at your face in both sides, and observe carefully!"
       ],
       "timeline": {
-        "beat": 1,
+        "beat": 2,
         "steps": [
           {
             "delay": 0,
             "show": [
-              "l1b1-title"
+              "cb-title"
             ]
           },
           {
-            "delay": 10642,
+            "delay": 4000,
+            "draw": [
+              "cb-mirror-glass"
+            ]
+          },
+          {
+            "delay": 5000,
             "show": [
-              "l1b1-sub"
+              "cb-mirror-silver"
+            ]
+          },
+          {
+            "delay": 7000,
+            "show": [
+              "cb-label-glass",
+              "cb-label-silver",
+              "cb-label-plane"
+            ]
+          },
+          {
+            "delay": 13000,
+            "draw": [
+              "cb-ray-incident"
+            ]
+          },
+          {
+            "delay": 14000,
+            "photon": [
+              "cb-photon-glow",
+              "cb-photon-core"
+            ]
+          },
+          {
+            "delay": 15000,
+            "show": [
+              "cb-normal"
+            ]
+          },
+          {
+            "delay": 16000,
+            "draw": [
+              "cb-ray-reflected"
+            ]
+          },
+          {
+            "delay": 17000,
+            "show": [
+              "cb-bounces"
+            ],
+            "pulse": [
+              "cb-bounces"
+            ]
+          },
+          {
+            "delay": 19000,
+            "show": [
+              "cb-label-incident",
+              "cb-label-reflected",
+              "cb-label-normal"
+            ]
+          },
+          {
+            "delay": 27000,
+            "draw": [
+              "cb-concave"
+            ]
+          },
+          {
+            "delay": 28000,
+            "show": [
+              "cb-label-concave",
+              "cb-label-concave2"
+            ]
+          },
+          {
+            "delay": 29000,
+            "draw": [
+              "cb-convex"
+            ]
+          },
+          {
+            "delay": 30000,
+            "show": [
+              "cb-label-convex",
+              "cb-label-convex2"
+            ]
+          },
+          {
+            "delay": 31000,
+            "show": [
+              "cb-summary-flat",
+              "cb-summary-concave",
+              "cb-summary-convex"
             ]
           }
         ]
@@ -70,6 +160,113 @@ window.CHAPTER_DATA = {
               "delay": 10642,
               "show": [
                 "l1b1-sub"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 2,
+          "steps": [
+            {
+              "delay": 0,
+              "show": [
+                "cb-title"
+              ]
+            },
+            {
+              "delay": 4000,
+              "draw": [
+                "cb-mirror-glass"
+              ]
+            },
+            {
+              "delay": 5000,
+              "show": [
+                "cb-mirror-silver"
+              ]
+            },
+            {
+              "delay": 7000,
+              "show": [
+                "cb-label-glass",
+                "cb-label-silver",
+                "cb-label-plane"
+              ]
+            },
+            {
+              "delay": 13000,
+              "draw": [
+                "cb-ray-incident"
+              ]
+            },
+            {
+              "delay": 14000,
+              "photon": [
+                "cb-photon-glow",
+                "cb-photon-core"
+              ]
+            },
+            {
+              "delay": 15000,
+              "show": [
+                "cb-normal"
+              ]
+            },
+            {
+              "delay": 16000,
+              "draw": [
+                "cb-ray-reflected"
+              ]
+            },
+            {
+              "delay": 17000,
+              "show": [
+                "cb-bounces"
+              ],
+              "pulse": [
+                "cb-bounces"
+              ]
+            },
+            {
+              "delay": 19000,
+              "show": [
+                "cb-label-incident",
+                "cb-label-reflected",
+                "cb-label-normal"
+              ]
+            },
+            {
+              "delay": 27000,
+              "draw": [
+                "cb-concave"
+              ]
+            },
+            {
+              "delay": 28000,
+              "show": [
+                "cb-label-concave",
+                "cb-label-concave2"
+              ]
+            },
+            {
+              "delay": 29000,
+              "draw": [
+                "cb-convex"
+              ]
+            },
+            {
+              "delay": 30000,
+              "show": [
+                "cb-label-convex",
+                "cb-label-convex2"
+              ]
+            },
+            {
+              "delay": 31000,
+              "show": [
+                "cb-summary-flat",
+                "cb-summary-concave",
+                "cb-summary-convex"
               ]
             }
           ]
