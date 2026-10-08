@@ -660,7 +660,7 @@ function buildProctorBadge() {
   badge.innerHTML = `
     <style>
       #proctorBadge {
-        position: fixed; bottom: 20px; right: 20px; z-index: 9500;
+        position: fixed; top: 20px; left: 20px; z-index: 9500;
         background: #7f1d1d; color: #fef2f2;
         border: 1px solid #fca5a5;
         padding: 8px 14px; border-radius: 20px;

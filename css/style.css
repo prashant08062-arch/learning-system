@@ -1733,7 +1733,7 @@ svg.rl-board rect[fill*="url(#mirror"] {
   .home-footer { padding: 16px !important; font-size: 11px !important; }
 
   /* Proctor badge */
-  #proctorBadge { font-size: 10px !important; padding: 4px 8px !important; bottom: 8px !important; right: 8px !important; }
+  #proctorBadge { font-size: 10px !important; padding: 4px 8px !important; top: 8px !important; left: 8px !important; }
 }
 
 /* ---- Tablet (481-820px) enhancements ---- */

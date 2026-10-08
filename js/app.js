@@ -941,6 +941,15 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
         if (i === showCount - 1) {
           void el.offsetWidth;
           el.classList.add('pulse');
+          // Start chalkboard timeline in immersive mode too
+          // Find the SVG element inside the immersive canvas
+          var imSvg = immersiveOverlay.querySelector('svg.lec-board, svg');
+          if (imSvg && window.ChalkboardTimeline && lec.timeline) {
+            var beatNum = parseInt(el.getAttribute('data-beat'), 10);
+            if (lec.timeline.beat === beatNum) {
+              window.ChalkboardTimeline.start(imSvg, lec.timeline.steps);
+            }
+          }
         }
       });
     }
