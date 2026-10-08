@@ -642,18 +642,29 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
   // Falls back to the clone-replace technique if getAnimations
   // is not available.
   function restartSVGAnimations(el) {
-    // Select ALL animated elements — includes both the original
-    // animation classes (area-tile, fade-in, draw-line, perim-dot,
-    // perim-dot-square) and the universal ones (anim-fade-in,
-    // anim-pop-in, anim-draw, anim-pulse-in, anim-slide-left,
-    // anim-slide-right).
+    // Skip restartSVGAnimations for chalkboard timeline elements —
+    // those are managed by the ChalkboardTimeline controller, not
+    // by CSS animation classes. Calling cancel()+play() on their
+    // Web Animations would conflict with the timeline's setTimeout
+    // reveals.
+    //
+    // Only restart elements that have universal animation classes
+    // (anim-*, area-tile, fade-in, etc.) but NOT chalkboard-
+    // specific classes (chalk-*, photon).
     const animated = el.querySelectorAll(
       '.area-tile, .fade-in, .draw-line, .perim-dot, .perim-dot-square, ' +
       '.anim-fade-in, .anim-pop-in, .anim-draw, .anim-pulse-in, ' +
-      '.anim-slide-left, .anim-slide-right, ' +
-      '.chalk-draw, .chalk-fade, .chalk-pulse, .photon, .photon-slow, .eraser-wipe'
+      '.anim-slide-left, .anim-slide-right'
     );
-    animated.forEach(function(animEl) {
+    // Filter OUT elements that also have chalkboard classes
+    const filtered = Array.from(animated).filter(function(e) {
+      return !e.classList.contains('chalk-draw') &&
+             !e.classList.contains('chalk-fade') &&
+             !e.classList.contains('chalk-pulse') &&
+             !e.classList.contains('photon') &&
+             !e.classList.contains('photon-slow');
+    });
+    filtered.forEach(function(animEl) {
       // Use Web Animations API if available (Chrome, Firefox, Edge)
       if (animEl.getAnimations) {
         const anims = animEl.getAnimations();
@@ -908,6 +919,17 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
     if (immersiveOverlay) {
       immersiveOverlay.classList.remove('active');
       document.body.style.overflow = '';
+      // Stop TTS when exiting immersive mode — otherwise audio
+      // continues playing after the overlay closes.
+      if (state.isPlaying) {
+        state.isPlaying = false;
+        playBtn.textContent = '▶';
+      }
+      clearTimers();
+      if (currentTTS && currentTTS.cancel) currentTTS.cancel();
+      if (window.TTS) TTS.stopSpeaking();
+      // Also clear chalkboard timeline timers
+      if (window.ChalkboardTimeline) window.ChalkboardTimeline.clear();
     }
   }
 

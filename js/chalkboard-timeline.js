@@ -32,53 +32,41 @@ function startTimeline(svgEl, timeline, onComplete) {
   clearTimers();
   
   if (!timeline || timeline.length === 0) return;
+  if (!svgEl) return;
+  
+  // Collect all elements up front (stable references)
+  var allItems = [];
+  timeline.forEach(function(step) {
+    (step.show || []).forEach(function(id) { allItems.push({id: id, type: 'show', el: svgEl.querySelector('#' + id)}); });
+    (step.draw || []).forEach(function(id) { allItems.push({id: id, type: 'draw', el: svgEl.querySelector('#' + id)}); });
+    (step.photon || []).forEach(function(id) { allItems.push({id: id, type: 'photon', el: svgEl.querySelector('#' + id)}); });
+    (step.pulse || []).forEach(function(id) { allItems.push({id: id, type: 'pulse', el: svgEl.querySelector('#' + id)}); });
+  });
   
   // PHASE 1: Force-reset ALL elements to hidden state.
-  // Disable transitions first so the reset is instant, then
-  // re-enable transitions after a microtask.
-  var allIds = [];
-  timeline.forEach(function(step) {
-    (step.show || []).forEach(function(id) { allIds.push({id: id, type: 'show'}); });
-    (step.draw || []).forEach(function(id) { allIds.push({id: id, type: 'draw'}); });
-    (step.photon || []).forEach(function(id) { allIds.push({id: id, type: 'photon'}); });
-    (step.pulse || []).forEach(function(id) { allIds.push({id: id, type: 'pulse'}); });
-  });
-  
-  // Disable transitions and reset to hidden
-  allIds.forEach(function(item) {
-    var el = svgEl.querySelector('#' + item.id);
-    if (!el) return;
-    el.style.transition = 'none';
-    if (item.type === 'show' || item.type === 'photon' || item.type === 'draw') {
-      el.style.opacity = '0';
-    }
+  allItems.forEach(function(item) {
+    if (!item.el) return;
+    item.el.style.transition = 'none';
+    item.el.style.opacity = '0';
     if (item.type === 'draw') {
-      el.style.strokeDasharray = '2000';
-      el.style.strokeDashoffset = '2000';
+      item.el.style.strokeDasharray = '2000';
+      item.el.style.strokeDashoffset = '2000';
     }
-    if (item.type === 'photon') {
-      el.style.animation = 'none';
-    }
-    if (item.type === 'pulse') {
-      el.style.animation = 'none';
-      el.style.opacity = '0';
-    }
+    item.el.style.animation = 'none';
   });
   
-  // Force reflow to apply the reset
+  // Force reflow
   void svgEl.offsetWidth;
   
-  // PHASE 2: Re-enable transitions (after a short delay so the
-  // browser registers the reset state)
-  setTimeout(function() {
-    allIds.forEach(function(item) {
-      var el = svgEl.querySelector('#' + item.id);
-      if (!el) return;
-      if (item.type === 'show' || item.type === 'photon' || item.type === 'draw') {
-        el.style.transition = 'opacity 0.6s ease';
+  // PHASE 2: Re-enable transitions after 50ms
+  var phase2Timer = setTimeout(function() {
+    allItems.forEach(function(item) {
+      if (!item.el) return;
+      if (item.type === 'show' || item.type === 'photon') {
+        item.el.style.transition = 'opacity 0.6s ease';
       }
       if (item.type === 'draw') {
-        el.style.transition = 'opacity 0.3s ease, stroke-dashoffset 2s ease';
+        item.el.style.transition = 'opacity 0.3s ease, stroke-dashoffset 1.5s ease';
       }
     });
     
@@ -113,19 +101,8 @@ function startTimeline(svgEl, timeline, onComplete) {
       }, step.delay);
       activeTimers.push(timer);
     });
-    
-    // Schedule completion callback
-    if (onComplete) {
-      var lastDelay = timeline[timeline.length - 1].delay + 3000;
-      var completeTimer = setTimeout(onComplete, lastDelay);
-      activeTimers.push(completeTimer);
-    }
-  }, 50); // 50ms delay to ensure browser registers the reset
-  
-  // Start title immediately (delay 0 steps should run after reset)
-  var immediateSteps = timeline.filter(function(s) { return s.delay === 0; });
-  // These will be handled by the setTimeout above, but with a 50ms delay
-  // which is close enough to "immediate"
+  }, 50);
+  activeTimers.push(phase2Timer);
 }
 
 window.ChalkboardTimeline = {
@@ -133,25 +110,39 @@ window.ChalkboardTimeline = {
   clear: clearTimers,
   reset: function(svgEl, timeline) {
     clearTimers();
-    if (!timeline || timeline.length === 0) return;
-    // Force-reset ALL elements to hidden (same as startTimeline Phase 1)
-    var allIds = [];
+    if (!timeline || timeline.length === 0 || !svgEl) return;
+    // Force-reset ALL elements to hidden
     timeline.forEach(function(step) {
-      (step.show || []).forEach(function(id) { allIds.push({id: id, type: 'show'}); });
-      (step.draw || []).forEach(function(id) { allIds.push({id: id, type: 'draw'}); });
-      (step.photon || []).forEach(function(id) { allIds.push({id: id, type: 'photon'}); });
-      (step.pulse || []).forEach(function(id) { allIds.push({id: id, type: 'pulse'}); });
-    });
-    allIds.forEach(function(item) {
-      var el = svgEl.querySelector('#' + item.id);
-      if (!el) return;
-      el.style.transition = 'none';
-      el.style.opacity = '0';
-      if (item.type === 'draw') {
+      (step.show || []).forEach(function(id) {
+        var el = svgEl.querySelector('#' + id);
+        if (!el) return;
+        el.style.transition = 'none';
+        el.style.opacity = '0';
+        el.style.animation = 'none';
+      });
+      (step.draw || []).forEach(function(id) {
+        var el = svgEl.querySelector('#' + id);
+        if (!el) return;
+        el.style.transition = 'none';
+        el.style.opacity = '0';
         el.style.strokeDasharray = '2000';
         el.style.strokeDashoffset = '2000';
-      }
-      el.style.animation = 'none';
+        el.style.animation = 'none';
+      });
+      (step.photon || []).forEach(function(id) {
+        var el = svgEl.querySelector('#' + id);
+        if (!el) return;
+        el.style.transition = 'none';
+        el.style.opacity = '0';
+        el.style.animation = 'none';
+      });
+      (step.pulse || []).forEach(function(id) {
+        var el = svgEl.querySelector('#' + id);
+        if (!el) return;
+        el.style.transition = 'none';
+        el.style.opacity = '0';
+        el.style.animation = 'none';
+      });
     });
     void svgEl.offsetWidth;
   }
