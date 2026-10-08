@@ -592,11 +592,20 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
     
     // Get the beat number of this element
     var beatNum = parseInt(el.getAttribute('data-beat'), 10);
-    if (lec.timeline.beat !== beatNum) return;
     
     // Find the SVG element containing this beat group
     var svgEl = sectionEl.querySelector('svg.lec-board');
     if (!svgEl) return;
+    
+    if (lec.timeline.beat !== beatNum) {
+      // This beat does NOT have a timeline — but we need to clean
+      // up the previous timeline's elements so they don't linger.
+      // Reset ALL timeline elements to their hidden state.
+      if (window.ChalkboardTimeline) {
+        window.ChalkboardTimeline.reset(svgEl, lec.timeline.steps);
+      }
+      return;
+    }
     
     // Start the timeline
     if (window.ChalkboardTimeline) {

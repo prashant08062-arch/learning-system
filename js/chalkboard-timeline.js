@@ -130,7 +130,31 @@ function startTimeline(svgEl, timeline, onComplete) {
 
 window.ChalkboardTimeline = {
   start: startTimeline,
-  clear: clearTimers
+  clear: clearTimers,
+  reset: function(svgEl, timeline) {
+    clearTimers();
+    if (!timeline || timeline.length === 0) return;
+    // Force-reset ALL elements to hidden (same as startTimeline Phase 1)
+    var allIds = [];
+    timeline.forEach(function(step) {
+      (step.show || []).forEach(function(id) { allIds.push({id: id, type: 'show'}); });
+      (step.draw || []).forEach(function(id) { allIds.push({id: id, type: 'draw'}); });
+      (step.photon || []).forEach(function(id) { allIds.push({id: id, type: 'photon'}); });
+      (step.pulse || []).forEach(function(id) { allIds.push({id: id, type: 'pulse'}); });
+    });
+    allIds.forEach(function(item) {
+      var el = svgEl.querySelector('#' + item.id);
+      if (!el) return;
+      el.style.transition = 'none';
+      el.style.opacity = '0';
+      if (item.type === 'draw') {
+        el.style.strokeDasharray = '2000';
+        el.style.strokeDashoffset = '2000';
+      }
+      el.style.animation = 'none';
+    });
+    void svgEl.offsetWidth;
+  }
 };
 
 })();
