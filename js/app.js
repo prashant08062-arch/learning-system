@@ -932,8 +932,17 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
       clearTimers();
       if (currentTTS && currentTTS.cancel) currentTTS.cancel();
       if (window.TTS) TTS.stopSpeaking();
-      // Also clear chalkboard timeline timers
-      if (window.ChalkboardTimeline) window.ChalkboardTimeline.clear();
+      // Only clear the IMMERSIVE clone's chalkboard timers — leave the
+      // dual-screen SVG's pending timers intact so the dual-screen
+      // animation continues from where it was before immersive mode.
+      // (Previously this called ChalkboardTimeline.clear() with no args,
+      // which cancelled ALL chalkboard timers including the dual-screen's,
+      // leaving the dual-screen view "stuck" with only the immediately-
+      // visible elements showing.)
+      if (window.ChalkboardTimeline) {
+        const imSvg = immersiveOverlay.querySelector('svg.lec-board, svg');
+        if (imSvg) window.ChalkboardTimeline.clear(imSvg);
+      }
     }
   }
 
