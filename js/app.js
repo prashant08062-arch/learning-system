@@ -569,8 +569,38 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
           // navigating back to a previously-seen beat should also
           // replay the animations.
           restartSVGAnimations(el);
+          // Check if this beat has a chalkboard timeline and start it
+          startChalkboardTimeline(el);
         }
       });
+    }
+  }
+
+  // Start chalkboard timeline if this beat has one.
+  // The timeline data is stored at lecture level as:
+  //   lec.timeline = { beat: 2, steps: [{delay, show, draw, photon, pulse}] }
+  // When the beat becomes visible, elements are revealed at specific
+  // timestamps synced with the TTS narration.
+  function startChalkboardTimeline(el) {
+    // Clear any existing timeline timers
+    if (window.ChalkboardTimeline) {
+      window.ChalkboardTimeline.clear();
+    }
+    
+    // Check if this lecture has a timeline
+    if (!lec || !lec.timeline) return;
+    
+    // Get the beat number of this element
+    var beatNum = parseInt(el.getAttribute('data-beat'), 10);
+    if (lec.timeline.beat !== beatNum) return;
+    
+    // Find the SVG element containing this beat group
+    var svgEl = sectionEl.querySelector('svg.lec-board');
+    if (!svgEl) return;
+    
+    // Start the timeline
+    if (window.ChalkboardTimeline) {
+      window.ChalkboardTimeline.start(svgEl, lec.timeline.steps);
     }
   }
 
@@ -622,7 +652,7 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
     }
   }
 
-  function clearTimers() { clearTimeout(state.playTimer); }
+  function clearTimers() { clearTimeout(state.playTimer); if (window.ChalkboardTimeline) window.ChalkboardTimeline.clear(); }
 
   let currentTTS = null;  // Track the current TTS handle to prevent stale onEnd callbacks
 
@@ -1490,7 +1520,7 @@ function initRealLifeScenario(dropdown, isImageType) {
     counterEl.textContent = `${state.currentBeat + 1} / ${beats.length}`;
   }
 
-  function clearTimers() { clearTimeout(state.playTimer); }
+  function clearTimers() { clearTimeout(state.playTimer); if (window.ChalkboardTimeline) window.ChalkboardTimeline.clear(); }
 
   function goTo(index) {
     if (index < 0 || index >= beats.length) return;
