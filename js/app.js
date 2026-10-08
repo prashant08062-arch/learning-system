@@ -588,7 +588,8 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
     const animated = el.querySelectorAll(
       '.area-tile, .fade-in, .draw-line, .perim-dot, .perim-dot-square, ' +
       '.anim-fade-in, .anim-pop-in, .anim-draw, .anim-pulse-in, ' +
-      '.anim-slide-left, .anim-slide-right'
+      '.anim-slide-left, .anim-slide-right, ' +
+      '.chalk-draw, .chalk-fade, .chalk-pulse, .photon, .photon-slow, .eraser-wipe'
     );
     animated.forEach(function(animEl) {
       // Use Web Animations API if available (Chrome, Firefox, Edge)

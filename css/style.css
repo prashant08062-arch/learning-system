@@ -2739,3 +2739,84 @@ svg.rl-board rect[fill*="url(#mirror"] {
 @keyframes draw-line-anim {
   to { stroke-dashoffset: 0; }
 }
+
+/* ============================================================
+   CHALKBOARD ANIMATION SYSTEM
+   For physics/math lectures that need "teacher drawing on
+   chalkboard" aesthetic with light/photon animations.
+   ============================================================ */
+
+/* Chalk-draw: lines draw themselves (stroke-dashoffset) */
+.chalk-draw {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: chalk-draw-anim 2s ease forwards;
+}
+@keyframes chalk-draw-anim {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Chalk-fade: text/labels fade in with slight scale */
+.chalk-fade {
+  opacity: 0;
+  animation: chalk-fade-anim 0.8s ease forwards;
+}
+@keyframes chalk-fade-anim {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Chalk-pulse: pulsing emphasis (for "BOUNCES BACK!" etc.) */
+.chalk-pulse {
+  animation: chalk-pulse-anim 0.8s ease-in-out infinite alternate;
+}
+@keyframes chalk-pulse-anim {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
+}
+
+/* Photon: glowing light dot that travels along a path using offset-path */
+.photon {
+  offset-rotate: 0deg;
+  animation: photon-travel 3s linear infinite;
+}
+@keyframes photon-travel {
+  0%   { offset-distance: 0%; }
+  100% { offset-distance: 100%; }
+}
+.photon-slow {
+  offset-rotate: 0deg;
+  animation: photon-travel 4.5s linear infinite;
+  animation-delay: 1s;
+}
+
+/* Eraser-wipe: fades out (for scene transitions) */
+.eraser-wipe {
+  animation: eraser-wipe-anim 1s ease forwards;
+}
+@keyframes eraser-wipe-anim {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Staggered delays for chalkboard timeline */
+.chalk-delay-1 { animation-delay: 0.5s; }
+.chalk-delay-2 { animation-delay: 1.0s; }
+.chalk-delay-3 { animation-delay: 1.5s; }
+.chalk-delay-4 { animation-delay: 2.0s; }
+.chalk-delay-5 { animation-delay: 2.5s; }
+.chalk-delay-6 { animation-delay: 3.0s; }
+.chalk-delay-7 { animation-delay: 3.5s; }
+.chalk-delay-8 { animation-delay: 4.0s; }
+.chalk-delay-9 { animation-delay: 4.5s; }
+.chalk-delay-10 { animation-delay: 5.0s; }
+.chalk-delay-11 { animation-delay: 5.5s; }
+.chalk-delay-12 { animation-delay: 6.0s; }
+.chalk-delay-13 { animation-delay: 6.5s; }
+.chalk-delay-14 { animation-delay: 7.0s; }
+.chalk-delay-15 { animation-delay: 7.5s; }
+.chalk-delay-16 { animation-delay: 8.0s; }
+.chalk-delay-17 { animation-delay: 8.5s; }
+.chalk-delay-18 { animation-delay: 9.0s; }
+.chalk-delay-19 { animation-delay: 9.5s; }
+.chalk-delay-20 { animation-delay: 10.0s; }
