@@ -26,7 +26,7 @@ window.CHAPTER_DATA = {
       "id": "mirrors",
       "label": "10.1 Spherical Mirrors",
       "viewBox": "0 0 1600 900",
-      "svg": "<defs>\n  <pattern id=\"grid-l1\" width=\"25\" height=\"25\" patternUnits=\"userSpaceOnUse\">\n    <path d=\"M 25 0 L 0 0 0 25\" fill=\"none\" stroke=\"#1e293b\" stroke-width=\"0.5\"/>\n  </pattern>\n  <linearGradient id=\"metal-l1\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#94a3b8\"/><stop offset=\"0.5\" stop-color=\"#cbd5e1\"/><stop offset=\"1\" stop-color=\"#64748b\"/>\n  </linearGradient>\n  <linearGradient id=\"metalBack-l1\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#475569\"/><stop offset=\"1\" stop-color=\"#1e293b\"/>\n  </linearGradient>\n  <radialGradient id=\"sun-l1\" cx=\"0.5\" cy=\"0.5\" r=\"0.5\">\n    <stop offset=\"0\" stop-color=\"#fde047\"/><stop offset=\"0.5\" stop-color=\"#fbbf24\"/><stop offset=\"1\" stop-color=\"#f59e0b\" stop-opacity=\"0\"/>\n  </radialGradient>\n</defs>\n<rect x=\"0\" y=\"0\" width=\"800\" height=\"600\" fill=\"url(#grid-l1)\"/>\n\n<!-- Beat 1: Plane mirror with parallel rays -->\n<g class=\"el\" data-beat=\"1\">\n  <rect x=\"380\" y=\"200\" width=\"14\" height=\"240\" fill=\"url(#metalBack-l1)\" stroke=\"#0f172a\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n  <rect x=\"394\" y=\"200\" width=\"6\" height=\"240\" fill=\"url(#metal-l1)\" stroke=\"#cbd5e1\" stroke-width=\"1\" class=\"anim-pop-in\" style=\"animation-delay: 0.15s\" />\n  <text x=\"400\" y=\"465\" fill=\"#94a3b8\" font-size=\"12\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Plane mirror</text>\n</g>\n\n<!-- Beat 2: Three mirror types — plane, concave, convex -->\n<g class=\"el\" data-beat=\"2\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowChalk\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\">\n    <path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/>\n  </marker>\n</defs>\n\n<!-- Chalkboard background -->\n<rect width=\"1600\" height=\"900\" fill=\"#1f2a24\"/>\n\n<!-- Chalk dust particles (always visible) -->\n<circle cx=\"300\" cy=\"150\" r=\"2\" fill=\"#f5f5f0\" opacity=\"0.3\"/>\n<circle cx=\"500\" cy=\"100\" r=\"1.5\" fill=\"#f5f5f0\" opacity=\"0.2\"/>\n<circle cx=\"900\" cy=\"120\" r=\"2\" fill=\"#f5f5f0\" opacity=\"0.25\"/>\n<circle cx=\"1200\" cy=\"90\" r=\"1.5\" fill=\"#f5f5f0\" opacity=\"0.2\"/>\n<circle cx=\"1400\" cy=\"160\" r=\"2\" fill=\"#f5f5f0\" opacity=\"0.3\"/>\n\n<!-- Title (appears at 0s) -->\n<text id=\"cb-title\" x=\"800\" y=\"80\" text-anchor=\"middle\" fill=\"#f5f5f0\" font-family=\"'Comic Sans MS', cursive\" font-size=\"48\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.8s ease\">Mirrors: Flat vs Curved</text>\n\n<!-- Flat mirror cross-section (draws at 4s) -->\n<rect id=\"cb-mirror-glass\" x=\"680\" y=\"380\" width=\"80\" height=\"240\" fill=\"rgba(180,220,255,0.10)\" stroke=\"#f5f5f0\" stroke-width=\"3\" filter=\"url(#chalk)\" style=\"stroke-dasharray:2000;stroke-dashoffset:2000;transition:stroke-dashoffset 2s ease\"/>\n<rect id=\"cb-mirror-silver\" x=\"740\" y=\"380\" width=\"12\" height=\"240\" fill=\"#c0c0c0\" opacity=\"0\" filter=\"url(#chalk)\" style=\"transition:opacity 0.6s ease\"/>\n\n<!-- Mirror labels (fade at 7s) -->\n<text id=\"cb-label-glass\" x=\"620\" y=\"510\" text-anchor=\"end\" fill=\"#f5f5f0\" font-family=\"'Comic Sans MS', cursive\" font-size=\"24\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">glass</text>\n<text id=\"cb-label-silver\" x=\"790\" y=\"510\" fill=\"#f5f5f0\" font-family=\"'Comic Sans MS', cursive\" font-size=\"24\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">silver / aluminium</text>\n<text id=\"cb-label-plane\" x=\"720\" y=\"660\" text-anchor=\"middle\" fill=\"#7dd3fc\" font-family=\"'Comic Sans MS', cursive\" font-size=\"20\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">PLANE MIRROR</text>\n\n<!-- Incident ray (draws at 13s) -->\n<line id=\"cb-ray-incident\" x1=\"420\" y1=\"280\" x2=\"680\" y2=\"480\" stroke=\"#7fdbff\" stroke-width=\"3\" stroke-linecap=\"round\" filter=\"url(#chalk)\" marker-end=\"url(#arrowChalk)\" style=\"stroke-dasharray:400;stroke-dashoffset:400;transition:stroke-dashoffset 1.5s ease\"/>\n\n<!-- Normal (dashed, appears at 15s) -->\n<line id=\"cb-normal\" x1=\"500\" y1=\"480\" x2=\"680\" y2=\"480\" stroke=\"#f4d35e\" stroke-width=\"2\" stroke-dasharray=\"8 8\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\"/>\n\n<!-- Reflected ray (draws at 16s) -->\n<line id=\"cb-ray-reflected\" x1=\"680\" y1=\"480\" x2=\"420\" y2=\"680\" stroke=\"#7fdbff\" stroke-width=\"3\" stroke-linecap=\"round\" filter=\"url(#chalk)\" marker-end=\"url(#arrowChalk)\" style=\"stroke-dasharray:400;stroke-dashoffset:400;transition:stroke-dashoffset 1.5s ease\"/>\n\n<!-- Ray labels (appear at 19s) -->\n<text id=\"cb-label-incident\" x=\"450\" y=\"360\" fill=\"#7fdbff\" font-family=\"'Comic Sans MS', cursive\" font-size=\"20\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">incident ray</text>\n<text id=\"cb-label-reflected\" x=\"450\" y=\"620\" fill=\"#7fdbff\" font-family=\"'Comic Sans MS', cursive\" font-size=\"20\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">reflected ray</text>\n<text id=\"cb-label-normal\" x=\"530\" y=\"470\" fill=\"#f4d35e\" font-family=\"'Comic Sans MS', cursive\" font-size=\"18\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">normal</text>\n\n<!-- BOUNCES BACK! (appears+pulses at 17s) -->\n<text id=\"cb-bounces\" x=\"500\" y=\"750\" text-anchor=\"middle\" fill=\"#fbbf24\" font-family=\"'Comic Sans MS', cursive\" font-size=\"32\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">BOUNCES BACK!</text>\n\n<!-- Photon (starts traveling at 14s) -->\n<circle id=\"cb-photon-glow\" r=\"8\" fill=\"#7fdbff\" filter=\"url(#glow)\" style=\"opacity:0\"/>\n<circle id=\"cb-photon-core\" r=\"4\" fill=\"#ffffff\" filter=\"url(#glow)\" style=\"opacity:0\"/>\n\n<!-- Concave mirror (draws at 27s) -->\n<path id=\"cb-concave\" d=\"M 1100 350 Q 1000 500 1100 650\" fill=\"none\" stroke=\"#7fdbff\" stroke-width=\"4\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:400;stroke-dashoffset:400;transition:stroke-dashoffset 1.5s ease\"/>\n<text id=\"cb-label-concave\" x=\"1050\" y=\"520\" text-anchor=\"end\" fill=\"#7fdbff\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">concave</text>\n<text id=\"cb-label-concave2\" x=\"1050\" y=\"548\" text-anchor=\"end\" fill=\"#94a3b8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"16\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">curves inward</text>\n\n<!-- Convex mirror (draws at 29s) -->\n<path id=\"cb-convex\" d=\"M 1250 350 Q 1350 500 1250 650\" fill=\"none\" stroke=\"#ff8fab\" stroke-width=\"4\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:400;stroke-dashoffset:400;transition:stroke-dashoffset 1.5s ease\"/>\n<text id=\"cb-label-convex\" x=\"1300\" y=\"520\" fill=\"#ff8fab\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">convex</text>\n<text id=\"cb-label-convex2\" x=\"1300\" y=\"548\" fill=\"#94a3b8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"16\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">bulges outward</text>\n\n<!-- Summary labels (appear at 31s) -->\n<text id=\"cb-summary-flat\" x=\"400\" y=\"800\" text-anchor=\"middle\" fill=\"#7dd3fc\" font-family=\"'Comic Sans MS', cursive\" font-size=\"20\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">flat = same size</text>\n<text id=\"cb-summary-concave\" x=\"800\" y=\"800\" text-anchor=\"middle\" fill=\"#7fdbff\" font-family=\"'Comic Sans MS', cursive\" font-size=\"20\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">concave = converging</text>\n<text id=\"cb-summary-convex\" x=\"1200\" y=\"800\" text-anchor=\"middle\" fill=\"#ff8fab\" font-family=\"'Comic Sans MS', cursive\" font-size=\"20\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">convex = diverging</text>\n</g>\n\n<!-- Beat 3: Concave mirror — curved inward (with arrow showing direction) -->\n<g class=\"el\" data-beat=\"3\">\n  <!-- large concave mirror at top -->\n  <path d=\"M 180 150 Q 290 230 180 310\" fill=\"none\" stroke=\"url(#metalBack-l1)\" stroke-width=\"14\" stroke-linecap=\"round\" class=\"anim-draw\" style=\"animation-delay: 0.00s\" />\n  <path d=\"M 190 153 Q 295 230 190 307\" fill=\"none\" stroke=\"url(#metal-l1)\" stroke-width=\"6\" stroke-linecap=\"round\" class=\"anim-draw\" style=\"animation-delay: 0.15s\" />\n  <path d=\"M 230 230 L 270 230\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowYellow)\" class=\"anim-draw\" style=\"animation-delay: 0.30s\" />\n  <text x=\"250\" y=\"125\" fill=\"#fbbf24\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"600\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">Curves inward</text>\n  <text x=\"290\" y=\"345\" fill=\"#7dd3fc\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"700\"   class=\"anim-fade-in\" style=\"animation-delay: 0.60s\">CONCAVE</text>\n</g>\n\n<!-- Beat 4: Convex mirror — bulges outward -->\n<g class=\"el\" data-beat=\"4\">\n  <path d=\"M 480 153 Q 595 230 480 307\" fill=\"none\" stroke=\"url(#metal-l1)\" stroke-width=\"6\" stroke-linecap=\"round\" class=\"anim-draw\" style=\"animation-delay: 0.00s\" />\n  <path d=\"M 488 156 Q 590 230 488 304\" fill=\"none\" stroke=\"url(#metalBack-l1)\" stroke-width=\"14\" stroke-linecap=\"round\" transform=\"translate(8,0)\" class=\"anim-draw\" style=\"animation-delay: 0.15s\" />\n  <path d=\"M 530 230 L 570 230\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowYellow)\" class=\"anim-draw\" style=\"animation-delay: 0.30s\" />\n  <text x=\"550\" y=\"125\" fill=\"#fbbf24\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"600\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">Bulges outward</text>\n  <text x=\"590\" y=\"345\" fill=\"#7dd3fc\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"700\"   class=\"anim-fade-in\" style=\"animation-delay: 0.60s\">CONVEX</text>\n</g>\n\n<defs>\n  <marker id=\"arrowYellow\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto\">\n    <path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#fbbf24\"/>\n  </marker>\n</defs>\n\n<!-- Beat 5: Spoon activity - inner curve gives inverted image -->\n<g class=\"el\" data-beat=\"5\">\n  <!-- Spoon -->\n  <ellipse cx=\"160\" cy=\"475\" rx=\"35\" ry=\"55\" fill=\"url(#metal-l1)\" stroke=\"#cbd5e1\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n  <line x1=\"160\" y1=\"525\" x2=\"160\" y2=\"585\" stroke=\"#94a3b8\" stroke-width=\"5\" stroke-linecap=\"round\" class=\"anim-draw\" style=\"animation-delay: 0.15s\" />\n  <!-- Face (inverted) -->\n  <circle cx=\"160\" cy=\"475\" r=\"12\" fill=\"#fbbf24\" opacity=\"0.4\" class=\"anim-pulse-in\" style=\"animation-delay: 0.30s\" />\n  <circle cx=\"155\" cy=\"472\" r=\"2\" fill=\"#1e293b\" class=\"anim-pulse-in\" style=\"animation-delay: 0.45s\" />\n  <circle cx=\"165\" cy=\"478\" r=\"2\" fill=\"#1e293b\" class=\"anim-pulse-in\" style=\"animation-delay: 0.60s\" />\n  <path d=\"M 155 482 Q 160 487 165 482\" stroke=\"#1e293b\" stroke-width=\"1.5\" fill=\"none\" class=\"anim-draw\" style=\"animation-delay: 0.75s\" />\n  <text x=\"220\" y=\"475\" fill=\"#fbbf24\" font-size=\"11\" font-weight=\"600\"   class=\"anim-fade-in\" style=\"animation-delay: 0.90s\">↑ Face upside-down</text>\n  <text x=\"220\" y=\"490\" fill=\"#94a3b8\" font-size=\"10\"   class=\"anim-fade-in\" style=\"animation-delay: 1.05s\">Inner curve (concave)</text>\n</g>\n\n<!-- Beat 6: Spoon outer curve - smaller erect image -->\n<g class=\"el\" data-beat=\"6\">\n  <ellipse cx=\"380\" cy=\"475\" rx=\"35\" ry=\"55\" fill=\"url(#metal-l1)\" stroke=\"#cbd5e1\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n  <!-- Flip spoon so outer curve is shown -->\n  <ellipse cx=\"380\" cy=\"475\" rx=\"20\" ry=\"50\" fill=\"url(#metalBack-l1)\" class=\"anim-pop-in\" style=\"animation-delay: 0.15s\" />\n  <!-- Face (small erect) -->\n  <circle cx=\"380\" cy=\"475\" r=\"7\" fill=\"#fbbf24\" opacity=\"0.4\" class=\"anim-pulse-in\" style=\"animation-delay: 0.30s\" />\n  <circle cx=\"377\" cy=\"473\" r=\"1.5\" fill=\"#1e293b\" class=\"anim-pulse-in\" style=\"animation-delay: 0.45s\" />\n  <circle cx=\"383\" cy=\"473\" r=\"1.5\" fill=\"#1e293b\" class=\"anim-pulse-in\" style=\"animation-delay: 0.60s\" />\n  <path d=\"M 377 478 Q 380 480 383 478\" stroke=\"#1e293b\" stroke-width=\"1\" fill=\"none\" class=\"anim-draw\" style=\"animation-delay: 0.75s\" />\n  <text x=\"440\" y=\"475\" fill=\"#fbbf24\" font-size=\"11\" font-weight=\"600\"   class=\"anim-fade-in\" style=\"animation-delay: 0.90s\">↑ Tiny face, right-side-up</text>\n  <text x=\"440\" y=\"490\" fill=\"#94a3b8\" font-size=\"10\"   class=\"anim-fade-in\" style=\"animation-delay: 1.05s\">Outer curve (convex)</text>\n</g>\n\n<!-- Beat 7: Schematic representation with shaded back -->\n<g class=\"el\" data-beat=\"7\">\n  <!-- Concave schematic -->\n  <path d=\"M 540 460 Q 580 490 540 520\" fill=\"none\" stroke=\"#38bdf8\" stroke-width=\"4\" stroke-linecap=\"round\" class=\"anim-draw\" style=\"animation-delay: 0.00s\" />\n  <path d=\"M 545 460 Q 580 490 545 520 L 555 520 Q 590 490 555 460 Z\" fill=\"#475569\" opacity=\"0.8\" class=\"anim-draw\" style=\"animation-delay: 0.15s\" />\n  <text x=\"560\" y=\"545\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Concave (symbol)</text>\n  <!-- Convex schematic -->\n  <path d=\"M 620 460 Q 660 490 620 520\" fill=\"none\" stroke=\"#38bdf8\" stroke-width=\"4\" stroke-linecap=\"round\" transform=\"translate(20,0)\" class=\"anim-draw\" style=\"animation-delay: 0.45s\" />\n  <path d=\"M 645 460 Q 680 490 645 520 L 645 460\" fill=\"#475569\" opacity=\"0.8\" class=\"anim-draw\" style=\"animation-delay: 0.60s\" />\n  <text x=\"660\" y=\"545\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.75s\">Convex (symbol)</text>\n  <!-- legend -->\n  <rect x=\"540\" y=\"565\" width=\"14\" height=\"6\" fill=\"#38bdf8\" class=\"anim-pop-in\" style=\"animation-delay: 0.90s\" />\n  <text x=\"560\" y=\"572\" fill=\"#94a3b8\" font-size=\"9\"   class=\"anim-fade-in\" style=\"animation-delay: 1.05s\">Reflecting surface</text>\n  <rect x=\"650\" y=\"565\" width=\"14\" height=\"6\" fill=\"#475569\" class=\"anim-pop-in\" style=\"animation-delay: 1.20s\" />\n  <text x=\"670\" y=\"572\" fill=\"#94a3b8\" font-size=\"9\"   class=\"anim-fade-in\" style=\"animation-delay: 1.35s\">Back (non-reflecting)</text>\n</g>\n\n<!-- Beat 8: Hollow sphere origin -->\n<g class=\"el\" data-beat=\"8\">\n  <circle cx=\"700\" cy=\"80\" r=\"40\" fill=\"none\" stroke=\"#64748b\" stroke-width=\"2\" stroke-dasharray=\"4,3\" class=\"anim-pulse-in\" style=\"animation-delay: 0.00s\" />\n  <path d=\"M 670 80 A 40 40 0 0 1 700 40\" fill=\"url(#metal-l1)\" stroke=\"#cbd5e1\" stroke-width=\"1\" class=\"anim-draw\" style=\"animation-delay: 0.15s\" />\n  <text x=\"700\" y=\"155\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Slice of</text>\n  <text x=\"700\" y=\"167\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">hollow sphere</text>\n</g>\n<!-- EXTRA: Side-by-side spoon analogy -->\n<g class=\"el\" data-beat=\"9\">\n  <!-- Spoon front (inside curve = concave) -->\n  <ellipse cx=\"640\" cy=\"450\" rx=\"35\" ry=\"55\" fill=\"url(#metal-l1)\" stroke=\"#cbd5e1\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n  <text x=\"640\" y=\"525\" fill=\"#7dd3fc\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"700\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Spoon inside</text>\n  <text x=\"640\" y=\"540\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">= CONCAVE</text>\n  <!-- Spoon back (outside curve = convex) -->\n  <ellipse cx=\"730\" cy=\"450\" rx=\"35\" ry=\"55\" fill=\"url(#metalBack-l1)\" stroke=\"#cbd5e1\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.45s\" />\n  <ellipse cx=\"730\" cy=\"450\" rx=\"22\" ry=\"50\" fill=\"url(#metal-l1)\" opacity=\"0.4\" class=\"anim-pop-in\" style=\"animation-delay: 0.60s\" />\n  <text x=\"730\" y=\"525\" fill=\"#7dd3fc\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"700\"   class=\"anim-fade-in\" style=\"animation-delay: 0.75s\">Spoon back</text>\n  <text x=\"730\" y=\"540\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.90s\">= CONVEX</text>\n</g>",
+      "svg": "<defs>\n  <pattern id=\"grid-l1\" width=\"25\" height=\"25\" patternUnits=\"userSpaceOnUse\">\n    <path d=\"M 25 0 L 0 0 0 25\" fill=\"none\" stroke=\"#1e293b\" stroke-width=\"0.5\"/>\n  </pattern>\n  <linearGradient id=\"metal-l1\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#94a3b8\"/><stop offset=\"0.5\" stop-color=\"#cbd5e1\"/><stop offset=\"1\" stop-color=\"#64748b\"/>\n  </linearGradient>\n  <linearGradient id=\"metalBack-l1\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#475569\"/><stop offset=\"1\" stop-color=\"#1e293b\"/>\n  </linearGradient>\n  <radialGradient id=\"sun-l1\" cx=\"0.5\" cy=\"0.5\" r=\"0.5\">\n    <stop offset=\"0\" stop-color=\"#fde047\"/><stop offset=\"0.5\" stop-color=\"#fbbf24\"/><stop offset=\"1\" stop-color=\"#f59e0b\" stop-opacity=\"0\"/>\n  </radialGradient>\n</defs>\n<rect x=\"0\" y=\"0\" width=\"800\" height=\"600\" fill=\"url(#grid-l1)\"/>\n\n<!-- Beat 1: Plane mirror with parallel rays -->\n<g class=\"el\" data-beat=\"1\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<text id=\"l1b1-title\" x=\"400\" y=\"80\" text-anchor=\"middle\" fill=\"#f5f5f0\" font-family=\"'Comic Sans MS', cursive\" font-size=\"32\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Spherical Mirrors</text><text id=\"l1b1-sub\" x=\"400\" y=\"120\" text-anchor=\"middle\" fill=\"#94a3b8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"18\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Chapter 10 · Light: Mirrors and Lenses</text>\n</g>\n\n<!-- Beat 2: Three mirror types — plane, concave, convex -->\n<g class=\"el\" data-beat=\"2\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowChalk\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\">\n    <path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/>\n  </marker>\n</defs>\n\n<!-- Chalkboard background -->\n<rect width=\"1600\" height=\"900\" fill=\"#1f2a24\"/>\n\n<!-- Chalk dust particles (always visible) -->\n<circle cx=\"300\" cy=\"150\" r=\"2\" fill=\"#f5f5f0\" opacity=\"0.3\"/>\n<circle cx=\"500\" cy=\"100\" r=\"1.5\" fill=\"#f5f5f0\" opacity=\"0.2\"/>\n<circle cx=\"900\" cy=\"120\" r=\"2\" fill=\"#f5f5f0\" opacity=\"0.25\"/>\n<circle cx=\"1200\" cy=\"90\" r=\"1.5\" fill=\"#f5f5f0\" opacity=\"0.2\"/>\n<circle cx=\"1400\" cy=\"160\" r=\"2\" fill=\"#f5f5f0\" opacity=\"0.3\"/>\n\n<!-- Title (appears at 0s) -->\n<text id=\"cb-title\" x=\"800\" y=\"80\" text-anchor=\"middle\" fill=\"#f5f5f0\" font-family=\"'Comic Sans MS', cursive\" font-size=\"48\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.8s ease\">Mirrors: Flat vs Curved</text>\n\n<!-- Flat mirror cross-section (draws at 4s) -->\n<rect id=\"cb-mirror-glass\" x=\"680\" y=\"380\" width=\"80\" height=\"240\" fill=\"rgba(180,220,255,0.10)\" stroke=\"#f5f5f0\" stroke-width=\"3\" filter=\"url(#chalk)\" style=\"stroke-dasharray:2000;stroke-dashoffset:2000;transition:stroke-dashoffset 2s ease\"/>\n<rect id=\"cb-mirror-silver\" x=\"740\" y=\"380\" width=\"12\" height=\"240\" fill=\"#c0c0c0\" opacity=\"0\" filter=\"url(#chalk)\" style=\"transition:opacity 0.6s ease\"/>\n\n<!-- Mirror labels (fade at 7s) -->\n<text id=\"cb-label-glass\" x=\"620\" y=\"510\" text-anchor=\"end\" fill=\"#f5f5f0\" font-family=\"'Comic Sans MS', cursive\" font-size=\"24\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">glass</text>\n<text id=\"cb-label-silver\" x=\"790\" y=\"510\" fill=\"#f5f5f0\" font-family=\"'Comic Sans MS', cursive\" font-size=\"24\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">silver / aluminium</text>\n<text id=\"cb-label-plane\" x=\"720\" y=\"660\" text-anchor=\"middle\" fill=\"#7dd3fc\" font-family=\"'Comic Sans MS', cursive\" font-size=\"20\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">PLANE MIRROR</text>\n\n<!-- Incident ray (draws at 13s) -->\n<line id=\"cb-ray-incident\" x1=\"420\" y1=\"280\" x2=\"680\" y2=\"480\" stroke=\"#7fdbff\" stroke-width=\"3\" stroke-linecap=\"round\" filter=\"url(#chalk)\" marker-end=\"url(#arrowChalk)\" style=\"stroke-dasharray:400;stroke-dashoffset:400;transition:stroke-dashoffset 1.5s ease\"/>\n\n<!-- Normal (dashed, appears at 15s) -->\n<line id=\"cb-normal\" x1=\"500\" y1=\"480\" x2=\"680\" y2=\"480\" stroke=\"#f4d35e\" stroke-width=\"2\" stroke-dasharray=\"8 8\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\"/>\n\n<!-- Reflected ray (draws at 16s) -->\n<line id=\"cb-ray-reflected\" x1=\"680\" y1=\"480\" x2=\"420\" y2=\"680\" stroke=\"#7fdbff\" stroke-width=\"3\" stroke-linecap=\"round\" filter=\"url(#chalk)\" marker-end=\"url(#arrowChalk)\" style=\"stroke-dasharray:400;stroke-dashoffset:400;transition:stroke-dashoffset 1.5s ease\"/>\n\n<!-- Ray labels (appear at 19s) -->\n<text id=\"cb-label-incident\" x=\"450\" y=\"360\" fill=\"#7fdbff\" font-family=\"'Comic Sans MS', cursive\" font-size=\"20\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">incident ray</text>\n<text id=\"cb-label-reflected\" x=\"450\" y=\"620\" fill=\"#7fdbff\" font-family=\"'Comic Sans MS', cursive\" font-size=\"20\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">reflected ray</text>\n<text id=\"cb-label-normal\" x=\"530\" y=\"470\" fill=\"#f4d35e\" font-family=\"'Comic Sans MS', cursive\" font-size=\"18\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">normal</text>\n\n<!-- BOUNCES BACK! (appears+pulses at 17s) -->\n<text id=\"cb-bounces\" x=\"500\" y=\"750\" text-anchor=\"middle\" fill=\"#fbbf24\" font-family=\"'Comic Sans MS', cursive\" font-size=\"32\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">BOUNCES BACK!</text>\n\n<!-- Photon (starts traveling at 14s) -->\n<circle id=\"cb-photon-glow\" r=\"8\" fill=\"#7fdbff\" filter=\"url(#glow)\" style=\"opacity:0\"/>\n<circle id=\"cb-photon-core\" r=\"4\" fill=\"#ffffff\" filter=\"url(#glow)\" style=\"opacity:0\"/>\n\n<!-- Concave mirror (draws at 27s) -->\n<path id=\"cb-concave\" d=\"M 1100 350 Q 1000 500 1100 650\" fill=\"none\" stroke=\"#7fdbff\" stroke-width=\"4\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:400;stroke-dashoffset:400;transition:stroke-dashoffset 1.5s ease\"/>\n<text id=\"cb-label-concave\" x=\"1050\" y=\"520\" text-anchor=\"end\" fill=\"#7fdbff\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">concave</text>\n<text id=\"cb-label-concave2\" x=\"1050\" y=\"548\" text-anchor=\"end\" fill=\"#94a3b8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"16\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">curves inward</text>\n\n<!-- Convex mirror (draws at 29s) -->\n<path id=\"cb-convex\" d=\"M 1250 350 Q 1350 500 1250 650\" fill=\"none\" stroke=\"#ff8fab\" stroke-width=\"4\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:400;stroke-dashoffset:400;transition:stroke-dashoffset 1.5s ease\"/>\n<text id=\"cb-label-convex\" x=\"1300\" y=\"520\" fill=\"#ff8fab\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">convex</text>\n<text id=\"cb-label-convex2\" x=\"1300\" y=\"548\" fill=\"#94a3b8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"16\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">bulges outward</text>\n\n<!-- Summary labels (appear at 31s) -->\n<text id=\"cb-summary-flat\" x=\"400\" y=\"800\" text-anchor=\"middle\" fill=\"#7dd3fc\" font-family=\"'Comic Sans MS', cursive\" font-size=\"20\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">flat = same size</text>\n<text id=\"cb-summary-concave\" x=\"800\" y=\"800\" text-anchor=\"middle\" fill=\"#7fdbff\" font-family=\"'Comic Sans MS', cursive\" font-size=\"20\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">concave = converging</text>\n<text id=\"cb-summary-convex\" x=\"1200\" y=\"800\" text-anchor=\"middle\" fill=\"#ff8fab\" font-family=\"'Comic Sans MS', cursive\" font-size=\"20\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">convex = diverging</text>\n</g>\n\n<!-- Beat 3: Concave mirror — curved inward (with arrow showing direction) -->\n<g class=\"el\" data-beat=\"3\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<path id=\"l1b3-mirror\" d=\"M 500 150 Q 420 300 500 450\" fill=\"none\" stroke=\"#7fdbff\" stroke-width=\"4\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l1b3-label\" x=\"380\" y=\"300\" text-anchor=\"end\" fill=\"#7fdbff\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">CONCAVE</text><text id=\"l1b3-desc\" x=\"380\" y=\"330\" text-anchor=\"end\" fill=\"#94a3b8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"14\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">curves inward</text><path id=\"l1b3-arrow\" d=\"M 460 300 L 430 300\" fill=\"none\" stroke=\"#7fdbff\" stroke-width=\"2\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/>\n</g>\n\n<!-- Beat 4: Convex mirror — bulges outward -->\n<g class=\"el\" data-beat=\"4\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<path id=\"l1b4-mirror\" d=\"M 500 150 Q 580 300 500 450\" fill=\"none\" stroke=\"#ff8fab\" stroke-width=\"4\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l1b4-label\" x=\"620\" y=\"300\" text-anchor=\"start\" fill=\"#ff8fab\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">CONVEX</text><text id=\"l1b4-desc\" x=\"620\" y=\"330\" text-anchor=\"start\" fill=\"#94a3b8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"14\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">bulges outward</text><path id=\"l1b4-arrow\" d=\"M 540 300 L 570 300\" fill=\"none\" stroke=\"#ff8fab\" stroke-width=\"2\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/>\n</g>\n\n<defs>\n  <marker id=\"arrowYellow\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto\">\n    <path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#fbbf24\"/>\n  </marker>\n</defs>\n\n<!-- Beat 5: Spoon activity - inner curve gives inverted image -->\n<g class=\"el\" data-beat=\"5\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<ellipse id=\"l1b5-spoon\" cx=\"300\" cy=\"300\" rx=\"60\" ry=\"100\" fill=\"rgba(192,192,192,0.15)\" stroke=\"#cbd5e1\" stroke-width=\"3\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\"/><text id=\"l1b5-face\" x=\"300\" y=\"450\" text-anchor=\"middle\" fill=\"#fbbf24\" font-family=\"'Comic Sans MS', cursive\" font-size=\"16\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Face upside-down</text><text id=\"l1b5-type\" x=\"300\" y=\"480\" text-anchor=\"middle\" fill=\"#7fdbff\" font-family=\"'Comic Sans MS', cursive\" font-size=\"14\" font-weight=\"600\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">CONCAVE (inside)</text>\n</g>\n\n<!-- Beat 6: Spoon outer curve - smaller erect image -->\n<g class=\"el\" data-beat=\"6\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<ellipse id=\"l1b6-spoon\" cx=\"300\" cy=\"300\" rx=\"60\" ry=\"100\" fill=\"rgba(192,192,192,0.15)\" stroke=\"#cbd5e1\" stroke-width=\"3\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\"/><text id=\"l1b6-face\" x=\"300\" y=\"450\" text-anchor=\"middle\" fill=\"#fbbf24\" font-family=\"'Comic Sans MS', cursive\" font-size=\"16\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Tiny face, right-side up</text><text id=\"l1b6-type\" x=\"300\" y=\"480\" text-anchor=\"middle\" fill=\"#ff8fab\" font-family=\"'Comic Sans MS', cursive\" font-size=\"14\" font-weight=\"600\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">CONVEX (back)</text>\n</g>\n\n<!-- Beat 7: Schematic representation with shaded back -->\n<g class=\"el\" data-beat=\"7\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l1b7-box0\" x=\"70\" y=\"200\" width=\"160\" height=\"120\" fill=\"rgba(125,211,252,0.10)\" stroke=\"#7dd3fc\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l1b7-lbl0\" x=\"150\" y=\"250\" text-anchor=\"middle\" fill=\"#7dd3fc\" font-family=\"'Comic Sans MS', cursive\" font-size=\"18\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">PLANE</text><text id=\"l1b7-desc0\" x=\"150\" y=\"285\" text-anchor=\"middle\" fill=\"#94a3b8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"12\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">flat surface</text><rect id=\"l1b7-box1\" x=\"320\" y=\"200\" width=\"160\" height=\"120\" fill=\"rgba(127,219,255,0.10)\" stroke=\"#7fdbff\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l1b7-lbl1\" x=\"400\" y=\"250\" text-anchor=\"middle\" fill=\"#7fdbff\" font-family=\"'Comic Sans MS', cursive\" font-size=\"18\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">CONCAVE</text><text id=\"l1b7-desc1\" x=\"400\" y=\"285\" text-anchor=\"middle\" fill=\"#94a3b8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"12\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">curves in</text><rect id=\"l1b7-box2\" x=\"570\" y=\"200\" width=\"160\" height=\"120\" fill=\"rgba(255,143,171,0.10)\" stroke=\"#ff8fab\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l1b7-lbl2\" x=\"650\" y=\"250\" text-anchor=\"middle\" fill=\"#ff8fab\" font-family=\"'Comic Sans MS', cursive\" font-size=\"18\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">CONVEX</text><text id=\"l1b7-desc2\" x=\"650\" y=\"285\" text-anchor=\"middle\" fill=\"#94a3b8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"12\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">bulges out</text>\n</g>\n\n<!-- Beat 8: Hollow sphere origin -->\n<g class=\"el\" data-beat=\"8\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l1b8-box\" x=\"150\" y=\"220\" width=\"500\" height=\"100\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l1b8-phrase\" x=\"400\" y=\"270\" text-anchor=\"middle\" fill=\"#38bdf8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Slice of hollow sphere</text>\n</g>\n<!-- EXTRA: Side-by-side spoon analogy -->\n<g class=\"el\" data-beat=\"9\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l1b9-box\" x=\"150\" y=\"220\" width=\"500\" height=\"100\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l1b9-phrase\" x=\"400\" y=\"270\" text-anchor=\"middle\" fill=\"#38bdf8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Schematic representation</text>\n</g>",
       "beats": [
         "Namaste and welcome, my young scientists, to Chapter 10 of your science book — Light: Mirrors and Lenses. Today we begin a journey into how light bounces and bends, and we will start with mirrors — but not the ordinary mirror in your bathroom! We are going to meet some very special curved mirrors.",
         "Before we start, let me remind you what a mirror is. A mirror is a smooth, shiny surface — usually a piece of glass with a thin coating of metal (like silver or aluminium) on the back. When light hits the smooth surface, it BOUNCES BACK — we call this reflection. That is why you can see yourself in a mirror: light from your face bounces off the mirror and comes back to your eyes. Today, we will look at CURVED mirrors, which behave very differently from the flat mirror in your bathroom.",
@@ -40,118 +40,261 @@ window.CHAPTER_DATA = {
         "Let me end with a teaser for our next lecture. We now know the shapes of these mirrors. But what kind of IMAGES do they form? Why does a concave mirror sometimes give a big image and sometimes a small upside-down one? Why does a convex mirror always give a small image? In our next lecture, we will perform activities to find out. Until then, take a spoon, look at your face in both sides, and observe carefully!"
       ],
       "timeline": {
-        "beat": 2,
+        "beat": 1,
         "steps": [
           {
             "delay": 0,
             "show": [
-              "cb-title"
+              "l1b1-title"
             ]
           },
           {
-            "delay": 4000,
-            "draw": [
-              "cb-mirror-glass"
-            ]
-          },
-          {
-            "delay": 5000,
+            "delay": 10642,
             "show": [
-              "cb-mirror-silver"
-            ]
-          },
-          {
-            "delay": 7000,
-            "show": [
-              "cb-label-glass",
-              "cb-label-silver",
-              "cb-label-plane"
-            ]
-          },
-          {
-            "delay": 13000,
-            "draw": [
-              "cb-ray-incident"
-            ]
-          },
-          {
-            "delay": 14000,
-            "photon": [
-              "cb-photon-glow",
-              "cb-photon-core"
-            ]
-          },
-          {
-            "delay": 15000,
-            "show": [
-              "cb-normal"
-            ]
-          },
-          {
-            "delay": 16000,
-            "draw": [
-              "cb-ray-reflected"
-            ]
-          },
-          {
-            "delay": 17000,
-            "show": [
-              "cb-bounces"
-            ],
-            "pulse": [
-              "cb-bounces"
-            ]
-          },
-          {
-            "delay": 19000,
-            "show": [
-              "cb-label-incident",
-              "cb-label-reflected",
-              "cb-label-normal"
-            ]
-          },
-          {
-            "delay": 27000,
-            "draw": [
-              "cb-concave"
-            ]
-          },
-          {
-            "delay": 28000,
-            "show": [
-              "cb-label-concave",
-              "cb-label-concave2"
-            ]
-          },
-          {
-            "delay": 29000,
-            "draw": [
-              "cb-convex"
-            ]
-          },
-          {
-            "delay": 30000,
-            "show": [
-              "cb-label-convex",
-              "cb-label-convex2"
-            ]
-          },
-          {
-            "delay": 31000,
-            "show": [
-              "cb-summary-flat",
-              "cb-summary-concave",
-              "cb-summary-convex"
+              "l1b1-sub"
             ]
           }
         ]
-      }
+      },
+      "timelines": [
+        {
+          "beat": 1,
+          "steps": [
+            {
+              "delay": 0,
+              "show": [
+                "l1b1-title"
+              ]
+            },
+            {
+              "delay": 10642,
+              "show": [
+                "l1b1-sub"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 3,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l1b3-mirror"
+              ]
+            },
+            {
+              "delay": 6571,
+              "show": [
+                "l1b3-label"
+              ]
+            },
+            {
+              "delay": 13142,
+              "show": [
+                "l1b3-desc"
+              ]
+            },
+            {
+              "delay": 19714,
+              "draw": [
+                "l1b3-arrow"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 4,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l1b4-mirror"
+              ]
+            },
+            {
+              "delay": 7642,
+              "show": [
+                "l1b4-label"
+              ]
+            },
+            {
+              "delay": 15285,
+              "show": [
+                "l1b4-desc"
+              ]
+            },
+            {
+              "delay": 22928,
+              "draw": [
+                "l1b4-arrow"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 5,
+          "steps": [
+            {
+              "delay": 0,
+              "show": [
+                "l1b5-spoon"
+              ]
+            },
+            {
+              "delay": 8000,
+              "show": [
+                "l1b5-face"
+              ]
+            },
+            {
+              "delay": 16000,
+              "show": [
+                "l1b5-type"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 6,
+          "steps": [
+            {
+              "delay": 0,
+              "show": [
+                "l1b6-spoon"
+              ]
+            },
+            {
+              "delay": 7023,
+              "show": [
+                "l1b6-face"
+              ]
+            },
+            {
+              "delay": 14047,
+              "show": [
+                "l1b6-type"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 7,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l1b7-box0"
+              ]
+            },
+            {
+              "delay": 2341,
+              "show": [
+                "l1b7-lbl0"
+              ]
+            },
+            {
+              "delay": 4682,
+              "show": [
+                "l1b7-desc0"
+              ]
+            },
+            {
+              "delay": 7023,
+              "draw": [
+                "l1b7-box1"
+              ]
+            },
+            {
+              "delay": 9365,
+              "show": [
+                "l1b7-lbl1"
+              ]
+            },
+            {
+              "delay": 11706,
+              "show": [
+                "l1b7-desc1"
+              ]
+            },
+            {
+              "delay": 14047,
+              "draw": [
+                "l1b7-box2"
+              ]
+            },
+            {
+              "delay": 16388,
+              "show": [
+                "l1b7-lbl2"
+              ]
+            },
+            {
+              "delay": 18730,
+              "show": [
+                "l1b7-desc2"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 8,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l1b8-box"
+              ]
+            },
+            {
+              "delay": 15250,
+              "show": [
+                "l1b8-phrase"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 9,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l1b9-box"
+              ]
+            },
+            {
+              "delay": 17178,
+              "show": [
+                "l1b9-phrase"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 10,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l1b10-box"
+              ]
+            },
+            {
+              "delay": 14714,
+              "show": [
+                "l1b10-phrase"
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "images",
       "label": "10.2 Images in Mirrors",
       "viewBox": "0 0 800 600",
-      "svg": "<defs>\n  <pattern id=\"grid-l2\" width=\"25\" height=\"25\" patternUnits=\"userSpaceOnUse\">\n    <path d=\"M 25 0 L 0 0 0 25\" fill=\"none\" stroke=\"#1e293b\" stroke-width=\"0.5\"/>\n  </pattern>\n  <linearGradient id=\"metal-l2\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#94a3b8\"/><stop offset=\"0.5\" stop-color=\"#cbd5e1\"/><stop offset=\"1\" stop-color=\"#64748b\"/>\n  </linearGradient>\n</defs>\n<rect x=\"0\" y=\"0\" width=\"800\" height=\"600\" fill=\"url(#grid-l2)\"/>\n\n<!-- Beat 1: Setup — concave and convex mirror side-by-side -->\n<g class=\"el\" data-beat=\"1\">\n  <!-- Concave mirror -->\n  <path d=\"M 100 200 Q 60 280 100 360\" fill=\"none\" stroke=\"#1e293b\" stroke-width=\"14\" stroke-linecap=\"round\" class=\"anim-draw\" style=\"animation-delay: 0.00s\" />\n  <path d=\"M 108 203 Q 70 280 108 357\" fill=\"none\" stroke=\"url(#metal-l2)\" stroke-width=\"6\" stroke-linecap=\"round\" class=\"anim-draw\" style=\"animation-delay: 0.15s\" />\n  <text x=\"85\" y=\"390\" fill=\"#7dd3fc\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"700\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Concave</text>\n  <!-- Convex mirror -->\n  <path d=\"M 500 200 Q 540 280 500 360\" fill=\"none\" stroke=\"url(#metal-l2)\" stroke-width=\"6\" stroke-linecap=\"round\" class=\"anim-draw\" style=\"animation-delay: 0.45s\" />\n  <path d=\"M 492 203 Q 530 280 492 357\" fill=\"none\" stroke=\"#1e293b\" stroke-width=\"14\" stroke-linecap=\"round\" transform=\"translate(16,0)\" class=\"anim-draw\" style=\"animation-delay: 0.60s\" />\n  <text x=\"515\" y=\"390\" fill=\"#7dd3fc\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"700\"   class=\"anim-fade-in\" style=\"animation-delay: 0.75s\">Convex</text>\n</g>\n\n<!-- Beat 2: Object placed in front of both mirrors (small toy) -->\n<g class=\"el\" data-beat=\"2\">\n  <!-- Toy in front of concave -->\n  <g transform=\"translate(180,290)\">\n    <rect x=\"-8\" y=\"-15\" width=\"16\" height=\"30\" fill=\"#fbbf24\" stroke=\"#f59e0b\" stroke-width=\"2\"/>\n    <circle cx=\"0\" cy=\"-22\" r=\"8\" fill=\"#fbbf24\" stroke=\"#f59e0b\" stroke-width=\"2\"/>\n    <text x=\"0\" y=\"35\" fill=\"#fbbf24\" font-size=\"10\" text-anchor=\"middle\">Object</text>\n  </g>\n  <!-- Toy in front of convex -->\n  <g transform=\"translate(420,290)\">\n    <rect x=\"-8\" y=\"-15\" width=\"16\" height=\"30\" fill=\"#fbbf24\" stroke=\"#f59e0b\" stroke-width=\"2\"/>\n    <circle cx=\"0\" cy=\"-22\" r=\"8\" fill=\"#fbbf24\" stroke=\"#f59e0b\" stroke-width=\"2\"/>\n    <text x=\"0\" y=\"35\" fill=\"#fbbf24\" font-size=\"10\" text-anchor=\"middle\">Object</text>\n  </g>\n</g>\n\n<!-- Beat 3: Concave close — erect enlarged image -->\n<g class=\"el\" data-beat=\"3\">\n  <g transform=\"translate(150,290) scale(1.5)\">\n    <rect x=\"-8\" y=\"-15\" width=\"16\" height=\"30\" fill=\"#34d399\" opacity=\"0.7\" stroke=\"#10b981\" stroke-width=\"2\"/>\n    <circle cx=\"0\" cy=\"-22\" r=\"8\" fill=\"#34d399\" opacity=\"0.7\" stroke=\"#10b981\" stroke-width=\"2\"/>\n  </g>\n  <text x=\"150\" y=\"340\" fill=\"#34d399\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"600\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">Enlarged, erect</text>\n  <text x=\"150\" y=\"355\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">(object close)</text>\n</g>\n\n<!-- Beat 4: Concave far — inverted -->\n<g class=\"el\" data-beat=\"4\">\n  <g transform=\"translate(230,290) scale(0.9) rotate(180)\">\n    <rect x=\"-8\" y=\"-15\" width=\"16\" height=\"30\" fill=\"#f87171\" opacity=\"0.7\" stroke=\"#ef4444\" stroke-width=\"2\"/>\n    <circle cx=\"0\" cy=\"-22\" r=\"8\" fill=\"#f87171\" opacity=\"0.7\" stroke=\"#ef4444\" stroke-width=\"2\"/>\n  </g>\n  <text x=\"230\" y=\"340\" fill=\"#f87171\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"600\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">Inverted, smaller</text>\n  <text x=\"230\" y=\"355\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">(object far)</text>\n</g>\n\n<!-- Beat 5: Convex always erect + small -->\n<g class=\"el\" data-beat=\"5\">\n  <g transform=\"translate(440,290) scale(0.7)\">\n    <rect x=\"-8\" y=\"-15\" width=\"16\" height=\"30\" fill=\"#34d399\" opacity=\"0.7\" stroke=\"#10b981\" stroke-width=\"2\"/>\n    <circle cx=\"0\" cy=\"-22\" r=\"8\" fill=\"#34d399\" opacity=\"0.7\" stroke=\"#10b981\" stroke-width=\"2\"/>\n  </g>\n  <text x=\"440\" y=\"340\" fill=\"#34d399\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"600\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">Always diminished</text>\n  <text x=\"440\" y=\"355\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">(any distance)</text>\n</g>\n\n<!-- Beat 6: Comparison with plane mirror -->\n<g class=\"el\" data-beat=\"6\">\n  <!-- Plane mirror at right -->\n  <rect x=\"630\" y=\"200\" width=\"6\" height=\"160\" fill=\"url(#metal-l2)\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n  <rect x=\"636\" y=\"200\" width=\"6\" height=\"160\" fill=\"#1e293b\" class=\"anim-pop-in\" style=\"animation-delay: 0.15s\" />\n  <text x=\"635\" y=\"380\" fill=\"#7dd3fc\" font-size=\"11\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Plane</text>\n  <!-- Object -->\n  <g transform=\"translate(700,290)\">\n    <rect x=\"-8\" y=\"-15\" width=\"16\" height=\"30\" fill=\"#fbbf24\"/>\n    <circle cx=\"0\" cy=\"-22\" r=\"8\" fill=\"#fbbf24\"/>\n  </g>\n  <!-- Image same size, erect -->\n  <g transform=\"translate(580,290)\">\n    <rect x=\"-8\" y=\"-15\" width=\"16\" height=\"30\" fill=\"#34d399\" opacity=\"0.6\"/>\n    <circle cx=\"0\" cy=\"-22\" r=\"8\" fill=\"#34d399\" opacity=\"0.6\"/>\n  </g>\n  <text x=\"635\" y=\"395\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">same size, erect</text>\n</g>\n\n<!-- Beat 7: Torch reflector (concave) -->\n<g class=\"el\" data-beat=\"7\">\n  <g transform=\"translate(200,460)\">\n    <!-- Torch body -->\n    <rect x=\"-50\" y=\"-15\" width=\"40\" height=\"30\" fill=\"#475569\" stroke=\"#1e293b\" stroke-width=\"2\"/>\n    <!-- Reflector (concave) -->\n    <path d=\"M -10 -20 Q 10 0 -10 20\" fill=\"url(#metal-l2)\" stroke=\"#cbd5e1\" stroke-width=\"2\"/>\n    <!-- Bulb -->\n    <circle cx=\"0\" cy=\"0\" r=\"4\" fill=\"#fef3c7\" stroke=\"#fbbf24\" stroke-width=\"1\"/>\n    <!-- Light beam -->\n    <path d=\"M 10 -15 L 80 -8 L 80 8 L 10 15 Z\" fill=\"#fbbf24\" opacity=\"0.3\"/>\n    <text x=\"20\" y=\"35\" fill=\"#fbbf24\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"600\">Torch reflector (concave)</text>\n  </g>\n</g>\n\n<!-- Beat 8: Dental mirror (concave) -->\n<g class=\"el\" data-beat=\"8\">\n  <g transform=\"translate(380,470)\">\n    <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"40\" stroke=\"#94a3b8\" stroke-width=\"3\"/>\n    <ellipse cx=\"0\" cy=\"-8\" rx=\"14\" ry=\"20\" fill=\"url(#metal-l2)\" stroke=\"#cbd5e1\" stroke-width=\"2\"/>\n    <path d=\"M -14 -8 Q 0 -22 14 -8\" fill=\"none\" stroke=\"#1e293b\" stroke-width=\"2\"/>\n    <text x=\"0\" y=\"60\" fill=\"#fbbf24\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"600\">Dental mirror (concave)</text>\n  </g>\n</g>\n\n<!-- Beat 9: Side-view mirror (convex) -->\n<g class=\"el\" data-beat=\"9\">\n  <g transform=\"translate(550,470)\">\n    <rect x=\"-25\" y=\"-5\" width=\"10\" height=\"10\" fill=\"#475569\"/>\n    <ellipse cx=\"0\" cy=\"0\" rx=\"25\" ry=\"18\" fill=\"url(#metal-l2)\" stroke=\"#cbd5e1\" stroke-width=\"2\"/>\n    <path d=\"M -15 -10 Q 0 -25 15 -10\" fill=\"none\" stroke=\"#1e293b\" stroke-width=\"2\"/>\n    <text x=\"0\" y=\"35\" fill=\"#fbbf24\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"600\">Side-view mirror (convex)</text>\n  </g>\n</g>\n\n<!-- Beat 10: Road safety mirror (convex) -->\n<g class=\"el\" data-beat=\"10\">\n  <g transform=\"translate(680,470)\">\n    <circle cx=\"0\" cy=\"0\" r=\"30\" fill=\"url(#metal-l2)\" stroke=\"#cbd5e1\" stroke-width=\"2\"/>\n    <circle cx=\"0\" cy=\"0\" r=\"30\" fill=\"none\" stroke=\"#1e293b\" stroke-width=\"2\" transform=\"translate(2,-2)\"/>\n    <line x1=\"-30\" y1=\"0\" x2=\"-40\" y2=\"15\" stroke=\"#475569\" stroke-width=\"3\"/>\n    <text x=\"0\" y=\"50\" fill=\"#fbbf24\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"600\">Road mirror (convex)</text>\n  </g>\n</g>\n<!-- EXTRA: Erect vs Inverted arrows (for Class 6-7) -->\n<g class=\"el\" data-beat=\"2\">\n  <!-- Object arrow (original) -->\n  <g transform=\"translate(620,420)\">\n    <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"-30\" stroke=\"#fbbf24\" stroke-width=\"3\"/>\n    <polygon points=\"-5,-25 5,-25 0,-35\" fill=\"#fbbf24\"/>\n    <text x=\"20\" y=\"-15\" fill=\"#fbbf24\" font-size=\"11\" text-anchor=\"start\" font-weight=\"600\">Object (real)</text>\n  </g>\n  <!-- Erect image (right-side up) -->\n  <g transform=\"translate(680,420)\">\n    <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"-25\" stroke=\"#34d399\" stroke-width=\"3\" opacity=\"0.7\"/>\n    <polygon points=\"-5,-20 5,-20 0,-30\" fill=\"#34d399\" opacity=\"0.7\"/>\n    <text x=\"10\" y=\"-15\" fill=\"#34d399\" font-size=\"11\" text-anchor=\"start\" font-weight=\"600\">ERECT (up)</text>\n  </g>\n  <!-- Inverted image (upside-down) -->\n  <g transform=\"translate(750,420)\">\n    <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"25\" stroke=\"#f87171\" stroke-width=\"3\" opacity=\"0.7\"/>\n    <polygon points=\"-5,20 5,20 0,30\" fill=\"#f87171\" opacity=\"0.7\"/>\n    <text x=\"10\" y=\"20\" fill=\"#f87171\" font-size=\"11\" text-anchor=\"start\" font-weight=\"600\">INVERTED (down)</text>\n  </g>\n</g>",
+      "svg": "<defs>\n  <pattern id=\"grid-l2\" width=\"25\" height=\"25\" patternUnits=\"userSpaceOnUse\">\n    <path d=\"M 25 0 L 0 0 0 25\" fill=\"none\" stroke=\"#1e293b\" stroke-width=\"0.5\"/>\n  </pattern>\n  <linearGradient id=\"metal-l2\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#94a3b8\"/><stop offset=\"0.5\" stop-color=\"#cbd5e1\"/><stop offset=\"1\" stop-color=\"#64748b\"/>\n  </linearGradient>\n</defs>\n<rect x=\"0\" y=\"0\" width=\"800\" height=\"600\" fill=\"url(#grid-l2)\"/>\n\n<!-- Beat 1: Setup — concave and convex mirror side-by-side -->\n<g class=\"el\" data-beat=\"1\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<text id=\"l2b1-title\" x=\"400\" y=\"80\" text-anchor=\"middle\" fill=\"#f5f5f0\" font-family=\"'Comic Sans MS', cursive\" font-size=\"32\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Images in Mirrors</text><text id=\"l2b1-sub\" x=\"400\" y=\"120\" text-anchor=\"middle\" fill=\"#94a3b8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"18\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">What kind of images do mirrors form?</text>\n</g>\n\n<!-- Beat 2: Object placed in front of both mirrors (small toy) -->\n<g class=\"el\" data-beat=\"2\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l2b2-box\" x=\"150\" y=\"220\" width=\"500\" height=\"100\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l2b2-phrase\" x=\"400\" y=\"270\" text-anchor=\"middle\" fill=\"#38bdf8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Setup: Mirror + Object</text>\n</g>\n\n<!-- Beat 3: Concave close — erect enlarged image -->\n<g class=\"el\" data-beat=\"3\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l2b3-box\" x=\"150\" y=\"220\" width=\"500\" height=\"100\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l2b3-phrase\" x=\"400\" y=\"270\" text-anchor=\"middle\" fill=\"#38bdf8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Concave (close): Enlarged</text>\n</g>\n\n<!-- Beat 4: Concave far — inverted -->\n<g class=\"el\" data-beat=\"4\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l2b4-box\" x=\"150\" y=\"220\" width=\"500\" height=\"100\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l2b4-phrase\" x=\"400\" y=\"270\" text-anchor=\"middle\" fill=\"#38bdf8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Concave (far): Inverted</text>\n</g>\n\n<!-- Beat 5: Convex always erect + small -->\n<g class=\"el\" data-beat=\"5\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l2b5-box\" x=\"150\" y=\"220\" width=\"500\" height=\"100\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l2b5-phrase\" x=\"400\" y=\"270\" text-anchor=\"middle\" fill=\"#38bdf8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Convex: Always diminished</text>\n</g>\n\n<!-- Beat 6: Comparison with plane mirror -->\n<g class=\"el\" data-beat=\"6\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l2b6-box0\" x=\"70\" y=\"200\" width=\"160\" height=\"120\" fill=\"rgba(125,211,252,0.10)\" stroke=\"#7dd3fc\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l2b6-lbl0\" x=\"150\" y=\"250\" text-anchor=\"middle\" fill=\"#7dd3fc\" font-family=\"'Comic Sans MS', cursive\" font-size=\"18\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">PLANE</text><text id=\"l2b6-desc0\" x=\"150\" y=\"285\" text-anchor=\"middle\" fill=\"#94a3b8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"12\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">same size</text><rect id=\"l2b6-box1\" x=\"320\" y=\"200\" width=\"160\" height=\"120\" fill=\"rgba(127,219,255,0.10)\" stroke=\"#7fdbff\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l2b6-lbl1\" x=\"400\" y=\"250\" text-anchor=\"middle\" fill=\"#7fdbff\" font-family=\"'Comic Sans MS', cursive\" font-size=\"18\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">CONCAVE</text><text id=\"l2b6-desc1\" x=\"400\" y=\"285\" text-anchor=\"middle\" fill=\"#94a3b8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"12\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">enlarged</text><rect id=\"l2b6-box2\" x=\"570\" y=\"200\" width=\"160\" height=\"120\" fill=\"rgba(255,143,171,0.10)\" stroke=\"#ff8fab\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l2b6-lbl2\" x=\"650\" y=\"250\" text-anchor=\"middle\" fill=\"#ff8fab\" font-family=\"'Comic Sans MS', cursive\" font-size=\"18\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">CONVEX</text><text id=\"l2b6-desc2\" x=\"650\" y=\"285\" text-anchor=\"middle\" fill=\"#94a3b8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"12\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">diminished</text>\n</g>\n\n<!-- Beat 7: Torch reflector (concave) -->\n<g class=\"el\" data-beat=\"7\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l2b7-box\" x=\"200\" y=\"180\" width=\"400\" height=\"100\" fill=\"rgba(52,211,153,0.10)\" stroke=\"#34d399\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l2b7-name\" x=\"400\" y=\"220\" text-anchor=\"middle\" fill=\"#34d399\" font-family=\"'Comic Sans MS', cursive\" font-size=\"20\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Torch Reflector</text><text id=\"l2b7-desc\" x=\"400\" y=\"250\" text-anchor=\"middle\" fill=\"#94a3b8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"13\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Concave mirror — parallel beam</text>\n</g>\n\n<!-- Beat 8: Dental mirror (concave) -->\n<g class=\"el\" data-beat=\"8\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l2b8-box\" x=\"200\" y=\"180\" width=\"400\" height=\"100\" fill=\"rgba(52,211,153,0.10)\" stroke=\"#34d399\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l2b8-name\" x=\"400\" y=\"220\" text-anchor=\"middle\" fill=\"#34d399\" font-family=\"'Comic Sans MS', cursive\" font-size=\"20\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Dental Mirror</text><text id=\"l2b8-desc\" x=\"400\" y=\"250\" text-anchor=\"middle\" fill=\"#94a3b8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"13\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Concave — enlarged view of teeth</text>\n</g>\n\n<!-- Beat 9: Side-view mirror (convex) -->\n<g class=\"el\" data-beat=\"9\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l2b9-box\" x=\"200\" y=\"180\" width=\"400\" height=\"100\" fill=\"rgba(52,211,153,0.10)\" stroke=\"#34d399\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l2b9-name\" x=\"400\" y=\"220\" text-anchor=\"middle\" fill=\"#34d399\" font-family=\"'Comic Sans MS', cursive\" font-size=\"20\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Side-view Mirror</text><text id=\"l2b9-desc\" x=\"400\" y=\"250\" text-anchor=\"middle\" fill=\"#94a3b8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"13\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Convex — wider view of road</text>\n</g>\n\n<!-- Beat 10: Road safety mirror (convex) -->\n<g class=\"el\" data-beat=\"10\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l2b10-box\" x=\"200\" y=\"180\" width=\"400\" height=\"100\" fill=\"rgba(52,211,153,0.10)\" stroke=\"#34d399\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l2b10-name\" x=\"400\" y=\"220\" text-anchor=\"middle\" fill=\"#34d399\" font-family=\"'Comic Sans MS', cursive\" font-size=\"20\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Road Mirror</text><text id=\"l2b10-desc\" x=\"400\" y=\"250\" text-anchor=\"middle\" fill=\"#94a3b8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"13\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Convex — safety at intersections</text>\n</g>\n<!-- EXTRA: Erect vs Inverted arrows (for Class 6-7) -->\n<g class=\"el\" data-beat=\"2\">\n  <!-- Object arrow (original) -->\n  <g transform=\"translate(620,420)\">\n    <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"-30\" stroke=\"#fbbf24\" stroke-width=\"3\"/>\n    <polygon points=\"-5,-25 5,-25 0,-35\" fill=\"#fbbf24\"/>\n    <text x=\"20\" y=\"-15\" fill=\"#fbbf24\" font-size=\"11\" text-anchor=\"start\" font-weight=\"600\">Object (real)</text>\n  </g>\n  <!-- Erect image (right-side up) -->\n  <g transform=\"translate(680,420)\">\n    <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"-25\" stroke=\"#34d399\" stroke-width=\"3\" opacity=\"0.7\"/>\n    <polygon points=\"-5,-20 5,-20 0,-30\" fill=\"#34d399\" opacity=\"0.7\"/>\n    <text x=\"10\" y=\"-15\" fill=\"#34d399\" font-size=\"11\" text-anchor=\"start\" font-weight=\"600\">ERECT (up)</text>\n  </g>\n  <!-- Inverted image (upside-down) -->\n  <g transform=\"translate(750,420)\">\n    <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"25\" stroke=\"#f87171\" stroke-width=\"3\" opacity=\"0.7\"/>\n    <polygon points=\"-5,20 5,20 0,30\" fill=\"#f87171\" opacity=\"0.7\"/>\n    <text x=\"10\" y=\"20\" fill=\"#f87171\" font-size=\"11\" text-anchor=\"start\" font-weight=\"600\">INVERTED (down)</text>\n  </g>\n</g>",
       "beats": [
         "Welcome back, my curious friends! In the last lecture, we met Meena at the science centre and learned that there are three kinds of mirrors: plane, concave, and convex. Today, we will discover what kind of IMAGES each of these mirrors actually forms.",
         "Place a concave mirror and a convex mirror side by side on a table, with their reflecting surfaces facing you. Stand a small toy — or any small object — in front of each mirror at a small distance, about three or four centimetres away. Look at the images formed in each mirror. What do you see? Take a moment to write down your observations in your notebook.",
@@ -163,13 +306,268 @@ window.CHAPTER_DATA = {
         "When you visit the DENTIST, the doctor uses a small mirror on a stick to look inside your mouth. That is a CONCAVE mirror! Held close to your teeth, it forms an ENLARGED image of each tooth — so the dentist can see every little cavity clearly. The next time you visit the dentist, ask them about their mirror — they will be surprised by your question!",
         "Now look at the SIDE-VIEW MIRRORS of cars, scooters, and buses. These are CONVEX mirrors. Because they bulge outward, they give a much WIDER view of the road behind. The vehicles in the mirror look smaller than they really are — which is why you will see a warning printed on these mirrors: 'Objects in mirror are closer than they appear'. The image is small, but the area covered is huge.",
         "CONVEX mirrors are also installed at sharp bends and road intersections, so that drivers from both sides can see each other and avoid collisions. You may also have seen large convex mirrors in big shops and supermarkets — they help the staff monitor a large area and deter thefts. So convex mirrors protect us on the road, in shops, and in our vehicles. Amazing, isn't it, that a simple curved piece of glass can do so much?"
-      ]
+      ],
+      "timelines": [
+        {
+          "beat": 1,
+          "steps": [
+            {
+              "delay": 0,
+              "show": [
+                "l2b1-title"
+              ]
+            },
+            {
+              "delay": 8928,
+              "show": [
+                "l2b1-sub"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 2,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l2b2-box"
+              ]
+            },
+            {
+              "delay": 12785,
+              "show": [
+                "l2b2-phrase"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 3,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l2b3-box"
+              ]
+            },
+            {
+              "delay": 11250,
+              "show": [
+                "l2b3-phrase"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 4,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l2b4-box"
+              ]
+            },
+            {
+              "delay": 13607,
+              "show": [
+                "l2b4-phrase"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 5,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l2b5-box"
+              ]
+            },
+            {
+              "delay": 10928,
+              "show": [
+                "l2b5-phrase"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 6,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l2b6-box0"
+              ]
+            },
+            {
+              "delay": 2738,
+              "show": [
+                "l2b6-lbl0"
+              ]
+            },
+            {
+              "delay": 5476,
+              "show": [
+                "l2b6-desc0"
+              ]
+            },
+            {
+              "delay": 8214,
+              "draw": [
+                "l2b6-box1"
+              ]
+            },
+            {
+              "delay": 10952,
+              "show": [
+                "l2b6-lbl1"
+              ]
+            },
+            {
+              "delay": 13690,
+              "show": [
+                "l2b6-desc1"
+              ]
+            },
+            {
+              "delay": 16428,
+              "draw": [
+                "l2b6-box2"
+              ]
+            },
+            {
+              "delay": 19166,
+              "show": [
+                "l2b6-lbl2"
+              ]
+            },
+            {
+              "delay": 21904,
+              "show": [
+                "l2b6-desc2"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 7,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l2b7-box"
+              ]
+            },
+            {
+              "delay": 8714,
+              "show": [
+                "l2b7-name"
+              ]
+            },
+            {
+              "delay": 17428,
+              "show": [
+                "l2b7-desc"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 8,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l2b8-box"
+              ]
+            },
+            {
+              "delay": 8357,
+              "show": [
+                "l2b8-name"
+              ]
+            },
+            {
+              "delay": 16714,
+              "show": [
+                "l2b8-desc"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 9,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l2b9-box"
+              ]
+            },
+            {
+              "delay": 9261,
+              "show": [
+                "l2b9-name"
+              ]
+            },
+            {
+              "delay": 18523,
+              "show": [
+                "l2b9-desc"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 10,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l2b10-box"
+              ]
+            },
+            {
+              "delay": 10095,
+              "show": [
+                "l2b10-name"
+              ]
+            },
+            {
+              "delay": 20190,
+              "show": [
+                "l2b10-desc"
+              ]
+            }
+          ]
+        }
+      ],
+      "timeline": {
+        "beat": 1,
+        "steps": [
+          {
+            "delay": 0,
+            "show": [
+              "l2b1-title"
+            ]
+          },
+          {
+            "delay": 8928,
+            "show": [
+              "l2b1-sub"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "laws",
       "label": "10.3 Laws of Reflection",
       "viewBox": "0 0 800 600",
-      "svg": "<defs>\n  <pattern id=\"grid-l3\" width=\"25\" height=\"25\" patternUnits=\"userSpaceOnUse\">\n    <path d=\"M 25 0 L 0 0 0 25\" fill=\"none\" stroke=\"#1e293b\" stroke-width=\"0.5\"/>\n  </pattern>\n  <linearGradient id=\"mirror-l3\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#94a3b8\"/><stop offset=\"1\" stop-color=\"#64748b\"/>\n  </linearGradient>\n  <linearGradient id=\"light-l3\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">\n    <stop offset=\"0\" stop-color=\"#fbbf24\"/><stop offset=\"1\" stop-color=\"#fef3c7\"/>\n  </linearGradient>\n  <marker id=\"arrowY-l3\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto\">\n    <path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#fbbf24\"/>\n  </marker>\n  <marker id=\"arrowO-l3\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto\">\n    <path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#fb923c\"/>\n  </marker>\n  <marker id=\"arrowS-l3\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto\">\n    <path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#7dd3fc\"/>\n  </marker>\n</defs>\n<rect x=\"0\" y=\"0\" width=\"800\" height=\"600\" fill=\"url(#grid-l3)\"/>\n\n<!-- Beat 1: Mirror on table, torch with comb-slit producing thin beam -->\n<g class=\"el\" data-beat=\"1\">\n  <!-- Table line -->\n  <line x1=\"50\" y1=\"450\" x2=\"750\" y2=\"450\" stroke=\"#475569\" stroke-width=\"2\" class=\"anim-draw\" style=\"animation-delay: 0.00s\" />\n  <!-- Mirror stand -->\n  <rect x=\"395\" y=\"430\" width=\"10\" height=\"20\" fill=\"#475569\" class=\"anim-pop-in\" style=\"animation-delay: 0.15s\" />\n  <!-- Mirror -->\n  <rect x=\"385\" y=\"200\" width=\"6\" height=\"240\" fill=\"url(#mirror-l3)\" stroke=\"#0f172a\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.30s\" />\n  <rect x=\"391\" y=\"200\" width=\"6\" height=\"240\" fill=\"#1e293b\" class=\"anim-pop-in\" style=\"animation-delay: 0.45s\" />\n  <text x=\"380\" y=\"465\" fill=\"#94a3b8\" font-size=\"11\" text-anchor=\"end\"   class=\"anim-fade-in\" style=\"animation-delay: 0.60s\">Plane mirror</text>\n  <!-- Torch -->\n  <g transform=\"translate(100,300)\">\n    <rect x=\"0\" y=\"-12\" width=\"40\" height=\"24\" fill=\"#fbbf24\" stroke=\"#f59e0b\" stroke-width=\"2\"/>\n    <rect x=\"40\" y=\"-12\" width=\"14\" height=\"24\" fill=\"#94a3b8\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <text x=\"27\" y=\"35\" fill=\"#fbbf24\" font-size=\"10\" text-anchor=\"middle\">Torch</text>\n  </g>\n  <!-- Comb -->\n  <g transform=\"translate(170,290)\">\n    <rect x=\"0\" y=\"0\" width=\"6\" height=\"40\" fill=\"#475569\"/>\n    <rect x=\"6\" y=\"0\" width=\"30\" height=\"6\" fill=\"#94a3b8\"/>\n    <rect x=\"6\" y=\"34\" width=\"30\" height=\"6\" fill=\"#94a3b8\"/>\n    <text x=\"20\" y=\"55\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\">Comb (slit)</text>\n  </g>\n</g>\n\n<!-- Beat 2: Beam of light from torch hits mirror -->\n<g class=\"el\" data-beat=\"2\">\n  <line x1=\"200\" y1=\"310\" x2=\"385\" y2=\"310\" stroke=\"url(#light-l3)\" stroke-width=\"3\" marker-end=\"url(#arrowY-l3)\" class=\"anim-draw\" style=\"animation-delay: 0.00s\" />\n  <text x=\"290\" y=\"298\" fill=\"#fbbf24\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"600\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Beam of light</text>\n</g>\n\n<!-- Beat 3: Reflected beam comes back -->\n<g class=\"el\" data-beat=\"3\">\n  <line x1=\"391\" y1=\"310\" x2=\"600\" y2=\"450\" stroke=\"url(#light-l3)\" stroke-width=\"3\" marker-end=\"url(#arrowY-l3)\" class=\"anim-draw\" style=\"animation-delay: 0.00s\" />\n  <text x=\"500\" y=\"395\" fill=\"#fbbf24\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"600\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Reflected beam</text>\n</g>\n\n<!-- Beat 4: Label incident ray and reflected ray -->\n<g class=\"el\" data-beat=\"4\">\n  <text x=\"280\" y=\"320\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"700\"   class=\"anim-fade-in\" style=\"animation-delay: 0.00s\">Incident ray</text>\n  <text x=\"510\" y=\"410\" fill=\"#fbbf24\" font-size=\"12\" font-weight=\"700\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Reflected ray</text>\n</g>\n\n<!-- Beat 5: Normal — perpendicular at point of incidence -->\n<g class=\"el\" data-beat=\"5\">\n  <!-- Point of incidence O -->\n  <circle cx=\"388\" cy=\"310\" r=\"5\" fill=\"#fbbf24\" class=\"anim-pulse-in\" style=\"animation-delay: 0.00s\" />\n  <text x=\"375\" y=\"295\" fill=\"#fbbf24\" font-size=\"14\" font-weight=\"700\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">O</text>\n  <!-- Normal (dashed line perpendicular to mirror) -->\n  <line x1=\"388\" y1=\"200\" x2=\"388\" y2=\"420\" stroke=\"#7dd3fc\" stroke-width=\"2\" stroke-dasharray=\"6,4\" class=\"anim-draw\" style=\"animation-delay: 0.30s\" />\n  <text x=\"345\" y=\"195\" fill=\"#7dd3fc\" font-size=\"13\" font-weight=\"700\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">Normal</text>\n</g>\n\n<!-- Beat 6: Angle of incidence (i) -->\n<g class=\"el\" data-beat=\"6\">\n  <!-- Arc for angle i -->\n  <path d=\"M 360 310 A 28 28 0 0 0 380 282\" fill=\"none\" stroke=\"#fb923c\" stroke-width=\"2.5\" class=\"anim-draw\" style=\"animation-delay: 0.00s\" />\n  <text x=\"365\" y=\"290\" fill=\"#fb923c\" font-size=\"14\" font-weight=\"700\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">i</text>\n  <text x=\"345\" y=\"280\" fill=\"#fb923c\" font-size=\"10\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Angle of</text>\n  <text x=\"345\" y=\"290\" fill=\"#fb923c\" font-size=\"10\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">incidence</text>\n</g>\n\n<!-- Beat 7: Angle of reflection (r) -->\n<g class=\"el\" data-beat=\"7\">\n  <path d=\"M 380 282 A 28 28 0 0 1 410 320\" fill=\"none\" stroke=\"#fb923c\" stroke-width=\"2.5\" transform=\"translate(0,28)\" class=\"anim-draw\" style=\"animation-delay: 0.00s\" />\n  <text x=\"410\" y=\"335\" fill=\"#fb923c\" font-size=\"14\" font-weight=\"700\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">r</text>\n  <text x=\"425\" y=\"328\" fill=\"#fb923c\" font-size=\"10\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Angle of</text>\n  <text x=\"425\" y=\"338\" fill=\"#fb923c\" font-size=\"10\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">reflection</text>\n</g>\n\n<!-- Beat 8: Law 1 — i = r -->\n<g class=\"el\" data-beat=\"8\">\n  <rect x=\"540\" y=\"120\" width=\"220\" height=\"60\" rx=\"10\" fill=\"rgba(251,191,36,0.15)\" stroke=\"#fbbf24\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n  <text x=\"650\" y=\"148\" fill=\"#fbbf24\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">LAW 1 of Reflection</text>\n  <text x=\"650\" y=\"170\" fill=\"#fbbf24\" font-size=\"16\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">∠i = ∠r</text>\n</g>\n\n<!-- Beat 9: Paper bending — same plane test -->\n<g class=\"el\" data-beat=\"9\">\n  <!-- Flat paper showing reflected beam -->\n  <rect x=\"100\" y=\"500\" width=\"180\" height=\"20\" fill=\"#fef3c7\" stroke=\"#fbbf24\" stroke-width=\"1\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n  <text x=\"190\" y=\"490\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Flat paper — beam visible</text>\n  <!-- Bent paper -->\n  <path d=\"M 350 510 L 430 510 L 460 460 L 540 460\" fill=\"#fef3c7\" stroke=\"#fbbf24\" stroke-width=\"1\" class=\"anim-draw\" style=\"animation-delay: 0.30s\" />\n  <text x=\"445\" y=\"490\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">Bent paper — beam vanishes!</text>\n</g>\n\n<!-- Beat 10: Law 2 — same plane -->\n<g class=\"el\" data-beat=\"10\">\n  <rect x=\"540\" y=\"200\" width=\"240\" height=\"80\" rx=\"10\" fill=\"rgba(125,211,252,0.12)\" stroke=\"#7dd3fc\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n  <text x=\"660\" y=\"225\" fill=\"#7dd3fc\" font-size=\"14\" font-weight=\"700\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">LAW 2 of Reflection</text>\n  <text x=\"660\" y=\"245\" fill=\"#7dd3fc\" font-size=\"11\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.30s\">Incident ray, normal, and</text>\n  <text x=\"660\" y=\"260\" fill=\"#7dd3fc\" font-size=\"11\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">reflected ray all lie in the</text>\n  <text x=\"660\" y=\"275\" fill=\"#7dd3fc\" font-size=\"11\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.60s\">SAME plane</text>\n</g>\n\n<!-- Beat 11: Parallel beams on three mirrors -->\n<g class=\"el\" data-beat=\"11\">\n  <!-- Three parallel rays on plane mirror -->\n  <g transform=\"translate(0,0)\">\n    <line x1=\"100\" y1=\"380\" x2=\"200\" y2=\"380\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l3)\"/>\n    <line x1=\"100\" y1=\"395\" x2=\"200\" y2=\"395\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l3)\"/>\n    <line x1=\"100\" y1=\"410\" x2=\"200\" y2=\"410\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l3)\"/>\n    <rect x=\"200\" y=\"350\" width=\"6\" height=\"80\" fill=\"url(#mirror-l3)\"/>\n    <!-- Reflected parallel -->\n    <line x1=\"206\" y1=\"380\" x2=\"306\" y2=\"380\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l3)\"/>\n    <line x1=\"206\" y1=\"395\" x2=\"306\" y2=\"395\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l3)\"/>\n    <line x1=\"206\" y1=\"410\" x2=\"306\" y2=\"410\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l3)\"/>\n    <text x=\"250\" y=\"445\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\">Plane — parallel stays parallel</text>\n  </g>\n</g>\n\n<!-- Beat 12: Concave converges, convex diverges -->\n<g class=\"el\" data-beat=\"12\">\n  <!-- Concave mirror -->\n  <g transform=\"translate(380,0)\">\n    <line x1=\"280\" y1=\"365\" x2=\"370\" y2=\"385\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l3)\"/>\n    <line x1=\"280\" y1=\"395\" x2=\"370\" y2=\"395\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l3)\"/>\n    <line x1=\"280\" y1=\"425\" x2=\"370\" y2=\"405\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l3)\"/>\n    <path d=\"M 370 350 Q 410 395 370 440\" fill=\"none\" stroke=\"url(#mirror-l3)\" stroke-width=\"4\"/>\n    <path d=\"M 378 354 Q 410 395 378 436\" fill=\"none\" stroke=\"#1e293b\" stroke-width=\"4\"/>\n    <!-- Converging rays -->\n    <line x1=\"378\" y1=\"385\" x2=\"490\" y2=\"395\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l3)\"/>\n    <line x1=\"378\" y1=\"395\" x2=\"490\" y2=\"395\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l3)\"/>\n    <line x1=\"378\" y1=\"405\" x2=\"490\" y2=\"395\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l3)\"/>\n    <!-- Focus point -->\n    <circle cx=\"490\" cy=\"395\" r=\"4\" fill=\"#fbbf24\"/>\n    <text x=\"495\" y=\"380\" fill=\"#fbbf24\" font-size=\"10\" font-weight=\"700\">Focus</text>\n    <text x=\"430\" y=\"465\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\">Concave — converges</text>\n  </g>\n  <!-- Convex mirror -->\n  <g transform=\"translate(0,0)\">\n    <line x1=\"580\" y1=\"365\" x2=\"650\" y2=\"385\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l3)\"/>\n    <line x1=\"580\" y1=\"395\" x2=\"650\" y2=\"395\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l3)\"/>\n    <line x1=\"580\" y1=\"425\" x2=\"650\" y2=\"405\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l3)\"/>\n    <path d=\"M 650 350 Q 690 395 650 440\" fill=\"none\" stroke=\"#1e293b\" stroke-width=\"4\"/>\n    <path d=\"M 658 354 Q 690 395 658 436\" fill=\"none\" stroke=\"url(#mirror-l3)\" stroke-width=\"4\"/>\n    <!-- Diverging rays -->\n    <line x1=\"690\" y1=\"385\" x2=\"780\" y2=\"365\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l3)\"/>\n    <line x1=\"690\" y1=\"395\" x2=\"780\" y2=\"395\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l3)\"/>\n    <line x1=\"690\" y1=\"405\" x2=\"780\" y2=\"425\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l3)\"/>\n    <text x=\"730\" y=\"465\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\">Convex — diverges</text>\n  </g>\n</g>\n\n<!-- Beat 13: Burning paper with concave mirror -->\n<g class=\"el\" data-beat=\"13\">\n  <g transform=\"translate(400,540)\">\n    <!-- Sun -->\n    <circle cx=\"-200\" cy=\"-30\" r=\"20\" fill=\"url(#sun-l3)\"/>\n    <text x=\"-200\" y=\"0\" fill=\"#fbbf24\" font-size=\"10\" text-anchor=\"middle\">Sun</text>\n    <!-- Concave mirror -->\n    <path d=\"M -80 -50 Q -110 0 -80 50\" fill=\"none\" stroke=\"url(#mirror-l3)\" stroke-width=\"4\"/>\n    <path d=\"M -76 -48 Q -106 0 -76 48\" fill=\"none\" stroke=\"#1e293b\" stroke-width=\"4\"/>\n    <!-- Focused beam -->\n    <line x1=\"-100\" y1=\"-30\" x2=\"-76\" y2=\"-15\" stroke=\"#fbbf24\" stroke-width=\"2\"/>\n    <line x1=\"-100\" y1=\"0\" x2=\"-76\" y2=\"0\" stroke=\"#fbbf24\" stroke-width=\"2\"/>\n    <line x1=\"-100\" y1=\"30\" x2=\"-76\" y2=\"15\" stroke=\"#fbbf24\" stroke-width=\"2\"/>\n    <line x1=\"-76\" y1=\"-15\" x2=\"20\" y2=\"0\" stroke=\"#fb923c\" stroke-width=\"2\"/>\n    <line x1=\"-76\" y1=\"0\" x2=\"20\" y2=\"0\" stroke=\"#fb923c\" stroke-width=\"2\"/>\n    <line x1=\"-76\" y1=\"15\" x2=\"20\" y2=\"0\" stroke=\"#fb923c\" stroke-width=\"2\"/>\n    <!-- Paper -->\n    <rect x=\"20\" y=\"-15\" width=\"30\" height=\"30\" fill=\"#f1f5f9\" stroke=\"#475569\" stroke-width=\"1\"/>\n    <!-- Smoke -->\n    <path d=\"M 30 -15 Q 28 -25 35 -32 Q 32 -42 40 -45\" stroke=\"#94a3b8\" stroke-width=\"2\" fill=\"none\"/>\n    <text x=\"35\" y=\"35\" fill=\"#fbbf24\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"600\">Paper burns!</text>\n  </g>\n</g>\n\n<defs>\n  <radialGradient id=\"sun-l3\" cx=\"0.5\" cy=\"0.5\" r=\"0.5\">\n    <stop offset=\"0\" stop-color=\"#fde047\"/><stop offset=\"1\" stop-color=\"#f59e0b\"/>\n  </radialGradient>\n</defs>\n<!-- EXTRA: Special case — light along normal (i = 0, r = 0) -->\n<g class=\"el\" data-beat=\"11\">\n  <!-- A second mini-diagram at top right showing the special case -->\n  <g transform=\"translate(680,540)\">\n    <rect x=\"-40\" y=\"-25\" width=\"80\" height=\"3\" fill=\"url(#mirror-l3)\"/>\n    <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"-30\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l3)\"/>\n    <line x1=\"0\" y1=\"-3\" x2=\"0\" y2=\"-25\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l3)\" transform=\"translate(2,0)\"/>\n    <text x=\"0\" y=\"-40\" fill=\"#fbbf24\" font-size=\"10\" text-anchor=\"middle\">i = 0</text>\n    <text x=\"0\" y=\"-52\" fill=\"#fb923c\" font-size=\"10\" text-anchor=\"middle\">r = 0</text>\n    <text x=\"0\" y=\"20\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\">Light retraces path</text>\n  </g>\n</g>",
+      "svg": "<defs>\n  <pattern id=\"grid-l3\" width=\"25\" height=\"25\" patternUnits=\"userSpaceOnUse\">\n    <path d=\"M 25 0 L 0 0 0 25\" fill=\"none\" stroke=\"#1e293b\" stroke-width=\"0.5\"/>\n  </pattern>\n  <linearGradient id=\"mirror-l3\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\">\n    <stop offset=\"0\" stop-color=\"#94a3b8\"/><stop offset=\"1\" stop-color=\"#64748b\"/>\n  </linearGradient>\n  <linearGradient id=\"light-l3\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">\n    <stop offset=\"0\" stop-color=\"#fbbf24\"/><stop offset=\"1\" stop-color=\"#fef3c7\"/>\n  </linearGradient>\n  <marker id=\"arrowY-l3\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto\">\n    <path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#fbbf24\"/>\n  </marker>\n  <marker id=\"arrowO-l3\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto\">\n    <path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#fb923c\"/>\n  </marker>\n  <marker id=\"arrowS-l3\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto\">\n    <path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#7dd3fc\"/>\n  </marker>\n</defs>\n<rect x=\"0\" y=\"0\" width=\"800\" height=\"600\" fill=\"url(#grid-l3)\"/>\n\n<!-- Beat 1: Mirror on table, torch with comb-slit producing thin beam -->\n<g class=\"el\" data-beat=\"1\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<text id=\"l3b1-title\" x=\"400\" y=\"80\" text-anchor=\"middle\" fill=\"#f5f5f0\" font-family=\"'Comic Sans MS', cursive\" font-size=\"32\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Laws of Reflection</text><text id=\"l3b1-sub\" x=\"400\" y=\"120\" text-anchor=\"middle\" fill=\"#94a3b8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"18\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Why does light bounce the way it does?</text>\n</g>\n\n<!-- Beat 2: Beam of light from torch hits mirror -->\n<g class=\"el\" data-beat=\"2\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<line id=\"l3b2-mirror\" x1=\"500\" y1=\"200\" x2=\"500\" y2=\"500\" stroke=\"#f5f5f0\" stroke-width=\"3\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><line id=\"l3b2-incident\" x1=\"250\" y1=\"200\" x2=\"500\" y2=\"350\" stroke=\"#7fdbff\" stroke-width=\"2\" stroke-linecap=\"round\" marker-end=\"url(#arrowB)\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><line id=\"l3b2-normal\" x1=\"400\" y1=\"350\" x2=\"500\" y2=\"350\" stroke=\"#f4d35e\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-dasharray=\"6 4\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\"/><line id=\"l3b2-reflected\" x1=\"500\" y1=\"350\" x2=\"250\" y2=\"500\" stroke=\"#7fdbff\" stroke-width=\"2\" stroke-linecap=\"round\" marker-end=\"url(#arrowB)\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><circle id=\"l3b2-photon\" r=\"6\" fill=\"#7fdbff\" filter=\"url(#glow)\" style=\"opacity:0\"/><text id=\"l3b2-lbl-incident\" x=\"280\" y=\"230\" text-anchor=\"start\" fill=\"#7fdbff\" font-family=\"'Comic Sans MS', cursive\" font-size=\"14\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">incident ray</text><text id=\"l3b2-lbl-reflected\" x=\"280\" y=\"470\" text-anchor=\"start\" fill=\"#7fdbff\" font-family=\"'Comic Sans MS', cursive\" font-size=\"14\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">reflected ray</text><text id=\"l3b2-lbl-normal\" x=\"380\" y=\"340\" text-anchor=\"end\" fill=\"#f4d35e\" font-family=\"'Comic Sans MS', cursive\" font-size=\"12\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">normal</text>\n</g>\n\n<!-- Beat 3: Reflected beam comes back -->\n<g class=\"el\" data-beat=\"3\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<line id=\"l3b3-mirror\" x1=\"500\" y1=\"200\" x2=\"500\" y2=\"500\" stroke=\"#f5f5f0\" stroke-width=\"3\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><line id=\"l3b3-incident\" x1=\"250\" y1=\"200\" x2=\"500\" y2=\"350\" stroke=\"#7fdbff\" stroke-width=\"2\" stroke-linecap=\"round\" marker-end=\"url(#arrowB)\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><line id=\"l3b3-normal\" x1=\"400\" y1=\"350\" x2=\"500\" y2=\"350\" stroke=\"#f4d35e\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-dasharray=\"6 4\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\"/><line id=\"l3b3-reflected\" x1=\"500\" y1=\"350\" x2=\"250\" y2=\"500\" stroke=\"#7fdbff\" stroke-width=\"2\" stroke-linecap=\"round\" marker-end=\"url(#arrowB)\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><circle id=\"l3b3-photon\" r=\"6\" fill=\"#7fdbff\" filter=\"url(#glow)\" style=\"opacity:0\"/><text id=\"l3b3-lbl-incident\" x=\"280\" y=\"230\" text-anchor=\"start\" fill=\"#7fdbff\" font-family=\"'Comic Sans MS', cursive\" font-size=\"14\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">incident ray</text><text id=\"l3b3-lbl-reflected\" x=\"280\" y=\"470\" text-anchor=\"start\" fill=\"#7fdbff\" font-family=\"'Comic Sans MS', cursive\" font-size=\"14\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">reflected ray</text><text id=\"l3b3-lbl-normal\" x=\"380\" y=\"340\" text-anchor=\"end\" fill=\"#f4d35e\" font-family=\"'Comic Sans MS', cursive\" font-size=\"12\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">normal</text>\n</g>\n\n<!-- Beat 4: Label incident ray and reflected ray -->\n<g class=\"el\" data-beat=\"4\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l3b4-box\" x=\"150\" y=\"220\" width=\"500\" height=\"100\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l3b4-phrase\" x=\"400\" y=\"270\" text-anchor=\"middle\" fill=\"#38bdf8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Incident Ray vs Reflected Ray</text>\n</g>\n\n<!-- Beat 5: Normal — perpendicular at point of incidence -->\n<g class=\"el\" data-beat=\"5\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<line id=\"l3b5-mirror\" x1=\"500\" y1=\"200\" x2=\"500\" y2=\"500\" stroke=\"#f5f5f0\" stroke-width=\"3\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><line id=\"l3b5-incident\" x1=\"250\" y1=\"200\" x2=\"500\" y2=\"350\" stroke=\"#7fdbff\" stroke-width=\"2\" stroke-linecap=\"round\" marker-end=\"url(#arrowB)\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><line id=\"l3b5-normal\" x1=\"400\" y1=\"350\" x2=\"500\" y2=\"350\" stroke=\"#f4d35e\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-dasharray=\"6 4\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\"/><line id=\"l3b5-reflected\" x1=\"500\" y1=\"350\" x2=\"250\" y2=\"500\" stroke=\"#7fdbff\" stroke-width=\"2\" stroke-linecap=\"round\" marker-end=\"url(#arrowB)\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><circle id=\"l3b5-photon\" r=\"6\" fill=\"#7fdbff\" filter=\"url(#glow)\" style=\"opacity:0\"/><text id=\"l3b5-lbl-incident\" x=\"280\" y=\"230\" text-anchor=\"start\" fill=\"#7fdbff\" font-family=\"'Comic Sans MS', cursive\" font-size=\"14\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">incident ray</text><text id=\"l3b5-lbl-reflected\" x=\"280\" y=\"470\" text-anchor=\"start\" fill=\"#7fdbff\" font-family=\"'Comic Sans MS', cursive\" font-size=\"14\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">reflected ray</text><text id=\"l3b5-lbl-normal\" x=\"380\" y=\"340\" text-anchor=\"end\" fill=\"#f4d35e\" font-family=\"'Comic Sans MS', cursive\" font-size=\"12\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">normal</text>\n</g>\n\n<!-- Beat 6: Angle of incidence (i) -->\n<g class=\"el\" data-beat=\"6\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l3b6-box\" x=\"150\" y=\"220\" width=\"500\" height=\"100\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l3b6-phrase\" x=\"400\" y=\"270\" text-anchor=\"middle\" fill=\"#38bdf8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Angle of Incidence (i)</text>\n</g>\n\n<!-- Beat 7: Angle of reflection (r) -->\n<g class=\"el\" data-beat=\"7\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l3b7-box\" x=\"150\" y=\"220\" width=\"500\" height=\"100\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l3b7-phrase\" x=\"400\" y=\"270\" text-anchor=\"middle\" fill=\"#38bdf8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Angle of Reflection (r)</text>\n</g>\n\n<!-- Beat 8: Law 1 — i = r -->\n<g class=\"el\" data-beat=\"8\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l3b8-box\" x=\"100\" y=\"200\" width=\"600\" height=\"120\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l3b8-num\" x=\"400\" y=\"250\" text-anchor=\"middle\" fill=\"#a78bfa\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">LAW 1 of Reflection</text><text id=\"l3b8-text\" x=\"400\" y=\"290\" text-anchor=\"middle\" fill=\"#e2e8f0\" font-family=\"'Comic Sans MS', cursive\" font-size=\"16\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Angle of incidence = Angle of reflection</text>\n</g>\n\n<!-- Beat 9: Paper bending — same plane test -->\n<g class=\"el\" data-beat=\"9\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l3b9-box\" x=\"150\" y=\"220\" width=\"500\" height=\"100\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l3b9-phrase\" x=\"400\" y=\"270\" text-anchor=\"middle\" fill=\"#38bdf8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Same Plane Activity</text>\n</g>\n\n<!-- Beat 10: Law 2 — same plane -->\n<g class=\"el\" data-beat=\"10\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l3b10-box\" x=\"100\" y=\"200\" width=\"600\" height=\"120\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l3b10-num\" x=\"400\" y=\"250\" text-anchor=\"middle\" fill=\"#a78bfa\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">LAW 2 of Reflection</text><text id=\"l3b10-text\" x=\"400\" y=\"290\" text-anchor=\"middle\" fill=\"#e2e8f0\" font-family=\"'Comic Sans MS', cursive\" font-size=\"16\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Incident ray, normal, reflected ray — same plane</text>\n</g>\n\n<!-- Beat 11: Parallel beams on three mirrors -->\n<g class=\"el\" data-beat=\"11\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l3b11-box\" x=\"150\" y=\"220\" width=\"500\" height=\"100\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l3b11-phrase\" x=\"400\" y=\"270\" text-anchor=\"middle\" fill=\"#38bdf8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Laws apply to ALL mirrors</text>\n</g>\n\n<!-- Beat 12: Concave converges, convex diverges -->\n<g class=\"el\" data-beat=\"12\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<path id=\"l3b12-mirror\" d=\"M 550 150 Q 470 300 550 450\" fill=\"none\" stroke=\"#7fdbff\" stroke-width=\"4\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><line id=\"l3b12-ray0\" x1=\"100\" y1=\"200\" x2=\"480\" y2=\"300\" stroke=\"#7fdbff\" stroke-width=\"2\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><line id=\"l3b12-ray1\" x1=\"100\" y1=\"300\" x2=\"480\" y2=\"300\" stroke=\"#7fdbff\" stroke-width=\"2\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><line id=\"l3b12-ray2\" x1=\"100\" y1=\"400\" x2=\"480\" y2=\"300\" stroke=\"#7fdbff\" stroke-width=\"2\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><line id=\"l3b12-refl0\" x1=\"480\" y1=\"300\" x2=\"100\" y2=\"400\" stroke=\"#7fdbff\" stroke-width=\"2\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><line id=\"l3b12-refl1\" x1=\"480\" y1=\"300\" x2=\"100\" y2=\"420\" stroke=\"#7fdbff\" stroke-width=\"2\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><line id=\"l3b12-refl2\" x1=\"480\" y1=\"300\" x2=\"100\" y2=\"440\" stroke=\"#7fdbff\" stroke-width=\"2\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><circle id=\"l3b12-focus\" cx=\"300\" cy=\"300\" r=\"4\" fill=\"#fbbf24\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\"/><text id=\"l3b12-flabel\" x=\"310\" y=\"295\" text-anchor=\"start\" fill=\"#fbbf24\" font-family=\"'Comic Sans MS', cursive\" font-size=\"14\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">F</text><text id=\"l3b12-label\" x=\"400\" y=\"520\" text-anchor=\"middle\" fill=\"#7fdbff\" font-family=\"'Comic Sans MS', cursive\" font-size=\"20\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">CONVERGES</text>\n</g>\n\n<!-- Beat 13: Burning paper with concave mirror -->\n<g class=\"el\" data-beat=\"13\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<path id=\"l3b13-mirror\" d=\"M 550 150 Q 470 300 550 450\" fill=\"none\" stroke=\"#7fdbff\" stroke-width=\"4\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><line id=\"l3b13-ray0\" x1=\"100\" y1=\"200\" x2=\"480\" y2=\"300\" stroke=\"#7fdbff\" stroke-width=\"2\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><line id=\"l3b13-ray1\" x1=\"100\" y1=\"300\" x2=\"480\" y2=\"300\" stroke=\"#7fdbff\" stroke-width=\"2\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><line id=\"l3b13-ray2\" x1=\"100\" y1=\"400\" x2=\"480\" y2=\"300\" stroke=\"#7fdbff\" stroke-width=\"2\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><line id=\"l3b13-refl0\" x1=\"480\" y1=\"300\" x2=\"100\" y2=\"400\" stroke=\"#7fdbff\" stroke-width=\"2\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><line id=\"l3b13-refl1\" x1=\"480\" y1=\"300\" x2=\"100\" y2=\"420\" stroke=\"#7fdbff\" stroke-width=\"2\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><line id=\"l3b13-refl2\" x1=\"480\" y1=\"300\" x2=\"100\" y2=\"440\" stroke=\"#7fdbff\" stroke-width=\"2\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><circle id=\"l3b13-focus\" cx=\"300\" cy=\"300\" r=\"4\" fill=\"#fbbf24\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\"/><text id=\"l3b13-flabel\" x=\"310\" y=\"295\" text-anchor=\"start\" fill=\"#fbbf24\" font-family=\"'Comic Sans MS', cursive\" font-size=\"14\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">F</text><text id=\"l3b13-label\" x=\"400\" y=\"520\" text-anchor=\"middle\" fill=\"#7fdbff\" font-family=\"'Comic Sans MS', cursive\" font-size=\"20\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">CONVERGES</text>\n</g>\n\n<defs>\n  <radialGradient id=\"sun-l3\" cx=\"0.5\" cy=\"0.5\" r=\"0.5\">\n    <stop offset=\"0\" stop-color=\"#fde047\"/><stop offset=\"1\" stop-color=\"#f59e0b\"/>\n  </radialGradient>\n</defs>\n<!-- EXTRA: Special case — light along normal (i = 0, r = 0) -->\n<g class=\"el\" data-beat=\"11\">\n  <!-- A second mini-diagram at top right showing the special case -->\n  <g transform=\"translate(680,540)\">\n    <rect x=\"-40\" y=\"-25\" width=\"80\" height=\"3\" fill=\"url(#mirror-l3)\"/>\n    <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"-30\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l3)\"/>\n    <line x1=\"0\" y1=\"-3\" x2=\"0\" y2=\"-25\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l3)\" transform=\"translate(2,0)\"/>\n    <text x=\"0\" y=\"-40\" fill=\"#fbbf24\" font-size=\"10\" text-anchor=\"middle\">i = 0</text>\n    <text x=\"0\" y=\"-52\" fill=\"#fb923c\" font-size=\"10\" text-anchor=\"middle\">r = 0</text>\n    <text x=\"0\" y=\"20\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\">Light retraces path</text>\n  </g>\n</g>",
       "beats": [
         "Welcome back, young scientists! In our last lecture, we discovered that concave and convex mirrors form very different kinds of images. But WHY? Are there any rules — any LAWS — that govern how light bounces off a mirror? Today we will discover the two Laws of Reflection, and we will do this through a beautiful hands-on activity.",
         "Let us set up the experiment. You will need: a plane mirror with a stand, a torch, a comb (yes, the same one you use to comb your hair!), a paper clip, a sheet of white paper, and a strip of black paper. Cover all the openings of the comb with black paper, except for ONE slit in the middle. Place the mirror upright on the white paper. Shine the torch through the single slit — you get a thin beam of light along the paper that falls on the mirror.",
@@ -185,13 +583,486 @@ window.CHAPTER_DATA = {
         "Send several parallel beams — uncover many slits of the comb — onto a plane mirror. The reflected beams are also parallel. Now send the same parallel beams onto a CONCAVE mirror. The reflected beams get closer — they meet at a point. We say the beams CONVERGE. Send them onto a CONVEX mirror. The reflected beams spread apart — they DIVERGE. So: a concave mirror converges light; a convex mirror diverges light.",
         "Here is a fascinating activity — but it requires supervision. Take a concave mirror and hold it facing the Sun. Direct the reflected sunlight onto a sheet of thin paper. Adjust the distance of the paper until you get a sharp, bright spot. Hold steady for a few minutes. What happens? The paper starts to burn and smoke! The concave mirror concentrates all the sunlight into one tiny spot, producing enough heat to ignite the paper. This is exactly how solar cookers work — and you will study solar concentrators in higher classes.",
         "So today we learned two powerful laws: angle of incidence equals angle of reflection; and the incident ray, normal, and reflected ray all lie in the same plane. These laws apply to every mirror in the world. Whenever you see your reflection, think of these two laws working quietly. In our next lecture, we will move from mirrors to LENSES — transparent pieces of glass that bend light in surprising ways. See you then!"
-      ]
+      ],
+      "timelines": [
+        {
+          "beat": 1,
+          "steps": [
+            {
+              "delay": 0,
+              "show": [
+                "l3b1-title"
+              ]
+            },
+            {
+              "delay": 11821,
+              "show": [
+                "l3b1-sub"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 2,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l3b2-mirror"
+              ]
+            },
+            {
+              "delay": 4008,
+              "draw": [
+                "l3b2-incident"
+              ]
+            },
+            {
+              "delay": 8017,
+              "show": [
+                "l3b2-normal"
+              ]
+            },
+            {
+              "delay": 12026,
+              "draw": [
+                "l3b2-reflected"
+              ]
+            },
+            {
+              "delay": 16035,
+              "photon": [
+                "l3b2-photon"
+              ]
+            },
+            {
+              "delay": 20044,
+              "show": [
+                "l3b2-lbl-incident"
+              ]
+            },
+            {
+              "delay": 24053,
+              "show": [
+                "l3b2-lbl-reflected"
+              ]
+            },
+            {
+              "delay": 28062,
+              "show": [
+                "l3b2-lbl-normal"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 3,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l3b3-mirror"
+              ]
+            },
+            {
+              "delay": 3125,
+              "draw": [
+                "l3b3-incident"
+              ]
+            },
+            {
+              "delay": 6250,
+              "show": [
+                "l3b3-normal"
+              ]
+            },
+            {
+              "delay": 9375,
+              "draw": [
+                "l3b3-reflected"
+              ]
+            },
+            {
+              "delay": 12500,
+              "photon": [
+                "l3b3-photon"
+              ]
+            },
+            {
+              "delay": 15625,
+              "show": [
+                "l3b3-lbl-incident"
+              ]
+            },
+            {
+              "delay": 18750,
+              "show": [
+                "l3b3-lbl-reflected"
+              ]
+            },
+            {
+              "delay": 21875,
+              "show": [
+                "l3b3-lbl-normal"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 4,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l3b4-box"
+              ]
+            },
+            {
+              "delay": 10964,
+              "show": [
+                "l3b4-phrase"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 5,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l3b5-mirror"
+              ]
+            },
+            {
+              "delay": 4098,
+              "draw": [
+                "l3b5-incident"
+              ]
+            },
+            {
+              "delay": 8196,
+              "show": [
+                "l3b5-normal"
+              ]
+            },
+            {
+              "delay": 12294,
+              "draw": [
+                "l3b5-reflected"
+              ]
+            },
+            {
+              "delay": 16392,
+              "photon": [
+                "l3b5-photon"
+              ]
+            },
+            {
+              "delay": 20491,
+              "show": [
+                "l3b5-lbl-incident"
+              ]
+            },
+            {
+              "delay": 24589,
+              "show": [
+                "l3b5-lbl-reflected"
+              ]
+            },
+            {
+              "delay": 28687,
+              "show": [
+                "l3b5-lbl-normal"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 6,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l3b6-box"
+              ]
+            },
+            {
+              "delay": 13821,
+              "show": [
+                "l3b6-phrase"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 7,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l3b7-box"
+              ]
+            },
+            {
+              "delay": 16464,
+              "show": [
+                "l3b7-phrase"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 8,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l3b8-box"
+              ]
+            },
+            {
+              "delay": 8523,
+              "show": [
+                "l3b8-num"
+              ]
+            },
+            {
+              "delay": 17047,
+              "show": [
+                "l3b8-text"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 9,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l3b9-box"
+              ]
+            },
+            {
+              "delay": 15607,
+              "show": [
+                "l3b9-phrase"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 10,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l3b10-box"
+              ]
+            },
+            {
+              "delay": 10047,
+              "show": [
+                "l3b10-num"
+              ]
+            },
+            {
+              "delay": 20095,
+              "show": [
+                "l3b10-text"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 11,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l3b11-box"
+              ]
+            },
+            {
+              "delay": 12321,
+              "show": [
+                "l3b11-phrase"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 12,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l3b12-mirror"
+              ]
+            },
+            {
+              "delay": 2935,
+              "draw": [
+                "l3b12-ray0"
+              ]
+            },
+            {
+              "delay": 5871,
+              "draw": [
+                "l3b12-ray1"
+              ]
+            },
+            {
+              "delay": 8807,
+              "draw": [
+                "l3b12-ray2"
+              ]
+            },
+            {
+              "delay": 11742,
+              "draw": [
+                "l3b12-refl0"
+              ]
+            },
+            {
+              "delay": 14678,
+              "draw": [
+                "l3b12-refl1"
+              ]
+            },
+            {
+              "delay": 17614,
+              "draw": [
+                "l3b12-refl2"
+              ]
+            },
+            {
+              "delay": 20550,
+              "show": [
+                "l3b12-focus"
+              ]
+            },
+            {
+              "delay": 23485,
+              "show": [
+                "l3b12-flabel"
+              ]
+            },
+            {
+              "delay": 26421,
+              "show": [
+                "l3b12-label"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 13,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l3b13-mirror"
+              ]
+            },
+            {
+              "delay": 3785,
+              "draw": [
+                "l3b13-ray0"
+              ]
+            },
+            {
+              "delay": 7571,
+              "draw": [
+                "l3b13-ray1"
+              ]
+            },
+            {
+              "delay": 11357,
+              "draw": [
+                "l3b13-ray2"
+              ]
+            },
+            {
+              "delay": 15142,
+              "draw": [
+                "l3b13-refl0"
+              ]
+            },
+            {
+              "delay": 18928,
+              "draw": [
+                "l3b13-refl1"
+              ]
+            },
+            {
+              "delay": 22714,
+              "draw": [
+                "l3b13-refl2"
+              ]
+            },
+            {
+              "delay": 26500,
+              "show": [
+                "l3b13-focus"
+              ]
+            },
+            {
+              "delay": 30285,
+              "show": [
+                "l3b13-flabel"
+              ]
+            },
+            {
+              "delay": 34071,
+              "show": [
+                "l3b13-label"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 14,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l3b14-box"
+              ]
+            },
+            {
+              "delay": 14964,
+              "show": [
+                "l3b14-phrase"
+              ]
+            }
+          ]
+        }
+      ],
+      "timeline": {
+        "beat": 1,
+        "steps": [
+          {
+            "delay": 0,
+            "show": [
+              "l3b1-title"
+            ]
+          },
+          {
+            "delay": 11821,
+            "show": [
+              "l3b1-sub"
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "lenses",
       "label": "10.4 Lenses",
       "viewBox": "0 0 800 600",
-      "svg": "<defs>\n  <pattern id=\"grid-l4\" width=\"25\" height=\"25\" patternUnits=\"userSpaceOnUse\">\n    <path d=\"M 25 0 L 0 0 0 25\" fill=\"none\" stroke=\"#1e293b\" stroke-width=\"0.5\"/>\n  </pattern>\n  <linearGradient id=\"glass-l4\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">\n    <stop offset=\"0\" stop-color=\"#7dd3fc\" stop-opacity=\"0.6\"/><stop offset=\"0.5\" stop-color=\"#bae6fd\" stop-opacity=\"0.8\"/><stop offset=\"1\" stop-color=\"#7dd3fc\" stop-opacity=\"0.6\"/>\n  </linearGradient>\n  <linearGradient id=\"light-l4\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">\n    <stop offset=\"0\" stop-color=\"#fbbf24\"/><stop offset=\"1\" stop-color=\"#fef3c7\"/>\n  </linearGradient>\n  <marker id=\"arrowY-l4\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto\">\n    <path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#fbbf24\"/>\n  </marker>\n  <marker id=\"arrowO-l4\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto\">\n    <path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#fb923c\"/>\n  </marker>\n</defs>\n<rect x=\"0\" y=\"0\" width=\"800\" height=\"600\" fill=\"url(#grid-l4)\"/>\n\n<!-- Beat 1: Water drop on glass, text underneath -->\n<g class=\"el\" data-beat=\"1\">\n  <!-- Glass plate -->\n  <rect x=\"100\" y=\"200\" width=\"200\" height=\"40\" fill=\"rgba(125,211,252,0.2)\" stroke=\"#7dd3fc\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.00s\" />\n  <text x=\"200\" y=\"195\" fill=\"#7dd3fc\" font-size=\"11\" text-anchor=\"middle\"   class=\"anim-fade-in\" style=\"animation-delay: 0.15s\">Glass plate (oiled)</text>\n  <!-- Water drop (curved outward) -->\n  <ellipse cx=\"200\" cy=\"180\" rx=\"20\" ry=\"14\" fill=\"rgba(56,189,248,0.5)\" stroke=\"#38bdf8\" stroke-width=\"2\" class=\"anim-pop-in\" style=\"animation-delay: 0.30s\" />\n  <text x=\"240\" y=\"180\" fill=\"#38bdf8\" font-size=\"11\" text-anchor=\"start\"   class=\"anim-fade-in\" style=\"animation-delay: 0.45s\">Water drop</text>\n  <!-- Text under glass -->\n  <text x=\"120\" y=\"270\" fill=\"#fbbf24\" font-size=\"18\" font-family=\"serif\" font-weight=\"700\"   class=\"anim-fade-in\" style=\"animation-delay: 0.60s\">ABC abc</text>\n  <!-- Same text under drop, enlarged -->\n  <text x=\"190\" y=\"270\" fill=\"#34d399\" font-size=\"30\" font-family=\"serif\" font-weight=\"700\"   class=\"anim-fade-in\" style=\"animation-delay: 0.75s\">A</text>\n  <text x=\"195\" y=\"280\" fill=\"#34d399\" font-size=\"11\"   class=\"anim-fade-in\" style=\"animation-delay: 0.90s\">↑ enlarged</text>\n</g>\n\n<!-- Beat 2: Magnifying glass -->\n<g class=\"el\" data-beat=\"2\">\n  <g transform=\"translate(450,200)\">\n    <!-- Lens -->\n    <ellipse cx=\"0\" cy=\"0\" rx=\"30\" ry=\"40\" fill=\"url(#glass-l4)\" stroke=\"#7dd3fc\" stroke-width=\"2\"/>\n    <!-- Handle -->\n    <line x1=\"0\" y1=\"40\" x2=\"0\" y2=\"80\" stroke=\"#475569\" stroke-width=\"6\" stroke-linecap=\"round\"/>\n    <rect x=\"-3\" y=\"78\" width=\"6\" height=\"20\" fill=\"#475569\" rx=\"3\"/>\n    <text x=\"0\" y=\"115\" fill=\"#7dd3fc\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"600\">Magnifying glass</text>\n  </g>\n</g>\n\n<!-- Beat 3: Convex lens — thick middle -->\n<g class=\"el\" data-beat=\"3\">\n  <g transform=\"translate(180,400)\">\n    <ellipse cx=\"0\" cy=\"0\" rx=\"22\" ry=\"60\" fill=\"url(#glass-l4)\" stroke=\"#7dd3fc\" stroke-width=\"2\"/>\n    <text x=\"0\" y=\"80\" fill=\"#7dd3fc\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"700\">Convex lens</text>\n    <text x=\"0\" y=\"95\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\">(thick middle)</text>\n  </g>\n</g>\n\n<!-- Beat 4: Concave lens — thick edges -->\n<g class=\"el\" data-beat=\"4\">\n  <g transform=\"translate(300,400)\">\n    <!-- Concave lens shape -->\n    <path d=\"M -22 -60 L 22 -60 Q 0 0 22 60 L -22 60 Q 0 0 -22 -60 Z\" fill=\"url(#glass-l4)\" stroke=\"#7dd3fc\" stroke-width=\"2\"/>\n    <text x=\"0\" y=\"80\" fill=\"#7dd3fc\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"700\">Concave lens</text>\n    <text x=\"0\" y=\"95\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\">(thick edges)</text>\n  </g>\n</g>\n\n<!-- Beat 5: Schematic representations -->\n<g class=\"el\" data-beat=\"5\">\n  <g transform=\"translate(420,400)\">\n    <!-- Convex schematic: vertical line with double-arrow outward -->\n    <line x1=\"0\" y1=\"-50\" x2=\"0\" y2=\"50\" stroke=\"#38bdf8\" stroke-width=\"3\"/>\n    <polygon points=\"-6,-50 6,-50 0,-60\" fill=\"#38bdf8\"/>\n    <polygon points=\"-6,50 6,50 0,60\" fill=\"#38bdf8\"/>\n    <text x=\"0\" y=\"80\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\">Convex symbol</text>\n  </g>\n  <g transform=\"translate(500,400)\">\n    <!-- Concave schematic: vertical line with arrows inward -->\n    <line x1=\"0\" y1=\"-50\" x2=\"0\" y2=\"50\" stroke=\"#38bdf8\" stroke-width=\"3\"/>\n    <polygon points=\"-6,-50 6,-50 0,-40\" fill=\"#38bdf8\"/>\n    <polygon points=\"-6,50 6,50 0,40\" fill=\"#38bdf8\"/>\n    <text x=\"0\" y=\"80\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\">Concave symbol</text>\n  </g>\n</g>\n\n<!-- Beat 6: Object through convex lens — close, enlarged -->\n<g class=\"el\" data-beat=\"6\">\n  <g transform=\"translate(620,400)\">\n    <!-- Convex lens -->\n    <ellipse cx=\"0\" cy=\"0\" rx=\"14\" ry=\"40\" fill=\"url(#glass-l4)\" stroke=\"#7dd3fc\" stroke-width=\"1.5\"/>\n    <!-- Object (small arrow) -->\n    <line x1=\"-50\" y1=\"-5\" x2=\"-50\" y2=\"-30\" stroke=\"#fbbf24\" stroke-width=\"3\"/>\n    <polygon points=\"-53,-30 -47,-30 -50,-38\" fill=\"#fbbf24\"/>\n    <!-- Image (larger, erect) -->\n    <line x1=\"30\" y1=\"-5\" x2=\"30\" y2=\"-50\" stroke=\"#34d399\" stroke-width=\"3\"/>\n    <polygon points=\"27,-50 33,-50 30,-58\" fill=\"#34d399\"/>\n    <text x=\"-50\" y=\"40\" fill=\"#fbbf24\" font-size=\"10\" text-anchor=\"middle\">Object</text>\n    <text x=\"30\" y=\"60\" fill=\"#34d399\" font-size=\"10\" text-anchor=\"middle\">Image (enlarged)</text>\n    <text x=\"-10\" y=\"70\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\">close → enlarged</text>\n  </g>\n</g>\n\n<!-- Beat 7: Object through convex lens — far, inverted -->\n<g class=\"el\" data-beat=\"7\">\n  <g transform=\"translate(80,200)\">\n    <!-- Convex lens -->\n    <ellipse cx=\"0\" cy=\"0\" rx=\"14\" ry=\"40\" fill=\"url(#glass-l4)\" stroke=\"#7dd3fc\" stroke-width=\"1.5\"/>\n    <!-- Object far -->\n    <line x1=\"-100\" y1=\"0\" x2=\"-100\" y2=\"-25\" stroke=\"#fbbf24\" stroke-width=\"3\"/>\n    <polygon points=\"-103,-25 -97,-25 -100,-33\" fill=\"#fbbf24\"/>\n    <!-- Image inverted -->\n    <line x1=\"60\" y1=\"20\" x2=\"60\" y2=\"50\" stroke=\"#f87171\" stroke-width=\"3\"/>\n    <polygon points=\"57,50 63,50 60,58\" fill=\"#f87171\"/>\n    <text x=\"-100\" y=\"40\" fill=\"#fbbf24\" font-size=\"10\" text-anchor=\"middle\">Object (far)</text>\n    <text x=\"60\" y=\"70\" fill=\"#f87171\" font-size=\"10\" text-anchor=\"middle\">Image (inverted)</text>\n    <text x=\"-20\" y=\"80\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\">far → inverted</text>\n  </g>\n</g>\n\n<!-- Beat 8: Object through concave lens — always erect, diminished -->\n<g class=\"el\" data-beat=\"8\">\n  <g transform=\"translate(280,200)\">\n    <!-- Concave lens -->\n    <path d=\"M -14 -40 L 14 -40 Q 0 0 14 40 L -14 40 Q 0 0 -14 -40 Z\" fill=\"url(#glass-l4)\" stroke=\"#7dd3fc\" stroke-width=\"1.5\"/>\n    <!-- Object -->\n    <line x1=\"-60\" y1=\"0\" x2=\"-60\" y2=\"-25\" stroke=\"#fbbf24\" stroke-width=\"3\"/>\n    <polygon points=\"-63,-25 -57,-25 -60,-33\" fill=\"#fbbf24\"/>\n    <!-- Small image, erect -->\n    <line x1=\"40\" y1=\"0\" x2=\"40\" y2=\"-15\" stroke=\"#34d399\" stroke-width=\"3\"/>\n    <polygon points=\"37,-15 43,-15 40,-23\" fill=\"#34d399\"/>\n    <text x=\"-60\" y=\"35\" fill=\"#fbbf24\" font-size=\"10\" text-anchor=\"middle\">Object</text>\n    <text x=\"40\" y=\"35\" fill=\"#34d399\" font-size=\"10\" text-anchor=\"middle\">Diminished image</text>\n  </g>\n</g>\n\n<!-- Beat 9: Parallel beams through lenses -->\n<g class=\"el\" data-beat=\"9\">\n  <!-- Thin glass plate -->\n  <g transform=\"translate(0,0)\">\n    <rect x=\"120\" y=\"530\" width=\"14\" height=\"60\" fill=\"rgba(125,211,252,0.2)\" stroke=\"#7dd3fc\" stroke-width=\"1\"/>\n    <line x1=\"80\" y1=\"540\" x2=\"120\" y2=\"540\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l4)\"/>\n    <line x1=\"80\" y1=\"560\" x2=\"120\" y2=\"560\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l4)\"/>\n    <line x1=\"80\" y1=\"580\" x2=\"120\" y2=\"580\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l4)\"/>\n    <line x1=\"134\" y1=\"540\" x2=\"180\" y2=\"540\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l4)\"/>\n    <line x1=\"134\" y1=\"560\" x2=\"180\" y2=\"560\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l4)\"/>\n    <line x1=\"134\" y1=\"580\" x2=\"180\" y2=\"580\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l4)\"/>\n    <text x=\"150\" y=\"610\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\">Glass — passes through</text>\n  </g>\n  <!-- Convex lens — converges -->\n  <g transform=\"translate(0,0)\">\n    <ellipse cx=\"260\" cy=\"560\" rx=\"10\" ry=\"30\" fill=\"url(#glass-l4)\" stroke=\"#7dd3fc\" stroke-width=\"1\"/>\n    <line x1=\"220\" y1=\"540\" x2=\"250\" y2=\"540\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l4)\"/>\n    <line x1=\"220\" y1=\"560\" x2=\"250\" y2=\"560\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l4)\"/>\n    <line x1=\"220\" y1=\"580\" x2=\"250\" y2=\"580\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l4)\"/>\n    <line x1=\"270\" y1=\"540\" x2=\"330\" y2=\"560\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l4)\"/>\n    <line x1=\"270\" y1=\"560\" x2=\"330\" y2=\"560\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l4)\"/>\n    <line x1=\"270\" y1=\"580\" x2=\"330\" y2=\"560\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l4)\"/>\n    <circle cx=\"330\" cy=\"560\" r=\"4\" fill=\"#fbbf24\"/>\n    <text x=\"270\" y=\"610\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\">Convex — converges</text>\n  </g>\n  <!-- Concave lens — diverges -->\n  <g transform=\"translate(0,0)\">\n    <path d=\"M 410 530 L 430 530 Q 420 560 430 590 L 410 590 Q 420 560 410 530 Z\" fill=\"url(#glass-l4)\" stroke=\"#7dd3fc\" stroke-width=\"1\"/>\n    <line x1=\"370\" y1=\"540\" x2=\"410\" y2=\"540\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l4)\"/>\n    <line x1=\"370\" y1=\"560\" x2=\"410\" y2=\"560\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l4)\"/>\n    <line x1=\"370\" y1=\"580\" x2=\"410\" y2=\"580\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l4)\"/>\n    <line x1=\"430\" y1=\"540\" x2=\"490\" y2=\"520\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l4)\"/>\n    <line x1=\"430\" y1=\"560\" x2=\"490\" y2=\"560\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l4)\"/>\n    <line x1=\"430\" y1=\"580\" x2=\"490\" y2=\"600\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l4)\"/>\n    <text x=\"450\" y=\"610\" fill=\"#94a3b8\" font-size=\"10\" text-anchor=\"middle\">Concave — diverges</text>\n  </g>\n</g>\n\n<!-- Beat 10: Sunlight burning paper through convex lens -->\n<g class=\"el\" data-beat=\"10\">\n  <g transform=\"translate(640,540)\">\n    <!-- Sun -->\n    <circle cx=\"-100\" cy=\"-30\" r=\"18\" fill=\"#fde047\"/>\n    <text x=\"-100\" y=\"0\" fill=\"#fbbf24\" font-size=\"9\" text-anchor=\"middle\">Sun</text>\n    <!-- Convex lens -->\n    <ellipse cx=\"-20\" cy=\"0\" rx=\"10\" ry=\"30\" fill=\"url(#glass-l4)\" stroke=\"#7dd3fc\" stroke-width=\"1.5\"/>\n    <!-- Focused beam -->\n    <line x1=\"-100\" y1=\"-25\" x2=\"-30\" y2=\"-10\" stroke=\"#fbbf24\" stroke-width=\"2\"/>\n    <line x1=\"-100\" y1=\"0\" x2=\"-30\" y2=\"0\" stroke=\"#fbbf24\" stroke-width=\"2\"/>\n    <line x1=\"-100\" y1=\"25\" x2=\"-30\" y2=\"10\" stroke=\"#fbbf24\" stroke-width=\"2\"/>\n    <line x1=\"-30\" y1=\"-10\" x2=\"40\" y2=\"0\" stroke=\"#fb923c\" stroke-width=\"2\"/>\n    <line x1=\"-30\" y1=\"0\" x2=\"40\" y2=\"0\" stroke=\"#fb923c\" stroke-width=\"2\"/>\n    <line x1=\"-30\" y1=\"10\" x2=\"40\" y2=\"0\" stroke=\"#fb923c\" stroke-width=\"2\"/>\n    <!-- Paper -->\n    <rect x=\"40\" y=\"-15\" width=\"20\" height=\"30\" fill=\"#f1f5f9\" stroke=\"#475569\"/>\n    <!-- Smoke -->\n    <path d=\"M 50 -15 Q 48 -25 55 -30 Q 52 -40 60 -45\" stroke=\"#94a3b8\" stroke-width=\"2\" fill=\"none\"/>\n    <text x=\"20\" y=\"35\" fill=\"#fbbf24\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"600\">Burns!</text>\n  </g>\n</g>\n\n<!-- Beat 11: Real-life uses of lenses -->\n<g class=\"el\" data-beat=\"11\">\n  <!-- Eyeglasses -->\n  <g transform=\"translate(70,80)\">\n    <ellipse cx=\"-15\" cy=\"0\" rx=\"18\" ry=\"12\" fill=\"url(#glass-l4)\" stroke=\"#7dd3fc\" stroke-width=\"1.5\"/>\n    <ellipse cx=\"15\" cy=\"0\" rx=\"18\" ry=\"12\" fill=\"url(#glass-l4)\" stroke=\"#7dd3fc\" stroke-width=\"1.5\"/>\n    <line x1=\"3\" y1=\"0\" x2=\"-3\" y2=\"0\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <line x1=\"-33\" y1=\"-2\" x2=\"-45\" y2=\"-5\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <line x1=\"33\" y1=\"-2\" x2=\"45\" y2=\"-5\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <text x=\"0\" y=\"25\" fill=\"#7dd3fc\" font-size=\"10\" text-anchor=\"middle\">Eyeglasses</text>\n  </g>\n  <!-- Camera -->\n  <g transform=\"translate(200,80)\">\n    <rect x=\"-25\" y=\"-15\" width=\"50\" height=\"30\" fill=\"#475569\" stroke=\"#1e293b\" stroke-width=\"2\"/>\n    <circle cx=\"-5\" cy=\"0\" r=\"10\" fill=\"url(#glass-l4)\" stroke=\"#7dd3fc\" stroke-width=\"2\"/>\n    <circle cx=\"-5\" cy=\"0\" r=\"5\" fill=\"#1e293b\"/>\n    <text x=\"0\" y=\"30\" fill=\"#7dd3fc\" font-size=\"10\" text-anchor=\"middle\">Camera</text>\n  </g>\n  <!-- Human eye -->\n  <g transform=\"translate(320,80)\">\n    <ellipse cx=\"0\" cy=\"0\" rx=\"22\" ry=\"14\" fill=\"#f1f5f9\" stroke=\"#475569\" stroke-width=\"2\"/>\n    <circle cx=\"0\" cy=\"0\" r=\"8\" fill=\"#38bdf8\" stroke=\"#1e293b\" stroke-width=\"1.5\"/>\n    <circle cx=\"0\" cy=\"0\" r=\"3\" fill=\"#1e293b\"/>\n    <ellipse cx=\"8\" cy=\"0\" rx=\"4\" ry=\"8\" fill=\"url(#glass-l4)\" stroke=\"#7dd3fc\" stroke-width=\"1.5\"/>\n    <text x=\"0\" y=\"30\" fill=\"#7dd3fc\" font-size=\"10\" text-anchor=\"middle\">Human eye</text>\n  </g>\n</g>\n<!-- EXTRA: Reflection vs Refraction (mirror vs lens) -->\n<g class=\"el\" data-beat=\"2\">\n  <!-- Mirror (reflection - light bounces back) -->\n  <g transform=\"translate(620,80)\">\n    <rect x=\"-25\" y=\"-15\" width=\"6\" height=\"30\" fill=\"url(#mirror-l4)\"/>\n    <rect x=\"-19\" y=\"-15\" width=\"3\" height=\"30\" fill=\"#1e293b\"/>\n    <line x1=\"-50\" y1=\"0\" x2=\"-25\" y2=\"0\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l4)\"/>\n    <line x1=\"-25\" y1=\"-3\" x2=\"-50\" y2=\"-15\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l4)\"/>\n    <text x=\"0\" y=\"35\" fill=\"#7dd3fc\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"600\">MIRROR</text>\n    <text x=\"0\" y=\"48\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\">Light BOUNCES back</text>\n  </g>\n  <!-- Lens (refraction - light passes through, bent) -->\n  <g transform=\"translate(730,80)\">\n    <ellipse cx=\"0\" cy=\"0\" rx=\"10\" ry=\"20\" fill=\"url(#glass-l4)\" stroke=\"#7dd3fc\" stroke-width=\"1.5\"/>\n    <line x1=\"-25\" y1=\"0\" x2=\"-10\" y2=\"0\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l4)\"/>\n    <line x1=\"10\" y1=\"0\" x2=\"35\" y2=\"-8\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l4)\"/>\n    <text x=\"0\" y=\"35\" fill=\"#7dd3fc\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"600\">LENS</text>\n    <text x=\"0\" y=\"48\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\">Light PASSES THROUGH (bent)</text>\n  </g>\n</g>",
+      "svg": "<defs>\n  <pattern id=\"grid-l4\" width=\"25\" height=\"25\" patternUnits=\"userSpaceOnUse\">\n    <path d=\"M 25 0 L 0 0 0 25\" fill=\"none\" stroke=\"#1e293b\" stroke-width=\"0.5\"/>\n  </pattern>\n  <linearGradient id=\"glass-l4\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">\n    <stop offset=\"0\" stop-color=\"#7dd3fc\" stop-opacity=\"0.6\"/><stop offset=\"0.5\" stop-color=\"#bae6fd\" stop-opacity=\"0.8\"/><stop offset=\"1\" stop-color=\"#7dd3fc\" stop-opacity=\"0.6\"/>\n  </linearGradient>\n  <linearGradient id=\"light-l4\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">\n    <stop offset=\"0\" stop-color=\"#fbbf24\"/><stop offset=\"1\" stop-color=\"#fef3c7\"/>\n  </linearGradient>\n  <marker id=\"arrowY-l4\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto\">\n    <path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#fbbf24\"/>\n  </marker>\n  <marker id=\"arrowO-l4\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto\">\n    <path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#fb923c\"/>\n  </marker>\n</defs>\n<rect x=\"0\" y=\"0\" width=\"800\" height=\"600\" fill=\"url(#grid-l4)\"/>\n\n<!-- Beat 1: Water drop on glass, text underneath -->\n<g class=\"el\" data-beat=\"1\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<text id=\"l4b1-title\" x=\"400\" y=\"80\" text-anchor=\"middle\" fill=\"#f5f5f0\" font-family=\"'Comic Sans MS', cursive\" font-size=\"32\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Lenses</text><text id=\"l4b1-sub\" x=\"400\" y=\"120\" text-anchor=\"middle\" fill=\"#94a3b8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"18\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Light passes THROUGH, not bounces</text>\n</g>\n\n<!-- Beat 2: Magnifying glass -->\n<g class=\"el\" data-beat=\"2\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l4b2-box\" x=\"150\" y=\"220\" width=\"500\" height=\"100\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l4b2-phrase\" x=\"400\" y=\"270\" text-anchor=\"middle\" fill=\"#38bdf8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Mirror vs Lens</text>\n</g>\n\n<!-- Beat 3: Convex lens — thick middle -->\n<g class=\"el\" data-beat=\"3\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<path id=\"l4b3-lens\" d=\"M 380 200 Q 420 300 380 400 Q 340 300 380 200 Z\" fill=\"rgba(127,219,255,0.10)\" stroke=\"#7fdbff\" stroke-width=\"3\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l4b3-label\" x=\"400\" y=\"450\" text-anchor=\"middle\" fill=\"#7fdbff\" font-family=\"'Comic Sans MS', cursive\" font-size=\"20\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">CONVEX LENS</text><text id=\"l4b3-desc\" x=\"400\" y=\"475\" text-anchor=\"middle\" fill=\"#94a3b8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"13\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">(thick middle)</text>\n</g>\n\n<!-- Beat 4: Concave lens — thick edges -->\n<g class=\"el\" data-beat=\"4\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<path id=\"l4b4-lens\" d=\"M 380 200 Q 360 300 380 400 Q 420 300 380 200 Z\" fill=\"rgba(255,143,171,0.10)\" stroke=\"#ff8fab\" stroke-width=\"3\" stroke-linecap=\"round\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l4b4-label\" x=\"400\" y=\"450\" text-anchor=\"middle\" fill=\"#ff8fab\" font-family=\"'Comic Sans MS', cursive\" font-size=\"20\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">CONCAVE LENS</text><text id=\"l4b4-desc\" x=\"400\" y=\"475\" text-anchor=\"middle\" fill=\"#94a3b8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"13\" font-weight=\"400\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">(thick edges)</text>\n</g>\n\n<!-- Beat 5: Schematic representations -->\n<g class=\"el\" data-beat=\"5\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l4b5-box\" x=\"150\" y=\"220\" width=\"500\" height=\"100\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l4b5-phrase\" x=\"400\" y=\"270\" text-anchor=\"middle\" fill=\"#38bdf8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Magnifying Glass = Convex Lens</text>\n</g>\n\n<!-- Beat 6: Object through convex lens — close, enlarged -->\n<g class=\"el\" data-beat=\"6\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l4b6-box\" x=\"150\" y=\"220\" width=\"500\" height=\"100\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l4b6-phrase\" x=\"400\" y=\"270\" text-anchor=\"middle\" fill=\"#38bdf8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Convex: thick middle</text>\n</g>\n\n<!-- Beat 7: Object through convex lens — far, inverted -->\n<g class=\"el\" data-beat=\"7\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l4b7-box\" x=\"150\" y=\"220\" width=\"500\" height=\"100\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l4b7-phrase\" x=\"400\" y=\"270\" text-anchor=\"middle\" fill=\"#38bdf8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Schematic Symbols</text>\n</g>\n\n<!-- Beat 8: Object through concave lens — always erect, diminished -->\n<g class=\"el\" data-beat=\"8\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l4b8-box\" x=\"150\" y=\"220\" width=\"500\" height=\"100\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l4b8-phrase\" x=\"400\" y=\"270\" text-anchor=\"middle\" fill=\"#38bdf8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Light passes through lens</text>\n</g>\n\n<!-- Beat 9: Parallel beams through lenses -->\n<g class=\"el\" data-beat=\"9\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l4b9-box\" x=\"150\" y=\"220\" width=\"500\" height=\"100\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l4b9-phrase\" x=\"400\" y=\"270\" text-anchor=\"middle\" fill=\"#38bdf8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Convex (close): Enlarged</text>\n</g>\n\n<!-- Beat 10: Sunlight burning paper through convex lens -->\n<g class=\"el\" data-beat=\"10\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l4b10-box\" x=\"150\" y=\"220\" width=\"500\" height=\"100\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l4b10-phrase\" x=\"400\" y=\"270\" text-anchor=\"middle\" fill=\"#38bdf8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Convex (far): Inverted</text>\n</g>\n\n<!-- Beat 11: Real-life uses of lenses -->\n<g class=\"el\" data-beat=\"11\">\n<defs>\n  <filter id=\"chalk\" x=\"-20%\" y=\"-20%\" width=\"140%\" height=\"140%\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.02\" numOctaves=\"3\" seed=\"7\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"1.8\" xChannelSelector=\"R\" yChannelSelector=\"G\"/>\n  </filter>\n  <filter id=\"glow\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\">\n    <feGaussianBlur stdDeviation=\"4\" result=\"blur\"/>\n    <feMerge><feMergeNode in=\"blur\"/><feMergeNode in=\"SourceGraphic\"/></feMerge>\n  </filter>\n  <marker id=\"arrowC\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#f5f5f0\"/></marker>\n  <marker id=\"arrowB\" markerWidth=\"10\" markerHeight=\"10\" refX=\"8\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L8,3 L0,6 Z\" fill=\"#7fdbff\"/></marker>\n</defs>\n<rect width=\"800\" height=\"600\" fill=\"#1f2a24\"/>\n<rect id=\"l4b11-box\" x=\"150\" y=\"220\" width=\"500\" height=\"100\" fill=\"rgba(56,189,248,0.10)\" stroke=\"#38bdf8\" stroke-width=\"2\" filter=\"url(#chalk)\" style=\"stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s ease;opacity:0\"/><text id=\"l4b11-phrase\" x=\"400\" y=\"270\" text-anchor=\"middle\" fill=\"#38bdf8\" font-family=\"'Comic Sans MS', cursive\" font-size=\"22\" font-weight=\"700\" filter=\"url(#chalk)\" style=\"opacity:0;transition:opacity 0.6s ease\">Concave: Always diminished</text>\n</g>\n<!-- EXTRA: Reflection vs Refraction (mirror vs lens) -->\n<g class=\"el\" data-beat=\"2\">\n  <!-- Mirror (reflection - light bounces back) -->\n  <g transform=\"translate(620,80)\">\n    <rect x=\"-25\" y=\"-15\" width=\"6\" height=\"30\" fill=\"url(#mirror-l4)\"/>\n    <rect x=\"-19\" y=\"-15\" width=\"3\" height=\"30\" fill=\"#1e293b\"/>\n    <line x1=\"-50\" y1=\"0\" x2=\"-25\" y2=\"0\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l4)\"/>\n    <line x1=\"-25\" y1=\"-3\" x2=\"-50\" y2=\"-15\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l4)\"/>\n    <text x=\"0\" y=\"35\" fill=\"#7dd3fc\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"600\">MIRROR</text>\n    <text x=\"0\" y=\"48\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\">Light BOUNCES back</text>\n  </g>\n  <!-- Lens (refraction - light passes through, bent) -->\n  <g transform=\"translate(730,80)\">\n    <ellipse cx=\"0\" cy=\"0\" rx=\"10\" ry=\"20\" fill=\"url(#glass-l4)\" stroke=\"#7dd3fc\" stroke-width=\"1.5\"/>\n    <line x1=\"-25\" y1=\"0\" x2=\"-10\" y2=\"0\" stroke=\"#fbbf24\" stroke-width=\"2\" marker-end=\"url(#arrowY-l4)\"/>\n    <line x1=\"10\" y1=\"0\" x2=\"35\" y2=\"-8\" stroke=\"#fb923c\" stroke-width=\"2\" marker-end=\"url(#arrowO-l4)\"/>\n    <text x=\"0\" y=\"35\" fill=\"#7dd3fc\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"600\">LENS</text>\n    <text x=\"0\" y=\"48\" fill=\"#94a3b8\" font-size=\"9\" text-anchor=\"middle\">Light PASSES THROUGH (bent)</text>\n  </g>\n</g>",
       "beats": [
         "Welcome back, my young scientists! So far, we have studied mirrors — surfaces that REFLECT light, sending it back. Today we will meet a different kind of object: a LENS. A lens does not reflect light; it lets light pass THROUGH it — but it bends the light along the way! And this bending can change how objects look.",
         "Here is the key difference between a mirror and a lens. A mirror REFLECTS light — light bounces BACK from the shiny surface. You see things IN the mirror. A lens is different: it is TRANSPARENT — light passes THROUGH it. The lens bends the light as it passes through, and you see things THROUGH the lens. So: mirror = bounce back; lens = pass through (and bend). Both can enlarge, diminish, or invert images, but they do it in different ways.",
@@ -209,7 +1080,334 @@ window.CHAPTER_DATA = {
         "Here is a dramatic activity, again under adult supervision. Take a convex lens and hold it facing the Sun, just like we did with the concave mirror. Direct the sunlight onto a piece of paper. Adjust until you get a sharp bright spot. Hold steady for a few minutes — the paper catches fire! The convex lens converges all the sunlight into one tiny spot, just like the concave mirror did. So a lens can also concentrate sunlight and burn paper.",
         "Where do we find lenses in real life? Everywhere! The EYEGLASSES that people wear to see clearly are lenses. The CAMERA in your parents' smartphone uses a tiny convex lens to focus light onto a sensor and take a photo. Telescopes and microscopes use multiple lenses to see things very far or very small. And the most amazing lens of all — your own EYE — has a convex lens inside it that can change shape, letting you read a book or watch a star. Lenses are truly everywhere!",
         "Today we have completed our journey through Light, Mirrors, and Lenses. We learned about plane, concave, and convex mirrors; about the two laws of reflection; about convex and concave lenses; and how lenses converge or diverge light. Take some time to revise these lectures, do the activities, and observe the mirrors and lenses around you. In the next classes, you will learn even more — how to draw ray diagrams and find exact image positions. Until then, stay curious!"
-      ]
+      ],
+      "timelines": [
+        {
+          "beat": 1,
+          "steps": [
+            {
+              "delay": 0,
+              "show": [
+                "l4b1-title"
+              ]
+            },
+            {
+              "delay": 11285,
+              "show": [
+                "l4b1-sub"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 2,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l4b2-box"
+              ]
+            },
+            {
+              "delay": 15785,
+              "show": [
+                "l4b2-phrase"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 3,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l4b3-lens"
+              ]
+            },
+            {
+              "delay": 9190,
+              "show": [
+                "l4b3-label"
+              ]
+            },
+            {
+              "delay": 18380,
+              "show": [
+                "l4b3-desc"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 4,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l4b4-lens"
+              ]
+            },
+            {
+              "delay": 9380,
+              "show": [
+                "l4b4-label"
+              ]
+            },
+            {
+              "delay": 18761,
+              "show": [
+                "l4b4-desc"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 5,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l4b5-box"
+              ]
+            },
+            {
+              "delay": 12642,
+              "show": [
+                "l4b5-phrase"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 6,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l4b6-box"
+              ]
+            },
+            {
+              "delay": 12928,
+              "show": [
+                "l4b6-phrase"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 7,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l4b7-box"
+              ]
+            },
+            {
+              "delay": 14250,
+              "show": [
+                "l4b7-phrase"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 8,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l4b8-box"
+              ]
+            },
+            {
+              "delay": 11571,
+              "show": [
+                "l4b8-phrase"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 9,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l4b9-box"
+              ]
+            },
+            {
+              "delay": 12250,
+              "show": [
+                "l4b9-phrase"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 10,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l4b10-box"
+              ]
+            },
+            {
+              "delay": 12821,
+              "show": [
+                "l4b10-phrase"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 11,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l4b11-box"
+              ]
+            },
+            {
+              "delay": 12500,
+              "show": [
+                "l4b11-phrase"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 12,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l4b12-box"
+              ]
+            },
+            {
+              "delay": 9619,
+              "show": [
+                "l4b12-name"
+              ]
+            },
+            {
+              "delay": 19238,
+              "show": [
+                "l4b12-desc"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 13,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l4b13-box"
+              ]
+            },
+            {
+              "delay": 7261,
+              "show": [
+                "l4b13-name"
+              ]
+            },
+            {
+              "delay": 14523,
+              "show": [
+                "l4b13-desc"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 14,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l4b14-box"
+              ]
+            },
+            {
+              "delay": 10523,
+              "show": [
+                "l4b14-name"
+              ]
+            },
+            {
+              "delay": 21047,
+              "show": [
+                "l4b14-desc"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 15,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l4b15-box"
+              ]
+            },
+            {
+              "delay": 11285,
+              "show": [
+                "l4b15-name"
+              ]
+            },
+            {
+              "delay": 22571,
+              "show": [
+                "l4b15-desc"
+              ]
+            }
+          ]
+        },
+        {
+          "beat": 16,
+          "steps": [
+            {
+              "delay": 0,
+              "draw": [
+                "l4b16-box"
+              ]
+            },
+            {
+              "delay": 16821,
+              "show": [
+                "l4b16-phrase"
+              ]
+            }
+          ]
+        }
+      ],
+      "timeline": {
+        "beat": 1,
+        "steps": [
+          {
+            "delay": 0,
+            "show": [
+              "l4b1-title"
+            ]
+          },
+          {
+            "delay": 11285,
+            "show": [
+              "l4b1-sub"
+            ]
+          }
+        ]
+      }
     }
   ],
   "notes": "<div style=\"background: linear-gradient(135deg, #500724 0%, #831843 100%); border: 1px solid #f472b6; border-radius: 12px; padding: 18px 20px; margin-bottom: 24px;\">\n<h2 style=\"color: #fbcfe8; font-size: 19px; margin: 0 0 12px; font-weight: 700;\">👶 Class 6-7 Quick Reference</h2>\n<p style=\"color: #fbcfe8; font-size: 13px; margin: 0 0 12px; line-height: 1.6;\">A super-simple glossary of every technical term in this chapter, explained in one line each. If you are in Class 6 or 7 and seeing these words for the first time, read this first! You can also launch the <strong>3D Mirror & Lens Atlas</strong> from the home screen to see each concept as an interactive 3D scene.</p>\n<table class=\"styled-table\" style=\"background: rgba(15, 23, 42, 0.6);\">\n<tr><th style=\"color: #fbcfe8;\">Term</th><th style=\"color: #fbcfe8;\">In one line (for Class 6-7)</th><th style=\"color: #fbcfe8;\">Real example</th></tr>\n<tr><td><strong>Concave mirror</strong></td><td>Curves <em>inward</em> like the inside of a spoon. Bends light rays <em>toward</em> each other (they meet at a point).</td><td>Torch reflector, dentist's mirror</td></tr>\n<tr><td><strong>Convex mirror</strong></td><td>Bulges <em>outward</em> like the back of a spoon. Bends light rays <em>away from</em> each other (they spread out).</td><td>Car side-view mirror, road safety mirror</td></tr>\n<tr><td><strong>Converge</strong></td><td>Light rays come <em>closer together</em> and meet at a point. Think of two friends walking toward each other.</td><td>Concave mirror converges light</td></tr>\n<tr><td><strong>Diverge</strong></td><td>Light rays <em>spread apart</em> from each other. Think of two friends walking away from each other.</td><td>Convex mirror diverges light</td></tr>\n<tr><td><strong>Focus (focal point)</strong></td><td>The single bright spot where converging light rays meet. All the Sun's heat is concentrated here.</td><td>The bright dot you see when sunlight hits a magnifying glass</td></tr>\n<tr><td><strong>Convex lens</strong></td><td>A piece of glass that is <em>thick in the middle</em> and thin at the edges. Like a magnifying glass. Light passes through and converges.</td><td>Magnifying glass, camera lens, the lens in your eye</td></tr>\n<tr><td><strong>Concave lens</strong></td><td>A piece of glass that is <em>thin in the middle</em> and thick at the edges. Light passes through and diverges.</td><td>Glasses for short-sighted people</td></tr>\n<tr><td><strong>Incident ray</strong></td><td>The light ray going <em>toward</em> the mirror. (\"Incident\" = \"falling upon\".)</td><td>Light from a torch going to a mirror</td></tr>\n<tr><td><strong>Reflected ray</strong></td><td>The light ray <em>bouncing back</em> from the mirror.</td><td>The light you see coming from a mirror</td></tr>\n<tr><td><strong>Normal</strong></td><td>An imaginary line drawn <em>perpendicular</em> (at 90°) to the mirror at the point where light hits. We use it to measure angles.</td><td>Like a \"straight up\" line on the mirror</td></tr>\n<tr><td><strong>Angle of incidence (i)</strong></td><td>The angle between the <em>incident ray</em> and the <em>normal</em>. NOT measured from the mirror surface!</td><td>If you shine a torch at 30° from the perpendicular, i = 30°</td></tr>\n<tr><td><strong>Angle of reflection (r)</strong></td><td>The angle between the <em>reflected ray</em> and the <em>normal</em>.</td><td>By Law 1, r = i = 30° in the example above</td></tr>\n<tr><td><strong>Erect image</strong></td><td>The image is <em>right-side up</em> (the way you see yourself in a bathroom mirror).</td><td>Plane mirror, convex mirror (always erect)</td></tr>\n<tr><td><strong>Inverted image</strong></td><td>The image is <em>upside-down</em>.</td><td>Concave mirror with far object, pinhole camera</td></tr>\n<tr><td><strong>Enlarged image</strong></td><td>The image is <em>bigger</em> than the real object.</td><td>Concave mirror held close to your face</td></tr>\n<tr><td><strong>Diminished image</strong></td><td>The image is <em>smaller</em> than the real object.</td><td>Convex mirror (always diminished)</td></tr>\n<tr><td><strong>Lateral inversion</strong></td><td>Left and right are <em>swapped</em> in the mirror image. (Top and bottom are NOT swapped.)</td><td>When you raise your right hand, your image raises its left</td></tr>\n<tr><td><strong>Solar concentrator</strong></td><td>A device that uses a concave mirror OR a convex lens to focus sunlight into a small hot spot.</td><td>Solar cooker, solar power plant, solar furnace</td></tr>\n</table>\n</div>\n\n<h2>📝 Key Notes — Light: Mirrors and Lenses</h2>\n\n<h3>1. Three Types of Mirrors</h3>\n<table class=\"styled-table\">\n<tr><th>Mirror Type</th><th>Shape</th><th>Example</th></tr>\n<tr><td>Plane</td><td>Flat</td><td>Bathroom mirror</td></tr>\n<tr><td>Concave</td><td>Curves inward (like inside of spoon)</td><td>Torch reflector, dental mirror</td></tr>\n<tr><td>Convex</td><td>Bulges outward (like back of spoon)</td><td>Side-view mirror, road safety mirror</td></tr>\n</table>\n\n<h3>2. Image Characteristics of Spherical Mirrors</h3>\n<table class=\"styled-table\">\n<tr><th>Mirror</th><th>Object position</th><th>Image</th></tr>\n<tr><td>Concave</td><td>Close to mirror</td><td>Erect, enlarged</td></tr>\n<tr><td>Concave</td><td>Far from mirror</td><td>Inverted, initially enlarged then diminishing</td></tr>\n<tr><td>Convex</td><td>Any distance</td><td>Always erect, always diminished</td></tr>\n<tr><td>Plane</td><td>Any distance</td><td>Always erect, same size as object</td></tr>\n</table>\n<p><em>Lateral inversion</em> (left-right reversal) is seen in all three types of mirrors.</p>\n\n<h3>3. The Two Laws of Reflection</h3>\n<ol>\n<li><strong>Law 1:</strong> The angle of incidence is equal to the angle of reflection. <code>∠i = ∠r</code></li>\n<li><strong>Law 2:</strong> The incident ray, the normal at the point of incidence, and the reflected ray all lie in the <strong>same plane</strong>.</li>\n</ol>\n<p>These laws apply to <strong>all kinds of mirrors</strong> — plane, concave, and convex.</p>\n\n<h3>4. Key Terms in Reflection</h3>\n<ul>\n<li><strong>Incident ray:</strong> The ray of light that falls on the mirror.</li>\n<li><strong>Reflected ray:</strong> The ray of light that comes back from the mirror.</li>\n<li><strong>Point of incidence (O):</strong> The point where the incident ray strikes the mirror.</li>\n<li><strong>Normal:</strong> An imaginary line perpendicular to the mirror at the point of incidence.</li>\n<li><strong>Angle of incidence (i):</strong> The angle between the normal and the incident ray.</li>\n<li><strong>Angle of reflection (r):</strong> The angle between the normal and the reflected ray.</li>\n</ul>\n\n<h3>5. Behaviour with Parallel Beams</h3>\n<table class=\"styled-table\">\n<tr><th>Surface</th><th>Parallel beams become...</th></tr>\n<tr><td>Plane mirror</td><td>Parallel (unchanged)</td></tr>\n<tr><td>Concave mirror</td><td>Converge (meet at a point)</td></tr>\n<tr><td>Convex mirror</td><td>Diverge (spread out)</td></tr>\n<tr><td>Convex lens</td><td>Converge</td></tr>\n<tr><td>Concave lens</td><td>Diverge</td></tr>\n</table>\n\n<h3>6. Two Types of Lenses</h3>\n<table class=\"styled-table\">\n<tr><th>Lens Type</th><th>Shape</th><th>Also called</th></tr>\n<tr><td>Convex</td><td>Thick at middle, thin at edges</td><td>Converging lens</td></tr>\n<tr><td>Concave</td><td>Thick at edges, thin at middle</td><td>Diverging lens</td></tr>\n</table>\n\n<h3>7. Image Characteristics of Lenses</h3>\n<table class=\"styled-table\">\n<tr><th>Lens</th><th>Object position</th><th>Image (seen through)</th></tr>\n<tr><td>Convex</td><td>Close</td><td>Erect, enlarged</td></tr>\n<tr><td>Convex</td><td>Far</td><td>Inverted, initially large then diminishing</td></tr>\n<tr><td>Concave</td><td>Any distance</td><td>Always erect, always diminished</td></tr>\n</table>\n\n<h3>8. Real-Life Uses</h3>\n<ul>\n<li><strong>Concave mirror:</strong> Torch reflectors, car headlights, dental mirrors, reflecting telescopes, solar concentrators.</li>\n<li><strong>Convex mirror:</strong> Side-view mirrors of vehicles, road safety mirrors at blind curves, surveillance mirrors in shops.</li>\n<li><strong>Convex lens:</strong> Magnifying glass, eyeglasses for long-sightedness, camera lenses, microscopes, telescopes, human eye.</li>\n<li><strong>Concave lens:</strong> Eyeglasses for short-sightedness (myopia).</li>\n</ul>\n\n<h3>9. Solar Concentrators</h3>\n<p>Devices that use mirrors or lenses to concentrate sunlight into a small area are called <strong>solar concentrators</strong>. The concentrated sunlight is used to:</p>\n<ul>\n<li>Heat a liquid to produce steam → electricity</li>\n<li>Cook food (solar cookers)</li>\n<li>Melt steel (solar furnaces)</li>\n</ul>\n\n<h3>10. Snapshots (from textbook)</h3>\n<ul>\n<li>A concave mirror can form enlarged, diminished, or same-size images — erect or inverted — depending on distance.</li>\n<li>A convex mirror always forms an erect, diminished image.</li>\n<li>The two laws of reflection apply to all mirrors.</li>\n<li>A concave mirror converges light; a convex mirror diverges it.</li>\n<li>A convex lens can form enlarged, diminished, or same-size images; a concave lens always forms an erect, diminished image.</li>\n<li>A convex lens converges light; a concave lens diverges it.</li>\n</ul>",

@@ -587,8 +587,7 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
       window.ChalkboardTimeline.clear();
     }
     
-    // Check if this lecture has a timeline
-    if (!lec || !lec.timeline) return;
+    if (!lec) return;
     
     // Get the beat number of this element
     var beatNum = parseInt(el.getAttribute('data-beat'), 10);
@@ -597,19 +596,43 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
     var svgEl = sectionEl.querySelector('svg.lec-board');
     if (!svgEl) return;
     
-    if (lec.timeline.beat !== beatNum) {
-      // This beat does NOT have a timeline — but we need to clean
-      // up the previous timeline's elements so they don't linger.
-      // Reset ALL timeline elements to their hidden state.
-      if (window.ChalkboardTimeline) {
-        window.ChalkboardTimeline.reset(svgEl, lec.timeline.steps);
+    // Support both single-timeline (lec.timeline) and multi-timeline (lec.timelines)
+    var timelineSteps = null;
+    
+    if (lec.timelines && Array.isArray(lec.timelines)) {
+      // Multi-timeline: find the one matching this beat
+      for (var i = 0; i < lec.timelines.length; i++) {
+        if (lec.timelines[i].beat === beatNum) {
+          timelineSteps = lec.timelines[i].steps;
+          break;
+        }
       }
+      // If no timeline for this beat, reset all timeline elements
+      if (!timelineSteps) {
+        // Collect all steps from all timelines to reset
+        var allSteps = [];
+        lec.timelines.forEach(function(tl) { allSteps = allSteps.concat(tl.steps); });
+        if (window.ChalkboardTimeline) {
+          window.ChalkboardTimeline.reset(svgEl, allSteps);
+        }
+        return;
+      }
+    } else if (lec.timeline) {
+      // Single timeline
+      if (lec.timeline.beat !== beatNum) {
+        if (window.ChalkboardTimeline) {
+          window.ChalkboardTimeline.reset(svgEl, lec.timeline.steps);
+        }
+        return;
+      }
+      timelineSteps = lec.timeline.steps;
+    } else {
       return;
     }
     
     // Start the timeline
-    if (window.ChalkboardTimeline) {
-      window.ChalkboardTimeline.start(svgEl, lec.timeline.steps);
+    if (timelineSteps && window.ChalkboardTimeline) {
+      window.ChalkboardTimeline.start(svgEl, timelineSteps);
     }
   }
 
@@ -951,12 +974,22 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
           void el.offsetWidth;
           el.classList.add('pulse');
           // Start chalkboard timeline in immersive mode too
-          // Find the SVG element inside the immersive canvas
           var imSvg = immersiveOverlay.querySelector('svg.lec-board, svg');
-          if (imSvg && window.ChalkboardTimeline && lec.timeline) {
-            var beatNum = parseInt(el.getAttribute('data-beat'), 10);
-            if (lec.timeline.beat === beatNum) {
-              window.ChalkboardTimeline.start(imSvg, lec.timeline.steps);
+          if (imSvg && window.ChalkboardTimeline && lec) {
+            var imBeatNum = parseInt(el.getAttribute('data-beat'), 10);
+            var imSteps = null;
+            if (lec.timelines && Array.isArray(lec.timelines)) {
+              for (var ti = 0; ti < lec.timelines.length; ti++) {
+                if (lec.timelines[ti].beat === imBeatNum) {
+                  imSteps = lec.timelines[ti].steps;
+                  break;
+                }
+              }
+            } else if (lec.timeline && lec.timeline.beat === imBeatNum) {
+              imSteps = lec.timeline.steps;
+            }
+            if (imSteps) {
+              window.ChalkboardTimeline.start(imSvg, imSteps);
             }
           }
         }
