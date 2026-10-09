@@ -7,7 +7,7 @@
    ============================================================
    */
 
-window.CHAPTER_DATA = {
+window.CHAPTERS = window.CHAPTERS || {}; window.CHAPTERS['living_creatures'] = {
   "meta": {
     "subject": "biology",
     "slug": "living_creatures",

@@ -5,7 +5,7 @@
    Contains: 7 lectures, 6 real-life scenarios, 8 guided practice problems, 10 self-test questions.
    ============================================================ */
 
-window.CHAPTER_DATA = {
+window.CHAPTERS = window.CHAPTERS || {}; window.CHAPTERS['baudhayana_pythagoras'] = {
   "meta": {
     "subject": "maths",
     "slug": "baudhayana_pythagoras",

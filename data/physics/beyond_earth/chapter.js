@@ -7,7 +7,7 @@
    ============================================================
    */
 
-window.CHAPTER_DATA = {
+window.CHAPTERS = window.CHAPTERS || {}; window.CHAPTERS['beyond_earth'] = {
   "meta": {
     "subject": "physics",
     "slug": "beyond_earth",

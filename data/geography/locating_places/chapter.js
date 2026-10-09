@@ -5,7 +5,7 @@
    Uses ANIMATED SVG BOARDS for conceptual diagrams (compass, globe, time zones).
    ============================================================ */
 
-window.CHAPTER_DATA = {
+window.CHAPTERS = window.CHAPTERS || {}; window.CHAPTERS['locating_places'] = {
   "meta": {
     "subject": "geography",
     "slug": "locating_places",

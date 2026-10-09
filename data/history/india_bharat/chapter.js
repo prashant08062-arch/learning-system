@@ -6,7 +6,7 @@
    Keeps IMAGE for maps (lectures 2, 3, 4) and the Sanchi Stupa photo (lecture 1).
    ============================================================ */
 
-window.CHAPTER_DATA = {
+window.CHAPTERS = window.CHAPTERS || {}; window.CHAPTERS['india_bharat'] = {
   "meta": {
     "subject": "history",
     "slug": "india_bharat",

@@ -3,7 +3,7 @@
    Subject: Mathematics (Grade 8, Ganita Prakash Part-II Chapter 7)
    ============================================================ */
 
-window.CHAPTER_DATA = {
+window.CHAPTERS = window.CHAPTERS || {}; window.CHAPTERS['area'] = {
   "meta": {
     "subject": "maths",
     "slug": "area",

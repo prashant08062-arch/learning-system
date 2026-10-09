@@ -153,24 +153,34 @@ function loadChapter(subject, chapter) {
   switchTab('lecture');
   window.scrollTo({ top: 0, behavior: 'instant' });
 
-  // Dynamically load the chapter data file
-  const script = document.createElement('script');
-  script.src = chapter.dataFile;
-  script.onload = () => {
-    currentChapterData = window.CHAPTER_DATA;
-    if (currentChapterData) {
-      renderChapter();
-    } else {
-      console.error('Chapter data not found in', chapter.dataFile);
-      alert('Chapter data not found in: ' + chapter.dataFile);
+  // FILE:// PROTOCOL FIX: Instead of dynamically loading chapter.js (which
+  // fails on file:// protocol with "file: URLs are treated as unique security
+  // origins"), we pre-load ALL chapter files as static <script> tags in
+  // index.html. Each chapter sets window.CHAPTERS[slug]. We just read it.
+  currentChapterData = window.CHAPTERS && window.CHAPTERS[chapter.slug];
+  if (currentChapterData) {
+    renderChapter();
+  } else {
+    // Fallback: try dynamic loading (works on http:// but not file://)
+    console.warn('Chapter not pre-loaded, trying dynamic load:', chapter.dataFile);
+    const script = document.createElement('script');
+    script.src = chapter.dataFile;
+    script.onload = () => {
+      currentChapterData = window.CHAPTER_DATA || (window.CHAPTERS && window.CHAPTERS[chapter.slug]);
+      if (currentChapterData) {
+        renderChapter();
+      } else {
+        console.error('Chapter data not found in', chapter.dataFile);
+        alert('Chapter data not found in: ' + chapter.dataFile + '\n\nIf you opened this from file:// protocol, make sure all chapter files are listed in index.html as <script> tags.');
+        goHome();
+      }
+    };
+    script.onerror = () => {
+      alert('Failed to load chapter data: ' + chapter.dataFile + '\n\nThis can happen if you opened index.html directly from disk (file:// protocol). Try running a local web server instead, or make sure the chapter file exists.');
       goHome();
-    }
-  };
-  script.onerror = () => {
-    alert('Failed to load chapter data: ' + chapter.dataFile);
-    goHome();
-  };
-  document.head.appendChild(script);
+    };
+    document.head.appendChild(script);
+  }
 }
 
 function goHome() {
@@ -798,7 +808,11 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
     // STOP events.
     if (state._destroyed) return;
     state.currentBeat = index;
-    updateUI();
+    // Use state.updateUI (the immersive wrapper) so the immersive overlay stays
+    // in sync with beat changes. Calling the bare updateUI() bypasses the
+    // immersive overlay update — was the cause of "frozen immersive UI" bug
+    // found in live-play testing of the Light: Mirrors and Lenses chapter.
+    state.updateUI();
     if (!state.isPlaying) return;
     clearTimers();
 
@@ -883,7 +897,9 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
     if (window.TTS) TTS.stopSpeaking();
   };
 
-  updateUI();
+  // Initial render. Use state.updateUI so the immersive wrapper (if assigned
+  // later) is picked up; otherwise this just calls the plain updateUI.
+  state.updateUI();
 
   // ----------------------------------------------------------------
   // IMMERSIVE MODE — full-screen animation + current beat at bottom
@@ -892,6 +908,16 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
   let immersiveOverlay = null;
 
   function enterImmersive() {
+    // BUG (live-play audit, Light chapter): remove any pre-existing immersive
+    // overlays from previous lecture-section sessions. Because each lecture
+    // section gets its own `initLectureState` closure, the `immersiveOverlay`
+    // variable here is per-section — switching to another section leaves the
+    // old overlay in the DOM. Without this cleanup, after entering immersive
+    // in 10.1 then exiting then switching to 10.4 then entering immersive
+    // again, there would be TWO overlays in the DOM, and querySelector would
+    // return the stale one (showing the wrong title, beat number, and SVG).
+    document.querySelectorAll('.immersive-overlay').forEach(el => el.remove());
+
     // Create overlay if not exists or was removed from DOM
     if (!immersiveOverlay || !document.body.contains(immersiveOverlay)) {
       immersiveOverlay = document.createElement('div');
@@ -1044,6 +1070,14 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
         const imSvg = immersiveOverlay.querySelector('svg.lec-board, svg');
         if (imSvg) window.ChalkboardTimeline.clear(imSvg);
       }
+      // BUG (live-play audit, Light chapter): remove the overlay from the DOM.
+      // Previously this only removed the .active class, leaving the element
+      // with stale content (old title, beat number, SVG) in the DOM.
+      // Switching to a different lecture section then entering immersive
+      // created a SECOND overlay, and querySelector('.immersive-overlay')
+      // returned the stale one.
+      if (immersiveOverlay.parentNode) immersiveOverlay.parentNode.removeChild(immersiveOverlay);
+      immersiveOverlay = null;
     }
   }
 

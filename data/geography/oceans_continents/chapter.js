@@ -6,7 +6,7 @@
    Keeps IMAGE for the world map (lecture 2).
    ============================================================ */
 
-window.CHAPTER_DATA = {
+window.CHAPTERS = window.CHAPTERS || {}; window.CHAPTERS['oceans_continents'] = {
   "meta": {
     "subject": "geography",
     "slug": "oceans_continents",

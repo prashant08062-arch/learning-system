@@ -1,7 +1,7 @@
 /* CHAPTER DATA — Nature of Matter: Elements, Compounds, and Mixtures
    Subject: chemistry (Grade 8, Chapter 8) */
 
-window.CHAPTER_DATA = {
+window.CHAPTERS = window.CHAPTERS || {}; window.CHAPTERS['elements_compounds_mixtures'] = {
   "meta": {
     "subject": "chemistry",
     "slug": "elements_compounds_mixtures",

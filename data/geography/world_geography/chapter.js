@@ -1,4 +1,4 @@
-window.CHAPTER_DATA = {
+window.CHAPTERS = window.CHAPTERS || {}; window.CHAPTERS['world_geography'] = {
   "meta": {
     "subject": "geography",
     "slug": "world_geography",

@@ -16,7 +16,7 @@
      • Complete key notes with formulas, common mistakes, and quick reference card
    ============================================================ */
 
-window.CHAPTER_DATA = {
+window.CHAPTERS = window.CHAPTERS || {}; window.CHAPTERS['fractions_in_disguise'] = {
   "meta": {
     "subject": "maths",
     "slug": "fractions_in_disguise",

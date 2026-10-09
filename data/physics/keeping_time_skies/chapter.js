@@ -1,7 +1,7 @@
 /* CHAPTER DATA — Keeping Time with the Skies
    Subject: physics (Grade 8, Chapter 11) */
 
-window.CHAPTER_DATA = {
+window.CHAPTERS = window.CHAPTERS || {}; window.CHAPTERS['keeping_time_skies'] = {
   "meta": {
     "subject": "physics",
     "slug": "keeping_time_skies",

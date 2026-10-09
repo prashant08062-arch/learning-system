@@ -6,7 +6,7 @@
    - Photons have <animateMotion>
    - Pulse class implemented in css/style.css
    ============================================================ */
-window.CHAPTER_DATA = {
+window.CHAPTERS = window.CHAPTERS || {}; window.CHAPTERS['light_mirrors_lenses'] = {
   "meta": {
     "slug": "light_mirrors_lenses",
     "title": "Light: Mirrors and Lenses",

@@ -26,7 +26,7 @@
        memory tricks, and a Quick Reference Card
    ============================================================ */
 
-window.CHAPTER_DATA = {
+window.CHAPTERS = window.CHAPTERS || {}; window.CHAPTERS['our_home_earth'] = {
   "meta": {
     "subject": "biology",
     "slug": "our_home_earth",

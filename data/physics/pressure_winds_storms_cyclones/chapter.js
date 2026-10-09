@@ -20,7 +20,7 @@
        tricks, safety tips, and a Quick Reference Card
    ============================================================ */
 
-window.CHAPTER_DATA = {
+window.CHAPTERS = window.CHAPTERS || {}; window.CHAPTERS['pressure_winds_storms_cyclones'] = {
   "meta": {
     "subject": "physics",
     "slug": "pressure_winds_storms_cyclones",

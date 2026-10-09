@@ -11,7 +11,7 @@
      • 2 practice cards with reveal-answer buttons
    ============================================================ */
 
-window.CHAPTER_DATA = {
+window.CHAPTERS = window.CHAPTERS || {}; window.CHAPTERS['perimeter_area'] = {
   "meta": {
     "subject": "maths",
     "slug": "perimeter_area",

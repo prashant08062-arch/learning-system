@@ -19,7 +19,7 @@
      - 25 images extracted from the original textbook PDF
    ============================================================ */
 
-window.CHAPTER_DATA = {
+window.CHAPTERS = window.CHAPTERS || {}; window.CHAPTERS['india_independence'] = {
   "meta": {
     "subject": "history",
     "slug": "india_independence",

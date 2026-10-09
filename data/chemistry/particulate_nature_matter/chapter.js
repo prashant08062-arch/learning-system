@@ -1,7 +1,7 @@
 /* CHAPTER DATA — Particulate Nature of Matter
    Subject: chemistry (Grade 8, Chapter 7) */
 
-window.CHAPTER_DATA = {
+window.CHAPTERS = window.CHAPTERS || {}; window.CHAPTERS['particulate_nature_matter'] = {
   "meta": {
     "subject": "chemistry",
     "slug": "particulate_nature_matter",

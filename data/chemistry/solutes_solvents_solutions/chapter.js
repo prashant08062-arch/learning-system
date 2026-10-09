@@ -1,7 +1,7 @@
 /* CHAPTER DATA — The Amazing World of Solutes, Solvents, and Solutions
    Subject: chemistry (Grade 8, Chapter 9) */
 
-window.CHAPTER_DATA = {
+window.CHAPTERS = window.CHAPTERS || {}; window.CHAPTERS['solutes_solvents_solutions'] = {
   "meta": {
     "subject": "chemistry",
     "slug": "solutes_solvents_solutions",

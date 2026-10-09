@@ -6,7 +6,7 @@
    Keeps IMAGE for the Ganga satellite view (lecture 4).
    ============================================================ */
 
-window.CHAPTER_DATA = {
+window.CHAPTERS = window.CHAPTERS || {}; window.CHAPTERS['landforms_life'] = {
   "meta": {
     "subject": "geography",
     "slug": "landforms_life",

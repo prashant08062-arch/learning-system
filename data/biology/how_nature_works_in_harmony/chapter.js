@@ -23,7 +23,7 @@
        tricks, and a Quick Reference Card
    ============================================================ */
 
-window.CHAPTER_DATA = {
+window.CHAPTERS = window.CHAPTERS || {}; window.CHAPTERS['how_nature_works_in_harmony'] = {
   "meta": {
     "subject": "biology",
     "slug": "how_nature_works_in_harmony",

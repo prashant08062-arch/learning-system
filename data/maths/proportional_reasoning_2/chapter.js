@@ -18,7 +18,7 @@
        tricks, and a Quick Reference Card
    ============================================================ */
 
-window.CHAPTER_DATA = {
+window.CHAPTERS = window.CHAPTERS || {}; window.CHAPTERS['proportional_reasoning_2'] = {
   "meta": {
     "subject": "maths",
     "slug": "proportional_reasoning_2",

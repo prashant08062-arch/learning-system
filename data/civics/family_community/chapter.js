@@ -5,7 +5,7 @@
    SVG elements are synced to beats: data-beat="N" reveals at beat N.
    ============================================================ */
 
-window.CHAPTER_DATA = {
+window.CHAPTERS = window.CHAPTERS || {}; window.CHAPTERS['family_community'] = {
   "meta": {
     "subject": "civics",
     "slug": "family_community",
