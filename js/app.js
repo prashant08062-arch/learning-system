@@ -153,17 +153,34 @@ function loadChapter(subject, chapter) {
   switchTab('lecture');
   window.scrollTo({ top: 0, behavior: 'instant' });
 
-  // STANDALONE PAGE APPROACH: Navigate to the chapter's own HTML page.
-  // Each chapter has a standalone HTML file (chapter_<slug>.html) with the
-  // chapter data embedded inline. This works from file:// protocol because
-  // no dynamic script loading is needed — the data is in the HTML itself.
-  var chapterPage = 'chapter_' + chapter.slug + '.html';
-  // Save the target chapter slug so the chapter page knows which one to load
-  try { sessionStorage.setItem('learning_system_target_chapter', chapter.slug); } catch(e) {}
-  // Also save it in localStorage as fallback
-  try { localStorage.setItem('learning_system_target_chapter', chapter.slug); } catch(e) {}
-  // Navigate to the chapter page
-  window.location.href = chapterPage;
+  // FILE:// PROTOCOL FIX: Instead of dynamically loading chapter.js (which
+  // fails on file:// protocol with "file: URLs are treated as unique security
+  // origins"), we pre-load ALL chapter files as static <script> tags in
+  // index.html. Each chapter sets window.CHAPTERS[slug]. We just read it.
+  currentChapterData = window.CHAPTERS && window.CHAPTERS[chapter.slug];
+  if (currentChapterData) {
+    renderChapter();
+  } else {
+    // Fallback: try dynamic loading (works on http:// but not file://)
+    console.warn('Chapter not pre-loaded, trying dynamic load:', chapter.dataFile);
+    const script = document.createElement('script');
+    script.src = chapter.dataFile;
+    script.onload = () => {
+      currentChapterData = window.CHAPTER_DATA || (window.CHAPTERS && window.CHAPTERS[chapter.slug]);
+      if (currentChapterData) {
+        renderChapter();
+      } else {
+        console.error('Chapter data not found in', chapter.dataFile);
+        alert('Chapter data not found in: ' + chapter.dataFile + '\n\nIf you opened this from file:// protocol, make sure all chapter files are listed in index.html as <script> tags.');
+        goHome();
+      }
+    };
+    script.onerror = () => {
+      alert('Failed to load chapter data: ' + chapter.dataFile + '\n\nThis can happen if you opened index.html directly from disk (file:// protocol). Try running a local web server instead, or make sure the chapter file exists.');
+      goHome();
+    };
+    document.head.appendChild(script);
+  }
 }
 
 function goHome() {
@@ -2321,35 +2338,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-  // STANDALONE CHAPTER PAGE CHECK: If we're on a chapter_*.html page,
-  // skip rendering the home screen and instead render the chapter directly.
-  // The chapter data is already embedded in window.CHAPTER_DATA.
-  var isStandaloneChapterPage = window.location.href.indexOf('chapter_') !== -1 &&
-                                 window.CHAPTER_DATA;
-
-  if (isStandaloneChapterPage) {
-    // We're on a standalone chapter page — render the chapter immediately
-    currentChapterData = window.CHAPTER_DATA;
-    // Show chapter screen, hide home screen
-    var hs = document.getElementById('homeScreen');
-    var cs = document.getElementById('chapterScreen');
-    if (hs) hs.style.display = 'none';
-    if (cs) cs.style.display = 'block';
-    // Update top bar
-    var ts = document.getElementById('chapterTopSubject');
-    var tt = document.getElementById('chapterTopTitle');
-    if (ts && currentChapterData.meta) ts.textContent = currentChapterData.meta.subject || '';
-    if (tt && currentChapterData.meta) tt.textContent = currentChapterData.meta.title || '';
-    // Render the chapter
-    renderChapter();
-    // Hide auth overlay if logged in
-    if (window.Auth && window.Auth.isLoggedIn && window.Auth.isLoggedIn()) {
-      var authOverlay = document.getElementById('authOverlay');
-      if (authOverlay) authOverlay.style.display = 'none';
-    }
-  } else {
-    renderHome();
-  }
+  renderHome();
 
   // Tab switching
   document.querySelectorAll('.tab').forEach(tab => {
@@ -2501,64 +2490,4 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
-  // Expose key functions for standalone chapter pages.
-  // Standalone chapter_*.html pages have CHAPTER_DATA embedded inline
-  // and need to call renderChapter() directly (no loadChapter file loading).
-  window.renderChapter = renderChapter;
-  window.goHome = goHome;
-  window.switchTab = switchTab;
-
-})();
-
-// ============================================================
-// STANDALONE CHAPTER AUTO-LOAD
-// If we're on a chapter_*.html page, auto-load the chapter
-// whose data is already embedded in window.CHAPTER_DATA.
-// This runs after all scripts are loaded.
-// ============================================================
-(function() {
-  // Check if we're on a standalone chapter page (not index.html)
-  var isChapterPage = window.location.href.indexOf('chapter_') !== -1;
-
-  if (isChapterPage && window.CHAPTER_DATA) {
-    // We're on a chapter page and the data is already embedded.
-    // Auto-render the chapter.
-    function autoLoadChapter() {
-      if (typeof window.renderChapter === 'function' && window.CHAPTER_DATA) {
-        // Set the current chapter data
-        window.currentChapterData = window.CHAPTER_DATA;
-
-        // Show the chapter screen
-        var hs = document.getElementById('homeScreen');
-        var cs = document.getElementById('chapterScreen');
-        if (hs) hs.style.display = 'none';
-        if (cs) cs.style.display = 'block';
-
-        // Update top bar
-        var topSubject = document.getElementById('chapterTopSubject');
-        var topTitle = document.getElementById('chapterTopTitle');
-        if (topSubject && window.CHAPTER_DATA.meta) topSubject.textContent = window.CHAPTER_DATA.meta.subject || '';
-        if (topTitle && window.CHAPTER_DATA.meta) topTitle.textContent = window.CHAPTER_DATA.meta.title || '';
-
-        // Render the chapter
-        window.renderChapter();
-
-        // Hide auth overlay if user is logged in
-        if (window.Auth && window.Auth.isLoggedIn && window.Auth.isLoggedIn()) {
-          var overlay = document.getElementById('authOverlay');
-          if (overlay) overlay.style.display = 'none';
-        }
-      } else {
-        // app.js not ready yet — retry in 200ms
-        setTimeout(autoLoadChapter, 200);
-      }
-    }
-
-    // Start auto-loading after DOM is ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', function() { setTimeout(autoLoadChapter, 300); });
-    } else {
-      setTimeout(autoLoadChapter, 300);
-    }
-  }
 })();
