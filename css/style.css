@@ -2894,3 +2894,40 @@ svg.gp-board .el circle {
     stroke-dashoffset: 0 !important;
   }
 }
+
+/* ============================================================
+   Light: Mirrors and Lenses — choreography-document additions
+   ============================================================ */
+
+/* Pulse directive — used by chalkboard timeline's `pulse` array.
+   Adds a 0.8s scale pulse to draw attention to emphasized elements. */
+@keyframes lightPulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.15); }
+}
+.pulse {
+  animation: lightPulse 0.8s ease-in-out 2;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+/* Pulse-anim variant used by some chalkboard elements via the
+   `chalk-pulse-anim` class — kept for backward compat. */
+@keyframes chalkPulseAnim {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.7; transform: scale(1.1); }
+}
+.chalk-pulse-anim {
+  animation: chalkPulseAnim 0.8s ease-in-out infinite alternate;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+/* Fade transition for immersive beat text */
+.immersive-beat-text.fade {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.immersive-beat-text {
+  transition: opacity 0.15s ease;
+}

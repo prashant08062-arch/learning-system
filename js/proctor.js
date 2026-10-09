@@ -49,7 +49,14 @@ const FULLSCREEN_CHECK_MS           = 2000;
 const TAB_SWITCH_MIN_DURATION_MS    = 2000;  // ignore focus losses shorter than this
 const PROCTOR_ENABLED_KEY = (uid) => `learning_system_proctor_enabled_${uid}`;
 
+// USER REQUEST: proctor mode globally disabled for now (2026-10-09).
+// Even if a parent has set the per-user localStorage flag to 'true',
+// startProctoring() will skip the visibility/blur/fullscreen listeners.
+// Set this back to false to re-enable proctoring globally.
+const PROCTOR_GLOBALLY_DISABLED = true;
+
 function isProctorEnabled() {
+  if (PROCTOR_GLOBALLY_DISABLED) return false;
   const uid = getCurrentUserId();
   if (!uid) return false;
   try {
