@@ -189,7 +189,9 @@ function init() {
   if (user && user.role === 'student') {
     hideOverlay();
   } else {
-    showOverlay();
+    // Don't force the overlay — let the user browse without logging in.
+    // Only show overlay if they click the login/logout button.
+    hideOverlay();
   }
 
   // Wire auth tabs
@@ -212,6 +214,9 @@ function init() {
 
   var logoutBtn = document.getElementById('logoutBtn');
   if (logoutBtn) logoutBtn.addEventListener('click', logout);
+
+  var skipBtn = document.getElementById('skipAuthBtn');
+  if (skipBtn) skipBtn.addEventListener('click', hideOverlay);
 }
 
 window.Auth = {
@@ -228,3 +233,14 @@ if (document.readyState === 'loading') {
 }
 
 })();
+
+// Fallback: hide the overlay on window load (in case DOMContentLoaded ran too early)
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    var user = getCurrentUser();
+    if (!user || user.role !== 'student') {
+      // Don't force the overlay — let users browse without login
+      hideOverlay();
+    }
+  }, 100);
+});
