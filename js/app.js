@@ -50,6 +50,7 @@ let gpState = null;
 // ====================================================================
 function renderHome() {
   const grid = document.getElementById('subjectsGrid');
+  if (!grid) return;  // Defensive: skip if not on the home page
   grid.innerHTML = '';
 
   window.CATALOG.subjects.forEach(subject => {
@@ -1714,7 +1715,7 @@ function renderRealLife() {
               <button class="control-btn primary rl-play">▶</button>
               <button class="control-btn rl-next">⏭</button>
               <div class="progress-bar rl-progress"><div class="progress-fill rl-progress-fill" style="width:0%"></div></div>
-              <div class="beat-counter rl-counter">1 / ${sc.beats.length}</div>
+              <div class="beat-counter rl-counter">1 / ${(sc.beats || sc.steps || []).length}</div>
             </div>
           </div>
         </div>
@@ -1736,7 +1737,7 @@ function initRealLifeScenario(dropdown, isImageType) {
   const scenarios = currentChapterData.realLife || [];
   const sc = scenarios.find(s => s.id === scenarioKey);
   if (!sc) return;
-  const beats = sc.beats;
+  const beats = sc.beats || sc.steps || [];
 
   const transcriptEl = dropdown.querySelector('.real-life-transcript');
   const stackEl = dropdown.querySelector('.rl-stack');
