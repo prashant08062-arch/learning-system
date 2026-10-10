@@ -1,149 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Learning System — Multi-Subject Interactive Modules</title>
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning System — Multi-Subject Interactive Modules</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <!-- ============================================================
-     AUTH OVERLAY — Login / Signup / Parent Login (shown on load)
+     HOME SCREEN
      ============================================================ -->
-<!-- The #authOverlay DOM is injected by js/auth.js -->
-
-<!-- ============================================================
-     PROCTORING BADGE — small floating indicator (hidden by default)
-     ============================================================ -->
-<!-- The #proctorBadge DOM is injected by js/proctor.js -->
-
-<!-- ============================================================
-     HOME SCREEN — Subject & Chapter Selector
-     ============================================================ -->
-<div id="homeScreen" class="home-screen">
+<div id="homeScreen">
   <header class="home-header">
     <h1>🎓 Learning System</h1>
-    <p class="home-subtitle">Interactive modules for Mathematics, Geography, History, Civics, Economics, Physics, Chemistry &amp; Biology</p>
+    <p>Multi-Subject Interactive Modules for Class 6 & 8</p>
+    <div class="class-selector-bar">
+      <button class="class-btn" data-grade="6">Class 6</button>
+      <button class="class-btn" data-grade="7">Class 7</button>
+      <button class="class-btn" data-grade="8">Class 8</button>
+      <button class="class-btn" data-grade="all">All Classes</button>
+    </div>
   </header>
 
-      <!-- Class Selector -->
-    <div class="class-selector-bar">
-      <label class="class-selector-label">Select Class:</label>
-      <div class="class-selector-options" id="class-selector-options">
-        <button class="class-btn active" data-grade="6">Class 6</button>
-        <button class="class-btn" data-grade="7">Class 7</button>
-        <button class="class-btn" data-grade="8">Class 8</button>
-        <button class="class-btn" data-grade="all">All Classes</button>
-      </div>
-    </div>
-
-  <div class="subjects-grid" id="subjectsGrid">
-    <!-- Subject cards are rendered here by app.js -->
-  </div>
-
-  <!-- 3D Animated Atlas Launcher (Physics) -->
-  <div style="margin: 0 auto 16px; max-width: 760px; padding: 18px 22px; background: linear-gradient(135deg, #500724 0%, #be185d 100%); border-radius: 14px; border: 1px solid #f472b6; box-shadow: 0 8px 24px rgba(190,24,93,0.35);">
-    <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
-      <div style="font-size: 36px;">🔬</div>
-      <div style="flex-grow: 1;">
-        <h2 style="color: #fff; font-size: 19px; font-weight: 700; margin: 0 0 4px;">Mirror &amp; Lens Atlas — 3D Interactive Physics</h2>
-        <p style="color: #fbcfe8; font-size: 13px; margin: 0; line-height: 1.5;">Explore <strong>10 Grade-8 physics concepts</strong> (plane / concave / convex mirrors, convex / concave lenses, laws of reflection, burning paper with sunlight, dentist mirror, side-view mirror) as <strong>interactive 3D scenes</strong>. Light rays converge, diverge, and burn — animated to make every concept crystal clear even for Class 6-7 students.</p>
-      </div>
-      <a href="mirrors_lenses_3d_atlas.html" target="_blank" style="background: #fbbf24; color: #0a1326; padding: 11px 22px; border-radius: 8px; font-size: 14px; font-weight: 700; text-decoration: none; white-space: nowrap; box-shadow: 0 4px 12px rgba(251,191,36,0.4); transition: transform 0.15s;">🚀 Launch 3D Atlas →</a>
-    </div>
-  </div>
-
-  <!-- 3D Animated Atlas Launcher (Geography) -->
-  <div style="margin: 0 auto 28px; max-width: 760px; padding: 18px 22px; background: linear-gradient(135deg, #0c4a6e 0%, #0e7490 100%); border-radius: 14px; border: 1px solid #38bdf8; box-shadow: 0 8px 24px rgba(14,116,144,0.35);">
-    <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
-      <div style="font-size: 36px;">🌊</div>
-      <div style="flex-grow: 1;">
-        <h2 style="color: #fff; font-size: 19px; font-weight: 700; margin: 0 0 4px;">Water Body Atlas — 3D Animated Reference</h2>
-        <p style="color: #bae6fd; font-size: 13px; margin: 0; line-height: 1.5;">Explore <strong>15 water-body terms</strong> (Sea, Gulf, Bay, Strait, Canal, Trench, Ridge, Reef, Atoll, Isthmus, Peninsula, Cape, Delta, Estuary, Lagoon) as <strong>animated 3D scenes</strong>. Watch ships pass through straits, lock gates open in canals, magma rise from mid-ocean ridges, and corals sway with fish — exactly as in a classroom.</p>
-      </div>
-      <a href="water_body_atlas.html" target="_blank" style="background: #fbbf24; color: #0a1326; padding: 11px 22px; border-radius: 8px; font-size: 14px; font-weight: 700; text-decoration: none; white-space: nowrap; box-shadow: 0 4px 12px rgba(251,191,36,0.4); transition: transform 0.15s;">🚀 Launch 3D Atlas →</a>
-    </div>
-  </div>
+  <main class="subjects-grid" id="subjectsGrid"></main>
 
   <footer class="home-footer">
-    <p>📖 Select a subject above to see its chapters. New chapters can be added by dropping a <code>chapter.js</code> file into the appropriate <code>data/&lt;subject&gt;/&lt;chapter-slug&gt;/</code> folder and registering it in <code>data/catalog.js</code>.</p>
+    <p>📖 Select a subject above to see its chapters.</p>
   </footer>
 </div>
 
 <!-- ============================================================
-     CHAPTER SCREEN — Tabbed Learning Interface
+     CHAPTER SCREEN
      ============================================================ -->
-<div id="chapterScreen" class="chapter-screen" style="display:none">
-  <!-- Top bar: back button + chapter title + fullscreen toggle -->
+<div id="chapterScreen" style="display:none;">
   <div class="chapter-top-bar">
     <button class="back-btn" id="backBtn">← All Subjects</button>
-    <div class="chapter-top-title">
-      <span id="chapterTopSubject"></span> · <span id="chapterTopTitle"></span>
+    <div class="chapter-top-info">
+      <span id="chapterTopSubject"></span>
+      <span id="chapterTopTitle"></span>
     </div>
-    <button class="fullscreen-btn" id="fullscreenBtn" title="Toggle full-screen reading mode">⛶ Fullscreen</button>
-    <button class="chapter-logout-btn" id="chapterLogoutBtn" title="Logout" style="background:transparent;color:#fca5a5;border:1px solid #334155;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s;margin-left:4px;">Logout</button>
+    <button class="logout-btn" id="logoutBtn" style="display:none;">Logout</button>
   </div>
 
-  <!-- Tabs -->
-  <div class="tabs">
+  <nav class="tab-bar" id="tabBar">
     <button class="tab active" data-tab="lecture">🎓 Lecture</button>
     <button class="tab" data-tab="notes">📝 Key Notes</button>
     <button class="tab" data-tab="practice">✏️ Practice</button>
     <button class="tab" data-tab="reallife">🌍 Real Life</button>
     <button class="tab" data-tab="guided">🎯 Guided Practice</button>
     <button class="tab" data-tab="selftest">🧪 Self-Test</button>
-    <button class="tab tab-testpaper" data-tab="testpaper" style="display:none;">📋 Test Paper</button>
-  </div>
+  </nav>
 
-  <!-- LECTURE -->
-  <div class="section active" id="lecture">
+  <section class="section active" id="lecture">
     <div class="lecture-section-bar" id="lectureSectionBar"></div>
     <div id="lectureContainer"></div>
-  </div>
-
-  <!-- NOTES -->
-  <div class="section" id="notes">
-    <div class="content" id="notesContent"></div>
-  </div>
-
-  <!-- PRACTICE -->
-  <div class="section" id="practice">
-    <div class="content" id="practiceContent"></div>
-  </div>
-
-  <!-- REAL LIFE -->
-  <div class="section" id="reallife">
-    <div class="content" id="reallifeContent"></div>
-  </div>
-
-  <!-- GUIDED PRACTICE -->
-  <div class="section" id="guided">
-    <div class="gp-app" id="guidedApp"></div>
-  </div>
-
-  <!-- SELF-TEST -->
-  <div class="section" id="selftest">
-    <div class="content self-test" id="selftestContent"></div>
-  </div>
-
-  <!-- TEST PAPER (Maths only) -->
-  <div class="section" id="testpaper">
-    <div class="content" id="testpaperContent"></div>
-  </div>
-
-  <!-- Exit-fullscreen floating button (only visible in fullscreen mode) -->
-  <button class="exit-fullscreen-btn" id="exitFullscreenBtn">✕ Exit Fullscreen</button>
+  </section>
+  <section class="section" id="notes"><div class="content" id="notesContent"></div></section>
+  <section class="section" id="practice"><div class="content" id="practiceContent"></div></section>
+  <section class="section" id="reallife"><div class="content" id="reallifeContent"></div></section>
+  <section class="section" id="guided"><div id="guidedApp"></div></section>
+  <section class="section" id="selftest"><div class="content" id="selftestContent"></div></section>
 </div>
 
 <!-- ============================================================
-     SCRIPTS — loaded in order
+     AUTH OVERLAY
      ============================================================ -->
-<!-- Three.js for 3D globe (geography chapters) — bundled locally for offline use -->
+<div id="authOverlay" style="display:none;">
+  <div class="auth-card">
+    <h2>🎓 Learning System</h2>
+    <p>Sign in to continue your learning journey</p>
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-mode="login">Student Login</button>
+      <button class="auth-tab" data-mode="signup">Create Account</button>
+    </div>
+    <div id="loginForm">
+      <input type="email" id="loginEmail" placeholder="Student Email" required>
+      <input type="password" id="loginPassword" placeholder="Password" required>
+      <button id="loginBtn">Login</button>
+    </div>
+    <div id="signupForm" style="display:none;">
+      <input type="text" id="suName" placeholder="Student Name" required>
+      <select id="suGrade">
+        <option value="6">Class 6</option>
+        <option value="7">Class 7</option>
+        <option value="8">Class 8</option>
+      </select>
+      <input type="email" id="suEmail" placeholder="Student Email" required>
+      <input type="password" id="suPassword" placeholder="Password" required>
+      <input type="text" id="suParentName" placeholder="Parent Name" required>
+      <input type="email" id="suParentEmail" placeholder="Parent Email" required>
+      <input type="tel" id="suParentPhone" placeholder="Parent Phone" required>
+      <input type="password" id="suParentPassword" placeholder="Parent Password" required>
+      <button id="signupBtn">Create Account</button>
+    </div>
+    <div id="otpSection" style="display:none;"></div>
+    <div id="authToast"></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SCRIPTS — loaded as static tags (works from file:// AND http://)
+     Order matters: catalog first, then chapters, then engine
+     ============================================================ -->
 <script src="vendor/three.min.js"></script>
 <script src="data/catalog.js"></script>
-<!-- PRE-LOAD ALL CHAPTERS (for file:// protocol support) -->
 <script>window.CHAPTERS = window.CHAPTERS || {};</script>
+
+<!-- All 36 chapter data files pre-loaded as static script tags -->
 <script src="data/maths/perimeter_area/chapter.js"></script>
 <script src="data/maths/baudhayana_pythagoras/chapter.js"></script>
 <script src="data/maths/fractions_in_disguise/chapter.js"></script>
@@ -180,17 +144,12 @@
 <script src="data/biology/natures_treasures/chapter.js"></script>
 <script src="data/biology/how_nature_works_in_harmony/chapter.js"></script>
 <script src="data/biology/our_home_earth/chapter.js"></script>
-<!-- END PRE-LOAD -->
+
+<!-- Engine scripts -->
 <script src="js/tts.js"></script>
-<script src="js/globe.js"></script>
-<!-- Auth (login/signup/parent login) — must run before app.js so the
-     overlay is shown first and the main app is gated behind login -->
 <script src="js/auth.js"></script>
-<!-- Proctor (progress tracking + auto-proctor) — runs alongside app.js -->
-<script src="js/proctor.js"></script>
 <script src="js/app.js"></script>
-<script src="js/testpaper.js"></script>
-<script src="js/enhancements.js"></script>
 <script src="js/chalkboard-timeline.js"></script>
+
 </body>
 </html>
