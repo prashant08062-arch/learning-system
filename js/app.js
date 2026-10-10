@@ -344,7 +344,34 @@ function initLectureState(sectionEl, lec, isImageType, isGlobeType) {
         void el.offsetWidth;
         el.classList.add('pulse');
         restartSVGAnimations(el);
-        startChalkboardTimeline(el);
+        // Instantly reveal all elements in this beat group so the user sees
+        // the full diagram immediately. The timeline animation is only
+        // useful during playback — for navigation, show everything at once.
+        revealAllElements(el);
+        // Only start the chalkboard timeline if we're playing (not navigating)
+        if (state.isPlaying) {
+          startChalkboardTimeline(el);
+        }
+      }
+    });
+  }
+
+  // Instantly set opacity:1 and stroke-dashoffset:0 on all child elements
+  // so the diagram is fully visible without waiting for timeline animation.
+  function revealAllElements(el) {
+    if (!el || !el.querySelectorAll) return;
+    var children = el.querySelectorAll('*');
+    children.forEach(function(child) {
+      if (child.style) {
+        // Make text/rect/circle/path elements visible
+        if (child.style.opacity === '0' || child.getAttribute('opacity') === '0') {
+          child.style.opacity = '1';
+          child.removeAttribute('opacity');
+        }
+        // Reset stroke-dashoffset so drawn lines/paths are fully visible
+        if (child.style.strokeDashoffset && child.style.strokeDashoffset !== '0') {
+          child.style.strokeDashoffset = '0';
+        }
       }
     });
   }
