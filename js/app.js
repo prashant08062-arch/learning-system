@@ -62,8 +62,16 @@ function renderHome() {
     card.innerHTML = '<div class="subject-header">' +
       '<span class="subject-icon">' + (subject.icon || '📚') + '</span>' +
       '<span class="subject-name">' + escapeHtml(subject.name) + '</span>' +
-      '<span class="subject-count">' + filtered.length + ' chapter' + (filtered.length > 1 ? 's' : '') + '</span>' +
+      '<span class="subject-count has-chapters">' + filtered.length + ' chapter' + (filtered.length > 1 ? 's' : '') + '</span>' +
       '</div><div class="chapters-list"></div>';
+
+    // Click the subject header to expand/collapse the chapter list
+    var header = card.querySelector('.subject-header');
+    header.style.cursor = 'pointer';
+    header.addEventListener('click', function() {
+      card.classList.toggle('expanded');
+    });
+
     var listEl = card.querySelector('.chapters-list');
 
     filtered.forEach(function(ch) {
@@ -71,7 +79,8 @@ function renderHome() {
       item.className = 'chapter-item';
       item.innerHTML = '<div class="chapter-item-title">' + escapeHtml(ch.title) + '</div>' +
         '<div class="chapter-item-subtitle">' + escapeHtml(ch.subtitle || '') + '</div>';
-      item.addEventListener('click', function() {
+      item.addEventListener('click', function(e) {
+        e.stopPropagation();  // Prevent toggling the subject card
         loadChapter(subject, ch);
       });
       listEl.appendChild(item);
